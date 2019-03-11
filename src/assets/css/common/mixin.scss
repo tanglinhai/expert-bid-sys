@@ -1,0 +1,109 @@
+﻿@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}
+
+
+@mixin singleline-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+
+@mixin common-el-table {
+    .el-table{
+        font-size: 13px;
+        .el-table__header-wrapper, .el-table__fixed-header-wrapper{
+            thead{
+                th{
+                    padding: 0;
+                    background-color: #d9e0e7;
+                    user-select: auto;
+                    .cell{
+                        height: 40px;
+                        line-height: 40px;
+                        color: #2c3e50;
+                    }
+                }
+            }
+        }
+        .el-table__body-wrapper, .el-table__fixed-body-wrapper{
+            .el-table__body{
+                .el-table__row{
+                    &:hover td{
+                        background-color: #ecf5ff;
+                        border-color: #ebeef5;
+                    }
+                    .cell{
+                        
+                    }
+                }
+            }
+        }
+        td{
+            vertical-align: top;
+        }
+    }
+    
+}
+
+
+
+@mixin table-no-data($url: '/img/nodata/1.png'){
+    .el-table{
+        .el-table__body-wrapper{
+            .el-table__empty-block{
+                .el-table__empty-text{
+                    display: block;
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    transform: none;
+                    .no-data{
+                        display: inline-block;
+                        padding: 70px;
+                        text-align: left;
+                        @include singleline-ellipsis;
+                        .no-data-icon{
+                            float: left;
+                            width: 85px;
+                            height: 86px;
+                            background: url($url) no-repeat;
+                        }
+                        .no-data-txt{
+                            float: left;
+                            margin-left: 20px;
+                            .no-data-txt-tit{
+                                color: #333;
+                                font-size: 22px;
+                                line-height: 38px;
+                                margin-top: 10px;
+                                font-weight: bold;
+                            }
+                            .no-data-txt-des{
+                                font-size: 12px;
+                                line-height: 26px;
+                                .no-data-txt-a{
+                                    text-decoration: none;
+                                    &:hover{
+                                        text-decoration: underline;
+                                    };
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

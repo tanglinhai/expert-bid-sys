@@ -1,0 +1,59 @@
+﻿@import "./reset.scss";
+@import "./variables.scss";
+@import "./crumb.scss";
+@import "./color.scss";
+@import "./margin.scss";
+@import "./padding.scss";
+@import "./font.scss";
+@import "./mixin.scss";
+
+
+/**
+ * 整体布局css代码
+ */
+html,
+body {
+	min-width: 1024px;
+	max-width: 1920px;
+	height: 100%;
+	background-color: #d9e0e7;
+}
+
+.app {
+	.home {
+		
+	}
+}
+
+
+
+/*清除浮动*/
+.cf:before,
+.cf:after {
+	content: " ";
+	/* 1 */
+	display: table;
+	/* 2 */
+}
+.cf:after {
+	clear: both;
+}
+
+/**
+ * 只针对ie6、7
+ * 下面的命令会触发hasLayout，从而包含浮动
+ */
+.cf {
+	*zoom: 1;
+}
+
+
+@keyframes closeHover {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

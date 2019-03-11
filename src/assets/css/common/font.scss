@@ -1,0 +1,59 @@
+﻿.fs{
+  font-size:12px;
+}
+.fs10{
+  font-size: 10px;
+}
+.fs13{
+  font-size:13px;
+}
+.fs14{
+  font-size:14px;
+}
+.fs15{
+  font-size:15px;
+}
+.fs16{
+  font-size:16px;
+}
+.fs30{
+  font-size:30px;
+}
+.fs21{
+  font-size: 21px;
+}
+.fs22{
+  font-size: 22px;
+}
+.fs24{
+  font-size: 24px;
+}
+.curSty:hover{
+  color:#348fe2;
+  cursor: pointer;
+  background: #fff !important;
+}
+.curStyot{
+  text-decoration: none;
+}
+.curStyot :hover{
+  color:#ba2636;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.overflowText{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.fwb{
+  font-weight: bold;
+}
+
+ .el-button .iconfont {
+  font-family: "iconfont" !important;
+  font-size: 12px !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
