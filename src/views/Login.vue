@@ -93,6 +93,12 @@ export default {
 
   },
   methods: {
+    ErroAlert(e) {
+        var index = layer.alert(e, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+        layer.style(index, {
+            color: '#777'
+        }); 
+    },
     //hours为空字符串时,cookie的生存期至浏览器会话结束。  
     //hours为数字0时,建立的是一个失效的cookie,  
     //这个cookie会覆盖已经建立过的同名、同path的cookie（如果这个cookie存在）。     
@@ -204,7 +210,6 @@ export default {
       var open = 0;
       var _this = this;
       layui.use('layer', function() {
-        layer.alert('你好么，体验者');
           var msgalert = '默认账号:' + _this.truelogin + '<br/> 默认密码:' + _this.truepwd;
           var index = layer.alert(msgalert, { icon: 6, time: 4000, offset: 't', closeBtn: 0, title: '友情提示', btn: [], anim: 2, shade: 0 });
           layer.style(index, {
@@ -216,11 +221,11 @@ export default {
               var pwd = $('input[name="pwd"]').val();
               var code = $('input[name="code"]').val();
               if (login == '') {
-                  ErroAlert('请输入您的账号');
+                  _this.ErroAlert('请输入您的账号');
               } else if (pwd == '') {
-                  ErroAlert('请输入密码');
+                  _this.ErroAlert('请输入密码');
               } else if (code == '' || code.length != 4) {
-                  ErroAlert('输入验证码');
+                  _this.ErroAlert('输入验证码');
               } else {
                   //认证中..
                   fullscreen();
