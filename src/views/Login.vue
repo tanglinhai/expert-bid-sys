@@ -206,7 +206,7 @@ export default {
       layui.use('layer', function() {
         layer.alert('你好么，体验者');
           var msgalert = '默认账号:' + _this.truelogin + '<br/> 默认密码:' + _this.truepwd;
-          var index = layer.alert(msgalert, { icon: 6, time: 400000, offset: 't', closeBtn: 0, title: '友情提示', btn: [], anim: 2, shade: 0 });
+          var index = layer.alert(msgalert, { icon: 6, time: 4000, offset: 't', closeBtn: 0, title: '友情提示', btn: [], anim: 2, shade: 0 });
           layer.style(index, {
               color: '#777'
           });
