@@ -10,7 +10,14 @@ var routes = [
     {
       path: '/index',
       name: 'index',
-      component: () => import('./views/Home.vue')
+      redirect: '/index/indexcontent',
+      component: () => import('./views/Home.vue'),
+      children: [
+        //首页
+        { name: '/index/indexcontent', path: '/index/indexcontent', component: () => import('./components/Index.vue') },
+        //项目列表页面
+        { name: '/index/projects', path: '/index/projects', component: () => import('./components/Projects.vue') },
+      ]
     }
   ];
 
