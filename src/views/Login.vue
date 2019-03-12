@@ -2,7 +2,7 @@
   <div class='loginPage'>
     <div class='login'>
       <div class='login_title'>
-          <span>管理员登录</span>
+          <span>评标专家登录</span>
       </div>
       <div class='login_fields'>
           <div class='login_fields__user'>
@@ -28,7 +28,7 @@
       </div>
       <div class='success'></div>
       <div class='disclaimer'>
-          <p>欢迎登陆后台管理系统</p>
+          <p>欢迎登陆专家评标系统</p>
       </div>
     </div>
   	<div class='authent'>
