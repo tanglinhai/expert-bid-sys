@@ -41,18 +41,23 @@
 		  </el-submenu>
 		</el-menu>
 
-
-
+		<!--环境检测弹框-->
 		<el-dialog
-		  title="环境检测"
-		  :visible.sync="enviromentDialog"
-		  width="30%"
-			custom-class="enviromentDialog"
-		  >
-		  <div class="bd">
-				
-		  </div>
+		class="environmentDialog"
+		title="您还没有安装必备得组件，请先下载环境检测工具安装系统必备组件"
+		:visible.sync="environmentTestDialogVisible"
+		width="30%"
+		center
+		>
+			<div>
+				<i></i>
+				<span></span>
+				<a href="http://365trade-pub.cn-bj.ufileos.com/client/tools-test/Installers/ZZLH.EA.Installer.exe">
+					<i class="ico2" id="envDownload">下载环境检测工具 </i>
+				</a>
+			</div>
 		</el-dialog>
+		<!--环境检测弹框-->
   </div>
 </template>
 
@@ -64,7 +69,7 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      enviromentDialog: false
+			environmentTestDialogVisible: true,  //环境检测弹框默认展开
     };
   },
   methods: {
@@ -80,6 +85,15 @@ export default {
 }
 </script>
 <style lang="scss">
+.v-modal{
+	top:61px;
+}
+.environmentDialog{
+	.el-dialog__title{
+		color:red;
+		font-size:14px;
+	}
+}
 .head-submenu{
 	.iconfont{
   	font-size: 18px;
