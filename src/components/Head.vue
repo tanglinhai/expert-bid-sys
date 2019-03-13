@@ -46,16 +46,34 @@
 		class="environmentDialog"
 		title="您还没有安装必备得组件，请先下载环境检测工具安装系统必备组件"
 		:visible.sync="environmentTestDialogVisible"
-		width="30%"
+		width="40%"
 		center
 		>
-			<div>
-				<i></i>
-				<span></span>
-				<a href="http://365trade-pub.cn-bj.ufileos.com/client/tools-test/Installers/ZZLH.EA.Installer.exe">
-					<i class="ico2" id="envDownload">下载环境检测工具 </i>
-				</a>
-			</div>
+			<el-row :gutter="20" class="environmentFirst">
+				<el-col :span="18" :offset="3" class="environmentFirstBg">
+					<div class="grid-content bg-purple environmentFirstCot">
+						<div class="environmentFirst_icon">
+							<i class="el-icon-warning"></i>
+						</div>
+						<span>尚未安装请先下载并安装</span>
+						<a href="http://365trade-pub.cn-bj.ufileos.com/client/tools-test/Installers/ZZLH.EA.Installer.exe">
+							<i class="el-icon-download" id="envDownload">下载环境检测工具 </i>
+						</a>
+					</div>
+				</el-col>
+				<el-col :span="18" :offset="3" class="environmentFirstBg">
+					<div class="grid-content bg-purple environmentFirstCot">
+						<i class=" icon iconfont icon-1 xe664 mr20 ver_al_m" ></i>
+						<div class="environmentFirst_icon">
+							<i class="el-icon-circle-check"></i>
+						</div>
+						<span>已安装检测工具可直接启动</span>
+						<a href="javascript:;">
+							<i class="el-icon-download" id="envDownload">启动环境检测工具 </i>
+						</a>
+					</div>
+				</el-col>
+			</el-row>
 		</el-dialog>
 		<!--环境检测弹框-->
   </div>
@@ -92,6 +110,47 @@ export default {
 	.el-dialog__title{
 		color:red;
 		font-size:14px;
+	}
+}
+.environmentFirst{
+	.environmentFirstBg{
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-bottom:20px;
+		&:hover{
+			background:#f6f6f6;
+			border-radius:5px;
+		}
+	}
+	.environmentFirstCot{
+		text-align: center;
+		span{
+			display:block;
+			text-align:center;
+			margin-bottom: 15px;
+			font-size: 14px;
+			color: #666;
+			font-weight: bold;
+		}
+		a{
+			color: #fff;
+    	background-color: #409eff;
+			display: inline-block;
+			padding:10px 15px;
+			border-radius:4px;
+			&:hover{
+				background:#66b1ff;
+			}
+		}
+	}
+	.environmentFirst_icon{
+		
+		i{
+			font-size:30px;
+			display:block;
+			margin:0 auto 10px;
+			color:#409eff;
+		}
 	}
 }
 .head-submenu{
