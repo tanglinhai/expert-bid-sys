@@ -11,7 +11,7 @@
 
   	<el-menu :default-active="activeIndex2" class="menu-ri" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1">
-		  	<a href="javascript:void(0);"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
+		  	<a href="javascript:void(0);" @click="enviromentDialog=false"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
 		  <el-submenu index="2" popper-class="head-submenu">
 		    <template slot="title">
@@ -40,6 +40,7 @@
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>
+
 		<!--环境检测弹框-->
 		<el-dialog
 		class="environmentDialog"
@@ -99,6 +100,12 @@ export default {
   	padding-right: 7px;
   }
 }
+.enviromentDialog{
+	.bd{
+		height: 380px;
+	}
+}
+
 .head{
 	padding: 0 15px;
 	background-color: #fff;
@@ -112,10 +119,10 @@ export default {
   }
   .menu-ri{
 		float: right;
-		>.el-menu-item.is-active{
+		>.el-submenu.is-active .el-submenu__title,>.el-menu-item.is-active{
 			border-bottom: none;
 		}
-
+		
   }
 
 

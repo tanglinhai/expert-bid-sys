@@ -256,51 +256,49 @@ export default {
                   }
 
                   _this.$axios.post(url, JsonData).then(res => {
-                    setTimeout(function() {
-                        $('.authent').show().animate({ right: 90 }, {
-                            easing: 'easeOutQuint',
-                            duration: 600,
-                            queue: false
-                        });
-                        $('.authent').animate({ opacity: 0 }, {
-                            duration: 200,
-                            queue: false
-                        }).addClass('visible');
-                        $('.login').removeClass('testtwo'); //平移特效
-                    }, 2000);
-                    setTimeout(function() {
-                        $('.authent').hide();
-                        $('.login').removeClass('test');
-                        if (res.data.Status == 'ok') {
-                            //登录成功
-                            $('.login div').fadeOut(100);
-                            $('.success').fadeIn(1000);
-                            $('.success').html(res.data.Text);
-                            //跳转操作
+                    $('.authent').show().animate({ right: 90 }, {
+                        easing: 'easeOutQuint',
+                        duration: 600,
+                        queue: false,
+                        complete: function(){
+                          $('.authent').hide();
+                          $('.login').removeClass('test');
+                          if (res.data.Status == 'ok') {
+                              //登录成功
+                              $('.login div').fadeOut(100);
+                              $('.success').fadeIn(1000);
+                              $('.success').html(res.data.Text);
+                              //跳转操作
 
-                        } else {
-                            if (res.data.Status == "Erro") {
-                                switch (res.data.Erro) {
-                                    case "500":
-                                        top.location.href = '/Erro/Erro500';
-                                        break;
-                                    case "100001":
-                                        var index = layer.alert("错误 : 错误代码 '10001'", { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
-                                        layer.style(index, {
-                                            color: '#777'
-                                        }); 
-                                        break;
-                                    default:
-                                        var index = layer.alert(res.data.Erro, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
-                                        layer.style(index, {
-                                            color: '#777'
-                                        }); 
-                                }
-                            } else {
-                                layer.msg("未知错误！");
-                            }
+                          } else {
+                              if (res.data.Status == "Erro") {
+                                  switch (res.data.Erro) {
+                                      case "500":
+                                          top.location.href = '/Erro/Erro500';
+                                          break;
+                                      case "100001":
+                                          var index = layer.alert("错误 : 错误代码 '10001'", { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+                                          layer.style(index, {
+                                              color: '#777'
+                                          }); 
+                                          break;
+                                      default:
+                                          var index = layer.alert(res.data.Erro, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+                                          layer.style(index, {
+                                              color: '#777'
+                                          }); 
+                                  }
+                              } else {
+                                  layer.msg("未知错误！");
+                              }
+                          }
                         }
-                    }, 2400);
+                    });
+                    $('.authent').animate({ opacity: 0 }, {
+                        duration: 200,
+                        queue: false
+                    }).addClass('visible');
+                    $('.login').removeClass('testtwo'); //平移特效
                 });
               }
           })
