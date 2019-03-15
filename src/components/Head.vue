@@ -11,7 +11,7 @@
 
   	<el-menu :default-active="activeIndex2" class="menu-ri" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1">
-		  	<a href="javascript:void(0);" @click="enviromentDialog=false"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
+		  	<a href="javascript:void(0);" @click="environmentTestDialogVisible=true"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
 		  <el-submenu index="2" popper-class="head-submenu">
 		    <template slot="title">
@@ -41,18 +41,42 @@
 		  </el-submenu>
 		</el-menu>
 
-
-
+		<!--环境检测弹框-->
 		<el-dialog
-		  title="环境检测"
-		  :visible.sync="enviromentDialog"
-		  width="30%"
-			custom-class="enviromentDialog"
-		  >
-		  <div class="bd">
-				
-		  </div>
+		class="environmentDialog"
+		title="您还没有安装必备的组件，请先下载环境检测工具安装系统必备组件"
+		:visible.sync="environmentTestDialogVisible"
+		width="32%"
+		center
+		>
+			<el-row :gutter="20" class="environmentFirst">
+				<el-col :span="18" :offset="3" class="environmentFirstBg">
+					<div class="grid-content bg-purple environmentFirstCot">
+						<i class="icon iconfont icon-11 xe663 mr20 ver_al_m" ></i>
+						<div class="environmentFirst_icon">
+							<i class="el-icon-warning"></i>
+						</div>
+						<span>尚未安装请先下载并安装</span>
+						<a href="http://365trade-pub.cn-bj.ufileos.com/client/tools-test/Installers/ZZLH.EA.Installer.exe">
+							<i class="el-icon-download" id="envDownload">下载环境检测工具 </i>
+						</a>
+					</div>
+				</el-col>
+				<el-col :span="18" :offset="3" class="environmentFirstBg">
+					<div class="grid-content bg-purple environmentFirstCot">
+						<i class="icon iconfont icon-21 xe664 mr20 ver_al_m" ></i>
+						<div class="environmentFirst_icon">
+							<i class="el-icon-circle-check"></i>
+						</div>
+						<span>已安装检测工具可直接启动</span>
+						<a href="javascript:;">
+							<i class="el-icon-download" id="envDownload">启动环境检测工具 </i>
+						</a>
+					</div>
+				</el-col>
+			</el-row>
 		</el-dialog>
+		<!--环境检测弹框-->
   </div>
 </template>
 
@@ -64,12 +88,12 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      enviromentDialog: false
+			environmentTestDialogVisible: true,  //环境检测弹框默认展开
     };
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     goto(url){
     	this.$router.push({
@@ -80,6 +104,64 @@ export default {
 }
 </script>
 <style lang="scss">
+.v-modal{
+	top:61px;
+}
+.environmentDialog{
+	top:61px;
+	.el-dialog__title{
+		color:red;
+		font-size:14px;
+	}
+}
+.environmentFirst{
+	.environmentFirstBg{
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-bottom:20px;
+		&:hover{
+			background:#f6f6f6;
+			border-radius:5px;
+		}
+	}
+	.environmentFirstCot{
+		text-align: center;
+		position: relative;
+		.icon{
+			font-size: 22px;
+      position: absolute;
+      right: 10px;
+      top: 20px;
+		}
+		span{
+			display:block;
+			text-align:center;
+			margin-bottom: 15px;
+			font-size: 14px;
+			color: #666;
+			font-weight: bold;
+		}
+		a{
+			color: #fff;
+    	background-color: #409eff;
+			display: inline-block;
+			padding:10px 15px;
+			border-radius:4px;
+			&:hover{
+				background:#66b1ff;
+			}
+		}
+	}
+	.environmentFirst_icon{
+		
+		i{
+			font-size:30px;
+			display:block;
+			margin:0 auto 10px;
+			color:#409eff;
+		}
+	}
+}
 .head-submenu{
 	.iconfont{
   	font-size: 18px;

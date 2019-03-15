@@ -3,6 +3,8 @@
 @import "./color.scss";
 @import "./font.scss";
 @import "./mixin.scss";
+@import "./margin.scss";
+@import "./padding.scss";
 
 
 /**
@@ -37,6 +39,14 @@ body {
 	clear: both;
 }
 
+.fr {
+	float: right;
+}
+
+.fl {
+	float: left;
+}
+
 /**
  * 只针对ie6、7
  * 下面的命令会触发hasLayout，从而包含浮动
@@ -54,4 +64,42 @@ body {
 	to {
 		transform: rotate(360deg);
 	}
+}
+.ver_al_m{
+	vertical-align: middle;
+}
+.line_height_1.5{
+	line-height: 1.5em;
+}
+.line_height_1.8{
+	line-height: 1.8em;
+}
+
+.commonTitle {
+	font-size: 18px;
+	text-align: left;
+}
+
+.commonTitle:before {
+	content: "";
+	float: left;
+	margin-top: 0px;
+	margin-right: 10px;
+	border-left: 4px solid #348fe2;
+	height: 16px;
+	border-radius: 3px;
+}
+
+.wi260 {
+	width: 260px;
+}
+.textAlignC {
+	text-align: center;
+}
+
+.textAlignR {
+	text-align: right;
+}
+.textAlignL {
+	text-align: left;
 }
