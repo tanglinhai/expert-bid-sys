@@ -29,7 +29,7 @@
             <!-- 子组件 -->
             <div class="allContent">
                 <div  v-loading="pageLoading">
-                    <nowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr" ref="ccc"></nowProject>
+                    <NowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr" ref="ccc"></NowProject>
                 </div>
             </div>
 
@@ -50,13 +50,15 @@
     </div>
 </template>
 <script>
-    import nowProject from './publicVue/nowProject'
+    import NowProject from './publicVue/NowProject';
+
     export default {
         name: 'projects',
         props: {
         },
         components: {
-            nowProject
+            NowProject,
+
         },
         data() {
             return {
