@@ -12,8 +12,15 @@
     }
 </script>
 <style lang="scss">
+    body{
+        background-color: #fff;
+    }
     .index {
-        background-color: #dbe0e6;
-        padding: 25px 30px 25px 30px;
+        background-color: #fff;
+        padding:100px 15px 100px 15px;
+        text-align: center;
+        img{
+            width: 50%;
+        }
     }
 </style>
