@@ -88,7 +88,7 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-			environmentTestDialogVisible: true,  //环境检测弹框默认展开
+			environmentTestDialogVisible: false,  //环境检测弹框默认展开
     };
   },
   methods: {

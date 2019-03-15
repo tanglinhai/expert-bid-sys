@@ -18,6 +18,9 @@ var routes = [
         //项目列表页面
         { name: '/index/projects', path: '/index/projects', component: () => import('./components/Projects.vue') },
 
+        //开始评标页面lp
+        { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./evaluationpage/beginEvaluation.vue') },
+
 
         //用户信息
         { name: '/user/info', path: '/user/info', component: () => import('./views/user/UserInfo.vue') },
