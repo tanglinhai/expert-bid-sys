@@ -3,15 +3,15 @@
         <!-- 项目列表页面-->
         <el-row class="mb15">
             <el-col>
-                <el-button type="primary" size="medium">专家评审/ 我的评审项目</el-button>
+                <el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目</el-button>
             </el-col>
         </el-row>
         <div class="main">
-            <el-row class="pro_msg_warp ">
+            <el-row class="pro_msg_warp cf">
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                     <h5 class="commonTitle col348fe2">项目信息</h5>
                 </div>
-                <div class="fl search_warp textAlignR" >
+                <div class="fl search_warp textAlignR " >
                     <el-input
                             placeholder="项目名称关键字进行检索"
                             v-model="seach_input"
@@ -25,9 +25,26 @@
                                icon="el-icon-search">查询</el-button>
                 </div>
             </el-row>
+            <div class="line"></div>
             <!-- 子组件 -->
-            <div class="allContent" v-loading="pageLoading">
-                <nowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="unmsgBox" ref="ccc"></nowProject>
+            <div class="allContent">
+                <div  v-loading="pageLoading">
+                    <nowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr" ref="ccc"></nowProject>
+                </div>
+            </div>
+
+            <!--分页-->
+            <div class="pageBox">
+                <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[10, 20, 30, 40]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400"
+                >
+                </el-pagination>
             </div>
         </div>
     </div>
@@ -37,7 +54,6 @@
     export default {
         name: 'projects',
         props: {
-
         },
         components: {
             nowProject
@@ -47,45 +63,64 @@
                 seach_input:"",
                 projectBagMsg:[],
                 msgBox:[],
-                unmsgBox:[],
                 list:[],
                 pageLoading:false,
+                currentPage:1,
+                btn_search_loading:false,
+                arr:[],//默认打开折叠面板的下标数组
             }
         },
         mounted() {
-this.childMsg();
+             this.childMsg();
         },
         methods: {
             // 初始子组件数据获取
             childMsg(){
                 this.pageLoading=true;
                 this.$axios.post('/api/bagMsg').then(res => {
-                    if(res.status == 200){
+                    if(res.status === 200){
+                        // console.log(res.data);
                         this.pageLoading=false;
+                        this.btn_search_loading = false;
                         this.projectBagMsg=res.data.projectBagMsg;
-                        this.list=res.data.bagAll;
                         this.msgBox=res.data.allBagMsg;
-                        this.unmsgBox=res.data.unwidthMsg;
-
-                        // // 开标前两小时处理
-                        // res.data.allBagMsg.forEach(item => {
-                        //   // console.log(item.starTime);
-                        //   var oDate=new Date();
-                        //   oDate.setFullYear(oDate.getFullYear(),oDate.getMonth(),oDate.getDate());
-                        //   oDate.setHours(oDate.getHours(),oDate.getMinutes(),oDate.getSeconds(),oDate.getMilliseconds());
-                        //   var ms=new Date('2018/10/11 15:56').getTime()-oDate.getTime();
-                        //   setInterval(() => {
-                        //       ms--;
-                        //       if(ms < 2*(60*60*1000)){
-                        //         console.log(ms)
-                        //       }
-                        //   },1000)
-                        // })
+                        // console.log(this.msgBox, this.projectBagMsg);
+                        for(var i = 0; i < this.projectBagMsg.length; i++) {
+                            this.arr.push(i)
+                        }
                     }else {
+                        this.btn_search_loading = false;
                         this.pageLoading=false;
                     }
-                })
+                });
             },
+            handleSizeChange(val) {
+                // console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                this.pageLoading=true;
+                 this.childMsg();
+            },
+           search(){
+               if (this.btn_search_loading) {
+                   return;
+               }
+               this.btn_search_loading = true;
+               this.pageLoading = true;
+               let _this=this;
+               setTimeout(function () {
+                   _this.$axios.post('/api/bagMsg', {
+                       value: this.seach_input,
+                   }).then(res => {
+                       if (res.status === 200) {
+                           _this.childMsg();
+                       }
+                   }).catch(e => {
+                       _this.btn_search_loading = false;
+                       _this.pageLoading = true;
+                   });
+               }, 2000)
+           }
         },
     }
 </script>
@@ -97,11 +132,13 @@ this.childMsg();
             background: white;
             border-radius: 5px;
             .pro_msg_warp {
-                padding: 20px 15px 20px 15px;
-                border-bottom:1px solid #d9e0e7;
+                padding:  15px;
+                border-bottom:1px solid #f3f3f3;
                 .pro_msg_div,.search_warp{
                     width: 50%;
-
+                }
+                .pro_msg_div{
+                    margin-top: 9px;
                 }
                 .search_warp{
                     .el-button--small{
@@ -111,8 +148,22 @@ this.childMsg();
                         border-radius:4px 0 0 4px;
                     }
                 }
-
+            }
+            .line{
+                width: 100%;
+                height: 1px;
+                background-color: #f3f3f3;;
+            }
+            .allContent{
+                margin-top: 15px;
+            }
+            .pageBox{
+                text-align: right;
+                padding: 0 15px 15px 15px;
             }
         }
+        .el-collapse {
+            border: none!important;
+       }
     }
 </style>

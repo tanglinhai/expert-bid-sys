@@ -12,43 +12,35 @@ let tableMs = Mock.mock('/api/tableMsg', 'post', {
         'readM': '审核通过'
     }]
 })
-//评审项目项目数据
+//评审项目数据列表
 let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
-    'projectBagMsg': [{
+    'projectBagMsg|1-5': [{
         id: () => Random.id(),
-        'status': '公开招标',
-        'projectName': '测试标题南京中央办公项目建设',
-        'nowBag|2-4': '标包' + Random.natural(0, 9) + Random.natural(4, 8) + '、',
-        'num': 'YTZ-010-01',
-        'name': '中招国际招标有限公司'
+        'status|1': [0, 1,2],
+        'functionary': '@cname',
+        'projectName': '辅助-招标投标法-最低评标价【二次公告】',
+
     }],
-    'bagAll': [{
+    'allBagMsg|1-3': [{
         id: () => Random.id(),
-        'num': 'YTZ-010-01',
-        'name': '中招国际...',
+        'groupName': '0' + Random.natural(0, 9)+ Random.natural(0, 0) + Random.natural(0, 9)+'-'
+        +Random.natural(0, 6) + Random.natural(5, 9)+ Random.natural(0, 6) + Random.natural(5, 9)+'N'+Random.natural(0, 6) + Random.natural(5, 9)+ Random.natural(0, 6)
+        +'/'+'评委会',
+        'bagName': '第' + Random.natural(0, 6) + Random.natural(5, 9)+'包',
+        'starTime':   () => Random.datetime(),
+        'stopTime':  () => Random.datetime(),
+        'type|1': [0, 1]
     }],
-    'allBagMsg|0-9': [{
-        id: () => Random.id(),
-        'bagName': '标包' + Random.natural(0, 6) + Random.natural(5, 9),
-        'starTime': '2018/11/30 13:54:00',
-        'stopTime': () => Random.date(),
-        'status|1': [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    }],
-    'unwidthMsg|0-3':[{
-        id: () => Random.id(),
-        'bagName': '标包' + Random.natural(0, 6) + Random.natural(5, 9),
-        'starTime': '2018/10/14 08:56',
-        'stopTime': () => Random.date(),
-        'status': 1
-    }],
-    'unwidthMsgMore|3-12':[{
-        id: () => Random.id(),
-        'bagName': '标包' + Random.natural(0, 6) + Random.natural(5, 9),
-        'starTime': '2018/11/25 08:56',
-        'stopTime': () => Random.date(),
-        'status': 1
-    }]
 })
+
+
+
+
+
+//
+// let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
+//
+// })
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 
