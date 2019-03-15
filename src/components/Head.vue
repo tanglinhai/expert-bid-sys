@@ -11,7 +11,7 @@
 
   	<el-menu :default-active="activeIndex2" class="menu-ri" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1">
-		  	<a href="javascript:void(0);" @click="enviromentDialog=false"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
+		  	<a href="javascript:void(0);" @click="environmentTestDialogVisible=true"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
 		  <el-submenu index="2" popper-class="head-submenu">
 		    <template slot="title">
@@ -44,14 +44,15 @@
 		<!--环境检测弹框-->
 		<el-dialog
 		class="environmentDialog"
-		title="您还没有安装必备得组件，请先下载环境检测工具安装系统必备组件"
+		title="您还没有安装必备的组件，请先下载环境检测工具安装系统必备组件"
 		:visible.sync="environmentTestDialogVisible"
-		width="40%"
+		width="32%"
 		center
 		>
 			<el-row :gutter="20" class="environmentFirst">
 				<el-col :span="18" :offset="3" class="environmentFirstBg">
 					<div class="grid-content bg-purple environmentFirstCot">
+						<i class="icon iconfont icon-11 xe663 mr20 ver_al_m" ></i>
 						<div class="environmentFirst_icon">
 							<i class="el-icon-warning"></i>
 						</div>
@@ -63,7 +64,7 @@
 				</el-col>
 				<el-col :span="18" :offset="3" class="environmentFirstBg">
 					<div class="grid-content bg-purple environmentFirstCot">
-						<i class=" icon iconfont icon-1 xe664 mr20 ver_al_m" ></i>
+						<i class="icon iconfont icon-21 xe664 mr20 ver_al_m" ></i>
 						<div class="environmentFirst_icon">
 							<i class="el-icon-circle-check"></i>
 						</div>
@@ -107,6 +108,7 @@ export default {
 	top:61px;
 }
 .environmentDialog{
+	top:61px;
 	.el-dialog__title{
 		color:red;
 		font-size:14px;
@@ -124,6 +126,13 @@ export default {
 	}
 	.environmentFirstCot{
 		text-align: center;
+		position: relative;
+		.icon{
+			font-size: 22px;
+      position: absolute;
+      right: 10px;
+      top: 20px;
+		}
 		span{
 			display:block;
 			text-align:center;
