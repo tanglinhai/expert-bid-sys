@@ -11,6 +11,17 @@
                             </div>
                         </el-col>
                     </el-row>
+                    <el-row class="header_upload_div">
+                        <el-col :span="10" :offset="7">
+                            <el-form-item label="头像：" prop="touxiang" class="fs14 head_div cf">
+                                <!-- 头像上传裁剪---------------------- -->
+                                <div class="headerBox">
+                                     <img :src="imageUrl" alt="头像" class="headerImg" @click="crop_Header_Img">
+                                </div>
+                                <!-- -------------------------------- -->
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item label="姓名：" prop="name">
@@ -28,7 +39,6 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item label="绑定邮箱：" prop="email">
@@ -96,58 +106,16 @@
                                     </el-form-item>
                                 </el-col>
                             </el-row>
-
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item >
                                 <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg">
                                     保存
                                 </el-button>
-
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row class="mb15">
-                        <el-col>
-                            <div class="grid-content bg-purple-dark  ">
-                                <h5 class="commonTitle col348fe2">上次头像</h5>
-                            </div>
-                        </el-col>
-                    </el-row>
-
-
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item label="头像：" prop="touxiang" class="fs14 head_div cf">
-                                <!-- <el-upload
-                                        class="avatar-uploader"
-                                        action="http://localhost:8080/upload"
-                                        :show-file-list="false"
-                                        :on-success="handleAvatarSuccess"
-                                        :before-upload="beforeAvatarUpload">
-                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                                    <i v-else class="el-icon-plus avatar-uploader-icon "></i>
-                                </el-upload> -->
-                                <!-- 头像上传裁剪---------------------- -->
-                                <div class="headerBox">
-                                    <!--<img src="../../assets/image/txph.png" alt="头像" class="headerImg" @click="crop_Header_Img">-->
-                                    <!--<img :src="imageUrl" alt="头像" class="headerImg" @click="crop_Header_Img">-->
-                                </div>
-                                <!-- -------------------------------- -->
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item>
-                                <el-button size="small">上传头像 </el-button>
-                            </el-form-item>
-
-                        </el-col>
-                    </el-row>
-                </el-form>
-
-
+                 </el-form>
             </div>
         </div>
         <!--邮箱绑定弹框-->
@@ -260,11 +228,47 @@
               </el-form>
             </span>
         </el-dialog>
+        <!-- 裁剪dialog------------------------------  -->
+        <el-dialog
+                :visible.sync="centerDialogVisible"
+                width="700px"
+                @close="close"
+                center>
+            <div class="cropBox">
+                <div class="img-container" style="width:85%;float:left;">
+                    <img id="image" alt="Picture" class="cropper-hidden" style="display: none !important;">
+                </div>
+                <div id="preview_box" class="docs-preview clearfix" style="float:left;margin-left:15px;">
+                    <div class="img-preview" style="width:82px;height:82px;"></div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+            <div style="padding-top:15px;">
+                <el-upload
+                        class="upload-demo"
+                        ref="cropper_upload"
+                        action="/upload"
+                        :on-change="onChangeFile"
+                        :auto-upload="false"
+                        id="upImage"
+                        style="float:left;"
+                >
+                    <el-button slot="trigger" size="small" >选择图片</el-button>
+                    <el-button style="margin-left: 10px;" size="small" id="up" @click="submitUpload('cropper_upload','upImage')">上传图片</el-button>
+                    <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+                </el-upload>
+                <el-button type="primary" @click="cropConfirm" style="float:right;" size="small">确认裁剪使用</el-button>
+                <div style="clear:both;"></div>
+            </div>
+        </el-dialog>
+        <!-- ----------------------------------------------------- -->
     </div>
 </template>
 
 <script>
-
+    import txph from '../../assets/img/txph.png'
+    //头像裁剪坐标变量保存---------
+    var dataOptions="";
     export default {
         name: 'personal_user_logo',
         props: {},
@@ -276,6 +280,7 @@
                     resource: '男',
                     email: ''
                 },
+                imageUrl: txph,//上传图片图片路径
                 setTime: undefined,//定时器方法
                 acceptEmailCode: "",//接收到的验证码
                 acceptPhoneCode: "",//接收到的验证码
@@ -319,6 +324,11 @@
                         {pattern: /^\d{4}$/, message: '手机图片验证码不正确', trigger: 'blur'}
                     ]
                 },
+                // 头像裁剪数据绑定 -----------------
+                centerDialogVisible:false,
+                // beforeCropImgUrl:'',
+                afterCropImgUrl:'',
+                // ---------------------------------
             };
         },
         mounted() {
@@ -531,9 +541,57 @@
             phoneBinding() {
                 this.phoneBindingDialog = true;
             },
-
+            // 头像裁剪上传操作-----------------------------
+            crop_Header_Img(){
+                this.centerDialogVisible=true;
+            },
+            submitUpload(uploadImg,id_num){
+                $("#image").cropper('destroy');
+                $("#image").hide();
+                var options={
+                    aspectRatio:1/1,
+                    preview: '.img-preview',
+                    crop(e){
+                        //  console.log(e);
+                        dataOptions=e.detail;
+                    }
+                };
+                this.$commonJs.upload({
+                    context:this,
+                    key:uploadImg,
+                    id:id_num,
+                    callbacks:function (data,status) {
+                        // console.log(data,status);
+                        data.files.forEach((item) => {
+                            // console.log(item)
+                            var str=item.path;
+                            var urlReg=str.replace(/\\/g,"/");
+                            var laterUrl=urlReg.lastIndexOf("/");
+                            urlReg=urlReg.substring(laterUrl+1,urlReg.length);
+                            console.log(urlReg);
+                            $("#image").attr('src','http://localhost:8081/upload/' + urlReg);
+                            $("#image").show();
+                            $("#image").cropper(options);
+                        })
+                    },
+                    cropConfirm(){
+                        // console.log(dataOptions)
+                        this.$axios.post('/api/esta').then(res => {
+                            if(res.status == '200'){
+                                this.centerDialogVisible = !true;
+                                $("#image").cropper('destroy');
+                                $("#image").hide();
+                                alert('裁剪成功');
+                            }
+                        })
+                    },
+                    close(){
+                        $("#image").cropper('destroy');
+                        $("#image").hide();
+                    }
+                });
+            },
         }
-
     }
 </script>
 <style lang="scss">
@@ -545,7 +603,72 @@
             border-radius: 5px;
             .user_logo_con {
                 padding: 15px;
+                .demo-ruleForm{
+                    .header_upload_div{
+                        .head_div{
+                            .headerBox{
+                                width: 82px;
+                                height: 82px;
+                                border: 1px dashed #d9d9d9;
+                                -webkit-border-radius: 6px;
+                                -moz-border-radius: 6px;
+                                -ms-border-radius: 6px;
+                                -o-border-radius: 6px;
+                                border-radius: 6px;
+                                text-align: center;
+                                cursor: pointer;
+                                .headerImg{
+                                    width: 80px;
+                                    height: 80px;
+                                    vertical-align: middle;
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
         }
+            .cropBox{
+
+
+            .img-container,
+            .img-preview {
+                background-color: #f7f7f7;
+                text-align: center;
+                width: 100%;
+            }
+
+            .img-container {
+                margin-bottom: 1rem;
+                max-height: 500px;
+                min-height: 325px;
+            }
+
+            .img-container > img {
+                max-width: 100%;
+            }
+
+            .docs-preview {
+                margin-right: -1rem;
+            }
+
+            .img-preview {
+                float: left;
+                margin-bottom: .5rem;
+                margin-right: .5rem;
+                overflow: hidden;
+                width: 200px;
+                height:200px;
+            }
+
+            .img-preview > img {
+                max-width: 100%;
+            }
+            .el-upload-list{
+                display: none;
+            }
+        }
+
     }
 </style>

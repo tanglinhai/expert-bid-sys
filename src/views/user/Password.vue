@@ -26,7 +26,8 @@
                                           @input="OnPass"
                                           @focus="focus"
                                           @blur="blur"
-                                          maxlength="16"></el-input>
+                                          maxlength="16"
+                                          type="password"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -52,7 +53,7 @@
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item label="再次输入新密码：" prop="new_pass_again">
-                                <el-input v-model="ruleForm.new_pass_again" size="medium" class="newpass_input"></el-input>
+                                <el-input v-model="ruleForm.new_pass_again" size="medium" class="newpass_input" maxlength="16"  type="password"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -92,7 +93,9 @@
             let validatePass = (rule, value, callback) => {
                 if (!value) {
                     callback(new Error('请输入新密码'));
-                } else {
+                }else if(value.length<8){
+                    callback(new Error('请输入一个长度最少是 8 的字符串'));
+                }else if(value.length>=8) {
                  // let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
                     let targ = /^(?=.*[a-z])(?=.*[A-Z])[^]{8,16}$/;
                     if (!targ.test(value)) {
@@ -106,8 +109,11 @@
             let validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm.new_pass) {
-                    callback(new Error('两次输入密码不一致!'));
+                }else if(value.length<8){
+                    callback(new Error('请输入一个长度最少是 8 的字符串'));
+                }
+                else if (value !== this.ruleForm.new_pass) {
+                    callback(new Error('请两次输入相同的密码'));
                 } else {
                     callback();
                 }
