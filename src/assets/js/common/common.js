@@ -289,17 +289,17 @@ export default {
         //  *obj.context.$refs[a].onError    [就是on-error：文件上传失败时的钩子参数为：err, file, fileList]
         // * fileList   [{type}]  arry      [所有上传文件的数组]
         //  */obj.context  this
-        console.log(obj,'-------');
+        // console.log(obj,'-------');
         var a = '';
         a = obj.key;
         var b = obj.id;
-        console.log(obj.id==undefined,'111');
+        // console.log(obj.id==undefined,'111');
         var _this = this;
         var ieVer = _this.iEVersion();
         // console.log($("#"+b))//定义的iddom
         if (ieVer < 10 && ieVer != -1) {//ie6789
             if (obj.id ==undefined) {
-                console.log(obj.context.$refs[a],'2222');
+                // console.log(obj.context.$refs[a],'2222');
                 var $lis = $(obj.context.$refs[a].$children[2].$children[0].$options.parent.$el.children);//$(".el-upload-list li")
                 $.ajaxFileUpload({
                     url: '/upload',
@@ -307,7 +307,7 @@ export default {
                     fileElement: obj.context.$refs[a].$children[0].$refs.input,//$("el-upload__input")
                     dataType: 'json',
                     success: function (data, status) {
-                        console.log(data, status);
+                        // console.log(data, status);
                         $barInner.css('width', '100%');
                         $barText.html('100%');
                         clearInterval(supTimeout);
