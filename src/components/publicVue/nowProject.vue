@@ -52,7 +52,7 @@
                                 </el-button>
                             </el-col>
                             <el-col :span="11" class="bidding_doc" style="margin-left: 15px">
-                                <el-button size="small" @click="bidding_doc_btn(item)"><i
+                                <el-button size="small" @click="bidding_doc_btn"><i
                                         class="icon iconfont icon-wenjian mr3"></i>招标相关文件
                                 </el-button>
                             </el-col>
@@ -81,13 +81,13 @@
                         <div class="overflowText textAlignR">项目业务编号：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.proBusinessNum}}</div>
+                        <div class="overflowText">0635-1909qwerN1197</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">开标地点：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidOpeningPlace}}</div>
+                        <div class="overflowText">北京海淀区</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -95,13 +95,13 @@
                         <div class="overflowText textAlignR">售标起始时间：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.sellStartTime}}</div>
+                        <div class="overflowText">2019/03/14 00:00:00</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">开标时间：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidOpeningTime}}</div>
+                        <div class="overflowText">2019/03/14 00:00:00</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -109,13 +109,13 @@
                         <div class="overflowText textAlignR">售标结束时间：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.sellEndTime}}</div>
+                        <div class="overflowText">2019/03/14 00:00:00</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">评标地点：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.evaluationBidPlace}}</div>
+                        <div class="overflowText">北京市海淀区</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -123,15 +123,16 @@
                         <div class="overflowText textAlignR">获取标书方式：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.getBidType}}</div>
+                        <div class="overflowText">在线下载</div>
                     </el-col>
 
                     <el-col :span="6">
                         <div class="overflowText textAlignR">评标时间：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.evaluationBidTime}}</div>
+                        <div class="overflowText">2019/03/15 00:00:00</div>
                     </el-col>
+
                 </el-row>
                 <el-row class="information">
                     <el-col :span="6">
@@ -139,19 +140,23 @@
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText">
-                            <el-checkbox v-model="checked1" disabled class="checkedS">网上支付</el-checkbox>
-                            <el-checkbox v-model="checked2" disabled class="checkedS">现金支付</el-checkbox>
-                            <el-checkbox v-model="checked3" disabled class="checkedS">电汇</el-checkbox>
-                         </div>
+                            <template>
+                                <el-checkbox v-model="checked1" disabled>网上支付</el-checkbox>
+                                <el-checkbox v-model="checked2" disabled>现金支付</el-checkbox>
+                                <el-checkbox v-model="checked3" disabled>电汇</el-checkbox>
+                            </template>
+                        </div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">上传方式：</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText">
-                            <el-radio disabled v-model="radio1" label="禁用" class="radioS">线上</el-radio>
-                            <el-radio disabled v-model="radio1" label="禁用2" class="radioS">线下</el-radio>
-                            <el-radio disabled v-model="radio1" label="禁用3" class="radioS">辅助开评标</el-radio>
+                            <template>
+                                <el-radio disabled v-model="radio1" label="禁用">线上</el-radio>
+                                <el-radio disabled v-model="radio1" label="禁用">线下</el-radio>
+                                <el-radio disabled v-model="radio1" label="选中且禁用">辅助开评标</el-radio>
+                            </template>
                         </div>
                     </el-col>
                 </el-row>
@@ -169,13 +174,13 @@
                         <div class="overflowText textAlignR">包名称：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bagName}}</div>
+                        <div class="overflowText">第1包</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">图纸押金：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.drawingDeposit}}元</div>
+                        <div class="overflowText">1000.0元</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -183,14 +188,14 @@
                         <div class="overflowText textAlignR">邮寄费：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.postage}}元</div>
+                        <div class="overflowText">50.0元</div>
                     </el-col>
 
                     <el-col :span="6">
                         <div class="overflowText textAlignR">投标保证金：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.tenderBond}}元</div>
+                        <div class="overflowText">6万元</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -198,14 +203,14 @@
                         <div class="overflowText textAlignR">标书费：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.tenderFree}}元</div>
+                        <div class="overflowText">1000.0元</div>
                     </el-col>
 
                     <el-col :span="6">
                         <div class="overflowText textAlignR">招标代理服务费：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidAgencyServiceFee}}</div>
+                        <div class="overflowText">3.0(浮动费率 （发改价格[2011]534号)</div>
                     </el-col>
                 </el-row>
             </div>
@@ -272,11 +277,10 @@
         data() {
             return {
                 docListDialogVisible: false,//文件列表弹框
-                checked1: '',
-                checked2: '',
-                checked3: '',
-                radio1: '',
-                every_msg:[],
+                checked1: true,
+                checked2: true,
+                checked3: true,
+                radio1: '禁用'
             }
         },
         // 父组件传过来的值
@@ -294,12 +298,15 @@
                 type: Array
             }
         },
+
         mounted() {
+
 
         },
         methods: {
-            bidding_doc_btn(obj) {//招标相关文件
+            bidding_doc_btn() {
                 this.docListDialogVisible = true;
+
                 if(obj.paymentType[0]==0){
                     this.checked1=true;
                 }if(obj.paymentType[1]==1){
@@ -312,8 +319,9 @@
                 setTimeout(() =>{
                     this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
                 },100)
+
             },
-            begin_pingbiao_btn() {//开始评标
+            begin_pingbiao_btn() {
 
             }
         }
@@ -513,6 +521,7 @@
                     line-height: 35px;
                 }
             }
+
         }
     }
 </style>
