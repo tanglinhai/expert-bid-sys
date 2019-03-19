@@ -311,6 +311,20 @@
             },
             bidding_doc_btn() {
                 this.docListDialogVisible = true;
+
+                if(obj.paymentType[0]==0){
+                    this.checked1=true;
+                }if(obj.paymentType[1]==1){
+                    this.checked2=true;
+                }
+                if(obj.paymentType[2]==2){
+                    this.checked3=true;
+                }
+                this.every_msg=obj;
+                setTimeout(() =>{
+                    this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
+                },100)
+
             },
             begin_pingbiao_btn() {
 

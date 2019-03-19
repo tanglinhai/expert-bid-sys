@@ -50,11 +50,68 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'tenderBond':Random.float(10, 100, 2, 2)+'万元'
     }],
 });
-
-
-
-
-
+// 修改密码页面登陆名以及密码
+let login = Mock.mock('/api/login', 'post', {
+    code: 200,
+    message: '成功!',
+    'msg': {
+        "name": 'dyzs2001@vip.sina.com',
+        "pass": '0',
+    }
+});
+//一进页面判断是否已经绑定邮箱以及手机号码，
+let isbindingEmailPhone = Mock.mock('/api/isbindingEmailPhone', 'post', {
+    'data':{
+        name:"123",
+        pass:"0"
+    },
+    'massageList': {
+        "emaile": '1315619013@qq.com',
+        "phoneNum": "13325689861",
+    },
+    'type|1': [
+        {
+            value: '1',
+            label: '有头像'
+        },
+        {
+            value: '2',
+            label: '没有头像'
+        }],
+    'img|1': {
+        "txph": "../../assets/image/txph.png"
+    }
+});
+//基本信息保存成功
+let save = Mock.mock('/api/save', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
+//基本信息发送手机验证码
+let sendPhoneCode = Mock.mock('/api/sendPhoneCode', 'post', {
+    code: 200,
+    message: '成功!',
+    data: [1234]
+});
+//基本信息手机号绑定
+let phoneBinding = Mock.mock('/api/phoneBinding', 'post', {
+    code: 200,
+    message: '成功!',
+    data: [1234]
+});
+//基本信息发送邮箱验证码
+let sendEmailCode = Mock.mock('/api/sendEmailCode', 'post', {
+    code: 200,
+    message: '成功!',
+    data: [1234]
+});
+//基本信息邮箱绑定
+let Emailpd = Mock.mock('/api/Emailpd', 'post', {
+    code: 200,
+    message: '成功!',
+    data: [1234]
+});
 //
 // let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
 //
