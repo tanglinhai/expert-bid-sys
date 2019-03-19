@@ -47,7 +47,7 @@
                         </el-col>
                         <el-col style="width:30%" class="btns_div">
                             <el-col :span="11" class="begin_bidding" style="text-align: right">
-                                <el-button size="small" class="btnBg" @click="begin_pingbiao_btn"><i
+                                <el-button size="small" class="btnBg" @click="goto('/index/beginEvaluation')"><i
                                         class="icon iconfont icon-kaishi mr3"></i>开始评标
                                 </el-button>
                             </el-col>
@@ -304,8 +304,27 @@
 
         },
         methods: {
+            goto(url){
+                this.$router.push({
+                    path: url
+                });
+            },
             bidding_doc_btn() {
                 this.docListDialogVisible = true;
+
+                if(obj.paymentType[0]==0){
+                    this.checked1=true;
+                }if(obj.paymentType[1]==1){
+                    this.checked2=true;
+                }
+                if(obj.paymentType[2]==2){
+                    this.checked3=true;
+                }
+                this.every_msg=obj;
+                setTimeout(() =>{
+                    this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
+                },100)
+
             },
             begin_pingbiao_btn() {
 
