@@ -311,7 +311,6 @@
                 this.every_msg=obj;
                 setTimeout(() =>{
                     this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
-
                 },100)
             },
             begin_pingbiao_btn() {//开始评标

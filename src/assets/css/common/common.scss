@@ -103,3 +103,16 @@ body {
 .textAlignL {
 	text-align: left;
 }
+.btnBg {
+	background: #ff6600 !important;
+	border: 1px solid #ff6600 !important;
+	color: #fff !important;
+}
+.btnBg:hover {
+	background: #ff8600 !important;
+}
+.btnBg[data-v-4774750c]:hover {
+	background: #e47932 !important;
+	border-color: #e47932 !important;
+	color: #fff !important;
+}
