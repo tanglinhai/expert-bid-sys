@@ -40,6 +40,8 @@ var routes = [
         { name: '/elect/startElect', path: '/elect/startElect', component: () => import('./views/teamLeader/StartElect.vue') },
         //等待其他专家推举
         { name: '/elect/waitOhterElect', path: '/elect/waitOhterElect', component: () => import('./views/teamLeader/WaitOhterElect.vue') },
+         //资质审查页面
+        { name: '/elect/StartEvaluation', path: '/elect/StartEvaluation', component: () => import('./views/qualificationExam/StartEvaluation.vue') },
       ]
     }
   ];

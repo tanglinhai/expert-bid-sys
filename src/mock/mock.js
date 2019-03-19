@@ -22,7 +22,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
 
     }],
     'allBagMsg|1-3': [{
-        id: () => Random.id(),
+        ids: () => Random.id(),
         'groupName': '0' + '6'+ Random.natural(0, 0) + Random.natural(0, 9)+'-'
         +Random.natural(0, 6) + Random.natural(5, 9)+ Random.natural(0, 6) + Random.natural(5, 9)+'N'
         +Random.natural(0, 6) + Random.natural(5, 9)+ Random.natural(0, 6)
@@ -113,9 +113,18 @@ let Emailpd = Mock.mock('/api/Emailpd', 'post', {
     data: [1234]
 });
 let esta=Mock.mock('/api/esta','post',{
-    code: 200,
-    message: '成功!',
-    data: ""
+    msg:{
+        'status|1':[0,1]
+    },
+    'members|0-5':[
+        {unitName:'中招联合',editNum:() => Random.id(),name:() => Random.cname(),pNumber:'13253246679'}
+    ],
+    'mylist|0-5':[
+        {unitName:'中招国际',fileName:'我的联合体协议.pdf',newTime:() => Random.date() + ' 12:20:34','status|1':[0,1],id:() => Random.id(),name:() => Random.cname(),pNumber:'13253246679',url:'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',deleLoad:false}
+    ],
+    'already|0-5':[
+        {unitName:'中招联合',fileName:'我的联合体协议.pdf',startDate:() => Random.date() + ' 20:22',openTime:() => Random.date() + ' 15:40:59',id:() => Random.id(),name:() => Random.cname(),pNumber:'13253246679',url:'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+    ]
 });
 //
 // let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
