@@ -112,6 +112,11 @@ let Emailpd = Mock.mock('/api/Emailpd', 'post', {
     message: '成功!',
     data: [1234]
 });
+let esta=Mock.mock('/api/esta','post',{
+    code: 200,
+    message: '成功!',
+    data: ""
+});
 //
 // let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
 //
