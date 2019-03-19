@@ -20,16 +20,10 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li>
+                                <li v-for="(item,index) in projectZiliao" :key="index" :name="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
-                                        招标文件(pdf)
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        招标文件(pdf)
+                                        <span>{{index+1}}</span>
+                                        {{item.ziliaoName}}
                                     </a>
                                 </li>
                             </ul>
@@ -41,175 +35,103 @@
                     </div>
                     <div class="evaluationcommon_chakan">
                         <el-scrollbar style="width:100%; height:88%;">
-                            <ol>
-                                <li>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===0">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
+                                        <span style="background:#348fed">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
                                             <img src="../../assets/img/pdf_icon.png" alt="">
                                             <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li><li>
-                                    <a href="javascript:;">
-                                        <span>1</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>0635-1901qwerN1133/1</em>
-                                                <em>0635-1901qwerN1133/1</em>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
                                             </p>
                                         </div>
                                     </a>
                                 </li>
                             </ol>
-                            <ol>
-                                <li>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===1">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
+                                        <span style="background:#da2138">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
                                             <img src="../../assets/img/pdf_icon.png" alt="">
                                             <p>
-                                                <em>0635-1901qwerN1133/2</em>
-                                                <em>0635-1901qwerN1133/2</em>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
                                             </p>
                                         </div>
                                     </a>
                                 </li>
-                                
                             </ol>
-                            <ol>
-                                <li>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===2">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
+                                        <span style="background:#51cb1b">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
                                             <img src="../../assets/img/pdf_icon.png" alt="">
                                             <p>
-                                                <em>0635-1901qwerN1133/2</em>
-                                                <em>0635-1901qwerN1133/2</em>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
                                             </p>
                                         </div>
                                     </a>
                                 </li>
-                                
                             </ol>
-                            <ol>
-                                <li>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===3">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
+                                        <span style="background:#f2c71b">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
                                             <img src="../../assets/img/pdf_icon.png" alt="">
                                             <p>
-                                                <em>0635-1901qwerN1133/2</em>
-                                                <em>0635-1901qwerN1133/2</em>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
                                             </p>
                                         </div>
                                     </a>
                                 </li>
-                                
+                            </ol>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===4">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                    <a href="javascript:;">
+                                        <span style="background:#e234ed">{{index+1}}</span>
+                                        <div class="evaluationcommon_chakan_right">
+                                            <img src="../../assets/img/pdf_icon.png" alt="">
+                                            <p>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ol>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===5">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                    <a href="javascript:;">
+                                        <span style="background:#3d34ed">{{index+1}}</span>
+                                        <div class="evaluationcommon_chakan_right">
+                                            <img src="../../assets/img/pdf_icon.png" alt="">
+                                            <p>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ol>
+                            <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===6">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                    <a href="javascript:;">
+                                        <span style="background:#ff9000">{{index+1}}</span>
+                                        <div class="evaluationcommon_chakan_right">
+                                            <img src="../../assets/img/pdf_icon.png" alt="">
+                                            <p>
+                                                <em>{{item.bianhao}}</em>
+                                                <em>{{item.name}}</em>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </li>
                             </ol>
                         </el-scrollbar>
                     </div>
@@ -220,16 +142,10 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li>
+                                <li v-for="(item,index) in projectLeiFenxi" :key="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
-                                        分包
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span>2</span>
-                                        分包
+                                        <span>{{index+1}}</span>
+                                        {{item.ziliaoName}}
                                     </a>
                                 </li>
                             </ul>
@@ -271,14 +187,20 @@
         },
         // 父组件传过来的值
         props:{
-           
+           projectZiliao:{   //项目资料
+               type:Array
+           },
+           projectChaxun:{  //招标文件查看
+               type:Array
+           },
+           projectLeiFenxi:{  //雷同性分析
+               type:Array
+           }
         },
         components:{
 
         },
         mounted(){
-
-
         },
         methods: {
             goto(url){
@@ -359,6 +281,7 @@
                 .el-scrollbar__wrap {
                     overflow:hidden;
                     overflow-y:scroll;
+                    height:97%;
                 }
                 .el-scrollbar__bar{
                     .el-scrollbar__thumb{

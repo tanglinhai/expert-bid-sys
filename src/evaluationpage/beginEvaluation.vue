@@ -1,9 +1,9 @@
 <template>
 
-    <div class="beginEvaluation">
+    <div class="beginEvaluation" v-loading="pageLoading">
         <!--开始评标页面-->
         <!--公共部分组件-->
-        <evaluationcommonVue></evaluationcommonVue>
+        <evaluationcommonVue :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon">
             <el-collapse accordion v-model="activeNames2">
@@ -24,7 +24,7 @@
                     <div>
                         <template>
                             <el-table
-                            :data="tableData"
+                            :data="projectTableData"
                             :header-cell-style="getRowClass"
                             style="width: 100%">
                             <el-table-column
@@ -80,6 +80,7 @@
 
 <script>
     import evaluationcommonVue from '../components/publicVue/evaluationcommon.vue';
+import { setTimeout } from 'timers';
     export default {
         name: 'index',
         props: {},
@@ -88,19 +89,58 @@
         },
         data(){
             return {
+                pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
-                tableData: [{   //项目分包表格数据
-                    baohao: '0635-1909N974/1',
-                    baoName: '第一包',
-                    baostatuss:'进行中'
-                }],
-                currentPage4: 1   //分页
+                projectTableData: [],  //项目分包信息
+                currentPage4: 1,   //分页
+                projectZiliaoList:[],  //项目资料列表
+                projectChaxunList:[],  //招标文件查看
+                projectLeiFenxiList:[], //雷同性分析
             }
         },
-        methods(){
-            // getRowClass({row,column,rowIndex,columnIndex}){
+        mounted(){
+            this.ProjectSubcontract();//项目分包数据
+            this.ProjectZiliao() //项目，资料，分析，硬件分析查看
+            
+        },
+        methods:{
+            getRowClass({row,column,rowIndex,columnIndex}){  //项目分包表头添加背景颜色
+                if(rowIndex==0){
+                    return 'background:#efefef';
+                }else{
+                    return '';
+                }
+            },
 
-            // }
+            //项目分包数据
+            ProjectSubcontract(){   
+                 this.$axios.post('/api/ProjectSubcontract',{
+                    //invitioninpval:this.invitioninpval,   //传值关键词
+                    //redshow:this.redshow,    //四个按钮选中的是id
+                }).then(res=>{
+                    if(res.status == 200){
+                       this.projectTableData=res.data.projectTables;
+                    }
+                })
+            },
+
+            //项目，资料，分析，硬件分析查看
+            ProjectZiliao(){   
+                 this.$axios.post('/api/ProjectZiliao',{
+                }).then(res=>{
+                    if(res.status == 200){
+                        console.log(res.data)
+                        this.pageLoading=false;
+                        this.projectZiliaoList=res.data.projectZiliao;
+                        this.projectChaxunList=res.data.projectChaxun;
+                        this.projectLeiFenxiList=res.data.projectLeiFenxi;
+                        $(".el-collapse-item__wrap").hide()
+                        setTimeout(function(){
+                            $(".el-collapse-item__wrap").show()
+                        },50)
+                    }
+                })
+            },
         }
     }
 </script>
