@@ -20,8 +20,8 @@
                     </el-row>
                     <el-row>
                         <el-col :span="10" :offset="7">
-                            <el-form-item label="新密码：" prop="new_name">
-                                <el-input v-model="ruleForm.new_name" size="medium"
+                            <el-form-item label="新密码：" prop="new_pass">
+                                <el-input v-model="ruleForm.new_pass" size="medium"
                                           placeholder="密码为8位-16位并且由字母数字组成"
                                           @input="OnPass"
                                           @focus="focus"
@@ -51,8 +51,8 @@
                     </el-row>
                     <el-row>
                         <el-col :span="10" :offset="7">
-                            <el-form-item label="再次输入新密码：" prop="new_name_again">
-                                <el-input v-model="ruleForm.new_name_again" size="medium" class="newpass_input"></el-input>
+                            <el-form-item label="再次输入新密码：" prop="new_pass_again">
+                                <el-input v-model="ruleForm.new_pass_again" size="medium" class="newpass_input"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -78,35 +78,35 @@
         data() {
             let validateOldPass = (rule, value, callback) => {//原密码
                 if (value === '') {
-                    callback(new Error('原密码不能为空!'));
+                    callback(new Error('原密码不能为空'));
                 } else if (value !== this.loginPass) {
-                    callback(new Error('与原密码不符!'));
+                    callback(new Error('与原密码不符'));
                 }
                 else {
-                    // if (this.ruleForm.new_name_again !== '') {
-                    //     this.$refs.ruleForm.validateField('new_name_again');
+                    // if (this.ruleForm.new_pass_again !== '') {
+                    //     this.$refs.ruleForm.validateField('new_pass_again');
                     // }
                     callback();
                 }
             };
-            // let validatePass = (rule, value, callback) => {
-            //     if (!value) {
-            //         callback(new Error('请输入新密码'));
-            //     } else {
-            //      // let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
-            //         let targ = /^(?=.*[a-z])(?=.*[A-Z])[^]{8,16}$/;
-            //         if (!targ.test(value)) {
-            //             console.log(value);
-            //             // 密码为数字和字母的组合，至少包含一位大写字母和一位小写字母
-            //             callback(new Error('密码为数字和字母的组合，至少包含一位大写字母和一位小写字母'));
-            //         }
-            //         callback();
-            //     }
-            // };
+            let validatePass = (rule, value, callback) => {
+                if (!value) {
+                    callback(new Error('请输入新密码'));
+                } else {
+                 // let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+                    let targ = /^(?=.*[a-z])(?=.*[A-Z])[^]{8,16}$/;
+                    if (!targ.test(value)) {
+                        console.log(value);
+                        // 密码为数字和字母的组合，至少包含一位大写字母和一位小写字母
+                        callback(new Error('密码为数字和字母的组合，至少包含一位大写字母和一位小写字母'));
+                    }
+                    callback();
+                }
+            };
             let validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm.new_name) {
+                } else if (value !== this.ruleForm.new_pass) {
                     callback(new Error('两次输入密码不一致!'));
                 } else {
                     callback();
@@ -115,19 +115,19 @@
             return {
                 ruleForm: {
                     old_pass: '',
-                    new_name: '',
-                    new_name_again: '',
+                    new_pass: '',
+                    new_pass_again: '',
                     loginPass: '',//原登陆密码
                 },
                 rules: {
                     old_pass: [
                         {validator: validateOldPass, trigger: 'blur', required: true, message: '',},
                     ],
-                    // new_name: [
-                    //     {validator: validatePass, trigger: 'blur', required: true,},
-                    //     {min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur'}
-                    // ],
-                    new_name_again: [
+                    new_pass: [
+                        {validator: validatePass, trigger: 'blur', required: true,},
+                        {min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur'}
+                    ],
+                    new_pass_again: [
                         {validator: validatePass2, trigger: 'blur', required: true, message: '',}
                     ],
                 }
@@ -145,8 +145,8 @@
         },
         methods: {
             OnPass(){ //键盘弹起
-                console.log(this.ruleForm.new_name,this.ruleForm.new_name.length);
-                AuthPasswd(this.ruleForm.new_name);
+                console.log(this.ruleForm.new_pass,this.ruleForm.new_pass.length);
+                AuthPasswd(this.ruleForm.new_pass);
                 function AuthPasswd(string) {//效验
                     if(string.length >=6) {
                         if(/[a-zA-Z]+/.test(string) && /[0-9]+/.test(string) && /\W+\D+/.test(string)) {
@@ -197,11 +197,11 @@
                 }
             },
             blur(){
-                if(this.ruleForm.new_name.length>0&&this.ruleForm.new_name.length<6){
-                    console.log(this.ruleForm.new_name.length);
+                if(this.ruleForm.new_pass.length>0&&this.ruleForm.new_pass.length<6){
+                    console.log(this.ruleForm.new_pass.length);
                     $(".red_text").text("请输入一个长度最少是8的字符串");
                     $('.newpass_input').addClass("focus");
-                }else if(this.ruleForm.new_name==""){
+                }else if(this.ruleForm.new_pass==""){
                     $(".red_text").text("必填字段");
                 }
                 $('.newpass_input').addClass("outline");
