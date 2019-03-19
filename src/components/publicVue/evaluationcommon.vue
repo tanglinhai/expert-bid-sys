@@ -8,6 +8,7 @@
                 <div class="grid-content bg-purple-light">项目编号：0635-1909qwerN1133</div>
             </el-col>
         </el-row>
+        <!---->
         <el-collapse class="evaluationcommon_second" accordion v-model="activeNames">
             <el-collapse-item name="1">
                 
@@ -235,8 +236,28 @@
                         </el-scrollbar>
                     </div>
 
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                        <h5 class="commonTitle col348fe2 twoanonter">硬件特征码防串围标分析</h5>
+                    </div>
+                    <div class="evaluationcommon_ziliao">
+                        <el-scrollbar style="width:100%;">
+                            <ul>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span>1</span>
+                                        硬件特征码
+                                    </a>
+                                </li>
+                            </ul>
+                        </el-scrollbar>
+                    </div>
+
             </el-collapse-item>
         </el-collapse>
+        <!---->
+
+        
+
     </div>
 </template>
 
@@ -334,7 +355,7 @@
                 }
             }
             .evaluationcommon_chakan{
-                height:300px;
+                height:340px;
                 .el-scrollbar__wrap {
                     overflow:hidden;
                     overflow-y:scroll;
