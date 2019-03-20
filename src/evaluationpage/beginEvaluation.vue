@@ -3,7 +3,7 @@
     <div class="beginEvaluation" v-loading="pageLoading">
         <!--开始评标页面-->
         <!--公共部分组件-->
-        <evaluationcommonVue :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList"></evaluationcommonVue>
+        <evaluationcommonVue :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon">
             <el-collapse accordion v-model="activeNames2">
@@ -96,6 +96,9 @@ import { setTimeout } from 'timers';
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
                 projectLeiFenxiList:[], //雷同性分析
+                projectYinjianFenxiList:[], //硬件特征码防串围标分析
+                PorjectName:'',   //项目名称
+                ProjectBianhao:'', //项目编号
             }
         },
         mounted(){
@@ -134,6 +137,9 @@ import { setTimeout } from 'timers';
                         this.projectZiliaoList=res.data.projectZiliao;
                         this.projectChaxunList=res.data.projectChaxun;
                         this.projectLeiFenxiList=res.data.projectLeiFenxi;
+                        this.projectYinjianFenxiList=res.data.projectYinjianFenxi;
+                        this.PorjectName=res.data.PorjectName;
+                        this.ProjectBianhao=res.data.ProjectBianhao;
                         $(".el-collapse-item__wrap").hide()
                         setTimeout(function(){
                             $(".el-collapse-item__wrap").show()

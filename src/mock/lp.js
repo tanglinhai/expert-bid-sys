@@ -27,46 +27,46 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
             "id":'1',
             "bianhao":"0635-1901qwerN1133/1",
             "children":[
-                {"id":"1-1","bianhao":"0635-1901qwerN1133/1","name":"北京蓝天环境保护有限公司"},
-                {"id":"1-2","bianhao":"0635-1901qwerN1133/1","name":"益达天然产物有限公司"},
+                {"id":"1-1","baoname":"第一包","bianhao":"0635-1901qwerN1133/1","name":"北京蓝天环境保护有限公司"},
+                {"id":"1-2","baoname":"第一包","bianhao":"0635-1901qwerN1133/1","name":"益达天然产物有限公司"},
             ]
         },
         {
             "id":'2',
             "bianhao":"0635-1901qwerN1133/2",
             "children":[
-                {"id":"2-1","bianhao":"0635-1901qwerN1133/2","name":"北京蓝天环境保护有限公司"},
-                {"id":"2-2","bianhao":"0635-1901qwerN1133/2","name":"北京蓝天环境保护有限公司"},
-                {"id":"2-3","bianhao":"0635-1901qwerN1133/2","name":"益达天然产物有限公司"},
+                {"id":"2-1","baoname":"第二包","bianhao":"0635-1901qwerN1133/2","name":"北京蓝天环境保护有限公司"},
+                {"id":"2-2","baoname":"第二包","bianhao":"0635-1901qwerN1133/2","name":"北京蓝天环境保护有限公司"},
+                {"id":"2-3","baoname":"第二包","bianhao":"0635-1901qwerN1133/2","name":"益达天然产物有限公司"},
             ]
         },
         {
             "id":'3',
             "bianhao":"0635-1901qwerN1133/3",
             "children":[
-                {"id":"3-1","bianhao":"0635-1901qwerN1133/3","name":"北京蓝天环境保护有限公司"},
-                {"id":"3-2","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
-                {"id":"3-3","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
+                {"id":"3-1","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"北京蓝天环境保护有限公司"},
+                {"id":"3-2","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
+                {"id":"3-3","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
             ]
         },
         {
             "id":'4',
             "bianhao":"0635-1901qwerN1133/4",
             "children":[
-                {"id":"4-1","bianhao":"0635-1901qwerN1133/4","name":"北京蓝天环境保护有限公司"},
-                {"id":"4-2","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-                {"id":"4-3","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-                {"id":"4-4","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+                {"id":"4-1","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"北京蓝天环境保护有限公司"},
+                {"id":"4-2","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+                {"id":"4-3","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+                {"id":"4-4","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
             ]
         },
         {
             "id":'5',
             "bianhao":"0635-1901qwerN1133/5",
             "children":[
-                {"id":"4-1","bianhao":"0635-1901qwerN1133/5","name":"北京蓝天环境保护有限公司"},
-                {"id":"4-2","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-                {"id":"4-3","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-                {"id":"4-4","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+                {"id":"4-1","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"北京蓝天环境保护有限公司"},
+                {"id":"4-2","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+                {"id":"4-3","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+                {"id":"4-4","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
             ]
         }
     ],

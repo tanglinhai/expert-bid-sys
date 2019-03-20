@@ -2,10 +2,10 @@
     <div class="evaluationcommon">
         <el-row class="evaluationcommon_title">
             <el-col :span="6">
-                <div class="grid-content bg-purple">项目名称：单信封-0305-1</div>
+                <div class="grid-content bg-purple">项目名称：{{PorjectName}}</div>
             </el-col>
             <el-col :span="5" :offset="1">
-                <div class="grid-content bg-purple-light">项目编号：0635-1909qwerN1133</div>
+                <div class="grid-content bg-purple-light">项目编号：{{ProjectBianhao}}</div>
             </el-col>
         </el-row>
         <!---->
@@ -36,7 +36,7 @@
                     <div class="evaluationcommon_chakan">
                         <el-scrollbar style="width:100%; height:88%;">
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===0">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#348fed">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -50,7 +50,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===1">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#da2138">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -64,7 +64,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===2">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#51cb1b">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -78,7 +78,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===3">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#f2c71b">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -92,7 +92,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===4">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#e234ed">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -106,7 +106,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===5">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#3d34ed">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -120,7 +120,7 @@
                                 </li>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===6">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
                                     <a href="javascript:;">
                                         <span style="background:#ff9000">{{index+1}}</span>
                                         <div class="evaluationcommon_chakan_right">
@@ -158,10 +158,10 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li>
+                                <li v-for="(item,index) in projectYinjianFenxi" :key="index">
                                     <a href="javascript:;">
-                                        <span>1</span>
-                                        硬件特征码
+                                        <span>{{index+1}}</span>
+                                        {{item.ziliaoName}}
                                     </a>
                                 </li>
                             </ul>
@@ -172,7 +172,58 @@
         </el-collapse>
         <!---->
 
-        
+        <!--文件查看弹框-->
+        <el-dialog
+            title="投标文件列表"
+            :visible.sync="chakancenterDialogVisible"
+            width="60%"
+            center>
+            <span class="cf">
+                <template>
+                    <el-table
+                    :data="ChakanTableData"
+                    :header-cell-style="getRowClass"
+                    style="width: 100%">
+                    <el-table-column
+                        prop="bianhao"
+                        label="分包号"
+                        width="230">
+                    </el-table-column>
+                    <el-table-column
+                        prop="baoname"
+                        label="包名称"
+                        width="350">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="文件名称"
+                        width="300">
+                    </el-table-column>
+                     <el-table-column
+                        label="操作">
+                        <template slot-scope="scope">
+                            <el-button @click="ChakanhandleClick(scope.row)" size="small"><i class="el-icon-document"></i>&nbsp;&nbsp;查看</el-button>
+                            <a class="ml15" href="http://localhost:7002/img/download.svc" download="aaa"><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
+                        </template>
+                    </el-table-column>
+                    </el-table>
+                </template>
+                <el-pagination
+                    class="fr mt10"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="ChakanPage1"
+                    :page-sizes="[100, 200, 300, 400]"
+                    :page-size="100"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="400">
+                </el-pagination>
+            </span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="chakancenterDialogVisible = false">返回</el-button>
+            </span>
+        </el-dialog>
+        <!--文件查看弹框-->
 
     </div>
 </template>
@@ -182,7 +233,14 @@
         name: "evaluationcommon",
         data(){
             return {
+                ChakanPage1: 1,
                 activeNames: ['1'], //默认展开
+                chakancenterDialogVisible: false, //文件查看弹框默认隐藏
+                ChakanTableData:[{
+                    bianhao:"",
+                    baoname:"",
+                    name:"",
+                }],//招标文件查看弹框内容
             }
         },
         // 父组件传过来的值
@@ -195,19 +253,46 @@
            },
            projectLeiFenxi:{  //雷同性分析
                type:Array
+           },
+           projectYinjianFenxi:{   //硬件特征码防串围标分析
+               type:Array   
+           },
+           PorjectName:{   //项目名称
+               type:String
+           },
+           ProjectBianhao:{  //项目编号
+               type:String
            }
         },
         components:{
 
         },
         mounted(){
+            
         },
         methods: {
-            goto(url){
+            goto(url){ //路由
                 this.$router.push({
                     path: url
                 });
             },
+            getRowClass({row,column,rowIndex,columnIndex}){  //项目分包表头添加背景颜色
+                if(rowIndex==0){
+                    return 'background:#efefef';
+                }else{
+                    return '';
+                }
+            },
+            ChakanTk(item){  //招标文件查看点击事件
+                this.chakancenterDialogVisible=true;
+                this.ChakanTableData[0].bianhao=item.bianhao;
+                this.ChakanTableData[0].baoname=item.baoname;
+                this.ChakanTableData[0].name=item.name;
+            },
+            ChakanhandleClick(row){   //招标文件查看弹框的查看事件
+                console.log(row,999)
+                 window.open('http://localhost:7002/img/receipt.pdf');
+            }
         }
     }
 </script>
