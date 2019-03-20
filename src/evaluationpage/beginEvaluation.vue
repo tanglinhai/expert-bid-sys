@@ -17,7 +17,7 @@
                                 评标专家：
                                 <span>1</span>
                             </div>
-                            <el-button size="small" type="primary"><i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;&nbsp;查看推举情况</el-button>           
+                            <el-button size="small" type="primary" @click.stop="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;&nbsp;查看推举情况</el-button>           
                         </div>
                     </template>
                     <!--表格-->
@@ -74,7 +74,25 @@
             </div>
             <!--分页-->
         </div>
-
+        <!--推举情况弹框-->
+        <el-dialog
+            title="推举主任情况"
+            :visible.sync="dialogSelectionDirector"
+            width="50%"
+        >
+            <div class="failureEntryDialog">
+                <div class="failureoOject">
+                    {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
+                </div>
+                <el-row class="textAlignC dijilun" v-for="(item,index) in CheckReferralsList" :key="index">
+                    <el-col :span="4">第{{item.number}}轮</el-col>
+                    <el-col :span="16">
+                        <span v-for="(item,index) in item.children" :key="index">{{item.name}}({{item.peopleNumber}}票)</span>
+                    </el-col>
+                </el-row>
+            </div>
+        </el-dialog>
+        <!--推举情况弹框-->
     </div>
 </template>
 
@@ -99,6 +117,10 @@ import { setTimeout } from 'timers';
                 projectYinjianFenxiList:[], //硬件特征码防串围标分析
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
+                dialogSelectionDirector:false,  //推举情况弹框默认隐藏
+                leader:'',  //推举主任情况组长
+                baohao:'',  //推举主任情况包号
+                CheckReferralsList:[],  //推举主任情况弹框数据
             }
         },
         mounted(){
@@ -132,7 +154,7 @@ import { setTimeout } from 'timers';
                  this.$axios.post('/api/ProjectZiliao',{
                 }).then(res=>{
                     if(res.status == 200){
-                        console.log(res.data)
+                        //console.log(res.data)
                         this.pageLoading=false;
                         this.projectZiliaoList=res.data.projectZiliao;
                         this.projectChaxunList=res.data.projectChaxun;
@@ -147,6 +169,22 @@ import { setTimeout } from 'timers';
                     }
                 })
             },
+
+            //查看推举情况按钮事件
+            LookTuiju(){
+                this.dialogSelectionDirector=true;
+                this.$axios.post('/api/CheckReferrals',{
+
+                }).then(res=>{
+                    if(res.status==200){
+                       console.log(res.data) 
+                        this.leader=res.data.leader;
+                        this.baohao=res.data.baohao;
+                        this.CheckReferralsList = res.data.CheckReferralsList;
+                    }
+                })
+            }
+
         }
     }
 </script>
@@ -180,6 +218,20 @@ import { setTimeout } from 'timers';
                         padding:2px 5px;
                     }
                 }
+            }
+        }
+        .failureEntryDialog{
+            .failureoOject{
+            line-height: 38px;
+            height: 38px;
+            border-top: 1px dotted #ccc;
+            border-bottom: 1px dotted #ccc;
+            }
+            .dijilun{
+            line-height: 38px;
+            height: 38px;
+            border-bottom: 1px dotted #ccc;
+            margin-bottom: 25px;
             }
         }
     }

@@ -21,7 +21,7 @@
                         <el-scrollbar style="width:100%;">
                             <ul>
                                 <li v-for="(item,index) in projectZiliao" :key="index" :name="index">
-                                    <a href="javascript:;">
+                                    <a href="http://localhost:7002/img/download.svc" :download="item.ziliaoName">
                                         <span>{{index+1}}</span>
                                         {{item.ziliaoName}}
                                     </a>
@@ -142,7 +142,7 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li v-for="(item,index) in projectLeiFenxi" :key="index">
+                                <li v-for="(item,index) in projectLeiFenxi" :key="index" @click="LeitongcenterDialogVisible=true">
                                     <a href="javascript:;">
                                         <span>{{index+1}}</span>
                                         {{item.ziliaoName}}
@@ -158,7 +158,7 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li v-for="(item,index) in projectYinjianFenxi" :key="index">
+                                <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
                                     <a href="javascript:;">
                                         <span>{{index+1}}</span>
                                         {{item.ziliaoName}}
@@ -203,7 +203,7 @@
                         label="操作">
                         <template slot-scope="scope">
                             <el-button @click="ChakanhandleClick(scope.row)" size="small"><i class="el-icon-document"></i>&nbsp;&nbsp;查看</el-button>
-                            <a class="ml15" href="http://localhost:7002/img/download.svc" download="aaa"><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
+                            <a class="ml15" href="http://localhost:7002/img/download.svc" download=""><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
                         </template>
                     </el-table-column>
                     </el-table>
@@ -225,6 +225,71 @@
         </el-dialog>
         <!--文件查看弹框-->
 
+        <!--雷同性分析弹框-->
+        <el-dialog
+            title="标书雷同性分析"
+            :visible.sync="LeitongcenterDialogVisible"
+            width="60%"
+            center>
+            <span></span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="LeitongcenterDialogVisible = false">返回</el-button>
+            </span>
+        </el-dialog>
+        <!--雷同性分析弹框-->
+        <!--硬件特征码防串围标分析弹框-->
+        <el-dialog
+            title="硬件特征码分析"
+            :visible.sync="YinjiancenterDialogVisible"
+            width="90%"
+            center>
+            <span>
+                <template>
+                    <el-table
+                    :data="YinjiantableData"
+                    style="width: 100%">
+                        <el-table-column
+                            prop="gongyinshang"
+                            label="供应商名称"
+                            width="250">
+                        </el-table-column>
+                        <el-table-column
+                            prop="cpu"
+                            label=""
+                            >
+                        </el-table-column>
+                        <el-table-column
+                            prop="yinpan"
+                            label="">
+                        </el-table-column>
+                        <el-table-column
+                            prop="wangka"
+                            label="">
+                        </el-table-column>
+                        <el-table-column
+                            prop="ip"
+                            label="">
+                        </el-table-column>
+                        <el-table-column
+                            prop="ruanjian"
+                            label="">
+                        </el-table-column>
+                        <el-table-column
+                            prop="caozuo"
+                            label="">
+                        </el-table-column>
+                        <el-table-column
+                            prop="shijian"
+                            label="">
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="YinjiancenterDialogVisible = false">返回</el-button>
+            </span>
+        </el-dialog>
+        <!--硬件特征码防串围标分析弹框-->
     </div>
 </template>
 
@@ -236,11 +301,32 @@
                 ChakanPage1: 1,
                 activeNames: ['1'], //默认展开
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
+                LeitongcenterDialogVisible:false, //雷同性分析弹框默认隐藏
+                YinjiancenterDialogVisible:false, //硬件分析弹框默认隐藏
                 ChakanTableData:[{
                     bianhao:"",
                     baoname:"",
                     name:"",
                 }],//招标文件查看弹框内容
+                YinjiantableData: [{  //硬件特征码分析弹框数据
+                    gongyinshang: '益达天然产物有限公司（测试）',
+                    cpu: 'CPU序号',
+                    yinpan: '硬盘序列号',
+                    wangka: '网卡MAC地址',
+                    ip: 'IP地址',
+                    ruanjian: '软件序列号',
+                    caozuo: '操作系统及版本号',
+                    shijian: '操作时间'
+                }, {
+                    gongyinshang: '北京蓝天环境保护有限公司',
+                    cpu: 'CPU序号',
+                    yinpan: '硬盘序列号',
+                    wangka: '网卡MAC地址',
+                    ip: 'IP地址',
+                    ruanjian: '软件序列号',
+                    caozuo: '操作系统及版本号',
+                    shijian: '操作时间'
+                }]
             }
         },
         // 父组件传过来的值

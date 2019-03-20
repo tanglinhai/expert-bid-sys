@@ -80,6 +80,38 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
     }],
 });
 
+//beginEvaluation查看推举情况弹框接口
+let CheckReferrals=Mock.mock('/api/CheckReferrals','post',{
+    leader:'张三',
+    baohao:'0635-1909N963/2[2]',
+    'CheckReferralsList':[{
+        id:1,
+        number:'1',
+        children:[
+            {"name":"张三",'peopleNumber':'1'},
+            {"name":"李四",'peopleNumber':'0'},
+            {"name":"王五",'peopleNumber':'0'},
+        ]
+    },{
+        id:2,
+        number:'2',
+        children:[
+            {"name":"张三",'peopleNumber':'0'},
+            {"name":"李四",'peopleNumber':'1'},
+            {"name":"王五",'peopleNumber':'0'},
+        ]
+    },{
+        id:3,
+        number:'3',
+        children:[
+            {"name":"张三",'peopleNumber':'1'},
+            {"name":"李四",'peopleNumber':'0'},
+            {"name":"王五",'peopleNumber':'0'},
+            {"name":"赵六",'peopleNumber':'5'},
+        ]
+    }]
+})
+
 //beginEvaluation开始评标页面数据
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })
