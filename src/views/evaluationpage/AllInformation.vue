@@ -65,7 +65,7 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="400">
             </el-pagination>
-            <el-row :gutter="20" class="mt20">
+            <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                 <el-col :span="12" :offset="6">
                     <div class="grid-content bg-purple mar">
                         <el-checkbox v-model="checked"></el-checkbox>&nbsp;我已读并同意了此承诺书《承诺书协议》 
@@ -73,13 +73,35 @@
                 </el-col>
                 <el-col :span="12" :offset="6">
                     <div class="grid-content bg-purple mar mt20">
-                        <el-button size="small" type="primary">申请回避</el-button>
+                        <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
                         <el-button size="small" type="primary" :disabled="!checked">参加评标</el-button>
                     </div>
                 </el-col>
             </el-row>
         </div>
-       
+
+       <!--申请回避弹框-->
+       <el-dialog
+            class="mar"
+            title="申请回避"
+            :visible.sync="dialogApplyAvoid"
+            width="700px"
+        >
+            <div class="ApplyAvoid">
+                <el-form :model="ruleForm" :rules="rules" ref="ruleForm"  class="demo-ruleForm">
+                    <el-form-item  prop="desc" class="textAlignL">
+                        <label><span  class="cole02">*</span>回避原因：</label>
+                        <el-input type="textarea" v-model="ruleForm.desc" class="textarea"></el-input>
+                    </el-form-item>
+                    <el-form-item class="text-center">
+                        <el-button type="primary" @click="submitForm('ruleForm')" size="small" > <i class="icon iconfont icon-baocun1 mr5"  ></i> 确定</el-button>
+                        <el-button @click="dialogApplyAvoid=false" size="small" type="primary"> <i class="icon iconfont icon-fanhuishouye1 mr5"  ></i>返回</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+      </el-dialog>
+       <!--申请回避弹框-->
+
     </div>
 </template>
 
@@ -110,6 +132,15 @@
                 ],
                 ChakanPage1:1, //分页
                 checked:false, //我已读并同意了此承诺书是否可选
+                dialogApplyAvoid:false,
+                ruleForm: {
+                    desc: ''
+                },
+                rules: {
+                    desc: [
+                        { type:'string',required: true, message: '请填写申请原因', trigger: 'blur' }
+                    ]
+                },
             }
         },
         mounted(){
@@ -117,6 +148,12 @@
             this.AllInformation(); //专家个人信息,投标人信息接口
         },
         methods:{
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            },
             //项目，资料，分析，硬件分析查看
             ProjectZiliao(){   
                 this.$axios.post('/api/ProjectZiliao',{
@@ -143,15 +180,29 @@
                 this.$axios.post('/api/CheckReferrals',{
                 }).then(res=>{
                     if(res.status == 200){
-                        console.log(res.data.personInformation)
+                        //console.log(res.data.personInformation)
                         this.tableData2[0].num=res.data.personInformation.personName;
                         this.tableData2[0].telNum=res.data.personInformation.personTel;
                         this.tableData2[1].num=res.data.personInformation.personNumber;
                         this.tableData3=res.data.toubiaorenInformation;
                     }
                 })
-            }
-           
+            },
+           applyAvoid(){//申请回避弹框
+                this.dialogApplyAvoid=true
+            },
+            submitForm(formName) { //申请回避事件
+                this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    //console.log(this.$data.ruleForm,999)  //获取到的值
+                    //alert(1)
+                } else {
+                    return false;
+                }
+                });
+
+                // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
+            },
 
         }
     }
@@ -160,6 +211,12 @@
     .Allinformation {
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
-        
+        .ApplyAvoid {
+            .demo-ruleForm{
+                .el-textarea__inner{
+                    min-height: 120px!important;
+                }
+            }
+        }
     }
 </style>
