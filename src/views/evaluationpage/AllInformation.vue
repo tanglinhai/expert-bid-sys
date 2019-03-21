@@ -1,0 +1,165 @@
+<template>
+
+    <div class="Allinformation cf" v-loading="pageLoading">
+        <!--开始评标页面-->
+        <!--公共部分组件-->
+        <evaluationcommonVue :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
+        <!--公共部分组件-->
+        <div class="evaluationcommon mt20 cf">
+            <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                <h5 class="commonTitle col348fe2 oneanonter">专家个人信息</h5>
+            </div>
+            <el-table
+                class="mt20 fl"
+                :data="tableData2"
+                :show-header="false"
+                border
+                style="width: 100%">
+                <el-table-column
+                    prop="name"
+                    label="1"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    prop="num"
+                    label="招标文件">
+                </el-table-column>
+                <el-table-column
+                    prop="tel"
+                    label="招标文件">
+                </el-table-column>
+                <el-table-column
+                    prop="telNum"
+                    label="招标文件">
+                </el-table-column>
+            </el-table>
+            <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
+                <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
+            </div>
+            <el-table
+                class="mt20 fl"
+                :data="tableData3"
+                border
+                style="width: 100%">
+                <el-table-column
+                    type="index"
+                    label="序号"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    prop="toubiaorenName"
+                    label="招标人名称">
+                </el-table-column>
+                <el-table-column
+                    prop="toubiaorenFenbao"
+                    label="所投分包">
+                </el-table-column>
+            </el-table>
+            <el-pagination
+                class="fr mt10"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="ChakanPage1"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+            </el-pagination>
+            <el-row :gutter="20" class="mt20">
+                <el-col :span="12" :offset="6">
+                    <div class="grid-content bg-purple mar">
+                        <el-checkbox v-model="checked"></el-checkbox>&nbsp;我已读并同意了此承诺书《承诺书协议》 
+                    </div>
+                </el-col>
+                <el-col :span="12" :offset="6">
+                    <div class="grid-content bg-purple mar mt20">
+                        <el-button size="small" type="primary">申请回避</el-button>
+                        <el-button size="small" type="primary" :disabled="!checked">参加评标</el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
+       
+    </div>
+</template>
+
+<script>
+    import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
+
+    export default {
+        name: 'index',
+        props: {},
+        components: {
+            evaluationcommonVue
+        },
+        data(){
+            return {
+                pageLoading:true,  //loading
+                projectZiliaoList:[],  //项目资料列表
+                projectChaxunList:[],  //招标文件查看
+                projectLeiFenxiList:[], //雷同性分析
+                projectYinjianFenxiList:[], //硬件特征码防串围标分析
+                PorjectName:'',   //项目名称
+                ProjectBianhao:'', //项目编号
+                tableData2:[  //专家个人信息
+                    {name:'姓名：',num:'',tel:"手机：",telNum:'18700000003'},
+                    {name:'证件号码：',num:'352226199505120036'},
+                ],
+                tableData3:[  //投标人信息
+                    
+                ],
+                ChakanPage1:1, //分页
+                checked:false, //我已读并同意了此承诺书是否可选
+            }
+        },
+        mounted(){
+            this.ProjectZiliao(); //项目，资料，分析，硬件分析查看
+            this.AllInformation(); //专家个人信息,投标人信息接口
+        },
+        methods:{
+            //项目，资料，分析，硬件分析查看
+            ProjectZiliao(){   
+                this.$axios.post('/api/ProjectZiliao',{
+                }).then(res=>{
+                    if(res.status == 200){
+                        //console.log(res.data)
+                        this.pageLoading=false;
+                        this.projectZiliaoList=res.data.projectZiliao;
+                        this.projectChaxunList=res.data.projectChaxun;
+                        this.projectLeiFenxiList=res.data.projectLeiFenxi;
+                        this.projectYinjianFenxiList=res.data.projectYinjianFenxi;
+                        this.PorjectName=res.data.PorjectName;
+                        this.ProjectBianhao=res.data.ProjectBianhao;
+                        $(".el-collapse-item__wrap").hide()
+                        setTimeout(function(){
+                            $(".el-collapse-item__wrap").show()
+                        },50)
+                    }
+                })
+            },
+
+            //专家个人信息,投标人信息接口
+            AllInformation(){
+                this.$axios.post('/api/CheckReferrals',{
+                }).then(res=>{
+                    if(res.status == 200){
+                        console.log(res.data.personInformation)
+                        this.tableData2[0].num=res.data.personInformation.personName;
+                        this.tableData2[0].telNum=res.data.personInformation.personTel;
+                        this.tableData2[1].num=res.data.personInformation.personNumber;
+                        this.tableData3=res.data.toubiaorenInformation;
+                    }
+                })
+            }
+           
+
+        }
+    }
+</script>
+<style lang="scss">
+    .Allinformation {
+        background-color: #ededed;
+        padding: 15px 20px 15px 20px;
+        
+    }
+</style>

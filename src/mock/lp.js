@@ -110,8 +110,31 @@ let CheckReferrals=Mock.mock('/api/CheckReferrals','post',{
             {"name":"赵六",'peopleNumber':'5'},
         ]
     }]
-})
+});
 
 //beginEvaluation开始评标页面数据
+
+//AllInformation进入页面数据接口
+let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信息,投标人信息
+    personInformation:{
+        personName:'张三',
+        personTel:'13123434567',
+        personNumber:'352226199505120036',
+    },
+    toubiaorenInformation:[{
+        toubiaorenName:'重庆网控科技发展有限公司',
+        toubiaorenFenbao:'0635-198N517/1',
+    },{
+        toubiaorenName:'普瑞太阳能有限公司',
+        toubiaorenFenbao:'0635-198N517/1',
+    },{
+        toubiaorenName:'夏丰热工研究院有限公司',
+        toubiaorenFenbao:'0635-198N517/1',
+    },{
+        toubiaorenName:'北京有限公司',
+        toubiaorenFenbao:'0635-198N517/1',
+    }]
+})
+//AllInformation进入页面数据接口
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })
