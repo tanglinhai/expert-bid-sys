@@ -3,7 +3,7 @@
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
         <!--公共部分组件-->
-        <evaluationcommonVue :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
+        <evaluationcommonVue :NoClick="NoClick" :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon mt20 cf">
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
@@ -116,6 +116,7 @@
         },
         data(){
             return {
+                NoClick:0, //0不可点，1可点
                 pageLoading:true,  //loading
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
