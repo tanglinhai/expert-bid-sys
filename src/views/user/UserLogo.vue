@@ -357,24 +357,10 @@
             });
         },
         methods: {
-            // submitForm(formName) {
-            //     this.$refs[formName].validate((valid) => {
-            //         if (valid) {
-            //             alert('submit!');
-            //         } else {
-            //             console.log('error submit!!');
-            //             return false;
-            //         }
-            //     });
-            // },
-            // 提交的时候存到localstorage
+             // 提交的时候存到localstorage
             submitForm(formName) {
-                console.log(formName);
-                console.log(this.ruleForm.pass);
-                console.log(this.$data.ruleForm.pass);
-                this.$refs[formName].validate((valid) => {
+                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        console.log( this.$data.ruleForm);
                         this.mydataloading = true;
                         this.$axios.post('/api/save', 'post', {
                             data: JSON.stringify(this.$data.ruleForm)

@@ -126,10 +126,170 @@ let esta=Mock.mock('/api/esta','post',{
         {unitName:'中招联合',fileName:'我的联合体协议.pdf',startDate:() => Random.date() + ' 20:22',openTime:() => Random.date() + ' 15:40:59',id:() => Random.id(),name:() => Random.cname(),pNumber:'13253246679',url:'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
     ]
 });
-//
-// let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
-//
-// })
+let table_msg=Mock.mock('/api/table_msg','post',{
+    fristTableData:{
+             question:"形式评审项：",
+             answer:"投标人名称",
+            question1:"审查标准：",
+            answer1:"与营业执照、资质证书一致",
+         tableData: [{
+            index:0,
+            people: '招标人1：',
+            name: '[1]重庆网控科技发展有限公司',
+            pass: '1',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:1,
+        }, {
+            index:1,
+            people: '招标人2：',
+            name: '[2] 普瑞太阳能有限公司',
+            pass: '2',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:2,
+        },{
+            index:2,
+            people: '招标人2：',
+            name: '[2] 夏丰热工研究院有限公司',
+            pass: '2',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:3,
+        }],
+    },
+    secondTableData: {
+           question: "形式评审项：",
+            answer: "资质",
+            question1: "审查标准",
+            answer1: "与营业执照、资质证书一致",
+           tableData11: [{
+            index: 3,
+            people: '招标人1：',
+            name: '[1]重庆网控科技发展有限公司',
+            pass2: '1',
+            content: '',
+            ra1: '合格',
+            ra2: '不合格',
+            radio: '',
+            id: 4,
+        }, {
+            index: 4,
+            people: '招标人2：',
+            name: '[2] 普瑞太阳能有限公司',
+            pass2: '2',
+            content: '',
+            ra1: '合格',
+            ra2: '不合格',
+            radio: '',
+            id: 5,
+        }, {
+            index: 5,
+            people: '招标人2：',
+            name: '[2] 夏丰热工研究院有限公司',
+            pass2: '2',
+            content: '',
+            ra1: '合格',
+            ra2: '不合格',
+            radio: '',
+            id: 6,
+        }],
+    },
+    thirdTableData:{
+            question:"形式评审项：",
+            answer:"审查项目",
+            question1:"审查标准",
+            answer1:"与营业执照、资质证书一致",
+          tableData22: [{
+            index:6,
+            people: '招标人1：',
+            name: '[1]重庆网控科技发展有限公司',
+            pass2: '1',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:7,
+        }, {
+            index:7,
+            people: '招标人2：',
+            name: '[2] 普瑞太阳能有限公司',
+            pass2: '2',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:8
+        },{
+            index:8,
+            people: '招标人2：',
+            name: '[2] 夏丰热工研究院有限公司',
+            pass2: '2',
+            content:'',
+            ra1:'合格',
+            ra2:'不合格',
+            radio: '',
+            id:9,
+        }],
+        }
+
+});
+
+// 树形图接口
+let treeData = Mock.mock('/api/treeData', 'post', {
+    tableData:[
+        { id:1, pId:0, name:"形式审计-#707478", open:true},
+        { id:11, pId:1, name:"投标人名称", open:false},
+        { id:12, pId:1, name:"资质", open:false},
+        { id:13, pId:1, name:"审查项目", open:false},
+    ]
+});
+//个人形式审计表数据接口
+let personalAuditTableData = Mock.mock('/api/personalAuditTableData', 'post', {
+    msg: [{
+        number:'1',
+        date: '投标人名称',
+        name: '√',
+        province: '√',
+        city: '√',
+    }, {
+        number:'2',
+        date: '资质',
+        name: '√',
+        province: '√',
+        city: '√',
+    },
+    {
+        number:'3',
+        date: '审查项目',
+        name: '√',
+        province: '√',
+        city: '√',
+    },
+     {
+        number:'结论',
+        date: '审查标准与营业执照、资质证书是否一致',
+        name: '合格',
+        province: '合格',
+        city: '合格',
+    }, ],
+});
+
+
+// 不合格接口
+
+let comformFailureEntry = Mock.mock('/api/comformFailureEntry', 'post', {
+    code: 200,
+    message: '成功!',
+    data: ''
+});
+
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 
