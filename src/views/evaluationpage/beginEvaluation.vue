@@ -97,7 +97,7 @@
 </template>
 
 <script>
-    import evaluationcommonVue from '../components/publicVue/evaluationcommon.vue';
+    import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
 import { setTimeout } from 'timers';
     export default {
         name: 'index',
