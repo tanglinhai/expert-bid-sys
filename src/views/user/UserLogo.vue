@@ -257,7 +257,7 @@
                     <el-button style="margin-left: 10px;" size="small" id="up" @click="submitUpload('cropper_upload','upImage')">上传图片</el-button>
                     <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
                 </el-upload>
-                <el-button type="primary" @click="cropConfirm" style="float:right;" size="small">确认裁剪使用</el-button>
+                <el-button type="primary" @click="Confirm" style="float:right;" size="small">确认裁剪使用</el-button>
                 <div style="clear:both;"></div>
             </div>
         </el-dialog>
@@ -545,39 +545,44 @@
             crop_Header_Img(){
                 this.centerDialogVisible=true;
             },
-            submitUpload(uploadImg,id_num){
+            submitUpload(uploadImg,id_num) {
                 $("#image").cropper('destroy');
                 $("#image").hide();
-                var options={
-                    aspectRatio:1/1,
+                var options = {
+                    aspectRatio: 1 / 1,
                     preview: '.img-preview',
-                    crop(e){
-                        //  console.log(e);
-                        dataOptions=e.detail;
+                    crop(e) {
+                        console.log(e);
+                        dataOptions = e.detail;
                     }
                 };
                 this.$commonJs.upload({
-                    context:this,
-                    key:uploadImg,
-                    id:id_num,
-                    callbacks:function (data,status) {
+                    context: this,
+                    key: uploadImg,
+                    id: id_num,
+                    callbacks: function (data, status) {
                         // console.log(data,status);
                         data.files.forEach((item) => {
                             // console.log(item)
-                            var str=item.path;
-                            var urlReg=str.replace(/\\/g,"/");
-                            var laterUrl=urlReg.lastIndexOf("/");
-                            urlReg=urlReg.substring(laterUrl+1,urlReg.length);
-                            console.log(urlReg);
-                            $("#image").attr('src','http://localhost:8081/upload/' + urlReg);
+                            var str = item.path;
+                            var urlReg = str.replace(/\\/g, "/");
+                            var laterUrl = urlReg.lastIndexOf("/");
+                            urlReg = urlReg.substring(laterUrl + 1, urlReg.length);
+                            $("#image").attr('src', 'http://localhost:7000/upload/' + urlReg);
                             $("#image").show();
                             $("#image").cropper(options);
                         })
                     },
-                    cropConfirm(){
+                })
+            },
+                    Confirm(){
+
+                       console.log('0')
                         // console.log(dataOptions)
-                        this.$axios.post('/api/esta').then(res => {
-                            if(res.status == '200'){
+                        this.$axios.post('/api/sendPhoneCode').then(res => {
+                            if (res.status == 200) {
+                        //     console.log(res.data);
+                        //     if(res.status == '200'){
                                 this.centerDialogVisible = !true;
                                 $("#image").cropper('destroy');
                                 $("#image").hide();
@@ -589,8 +594,7 @@
                         $("#image").cropper('destroy');
                         $("#image").hide();
                     }
-                });
-            },
+
         }
     }
 </script>
@@ -665,10 +669,10 @@
             .img-preview > img {
                 max-width: 100%;
             }
-            .el-upload-list{
-                display: none;
-            }
-        }
 
+        }
+        .el-upload-list {
+            display: none!important;
+        }
     }
 </style>

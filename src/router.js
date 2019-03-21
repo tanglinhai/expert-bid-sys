@@ -19,7 +19,7 @@ var routes = [
         { name: '/index/projects', path: '/index/projects', component: () => import('./components/Projects.vue') },
 
         //开始评标页面lp
-        { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./evaluationpage/beginEvaluation.vue') },
+        { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./views/evaluationpage/beginEvaluation.vue') },
 
 
         //用户信息
@@ -40,6 +40,8 @@ var routes = [
         { name: '/elect/startElect', path: '/elect/startElect', component: () => import('./views/teamLeader/StartElect.vue') },
         //等待其他专家推举
         { name: '/elect/waitOhterElect', path: '/elect/waitOhterElect', component: () => import('./views/teamLeader/WaitOhterElect.vue') },
+         //资质审查页面
+        { name: '/elect/StartEvaluation', path: '/elect/StartEvaluation', component: () => import('./views/qualificationExam/StartEvaluation.vue') },
       ]
     }
   ];

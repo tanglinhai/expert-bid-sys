@@ -8,6 +8,7 @@ import axios from 'axios';
 import './assets/css/iconFonts/iconfont.css';
 import commonJs from '@/assets/js/common/common.js';
 import './mock/mock';
+import './mock/lp';
 
 Vue.prototype.$commonJs = commonJs;
 Vue.config.productionTip = false;
