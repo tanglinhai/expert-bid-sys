@@ -3,7 +3,7 @@
     <div class="beginEvaluation" v-loading="pageLoading">
         <!--开始评标页面-->
         <!--公共部分组件-->
-        <evaluationcommonVue :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
+        <evaluationcommonVue :NoClick="NoClick" :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon">
             <el-collapse accordion v-model="activeNames2">
@@ -107,6 +107,7 @@ import { setTimeout } from 'timers';
         },
         data(){
             return {
+                NoClick:1, //0不可点，1可点
                 pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
                 projectTableData: [],  //项目分包信息

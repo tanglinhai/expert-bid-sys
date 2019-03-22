@@ -20,6 +20,8 @@ var routes = [
 
         //开始评标页面lp
         { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./views/evaluationpage/beginEvaluation.vue') },
+        //进入页面所有信息页面lp
+        { name: '/index/AllInformation', path: '/index/AllInformation', component: () => import('./views/evaluationpage/AllInformation.vue') },
 
 
         //用户信息
