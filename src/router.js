@@ -22,7 +22,8 @@ var routes = [
         { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./views/evaluationpage/beginEvaluation.vue') },
         //进入页面所有信息页面lp
         { name: '/index/AllInformation', path: '/index/AllInformation', component: () => import('./views/evaluationpage/AllInformation.vue') },
-
+        //推荐组长页面lp
+        { name: '/index/ElectedLeader', path: '/index/ElectedLeader', component: () => import('./views/evaluationpage/ElectedLeader.vue') },
 
         //用户信息
         { name: '/user/info', path: '/user/info', component: () => import('./views/user/UserInfo.vue') },

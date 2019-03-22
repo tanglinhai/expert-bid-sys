@@ -11,7 +11,7 @@ let tableMs = Mock.mock('/api/ProjectSubcontract', 'post', {
         id: () => Random.id(),
         'baohao|1': ['0635-1909N974/1','0635-1909N974/2'],
         'baoName|1':['第一包','第二包','第三包'],
-        baostatuss: '进行中'
+        'status|1':['0','1','2','3'],
     }]
 });
 
@@ -81,7 +81,7 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
 });
 
 //beginEvaluation查看推举情况弹框接口
-let CheckReferrals=Mock.mock('/api/CheckReferrals','post',{
+let CheckReferrals=Mock.mock('/api/CheckReferralsTuiju','post',{
     leader:'张三',
     baohao:'0635-1909N963/2[2]',
     'CheckReferralsList':[{
