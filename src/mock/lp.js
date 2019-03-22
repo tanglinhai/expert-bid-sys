@@ -145,7 +145,7 @@ let WheelPushing=Mock.mock('/api/WheelPushing','post',{
         tel:13121223333, //手机号
         zjhao:2345,  //证件号
         danwei:'测试单位',   //单位
-        'caozuo':['1','2']  //1推举 ，2未签到
+        'caozuo|1':['1','2']  //1推举 ，2未签到
     }]
 });
 //WheelPushing推荐组长进入推荐接口

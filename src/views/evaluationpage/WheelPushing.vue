@@ -11,22 +11,44 @@
             </div>
            <template>
                 <el-table
+                class="mt20 cf"
                 :data="NumberRounddatas"
                 style="width: 100%">
-                <el-table-column
-                    prop="date"
-                    label="日期"
-                    width="180">
-                </el-table-column>
-                <el-table-column
-                    prop="name"
-                    label="姓名"
-                    width="180">
-                </el-table-column>
-                <el-table-column
-                    prop="address"
-                    label="地址">
-                </el-table-column>
+                    <el-table-column
+                        prop="zuanjiaName"
+                        label="专家姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="depiaoshu"
+                        label="得票数"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="tel"
+                        label="手机号">
+                    </el-table-column>
+                    <el-table-column
+                        prop="zjhao"
+                        label="证件号">
+                    </el-table-column>
+                    <el-table-column
+                        prop="danwei"
+                        label="单位">
+                    </el-table-column>
+                    <el-table-column
+                        prop="caozuo"
+                        label="操作">
+                        <template slot-scope="scope">
+                            <div v-if="scope.row.caozuo==1">
+                                <el-button size="small"><i class="icon iconfont icon-Viconzq-"></i>&nbsp;推举</el-button>
+                            </div>
+                            <div v-if="scope.row.caozuo==2">
+                                未签到
+                            </div>
+                           
+                        </template>
+                    </el-table-column>
                 </el-table>
             </template>
             <el-pagination
@@ -68,27 +90,13 @@
                 ProjectBianhao:'', //项目编号
                 ChakanPage1:1,  //分页
                 
-                NumberRounddatas:[{   //推举评委会主人第几轮
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                        date: '2016-05-04',
-                        name: '王小虎',
-                        address: '上海市普陀区金沙江路 1517 弄'
-                    }, {
-                        date: '2016-05-01',
-                        name: '王小虎',
-                        address: '上海市普陀区金沙江路 1519 弄'
-                    }, {
-                        date: '2016-05-03',
-                        name: '王小虎',
-                        address: '上海市普陀区金沙江路 1516 弄'
-                    }]
+                NumberRounddatas:[],  //推举评委会主人第几轮
+                        
                 }
         },
         mounted(){
             this.ProjectZiliao(); //项目，资料，分析，硬件分析查看
+            this.tuijuData(); //推举评委会主人第1轮
         },
         methods:{
             goto(url){//开始评标
@@ -122,6 +130,17 @@
                     }
                 })
             },
+
+            //推举评委会主人第1轮
+            tuijuData(){
+                this.$axios.post('/api/WheelPushing',{
+                }).then(res=>{
+                    if(res.status == 200){
+                        //console.log(res.data)
+                        this.NumberRounddatas=res.data.leaderList
+                    }
+                })
+            }
 
         }
     }
