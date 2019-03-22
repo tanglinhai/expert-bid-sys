@@ -15,7 +15,7 @@
                         <div class="bidevaluationexperts">
                             <div class="bidexpert">
                                 评标专家：
-                                <span>1</span>
+                                <span>张三</span>
                             </div>
                             <el-button size="small" type="primary" @click.stop="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;&nbsp;查看推举情况</el-button>           
                         </div>
@@ -44,14 +44,38 @@
                                 >
                             </el-table-column>
                              <el-table-column
-                                prop="baostatuss"
                                 label="状态">
+                                <template slot-scope="scope">
+                                    <div v-if="scope.row.status==0">
+                                        <el-tag>进行中</el-tag>
+                                    </div>
+                                    <div v-if="scope.row.status==3">
+                                        <el-tag>已废标</el-tag>
+                                    </div>
+                                    <div v-if="scope.row.status==1">
+                                        <el-tag>进行中</el-tag>
+                                    </div>
+                                    <div v-if="scope.row.status==2">
+                                        <el-tag>已完成</el-tag>
+                                    </div>
+                                </template>
                             </el-table-column>
                              <el-table-column
                                 label="操作">
                                 <template slot-scope="scope">
-                                    <el-button @click="handleClick(scope.row)" size="small">评标</el-button>
-                                    <el-button size="small">调整评标价</el-button>
+                                    <div v-if="scope.row.status==0" @click="goto('/index/WheelPushing')">
+                                        <el-button size="small"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
+                                    </div>
+                                    <div v-if="scope.row.status==3">
+                                        <el-button size="small"><i class="el-icon-message"></i>查看</el-button>
+                                    </div>
+                                    <div v-if="scope.row.status==1">
+                                        <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
+                                        <el-button size="small"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
+                                    </div>
+                                    <div v-if="scope.row.status==2">
+                                        <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
+                                    </div>
                                 </template>
                             </el-table-column>
                             </el-table>
@@ -98,7 +122,7 @@
 
 <script>
     import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
-import { setTimeout } from 'timers';
+import { setTimeout, setInterval } from 'timers';
     export default {
         name: 'index',
         props: {},
@@ -107,7 +131,7 @@ import { setTimeout } from 'timers';
         },
         data(){
             return {
-                NoClick:1, //0不可点，1可点
+                NoClick:0, //0不可点，1可点
                 pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
                 projectTableData: [],  //项目分包信息
@@ -125,11 +149,20 @@ import { setTimeout } from 'timers';
             }
         },
         mounted(){
+            var _this=this;
+            setInterval(function(){
+              _this.ProjectSubcontract();//项目分包数据  
+            },5000)
             this.ProjectSubcontract();//项目分包数据
             this.ProjectZiliao() //项目，资料，分析，硬件分析查看
             
         },
         methods:{
+            goto(url){//开始评标
+               this.$router.push({
+                    path: url
+                 });
+            },
             getRowClass({row,column,rowIndex,columnIndex}){  //项目分包表头添加背景颜色
                 if(rowIndex==0){
                     return 'background:#efefef';
@@ -174,11 +207,11 @@ import { setTimeout } from 'timers';
             //查看推举情况按钮事件
             LookTuiju(){
                 this.dialogSelectionDirector=true;
-                this.$axios.post('/api/CheckReferrals',{
+                this.$axios.post('/api/CheckReferralsTuiju',{
 
                 }).then(res=>{
                     if(res.status==200){
-                       console.log(res.data) 
+                       console.log(res.data,88888) 
                         this.leader=res.data.leader;
                         this.baohao=res.data.baohao;
                         this.CheckReferralsList = res.data.CheckReferralsList;

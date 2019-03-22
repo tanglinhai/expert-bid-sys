@@ -9,7 +9,7 @@
             </el-col>
         </el-row>
         <!---->
-        <el-collapse class="evaluationcommon_second" accordion v-model="activeNames">
+        <el-collapse class="evaluationcommon_second" accordion v-model="activeNames" :a="NoClick">
             <el-collapse-item name="1">
                 
                     <template slot="title">
@@ -20,11 +20,19 @@
                     <div class="evaluationcommon_ziliao">
                         <el-scrollbar style="width:100%;">
                             <ul>
-                                <li v-for="(item,index) in projectZiliao" :key="index" :name="index">
-                                    <a href="http://localhost:7002/img/download.svc" :download="item.ziliaoName">
-                                        <span>{{index+1}}</span>
-                                        {{item.ziliaoName}}
-                                    </a>
+                                <li v-for="(item,index) in projectZiliao"  :key="index" :name="index">
+                                    <template v-if="NoClick==0">
+                                        <a href="javascript:;">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </template>
+                                    <template v-else>
+                                        <a href="http://localhost:7002/img/download.svc" :download="item.ziliaoName">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </template>
                                 </li>
                             </ul>
                         </el-scrollbar>
@@ -36,137 +44,289 @@
                     <div class="evaluationcommon_chakan">
                         <el-scrollbar style="width:100%; height:88%;">
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===0">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#348fed">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#348fed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#348fed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===1">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#da2138">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#da2138">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#da2138">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
+                            
+                            
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===2">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#51cb1b">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#51cb1b">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#51cb1b">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===3">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#f2c71b">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#f2c71b">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#f2c71b">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===4">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#e234ed">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#e234ed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#e234ed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===5">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#3d34ed">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#3d34ed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#3d34ed">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                             <ol v-for="(item,index) in projectChaxun" :key="index" :name="index" v-if="index===6">
-                                <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
-                                    <a href="javascript:;">
-                                        <span style="background:#ff9000">{{index+1}}</span>
-                                        <div class="evaluationcommon_chakan_right">
-                                            <img src="../../assets/img/pdf_icon.png" alt="">
-                                            <p>
-                                                <em>{{item.bianhao}}</em>
-                                                <em>{{item.name}}</em>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <template v-if="NoClick==0">
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index">
+                                        <a href="javascript:;">
+                                            <span style="background:#ff9000">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-else>
+                                    <li v-for="(item,index) in item.children" :key="index" :name="index" @click="ChakanTk(item)">
+                                        <a href="javascript:;">
+                                            <span style="background:#ff9000">{{index+1}}</span>
+                                            <div class="evaluationcommon_chakan_right">
+                                                <img src="../../assets/img/pdf_icon.png" alt="">
+                                                <p>
+                                                    <em>{{item.bianhao}}</em>
+                                                    <em>{{item.name}}</em>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </template>
                             </ol>
                         </el-scrollbar>
                     </div>
 
-                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                        <h5 class="commonTitle col348fe2 twoanonter">雷同性分析</h5>
-                    </div>
-                    <div class="evaluationcommon_ziliao">
-                        <el-scrollbar style="width:100%;">
-                            <ul>
-                                <li v-for="(item,index) in projectLeiFenxi" :key="index" @click="LeitongcenterDialogVisible=true">
-                                    <a href="javascript:;">
-                                        <span>{{index+1}}</span>
-                                        {{item.ziliaoName}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </el-scrollbar>
-                    </div>
-
-                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                        <h5 class="commonTitle col348fe2 twoanonter">硬件特征码防串围标分析</h5>
-                    </div>
-                    <div class="evaluationcommon_ziliao">
-                        <el-scrollbar style="width:100%;">
-                            <ul>
-                                <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
-                                    <a href="javascript:;">
-                                        <span>{{index+1}}</span>
-                                        {{item.ziliaoName}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </el-scrollbar>
-                    </div>
+                    <template v-if="NoClick==0">
+                        <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL" style="display:none">
+                            <h5 class="commonTitle col348fe2 twoanonter">雷同性分析</h5>
+                        </div>
+                        <div class="evaluationcommon_ziliao" style="display:none">
+                            <el-scrollbar style="width:100%;">
+                                <ul>
+                                    <li v-for="(item,index) in projectLeiFenxi" :key="index" @click="LeitongcenterDialogVisible=true">
+                                        <a href="javascript:;">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </el-scrollbar>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                            <h5 class="commonTitle col348fe2 twoanonter">雷同性分析</h5>
+                        </div>
+                        <div class="evaluationcommon_ziliao">
+                            <el-scrollbar style="width:100%;">
+                                <ul>
+                                    <li v-for="(item,index) in projectLeiFenxi" :key="index" @click="LeitongcenterDialogVisible=true">
+                                        <a href="javascript:;">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </el-scrollbar>
+                        </div>
+                    </template>
+                    <template v-if="NoClick==0">
+                        <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL" style="display:none">
+                            <h5 class="commonTitle col348fe2 twoanonter">硬件特征码防串围标分析</h5>
+                        </div>
+                        <div class="evaluationcommon_ziliao" style="display:none">
+                            <el-scrollbar style="width:100%;">
+                                <ul>
+                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
+                                        <a href="javascript:;">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </el-scrollbar>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                            <h5 class="commonTitle col348fe2 twoanonter">硬件特征码防串围标分析</h5>
+                        </div>
+                        <div class="evaluationcommon_ziliao">
+                            <el-scrollbar style="width:100%;">
+                                <ul>
+                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
+                                        <a href="javascript:;">
+                                            <span>{{index+1}}</span>
+                                            {{item.ziliaoName}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </el-scrollbar>
+                        </div>
+                    </template>
+                    
 
             </el-collapse-item>
         </el-collapse>
@@ -298,6 +458,7 @@
         name: "evaluationcommon",
         data(){
             return {
+                
                 ChakanPage1: 1,
                 activeNames: ['1'], //默认展开
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
@@ -348,7 +509,10 @@
            },
            ProjectBianhao:{  //项目编号
                type:String
-           }
+           },
+           NoClick:{//是否可点0不可点 1可点
+              type:Number
+           },  
         },
         components:{
 

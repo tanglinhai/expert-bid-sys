@@ -11,7 +11,7 @@ let tableMs = Mock.mock('/api/ProjectSubcontract', 'post', {
         id: () => Random.id(),
         'baohao|1': ['0635-1909N974/1','0635-1909N974/2'],
         'baoName|1':['第一包','第二包','第三包'],
-        baostatuss: '进行中'
+        'status|1':['0','1','2','3'],
     }]
 });
 
@@ -81,7 +81,7 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
 });
 
 //beginEvaluation查看推举情况弹框接口
-let CheckReferrals=Mock.mock('/api/CheckReferrals','post',{
+let CheckReferrals=Mock.mock('/api/CheckReferralsTuiju','post',{
     leader:'张三',
     baohao:'0635-1909N963/2[2]',
     'CheckReferralsList':[{
@@ -134,7 +134,21 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
         toubiaorenName:'北京有限公司',
         toubiaorenFenbao:'0635-198N517/1',
     }]
-})
+});
 //AllInformation进入页面数据接口
+
+//WheelPushing推荐组长进入推荐接口
+let WheelPushing=Mock.mock('/api/WheelPushing','post',{
+    'leaderList|1-7':[{
+        'zuanjiaName|1':['1','2','4'],  //专家姓名
+        'depiaoshu|1':['1','0','0'],  //得票数
+        tel:13121223333, //手机号
+        zjhao:2345,  //证件号
+        danwei:'测试单位',   //单位
+        'caozuo|1':['1','2']  //1推举 ，2未签到
+    }]
+});
+//WheelPushing推荐组长进入推荐接口
+
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })

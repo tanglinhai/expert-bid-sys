@@ -3,7 +3,7 @@
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
         <!--公共部分组件-->
-        <evaluationcommonVue :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
+        <evaluationcommonVue :NoClick="NoClick" :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon mt20 cf">
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
@@ -74,7 +74,7 @@
                 <el-col :span="12" :offset="6">
                     <div class="grid-content bg-purple mar mt20">
                         <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
-                        <el-button size="small" type="primary" :disabled="!checked">参加评标</el-button>
+                        <el-button size="small" type="primary" :disabled="!checked" @click="goto('/index/ElectedLeader')">参加评标</el-button>
                     </div>
                 </el-col>
             </el-row>
@@ -116,6 +116,7 @@
         },
         data(){
             return {
+                NoClick:0, //0不可点，1可点
                 pageLoading:true,  //loading
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
@@ -148,6 +149,11 @@
             this.AllInformation(); //专家个人信息,投标人信息接口
         },
         methods:{
+            goto(url){//开始评标
+               this.$router.push({
+                    path: url
+                 });
+            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },

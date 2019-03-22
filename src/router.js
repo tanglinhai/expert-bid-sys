@@ -18,12 +18,17 @@ var routes = [
         //项目列表页面
         { name: '/index/projects', path: '/index/projects', component: () => import('./components/Projects.vue') },
 
-        //开始评标页面lp
+
+        //开始评标页面
         { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./views/evaluationpage/beginEvaluation.vue') },
-        //进入页面所有信息页面lp
+        //进入页面所有信息页面
         { name: '/index/AllInformation', path: '/index/AllInformation', component: () => import('./views/evaluationpage/AllInformation.vue') },
+        //推荐组长页面和评标页面(包含按钮判断展示)
+        { name: '/index/ElectedLeader', path: '/index/ElectedLeader', component: () => import('./views/evaluationpage/ElectedLeader.vue') },
+        //推荐组长进入推荐轮数
+        { name: '/index/WheelPushing', path: '/index/WheelPushing', component: () => import('./views/evaluationpage/WheelPushing.vue') },
 
-
+        
         //用户信息
         { name: '/user/info', path: '/user/info', component: () => import('./views/user/UserInfo.vue') },
         //用户头像
