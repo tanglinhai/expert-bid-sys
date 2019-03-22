@@ -63,7 +63,7 @@
                              <el-table-column
                                 label="操作">
                                 <template slot-scope="scope">
-                                    <div v-if="scope.row.status==0">
+                                    <div v-if="scope.row.status==0" @click="goto('/index/WheelPushing')">
                                         <el-button size="small"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                                     </div>
                                     <div v-if="scope.row.status==3">
@@ -158,6 +158,11 @@ import { setTimeout, setInterval } from 'timers';
             
         },
         methods:{
+            goto(url){//开始评标
+               this.$router.push({
+                    path: url
+                 });
+            },
             getRowClass({row,column,rowIndex,columnIndex}){  //项目分包表头添加背景颜色
                 if(rowIndex==0){
                     return 'background:#efefef';
