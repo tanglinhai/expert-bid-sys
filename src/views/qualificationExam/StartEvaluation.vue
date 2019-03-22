@@ -2,27 +2,27 @@
     <div class="startEvaluation">
         <el-row class="fs14 bid_msg mb15">
             <el-col :span="4">
-                <div class="grid-content bg-purple"><span>标名称：</span><span>2019年水利运输服务招标项目</span></div>
+                <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
             </el-col>
             <el-col :span="4">
-                <div class="grid-content bg-purple-light"><span>标号：</span><span>0635—1909qwerN1197</span></div>
+                <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
             </el-col>
             <el-col :span="4">
-                <div class="grid-content bg-purple"><span>包号：</span><span>0635—1909qwerN1197/1</span></div>
+                <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
             </el-col>
             <el-col :span="12" class="fs14 textAlignR select">
                 <div class="grid-content bg-purple">
-                    <el-dropdown>
-                        <el-button type="primary" size="small">
+                    <el-dropdown @command="handleCommand">
+                        <el-button type="primary" size="small"  >
                             操作<i class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>废标</el-dropdown-item>
-                            <el-dropdown-item>标中质询</el-dropdown-item>
-                            <el-dropdown-item>查看投标文件</el-dropdown-item>
-                            <el-dropdown-item>查看开标一览表</el-dropdown-item>
-                            <el-dropdown-item>评审结果签字</el-dropdown-item>
-                            <el-dropdown-item>资质审查签字</el-dropdown-item>
+                            <el-dropdown-item command="a">废标</el-dropdown-item>
+                            <el-dropdown-item command="b">标中质询</el-dropdown-item>
+                            <el-dropdown-item command="c">查看投标文件</el-dropdown-item>
+                            <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
+                            <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
+                            <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -31,21 +31,27 @@
         <div class="mainContentWarp" v-loading="page_loading">
             <div class="line"></div>
             <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button type="success" round>&nbsp;&nbsp;商&nbsp;&nbsp;务&nbsp;&nbsp;</el-button>
-                <el-button type="success" round>技术支持</el-button>
-                <el-button round type="warning">形式审查</el-button>
-                <el-button round>评审汇总</el-button>
-                <el-button round>评审汇总</el-button>
-                <el-button round>评审汇总</el-button>
+                <el-button   :type="item.type ==1 ? 'success' :
+                                item.type ==2 ? 'warning': ''"
+                             round v-for="item in options"  :value="item.value"
+                           >{{item.label }}</el-button>
             </el-row>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
                         <el-col class="textAlignC mt20 mb15">
-                            <el-button type="primary" size="small" @click="personalAuditFormBtn" class="personalAuditFormBtn">个人形式审计表</el-button>
+                            <el-button type="primary" size="small" @click="personalAuditFormBtn" class="personalAuditFormBtn">{{personalAuditFormBtn}}</el-button>
                         </el-col>
                     </el-row>
-                    <PersonalExamine ></PersonalExamine>
+                    <!--<PersonalExamine ></PersonalExamine>-->
+                    <el-row >
+                        <h6 class="pl15  col747 pt15 pb10">审查项</h6>
+                        <div class="content_wrap">
+                            <div class="zTreeDemoBackground left">
+                                <ul id="treeDemo" class="ztree">{{msg}}</ul>
+                            </div>
+                        </div>
+                    </el-row>
                 </el-col>
                 <!--点击ztree树显示-->
                 <el-col class="right_warp" :span="21">
@@ -62,15 +68,15 @@
                         </el-row>
                     </el-row>
                     <!------------------------table1--------------------------->
-                    <div class="first_warp">
+                    <div class="first_warp"  v-for="(item,index) in table_data" :key="index" :id="item.name">
                         <el-row class="title_msg">
                             <el-col>
                                 <div>
-                                    <p class="commonTitle fs14  col65">
-                                        <span class="ml3 col409">{{fristTitle.question}}</span><span
-                                            class="ml3  col409">{{fristTitle.answer}}</span><span
-                                            class="ml15 mr10"> /</span><span class="ml3">{{fristTitle.question1}}</span><span>{{fristTitle.answer1}}</span>
-                                    </p>
+                                 <p class="commonTitle fs14  col65">
+                                    <span class="ml3 col409">{{item.fristTableData.question}}</span><span
+                                        class="ml3  col409">{{item.fristTableData.answer}}</span><span
+                                        class="ml15 mr10"> /</span><span class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
+                                </p>
                                 </div>
                             </el-col>
                         </el-row>
@@ -113,110 +119,110 @@
                             </el-table-column>
                         </el-table>
                     </div>
-                    <!------------------------table2---------------------------->
-                    <div class="second_warp">
-                        <el-row class="title_msg">
-                            <el-col>
-                                <div class="mt20">
-                                    <p class="commonTitle fs14  col65">
-                                        <span class="ml3 col409">{{secondTitle.question}}</span><span
-                                            class="ml3  col409">{{secondTitle.answer}}</span><span
-                                            class="ml15 mr10"> /</span><span class="ml3">{{secondTitle.question1}}</span><span>{{secondTitle.answer1}}</span>
-                                    </p>
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-table
-                                :data="tableData11"
-                                border
-                                style="width: 100%;"
-                                class="first_table"
-                                :cell-style="rowStyle" >
-                            <el-table-column
-                                    prop="name"
-                                    label="名称">
-                                <template slot-scope="scope">
-                                    <span style="margin-left: 10px"><i class="el-icon-check mr5 ver_al_m"></i>投标人：<i
-                                            class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="pass"
-                                    label="是否合格">
-                                <template slot-scope="scope">
-                                <span style="margin-left: 10px">
-                                  <el-radio-group
-                                          @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,'tableData11')"
-                                          ref="shet" v-model="scope.row.radio">
-                                    <el-radio :label="scope.row.ra1">合格</el-radio>
-                                    <el-radio :label="scope.row.ra2">不合格</el-radio>
-                                  </el-radio-group>
-                                </span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="kong"
-                                    label="">
-                                <template slot-scope="scope">
-                                <span style="margin-left: 10px">
-                                  {{scope.row.content}}
-                                </span>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                    <!-------------------------table3--------------------------------->
-                    <div class="third_warp">
-                        <el-row class="title_msg">
-                            <el-col>
-                                <div class="mt20">
-                                    <p class="commonTitle fs14  col65">
-                                        <span class="ml3 col409">{{thirdTitle.question}}</span><span
-                                            class="ml3  col409">{{thirdTitle.answer}}</span><span
-                                            class="ml15 mr10"> /</span><span class="ml3">{{thirdTitle.question1}}</span><span>{{thirdTitle.answer1}}</span>
-                                    </p>
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-table
-                                :data="tableData22"
-                                border
-                                style="width: 100%;"
-                                class="first_table"
-                                :cell-style="rowStyle">
-                            <el-table-column
-                                    prop="name"
-                                    label="名称">
-                                <template slot-scope="scope">
-                                    <span style="margin-left: 10px"><i class="el-icon-check mr5 ver_al_m"></i>投标人：<i
-                                            class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="pass"
-                                    label="是否合格">
-                                <template slot-scope="scope">
-                                <span style="margin-left: 10px">
-                                  <el-radio-group
-                                          @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,'tableData22')"
-                                          ref="shet" v-model="scope.row.radio">
-                                    <el-radio :label="scope.row.ra1">合格</el-radio>
-                                    <el-radio :label="scope.row.ra2">不合格</el-radio>
-                                  </el-radio-group>
-                                </span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="kong"
-                                    label="">
-                                <template slot-scope="scope">
-                                <span style="margin-left: 10px">
-                                  {{scope.row.content}}
-                                </span>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </div>
+                    <!--&lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;table2&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+                    <!--<div class="second_warp">-->
+                        <!--<el-row class="title_msg">-->
+                            <!--<el-col>-->
+                                <!--<div class="mt20">-->
+                                    <!--<p class="commonTitle fs14  col65">-->
+                                        <!--<span class="ml3 col409">{{secondTitle.question}}</span><span-->
+                                            <!--class="ml3  col409">{{secondTitle.answer}}</span><span-->
+                                            <!--class="ml15 mr10"> /</span><span class="ml3">{{secondTitle.question1}}</span><span>{{secondTitle.answer1}}</span>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</el-col>-->
+                        <!--</el-row>-->
+                        <!--<el-table-->
+                                <!--:data="tableData11"-->
+                                <!--border-->
+                                <!--style="width: 100%;"-->
+                                <!--class="first_table"-->
+                                <!--:cell-style="rowStyle" >-->
+                            <!--<el-table-column-->
+                                    <!--prop="name"-->
+                                    <!--label="名称">-->
+                                <!--<template slot-scope="scope">-->
+                                    <!--<span style="margin-left: 10px"><i class="el-icon-check mr5 ver_al_m"></i>投标人：<i-->
+                                            <!--class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                            <!--<el-table-column-->
+                                    <!--prop="pass"-->
+                                    <!--label="是否合格">-->
+                                <!--<template slot-scope="scope">-->
+                                <!--<span style="margin-left: 10px">-->
+                                  <!--<el-radio-group-->
+                                          <!--@change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,'tableData11')"-->
+                                          <!--ref="shet" v-model="scope.row.radio">-->
+                                    <!--<el-radio :label="scope.row.ra1">合格</el-radio>-->
+                                    <!--<el-radio :label="scope.row.ra2">不合格</el-radio>-->
+                                  <!--</el-radio-group>-->
+                                <!--</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                            <!--<el-table-column-->
+                                    <!--prop="kong"-->
+                                    <!--label="">-->
+                                <!--<template slot-scope="scope">-->
+                                <!--<span style="margin-left: 10px">-->
+                                  <!--{{scope.row.content}}-->
+                                <!--</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                        <!--</el-table>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;table3-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+                    <!--<div class="third_warp">-->
+                        <!--<el-row class="title_msg">-->
+                            <!--<el-col>-->
+                                <!--<div class="mt20">-->
+                                    <!--<p class="commonTitle fs14  col65">-->
+                                        <!--<span class="ml3 col409">{{thirdTitle.question}}</span><span-->
+                                            <!--class="ml3  col409">{{thirdTitle.answer}}</span><span-->
+                                            <!--class="ml15 mr10"> /</span><span class="ml3">{{thirdTitle.question1}}</span><span>{{thirdTitle.answer1}}</span>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</el-col>-->
+                        <!--</el-row>-->
+                        <!--<el-table-->
+                                <!--:data="tableData22"-->
+                                <!--border-->
+                                <!--style="width: 100%;"-->
+                                <!--class="first_table"-->
+                                <!--:cell-style="rowStyle">-->
+                            <!--<el-table-column-->
+                                    <!--prop="name"-->
+                                    <!--label="名称">-->
+                                <!--<template slot-scope="scope">-->
+                                    <!--<span style="margin-left: 10px"><i class="el-icon-check mr5 ver_al_m"></i>投标人：<i-->
+                                            <!--class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                            <!--<el-table-column-->
+                                    <!--prop="pass"-->
+                                    <!--label="是否合格">-->
+                                <!--<template slot-scope="scope">-->
+                                <!--<span style="margin-left: 10px">-->
+                                  <!--<el-radio-group-->
+                                          <!--@change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,'tableData22')"-->
+                                          <!--ref="shet" v-model="scope.row.radio">-->
+                                    <!--<el-radio :label="scope.row.ra1">合格</el-radio>-->
+                                    <!--<el-radio :label="scope.row.ra2">不合格</el-radio>-->
+                                  <!--</el-radio-group>-->
+                                <!--</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                            <!--<el-table-column-->
+                                    <!--prop="kong"-->
+                                    <!--label="">-->
+                                <!--<template slot-scope="scope">-->
+                                <!--<span style="margin-left: 10px">-->
+                                  <!--{{scope.row.content}}-->
+                                <!--</span>-->
+                                <!--</template>-->
+                            <!--</el-table-column>-->
+                        <!--</el-table>-->
+                    <!--</div>-->
                 </el-col>
                 <!--点击个人形式审计表按钮显示-->
                 <el-col class="personalAuditFormTable" :span="21">
@@ -272,7 +278,7 @@
         </div>
         <el-dialog
                 title="不合格录入"
-                :visible.sync="dialogVisible"
+                :visible.sync="$store.state.failureEnery.show"
                 width="700px"
         >
             <FailureEntry @childByValue="childByValue"></FailureEntry>
@@ -281,16 +287,25 @@
 </template>
 
 <script>
-    import PersonalExamine from '../../components/publicVue/PersonalExamine';
+    // import PersonalExamine from '../../components/publicVue/PersonalExamine';
     import FailureEntry from '../../components/publicVue/FailureEntry';
-
+    //树形图
+    // function dblClickExpand(treeId, treeNode) {
+    //     return treeNode.level > 0;
+    // }
+    // function zTreeOnClick(event, treeId, treeNode) {
+    //     console.log(treeNode);//treeNode是这个节点的json数据
+    //     if(treeNode.name=="投标人名称"){
+    //
+    //     }
+    // };
+    //树形图
     export default {
         name: "start-evaluation",
         props: {},
         components: {
-            PersonalExamine,
+            // PersonalExamine,
             FailureEntry
-
         },
         data() {
             return {
@@ -304,7 +319,39 @@
                 treeData:[],//zTree数据
                 msgBox:[] ,//个人形式审计表table数据
                 idradionoprss:'',//table不合格的id
-                dialogVisible:false,
+                operationType:[],
+
+                /* -------头部包信息-----*/
+                name:"",//标包名称
+                biaoNum: '',
+                baohao: '',
+                options:[],//头部按钮
+                /* -------头部包信息end-----*/
+                /*-------------------左侧背景部分数据------------------*/
+                 personalAuditFormBtn:"",
+                /* -------树形图-----*/
+                setting : {   //zTree配置
+                    view: {
+                        dblClickExpand:this.dblClickExpand,
+                    },
+                    data: {
+                        simpleData: {//使用的数据格式
+                            enable: true
+                        }
+                    },
+                    callback: {//点击回调函数
+                        onClick: this.zTreeOnClick
+                    }
+                },
+                zNodes:[],
+                /* -------树形图end-----*/
+                /*-------------------左侧背景部分end--------------------*/
+                /*-------------------右侧主体部分数据-------------------*/
+                completePercent:0,
+                table_data:[],
+                   arr:[],
+                   arr1:[],
+                /*-------------------右侧主体部分数据-------------------*/
             }
         },
         computed: {
@@ -342,86 +389,126 @@
                 $(".right_warp").hide();
             });
             this.init();
-            this.$axios.post('/api/treeData').then(res => {
-                if (res.status === 200) {
-                    this.treeData=res.data.tableData;
-                }
-            });
-            this.$axios.post('/api/personalAuditTableData').then(res => {//zTree数据
-                    if (res.status === 200) {
-                    this.msgBox=res.data.msg;
-                }
-            })
+            // this.$axios.post('/api/treeData').then(res => {
+            //     if (res.status === 200) {
+            //         this.treeData=res.data.tableData;
+            //     }
+            // });
+            // this.$axios.post('/api/personalAuditTableData').then(res => {//zTree数据
+            //         if (res.status === 200) {
+            //         this.msgBox=res.data.msg;
+            //     }
+            // });
+            // this.$axios.post('/api/treeData').then(res => {
+            //     if (res.status === 200) {
+            //         this.zNodes=res.data.tableData;
+            //         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);
+            //     }
+            // });
+            setTimeout(function(){
+                $("#treeDemo_1_a").addClass("curSelectedNode");
+            },200);
         },
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg').then(res => {
+                    // console.log(res.data);
                     if (res.status === 200) {
-                        this.tableData = res.data.fristTableData.tableData;
-                        this.tableData11 = res.data.secondTableData.tableData11;
-                        this.tableData22 = res.data.thirdTableData.tableData22;
-                        this.fristTitle = res.data.fristTableData;
-                        this.secondTitle = res.data.secondTableData;
-                        this.thirdTitle = res.data.thirdTableData;
+                        this.name = res.data.bidMsg.name;
+                        this.baohao = res.data.bidMsg.baohao;
+                        this.biaoNum = res.data.bidMsg.biaoNum;
+                        this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
+                        this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;
+                        $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
+                        this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                        this.table_data = res.data.bidMsg.eviewrItemsMsg.zTreeData.children;
+                        // console.log(this.table_data);
                     }
                     this.page_loading = false;
                 })
-
             },
-            failuredRadio(radio,id,index, tableKey){
-                console.log(radio, id, index, tableKey);
+            failuredRadio(radio, id, index, tableKey) {
+                // console.log(radio, id, index, tableKey);
                 var store_radio = null;
-                for(var i = 0;i<this[tableKey].length;i++){
-                    if(this[tableKey][i].id==id){
+                for (var i = 0; i < this[tableKey].length; i++) {
+                    if (this[tableKey][i].id == id) {
                         store_radio = this[tableKey][i];
-                        console.log(store_radio);
+                        // console.log(store_radio);
                         break;
                     }
                 }
-                if(radio=='不合格'){
-                    this.dialogVisible=true;
+                if (radio == '不合格') {
+                    this.$store.state.failureEnery.show = true;
                     this.idradionoprss = id;
 
-                }else if(radio=='合格'){
-                    console.log(store_radio.content);
+                } else if (radio == '合格') {
+                    // console.log(store_radio.content);
                     store_radio.content = ''
                 }
                 // this.saveStorage();
             },
             childByValue: function (childValue) {
                 // childValue就是子组件传过来的值
-                for(var i = 0;i<this.tableData.length;i++){
-                    if(this.tableData[i].id==this.idradionoprss){
-                        this.tableData[i].content=childValue;
+                for (var i = 0; i < this.tableData.length; i++) {
+                    if (this.tableData[i].id == this.idradionoprss) {
+                        this.tableData[i].content = childValue;
                     }
                 }
-                for(var i = 0;i<this.tableData11.length;i++){
-                    if(this.tableData11[i].id==this.idradionoprss){
-                        this.tableData11[i].content=childValue;
+                for (var i = 0; i < this.tableData11.length; i++) {
+                    if (this.tableData11[i].id == this.idradionoprss) {
+                        this.tableData11[i].content = childValue;
                     }
                 }
-                for(var i = 0;i<this.tableData22.length;i++){
-                    if(this.tableData22[i].id==this.idradionoprss){
-                        this.tableData22[i].content=childValue;
+                for (var i = 0; i < this.tableData22.length; i++) {
+                    if (this.tableData22[i].id == this.idradionoprss) {
+                        this.tableData22[i].content = childValue;
                     }
                 }
                 // this.saveStorage();
-                this.dialogVisible=false;
+                this.$store.state.failureEnery.show = false;
             },
-            allChecked(){
-                for(var i = 0;i<this.tableData.length;i++){
-                    this.tableData[i].radio='合格';
+            allChecked() {//全选
+                for (var i = 0; i < this.tableData.length; i++) {
+                    this.tableData[i].radio = '合格';
                 }
-                for(var i = 0;i<this.tableData11.length;i++){
-                    this.tableData11[i].radio='合格';
+                for (var i = 0; i < this.tableData11.length; i++) {
+                    this.tableData11[i].radio = '合格';
                 }
-                for(var i = 0;i<this.tableData22.length;i++){
-                    this.tableData22[i].radio='合格';
+                for (var i = 0; i < this.tableData22.length; i++) {
+                    this.tableData22[i].radio = '合格';
                 }
                 // this.saveStorage();
             },
+            handleCommand(val) {//弹框群
+                if (val === 'a') {//人员信息
+                    alert('1')
 
+                } else if (val === 'b') {//交通费标准
+                    alert('0')
+
+                } else if (val === 'c') {//报销汇总表
+                    alert('2')
+                } else if (val === 'd') {//报销汇总表-财政
+                    alert('3')
+                } else if (val === 'e') {//报销情况查询-财政
+                    alert('4')
+                } else if (val === 'f') {//点击修改密码
+                    alert('5')
+                }
+            },
+            zTreeOnClick(event, treeId, treeNode) {
+                console.log(treeNode);//treeNode是这个节点的json数据
+                console.log(this.table_data);
+                console.log(treeNode.fristTableData);
+                this.arr.push(treeNode);
+                console.log(this.arr);
+                this.table_data=this.arr;
+
+            },
+             dblClickExpand(treeId, treeNode) {
+                return treeNode.level > 0;
+            }
         }
     }
 </script>
