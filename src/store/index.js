@@ -4,7 +4,9 @@ import state from './state';
 import mutations from './mutations';
 
 
+
 import download_files from './common/download_files'
+import failureEnery from './common/failureEnery';
 
 export default new Vuex.Store({
     actions,
@@ -12,6 +14,7 @@ export default new Vuex.Store({
     state,
     mutations,
     modules: {
-        download_files
+        download_files,
+        failureEnery
     }
 });

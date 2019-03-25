@@ -15,6 +15,9 @@
     function dblClickExpand(treeId, treeNode) {
         return treeNode.level > 0;
     }
+    function zTreeOnClick(event, treeId, treeNode) {
+        console.log(treeNode);//treeNode是这个节点的json数据
+    };
     export default {
         name: "personal -examine",
         props:{
@@ -25,15 +28,18 @@
         components: {},
         data () {
             return {
-                msgBox:[],
+
                 setting : {   //zTree配置
                     view: {
                         dblClickExpand: dblClickExpand,
                     },
                     data: {
-                        simpleData: {
+                        simpleData: {//使用的数据格式
                             enable: true
                         }
+                    },
+                    callback: {//点击回调函数
+                        onClick: zTreeOnClick
                     }
                 },
                 zNodes:[]//zTree数据
