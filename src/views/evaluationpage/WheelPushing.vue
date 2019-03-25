@@ -6,13 +6,15 @@
         <evaluationcommonVue :NoClick="NoClick" :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
         <!--公共部分组件-->
         <div class="evaluationcommon mt20 cf">
+            <div class="textAlignC cole02 fs20" v-if="waitTitshi">请等待其他专家推举... ...</div>
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                 <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第1轮</h5>
             </div>
            <template>
                 <el-table
-                class="mt20 cf"
+                class="mt20 fl"
                 :data="NumberRounddatas"
+                :header-cell-style="getRowClass"
                 style="width: 100%">
                     <el-table-column
                         prop="zuanjiaName"
@@ -40,8 +42,8 @@
                         prop="caozuo"
                         label="操作">
                         <template slot-scope="scope">
-                            <div v-if="scope.row.caozuo==1">
-                                <el-button size="small"><i class="icon iconfont icon-Viconzq-"></i>&nbsp;推举</el-button>
+                            <div style="cursor:pointer;" v-if="scope.row.caozuo==1" @click="tuijuAgain">
+                                <i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;推举
                             </div>
                             <div v-if="scope.row.caozuo==2">
                                 未签到
@@ -71,6 +73,7 @@
 
 <script>
     import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
+import { setInterval, clearInterval } from 'timers';
 
     export default {
         name: 'index',
@@ -90,6 +93,7 @@
                 ProjectBianhao:'', //项目编号
                 ChakanPage1:1,  //分页
                 
+                waitTitshi:false,  //推举组长提示信息
                 NumberRounddatas:[],  //推举评委会主人第几轮
                         
                 }
@@ -97,12 +101,25 @@
         mounted(){
             this.ProjectZiliao(); //项目，资料，分析，硬件分析查看
             this.tuijuData(); //推举评委会主人第1轮
+            
+            var _this=this;
+            var setTime;
+            setTime=setInterval(function(){
+                _this.tuijuData(); //推举评委会主人第1轮
+            },15000)
         },
         methods:{
             goto(url){//开始评标
                this.$router.push({
                     path: url
                  });
+            },
+            getRowClass({row,column,rowIndex,columnIndex}){  //项目分包表头添加背景颜色
+                if(rowIndex==0){
+                    return 'background:#efefef';
+                }else{
+                    return '';
+                }
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -140,7 +157,14 @@
                         this.NumberRounddatas=res.data.leaderList
                     }
                 })
-            }
+            },
+
+            //推举事件页面刷新
+            tuijuAgain(){
+                this.waitTitshi=true;
+                clearInterval(setTime);
+                this.tuijuData();
+            },
 
         }
     }

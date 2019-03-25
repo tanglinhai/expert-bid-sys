@@ -139,11 +139,11 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
 
 //WheelPushing推荐组长进入推荐接口
 let WheelPushing=Mock.mock('/api/WheelPushing','post',{
-    'leaderList|1-7':[{
+    'leaderList|5':[{
         'zuanjiaName|1':['1','2','4'],  //专家姓名
         'depiaoshu|1':['1','0','0'],  //得票数
         tel:13121223333, //手机号
-        zjhao:2345,  //证件号
+        'zjhao|1':['2345','1234','4563','2578'],  //证件号
         danwei:'测试单位',   //单位
         'caozuo|1':['1','2']  //1推举 ，2未签到
     }]
