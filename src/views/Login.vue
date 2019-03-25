@@ -1,5 +1,12 @@
 <template>
   <div class='loginPage'>
+    <div class="login_hd">
+      <img class="logo" src="@/assets/img/logo.png">
+    </div>
+    <div class="login_bg">
+      <div class="bg"></div>
+    </div>
+    <div class="login_fd">© 2016 All Rights Reserved.中招联合信息股份有限公司</div>
     <div class='login'>
       <div class='login_title'>
           <span>评标专家登录</span>
@@ -45,8 +52,40 @@
   </div>
 </template>
 <style lang="scss">
+@import '../assets/css/common/mixin.scss';
+#app{
+  overflow: hidden;
+  position: relative;
+}
 .loginPage{
   display: none;
+  width: 1200px;
+  margin: auto;
+  .login_hd{
+    height: 100px;
+    background: url(../assets/img/header-bg-tel.png) right 15px no-repeat;
+    @include clearfix;
+    .logo{
+      position: absolute;
+      top: 16px;
+    }
+  }
+  .login_bg{
+    width: 1200px;
+    margin: auto;
+    .bg{
+      width: 1920px;
+      height: 583px;
+      margin-left: -360px;
+    }
+  }
+  .login_fd{
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    height: 120px;
+    line-height: 120px;
+  }
 }
 </style>
 <script>
@@ -83,11 +122,6 @@ export default {
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/plugins/jQueryLogin/layui/layui.all.js',
         download_files_key: '/js/plugins/jQueryLogin/layui/layui.all.js',
-        callback: this.init
-    });
-    this.$commonJs.getScriptFile.call(this, {
-        url: '/js/plugins/jQueryLogin/js/Particleground.js',
-        download_files_key: '/js/plugins/jQueryLogin/js/Particleground.js',
         callback: this.init
     });
 
@@ -167,7 +201,7 @@ export default {
     },
     init(){
       this.jsDownCount++;
-      if(this.jsDownCount < 3){
+      if(this.jsDownCount < 2){
         return;
       }
       $('.loginPage').show();
@@ -178,11 +212,6 @@ export default {
           if (e.which == 13) {
               $('input[type="button"]').click();
           }
-      });
-      //粒子背景特效
-      $('body').particleground({
-          dotColor: '#E8DFE8',
-          lineColor: '#133b88'
       });
       $('input[name="pwd"]').focus(function() {
           $(this).attr('type', 'password');
@@ -228,13 +257,13 @@ export default {
                   _this.ErroAlert('输入验证码');
               } else {
                   //认证中..
-                  fullscreen();
+                  //fullscreen();
                   $('.login').addClass('test'); //倾斜特效
                   setTimeout(function() {
                       $('.login').addClass('testtwo'); //平移特效
                   }, 300);
                   setTimeout(function() {
-                      $('.authent').show().animate({ right: -320 }, {
+                      $('.authent').show().animate({ right: '24%' }, {
                           easing: 'easeOutQuint',
                           duration: 600,
                           queue: false
@@ -286,7 +315,7 @@ export default {
                                           var index = layer.alert(res.data.Erro, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
                                           layer.style(index, {
                                               color: '#777'
-                                          }); 
+                                          });
                                   }
                               } else {
                                   layer.msg("未知错误！");
@@ -320,7 +349,8 @@ export default {
   },
 
   mounted(){
-    
+
+    $('.loginPage').addClass('bg'+(Math.floor(Math.random() * 5 + 1)));
   }
 }
 </script>
