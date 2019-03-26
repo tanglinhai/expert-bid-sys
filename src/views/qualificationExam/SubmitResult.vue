@@ -1,8 +1,8 @@
 <template>
-    <div class="startEvaluation">
+    <div class="SubmitResult">
         <el-row class="fs14 bid_msg mb15">
             <el-col :span="4">
-                <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
+                <div class="grid-content bg-purple"><span>111111标名称：</span><span>{{name}}</span></div>
             </el-col>
             <el-col :span="4">
                 <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
@@ -34,7 +34,7 @@
                 <el-button   :type="item.type ==1 ? 'success' :
                                 item.type ==2 ? 'warning': ''"
                              round v-for="item in options"  :value="item.value" @click="changeView(item.value)"
-                           >{{item.label }}</el-button>
+                >{{item.label }}</el-button>
             </el-row>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
@@ -90,7 +90,7 @@
                                 <template slot-scope="scope">
                                     <span style="margin-left: 10px">投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style" href="/page/checkPDF/check_pdf.html" target="_blank"><i
-                                            class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
+                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -109,7 +109,7 @@
                             </el-table-column>
                             <el-table-column
                                     prop="kong"
-                                    >
+                            >
                                 <template slot-scope="scope">
                                 <span style="margin-left: 10px">
                                   {{scope.row.content}}
@@ -118,7 +118,7 @@
                             </el-table-column>
                         </el-table>
                     </div>
-                  </el-col>
+                </el-col>
                 <!--点击个人形式审计表按钮显示-->
                 <el-col class="personalAuditFormTable" :span="21">
                     <div class="FormTableTitle">
@@ -203,7 +203,7 @@
                 options:[],//头部按钮
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
-                 personalAuditFormBtn:"",
+                personalAuditFormBtn:"",
                 /* -------树形图-----*/
                 setting : {   //zTree配置
                     view: {
@@ -297,7 +297,7 @@
                 } else if (radio == '合格') {
                     store_radio.content = ''
                 }
-               },
+            },
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if(this.obj.id==this.idradionoprss){
                     this.obj.content=childValue;
@@ -317,7 +317,7 @@
                         break;
                     }
                 }
-                 return isAllF;
+                return isAllF;
             },
             allSubmit(){
                 if(!this.isAllFilled()){
@@ -326,16 +326,16 @@
                         center: true
                     });
                 }else{
+                    alert('2')
                     // this.$router.push({
-                    //     path: '/elect/SubmitResult'
+                    //     path: '/operation/zjps/hldj/myQualificationsResult'
                     // })
-
-
                 }
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
                     alert('1');
+
                 } else if (val === 'b') {//交通费标准
                     alert('0')
 
@@ -356,9 +356,10 @@
                     this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
                 }else if(i==="9"){
                     console.log("2")
+
                 }
             },
-           /*----------------- zTree ----------------------*/
+            /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
                 this.arr.push(treeNode);
                 this.table_data=this.arr;
@@ -369,7 +370,7 @@
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
             },
-             dblClickExpand(treeId, treeNode) {
+            dblClickExpand(treeId, treeNode) {
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
@@ -388,7 +389,7 @@
 </script>
 
 <style lang="scss">
-    .startEvaluation {
+    .SubmitResult {
         padding: 15px;
         background-color: #ededed;
         .bid_msg {

@@ -208,7 +208,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                 answer: "资质",
                                 question1: "审查标准",
                                 answer1: "与营业执照、资质证书一致",
-                                tableData11: [{
+                                tableData: [{
                                     index: 3,
                                     people: '招标人1：',
                                     name: '[1]重庆网控科技发展有限公司',
@@ -248,7 +248,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                 answer: "审查项目",
                                 question1: "审查标准",
                                 answer1: "与营业执照、资质证书一致",
-                                tableData22: [{
+                                tableData: [{
                                     index: 6,
                                     people: '招标人1：',
                                     name: '[1]重庆网控科技发展有限公司',
@@ -284,40 +284,54 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                     ]
                 },
             ],
+            'mylist|3': [
+                {
+                    date: '0',
+                    isFinish: '未完成',
+                    id: () => Random.id(),
+                    name: () => Random.cname(),
+                }
+            ],
             //头部审查类型按钮
             'viewType': [
                 {
                     value: '1',
-                    label: '商务',
+                    label: '资格审查项',
                     type:'1'
                 },
                 {
                     value: '2',
-                    label: '技术支持',
+                    label: '资格审查项汇总',
                     type:'1'
                 },
 
                 {
                     value: '4',
-                    label: '形式审查',
+                    label: '符合性审查项',
                     type:'2'
                 },
                 {
                     value: '5',
-                    label: '评审汇总',
+                    label: ' 符合性审查项汇总',
                     type:'3'
                 },
                 {
                     value: '6',
-                    label: '评审汇总',
+                    label: ' 详细评审（技术）',
                     type:'4'
                 },
                 {
                     value: '7',
+                    label: '详细评审（技术）汇总',
+                    type:'5'
+                },
+                {
+                    value: '8',
                     label: '评审汇总',
                     type:'5'
                 },
             ],
+
         }],
         msg: [{////个人形式审计表数据接口
             number: '1',
@@ -349,57 +363,107 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
     }],
 });
 
-// 树形图接口
-// let treeData = Mock.mock('/api/treeData', 'post', {
-//     tableData: [
-//         // { id:1, pId:2, name:"形式审计-#707478", open:true},
-//         // { id:11, pId:1, name:"投标人名称", open:false},
-//         // { id:12, pId:1, name:"资质", open:false},
-//         // { id:13, pId:1, name:"审查项目", open:false},
-//         {id: 1, pId: 0, name: "形式审计-#707478", open: true},
-//         {id: 101, pId: 1, name: "投标人名称", file: "core/standardData"},
-//         {id: 102, pId: 1, name: "资质", file: "core/simpleData"},
-//         {id: 103, pId: 1, name: "审查项目", file: "core/noline"},
-//
-//     ]
-// });
+// 资格审查项汇总页面table接口
 
-// let personalAuditTableData = Mock.mock('/api/personalAuditTableData', 'post', {
-//     msg: [{
-//         number: '1',
-//         date: '投标人名称',
-//         name: '√',
-//         province: '√',
-//         city: '√',
-//     }, {
-//         number: '2',
-//         date: '资质',
-//         name: '√',
-//         province: '√',
-//         city: '√',
-//     },
-//         {
-//             number: '3',
-//             date: '审查项目',
-//             name: '√',
-//             province: '√',
-//             city: '√',
-//         },
-//         {
-//             number: '结论',
-//             date: '审查标准与营业执照、资质证书是否一致',
-//             name: '合格',
-//             province: '合格',
-//             city: '合格',
-//         }]
-// });
+let table_data = Mock.mock('/api/table_data', 'post', {
+    'bidMsg|1': [{
+        id: () => Random.id(),
+        'name': '2019年水利运输服务招标项目',
+        'biaoNum': '0635—1909qwerN1197',
+        'baohao': '0635—1909qwerN1197/1',
+        //审查项
+        'eviewrItemsMsg|1': [{
+            'viewnBtnName': '个人资格审查项表',//左侧审查项类型
+            //头部审查类型按钮
+            'viewType': [
+                {
+                    value: '1',
+                    label: '资格审查项',
+                    type:'1'
+                },
+                {
+                    value: '2',
+                    label: '资格审查项汇总',
+                    type:'1'
+                },
+
+                {
+                    value: '4',
+                    label: '符合性审查项',
+                    type:'2'
+                },
+                {
+                    value: '5',
+                    label: ' 符合性审查项汇总',
+                    type:'3'
+                },
+                {
+                    value: '6',
+                    label: ' 详细评审（技术）',
+                    type:'4'
+                },
+                {
+                    value: '7',
+                    label: '详细评审（技术）汇总',
+                    type:'5'
+                },
+                {
+                    value: '8',
+                    label: '评审汇总',
+                    type:'5'
+                },
+            ],
+            'isShow|1':[0,1],
+             'mylist|3': [
+                {
+                    dates: '10',
+                    isFinish: '未完成',
+                    id: () => Random.id(),
+                    name: () => Random.cname(),
+                }
+            ],
+            'evaluationLeader':'张三',
+            'other_explain':() => Random.csentence(),
+            'unlock_table':[
+                {num:'1',factor:'投标人名称',name:'√(5√0×)',name1:'√(5√0×)',name2:'√(5√0×)',id:1},
+                {num:'2',factor:'资质',name:'√(5√0×)',name1:'√(5√0×)',name2:'√(5√0×)',id:2},
+                {num:'3',factor:'审查项目',name:'√(5√0×)',name1:'√(5√0×)',name2:'√(5√0×)',id:3},
+                {num:'结论',factor:'是否通过资格审查项检查',name:'合格',name1:'合格',name2:'合格',id:4}
+            ],
+            'unlock_dialog_check|1':[{
+                'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
+                'applicantPeole':'@cname',
+                'applicantTime':Random.datetime(),
+                'unlockObject':'@cname',
+                'applicantReason':'投标函格式',
+                'assessingOfficer':"@cname",
+                'assessingResult|1': [ 0,1],
+                'unlockReason':() => Random.csentence()
+                }]
+
+        }],
+
+    }],
+});
+
 // 不合格接口
 let comformFailureEntry = Mock.mock('/api/comformFailureEntry', 'post', {
     code: 200,
     message: '成功!',
     data: ''
 });
-
+//申请解锁信息保存成功
+let save_apply_unlock = Mock.mock('/api/save_apply_unlock', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
+//StartEvaluation table 中的名称查看pdf
+let check_pdf = Mock.mock('/api/check_pdf','post',{
+    'basicMessage':{
+        url:"/documents/younojsxia.pdf"
+    }
+});
 
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 

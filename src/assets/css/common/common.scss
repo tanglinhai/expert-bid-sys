@@ -75,6 +75,9 @@ body {
 	line-height: 1.8em;
 }
 
+.lin-height35{
+	line-height: 35px;
+}
 .commonTitle {
 	font-size: 18px;
 	text-align: left;
@@ -115,4 +118,19 @@ body {
 	background: #e47932 !important;
 	border-color: #e47932 !important;
 	color: #fff !important;
+}
+.curSty:hover{
+	color:#348fe2;
+	cursor: pointer;
+	background: #fff !important;
+}
+.common_a_style{
+	color:#348fe2;
+	cursor: pointer;
+	text-decoration: none;
+}
+.common_a_style:hover{
+	color:#ba2636;
+	cursor: pointer;
+	text-decoration: underline;
 }
