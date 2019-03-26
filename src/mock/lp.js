@@ -150,5 +150,27 @@ let WheelPushing=Mock.mock('/api/WheelPushing','post',{
 });
 //WheelPushing推荐组长进入推荐接口
 
+//ElectedLeader数据
+//投标人最新报价列表弹框表格数据
+let NewChange=Mock.mock('/api/NewChangePrice','post',{
+    msgBox: [{
+            firstPrice: '100000000人民币',
+            name: '重庆网控科技发展有限公司',
+            finalQuotation: 0
+        },
+        {
+            firstPrice: '200000000人民币',
+            name: '普瑞太1阳能有限公司',
+            finalQuotation: 0
+        },
+        {
+            firstPrice: '100000000人民币',
+            name: '夏丰热工研究院有限公司',
+            finalQuotation: 0
+        },
+    ]
+})
+
+//ElectedLeader数据
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })

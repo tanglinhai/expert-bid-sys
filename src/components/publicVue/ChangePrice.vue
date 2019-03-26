@@ -23,7 +23,7 @@
     </el-table>
     <el-row>
       <el-col class="textAlignC mt20" >
-        <el-button @click="reback"  size="mini" type="primary" style="padding: 9px 15px">返回</el-button>
+        <el-button @click="reback" size="mini" type="primary" style="padding: 9px 15px">返回</el-button>
       </el-col>
     </el-row>
     <el-dialog :title="titleName" :visible.sync="dialogFormVisible" append-to-body
@@ -247,11 +247,11 @@
                 </el-table>
               </div>
           </div>
-          <el-form-item label="降价附件：" class="clearfix marginT15">
-            <el-input v-model="model.name" class="marginR10 fl " style="width: 300px" size="small "></el-input>
+          <el-form-item label="降价附件：" class="clearfix mt15">
+            <el-input v-model="model.name" class="mr10 fl " style="width: 300px" size="small "></el-input>
             <el-button size="small" @click.stop="adjunctBtn" class="fl" style="margin-top: 4px"> 浏览</el-button>
           </el-form-item>
-          <el-form-item class="text-center">
+          <el-form-item class="textAlignC">
             <el-button type="primary"
                        @click="handeleSave(model,technicalAdjustmentPrice,businessAdjustmentPrice,businessAdjustmentPrice+technicalAdjustmentPrice)"
                        size="small"
@@ -295,26 +295,27 @@
     },
     data() {
       return {
+        show:true,  //默认投标人最新报价列表弹框展示
         titleName:"",
         successDialogVisible:false,// 保存成功的提示弹框
         dialogFormVisible: false,//标价价调整弹框
         dialogVisible: false,//调转评标价弹框
-        msgBox: [{
-          firstPrice: '1,000,000,00 人民币',
-          name: '重庆网控科技发展有限公司',
-          finalQuotation: 0
-        },
-          {
-            firstPrice: '1,000,000,00 人民币',
-            name: '普瑞太阳能有限公司',
-            finalQuotation: 0
-          },
-          {
-            firstPrice: '1,000,000,00 人民币',
-            name: '夏丰热工研究院有限公司',
-            finalQuotation: 0
-          },
-        ],
+        // msgBox: [{
+        //   firstPrice: '100000000人民币',
+        //   name: '重庆网控科技发展有限公司',
+        //   finalQuotation: 0
+        // },
+        //   {
+        //     firstPrice: '200000000人民币',
+        //     name: '普瑞太阳能有限公司',
+        //     finalQuotation: 0
+        //   },
+        //   {
+        //     firstPrice: '100000000人民币',
+        //     name: '夏丰热工研究院有限公司',
+        //     finalQuotation: 0
+        //   },
+        // ],
         //标价价调整
         model: {
           /*---------------技术性价格调整---------------*/
@@ -358,6 +359,12 @@
         i:"",//记录下标
       }
     },
+    // 父组件传过来的值
+    props:{
+      msgBox:{   //投标人最新报价列表
+          type:Array
+      },
+    },
     created() {
     },
     computed: {
@@ -365,6 +372,7 @@
         let amt = 0;
         this.model.arr.forEach(e => {
           amt += e.chageCount * e.resource;
+          console.log(e.chageCount,666666)
         });
         return amt;
       },
@@ -416,7 +424,9 @@
     },
     methods: {
       reback(){
-
+        console.log(111)
+        this.show=false;  //点击返回关闭父级弹框
+        this.$emit('sonToFather',this.show);
       },
       goback(){
         this.dialogFormVisible=false;
@@ -447,12 +457,14 @@
         this.dialogVisible = true;
       },
       changePriceBtn(index, obj) {
-        // console.log(index, obj);
+        console.log(index, obj,88888888);
         this.dialogFormVisible = true;//标价价调整弹框
         this.a=obj.finalQuotation;
         // obj.finalQuotation = this.$loaclStore.get('hldj_调整评标价isSubmit');
         this.i=index;
         this.titleName=this.msgBox[this.i].name;
+        //this.model.fristQuote=this.msgBox[this.i].firstPrice;
+        console.log(this.model.fristQuote,9999)
       },
       /*-------------------------------------技术性评标价格调整-------------------------------*/
       addBtn() {  //新增
@@ -470,8 +482,10 @@
         }
         if (obj.computationalBase == '' && obj.ratio == '' && obj.resource == "1") {
           this.model.moneySum = Number(obj.chageCount);
+          console.log(obj.chageCount,666666666)
         } else if (obj.computationalBase == '' && obj.ratio == '' && obj.resource == "-1") {
           this.model.moneySum = Number(obj.chageCount);
+          console.log(obj.chageCount,777777)
         }
       },
       computationalBaseBlur(index, obj) {//计算基数input失焦
@@ -510,6 +524,7 @@
         this.$refs["form"].validate((valid, model) => {
           this.valid = valid;
           if (valid) {
+            //console.log(this.$data.model,999997)  //获取值
             this.successDialogVisible = true;// 成功弹框
             this.goGrdoupRecor();//倒计时开始
             let bidEvaluation  = formName.fristQuote + a;//评标价;
