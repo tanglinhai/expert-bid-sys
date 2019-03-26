@@ -3,15 +3,11 @@ body {
           perspective: 800px;
   height: 100vh;
   margin: 0;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-family: 'Gudea', sans-serif;
   background: #EA5C54;
-  /* Old browsers */
-  /* FF3.6+ */
- 
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EA5C54 ', endColorstr='#bb6dec',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
+  position: relatvie;
 }
 body ::-webkit-input-placeholder {
   color: #4E546D;
@@ -32,14 +28,13 @@ body .authent {
   IE6-9 fallback on horizontal gradient */
   position: absolute;
   right: 18%;
-  margin: auto;
   width: 100px;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
   padding: 20px 70px;
-  top: 300px;
+  top: 500px;
   bottom: 0;
   height: 70px;
   opacity: 0;
@@ -68,6 +63,9 @@ body .test {
   pointer-events: none;
   top: 52px !important;
   -webkit-transform: rotateX(52deg) scale(0.8) !important;
+     -moz-transform: rotateX(52deg) scale(0.8) !important;
+      -ms-transform: rotateX(52deg) scale(0.8) !important;
+       -o-transform: rotateX(52deg) scale(0.8) !important;
           transform: rotateX(52deg) scale(0.8) !important;
   opacity: .6 !important;
   -webkit-filter: blur(1px);
@@ -83,9 +81,14 @@ body .login
   -webkit-transition-duration: .5s;
           transition-duration: .5s;
   -webkit-transform-origin: 161px 100%;
+     -moz-transform-origin: 161px 100%;
       -ms-transform-origin: 161px 100%;
+       -o-transform-origin: 161px 100%;
           transform-origin: 161px 100%;
   -webkit-transform: rotateX(0deg);
+     -moz-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+       -o-transform: rotateX(0deg);
           transform: rotateX(0deg);
   width: 250px;
   height: 270px;
@@ -395,7 +398,7 @@ input::-webkit-input-placeholder{
     color: #CECFD2;opacity:1;
 }
 html, body { 
-  padding: 0; margin: 0; height: 100%; font-size: 16px; 
+  padding: 0; margin: 0; font-size: 16px; 
   background-repeat: no-repeat; 
   background-position: left top; 
   /*background-color: #242645; */

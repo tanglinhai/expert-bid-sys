@@ -17,10 +17,10 @@
     }
     .index {
         background-color: #fff;
-        padding:100px 15px 100px 15px;
+        padding:50px 15px 50px 15px;
         text-align: center;
         img{
-            width: 50%;
+            width: 80%;
         }
     }
 </style>

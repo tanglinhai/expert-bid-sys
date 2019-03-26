@@ -7,37 +7,6 @@
       <div class="bg"></div>
     </div>
     <div class="login_fd">© 2016 All Rights Reserved.中招联合信息股份有限公司</div>
-    <div class='login'>
-      <div class='login_title'>
-          <span>评标专家登录</span>
-      </div>
-      <div class='login_fields'>
-          <div class='login_fields__user'>
-            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/user_icon_copy.png'/></div>
-            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy" />
-            <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
-          </div>
-  				<div class='login_fields__password'>
-  	    		<div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/lock_icon_copy.png'/></div>
-  	        <input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
-  	        <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
-          </div>
-  				<div class='login_fields__password'>
-  					<div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/key.png'/></div>
-  					<input name="code" placeholder='验证码' maxlength="4" type='text' autocomplete="off">
-  					<div class='validation' style="opacity: 1; right: -5px;top: -3px;">
-  						<canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-  					</div>
-  				</div>
-          <div class='login_fields__submit'>
-            <input type='button' value='登录'>
-          </div>
-      </div>
-      <div class='success'></div>
-      <div class='disclaimer'>
-          <p>欢迎登陆专家评标系统</p>
-      </div>
-    </div>
   	<div class='authent'>
       <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
         <div class="loader-inner ball-clip-rotate-multiple">
@@ -48,15 +17,47 @@
       </div>
       <p>认证中...</p>
   	</div>
+
+
+    
+    <div class='login'>
+      <div class='login_title'>
+          <span>评标专家登录</span>
+      </div>
+      <div class='login_fields'>
+          <div class='login_fields__user'>
+            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/user_icon_copy.png'/></div>
+            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy" />
+            <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
+          </div>
+          <div class='login_fields__password'>
+            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/lock_icon_copy.png'/></div>
+            <input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+            <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
+          </div>
+          <div class='login_fields__password'>
+            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/key.png'/></div>
+            <input name="code" placeholder='验证码' maxlength="4" type='text' autocomplete="off">
+            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+              <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+            </div>
+          </div>
+          <div class='login_fields__submit'>
+            <input type='button' value='登录'>
+          </div>
+      </div>
+      <div class='success'></div>
+      <div class='disclaimer'>
+          <p>欢迎登陆专家评标系统</p>
+      </div>
+    </div>
+
     <div class="OverWindows"></div>
   </div>
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
-#app{
-  overflow: hidden;
-  position: relative;
-}
+
 .loginPage{
   display: none;
   width: 1200px;
