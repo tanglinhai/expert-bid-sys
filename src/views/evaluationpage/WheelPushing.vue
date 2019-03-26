@@ -83,7 +83,7 @@ import { setInterval, clearInterval } from 'timers';
         },
         data(){
             return {
-                NoClick:0, //0不可点，1可点
+                NoClick:1, //0不可点，1可点
                 pageLoading:true,  //loading
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
@@ -101,7 +101,7 @@ import { setInterval, clearInterval } from 'timers';
         mounted(){
             this.ProjectZiliao(); //项目，资料，分析，硬件分析查看
             this.tuijuData(); //推举评委会主人第1轮
-            
+
             var _this=this;
             var setTime;
             setTime=setInterval(function(){

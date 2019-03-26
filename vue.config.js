@@ -220,8 +220,6 @@ module.exports = {
 
   https: false,
 
-  hotOnly: false,
-
   proxy: {
       '/elementuiUpload': {
           target: 'https://jsonplaceholder.typicode.com/posts/',

@@ -70,11 +70,11 @@
                                         <el-button size="small"><i class="el-icon-message"></i>查看</el-button>
                                     </div>
                                     <div v-if="scope.row.status==1">
-                                        <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
-                                        <el-button size="small" @click="adjustedValuation"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
+                                        <el-button size="small" @click="goto('/elect/StartEvaluation')"><i class="el-icon-edit-outline"></i>评标</el-button>
+                                        <el-button size="small" @click="adjustedValuation(scope.row)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                                     </div>
                                     <div v-if="scope.row.status==2">
-                                        <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
+                                        <el-button size="small" @click="goto('/elect/StartEvaluation')"><i class="el-icon-edit-outline"></i>评标</el-button>
                                     </div>
                                 </template>
                             </el-table-column>
@@ -122,7 +122,7 @@
             title="投标人最新报价列表"
             :visible.sync="ChangedialogVisible"
         >
-            <ChangePrice></ChangePrice>
+            <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
         </el-dialog>
         <!--调整评标价弹框-->
     </div>
@@ -140,6 +140,7 @@
         },
         data(){
             return {
+                TkOneloading:true,
                 NoClick:0, //0不可点，1可点
                 pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
@@ -156,6 +157,7 @@
                 baohao:'',  //推举主任情况包号
                 CheckReferralsList:[],  //推举主任情况弹框数据
                 ChangedialogVisible:false,  //调整评标价弹框
+                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
             }
         },
         mounted(){
@@ -165,6 +167,8 @@
             },15000)
             this.ProjectSubcontract();//项目分包数据
             this.ProjectZiliao() //项目，资料，分析，硬件分析查看
+
+            
             
         },
         methods:{
@@ -230,8 +234,25 @@
             },
 
             //调整评标价点击事件
-            adjustedValuation(){
+            adjustedValuation(row){
                 this.ChangedialogVisible = true;
+                this.TkOneloading=true;
+                console.log(row.id)
+                //调整评标价点击弹框传值到子页面
+                this.$axios.post('/api/NewChangePrice',{
+                    id:row.id,   //点击得id
+                }).then(res=>{
+                    if(res.status == 200){
+                        console.log(res.data.msgBox)
+                       this.ChangePriceTk=res.data.msgBox;
+                       this.TkOneloading=false;
+                    }
+                })
+            },
+
+
+            sonToFather(val){  //子集得返回点击关闭事件传值
+                this.ChangedialogVisible = val;
             },
 
         }
