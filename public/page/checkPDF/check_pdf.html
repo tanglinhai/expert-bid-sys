@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            background-color: rgb(82, 86, 89);
+        }
+        #pdfShow{
+            height: 100%;
+        }
+        .tips_pdf{
+            display: none;
+            margin:  200px auto;
+            width:747px;
+            height: 90px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        .check_pdf_icon{
+            float: left;
+            margin-top: 3px;
+        }
+        .no_message_div{
+            float: right;
+        }
+        a{
+            text-decoration: none;
+            color: #409EFF;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        .adobe{
+            margin-right: 150px;
+        }
+    </style>
+</head>
+<body>
+<script src="../../js/plugins/pdfobject/pdfobject.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<div id="pdfShow">
+    <div class="tips_pdf" >
+        <img src="../../img/check_pdf.png" alt="" class="check_pdf_icon" />
+        <div  class="fr no_message_div">
+            <h3 class="no_message_h1">对不起,您还没有安装PDF阅读器软件呢,为了方便预览PDF文档,请选择安装！</h3>
+            <a href="http://ardownload.adobe.com/pub/adobe/reader/win/9.x/9.3/chs/AdbeRdr930_zh_CN.exe" class="adobe">安装PDF阅读器软件 </a>
+            <a href="/documents/younojsxia.pdf">下载PDF</a>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var id = JSON.parse(localStorage.getItem('checkCredential'));
+    var src=id;//要展示的文件路径
+    $(function () {
+        // 下面代码都是处理IE浏览器的情况
+        if (window.ActiveXObject || "ActiveXObject" in window) {
+            //判断是否为IE浏览器，"ActiveXObject" in window判断是否为IE11
+            //判断是否安装了adobe Reader
+            for (x = 2; x < 10; x++) {
+                try {
+                    oAcro = eval("new ActiveXObject('PDF.PdfCtrl." + x + "');");
+                    if (oAcro) {
+                        flag = true;
+                    }
+                } catch (e) {
+                    flag = false;
+                }
+            }
+            try {
+                oAcro4 = new ActiveXObject('PDF.PdfCtrl.1');
+                if (oAcro4) {
+                    flag = true;
+                }
+            } catch (e) {
+                flag = false;
+            }
+            try {
+                oAcro7 = new ActiveXObject('AcroPDF.PDF.1');
+                if (oAcro7) {
+                    flag = true;
+                }
+            } catch (e) {
+                flag = false;
+            }
+            if (flag) {//支持
+                pdfShow(src);//调用显示的方法
+            } else {//不支持
+                $("body").css("backgroundColor","#EEE");
+                $(".tips_pdf").show();
+            }
+        }else {
+            pdfShow(src);//调用显示的方法
+        }
+    });
+    //显示文件方法，就是将文件展示到div中
+    function pdfShow(url){
+        $("#pdfShow").append('<iframe style="height:100%;width:100%;" src="'+src+'"></iframe>');
+    }
+</script>
+</html>

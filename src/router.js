@@ -49,6 +49,10 @@ var routes = [
         { name: '/elect/waitOhterElect', path: '/elect/waitOhterElect', component: () => import('./views/teamLeader/WaitOhterElect.vue') },
          //资质审查页面
         { name: '/elect/StartEvaluation', path: '/elect/StartEvaluation', component: () => import('./views/qualificationExam/StartEvaluation.vue') },
+          //资质审查汇总页面
+        { name: '/elect/UnFinishQualificationsResult', path: '/elect/UnFinishQualificationsResult', component: () => import('./views/qualificationExam/UnFinishQualificationsResult.vue') },
+          //全部提交页面
+         { name: '/elect/SubmitResult', path: '/elect/SubmitResult', component: () => import('./views/qualificationExam/SubmitResult.vue') },
       ]
     }
   ];

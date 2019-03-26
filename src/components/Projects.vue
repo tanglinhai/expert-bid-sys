@@ -32,7 +32,6 @@
                     <NowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr" ref="ccc"></NowProject>
                 </div>
             </div>
-
             <!--分页-->
             <div class="pageBox">
                 <el-pagination
