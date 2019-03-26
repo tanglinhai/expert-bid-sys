@@ -13,7 +13,7 @@
             <el-col :span="12" class="fs14 textAlignR select">
                 <div class="grid-content bg-purple">
                     <el-dropdown @command="handleCommand">
-                        <el-button type="primary" size="small"  >
+                        <el-button type="primary" size="small">
                             操作<i class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
@@ -31,20 +31,22 @@
         <div class="mainContentWarp" v-loading="page_loading">
             <div class="line"></div>
             <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button   :type="item.type ==1 ? 'success' :
+                <el-button :type="item.type ==1 ? 'success' :
                                 item.type ==2 ? 'warning': ''"
-                             round v-for="item in options"  :value="item.value" @click="changeView(item.value)"
-                           >{{item.label }}</el-button>
+                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
+                >{{item.label }}
+                </el-button>
             </el-row>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
                         <el-col class="textAlignC mt20 mb15">
-                            <el-button type="primary" size="small"  class="personalAuditFormBtn">{{personalAuditFormBtn}}</el-button>
+                            <el-button type="primary" size="small" class="personalAuditFormBtn">
+                                {{personalAuditFormBtn}}
+                            </el-button>
                         </el-col>
                     </el-row>
-                    <!--<PersonalExamine ></PersonalExamine>-->
-                    <el-row >
+                    <el-row>
                         <h6 class="pl15  col747 pt15 pb10">审查项</h6>
                         <div class="content_wrap">
                             <div class="zTreeDemoBackground left">
@@ -62,41 +64,44 @@
                                 <el-progress :percentage="completePercent" class="progress fl"></el-progress>
                             </div>
                         </el-col>
-                        <el-row :span="10" style="padding:0px; float:right;">
+                        <el-row :span="10" style="padding:0px; float:right;" class="hide_btn">
                             <el-button @click="allChecked()" plain size="mini" type="primary">全部合格</el-button>
                             <el-button size="mini" type="primary" @click="allSubmit">全部提交</el-button>
                         </el-row>
                     </el-row>
                     <!------------------------table1--------------------------->
-                    <div class="first_warp"  v-for="(item,index) in table_data" :key="index" :id="item.name">
-                        <el-row class="title_msg">
-                            <el-col>
-                                <p class="commonTitle fs14  col65">
-                                    <span class="ml3 col409">{{item.fristTableData.question}}</span><span
-                                        class="ml3  col409">{{item.fristTableData.answer}}</span><span
-                                        class="ml15 mr10"> /</span><span class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
-                                </p>
-                            </el-col>
-                        </el-row>
-                        <el-table
-                                :data="item.fristTableData.tableData"
-                                border
-                                style="width: 100%;"
-                                class="first_table"
-                                :cell-style="rowStyle" >
-                            <el-table-column
-                                    prop="name"
-                                    label="名称">
-                                <template slot-scope="scope">
+                    <div class="weitijiao" v-if="$store.state.failureEnery.flag">
+                        <div class="first_warp" v-for="(item,index) in table_data" :key="index" :id="item.name">
+                            <el-row class="title_msg">
+                                <el-col>
+                                    <p class="commonTitle fs14  col65">
+                                        <span class="ml3 col409">{{item.fristTableData.question}}</span><span
+                                            class="ml3  col409">{{item.fristTableData.answer}}</span><span
+                                            class="ml15 mr10"> /</span><span
+                                            class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
+                                    </p>
+                                </el-col>
+                            </el-row>
+                            <el-table
+                                    :data="item.fristTableData.tableData"
+                                    border
+                                    style="width: 100%;"
+                                    class="first_table"
+                                    :cell-style="rowStyle">
+                                <el-table-column
+                                        prop="name"
+                                        label="名称">
+                                    <template slot-scope="scope">
                                     <span style="margin-left: 10px">投标人：
-                                        <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style" href="/page/checkPDF/check_pdf.html" target="_blank"><i
-                                            class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="pass"
-                                    label="是否合格">
-                                <template slot-scope="scope">
+                                        <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
+                                           href="/page/checkPDF/check_pdf.html" target="_blank"><i
+                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="pass"
+                                        label="是否合格">
+                                    <template slot-scope="scope">
                                 <span style="margin-left: 10px">
                                   <el-radio-group
                                           @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData)"
@@ -105,20 +110,71 @@
                                     <el-radio :label="scope.row.ra2">不合格</el-radio>
                                   </el-radio-group>
                                 </span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    prop="kong"
-                                    >
-                                <template slot-scope="scope">
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="kong"
+                                >
+                                    <template slot-scope="scope">
                                 <span style="margin-left: 10px">
                                   {{scope.row.content}}
                                 </span>
-                                </template>
-                            </el-table-column>
-                        </el-table>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
                     </div>
-                  </el-col>
+                    <!-- -------------------全部提交的table----------------->
+                    <div class="sumbit_warp" v-else>
+                        <div class="first_warp" v-for="(item,index) in table_data" :key="index" :id="item.name">
+                            <el-row class="title_msg">
+                                <el-col>
+                                    <p class="commonTitle fs14  col65">
+                                        <span class="ml3 col409">{{item.fristTableData.question}}</span><span
+                                            class="ml3  col409">{{item.fristTableData.answer}}</span><span
+                                            class="ml15 mr10"> /</span><span
+                                            class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
+                                    </p>
+                                </el-col>
+                            </el-row>
+                            <el-table
+                                    :data="item.fristTableData.submitData"
+                                    border
+                                    style="width: 100%;"
+                                    class="first_table"
+                                    :cell-style="rowStyle">
+                                <el-table-column
+                                        prop="name"
+                                        label="名称">
+                                    <template slot-scope="scope">
+                                    <span ><i class="el-icon-close mr5 " v-if="scope.row.is_qualified=='不合格'"></i> <i class="el-icon-check mr5 "  v-if="scope.row.is_qualified=='合格'"></i>投标人：
+                                        <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
+                                           href="/page/checkPDF/check_pdf.html" target="_blank"><i
+                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="is_qualified"
+                                        label="是否合格">
+                                    <template slot-scope="scope">
+                                <span style="margin-left: 10px;color:red;">
+                                {{scope.row.is_qualified}}
+                                </span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="kong"
+                                >
+                                    <template slot-scope="scope">
+                                <span style="margin-left: 10px">
+                                  {{scope.row.content}}
+                                </span>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                    </div>
+                </el-col>
                 <!--点击个人形式审计表按钮显示-->
                 <el-col class="personalAuditFormTable" :span="21">
                     <div class="FormTableTitle">
@@ -162,8 +218,8 @@
                                 </el-table-column>
                             </el-table-column>
                         </el-table>
-                        <el-row class="fs14 table_tips" >
-                            <el-col >注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
+                        <el-row class="fs14 table_tips">
+                            <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
                             </el-col>
                             <el-col>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。</el-col>
                         </el-row>
@@ -183,6 +239,7 @@
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
+
     export default {
         name: "start-evaluation",
         props: {},
@@ -192,22 +249,22 @@
         data() {
             return {
                 page_loading: false,
-                tableData:[],//table1数据
-                msgBox:[] ,//个人形式审计表table数据
-                idradionoprss:'',//table不合格的id
-                operationType:[],
+                tableData: [],//table1数据
+                msgBox: [],//个人形式审计表table数据
+                idradionoprss: '',//table不合格的id
+                operationType: [],
                 /* -------头部包信息-----*/
-                name:"",//标包名称
+                name: "",//标包名称
                 biaoNum: '',
                 baohao: '',
-                options:[],//头部按钮
+                options: [],//头部按钮
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
-                 personalAuditFormBtn:"",
+                personalAuditFormBtn: "",
                 /* -------树形图-----*/
-                setting : {   //zTree配置
+                setting: {   //zTree配置
                     view: {
-                        dblClickExpand:this.dblClickExpand,
+                        dblClickExpand: this.dblClickExpand,
                     },
                     data: {
                         simpleData: {//使用的数据格式
@@ -218,43 +275,48 @@
                         onClick: this.zTreeOnClick
                     }
                 },
-                zNodes:[],
+                zNodes: [],
                 /* -------树形图end-----*/
                 /*-------------------左侧背景部分end--------------------*/
                 /*-------------------右侧主体部分数据-------------------*/
                 // completePercent:0,
-                table_data:[],
-                arr:[],
+                table_data: [],//未提交的table
+                arr: [],
                 /*-------------------右侧主体部分数据-------------------*/
-                obj:{},//接受每次点击的数据
-                tableArr:[],//table数据
-                radioArr:[],//所有table的radio
+                obj: {},//接受每次点击的数据
+                tableArr: [],//table数据
+                radioArr: [],//所有table的radio
+                //全部提交
+
+
             }
         },
-
         mounted() {
-            $("#treeDemo").on('click','#treeDemo_1_a',function(){
+            $("#treeDemo").on('click', '#treeDemo_1_a', function () {
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
             });
-            $(".personalAuditFormBtn").click(function(){
+            $(".personalAuditFormBtn").click(function () {
                 $(".personalAuditFormTable").show();
                 $(".right_warp").hide();
             });
             this.init();
-            setTimeout(function(){
+            setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
-            },200);
+            }, 200);
+
+
+
         },
         computed: {
-            completePercent(){
+            completePercent() {
                 let fillCount = 0;
-                for(var i=0;i<this.radioArr.length;i++){
-                    if(this.radioArr[i].radio){
+                for (var i = 0; i < this.radioArr.length; i++) {
+                    if (this.radioArr[i].radio) {
                         fillCount++;
                     }
                 }
-                return (Math.floor((fillCount /this.radioArr.length).toFixed(2)*100));
+                return (Math.floor((fillCount / this.radioArr.length).toFixed(2) * 100));
                 // return ((fillCount /this.radioArr.length)*100).toFixed(1);
             }
         },
@@ -270,10 +332,19 @@
                         this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;
                         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                         this.$store.state.failureEnery.flag = false;
                         this.table_data = res.data.bidMsg.eviewrItemsMsg.zTreeData.children;
-                        this.table_data.forEach((m,i) => {
+                        if (res.data.bidMsg.type === 0) {
+                            this.$store.state.failureEnery.flag = true;//未提交
+                        } else {
+                            this.$store.state.failureEnery.flag = false;//已提交
+                            $(".hide_btn").hide();
+                        }
+
+                        console.log(res.data.bidMsg.eviewrItemsMsg.zTreeData.children);
+                        this.table_data.forEach((m, i) => {
                             this.tableArr.push(m.fristTableData.tableData);
-                            m.fristTableData.tableData.forEach((x,s)=> {
+                            m.fristTableData.tableData.forEach((x, s) => {
                                 this.radioArr.push(x)
                             })
                         })
@@ -286,7 +357,7 @@
                 for (var i = 0; i < tableKey.length; i++) {
                     if (tableKey[i].id == id) {
                         store_radio = tableKey[i];
-                        this.obj=store_radio;
+                        this.obj = store_radio;
                         break;
                     }
                 }
@@ -297,10 +368,10 @@
                 } else if (radio == '合格') {
                     store_radio.content = ''
                 }
-               },
+            },
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
-                if(this.obj.id==this.idradionoprss){
-                    this.obj.content=childValue;
+                if (this.obj.id == this.idradionoprss) {
+                    this.obj.content = childValue;
                 }
                 this.$store.state.failureEnery.show = false;
             },
@@ -309,28 +380,25 @@
                     this.radioArr[i].radio = '合格';
                 }
             },
-            isAllFilled(){
+            isAllFilled() {
                 var isAllF = true;
-                for(var i=0;i<this.radioArr.length;i++){
-                    if(!this.radioArr[i].radio){
+                for (var i = 0; i < this.radioArr.length; i++) {
+                    if (!this.radioArr[i].radio) {
                         isAllF = false;
                         break;
                     }
                 }
-                 return isAllF;
+                return isAllF;
             },
-            allSubmit(){
-                if(!this.isAllFilled()){
+            allSubmit() {
+                if (!this.isAllFilled()) {
                     this.$message({
                         message: '请选择合格/不合格',
                         center: true
                     });
-                }else{
-                    // this.$router.push({
-                    //     path: '/elect/SubmitResult'
-                    // })
-
-
+                } else {
+                    this.$store.state.failureEnery.flag = false;
+                    $(".hide_btn").hide();
                 }
             },
             handleCommand(val) {//弹框群
@@ -349,33 +417,36 @@
                     alert('5')
                 }
             },
-            changeView(i){      //路由跳转传参函数
-                if(i==='1'){
+            changeView(i) {      //路由跳转传参函数
+                if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                }else if(i==='2'){
+                } else if (i === '2') {
                     this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                }else if(i==="9"){
+                } else if (i === "9") {
                     console.log("2")
                 }
             },
-           /*----------------- zTree ----------------------*/
+            /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
+
                 this.arr.push(treeNode);
-                this.table_data=this.arr;
-                this.arr=[];
-                if(treeNode.children){
-                    this.table_data=treeNode.children;
+                this.table_data = this.arr;
+                this.arr = [];
+                if (treeNode.children) {
+                    this.table_data = treeNode.children;
                 }
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
+
+
             },
-             dblClickExpand(treeId, treeNode) {
+            dblClickExpand(treeId, treeNode) {
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            check_pdf(i,obj){
+            check_pdf(i, obj) {
                 // console.log(i, obj);
-                this.$axios.post('/api/check_pdf','post',{
+                this.$axios.post('/api/check_pdf', 'post', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
@@ -436,8 +507,8 @@
                 .left_examine {
                     background: #e4e9ec;
                     border-radius: 10px;
-                    height:820px;
-                    .div_header{
+                    height: 820px;
+                    .div_header {
                         border-bottom: 1px solid #bfc8cd;
                     }
                 }
@@ -489,18 +560,18 @@
                         }
                     }
                 }
-                .personalAuditFormTable{
+                .personalAuditFormTable {
                     display: none;
                     padding-left: 15px;
                     border-radius: 5px;
-                    .FormTableTitle{
-                        margin-bottom:10px;
-                        span{
-                            font-size:14px;
-                            margin-right:20px;
+                    .FormTableTitle {
+                        margin-bottom: 10px;
+                        span {
+                            font-size: 14px;
+                            margin-right: 20px;
                         }
                     }
-                    .table_tips{
+                    .table_tips {
                         line-height: 23px;
                         color: #606266;
                         border-left: 1px solid #ebeef5;

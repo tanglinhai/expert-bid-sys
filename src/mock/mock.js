@@ -154,10 +154,11 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
         'name': '2019年水利运输服务招标项目',
         'biaoNum': '0635—1909qwerN1197',
         'baohao': '0635—1909qwerN1197/1',
+        'type|1':[0,1],//是否提交过
         //审查项
         'eviewrItemsMsg|1': [{
             'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-            'zTreeData|1': [//树形图
+             'zTreeData|1': [//树形图
                 {
                     id: 1, pId: 0, name: "形式审计-#707478", open: true,
                     children: [
@@ -182,7 +183,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     index: 1,
                                     people: '招标人2：',
                                     name: '[2] 普瑞太阳能有限公司',
-                                    pass: '2',
+                                    pass: '1',
                                     content: '',
                                     ra1: '合格',
                                     ra2: '不合格',
@@ -192,14 +193,51 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     index: 2,
                                     people: '招标人2：',
                                     name: '[2] 夏丰热工研究院有限公司',
-                                    pass: '2',
+                                    pass: '1',
                                     content: '',
                                     ra1: '合格',
                                     ra2: '不合格',
                                     radio: '',
                                     id: 3,
                                 }],
-                            },
+
+                                submitData: [{
+                                    index: 0,
+                                    people: '招标人1：',
+                                    name: '[1]重庆网控科技发展有限公司',
+                                    pass: '1',
+                                    content: () => Random.csentence(),
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    radio: '',
+                                    is_qualified:"不合格",
+                                    id: 1,
+                                }, {
+                                    index: 1,
+                                    people: '招标人2：',
+                                    name: '[2] 普瑞太阳能有限公司',
+                                    pass: '2',
+                                    content:() => Random.csentence(),
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    is_qualified:"不合格",
+                                    radio: '',
+                                    id: 2,
+                                }, {
+                                    index: 2,
+                                    people: '招标人2：',
+                                    name: '[2] 夏丰热工研究院有限公司',
+                                    pass: '2',
+                                    content: () => Random.csentence(),
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    is_qualified:"不合格",
+                                    radio: '',
+                                    id: 3,
+                                }],
+
+
+                               },
                         },
                         {
                             id: 102, pId: 1, name: "资质", open: false,
@@ -212,7 +250,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     index: 3,
                                     people: '招标人1：',
                                     name: '[1]重庆网控科技发展有限公司',
-                                    pass2: '1',
+                                    pass: '2',
                                     content: '',
                                     ra1: '合格',
                                     ra2: '不合格',
@@ -222,7 +260,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     index: 4,
                                     people: '招标人2：',
                                     name: '[2] 普瑞太阳能有限公司',
-                                    pass2: '2',
+                                    pass: '2',
                                     content: '',
                                     ra1: '合格',
                                     ra2: '不合格',
@@ -232,10 +270,42 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     index: 5,
                                     people: '招标人2：',
                                     name: '[2] 夏丰热工研究院有限公司',
-                                    pass2: '2',
+                                    pass: '2',
                                     content: '',
                                     ra1: '合格',
                                     ra2: '不合格',
+                                    radio: '',
+                                    id: 6,
+                                }],
+                                submitData: [{
+                                    index: 3,
+                                    people: '招标人1：',
+                                    name: '[1]重庆网控科技发展有限公司',
+                                    pass3: '3',
+                                    content: () => Random.csentence(),
+                                    address: '',
+                                    radio: '',
+                                    is_qualified:"不合格",
+                                    id: 4,
+                                }, {
+                                    index: 4,
+                                    people: '招标人2：',
+                                    name: '[2] 普瑞太阳能有限公司',
+                                    pass3: '3',
+                                    content: () => Random.csentence(),
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    is_qualified:"不合格",
+                                    radio: '',
+                                    id: 5,
+                                }, {
+                                    index: 5,
+                                    people: '招标人2：',
+                                    name: '[2] 夏丰热工研究院有限公司',
+                                    pass3: '3',
+                                    content: () => Random.csentence(),
+                                    address: '1111',
+                                    is_qualified:"不合格",
                                     radio: '',
                                     id: 6,
                                 }],
@@ -279,7 +349,41 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     radio: '',
                                     id: 9,
                                 }],
-                            }
+                                submitData: [{
+                                    index: 6,
+                                    people: '招标人1：',
+                                    name: '[1]重庆网控科技发展有限公司',
+                                    pass2: '1',
+                                    content: '',
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    is_qualified:"合格",
+                                    radio: '',
+                                    id: 7,
+                                }, {
+                                    index: 7,
+                                    people: '招标人2：',
+                                    name: '[2] 普瑞太阳能有限公司',
+                                    pass2: '2',
+                                    content: '',
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    radio: '',
+                                    is_qualified:"合格",
+                                    id: 8
+                                }, {
+                                    index: 8,
+                                    people: '招标人2：',
+                                    name: '[2] 夏丰热工研究院有限公司',
+                                    pass2: '2',
+                                    content: '',
+                                    ra1: '合格',
+                                    ra2: '不合格',
+                                    radio: '',
+                                    is_qualified:"合格",
+                                    id: 9,
+                                }],
+                             }
                         },
                     ]
                 },
@@ -363,6 +467,10 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
     }],
 });
 
+//
+
+
+
 // 资格审查项汇总页面table接口
 
 let table_data = Mock.mock('/api/table_data', 'post', {
@@ -440,9 +548,7 @@ let table_data = Mock.mock('/api/table_data', 'post', {
                 'assessingResult|1': [ 0,1],
                 'unlockReason':() => Random.csentence()
                 }]
-
         }],
-
     }],
 });
 
