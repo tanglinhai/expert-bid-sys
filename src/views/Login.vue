@@ -115,6 +115,10 @@ export default {
         url: '/js/plugins/jQueryLogin/css/styles.css',
         download_files_key: '/js/plugins/jQueryLogin/css/styles.css'
     });
+    this.$commonJs.getCssFile.call(this, {
+        url: '/js/plugins/jQueryLogin/css/loaders.css',
+        download_files_key: '/js/plugins/jQueryLogin/css/loaders.css'
+    });
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/lib/jquery-ui.min.js',
         download_files_key: '/js/lib/jquery-ui.min.js',
@@ -313,7 +317,7 @@ export default {
                                           }); 
                                           break;
                                       default:
-                                          var index = layer.alert(res.data.Erro, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+                                          var index = layer.alert(res.data.Erro, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0, fix: false });
                                           layer.style(index, {
                                               color: '#777'
                                           });
