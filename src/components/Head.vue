@@ -32,11 +32,8 @@
 		    <template slot="title">
 		    	<img src=""/>张三
 		    </template>
-		    <el-menu-item index="5-1"><i class="iconfont icon-xiugaitouxiang"></i>修改头像</el-menu-item>
 		    <el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>
 		    <el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>
-		    <el-menu-item index="5-4"><i class="iconfont icon-shenqing"></i>CA申请</el-menu-item>
-		    <el-menu-item index="5-5"><i class="iconfont icon-bangding"></i>CA绑定</el-menu-item>
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>

@@ -71,7 +71,7 @@
                                     </div>
                                     <div v-if="scope.row.status==1">
                                         <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
-                                        <el-button size="small"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
+                                        <el-button size="small" @click="adjustedValuation"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                                     </div>
                                     <div v-if="scope.row.status==2">
                                         <el-button size="small"><i class="el-icon-edit-outline"></i>评标</el-button>
@@ -117,17 +117,26 @@
             </div>
         </el-dialog>
         <!--推举情况弹框-->
+        <!--调整评标价弹框-->
+        <el-dialog
+            title="投标人最新报价列表"
+            :visible.sync="ChangedialogVisible"
+        >
+            <ChangePrice></ChangePrice>
+        </el-dialog>
+        <!--调整评标价弹框-->
     </div>
 </template>
 
 <script>
     import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
-import { setTimeout, setInterval } from 'timers';
+    import ChangePrice from '../../components/publicVue/ChangePrice.vue';
     export default {
         name: 'index',
         props: {},
         components: {
-            evaluationcommonVue
+            evaluationcommonVue,
+            ChangePrice
         },
         data(){
             return {
@@ -146,13 +155,14 @@ import { setTimeout, setInterval } from 'timers';
                 leader:'',  //推举主任情况组长
                 baohao:'',  //推举主任情况包号
                 CheckReferralsList:[],  //推举主任情况弹框数据
+                ChangedialogVisible:false,  //调整评标价弹框
             }
         },
         mounted(){
             var _this=this;
             setInterval(function(){
               _this.ProjectSubcontract();//项目分包数据  
-            },5000)
+            },15000)
             this.ProjectSubcontract();//项目分包数据
             this.ProjectZiliao() //项目，资料，分析，硬件分析查看
             
@@ -217,7 +227,12 @@ import { setTimeout, setInterval } from 'timers';
                         this.CheckReferralsList = res.data.CheckReferralsList;
                     }
                 })
-            }
+            },
+
+            //调整评标价点击事件
+            adjustedValuation(){
+                this.ChangedialogVisible = true;
+            },
 
         }
     }
