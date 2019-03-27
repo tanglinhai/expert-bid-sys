@@ -105,7 +105,7 @@
             :visible.sync="dialogSelectionDirector"
             width="50%"
         >
-            <div class="failureEntryDialog">
+            <div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
                 <div class="failureoOject">
                     {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
                 </div>
@@ -146,6 +146,7 @@
                 pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
 
+                ElevatedSituationLoading:false, //推举情况弹框loading
                 ProjectFbLoading:false,  //项目分包表格loading
                 projectTableData: [],  //项目分包信息
                 currentPage4: 1,   //分页
@@ -233,6 +234,7 @@
             //查看推举情况按钮事件
             LookTuiju(){
                 this.dialogSelectionDirector=true;
+                this.ElevatedSituationLoading=true;
                 this.$axios.post('/api/CheckReferralsTuiju',{
 
                 }).then(res=>{
@@ -241,6 +243,7 @@
                         this.leader=res.data.leader;
                         this.baohao=res.data.baohao;
                         this.CheckReferralsList = res.data.CheckReferralsList;
+                        this.ElevatedSituationLoading=false;
                     }
                 })
             },

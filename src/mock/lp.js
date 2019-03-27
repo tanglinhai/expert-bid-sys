@@ -158,6 +158,7 @@ let reRefuse=Mock.mock('/api/refuseWhy','post',{
 
 //WheelPushing推荐组长进入推荐接口
 let WheelPushing=Mock.mock('/api/WheelPushing','post',{
+    'LunNumber|1':['1','3','4'],
     'leaderList|5':[{
         'zuanjiaName|1':['1','2','4'],  //专家姓名
         'depiaoshu|1':['1','0','0'],  //得票数
