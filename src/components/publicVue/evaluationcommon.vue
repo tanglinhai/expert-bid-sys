@@ -299,7 +299,7 @@
                         <div class="evaluationcommon_ziliao" style="display:none">
                             <el-scrollbar style="width:100%;">
                                 <ul>
-                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
+                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="HardWareClick">
                                         <a href="javascript:;">
                                             <span>{{index+1}}</span>
                                             {{item.ziliaoName}}
@@ -316,7 +316,7 @@
                         <div class="evaluationcommon_ziliao">
                             <el-scrollbar style="width:100%;">
                                 <ul>
-                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="YinjiancenterDialogVisible=true">
+                                    <li v-for="(item,index) in projectYinjianFenxi" :key="index" @click="HardWareClick">
                                         <a href="javascript:;">
                                             <span>{{index+1}}</span>
                                             {{item.ziliaoName}}
@@ -406,6 +406,7 @@
             <span>
                 <template>
                     <el-table
+                    v-loading="YinJianLoading"
                     :data="YinjiantableData"
                     style="width: 100%">
                         <el-table-column
@@ -446,7 +447,7 @@
                 </template>
             </span>
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="YinjiancenterDialogVisible = false">返回</el-button>
+                <el-button type="primary" size="small" @click="YinjiancenterDialogVisible = false">返回</el-button>
             </span>
         </el-dialog>
         <!--硬件特征码防串围标分析弹框-->
@@ -469,25 +470,8 @@
                     baoname:"",
                     name:"",
                 }],//招标文件查看弹框内容
-                YinjiantableData: [{  //硬件特征码分析弹框数据
-                    gongyinshang: '益达天然产物有限公司（测试）',
-                    cpu: 'CPU序号',
-                    yinpan: '硬盘序列号',
-                    wangka: '网卡MAC地址',
-                    ip: 'IP地址',
-                    ruanjian: '软件序列号',
-                    caozuo: '操作系统及版本号',
-                    shijian: '操作时间'
-                }, {
-                    gongyinshang: '北京蓝天环境保护有限公司',
-                    cpu: 'CPU序号',
-                    yinpan: '硬盘序列号',
-                    wangka: '网卡MAC地址',
-                    ip: 'IP地址',
-                    ruanjian: '软件序列号',
-                    caozuo: '操作系统及版本号',
-                    shijian: '操作时间'
-                }]
+                YinjiantableData: [], //硬件特征码分析弹框数据
+                YinJianLoading:false, //硬件弹框loading加载
             }
         },
         // 父组件传过来的值
@@ -542,6 +526,19 @@
             ChakanhandleClick(row){   //招标文件查看弹框的查看事件
                 console.log(row,999)
                  window.open('http://localhost:7002/img/receipt.pdf');
+            },
+            HardWareClick(){  //硬件特征点击弹框数据
+                this.YinjiancenterDialogVisible=true;
+                this.YinJianLoading=true;
+                this.$axios.post('/api/HardwareDataTk',{
+                    //invitioninpval:this.invitioninpval,   //传值关键词
+                    //redshow:this.redshow,    //四个按钮选中的是id
+                }).then(res=>{
+                    if(res.status == 200){
+                       this.YinjiantableData=res.data.YinjiantableData;
+                       this.YinJianLoading=false;
+                    }
+                })
             }
         }
     }

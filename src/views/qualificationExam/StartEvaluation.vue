@@ -353,6 +353,7 @@
                 })
             },
             failuredRadio(radio, id, index, tableKey) {//不合格
+                console.log(radio,id,8888)
                 var store_radio = null;
                 for (var i = 0; i < tableKey.length; i++) {
                     if (tableKey[i].id == id) {

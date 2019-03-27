@@ -80,6 +80,20 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
     }],
 });
 
+//evaluationcommon得硬件特征码防串围标分析点击弹框内容数据供应商名称接口
+let HardwareDataTk=Mock.mock('/api/HardwareDataTk','post',{
+    "YinjiantableData|1-10": [{  //硬件特征码分析弹框数据
+        'gongyinshang|1': ['益达天然产物有限公司（测试）','北京蓝天环境保护有限公司','夏丰热工研究院有限公司','重庆网控科技发展有限公司'],
+        cpu: 'CPU序号',
+        yinpan: '硬盘序列号',
+        wangka: '网卡MAC地址',
+        ip: 'IP地址',
+        ruanjian: '软件序列号',
+        caozuo: '操作系统及版本号',
+        shijian: '操作时间'
+    }]
+})
+
 //beginEvaluation查看推举情况弹框接口
 let CheckReferrals=Mock.mock('/api/CheckReferralsTuiju','post',{
     leader:'张三',
@@ -119,7 +133,7 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
     personInformation:{
         personName:'张三',
         personTel:'13123434567',
-        personNumber:'352226199505120036',
+        "personNumber|1":['352226199505120036','352266199505120036'],
     },
     toubiaorenInformation:[{
         toubiaorenName:'重庆网控科技发展有限公司',
@@ -131,9 +145,14 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
         toubiaorenName:'夏丰热工研究院有限公司',
         toubiaorenFenbao:'0635-198N517/1',
     },{
-        toubiaorenName:'北京有限公司',
+        'toubiaorenName|1':['北京有限公司','夏丰热工研究院有限公司'],
         toubiaorenFenbao:'0635-198N517/1',
     }]
+});
+//申请回避弹框原因接口
+let reRefuse=Mock.mock('/api/refuseWhy','post',{
+    code: 200,
+    data: [1234]
 });
 //AllInformation进入页面数据接口
 
