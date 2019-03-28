@@ -247,9 +247,26 @@
                 </el-table>
               </div>
           </div>
-          <el-form-item label="降价附件：" class="clearfix mt15">
+          <!-- <el-form-item label="附件：" class="clearfix mt15">
             <el-input v-model="model.name" class="mr10 fl " style="width: 300px" size="small "></el-input>
             <el-button size="small" @click.stop="adjunctBtn" class="fl" style="margin-top: 4px"> 浏览</el-button>
+          </el-form-item> -->
+          <el-form-item label="上传文件:" :label-width="ruleFormLabelWidth" class="clearfix mt15">
+              <el-input v-model="model.nameFiles" class="mr10 fl " style="width: 300px" size="small "></el-input>
+              <el-upload
+                      class="upload-demo"
+                      ref="upload2"
+                      action="/upload"
+                      :on-preview="handlePreview"
+                      :on-remove="handleRemove"
+                      :auto-upload="false"
+              >
+
+                  <el-button slot="trigger" size="small" >浏览文件</el-button>
+                  <el-button style="margin-left: 10px;" size="small"
+                              @click="submitUpload('upload2')">上传到服务器
+                  </el-button>
+              </el-upload>
           </el-form-item>
           <el-form-item class="textAlignC">
             <el-button type="primary"
@@ -334,7 +351,7 @@
           computationalBase: 0,//计算基数
           chageCount: 0,//调整金额
           ratio: 0,//比例
-          name: "",
+          nameFiles: "",
           moneySum: 0,
           /*-------------------------商务性调整---------------------*/
           arrbusiness: [],
@@ -524,7 +541,7 @@
         this.$refs["form"].validate((valid, model) => {
           this.valid = valid;
           if (valid) {
-            //console.log(this.$data.model,999997)  //获取值
+            console.log(this.$data.model,999997)  //获取值
             this.successDialogVisible = true;// 成功弹框
             this.goGrdoupRecor();//倒计时开始
             let bidEvaluation  = formName.fristQuote + a;//评标价;
@@ -558,7 +575,37 @@
           },1000)
         }
       },
+
+      submitUpload(upload2,id_num) {   //上传文件
+          console.log(upload2,id_num);
+          let that=this;
+          this.$commonJs.upload({
+              context: this,
+              key: upload2,
+              id: id_num,
+              callbacks: function (data, status) {
+                  //console.log(data.files, status,555);
+                  data.files.forEach((item) => {
+                       
+                      var str = item.path;
+                      var urlReg = str.replace(/\\/g, "/");
+                      var laterUrl = urlReg.lastIndexOf("/");
+                      urlReg = urlReg.substring(laterUrl + 1, urlReg.length);
+                      console.log(urlReg,that.$data,8888)
+                      that.model.nameFiles= urlReg;
+                      $(".el-upload-list").css({"opacity":0})
+                      // $("#image").attr('src', 'http://localhost:7000/upload/' + urlReg);
+                      // $("#image").show();
+                      // $("#image").cropper(options);
+                  })
+              }
+          });
+      },
+
+
     }
+
+    
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
