@@ -57,7 +57,6 @@
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
-
 .loginPage{
   display: none;
   width: 1200px;

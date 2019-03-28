@@ -171,7 +171,7 @@ module.exports = {
 
   // 是否使用css分离插件 ExtractTextPlugin
 
-  extract: true,
+  extract: !debug,
 
   // 开启 CSS source maps?
 
