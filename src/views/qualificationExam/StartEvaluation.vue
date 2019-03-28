@@ -14,7 +14,7 @@
                 <div class="grid-content bg-purple">
                     <el-dropdown @command="handleCommand">
                         <el-button type="primary" size="small">
-                            操作<i class="el-icon-arrow-down el-icon--right"></i>
+                            <i class="icon iconfont icon-caozuo  mr3"></i>操作<i class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="a">废标</el-dropdown-item>
@@ -42,6 +42,7 @@
                     <el-row class="div_header">
                         <el-col class="textAlignC mt20 mb15">
                             <el-button type="primary" size="small" class="personalAuditFormBtn">
+                                <i class="icon iconfont icon-zigeshenchazhuti  mr3"></i>
                                 {{personalAuditFormBtn}}
                             </el-button>
                         </el-col>
@@ -64,14 +65,15 @@
                                 <el-progress :percentage="completePercent" class="progress fl"></el-progress>
                             </div>
                         </el-col>
-                        <el-row :span="10" style="padding:0px; float:right;" class="hide_btn">
-                            <el-button @click="allChecked()" plain size="mini" type="primary">全部合格</el-button>
-                            <el-button size="mini" type="primary" @click="allSubmit">全部提交</el-button>
+                        <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                            <el-button @click="allChecked" plain size="mini" type="primary"><i class="icon iconfont icon-ic_qualified  mr3"></i>全部合格</el-button>
+                            <el-button size="mini" type="primary" @click="allSubmit"> <i class="icon iconfont icon-tijiao  mr3"></i>全部提交</el-button>
                         </el-row>
                     </el-row>
                     <!------------------------table1--------------------------->
                     <div class="weitijiao" v-if="$store.state.failureEnery.flag">
-                        <div class="first_warp" v-for="(item,index) in table_data" :key="index" :id="item.name">
+                        <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index" :id="item.name"
+                             v-if="item.show==true||item.show==undefined">
                             <el-row class="title_msg">
                                 <el-col>
                                     <p class="commonTitle fs14  col65">
@@ -95,14 +97,16 @@
                                     <span style="margin-left: 10px">投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
                                            href="/page/checkPDF/check_pdf.html" target="_blank"><i
-                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
+                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                            <i class="icon iconfont icon-pdf "></i>
+                                        </a></span>
                                     </template>
                                 </el-table-column>
                                 <el-table-column
                                         prop="pass"
                                         label="是否合格">
                                     <template slot-scope="scope">
-                                <span style="margin-left: 10px">
+                                <span style="margin-left: 10px" class="radios">
                                   <el-radio-group
                                           @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData)"
                                           ref="shet" v-model="scope.row.radio">
@@ -126,7 +130,8 @@
                     </div>
                     <!-- -------------------全部提交的table----------------->
                     <div class="sumbit_warp" v-else>
-                        <div class="first_warp" v-for="(item,index) in table_data" :key="index" :id="item.name">
+                        <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index" :id="item.name"
+                             v-if="item.show==true||item.show==undefined">
                             <el-row class="title_msg">
                                 <el-col>
                                     <p class="commonTitle fs14  col65">
@@ -147,10 +152,15 @@
                                         prop="name"
                                         label="名称">
                                     <template slot-scope="scope">
-                                    <span ><i class="el-icon-close mr5 " v-if="scope.row.is_qualified=='不合格'"></i> <i class="el-icon-check mr5 "  v-if="scope.row.is_qualified=='合格'"></i>投标人：
+                                    <span><i class="el-icon-close mr5 " v-if="scope.row.is_qualified=='不合格'"
+                                             style="color: red"></i> <i class="el-icon-check mr5 "
+                                                                        style="color: #67c23a"
+                                                                        v-if="scope.row.is_qualified=='合格'"></i>投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
                                            href="/page/checkPDF/check_pdf.html" target="_blank"><i
-                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}</a></span>
+                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                             <i class="icon iconfont icon-pdf "></i>
+                                        </a></span>
                                     </template>
                                 </el-table-column>
                                 <el-table-column
@@ -158,6 +168,7 @@
                                         label="是否合格">
                                     <template slot-scope="scope">
                                 <span style="margin-left: 10px;color:red;">
+
                                 {{scope.row.is_qualified}}
                                 </span>
                                     </template>
@@ -277,18 +288,10 @@
                 },
                 zNodes: [],
                 /* -------树形图end-----*/
-                /*-------------------左侧背景部分end--------------------*/
-                /*-------------------右侧主体部分数据-------------------*/
-                // completePercent:0,
-                table_data: [],//未提交的table
-                arr: [],
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
                 radioArr: [],//所有table的radio
-                //全部提交
-
-
             }
         },
         mounted() {
@@ -304,9 +307,6 @@
             setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
             }, 200);
-
-
-
         },
         computed: {
             completePercent() {
@@ -316,8 +316,7 @@
                         fillCount++;
                     }
                 }
-                return (Math.floor((fillCount / this.radioArr.length).toFixed(2) * 100));
-                // return ((fillCount /this.radioArr.length)*100).toFixed(1);
+                return fillCount === 0 ? 0 : (Math.floor((fillCount / this.radioArr.length).toFixed(2) * 100));
             }
         },
         methods: {
@@ -328,21 +327,19 @@
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
+                        this.msgBox = res.data.bidMsg.msg;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;
                         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
-                         this.$store.state.failureEnery.flag = false;
-                        this.table_data = res.data.bidMsg.eviewrItemsMsg.zTreeData.children;
+                        this.$store.state.failureEnery.flag = false;
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.flag = true;//未提交
                         } else {
                             this.$store.state.failureEnery.flag = false;//已提交
                             $(".hide_btn").hide();
                         }
-
-                        console.log(res.data.bidMsg.eviewrItemsMsg.zTreeData.children);
-                        this.table_data.forEach((m, i) => {
+                        this.zNodes.children.forEach((m, i) => {
                             this.tableArr.push(m.fristTableData.tableData);
                             m.fristTableData.tableData.forEach((x, s) => {
                                 this.radioArr.push(x)
@@ -352,24 +349,44 @@
                     this.page_loading = false;
                 })
             },
-            failuredRadio(radio, id, index, tableKey) {//不合格
-                console.log(radio,id,8888)
-                var store_radio = null;
-                for (var i = 0; i < tableKey.length; i++) {
-                    if (tableKey[i].id == id) {
-                        store_radio = tableKey[i];
-                        this.obj = store_radio;
-                        break;
+// <<<<<<< HEAD
+            failuredRadio(radio, id, index, tableKey) {//合格不合格
+                console.log(this.radioArr, '000', tableKey);
+                this.$axios.post('/api/isFailure', 'post', {
+                    id: id,
+                    type: radio
+                }).then(res => {
+                    if (res.status == 200) {
+                        var store_radio = null;
+                        for (var i = 0; i < tableKey.length; i++) {
+                            if (tableKey[i].id == id) {
+                                store_radio = tableKey[i];
+                                this.obj = store_radio;
+                                break;
+                            }
+                        }
+                        if (radio == '不合格') {
+                            this.$store.state.failureEnery.show = true;
+                            this.idradionoprss = id;
+                        } else if (radio == '合格') {
+                            store_radio.content = ''
+                        }
                     }
-                }
-                if (radio == '不合格') {
-                    this.$store.state.failureEnery.show = true;
-                    this.idradionoprss = id;
-
-                } else if (radio == '合格') {
-                    store_radio.content = ''
-                }
+                })
             },
+// =======
+//             failuredRadio(radio, id, index, tableKey) {//不合格
+//                 console.log(radio,id,8888)
+//                 var store_radio = null;
+//                 for (var i = 0; i < tableKey.length; i++) {
+//                     if (tableKey[i].id == id) {
+//                         store_radio = tableKey[i];
+//                         this.obj = store_radio;
+//                         break;
+// >>>>>>> 61bfacbe08cf7d338013884878186eb4a4c51ba7
+//                     }
+//                 });
+//             },
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if (this.obj.id == this.idradionoprss) {
                     this.obj.content = childValue;
@@ -377,11 +394,17 @@
                 this.$store.state.failureEnery.show = false;
             },
             allChecked() {//全选
-                for (var i = 0; i < this.radioArr.length; i++) {
-                    this.radioArr[i].radio = '合格';
-                }
+                this.$axios.post('/api/allChecked', 'post', {
+                    // id:id
+                }).then(res => {
+                    if (res.status === 200) {
+                        for (var i = 0; i < this.radioArr.length; i++) {
+                            this.radioArr[i].radio = '合格';
+                        }
+                    }
+                });
             },
-            isAllFilled() {
+            isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 var isAllF = true;
                 for (var i = 0; i < this.radioArr.length; i++) {
                     if (!this.radioArr[i].radio) {
@@ -392,14 +415,37 @@
                 return isAllF;
             },
             allSubmit() {
-                if (!this.isAllFilled()) {
+                console.log(this.zNodes.children);
+
+
+                if (this.isAllFilled()) {
+                    this.$axios.post('/api/alltijiao', 'post', {
+                        // id:id,
+                        // status:status,
+                    }).then(res => {
+                        if (res.status == 200) {
+                            this.$store.state.failureEnery.flag = false;
+                            $(".hide_btn").hide();
+                        } else {
+                            this.$message({
+                                message: '请选择合格/不合格',
+                                center: true,
+                                type: 'error',
+                            });
+                        }
+                    }).catch(() => {
+                        this.$message({
+                            message: '请选择合格/不合格',
+                            center: true,
+                            type: 'error',
+                        });
+                    })
+                } else {
                     this.$message({
                         message: '请选择合格/不合格',
-                        center: true
+                        center: true,
+                        type: 'error',
                     });
-                } else {
-                    this.$store.state.failureEnery.flag = false;
-                    $(".hide_btn").hide();
                 }
             },
             handleCommand(val) {//弹框群
@@ -407,7 +453,6 @@
                     alert('1');
                 } else if (val === 'b') {//交通费标准
                     alert('0')
-
                 } else if (val === 'c') {//报销汇总表
                     alert('2')
                 } else if (val === 'd') {//报销汇总表-财政
@@ -429,26 +474,31 @@
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-
-                this.arr.push(treeNode);
-                this.table_data = this.arr;
-                this.arr = [];
                 if (treeNode.children) {
-                    this.table_data = treeNode.children;
+                    this.zNodes.children.forEach((m, i) => {
+                        this.$set(m, 'show', true)
+                    })
+                } else {
+                    this.zNodes.children.forEach((m, i) => {
+                        console.log(m, i);
+                        console.log(m.id, treeNode.id);
+                        if (m.id == treeNode.id) {
+                            this.$set(m, 'show', true)
+                        } else {
+                            this.$set(m, 'show', false)
+                        }
+                    })
                 }
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
-
-
             },
             dblClickExpand(treeId, treeNode) {
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
             check_pdf(i, obj) {
-                // console.log(i, obj);
                 this.$axios.post('/api/check_pdf', 'post', {
-                    // id:id
+                    id: obj.id
                 }).then(res => {
                     if (res.status === 200) {
                         localStorage.setItem("checkCredential", JSON.stringify(res.data.basicMessage.url));

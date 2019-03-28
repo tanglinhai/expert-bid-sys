@@ -85,7 +85,7 @@
                         this.btn_search_loading = false;
                         this.projectBagMsg=res.data.projectBagMsg;
                         this.msgBox=res.data.allBagMsg;
-                        // console.log(this.msgBox, this.projectBagMsg);
+                        console.log(this.msgBox, this.projectBagMsg);
                         for(var i = 0; i < this.projectBagMsg.length; i++) {
                             this.arr.push(i)
                         }

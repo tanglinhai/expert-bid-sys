@@ -5,5 +5,6 @@ export default {
         qualificationUnlock :false,//资格审查项汇总解锁申请弹框
         flag:'',//是否提交table
         isshow:'',//资格审查项汇总显示
+        individualTrial:false,//个人初审类活动表弹框
     }
 }
