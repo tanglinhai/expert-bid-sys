@@ -37,6 +37,7 @@
                 <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
             </div>
             <el-table
+                v-loading="tBrMsgLoading"
                 class="mt20 fl"
                 :data="tableData3"
                 border
@@ -118,6 +119,7 @@
             return {
                 NoClick:0, //0不可点，1可点
                 pageLoading:true,  //loading
+                tBrMsgLoading:false,  //投标人信息列表loading效果
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
                 projectLeiFenxiList:[], //雷同性分析
@@ -159,6 +161,8 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+                this.tBrMsgLoading=true;
+                this.AllInformation();
             },
             //项目，资料，分析，硬件分析查看
             ProjectZiliao(){   
@@ -191,6 +195,7 @@
                         this.tableData2[0].telNum=res.data.personInformation.personTel;
                         this.tableData2[1].num=res.data.personInformation.personNumber;
                         this.tableData3=res.data.toubiaorenInformation;
+                        this.tBrMsgLoading=false;
                     }
                 })
             },
@@ -200,8 +205,21 @@
             submitForm(formName) { //申请回避事件
                 this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    //console.log(this.$data.ruleForm,999)  //获取到的值
+                    //console.log(this.$data.ruleForm.desc,999)  //获取到的拒绝的值
                     //alert(1)
+                    this.dialogApplyAvoid=false;
+                    this.$axios.post('/api/refuseWhy',{
+                        yuanyin:this.$data.ruleForm.desc,
+                    }).then(res=>{
+                        if(res.data.code=="200"){
+                            //console.log(this.$data.ruleForm.desc,888)
+                            this.$message({
+                                message: '回避原因提交完成',
+                                type: 'success'
+                            });
+                            this.$data.ruleForm.desc="";
+                        }
+                    })
                 } else {
                     return false;
                 }

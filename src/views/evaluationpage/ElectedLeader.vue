@@ -24,6 +24,7 @@
                     <div>
                         <template>
                             <el-table
+                            v-loading="ProjectFbLoading"
                             :data="projectTableData"
                             :header-cell-style="getRowClass"
                             style="width: 100%">
@@ -104,7 +105,7 @@
             :visible.sync="dialogSelectionDirector"
             width="50%"
         >
-            <div class="failureEntryDialog">
+            <div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
                 <div class="failureoOject">
                     {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
                 </div>
@@ -141,9 +142,12 @@
         data(){
             return {
                 TkOneloading:true,
-                NoClick:0, //0不可点，1可点
+                NoClick:0, //项目资料,雷同性分析,招标文件查看,硬件特征四项，0不可点，1可点
                 pageLoading:true,  //loading
                 activeNames2: ['1'], //项目分包默认展开
+
+                ElevatedSituationLoading:false, //推举情况弹框loading
+                ProjectFbLoading:false,  //项目分包表格loading
                 projectTableData: [],  //项目分包信息
                 currentPage4: 1,   //分页
                 projectZiliaoList:[],  //项目资料列表
@@ -184,15 +188,24 @@
                     return '';
                 }
             },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                this.ProjectFbLoading=true;
+                this.ProjectSubcontract();
+            },
 
             //项目分包数据
             ProjectSubcontract(){   
-                 this.$axios.post('/api/ProjectSubcontract',{
+                this.$axios.post('/api/ProjectSubcontract',{
                     //invitioninpval:this.invitioninpval,   //传值关键词
                     //redshow:this.redshow,    //四个按钮选中的是id
                 }).then(res=>{
                     if(res.status == 200){
                        this.projectTableData=res.data.projectTables;
+                       this.ProjectFbLoading=false;
                     }
                 })
             },
@@ -221,6 +234,7 @@
             //查看推举情况按钮事件
             LookTuiju(){
                 this.dialogSelectionDirector=true;
+                this.ElevatedSituationLoading=true;
                 this.$axios.post('/api/CheckReferralsTuiju',{
 
                 }).then(res=>{
@@ -229,6 +243,7 @@
                         this.leader=res.data.leader;
                         this.baohao=res.data.baohao;
                         this.CheckReferralsList = res.data.CheckReferralsList;
+                        this.ElevatedSituationLoading=false;
                     }
                 })
             },

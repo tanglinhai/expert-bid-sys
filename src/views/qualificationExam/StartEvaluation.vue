@@ -349,6 +349,7 @@
                     this.page_loading = false;
                 })
             },
+// <<<<<<< HEAD
             failuredRadio(radio, id, index, tableKey) {//合格不合格
                 console.log(this.radioArr, '000', tableKey);
                 this.$axios.post('/api/isFailure', 'post', {
@@ -371,8 +372,21 @@
                             store_radio.content = ''
                         }
                     }
-                });
+                })
             },
+// =======
+//             failuredRadio(radio, id, index, tableKey) {//不合格
+//                 console.log(radio,id,8888)
+//                 var store_radio = null;
+//                 for (var i = 0; i < tableKey.length; i++) {
+//                     if (tableKey[i].id == id) {
+//                         store_radio = tableKey[i];
+//                         this.obj = store_radio;
+//                         break;
+// >>>>>>> 61bfacbe08cf7d338013884878186eb4a4c51ba7
+//                     }
+//                 });
+//             },
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if (this.obj.id == this.idradionoprss) {
                     this.obj.content = childValue;

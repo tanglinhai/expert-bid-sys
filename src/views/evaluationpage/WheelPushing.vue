@@ -8,10 +8,11 @@
         <div class="evaluationcommon mt20 cf">
             <div class="textAlignC cole02 fs20" v-if="waitTitshi">请等待其他专家推举... ...</div>
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第1轮</h5>
+                <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第{{LunNumber}}轮</h5>
             </div>
            <template>
                 <el-table
+                v-loading="PutRoundNumberLoading"
                 class="mt20 fl"
                 :data="NumberRounddatas"
                 :header-cell-style="getRowClass"
@@ -95,6 +96,8 @@ import { setInterval, clearInterval } from 'timers';
                 
                 waitTitshi:false,  //推举组长提示信息
                 NumberRounddatas:[],  //推举评委会主人第几轮
+                LunNumber:'', //推举评委会主人标题轮数
+                PutRoundNumberLoading:false, //推举评委会主人loading
                         
                 }
         },
@@ -126,6 +129,8 @@ import { setInterval, clearInterval } from 'timers';
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+                this.PutRoundNumberLoading=true;
+                this.tuijuData();
             },
             //项目，资料，分析，硬件分析查看
             ProjectZiliao(){   
@@ -154,7 +159,9 @@ import { setInterval, clearInterval } from 'timers';
                 }).then(res=>{
                     if(res.status == 200){
                         //console.log(res.data)
-                        this.NumberRounddatas=res.data.leaderList
+                        this.NumberRounddatas=res.data.leaderList;
+                        this.LunNumber=res.data.LunNumber;
+                        this.PutRoundNumberLoading=false;
                     }
                 })
             },
