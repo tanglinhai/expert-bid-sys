@@ -48,7 +48,11 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'postage': Random.float(10, 100, 2, 2),
         'drawingDeposit': Random.float(10, 100, 2, 2),
         'bidAgencyServiceFee': Random.float(1, 100, 2, 2) + '(浮动费率 （发改价格[2011]534号)',
-        'tenderBond': Random.float(10, 100, 2, 2) + '万元'
+        'tenderBond': Random.float(10, 100, 2, 2) + '万元',
+        'previewFile':'',
+        'tenderDocuments':"",
+        "attachement":"",
+        'pdf_url':""
     }],
 });
 // 修改密码页面登陆名以及密码
@@ -151,7 +155,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
     // 头部标包信息
     'bidMsg|1': [{
         id: () => Random.id(),
-        'name': '2019年水利运输服务招标项目',
+        'name': '2019年水利运输服务招标项目111',
         'biaoNum': '0635—1909qwerN1197',
         'baohao': '0635—1909qwerN1197/1',
         'type|1':[0,1],//是否提交过
@@ -166,7 +170,7 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                             id: 101, pId: 1, name: "投标人名称", open: false,
                             fristTableData: {//第一个表格
                                 question: "形式评审项：",
-                                answer: "投标人名称",
+                                answer : "投标人名称",
                                 question1: "审查标准：",
                                 answer1: "与营业执照、资质证书一致",
                                 tableData: [{
@@ -235,8 +239,6 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
                                     radio: '',
                                     id: 3,
                                 }],
-
-
                                },
                         },
                         {
@@ -521,7 +523,7 @@ let table_data = Mock.mock('/api/table_data', 'post', {
                     type:'5'
                 },
             ],
-            'isShow|1':[0,1],
+            'isShow|1':[1],//1：解锁的那个页面显示，反之进度条的那个显示
              'mylist|3': [
                 {
                     dates: '10',
@@ -551,13 +553,33 @@ let table_data = Mock.mock('/api/table_data', 'post', {
         }],
     }],
 });
-
-// 不合格接口
+//合格不合格接口
+let isFailure = Mock.mock('/api/isFailure', 'post', {
+    code: 200,
+    message: '成功!',
+    data: '',
+    type:''
+});
+// 不合格录入接口
 let comformFailureEntry = Mock.mock('/api/comformFailureEntry', 'post', {
     code: 200,
     message: '成功!',
     data: ''
 });
+// 全部选中接口
+let allChecked = Mock.mock('/api/allChecked', 'post', {
+    code: 200,
+    message: '成功!',
+    data: ''
+});
+
+// 全部提交接口
+let alltijiao = Mock.mock('/api/alltijiao', 'post', {
+    code: 200,
+    message: '成功!',
+    data: ''
+});
+
 //申请解锁信息保存成功
 let save_apply_unlock = Mock.mock('/api/save_apply_unlock', 'post', {
     code: 200,

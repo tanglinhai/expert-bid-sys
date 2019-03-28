@@ -75,6 +75,8 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
+                                        <el-button size="small" plain @click="submit">提交</el-button>
+                                        <el-button size="small" plain @click="individualTrial">查看个人资格审查项表</el-button>
                                         <el-button size="small" plain @click="checkUnlockRecord">查看资格审查项解锁记录</el-button>
                                         <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁</el-button>
                                     </div>
@@ -130,9 +132,9 @@
                                     </div>
                                 </el-col>
                                 <el-col :span="16">
-                                    <div class="grid-content bg-purple" style="padding-top: 23px">
-                                        <!--<el-input type="textarea"></el-input>-->
-                                        {{other_explain}}
+                                    <div class="grid-content bg-purple" >
+                                        <el-input type="textarea"></el-input>
+                                        <!--{{other_explain}}-->
                                     </div>
                                 </el-col>
                             </el-row>
@@ -155,19 +157,28 @@
         >
             <QualificationUnlock></QualificationUnlock>
         </el-dialog>
+        <el-dialog
+                :title="$store.state.failureEnery.individualTrial"
+                :visible.sync="dialogVisible"
+                width="952px"
+        >
+            <IndividualTrial ></IndividualTrial>
+        </el-dialog>
     </div>
 </template>
 
 <script>
     import ViewUnlockRecord from '../../components/publicVue/ViewUnlockRecord';
     import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';
+    import IndividualTrial from '../../components/publicVue/IndividualTrial';
 
     export default {
         name: "unFinishQualificationsResult",
         props: {},
         components: {
             ViewUnlockRecord,
-            QualificationUnlock
+            QualificationUnlock,
+            IndividualTrial
         },
         data() {
             return {
@@ -255,7 +266,13 @@
             },
             quaUnlockApplication() {
                 this.$store.state.failureEnery.qualificationUnlock = true;
-            }
+            },
+            submit(){
+
+            },
+            individualTrial(){
+
+            },
         },
     }
 </script>

@@ -130,7 +130,7 @@
                         <div class="overflowText textAlignR">评标时间：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">{{every_msg.evaluationBidTime}}</div>
+                        <div class="overflowText">{every_msg.evaluationBidTime}}</div>
                     </el-col>
                 </el-row>
                 <el-row class="information">
@@ -222,13 +222,13 @@
                         <div class="overflowText textAlignR">预览文件：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">&nbsp;</div>
+                        <div class="overflowText">{{every_msg.previewFile}}</div>
                     </el-col>
                     <el-col :span="6">
                         <div class="overflowText textAlignR">招标文件附件：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText">&nbsp;</div>
+                        <div class="overflowText">{{every_msg.tenderDocuments}}</div>
                     </el-col>
                 </el-row>
             </div>
@@ -245,7 +245,7 @@
                         <div class="overflowText textAlignR">附件文件：</div>
                     </el-col>
                     <el-col :span="6">
-                        <div class="overflowText"></div>
+                        <div class="overflowText">{{every_msg.attachement}}</div>
                     </el-col>
                 </el-row>
             </div>
