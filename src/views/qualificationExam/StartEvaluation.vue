@@ -245,17 +245,30 @@
         >
             <FailureEntry @childByValue="childByValue"></FailureEntry>
         </el-dialog>
+
+        <!--废标弹框-->
+        <el-dialog
+            title="废标"
+            :visible.sync="dialogAbandonedTender"
+            width="700px"
+            >
+            <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
+        </el-dialog>
+        <!--废标弹框-->
+
+
     </div>
 </template>
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
-
+    import AbandonedTender from '../../components/dialog/AbandonedTender';
     export default {
         name: "start-evaluation",
         props: {},
         components: {
-            FailureEntry
+            FailureEntry,
+            AbandonedTender,   //废标  
         },
         data() {
             return {
@@ -292,6 +305,8 @@
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
                 radioArr: [],//所有table的radio
+
+                dialogAbandonedTender:false, //废标
             }
         },
         mounted() {
@@ -450,7 +465,8 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    alert('1');
+                    //alert('1');
+                    this.dialogAbandonedTender=true;
                 } else if (val === 'b') {//交通费标准
                     alert('0')
                 } else if (val === 'c') {//报销汇总表
@@ -463,6 +479,7 @@
                     alert('5')
                 }
             },
+            
             changeView(i) {      //路由跳转传参函数
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?id=" + this.id);
