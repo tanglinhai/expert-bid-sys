@@ -44,12 +44,17 @@
                         label="操作">
                         <template slot-scope="scope">
                             <div style="cursor:pointer;" v-if="scope.row.caozuo==1" @click="tuijuAgain">
-                                <i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;推举
+                                <i class="icon iconfont icon-shou"></i>&nbsp;推举
                             </div>
                             <div v-if="scope.row.caozuo==2">
                                 未签到
                             </div>
-                           
+                           <div v-if="scope.row.caozuo==3">
+                                已推举
+                            </div>
+                            <div v-if="scope.row.caozuo==4">
+                                
+                            </div>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -93,6 +98,9 @@ import { setInterval, clearInterval } from 'timers';
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
                 ChakanPage1:1,  //分页
+
+                id:444,  //假设当前专家的id为222
+                caozuoAlls:[],  //获取所有状态是否为已推荐
                 
                 waitTitshi:false,  //推举组长提示信息
                 NumberRounddatas:[],  //推举评委会主人第几轮
@@ -159,8 +167,28 @@ import { setInterval, clearInterval } from 'timers';
                 }).then(res=>{
                     if(res.status == 200){
                         //console.log(res.data)
+                        this.caozuoAlls=[];
                         this.NumberRounddatas=res.data.leaderList;
                         this.LunNumber=res.data.LunNumber;
+                        this.NumberRounddatas.forEach((m,i) => {
+                            if(m.id==this.id&&m.caozuo==3){  //判断当前的自己是否已推荐，已经推举的话就直接提示推举状态
+                                m.caozuo=4;
+                                this.waitTitshi=true;
+                            }else{
+                               this.waitTitshi=false; 
+                            }
+                            if(m.caozuo==3||m.caozuo==4){
+                                this.caozuoAlls.push(m.caozuo);
+                                //console.log(this.caozuoAlls.length,this.caozuoAlls,m.caozuo,8888)
+                            }
+                            //const arr = [1,2,3,4,5,6,7]
+                        })
+                        console.log(this.caozuoAlls.length,this.caozuoAlls,this.NumberRounddatas.length,7777)
+                        if(this.caozuoAlls.length==this.NumberRounddatas.length){
+                            this.$router.push({
+                                path: '/elect/StartEvaluation',
+                            })
+                        }
                         this.PutRoundNumberLoading=false;
                     }
                 })

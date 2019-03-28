@@ -159,13 +159,38 @@ let reRefuse=Mock.mock('/api/refuseWhy','post',{
 //WheelPushing推荐组长进入推荐接口
 let WheelPushing=Mock.mock('/api/WheelPushing','post',{
     'LunNumber|1':['1','3','4'],
-    'leaderList|5':[{
-        'zuanjiaName|1':['1','2','4'],  //专家姓名
-        'depiaoshu|1':['1','0','0'],  //得票数
+    leaderList:[{
+        id:111,
+        zuanjiaName:'1',  //专家姓名
+        depiaoshu:'1',  //得票数
         tel:13121223333, //手机号
-        'zjhao|1':['2345','1234','4563','2578'],  //证件号
+        zjhao:'2345',  //证件号
+        danwei:'测试单位',   //单位 
+        'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
+    },{
+        id:222,
+        zuanjiaName:'2',  //专家姓名
+        depiaoshu:'0',  //得票数
+        tel:13121223333, //手机号
+        zjhao:'1234',  //证件号
         danwei:'测试单位',   //单位
-        'caozuo|1':['1','2']  //1推举 ，2未签到
+        'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
+    },{
+        id:333,
+        zuanjiaName:'3',  //专家姓名
+        depiaoshu:'5',  //得票数
+        tel:13121223333, //手机号
+        zjhao:'5678',  //证件号
+        danwei:'测试单位',   //单位
+        'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
+    },{
+        id:444,
+        zuanjiaName:'4',  //专家姓名
+        depiaoshu:'0',  //得票数
+        tel:13121223333, //手机号
+        zjhao:'23456',  //证件号
+        danwei:'单位',   //单位
+        'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
     }]
 });
 //WheelPushing推荐组长进入推荐接口
