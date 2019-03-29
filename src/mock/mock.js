@@ -474,7 +474,6 @@ let table_msg = Mock.mock('/api/table_msg', 'post', {
 
 
 // 资格审查项汇总页面table接口
-
 let table_data = Mock.mock('/api/table_data', 'post', {
     'bidMsg|1': [{
         id: () => Random.id(),
@@ -523,7 +522,7 @@ let table_data = Mock.mock('/api/table_data', 'post', {
                     type:'5'
                 },
             ],
-            'isShow|1':[1],//1：解锁的那个页面显示，反之进度条的那个显示
+            'isShow|1':[0,1],//1：解锁的那个页面显示，反之进度条的那个显示
              'mylist|3': [
                 {
                     dates: '10',
@@ -549,7 +548,24 @@ let table_data = Mock.mock('/api/table_data', 'post', {
                 'assessingOfficer':"@cname",
                 'assessingResult|1': [ 0,1],
                 'unlockReason':() => Random.csentence()
-                }]
+                }],
+            'msgBox|1-5': [{
+                'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                + '/' + '评委会',//     评标委员会
+                'bagName': '第' + Random.natural(0, 9) + '包',//分包号
+                'panduan1':"√",
+                'evaluationFactors|1-5': () => Random.csentence(),//评审因素
+                'panduan2':"√",
+                'panduan3':"√",
+                'bidder|1-5': [
+                    {
+                       name:"重庆网控科技发展有限公司"
+                    }
+                ]//投标人
+            }],
+            companyName:["重庆网控科技发展有限公司","重庆网控科技有限公司","重庆网有限公司"]
         }],
     }],
 });
@@ -593,6 +609,130 @@ let check_pdf = Mock.mock('/api/check_pdf','post',{
     }
 });
 
+//复合性项目审查提交（table）
+let tijiao = Mock.mock('/api/tijiao', 'post', {
+    code: 200,
+    message: '提交成功!',
+    data: []
+});
+
+// 资格审查项汇总页面table接口
+let pingshen_huizong = Mock.mock('/api/pingshen_huizong', 'post', {
+    'bidMsg|1': [{
+        id: () => Random.id(),
+        'name': '2019年水利运输服务招标项目',
+        'biaoNum': '0635—1909qwerN1197',
+        'baohao': '0635—1909qwerN1197/1',
+        //审查项
+        'eviewrItemsMsg|1': [{
+            //头部审查类型按钮
+            'viewType': [
+                {
+                    value: '1',
+                    label: '资格审查项',
+                    type:'1'
+                },
+                {
+                    value: '2',
+                    label: '资格审查项汇总',
+                    type:'1'
+                },
+
+                {
+                    value: '4',
+                    label: '符合性审查项',
+                    type:'2'
+                },
+                {
+                    value: '5',
+                    label: ' 符合性审查项汇总',
+                    type:'3'
+                },
+                {
+                    value: '6',
+                    label: ' 详细评审（技术）',
+                    type:'4'
+                },
+                {
+                    value: '7',
+                    label: '详细评审（技术）汇总',
+                    type:'5'
+                },
+                {
+                    value: '8',
+                    label: '评审汇总',
+                    type:'5'
+                },
+            ],
+            'isShow|1':[0,1],//0：提交前那个页面显示，1:提交前的页面
+            'other_explain':() => Random.csentence(),//其他说明
+            'bidEvaluation|3':[{//报价评审弹框报价计算table
+                'id': () => Random.id(),
+                'bid_name':"重庆网控科技发展有限公司" ,
+                'tender_offer':() => Random.integer(100, 9999),
+                'bid_price':() => Random.integer(100, 9999),
+                'base_rice':() => Random.integer(100, 9999),
+                'bias_ratio':() => Random.integer(0, 100),
+                 'radio': 1,
+            }],
+            'review_summary|3':[{//评审汇总table
+                'id': () => Random.id(),
+                'num':() => Random.integer(1, 7),
+                'name':"重庆网控科技发展有限公司" ,
+                'tender_offer':'10000.0000',
+                'total':'10000.0000',
+                'ranking':() => Random.integer(1, 7),
+             }],
+            'sort_data|3':[{
+                'company_name':() => Random.csentence(1, 10),
+                'id': () => Random.id(),
+                'ranking':() => Random.integer(1, 7),
+            }],
+        }],
+    }],
+});
+
+//报价审核是否有效接口
+let radio_is_valid = Mock.mock('/api/radio_is_valid', 'post', {
+    code: 200,
+    message: '成功!',
+    data: '',
+    type:''
+});
+
+//报价审核提交接口
+let radio_is_valid_tijiao = Mock.mock('/api/radio_is_valid_tijiao', 'post', {
+    code: 200,
+    message: '成功!',
+    data: '',
+    type:''
+});
+
+//评审汇总页面提交（table）
+let pshz_tijiao = Mock.mock('/api/pshz_tijiao', 'post', {
+    code: 200,
+    message: '提交成功!',
+    data: []
+});
+
+//排序(向上)
+let sort_up = Mock.mock('/api/sort_up', 'post', {
+    code: 200,
+    message: '向上排序成功!',
+    data: []
+});
+//排序(向下)
+let sort_down = Mock.mock('/api/sort_down', 'post', {
+    code: 200,
+    message: '向下排序成功!',
+    data: []
+});
+//排序(提交)
+let sort_tijaio = Mock.mock('/api/sort_tijaio', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 
 

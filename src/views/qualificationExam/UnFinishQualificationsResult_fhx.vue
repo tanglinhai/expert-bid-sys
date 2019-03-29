@@ -1,5 +1,5 @@
 <template>
-    <div class="unFinishQualificationsResult">
+    <div class="result_fhx">
         <el-row class="fs14 bid_msg mb15">
             <el-col :span="4">
                 <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
@@ -158,7 +158,7 @@
             <QualificationUnlock></QualificationUnlock>
         </el-dialog>
         <el-dialog
-               title="个人初审类活动表"
+                title="个人初审类活动表"
                 :visible.sync="$store.state.failureEnery.individualTrial"
                 width="952px"
         >
@@ -240,7 +240,7 @@
                     }
                     this.page_loading = false;
                 })
-            //    个人初审类活动表数据
+                //    个人初审类活动表数据
 
 
             },
@@ -275,7 +275,6 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit(){
-                // console.log(this.form.desc);
                 this.$axios.post('/api/tijiao', 'post', {
                     data:this.form.desc
                 }).then(res => {
@@ -284,7 +283,7 @@
                             message: '提交成功',
                             type: 'success'
                         });
-                        this.$router.push("/elect/complianceReviewItem");
+                        this.$router.push("/elect/StartEvaluation_xxjs");
                     }
                 })
             },
@@ -296,7 +295,7 @@
 </script>
 
 <style lang="scss">
-    .unFinishQualificationsResult {
+    .result_fhx {
         padding: 15px;
         background-color: #ededed;
         .bid_msg {

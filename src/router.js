@@ -28,7 +28,7 @@ var routes = [
         //推荐组长进入推荐轮数
         { name: '/index/WheelPushing', path: '/index/WheelPushing', component: () => import('./views/evaluationpage/WheelPushing.vue') },
 
-        
+
         //用户信息
         { name: '/user/info', path: '/user/info', component: () => import('./views/user/UserInfo.vue') },
         //用户头像
@@ -53,6 +53,16 @@ var routes = [
         { name: '/elect/UnFinishQualificationsResult', path: '/elect/UnFinishQualificationsResult', component: () => import('./views/qualificationExam/UnFinishQualificationsResult.vue') },
           //全部提交页面
          { name: '/elect/SubmitResult', path: '/elect/SubmitResult', component: () => import('./views/qualificationExam/SubmitResult.vue') },
+          // 符合性审查项页面
+         { name: '/elect/StartEvaluation_fhx', path: '/elect/StartEvaluation_fhx', component: () => import('./views/qualificationExam/StartEvaluation_fhx.vue') },
+          // 符合性审查项汇总页面
+         { name: '/elect/UnFinishQualificationsResult_fhx', path: '/elect/UnFinishQualificationsResult_fhx', component: () => import('./views/qualificationExam/UnFinishQualificationsResult_fhx.vue') },
+          // 详细评审（技术）页面
+         { name: '/elect/StartEvaluation_xxjs', path: '/elect/StartEvaluation_xxjs', component: () => import('./views/qualificationExam/StartEvaluation_xxjs.vue') },
+          // 详细评审（技术）汇总页面
+          { name: '/elect/UnFinishQualificationsResult_xxjs', path: '/elect/UnFinishQualificationsResult_xxjs', component: () => import('./views/qualificationExam/UnFinishQualificationsResult_xxjs.vue') },
+          // 详细评审（技术）汇总页面
+          { name: '/elect/ReviewSummary', path: '/elect/ReviewSummary', component: () => import('./views/qualificationExam/ReviewSummary.vue') },
       ]
     }
   ];

@@ -6,5 +6,7 @@ export default {
         flag:'',//是否提交table
         isshow:'',//资格审查项汇总显示
         individualTrial:false,//个人初审类活动表弹框
+        sort:false,//评审汇总的排序弹框状态
+        bidEvaluation:false ,//报价评审（评审汇总）
     }
 }

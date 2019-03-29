@@ -1,5 +1,5 @@
 <template>
-    <div class="startEvaluation">
+    <div class="StartEvaluation_xxjs">
         <el-row class="fs14 bid_msg mb15">
             <el-col :span="4">
                 <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
@@ -33,9 +33,9 @@
             <el-row class="textAlignC pt30 pb30 btns_grounp">
 
                 <el-button
-                    :type="item.type ==1 ? 'success' :
+                        :type="item.type ==1 ? 'success' :
                     item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
+                        round v-for="item in options" :value="item.value" @click="changeView(item.value)"
                 >{{item.label }}
                 </el-button>
             </el-row>
@@ -351,6 +351,7 @@
                     this.page_loading = false;
                 })
             },
+// <<<<<<< HEAD
             failuredRadio(radio, id, index, tableKey) {//合格不合格
                 console.log(this.radioArr, '000', tableKey);
                 this.$axios.post('/api/isFailure', 'post', {
@@ -375,6 +376,19 @@
                     }
                 })
             },
+// =======
+//             failuredRadio(radio, id, index, tableKey) {//不合格
+//                 console.log(radio,id,8888)
+//                 var store_radio = null;
+//                 for (var i = 0; i < tableKey.length; i++) {
+//                     if (tableKey[i].id == id) {
+//                         store_radio = tableKey[i];
+//                         this.obj = store_radio;
+//                         break;
+// >>>>>>> 61bfacbe08cf7d338013884878186eb4a4c51ba7
+//                     }
+//                 });
+//             },
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if (this.obj.id == this.idradionoprss) {
                     this.obj.content = childValue;
@@ -403,6 +417,9 @@
                 return isAllF;
             },
             allSubmit() {
+                console.log(this.zNodes.children);
+
+
                 if (this.isAllFilled()) {
                     this.$axios.post('/api/alltijiao', 'post', {
                         // id:id,
@@ -466,14 +483,11 @@
                     this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
                 }else if (i === "6"){
                     console.log("6")
-                    this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
                 }else if (i === "7"){
                     console.log("7")
-                    this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
                 }
                 else if (i === "8"){
                     console.log("8")
-                    this.$router.push("/elect/ReviewSummary");//还要传id
                 }
             },
             /*----------------- zTree ----------------------*/
@@ -514,7 +528,7 @@
 </script>
 
 <style lang="scss">
-    .startEvaluation {
+    .StartEvaluation_xxjs {
         padding: 15px;
         background-color: #ededed;
         .bid_msg {
