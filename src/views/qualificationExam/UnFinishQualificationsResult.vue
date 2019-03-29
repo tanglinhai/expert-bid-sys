@@ -260,12 +260,34 @@
                 }
             },
             changeView(i) {      //路由跳转传参函数
-                if (i === '1') {
-                    this.$router.push("/elect/StartEvaluation");
-                } else if (i === '2') {
-                    this.$router.push("/elect/UnFinishQualificationsResult");
-                } else if (i === "9") {
-                    console.log("2")
+                changeView(i)
+                {      //路由跳转传参函数
+                    console.log(this.options);
+                    console.log(i);
+                    if (i === '1') {
+                        console.log("1")
+                        this.$router.push("/elect/StartEvaluation?id=" + this.id);
+                    } else if (i === '2') {
+                        console.log("2")
+                        this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
+                    } else if (i === "4") {
+                        console.log("4")
+                        this.$router.push("/elect/StartEvaluation_fhx");//还要传id
+
+                    } else if (i === "5") {
+                        console.log("5")
+                        this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
+                    } else if (i === "6") {
+                        console.log("6")
+                        this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
+                    } else if (i === "7") {
+                        console.log("7")
+                        this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
+                    }
+                    else if (i === "8") {
+                        console.log("8")
+                        this.$router.push("/elect/ReviewSummary");//还要传id
+                    }
                 }
             },
             checkUnlockRecord() {

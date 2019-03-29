@@ -354,34 +354,18 @@
                 this.sort_msg = msg_box;
             },
             sort_down() {//向下排序
-                this.$axios.post('/api/sort_down', 'post', {
-                    data: this.obj,
-                    index: this.i,
-                    // id:id
-                }).then(res => {
-                    if (res.status == 200) {
-                        if(this.i !== this.sort_msg.length-1){
-                            let item = this.sort_msg[this.i];
-                            this.sort_msg.splice(this.i,1);
-                            this.sort_msg.splice(this.i + 1, 0, item);
-                        }
-                    }
-                })
+                 if (this.i > 0) {
+                    let item = this.sort_msg[this.i];
+                    this.sort_msg.splice(this.i - 1, 0, item);
+                    this.sort_msg.splice(this.i + 1, 1);
+                }
             },
             sort_up() {//向上排序
-                this.$axios.post('/api/sort_up', 'post', {
-                    data: this.obj,
-                    index: this.i,
-                    // id:id
-                }).then(res => {
-                    if (res.status == 200) {
-                       if (this.i > 0) {
-                            let item = this.sort_msg[this.i];
-                            this.sort_msg.splice(this.i - 1, 0, item);
-                            this.sort_msg.splice(this.i + 1, 1);
-                        }
-                    }
-                })
+                 if (this.i > 0) {
+                    let item = this.sort_msg[this.i];
+                    this.sort_msg.splice(this.i - 1, 0, item);
+                    this.sort_msg.splice(this.i + 1, 1);
+                }
             },
             save() {//排序保存
                 console.log(this.sort_msg);
