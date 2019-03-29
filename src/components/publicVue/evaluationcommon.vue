@@ -28,7 +28,7 @@
                                         </a>
                                     </template>
                                     <template v-else>
-                                        <a href="http://localhost:7002/img/download.svc" :download="item.ziliaoName">
+                                        <a href="http://localhost:7001/img/download.svc" :download="item.ziliaoName">
                                             <span>{{index+1}}</span>
                                             {{item.ziliaoName}}
                                         </a>
@@ -525,7 +525,7 @@
             },
             ChakanhandleClick(row){   //招标文件查看弹框的查看事件
                 console.log(row,999)
-                 window.open('http://localhost:7002/img/receipt.pdf');
+                 window.open('http://localhost:7001/img/receipt.pdf');
             },
             HardWareClick(){  //硬件特征点击弹框数据
                 this.YinjiancenterDialogVisible=true;

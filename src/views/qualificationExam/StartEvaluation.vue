@@ -255,20 +255,31 @@
             <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
         <!--废标弹框-->
-
+  
+        <!--标中质询弹框-->
+        <el-dialog
+            title="标中质询信息列表"
+            :visible.sync="dialogStandardChallengeInformation"
+            width="900px"
+            >
+            <StandardChallengeInformation ></StandardChallengeInformation>
+        </el-dialog>
+        <!--标中质询弹框-->
 
     </div>
 </template>
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
-    import AbandonedTender from '../../components/dialog/AbandonedTender';
+    import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
+    import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     export default {
         name: "start-evaluation",
         props: {},
         components: {
             FailureEntry,
             AbandonedTender,   //废标  
+            StandardChallengeInformation
         },
         data() {
             return {
@@ -307,6 +318,7 @@
                 radioArr: [],//所有table的radio
 
                 dialogAbandonedTender:false, //废标
+                dialogStandardChallengeInformation:false,//标中质询信息表
             }
         },
         mounted() {
@@ -468,9 +480,11 @@
                     //alert('1');
                     this.dialogAbandonedTender=true;
                 } else if (val === 'b') {//交通费标准
-                    alert('0')
+                    //alert('0')
+                    this.dialogStandardChallengeInformation=true;
                 } else if (val === 'c') {//报销汇总表
-                    alert('2')
+                    //alert('2')
+                    window.open('http://localhost:7001/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
                     alert('3')
                 } else if (val === 'e') {//报销情况查询-财政
