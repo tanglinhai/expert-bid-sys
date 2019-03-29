@@ -247,17 +247,41 @@
         >
             <FailureEntry @childByValue="childByValue"></FailureEntry>
         </el-dialog>
+
+        <!--废标弹框-->
+        <el-dialog
+            title="废标"
+            :visible.sync="dialogAbandonedTender"
+            width="700px"
+            >
+            <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
+        </el-dialog>
+        <!--废标弹框-->
+  
+        <!--标中质询弹框-->
+        <el-dialog
+            title="标中质询信息列表"
+            :visible.sync="dialogStandardChallengeInformation"
+            width="900px"
+            >
+            <StandardChallengeInformation ></StandardChallengeInformation>
+        </el-dialog>
+        <!--标中质询弹框-->
+
     </div>
 </template>
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
-
+    import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
+    import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     export default {
         name: "start-evaluation",
         props: {},
         components: {
-            FailureEntry
+            FailureEntry,
+            AbandonedTender,   //废标  
+            StandardChallengeInformation
         },
         data() {
             return {
@@ -294,6 +318,9 @@
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
                 radioArr: [],//所有table的radio
+
+                dialogAbandonedTender:false, //废标
+                dialogStandardChallengeInformation:false,//标中质询信息表
             }
         },
         mounted() {
@@ -435,19 +462,24 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    alert('1');
+                    //alert('1');
+                    this.dialogAbandonedTender=true;
                 } else if (val === 'b') {//交通费标准
-                    alert('0')
+                    //alert('0')
+                    this.dialogStandardChallengeInformation=true;
                 } else if (val === 'c') {//报销汇总表
-                    alert('2')
+                    //alert('2')
+                    window.open('http://localhost:7001/img/index.html', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    alert('3')
+                    //alert('3')
+                    window.open('http://localhost:7001/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    alert('4')
+                    window.open('http://localhost:7001/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     alert('5')
                 }
             },
+            
             changeView(i) {      //路由跳转传参函数
                 console.log(this.options);
                 console.log(i);
