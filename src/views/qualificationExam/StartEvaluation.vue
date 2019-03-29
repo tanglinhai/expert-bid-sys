@@ -484,11 +484,12 @@
                     this.dialogStandardChallengeInformation=true;
                 } else if (val === 'c') {//报销汇总表
                     //alert('2')
-                    window.open('http://localhost:7001/img/receipt.pdf', '_blank',);
+                    window.open('http://localhost:7001/img/index.html', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    alert('3')
+                    //alert('3')
+                    window.open('http://localhost:7001/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    alert('4')
+                    window.open('http://localhost:7001/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     alert('5')
                 }

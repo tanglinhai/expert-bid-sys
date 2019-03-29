@@ -8,6 +8,11 @@ var routes = [
       component: () => import('./views/Login.vue')
     },
     {
+      path: '/SignaturePage',
+      name: 'SignaturePage',
+      component: () => import('./views/SignaturePage.vue')
+    },
+    {
       path: '/index',
       name: 'index',
       redirect: '/index/indexcontent',

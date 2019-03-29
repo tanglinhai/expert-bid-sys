@@ -1,0 +1,322 @@
+@charset "utf-8";
+body{
+  background:#f3f3f3;
+}
+.Gdscroll::-webkit-scrollbar{
+  width:3px;
+  background:#ccc;
+}
+.Gdscroll::-webkit-scrollbar-button{
+  display:none;
+}
+.Gdscroll::-webkit-scrollbar-thumb{
+  width:3px;
+  background:#348fe2;
+}
+.row {
+   margin-right: 0px; 
+   margin-left: 0px; 
+}
+.col-md-3{
+  padding:0px;
+  width:24%;
+  position: fixed;
+}
+.contentLeft{
+  background:white;
+  margin-right:1%;
+  padding-bottom:20px;
+  
+  height:100%;
+}
+.contentRight{
+  margin-left:25%;
+}
+
+.indexFix{
+  position: fixed;
+  height:93px;
+  width:24%;
+  left:0px; bottom:0px;
+  border-top:1px solid #efefef;
+  background:white;
+}
+.indexFix .btn{
+  width:154px;
+  height:40px;
+  border-radius:40px;
+  margin:25px auto;
+  display:block;
+  background:#ff9702;
+  line-height:26px;
+  color:white;
+}
+.logo{
+  background:#348fe2;
+  width:24%;
+  display:block;
+  padding-top:25px;
+  padding-bottom:25px;
+  position: fixed;
+  z-index:999;
+  height:86px;
+}
+.logo img{
+  display:block;
+  margin:0px auto;
+  height:100%;
+}
+.indexPerson:nth-child(even){
+  margin-bottom:30px;
+}
+.indexPerson{
+  width:90%;
+  margin:20px auto;
+  float:left;
+  margin-left:5%;
+  border:1px solid #f79d3c; 
+  border-radius:6px 6px 0px 0px;
+}
+
+.indexPerson h5{
+  width:100%;
+  height:36px;
+  background:#f79d3c;
+  text-align: center;
+  color:white;
+  line-height:36px;
+  margin-bottom:0px;
+  margin-top:0px;
+  float:left;
+}
+.indexPerson h5 span a{
+  color:white;
+}
+.personTitle{
+  width:100%;
+  height:34px;
+  background:#efefef;
+  color:#333;
+  font-size:14px;
+  line-height: 34px;
+  float:left;
+}
+.personTitle span{
+  float:left;
+  width:33%;
+  text-align: center;
+}
+.personTitle span:nth-child(1){
+  width:40%;
+}
+.personTitle span:nth-child(3){
+  width:26%;
+}
+.personUl{
+  float:left;
+  padding-bottom:20px;
+  width:100%;
+}
+.personUl li{
+  width:100%;
+  font-size:14px;
+  padding:10px 0px 2px;
+  float:left;
+}
+.personUl li p,.personUl li span,.personUl li em{
+  float:left;
+  width:33%;
+  text-align: center;
+}
+.personUl li p{
+  color:#333;
+  width:40%;
+}
+.personUl li span{
+  color:#b3b3b3;
+  font-size:12px;
+}
+.personUl li em{
+  color:#c01717;
+  width:26%;
+}
+.personUl li .emsuccess{
+  color:#36c527;
+}
+.personUl li:hover,.personUl .lionit{
+  background:#f3f3f3;
+  cursor:pointer;
+}
+.modal-dialog {
+  width: 800px;
+  margin: 30px auto;
+}
+.moTitle{
+  width:90%;
+  margin:30px auto 0px;
+  background:#e7e7e7;
+  height:40px;
+  line-height:40px;
+  font-size:14px;
+  overflow:hidden;
+  border:1px solid #e6e6e6;
+  border-bottom:none;
+}
+.moTitle span{
+  float:left;
+  width:20%;
+  text-align: center;
+}
+.moUl{
+  width:90%;
+  border:1px solid #e6e6e6;
+  font-size:14px;
+  margin:0 auto;
+
+}
+.moUl li{
+  width:100%;
+  height:40px;
+  line-height: 40px;
+  border-bottom:1px solid #e6e6e6;
+}
+.moUl li:last-child{
+  border-bottom:none;
+}
+.moUl li span{
+  float:left;
+  width:20%;
+  text-align: center;
+}
+.projectName{
+  height: 87px;
+  line-height: 87px;
+  font-size: 16px;
+  color: #333;
+  position: fixed;
+  background: white;
+  width: 100%;
+  margin: 0px;
+  margin-left: -2%;
+  z-index: 9;
+}
+.rightCon{
+  background:white;
+  margin-top:87px;
+}
+
+.titleBox{
+  width: 75%;
+  height: 87px;
+  margin: 0;
+}
+.titleBox .row{
+height: 50%;
+line-height: 43.5px;  
+}
+.secendColumn{
+  font-weight: 600;
+}
+.spaceNowrap{
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+}
+
+
+.bgBtn{
+  background: #f0ad4e;
+  border-radius:4px;
+}
+
+.downBtn {
+  margin-right:15px;
+}
+
+.xialalist{
+  float:left;
+  width:100%;
+  padding:10px 0px;
+  border-bottom:1px solid #f3f3f3;
+  text-align: right;
+  margin-top:95px;
+  white-space:nowrap;
+}
+
+.download{ 
+  display:block;
+  width:43px;
+  height:37px;
+  margin:5px auto;
+  background:url(../image/download.png) center center no-repeat;
+  border-radius:6px;
+}
+
+.download:hover{ 
+  display:block;
+  width:43px;
+  height:37px;
+  margin:5px auto;
+  background:#348fe2 url(../image/downloadHover.png) center center no-repeat;
+  border-radius:6px;
+}
+
+.bannerBox{
+  width: 100%;
+ }
+ .bannerBox img{
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   margin-left: -424px;
+   margin-top: -430px;
+   -webkit-transform:translate(80%,50%);
+       -ms-transform:translate(80%,50%);
+           transform:translate(80%,50%)
+ }
+ 
+
+.allNameShow{
+  width: 104px;
+  padding:3px 3px 2px;
+}
+.allNameShow .experName{
+  width: 84px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.allNameShow .caret{
+  margin-top:-7px;
+}
+.btn-group{
+  margin-right: 5%;
+  
+}
+ .UpdateHints{
+   width: 100%;
+   height: 100%;
+   background:#fff;
+   text-align: center;
+ }
+ .UpdateHints p{
+   padding: 30px 0;
+ }
+ .UpdateHints p img{
+   width: 10%;
+   height: 10%;
+ }
+ .UpdateHints p span{
+   color:red;
+ }
+@media (min-width: 992px){
+  .col-md-3 {
+      width: 24%;
+  }
+}
+@media (min-width: 768px){
+  .modal-dialog {
+      width: 800px;
+      margin: 30px auto;
+  }
+}
