@@ -17,7 +17,7 @@
     export default {
         name: "nav-bar",
         props:{
-            msg:{
+            msg: {
                 type:Array
             }
         },
@@ -32,7 +32,8 @@
                 console.log(i);
                 if (i === '1') {
                     // console.log("1")
-                    this.$router.push("/elect/StartEvaluation?id=" + this.id);
+                    this.$router.push("/elect/StartEvaluation");
+
                 } else if (i === '2') {
                     // console.log("2")
                     this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
