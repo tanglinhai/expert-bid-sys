@@ -5,11 +5,11 @@
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
           </a>
-          <div class="leaderWrap" style="height:135px;">
+          <div class="leaderWrap leaders" style="height:135px;">
               <a class="leader2"><span class="userName">新增专家一号</span></a>
               <button class="btn repairSign" data-target=".bs-example-modal-lg" style="background-image:none;text-indent:0px;display:none;" role="button">补签</button>
                 <a class="btn downBtn" href="#" role="button">下载全部</a>
-                <div class="btn-group btn-group-md bgBtn" style="height:40px; margin-top:-237px;">
+                <div class="btn-group btn-group-md bgBtn">
                     <!-- <button type="button" class="btn btn-warning dropdown-toggle allNameShow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="experName" title="">全 部</span>
                         <span class="caret"></span>
@@ -130,6 +130,13 @@
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
+    .leaders{
+        .btn-group{
+            height:40px!important; 
+            float:right; 
+            margin-top:-215px!important;
+        }
+    }
     .selectOptions {
         .el-input__inner{
             border:1px solid white;
