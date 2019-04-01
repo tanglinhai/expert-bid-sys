@@ -41,7 +41,7 @@
                 type: 'warning',
                 center: true
               }).then(() => {
-                this.$axios.post('/api/NewChangePrice', 'post', {
+                this.$axios.post('/api/FeiBiao', 'post', {
                     // id:id
                 }).then(res => {
                     if (res.data.code == 200) {

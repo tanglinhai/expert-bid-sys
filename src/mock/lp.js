@@ -219,7 +219,7 @@ let NewChange=Mock.mock('/api/NewChangePrice','post',{
 //ElectedLeader数据
 
 //AbandonedTender废标弹框数据
-let ReasonScrap=Mock.mock('/api/NewChangePrice','post',{
+let ReasonScrap=Mock.mock('/api/FeiBiao','post',{
     code: 200,
     data: [1234]
 })

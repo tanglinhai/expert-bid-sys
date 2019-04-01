@@ -258,7 +258,7 @@
                     id:row.id,   //点击得id
                 }).then(res=>{
                     if(res.status == 200){
-                        console.log(res.data.msgBox)
+                        console.log(res.data,99999)
                        this.ChangePriceTk=res.data.msgBox;
                        this.TkOneloading=false;
                     }
