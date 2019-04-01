@@ -609,10 +609,10 @@
                 }
             }
             .evaluationcommon_chakan{
-                height:340px;
+               // height:340px;（有用）
                 .el-scrollbar__wrap {
                     overflow:hidden;
-                    overflow-y:scroll;
+                    //overflow-y:scroll;//代表横向滚动条暂时隐藏（有用）
                     height:97%;
                 }
                 .el-scrollbar__bar{
@@ -628,7 +628,8 @@
                     float: left;
                     white-space: nowrap;
                     padding-right:20px;
-                    width:100%;
+                    width:97%;
+                    //width:100%;  //横向滚动条有（有用）
                     li{
                         display: inline-block;
                         margin-right:5px;

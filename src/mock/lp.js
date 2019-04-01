@@ -18,7 +18,7 @@ let tableMs = Mock.mock('/api/ProjectSubcontract', 'post', {
 let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
     PorjectName:'单信封-0305-1',
     ProjectBianhao:'0635-1909qwerN1133',
-    'projectZiliao|30':[{  //项目资料
+    'projectZiliao|4':[{  //项目资料
         id: () => Random.id(),
         'ziliaoName|1':['招标文件1','招标文件2','招标文件3'],
     }],
@@ -49,26 +49,26 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
                 {"id":"3-3","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
             ]
         },
-        {
-            "id":'4',
-            "bianhao":"0635-1901qwerN1133/4",
-            "children":[
-                {"id":"4-1","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"北京蓝天环境保护有限公司"},
-                {"id":"4-2","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-                {"id":"4-3","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-                {"id":"4-4","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-            ]
-        },
-        {
-            "id":'5',
-            "bianhao":"0635-1901qwerN1133/5",
-            "children":[
-                {"id":"4-1","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"北京蓝天环境保护有限公司"},
-                {"id":"4-2","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-                {"id":"4-3","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-                {"id":"4-4","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-            ]
-        }
+        // {
+        //     "id":'4',
+        //     "bianhao":"0635-1901qwerN1133/4",
+        //     "children":[
+        //         {"id":"4-1","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"北京蓝天环境保护有限公司"},
+        //         {"id":"4-2","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+        //         {"id":"4-3","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+        //         {"id":"4-4","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
+        //     ]
+        // },
+        // {
+        //     "id":'5',
+        //     "bianhao":"0635-1901qwerN1133/5",
+        //     "children":[
+        //         {"id":"4-1","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"北京蓝天环境保护有限公司"},
+        //         {"id":"4-2","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+        //         {"id":"4-3","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+        //         {"id":"4-4","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
+        //     ]
+        // }
     ],
     'projectLeiFenxi|1-20':[{  //雷同性分析
         id: () => Random.id(),
@@ -219,7 +219,7 @@ let NewChange=Mock.mock('/api/NewChangePrice','post',{
 //ElectedLeader数据
 
 //AbandonedTender废标弹框数据
-let ReasonScrap=Mock.mock('/api/NewChangePrice','post',{
+let ReasonScrap=Mock.mock('/api/FeiBiao','post',{
     code: 200,
     data: [1234]
 })
