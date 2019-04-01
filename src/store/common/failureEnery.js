@@ -8,5 +8,7 @@ export default {
         individualTrial:false,//个人初审类活动表弹框
         sort:false,//评审汇总的排序弹框状态
         bidEvaluation:false ,//报价评审（评审汇总）
+        success_warning:false ,//成功提示
+        submitPrompt:false ,//全部提交提示
     }
 }

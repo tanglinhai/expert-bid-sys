@@ -29,13 +29,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button   :type="item.type ==1 ? 'success' :
-                                item.type ==2 ? 'warning': ''"
-                             round v-for="item in options"  :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}</el-button>
-            </el-row>
+             <NavBar :msg="options"></NavBar>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
@@ -43,7 +37,6 @@
                             <el-button type="primary" size="small"  class="personalAuditFormBtn">{{personalAuditFormBtn}}</el-button>
                         </el-col>
                     </el-row>
-                    <!--<PersonalExamine ></PersonalExamine>-->
                     <el-row >
                         <h6 class="pl15  col747 pt15 pb10">审查项</h6>
                         <div class="content_wrap">
@@ -183,11 +176,13 @@
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
+    import NavBar from '../../components/publicVue/NavBar';
     export default {
         name: "start-evaluation",
         props: {},
         components: {
-            FailureEntry
+            FailureEntry,
+            NavBar
         },
         data() {
             return {
@@ -349,16 +344,7 @@
                     alert('5')
                 }
             },
-            changeView(i){      //路由跳转传参函数
-                if(i==='1'){
-                    this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                }else if(i==='2'){
-                    this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                }else if(i==="9"){
-                    console.log("2")
 
-                }
-            },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
                 this.arr.push(treeNode);

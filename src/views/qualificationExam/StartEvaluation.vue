@@ -29,16 +29,16 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-
-                <el-button
-                    :type="item.type ==1 ? 'success' :
-                    item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}
-                </el-button>
-            </el-row>
+            <!--<div class="line"></div>-->
+            <!--<el-row class="textAlignC pt30 pb30 btns_grounp">-->
+                <!--<el-button-->
+                    <!--:type="item.type ==1 ? 'success' :-->
+                    <!--item.type ==2 ? 'warning': ''"-->
+                           <!--round v-for="item in options" :value="item.value" @click="changeView(item.value)"-->
+                <!--&gt;{{item.label }}-->
+                <!--</el-button>-->
+            <!--</el-row>-->
+            <NavBar></NavBar>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
@@ -96,7 +96,13 @@
                                         prop="name"
                                         label="名称">
                                     <template slot-scope="scope">
-                                    <span style="margin-left: 10px">投标人：
+                                    <span style="margin-left: 10px">
+                                          <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                             style="color: red"></i>
+                                           <i class="el-icon-check mr5 "
+                                              style="color: #67c23a"
+                                              v-if="scope.row.radio=='合格'"></i>
+                                        投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
                                            href="/page/checkPDF/check_pdf.html" target="_blank"><i
                                                 class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
@@ -154,8 +160,10 @@
                                         prop="name"
                                         label="名称">
                                     <template slot-scope="scope">
-                                    <span><i class="el-icon-close mr5 " v-if="scope.row.is_qualified=='不合格'"
-                                             style="color: red"></i> <i class="el-icon-check mr5 "
+                                    <span>
+                                        <i class="el-icon-close mr5 " v-if="scope.row.is_qualified=='不合格'"
+                                             style="color: red"></i>
+                                        <i class="el-icon-check mr5 "
                                                                         style="color: #67c23a"
                                                                         v-if="scope.row.is_qualified=='合格'"></i>投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
@@ -170,7 +178,6 @@
                                         label="是否合格">
                                     <template slot-scope="scope">
                                 <span style="margin-left: 10px;color:red;">
-
                                 {{scope.row.is_qualified}}
                                 </span>
                                     </template>
@@ -257,7 +264,7 @@
             <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
         <!--废标弹框-->
-  
+
         <!--标中质询弹框-->
         <el-dialog
             title="标中质询信息列表"
@@ -267,21 +274,32 @@
             <StandardChallengeInformation ></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
-
+        <el-dialog
+                title="审查提示"
+                :visible.sync="$store.state.failureEnery.submitPrompt"
+                width="700px"
+        >
+            <SubmitPrompt></SubmitPrompt>
+        </el-dialog>
     </div>
 </template>
 
 <script>
+    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
     import FailureEntry from '../../components/publicVue/FailureEntry';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import NavBar from '../../components/publicVue/NavBar';//标中质询
     export default {
         name: "start-evaluation",
         props: {},
         components: {
             FailureEntry,
             AbandonedTender,   //废标  
-            StandardChallengeInformation
+            StandardChallengeInformation,
+            SubmitPrompt,
+            NavBar
+
         },
         data() {
             return {
@@ -379,7 +397,8 @@
                 })
             },
             failuredRadio(radio, id, index, tableKey) {//合格不合格
-                console.log(this.radioArr, '000', tableKey);
+                console.log(radio, id, index, tableKey);
+                // console.log(this.radioArr, '000', tableKey);
                 this.$axios.post('/api/isFailure', 'post', {
                     id: id,
                     type: radio
@@ -437,6 +456,7 @@
                     }).then(res => {
                         if (res.status == 200) {
                             this.$store.state.failureEnery.flag = false;
+                            this.$store.state.failureEnery.submitPrompt = true;
                             $(".hide_btn").hide();
                         } else {
                             this.$message({
@@ -479,35 +499,35 @@
                     alert('5')
                 }
             },
-            
-            changeView(i) {      //路由跳转传参函数
-                console.log(this.options);
-                console.log(i);
-                if (i === '1') {
-                    console.log("1")
-                    this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                } else if (i === '2') {
-                    console.log("2")
-                    this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                } else if (i === "4") {
-                    console.log("4")
-                    this.$router.push("/elect/StartEvaluation_fhx");//还要传id
 
-                }else if (i === "5"){
-                    console.log("5")
-                    this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
-                }else if (i === "6"){
-                    console.log("6")
-                    this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
-                }else if (i === "7"){
-                    console.log("7")
-                    this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
-                }
-                else if (i === "8"){
-                    console.log("8")
-                    this.$router.push("/elect/ReviewSummary");//还要传id
-                }
-            },
+            // changeView(i) {      //路由跳转传参函数
+            //     console.log(this.options);
+            //     console.log(i);
+            //     if (i === '1') {
+            //         console.log("1")
+            //         this.$router.push("/elect/StartEvaluation?id=" + this.id);
+            //     } else if (i === '2') {
+            //         console.log("2")
+            //         this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
+            //     } else if (i === "4") {
+            //         console.log("4")
+            //         this.$router.push("/elect/StartEvaluation_fhx");//还要传id
+            //
+            //     }else if (i === "5"){
+            //         console.log("5")
+            //         this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
+            //     }else if (i === "6"){
+            //         console.log("6")
+            //         this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
+            //     }else if (i === "7"){
+            //         console.log("7")
+            //         this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
+            //     }
+            //     else if (i === "8"){
+            //         console.log("8")
+            //         this.$router.push("/elect/ReviewSummary");//还要传id
+            //     }
+            // },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
                 if (treeNode.children) {

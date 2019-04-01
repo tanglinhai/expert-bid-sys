@@ -29,18 +29,11 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button :type="item.type ==1 ? 'success' :
-                                item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}
-                </el-button>
-            </el-row>
+            <NavBar :msg="options"></NavBar>
             <el-row class="center_part">
                 <el-col :span="24">
                     <template>
-                       <div class="unlock_table-warp fs14">
+                        <div class="unlock_table-warp fs14">
                             <el-row>
                                 <el-col :span="12">
                                     <div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">
@@ -54,7 +47,7 @@
                                     </el-button>
                                 </el-col>
                                 <el-col :span="12" class="textAlignR mian_btns" style="display: none">
-                                    <el-button @click="submited_goback" type="primary" size="small" >返回</el-button>
+                                    <el-button @click="submited_goback" type="primary" size="small">返回</el-button>
                                 </el-col>
                             </el-row>
 
@@ -112,7 +105,6 @@
                 width="700px"
                 class="sortDialog"
         >
-            <!--<Sort :msg_box="msg_box"></Sort>-->
             <div class="sort">
                 <!----------------------投标人排序调整--------------------->
                 <div class="warp cf">
@@ -194,11 +186,26 @@
                     </template>
                 </div>
                 <div class="textAlignC pt20">
-                    <el-button size="small" @click="bidEvaluation_submit" type="primary"><i class="icon iconfont icon-baocun1 mr5"></i>提交
+                    <el-button size="small" @click="bidEvaluation_submit" type="primary"><i
+                            class="icon iconfont icon-baocun1 mr5"></i>提交
                     </el-button>
-                    <el-button size="small" @click="bidEvaluation_reback" type="primary"><i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                    <el-button size="small" @click="bidEvaluation_reback" type="primary"><i
+                            class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
                     </el-button>
                 </div>
+            </div>
+        </el-dialog>
+        <el-dialog title="成功提示"
+                   :visible.sync="$store.state.failureEnery.success_warning"
+                   width="700px">
+            <div class="textAlignC">
+                <p>请先点击页面【报价审核页面】按钮，设置投标人是否有效!</p>
+            </div>
+            <div class="textAlignC pt20">
+
+                <el-button size="small" @click="confirm_btn" type="primary"><i
+                        class="icon iconfont icon-fanhuishouye1 mr5"></i>确定
+                </el-button>
             </div>
         </el-dialog>
     </div>
@@ -206,7 +213,7 @@
 
 <script>
     // import Sort from '../../components/publicVue/Sort';
-    // import BidEvaluation from '../../components/publicVue/BidEvaluation';
+    import NavBar from '../../components/publicVue/NavBar';
 
 
     export default {
@@ -215,6 +222,7 @@
         components: {
             // Sort,
             // BidEvaluation,
+            NavBar
         },
         data() {
             return {
@@ -228,7 +236,7 @@
                 /* -------头部包信息end-----*/
                 other_explain: "",//其他说明
                 form: {
-                    desc: ''
+                    desc: '222'
                 },
                 msg_data: [],//评审报价(子组件)
                 /*-----------------排序----------*/
@@ -240,6 +248,7 @@
                 /*--------------报价计算-----------------*/
                 table_data: [],//报价计算table数据
                 /*--------------报价计算end-----------------*/
+                a: [],//radio等于2的数组
             }
         },
         created() {
@@ -247,13 +256,12 @@
         },
         mounted() {
             this.init();
-
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/pingshen_huizong', 'post', {//通过包id
+                this.$axios.post('/api/pingshen_huizong', {type:7}, {//通过包id
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
@@ -290,50 +298,34 @@
                     alert('5')
                 }
             },
-            changeView(i) {      //路由跳转传参函数
-                if (i === '1') {
-                    console.log("1")
-                    this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                } else if (i === '2') {
-                    console.log("2")
-                    this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                } else if (i === "4") {
-                    console.log("4")
-                    this.$router.push("/elect/StartEvaluation_fhx");//还要传id
-
-                } else if (i === "5") {
-                    console.log("5")
-                    this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
-                } else if (i === "6") {
-                    console.log("6")
-                    this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
-                } else if (i === "7") {
-                    console.log("7")
-                    this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
-                }
-                else if (i === "8") {
-                    console.log("8")
-                    this.$router.push("/elect/ReviewSummary");//还要传id
-                }
-            },
-
-            /*------------------------评审汇总-----------------*/
+               /*------------------------评审汇总-----------------*/
             submit_btn() {//   提交
-                console.log(this.form.desc);
-                this.$axios.post('/api/pshz_tijiao', 'post', {
+                this.$axios.post('/api/pshz_tijiao', {type:7}, {
                     data: this.form.desc
                 }).then(res => {
                     if (res.status == 200) {
-                        this.$message({
-                            message: '提交成功',
-                            type: 'success'
+                        this.options=res.data.vue_type;
+                        this.msg_data.forEach((m, i) => {
+                            console.log(m.radio);
+                            if (m.radio == 2) {
+                                this.a.push(m.radio)
+                            }
                         });
-                        $(".mian_btns").show();
-                        $(".btns").hide();
+                        if (this.a.length === 3) {
+                            this.$store.state.failureEnery.success_warning = true;
+                        } else {
+                            this.$store.state.failureEnery.success_warning = false;
+                            this.$message({
+                                message: '提交成功',
+                                type: 'success'
+                            });
+                            $(".btns").hide();
+                            $(".mian_btns").show();
+                        }
                     }
                 })
             },
-            submited_goback(){
+            submited_goback() {
                 $(".btns").show();
                 $(".mian_btns").hide();
             },
@@ -354,14 +346,14 @@
                 this.sort_msg = msg_box;
             },
             sort_down() {//向下排序
-                 if (this.i > 0) {
+                if (this.i > 0) {
                     let item = this.sort_msg[this.i];
                     this.sort_msg.splice(this.i - 1, 0, item);
                     this.sort_msg.splice(this.i + 1, 1);
                 }
             },
             sort_up() {//向上排序
-                 if (this.i > 0) {
+                if (this.i > 0) {
                     let item = this.sort_msg[this.i];
                     this.sort_msg.splice(this.i - 1, 0, item);
                     this.sort_msg.splice(this.i + 1, 1);
@@ -385,33 +377,34 @@
 
             /*-------------报价计算----------------*/
             radio_is_valid(radio, id, tableKey, index, msg_box) {//报价审核是否有效
-                console.log(radio, id, tableKey, index, msg_box);
+                // console.log(radio, id, tableKey, index, msg_box);
                 this.$axios.post('/api/radio_is_valid', 'post', {
                     id: id,
                     type: radio,
                 }).then(res => {
                     if (res.status == 200) {
                         var store_radio = null;
-                        for (var i = 0; i < msg_box.length; i++) {
-                            if (msg_box[i].id == id) {
-                                radio = msg_box[i].radio;
+                        for (var i = 0; i < this.msg_data.length; i++) {
+                            if (this.msg_data[i].id == id) {
+                                radio = this.msg_data[i].radio;
                                 break;
                             }
                         }
                     }
                 });
-                this.table_data = msg_box;
+                // console.log(this.msg_data);
             },
             bidEvaluation_submit() {// 报价计算
-                console.log(this.table_data);
+                // console.log(this.msg_data);
                 this.$axios.post('/api/radio_is_valid_tijiao', 'post', {
-                    data: this.table_data
+                    data: this.msg_data
                 }).then(res => {
                     if (res.status == 200) {
                         this.$message({
                             message: '提交成功',
                             type: 'success'
                         });
+                        this.$store.state.failureEnery.bidEvaluation = false;
                     }
                 })
             },
@@ -419,6 +412,9 @@
                 this.$store.state.failureEnery.bidEvaluation = false;
             },
             /*-------------报价计算end----------------*/
+            confirm_btn() {
+                this.$store.state.failureEnery.success_warning = false;
+            }
         }
     }
 </script>

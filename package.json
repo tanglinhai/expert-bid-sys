@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "JSON": "^1.0.0",
     "axios": "^0.18.0",
     "multer": "^1.4.1"
   },

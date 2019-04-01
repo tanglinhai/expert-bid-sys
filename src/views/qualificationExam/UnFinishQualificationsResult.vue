@@ -29,14 +29,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button :type="item.type ==1 ? 'success' :
-                                item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}
-                </el-button>
-            </el-row>
+            <NavBar :msg="options"></NavBar>
             <el-row class="center_part">
                 <el-col :span="24">
                     <template>
@@ -75,8 +68,9 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <el-button size="small" plain @click="submit">提交</el-button>
-                                        <el-button size="small" plain @click="individualTrial">查看个人资格审查项表</el-button>
+                                        <span class="hide_div"><el-button size="small" plain @click="submit">提交</el-button>
+                                            <el-button size="small" plain @click="individualTrial">查看个人资格审查项表</el-button></span>
+
                                         <el-button size="small" plain @click="checkUnlockRecord">查看资格审查项解锁记录</el-button>
                                         <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁</el-button>
                                     </div>
@@ -171,14 +165,15 @@
     import ViewUnlockRecord from '../../components/publicVue/ViewUnlockRecord';
     import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';
     import IndividualTrial from '../../components/publicVue/IndividualTrial';
-
+    import NavBar from '../../components/publicVue/NavBar';
     export default {
         name: "unFinishQualificationsResult",
         props: {},
         components: {
             ViewUnlockRecord,
             QualificationUnlock,
-            IndividualTrial
+            IndividualTrial,
+            NavBar
         },
         data() {
             return {
@@ -209,14 +204,14 @@
         },
         mounted() {
             this.init();
-
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/table_data', 'post', {//通过包id
+                this.$axios.post('/api/table_data',  {//通过包id
                     // id:id
+                    type:2
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
@@ -240,9 +235,6 @@
                     }
                     this.page_loading = false;
                 })
-            //    个人初审类活动表数据
-
-
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
@@ -259,37 +251,6 @@
                     alert('5')
                 }
             },
-            changeView(i) {      //路由跳转传参函数
-                changeView(i)
-                {      //路由跳转传参函数
-                    console.log(this.options);
-                    console.log(i);
-                    if (i === '1') {
-                        console.log("1")
-                        this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                    } else if (i === '2') {
-                        console.log("2")
-                        this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                    } else if (i === "4") {
-                        console.log("4")
-                        this.$router.push("/elect/StartEvaluation_fhx");//还要传id
-
-                    } else if (i === "5") {
-                        console.log("5")
-                        this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
-                    } else if (i === "6") {
-                        console.log("6")
-                        this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
-                    } else if (i === "7") {
-                        console.log("7")
-                        this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
-                    }
-                    else if (i === "8") {
-                        console.log("8")
-                        this.$router.push("/elect/ReviewSummary");//还要传id
-                    }
-                }
-            },
             checkUnlockRecord() {
                 this.$store.state.failureEnery.unlock_record = true;
             },
@@ -302,11 +263,13 @@
                     data:this.form.desc
                 }).then(res => {
                     if(res.status==200){
+                        this.options=res.data.vue_type;
                         this.$message({
                             message: '提交成功',
                             type: 'success'
                         });
-                        this.$router.push("/elect/complianceReviewItem");
+                        $(".hide_div").hide();
+                        // this.$router.push("/elect/complianceReviewItem");
                     }
                 })
             },

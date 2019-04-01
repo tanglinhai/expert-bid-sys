@@ -29,14 +29,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button :type="item.type ==1 ? 'success' :
-                                item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}
-                </el-button>
-            </el-row>
+             <NavBar :msg="options"></NavBar>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
@@ -94,7 +87,12 @@
                                         prop="name"
                                         label="名称">
                                     <template slot-scope="scope">
-                                    <span style="margin-left: 10px">投标人：
+                                    <span style="margin-left: 10px">
+                                          <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                             style="color: red"></i>
+                                           <i class="el-icon-check mr5 "
+                                              style="color: #67c23a"
+                                              v-if="scope.row.radio=='合格'"></i>投标人：
                                         <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
                                            href="/page/checkPDF/check_pdf.html" target="_blank"><i
                                                 class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
@@ -245,17 +243,27 @@
         >
             <FailureEntry @childByValue="childByValue"></FailureEntry>
         </el-dialog>
+        <el-dialog
+                title="审查提示"
+                :visible.sync="$store.state.failureEnery.submitPrompt"
+                width="700px"
+        >
+            <SubmitPrompt></SubmitPrompt>
+        </el-dialog>
     </div>
 </template>
 
 <script>
     import FailureEntry from '../../components/publicVue/FailureEntry';
-
+    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
+    import NavBar from '../../components/publicVue/NavBar';
     export default {
         name: "start-evaluation",
         props: {},
         components: {
-            FailureEntry
+            FailureEntry,
+            SubmitPrompt,
+            NavBar
         },
         data() {
             return {
@@ -322,7 +330,7 @@
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/table_msg').then(res => {
+                this.$axios.post('/api/table_msg_fhx',{type:3}).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
@@ -349,10 +357,9 @@
                     this.page_loading = false;
                 })
             },
-// <<<<<<< HEAD
             failuredRadio(radio, id, index, tableKey) {//合格不合格
                 console.log(this.radioArr, '000', tableKey);
-                this.$axios.post('/api/isFailure', 'post', {
+                this.$axios.post('/api/isFailure_fhx', 'post', {
                     id: id,
                     type: radio
                 }).then(res => {
@@ -374,19 +381,7 @@
                     }
                 })
             },
-// =======
-//             failuredRadio(radio, id, index, tableKey) {//不合格
-//                 console.log(radio,id,8888)
-//                 var store_radio = null;
-//                 for (var i = 0; i < tableKey.length; i++) {
-//                     if (tableKey[i].id == id) {
-//                         store_radio = tableKey[i];
-//                         this.obj = store_radio;
-//                         break;
-// >>>>>>> 61bfacbe08cf7d338013884878186eb4a4c51ba7
-//                     }
-//                 });
-//             },
+
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if (this.obj.id == this.idradionoprss) {
                     this.obj.content = childValue;
@@ -394,7 +389,7 @@
                 this.$store.state.failureEnery.show = false;
             },
             allChecked() {//全选
-                this.$axios.post('/api/allChecked', 'post', {
+                this.$axios.post('/api/allChecked_fhx', 'post', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
@@ -416,15 +411,15 @@
             },
             allSubmit() {
                 console.log(this.zNodes.children);
-
-
                 if (this.isAllFilled()) {
-                    this.$axios.post('/api/alltijiao', 'post', {
+                    this.$axios.post('/api/alltijiao_fhx', {type:3}, {
                         // id:id,
                         // status:status,
                     }).then(res => {
                         if (res.status == 200) {
+                            this.options=res.data.vue_type;
                             this.$store.state.failureEnery.flag = false;
+                            this.$store.state.failureEnery.submitPrompt = true;
                             $(".hide_btn").hide();
                         } else {
                             this.$message({
@@ -463,16 +458,7 @@
                     alert('5')
                 }
             },
-            changeView(i) {      //路由跳转传参函数
-                if (i === '1') {
-                    this.$router.push("/elect/StartEvaluation?id=" + this.id);
-                } else if (i === '2') {
-                    this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                } else if (i === "9") {
-                    console.log("2")
-                }
-            },
-            /*----------------- zTree ----------------------*/
+               /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
                 if (treeNode.children) {
                     this.zNodes.children.forEach((m, i) => {
@@ -497,7 +483,7 @@
             },
             /*----------------- zTree end ----------------------*/
             check_pdf(i, obj) {
-                this.$axios.post('/api/check_pdf', 'post', {
+                this.$axios.post('/api/check_pdf_fhx', 'post', {
                     id: obj.id
                 }).then(res => {
                     if (res.status === 200) {

@@ -29,14 +29,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <div class="line"></div>
-            <el-row class="textAlignC pt30 pb30 btns_grounp">
-                <el-button :type="item.type ==1 ? 'success' :
-                                item.type ==2 ? 'warning': ''"
-                           round v-for="item in options" :value="item.value" @click="changeView(item.value)"
-                >{{item.label }}
-                </el-button>
-            </el-row>
+            <NavBar :msg="options"></NavBar>
             <el-row class="center_part">
                 <el-col :span="24">
                     <template>
@@ -75,8 +68,10 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <el-button size="small" plain @click="submit">提交</el-button>
+                                        <span class="hide_span">
+                                              <el-button size="small" plain @click="submit">提交</el-button>
                                         <el-button size="small" plain @click="individualTrial">查看个人资格审查项表</el-button>
+                                        </span>
                                         <el-button size="small" plain @click="checkUnlockRecord">查看资格审查项解锁记录</el-button>
                                         <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁</el-button>
                                     </div>
@@ -171,6 +166,7 @@
     import ViewUnlockRecord from '../../components/publicVue/ViewUnlockRecord';
     import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';
     import IndividualTrial from '../../components/publicVue/IndividualTrial';
+    import NavBar from '../../components/publicVue/NavBar';
 
     export default {
         name: "unFinishQualificationsResult",
@@ -178,7 +174,8 @@
         components: {
             ViewUnlockRecord,
             QualificationUnlock,
-            IndividualTrial
+            IndividualTrial,
+            NavBar
         },
         data() {
             return {
@@ -215,8 +212,9 @@
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/table_data', 'post', {//通过包id
+                this.$axios.post('/api/table_data_fhx',  {//通过包id
                     // id:id
+                    type:4
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
@@ -259,31 +257,24 @@
                     alert('5')
                 }
             },
-            changeView(i) {      //路由跳转传参函数
-                if (i === '1') {
-                    this.$router.push("/elect/StartEvaluation");
-                } else if (i === '2') {
-                    this.$router.push("/elect/UnFinishQualificationsResult");
-                } else if (i === "9") {
-                    console.log("2")
-                }
-            },
-            checkUnlockRecord() {
+             checkUnlockRecord() {
                 this.$store.state.failureEnery.unlock_record = true;
             },
             quaUnlockApplication() {
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit(){
-                this.$axios.post('/api/tijiao', 'post', {
+                this.$axios.post('/api/tijiao_fhx', {type:4}, {
                     data:this.form.desc
                 }).then(res => {
                     if(res.status==200){
+                        this.options=res.data.vue_type;
                         this.$message({
                             message: '提交成功',
                             type: 'success'
                         });
-                        this.$router.push("/elect/StartEvaluation_xxjs");
+                        // this.$router.push("/elect/StartEvaluation_xxjs");
+                        $('.hide_span').hide();
                     }
                 })
             },
