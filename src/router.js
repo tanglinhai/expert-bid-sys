@@ -10,7 +10,12 @@ var routes = [
     {
       path: '/SignaturePage',
       name: 'SignaturePage',
-      component: () => import('./views/SignaturePage.vue')
+      component: () => import('./views/SignaturePage.vue')  //签字
+    },
+    {
+      path: '/LeaderSignaturePage',
+      name: 'LeaderSignaturePage',
+      component: () => import('./views/LeaderSignaturePage.vue') //组长查看
     },
     {
       path: '/index',

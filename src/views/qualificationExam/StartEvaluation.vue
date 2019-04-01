@@ -476,7 +476,8 @@
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    alert('5')
+                    //alert('5')
+                    window.open('http://localhost:7000/SignaturePage', '_blank',);
                 }
             },
             

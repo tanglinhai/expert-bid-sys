@@ -5,13 +5,34 @@
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
           </a>
-          <div class="leaderWrap">
-              <a class="leader" @click="goto('/LeaderSignaturePage')" target="_blank" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
+          <div class="leaderWrap" style="height:135px;">
               <a class="leader2"><span class="userName">新增专家一号</span></a>
+              <button class="btn repairSign" data-target=".bs-example-modal-lg" style="background-image:none;text-indent:0px;display:none;" role="button">补签</button>
+                <a class="btn downBtn" href="#" role="button">下载全部</a>
+                <div class="btn-group btn-group-md bgBtn" style="height:40px; margin-top:-237px;">
+                    <!-- <button type="button" class="btn btn-warning dropdown-toggle allNameShow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="experName" title="">全 部</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" id="choose">
+                        
+                    </ul> -->
+                    <template>
+                        <el-select size="small" class="selectOptions" v-model="value"  @change="selectAll" placeholder="请选择" style="width:186px; border:1px solid #f79d3c; border-radius:3px;">
+                            <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :id="item.id"
+                            :label="item.label"
+                            :value="item.id">
+                            </el-option>
+                        </el-select>
+                    </template>
+                </div>
           </div>
           <div class="zjList Gdscroll" id="sucai">
-              <div class="indexPerson">
-                    <h5>我的签名文档</h5>
+              <div class="indexPerson" id="111">
+                    <h5 style="text-align:left!important; text-indent:14px;">专家一号会签文档</h5>
                     <div class="personTitle">
                         <span>文件名称</span>
                         <span>创建时间</span>
@@ -27,8 +48,25 @@
                      </ul>
                      <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
-              <div class="indexPerson">
-                    <h5>我的会签文档</h5>
+              <div class="indexPerson" id="222">
+                    <h5 style="text-align:left!important; text-indent:14px;">专家二号会签文档</h5>
+                    <div class="personTitle">
+                        <span>文件名称</span>
+                        <span>创建时间</span>
+                        <span>状态</span>
+                      </div>
+                      <ul class="personUl">
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                     </ul>
+                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
+              </div>
+              <div class="indexPerson" id="333">
+                    <h5 style="text-align:left!important; text-indent:14px;">专家三号会签文档</h5>
                     <div class="personTitle">
                         <span>文件名称</span>
                         <span>创建时间</span>
@@ -80,49 +118,50 @@
                           <button class="svgZoomBtn small" title="缩小" zoom="-1" svg="testsvg" data-inline="true"></button>  
                       </div>  
                       <div id="page2" class="paging"></div>
-                      <div id="callBack2"><span>1</span><i style="display:inline-block; width:2px; font-size:16px;">/</i><em></em></div>
+                      <div id="callBack2"><span>1</span>/<em></em></div>
                   </div>
               </div>
           </div>
     </div>
 
-    <div class="indexFix">
-        <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
-        <a id="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
-        <a id="more2" href="javascript:;" download="" class="btn2">签名回执</a>
-    </div>
-
-    <!-- 模态框（Modal） -->
-    <div class="model_tk">
-        <div class="modal-body">
-            <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
-            <strong class="ewm_tishimsg">请扫描二维码提交签名</strong>
-            <div class="ewm">
-                <input  id="text" type="hidden" value="" style="width:80%" />
-                <!-- <div id="qrcode"></div> -->
-                <p class="ewmsx">
-                    <span>二维码已失效</span>
-                    <a href="javascript:;" class="btnRefush">请刷新页面</a>
-                </p>
-                <img src="@/assets/img/ewm.png" alt="">
-                <strong>如果签名已完成，该页面会自动刷新</strong>
-                <a target="_blank" class="ewm_lianjie" style="display:none;">电脑端签名</a>
-            </div>
-        </div>
-    </div>
+  
 
   </div>
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
-
+    .selectOptions {
+        .el-input__inner{
+            border:1px solid white;
+            &:focus {
+                border-color: white;
+            }
+        }
+    }
 </style>
 <script>
 export default {
   name: 'SignaturePage',
   data() {
     return {
-      
+       options: [{
+          value: '全部',
+          id:'000',
+          label: '全部'
+        },{
+          value: '专家一号',
+          id:'111',
+          label: '专家一号'
+        }, {
+          value: '专家二号',
+          id:'222',
+          label: '专家二号'
+        }, {
+          value: '专家三号',
+          id:'333',
+          label: '专家三号'
+        }],
+        value: '全部'
     };
   },
   components: {
@@ -134,8 +173,8 @@ export default {
         download_files_key: '/js/plugins/bootstrap/css/bootstrap.min.css'
     });
     this.$commonJs.getCssFile.call(this, {
-        url: '/js/plugins/bootstrap/css/index.css',
-        download_files_key: '/js/plugins/bootstrap/css/index.css'
+        url: '/js/plugins/bootstrap/css/groupLeader.css',
+        download_files_key: '/js/plugins/bootstrap/css/groupLeader.css'
     });
     this.$commonJs.getCssFile.call(this, {
         url: '/js/plugins/bootstrap/css/page.css',
@@ -194,12 +233,31 @@ export default {
         $(".scrollHei").height($(document.body).height()-110);//加载进来右侧滚动条显示位置
         $("#sucai").height($(document.body).height()-240);
     },
-    
-    goto(url){//开始评标
-        this.$router.push({
-            path: url
-            });
-    },
+
+    selectAll(){
+        console.log()
+        if(this.value=="000"){
+            $("#111").show();
+            $("#222").show();
+            $("#333").show();
+        }
+        if(this.value=="111"){
+            $("#111").show();
+            $("#222").hide();
+            $("#333").hide();
+        }
+        if(this.value=="222"){
+            console.log(this.value)
+            $("#111").hide();
+            $("#222").show();
+            $("#333").hide();
+        }
+        if(this.value=="333"){
+            $("#111").hide();
+            $("#222").hide();
+            $("#333").show();
+        }
+    }
 
   },
 
