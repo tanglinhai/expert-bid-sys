@@ -18,14 +18,14 @@
                         <span>状态</span>
                       </div>
                       <ul class="personUl">
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
                      </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:block">您，暂无签名文档！</p>
+                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
               <div class="indexPerson">
                     <h5>我的会签文档</h5>
@@ -35,14 +35,14 @@
                         <span>状态</span>
                       </div>
                       <ul class="personUl">
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li attr='+file.fileId+'><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
                      </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:block">您，暂无签名文档！</p>
+                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
           </div>
       </div>
@@ -68,7 +68,9 @@
                   <div class="scrollHei" style="width:100%; overflow:scroll;">
                       <div class="content_width">
                           <div id="svgDiv">  
-                              <img style="float:left;width:100%; position:relative!important;cursor: pointer;" src="" type="image/svg+xml" class="svgimg div1" id="testsvg"/>  
+                              <!-- <img style="float:left;width:100%; position:relative!important;cursor: pointer;" src="" type="image/svg+xml" class="svgimg div1" id="testsvg"/>   -->
+                              <img class="imgsvgRightone" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
+                              <img class="imgsvgRighttwo" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
                           </div>  
                       </div>
                   </div>
@@ -88,6 +90,25 @@
         <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
         <a id="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
         <a id="more2" href="javascript:;" download="" class="btn2">签名回执</a>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="model_tk">
+        <div class="modal-body">
+            <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
+            <strong class="ewm_tishimsg">请扫描二维码提交签名</strong>
+            <div class="ewm">
+                <input  id="text" type="hidden" value="" style="width:80%" />
+                <!-- <div id="qrcode"></div> -->
+                <p class="ewmsx">
+                    <span>二维码已失效</span>
+                    <a href="javascript:;" class="btnRefush">请刷新页面</a>
+                </p>
+                <img src="@/assets/img/ewm.png" alt="">
+                <strong>如果签名已完成，该页面会自动刷新</strong>
+                <a target="_blank" class="ewm_lianjie" style="display:none;">电脑端签名</a>
+            </div>
+        </div>
     </div>
 
   </div>
@@ -145,11 +166,11 @@ export default {
         download_files_key: '/js/plugins/bootstrap/js/url.js',
         callback: this.init
     });
-    // this.$commonJs.getScriptFile.call(this, {
-    //     url: '/js/plugins/bootstrap/js/index1.js',
-    //     download_files_key: '/js/plugins/bootstrap/js/index1.js',
-    //     callback: this.init
-    // });
+    this.$commonJs.getScriptFile.call(this, {
+        url: '/js/plugins/bootstrap/js/index1.js',
+        download_files_key: '/js/plugins/bootstrap/js/index1.js',
+        callback: this.init
+    });
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
         download_files_key: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
@@ -189,6 +210,14 @@ export default {
             cursorborderradius:"3px"  
         }); 
     },1000)
+    $(".personUl li:even").click(function(){
+        $(".imgsvgRighttwo").hide();
+        $(".imgsvgRightone").show();
+    })
+    $(".personUl li:odd").click(function(){
+        $(".imgsvgRightone").hide();
+        $(".imgsvgRighttwo").show();
+    })
   },
   watch:{
    
