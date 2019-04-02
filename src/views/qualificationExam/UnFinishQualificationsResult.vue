@@ -160,6 +160,32 @@
         >
             <IndividualTrial :msgBox="individualTrialData" :msg="companyName"></IndividualTrial>
         </el-dialog>
+        <!--废标弹框-->
+        <el-dialog
+            title="废标"
+            :visible.sync="dialogAbandonedTender"
+            width="700px"
+            >
+            <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
+        </el-dialog>
+        <!--废标弹框-->
+
+        <!--标中质询弹框-->
+        <el-dialog
+            title="标中质询信息列表"
+            :visible.sync="dialogStandardChallengeInformation"
+            width="900px"
+            >
+            <StandardChallengeInformation ></StandardChallengeInformation>
+        </el-dialog>
+        <!--标中质询弹框-->
+        <el-dialog
+                title="审查提示"
+                :visible.sync="$store.state.failureEnery.submitPrompt"
+                width="700px"
+        >
+            <SubmitPrompt></SubmitPrompt>
+        </el-dialog>
     </div>
 </template>
 
@@ -168,6 +194,8 @@
     import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';
     import IndividualTrial from '../../components/publicVue/IndividualTrial';
     import NavBar from '../../components/publicVue/NavBar';
+    import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
+    import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
 
     export default {
         name: "unFinishQualificationsResult",
@@ -179,7 +207,9 @@
             ViewUnlockRecord,
             QualificationUnlock,
             IndividualTrial,
-            NavBar
+            NavBar,
+            AbandonedTender,   //废标  
+            StandardChallengeInformation,
         },
         data() {
             return {
@@ -243,17 +273,22 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    alert('1');
+                    //alert('1');
+                    this.dialogAbandonedTender=true;
                 } else if (val === 'b') {//交通费标准
-                    alert('0')
+                    //alert('0')
+                    this.dialogStandardChallengeInformation=true;
                 } else if (val === 'c') {//报销汇总表
-                    alert('2')
+                    //alert('2')
+                    window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    alert('3')
+                    //alert('3')
+                    window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    alert('4')
+                    window.open('http://localhost:7000/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    alert('5')
+                    //alert('5')
+                    window.open('http://localhost:7000/SignaturePage', '_blank',);
                 }
             },
             checkUnlockRecord() {
