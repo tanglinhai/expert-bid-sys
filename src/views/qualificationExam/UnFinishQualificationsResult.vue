@@ -263,11 +263,23 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {
-                this.$axios.post('/api/tijiao', 'post', {
-                    data: this.form.desc
+                console.log(parseInt(this.type) + 1);
+                 let url;
+                if(this.type==4){
+                    url='/api/tijiao_fhx';
+                }else if(this.type==2){
+                    url='/api/tijiao';
+                }
+                else if(this.type==6){
+                    url='/api/tijiao_xxjs';
+                }
+                this.$axios.post(url, {
+                    data: this.form.desc,
+                    type:parseInt(this.type)+ 1
                 }).then(res => {
                     if (res.status == 200) {
                         this.options = res.data.vue_type;
+                        console.log(this.options);
                         this.$message({
                             message: '提交成功',
                             type: 'success'

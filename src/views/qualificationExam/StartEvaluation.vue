@@ -351,10 +351,11 @@
                 this.$store.state.failureEnery.show = false;
             },
             allChecked() {//全选
-                this.$axios.post('/api/allChecked_fhx', 'post', {
+                this.$axios.post('/api/allChecked_fhx',  {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
+                        console.log("1")
                         for (var i = 0; i < this.radioArr.length; i++) {
                             this.radioArr[i].radio = '合格';
                         }
@@ -363,7 +364,9 @@
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 var isAllF = true;
+
                 for (var i = 0; i < this.radioArr.length; i++) {
+                    console.log(this.radioArr[i].radio);
                     if (!this.radioArr[i].radio) {
                         isAllF = false;
                         break;
@@ -372,11 +375,20 @@
                 return isAllF;
             },
             allSubmit() {
+                console.log(this.radioArr);
+                let url;
                 if (this.isAllFilled()) {
-                    this.$axios.post('/api/alltijiao', {type:1}, {
-                        // id:id,
-                        // status:status,
-                    }).then(res => {
+                    if(this.type_btn==3){
+                        url='/api/alltijiao_fhx';
+                    }else if(this.type_btn==1){
+                        url='/api/alltijiao';
+                    }
+                    else if(this.type_btn==5){
+                        url='/api/alltijiao_xxjs';
+                    }
+                    console.log(url,'77');
+                    this.$axios.post(url, {type:parseInt(this.type_btn)+ 1}).then(res => {
+                        console.log(res);
                         if (res.status == 200) {
                             this.options=res.data.vue_type;
                             this.$store.state.failureEnery.flag = false;

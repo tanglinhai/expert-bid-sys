@@ -156,6 +156,8 @@ let esta = Mock.mock('/api/esta', 'post', {
 
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
+    var submit_type= Random.integer(0, 1);
+
     console.log(JSON.parse(options.body));
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 1) {
@@ -174,7 +176,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
-                'type': Random.integer(0, 1),//是否提交过//是否提交过
+                'type': submit_type,//是否提交过//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
@@ -397,7 +399,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
-                'type': Random.integer(0, 1),//是否提交过//是否提交过
+                'type': submit_type,//是否提交过//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
@@ -582,7 +584,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
-                'type': Random.integer(0, 1),//是否提交过
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
@@ -751,13 +753,13 @@ Mock.mock('/api/table_msg', 'post', (options) => {
             }
         }
     }
-    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
+    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1,submit_type);
     return return_val;
 });
 
 // 资格审查项汇总页面table接口
 Mock.mock('/api/table_data', 'post', (options) => {
-    console.log(JSON.parse(options.body));
+    // console.log(JSON.parse(options.body));
     let return_val;
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 2) {
@@ -837,7 +839,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
             }
         }
     } else if (get_type_num == 4) {
-        console.log(JSON.parse(options.body));
+        // console.log(JSON.parse(options.body));
         let msg = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             msg.push({
@@ -913,7 +915,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
             }
         }
     } else if (get_type_num == 6) {
-        console.log(JSON.parse(options.body));
+        // console.log(JSON.parse(options.body));
         let msg = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             msg.push({
@@ -1041,39 +1043,40 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 });
 // 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
-//提交之后的状态
-function get_data(type) {//type
+//提交之后的状态：
+//is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态；zong_type：是否提交的状态( 是汇总页面提交)；
+function get_data(type,is_submit_type) {//type
     function set_type() {
         if (type == 0) {
-            return [2, 3, 4, 4, 4, 4, 4,]
+            return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4,]
         }
         if (type == 1) {
             return [1, 3, 4, 4, 4, 4, 4,]
         }
         if (type == 2) {
-            return [1, 1, 2, 3, 4, 4, 4,]
+            return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,]
         }
         if (type == 3) {//符合性审查项
-            return [1, 1, 1, 2, 4, 4, 4,]
+            return [1, 1, 1, is_submit_type?1:2, 4, 4, 4,]
         }
         if (type == 4) {//符合性审查项汇总
-            return [1, 1, 1, 1, 2, 3, 4,]
+            return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,]
         }
         if (type == 5) {//详细
-            return [1, 1, 1, 1, 1, 2, 3,]
+            return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,]
         }
         if (type == 6) {//详细汇总
-            return [1, 1, 1, 1, 1, 1, 2,]
+            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
         }
         if (type == 7) {//详细汇总
-            return [1, 1, 1, 1, 1, 1, 1,]
+            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
         }
     }
 
     set_type();
     var a;
     a = set_type();
-
+    console.log(a);
     return [
         {
             value: '1',
@@ -1117,7 +1120,7 @@ function get_data(type) {//type
 
 // 资格审查全部提交接口
 let alltijiao = Mock.mock('/api/alltijiao', 'post', {
-    code: 200,
+    status: 200,
     message: '成功!',
     data: '',
     vue_type: get_data(1),
@@ -1125,14 +1128,14 @@ let alltijiao = Mock.mock('/api/alltijiao', 'post', {
 });
 // 符合性审查全部提交接口
 let alltijiao_fhx = Mock.mock('/api/alltijiao_fhx', 'post', {
-    code: 200,
+    status: 200,
     message: '成功!',
     data: '',
     vue_type: get_data(3),
 });
 // 详细技术审查全部提交接口
 let alltijiao_xxjs = Mock.mock('/api/alltijiao_xxjs', 'post', {
-    code: 200,
+    status: 200,
     message: '成功!',
     data: '',
     vue_type: get_data(5),
@@ -1193,6 +1196,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     var msg = [];
     var data_msg = [];
     var dataMsg = [];
+    let is_tijaio=Random.integer(0, 1);
     for (var i = 0; i < Random.integer(3,8); i++) {
         msg.push({//报价评审弹框报价计算table
             'id': () => Random.id(),
@@ -1227,45 +1231,8 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
             //审查项
             'eviewrItemsMsg': {
                 //头部审查类型按钮
-                'viewType': [
-                    {
-                        value: '1',
-                        label: '资格审查项',
-                        type: '1'
-                    },
-                    {
-                        value: '2',
-                        label: '资格审查项汇总',
-                        type: '2'
-                    },
-
-                    {
-                        value: '3',
-                        label: '符合性审查项',
-                        type: '3'
-                    },
-                    {
-                        value: '4',
-                        label: ' 符合性审查项汇总',
-                        type: '4'
-                    },
-                    {
-                        value: '5',
-                        label: ' 详细评审（技术）',
-                        type: '5'
-                    },
-                    {
-                        value: '6',
-                        label: '详细评审（技术）汇总',
-                        type: '7'
-                    },
-                    {
-                        value: '8',
-                        label: '评审汇总',
-                        type: '8'
-                    },
-                ],
-                'isShow': Random.integer(0, 1),//0：提交前那个页面显示，1:提交前的页面
+                'viewType':get_data(7,is_tijaio),
+                'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
                 'other_explain': Random.csentence(),//其他说明
                 'bidEvaluation': msg,
                 'review_summary': data_msg,
@@ -1293,7 +1260,7 @@ let radio_is_valid_tijiao = Mock.mock('/api/radio_is_valid_tijiao', 'post', {
 
 //评审汇总页面提交（table）
 let pshz_tijiao = Mock.mock('/api/pshz_tijiao', 'post', {
-    code: 200,
+    status: 200,
     message: '提交成功!',
     data: [],
     vue_type: get_data(7),

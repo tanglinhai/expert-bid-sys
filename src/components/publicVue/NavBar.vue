@@ -43,7 +43,7 @@
                      this.$router.push("/elect/UnFinishQualificationsResult?type=6");
                 }
                 else if (i === "7"){
-                    this.$router.push("/elect/ReviewSummary");//还要传id
+                    this.$router.push("/elect/ReviewSummary?type=7");
                 }
             },
         }

@@ -40,13 +40,13 @@
                                         <h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>
                                     </div>
                                 </el-col>
-                                <el-col :span="12" class="textAlignR btns">
+                                <el-col :span="12" class="textAlignR btns" v-if="!this.$store.state.failureEnery.is_pingshen_show" >
                                     <el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审</el-button>
-                                    <el-button type="primary" size="small" @click="submit_btn"> 提交</el-button>
+                                    <el-button type="primary" size="small" @click="submit_btn" > 提交</el-button>
                                     <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                     </el-button>
                                 </el-col>
-                                <el-col :span="12" class="textAlignR mian_btns">
+                                <el-col :span="12" class="textAlignR mian_btns"  v-else>
                                     <el-button @click="submited_goback" type="primary" size="small">返回</el-button>
                                 </el-col>
                             </el-row>
@@ -183,7 +183,7 @@
                     </template>
                 </div>
                 <div class="textAlignC pt20">
-                    <el-button size="small" @click="bidEvaluation_submit" type="primary"><i
+                    <el-button size="small" @click="bidEvaluation_submit" type="primary" ><i
                             class="icon iconfont icon-baocun1 mr5"></i>提交
                     </el-button>
                     <el-button size="small" @click="bidEvaluation_reback" type="primary"><i
@@ -248,20 +248,19 @@
             }
         },
         created() {
-
+            this.$route.query.type
         },
         mounted() {
             this.init();
-            $(".mian_btns ").hide();
-            $(".btns ").show();
+            // $(".mian_btns ").hide();
+            // $(".btns ").show();
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/pingshen_huizong', {//通过包id
-                    // id:id
-                }).then(res => {
+                 this.$axios.post('/api/pingshen_huizong', {type:this.$route.query.type })
+                    .then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
@@ -298,9 +297,7 @@
             },
             /*------------------------评审汇总-----------------*/
             submit_btn() {//   提交
-                this.$axios.post('/api/pshz_tijiao', {type: 7}, {
-                    data: this.form.desc
-                }).then(res => {
+                this.$axios.post('/api/pshz_tijiao', {type: this.$route.query.type,data: this.form.desc}).then(res => {
                     if (res.status == 200) {
                         this.options = res.data.vue_type;
                         this.msg_data.forEach((m, i) => {
@@ -312,20 +309,17 @@
                             this.$store.state.failureEnery.success_warning = true;
                         } else {
                             this.$store.state.failureEnery.success_warning = false;
-                            $(".mian_btns ").show();
+                            this.$store.state.failureEnery.is_pingshen_show = true;
                             this.$message({
                                 message: '提交成功',
                                 type: 'success'
                             });
-                            $(".btns").hide();
-
                         }
                     }
                 })
             },
-            submited_goback() {
-                $(".btns").show();
-                $(".mian_btns").hide();
+            submited_goback() {//掉接口
+                this.$store.state.failureEnery.is_pingshen_show = true;
             },
             /*------------------------评审汇总end-----------------*/
             /*-----------排序弹框----------*/
