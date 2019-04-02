@@ -70,23 +70,22 @@
           <el-form-item label="质询内容：" prop="desc">
             <el-input type="textarea"  autosize  v-model="ruleForm.desc" ></el-input>
           </el-form-item>
-          <el-form-item label="上传文件:" :label-width="ruleFormLabelWidth" class="clearfix mt15">
+          <!-- <el-form-item label="上传文件:" :label-width="ruleFormLabelWidth" class="clearfix mt15">
             <el-input v-model="model.nameFiles" class="mr10 fl " style="width: 300px" size="small "></el-input>
             <el-upload
-                    class="upload-demo"
-                    ref="upload2"
-                    action="/upload"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :auto-upload="false"
+              class="upload-demo"
+              ref="upload2"
+              action="/upload"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :auto-upload="false"
             >
-
-                <el-button slot="trigger" size="small" >浏览文件</el-button>
-                <el-button style="margin-left: 10px;" size="small"
-                            @click="submitUpload('upload2')">上传到服务器
-                </el-button>
+            <el-button slot="trigger" size="small" >浏览文件</el-button>
+            <el-button style="margin-left: 10px;" size="small"
+                        @click="submitUpload('upload2')">上传到服务器
+            </el-button>
             </el-upload>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="要求回复时间：" >
             <el-col :span="11">
               <el-form-item>
