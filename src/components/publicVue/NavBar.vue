@@ -28,32 +28,21 @@
         },
         methods:{
             changeView(i) {      //路由跳转传参函数
-                console.log(this.msg);
-                console.log(i);
+                // console.log(i);
                 if (i === '1') {
-                    // console.log("1")
-                    this.$router.push("/elect/StartEvaluation");
-
+                    this.$router.push("/elect/StartEvaluation?type=1");
                 } else if (i === '2') {
-                    // console.log("2")
-                    this.$router.push("/elect/UnFinishQualificationsResult");//还要传id
-                } else if (i === "4") {
-                    // console.log("4")
-                    this.$router.push("/elect/StartEvaluation_fhx");//还要传id
-
+                   this.$router.push("/elect/UnFinishQualificationsResult?type=2");
+                } else if (i === "3") {
+                    this.$router.push("/elect/StartEvaluation?type=3");
+                }else if (i === "4"){
+                    this.$router.push("/elect/UnFinishQualificationsResult?type=4");
                 }else if (i === "5"){
-                    // console.log("5")
-                    this.$router.push("/elect/UnFinishQualificationsResult_fhx");//还要传id
+                    this.$router.push("/elect/StartEvaluation?type=5");
                 }else if (i === "6"){
-                    // console.log("6")
-                    this.$router.push("/elect/StartEvaluation_xxjs");//还要传id
-                }else if (i === "7"){
-                    // // console.log("7")
-                    // console.log(JSON.parse('aa:{a：1}'));
-                    this.$router.push("/elect/UnFinishQualificationsResult_xxjs");//还要传id
+                     this.$router.push("/elect/UnFinishQualificationsResult?type=6");
                 }
-                else if (i === "8"){
-                    // console.log("8")
+                else if (i === "7"){
                     this.$router.push("/elect/ReviewSummary");//还要传id
                 }
             },

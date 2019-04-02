@@ -163,7 +163,7 @@ import { setTimeout } from 'timers';
                         this.projectYinjianFenxiList=res.data.projectYinjianFenxi;
                         this.PorjectName=res.data.PorjectName;
                         this.ProjectBianhao=res.data.ProjectBianhao;
-                        $(".el-collapse-item__wrap").hide()
+                        $(".el-collapse-item__wrap").hide();
                         setTimeout(function(){
                             $(".el-collapse-item__wrap").show()
                         },50)

@@ -155,8 +155,10 @@ let esta = Mock.mock('/api/esta', 'post', {
 //评标页面数据接口
 
 Mock.mock('/api/table_msg', 'post', (options) => {
+    let return_val;
     console.log(JSON.parse(options.body));
-    if (JSON.parse(options.body).type == 1) {
+    let get_type_num=JSON.parse(options.body).type;
+    if (get_type_num == 1) {
         let ms = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             ms.push({
@@ -166,8 +168,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 name: Random.cname(),
             })
         }
-        // 头部标包信息
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -266,7 +267,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     id: 103, pId: 1, name: "资格审查项目", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格",
+                                        answer: "资格审查项目",
                                         question1: "审查标准",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -318,33 +319,33 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         {
                             value: '2',
                             label: '资格审查项汇总',
-                            type: '1'
+                            type: '2'
                         },
 
                         {
-                            value: '4',
+                            value: '3',
                             label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
                             type: '3'
                         },
                         {
-                            value: '6',
-                            label: ' 详细评审（技术）',
+                            value: '4',
+                            label: ' 符合性审查项汇总',
                             type: '4'
                         },
                         {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
+                            value: '5',
+                            label: ' 详细评审（技术）',
                             type: '5'
                         },
                         {
-                            value: '8',
+                            value: '6',
+                            label: '详细评审（技术）汇总',
+                            type: '6'
+                        },
+                        {
+                            value: '7',
                             label: '评审汇总',
-                            type: '5'
+                            type: '7'
                         },
                     ],
 
@@ -379,7 +380,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     }]
             }
         }
-    } else if (JSON.parse(options.body).type == 4) {
+    } else if (get_type_num == 3) {
         let ms = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             ms.push({
@@ -390,7 +391,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
             })
         }
         // 头部标包信息
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -408,7 +409,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     id: 101, pId: 1, name: "投标人名称", open: false,
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
-                                        answer: "资格审查1",
+                                        answer: "投标人名称",
                                         question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -450,7 +451,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     id: 102, pId: 1, name: "资质", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格审查2",
+                                        answer: "资质",
                                         question1: "审查标准",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -491,7 +492,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     id: 103, pId: 1, name: "审查项目", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格",
+                                        answer: "审查项目",
                                         question1: "审查标准",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -525,7 +526,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             radio: '',
                                             id: 9,
                                         }],
-
                                     }
                                 },
                             ]
@@ -533,44 +533,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 
                     'mylist': ms,
                     //头部审查类型按钮
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1'
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '1'
-                        },
-
-                        {
-                            value: '4',
-                            label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
-                            type: '3'
-                        },
-                        {
-                            value: '6',
-                            label: ' 详细评审（技术）',
-                            type: '4'
-                        },
-                        {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
-                            type: '5'
-                        },
-                        {
-                            value: '8',
-                            label: '评审汇总',
-                            type: '5'
-                        },
-                    ],
 
                 },
                 msg: [{////个人形式审计表数据接口
@@ -603,7 +565,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
             }
         }
 
-    } else if (JSON.parse(options.body).type == 6) {
+    } else if (get_type_num == 5) {
         var ms = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             ms.push({
@@ -614,7 +576,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
             })
         }
         // 头部标包信息
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -626,13 +588,13 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'zTreeData': //树形图
                         {
-                            id: 1, pId: 0, name: "形式审计-#707478", open: true,
+                            id: 1, pId: 0, name: "详细评审技术", open: true,
                             children: [
                                 {
-                                    id: 101, pId: 1, name: "投标人名称", open: false,
+                                    id: 101, pId: 1, name: "详细评审1", open: false,
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
-                                        answer: "资格审查1",
+                                        answer: "详细评审1",
                                         question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -671,10 +633,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     },
                                 },
                                 {
-                                    id: 102, pId: 1, name: "资质", open: false,
+                                    id: 102, pId: 1, name: "详细评审2", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格审查2",
+                                        answer: "详细评审2",
                                         question1: "审查标准",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -712,10 +674,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     },
                                 },
                                 {
-                                    id: 103, pId: 1, name: "审查项目", open: false,
+                                    id: 103, pId: 1, name: "详细评审3", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格",
+                                        answer: "详细评审3",
                                         question1: "审查标准",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
@@ -757,44 +719,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 
                     'mylist': ms,
                     //头部审查类型按钮
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1'
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '1'
-                        },
-
-                        {
-                            value: '4',
-                            label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
-                            type: '3'
-                        },
-                        {
-                            value: '6',
-                            label: ' 详细评审（技术）',
-                            type: '4'
-                        },
-                        {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
-                            type: '5'
-                        },
-                        {
-                            value: '8',
-                            label: '评审汇总',
-                            type: '5'
-                        },
-                    ],
 
                 },
                 msg: [{////个人形式审计表数据接口
@@ -827,469 +751,16 @@ Mock.mock('/api/table_msg', 'post', (options) => {
             }
         }
     }
-
-});
-
-// 符合型审查页面
-Mock.mock('/api/table_msg_fhx', 'post', (options) => {
-    console.log(JSON.parse(options.body));
-    var ms = [];
-    for (var i = 0; i < Random.integer(1, 5); i++) {
-        ms.push({
-            date: '0',
-            isFinish: '未完成',
-            id: Random.id(),
-            name: Random.cname(),
-        })
-    }
-    // 头部标包信息
-    return {
-        'bidMsg': {
-            id: Random.id(),
-            'name': '2019年水利运输服务招标项目',
-            'biaoNum': '0635—1909qwerN1197',
-            'baohao': '0635—1909qwerN1197/1',
-            'type': Random.integer(0, 1),//是否提交过
-            //审查项
-            'eviewrItemsMsg': {
-                'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-                'zTreeData': //树形图
-                    {
-                        id: 1, pId: 0, name: "形式审计-#707478", open: true,
-                        children: [
-                            {
-                                id: 101, pId: 1, name: "投标人名称", open: false,
-                                fristTableData: {//第一个表格
-                                    question: "资格审查评审项：",
-                                    answer: "资格审查1",
-                                    question1: "审查标准：",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 0,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 1,
-                                    }, {
-                                        index: 1,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 2,
-                                    }, {
-                                        index: 2,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 3,
-                                    }],
-
-
-                                },
-                            },
-                            {
-                                id: 102, pId: 1, name: "资质", open: false,
-                                fristTableData: {
-                                    question: "资格审查评审项：",
-                                    answer: "资格审查2",
-                                    question1: "审查标准",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 3,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 4,
-                                    }, {
-                                        index: 4,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 5,
-                                    }, {
-                                        index: 5,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 6,
-                                    }],
-
-                                },
-                            },
-                            {
-                                id: 103, pId: 1, name: "审查项目", open: false,
-                                fristTableData: {
-                                    question: "资格审查评审项：",
-                                    answer: "资格",
-                                    question1: "审查标准",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 6,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass2: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 7,
-                                    }, {
-                                        index: 7,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass2: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 8
-                                    }, {
-                                        index: 8,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass2: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 9,
-                                    }],
-
-                                }
-                            },
-                        ]
-                    },
-
-                'mylist': ms,
-                //头部审查类型按钮
-                'viewType': [
-                    {
-                        value: '1',
-                        label: '资格审查项',
-                        type: '1'
-                    },
-                    {
-                        value: '2',
-                        label: '资格审查项汇总',
-                        type: '1'
-                    },
-
-                    {
-                        value: '4',
-                        label: '符合性审查项',
-                        type: '2'
-                    },
-                    {
-                        value: '5',
-                        label: ' 符合性审查项汇总',
-                        type: '3'
-                    },
-                    {
-                        value: '6',
-                        label: ' 详细评审（技术）',
-                        type: '4'
-                    },
-                    {
-                        value: '7',
-                        label: '详细评审（技术）汇总',
-                        type: '5'
-                    },
-                    {
-                        value: '8',
-                        label: '评审汇总',
-                        type: '5'
-                    },
-                ],
-
-            },
-            msg: [{////个人形式审计表数据接口
-                number: '1',
-                date: '投标人名称',
-                name: '√',
-                province: '√',
-                city: '√',
-            }, {
-                number: '2',
-                date: '资质',
-                name: '√',
-                province: '√',
-                city: '√',
-            },
-                {
-                    number: '3',
-                    date: '审查项目',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                },
-                {
-                    number: '结论',
-                    date: '审查标准与营业执照、资质证书是否一致',
-                    name: '合格',
-                    province: '合格',
-                    city: '合格',
-                }]
-        }
-    }
-});
-
-
-//详细评审页面数据接口
-Mock.mock('/api/table_msg_xxjs', 'post', (options) => {
-    console.log(JSON.parse(options.body));
-    var ms = [];
-    for (var i = 0; i < Random.integer(1, 5); i++) {
-        ms.push({
-            date: '0',
-            isFinish: '未完成',
-            id: Random.id(),
-            name: Random.cname(),
-        })
-    }
-    // 头部标包信息
-    return {
-        'bidMsg': {
-            id: Random.id(),
-            'name': '2019年水利运输服务招标项目',
-            'biaoNum': '0635—1909qwerN1197',
-            'baohao': '0635—1909qwerN1197/1',
-            'type': Random.integer(0, 1),//是否提交过
-            //审查项
-            'eviewrItemsMsg': {
-                'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-                'zTreeData': //树形图
-                    {
-                        id: 1, pId: 0, name: "详情评审（技术）", open: true,
-                        children: [
-                            {
-                                id: 101, pId: 1, name: "详细评审1", open: false,
-                                fristTableData: {//第一个表格
-                                    question: "资格审查评审项：",
-                                    answer: "资格审查1",
-                                    question1: "审查标准：",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 0,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 1,
-                                    }, {
-                                        index: 1,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 2,
-                                    }, {
-                                        index: 2,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 3,
-                                    }],
-
-
-                                },
-                            },
-                            {
-                                id: 102, pId: 1, name: "详细评审2", open: false,
-                                fristTableData: {
-                                    question: "资格审查评审项：",
-                                    answer: "资格审查2",
-                                    question1: "审查标准",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 3,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 4,
-                                    }, {
-                                        index: 4,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 5,
-                                    }, {
-                                        index: 5,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 6,
-                                    }],
-
-                                },
-                            },
-                            {
-                                id: 103, pId: 1, name: "详细评审3", open: false,
-                                fristTableData: {
-                                    question: "资格审查评审项：",
-                                    answer: "资格",
-                                    question1: "审查标准",
-                                    answer1: "与营业执照、资质证书一致",
-                                    tableData: [{
-                                        index: 6,
-                                        people: '招标人1：',
-                                        name: '[1]重庆网控科技发展有限公司',
-                                        pass2: '1',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 7,
-                                    }, {
-                                        index: 7,
-                                        people: '招标人2：',
-                                        name: '[2] 普瑞太阳能有限公司',
-                                        pass2: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 8
-                                    }, {
-                                        index: 8,
-                                        people: '招标人2：',
-                                        name: '[2] 夏丰热工研究院有限公司',
-                                        pass2: '2',
-                                        content: '',
-                                        ra1: '合格',
-                                        ra2: '不合格',
-                                        radio: '',
-                                        id: 9,
-                                    }],
-
-                                }
-                            },
-                        ]
-                    },
-
-                'mylist': ms,
-                //头部审查类型按钮
-                'viewType': [
-                    {
-                        value: '1',
-                        label: '资格审查项',
-                        type: '1'
-                    },
-                    {
-                        value: '2',
-                        label: '资格审查项汇总',
-                        type: '1'
-                    },
-
-                    {
-                        value: '4',
-                        label: '符合性审查项',
-                        type: '2'
-                    },
-                    {
-                        value: '5',
-                        label: ' 符合性审查项汇总',
-                        type: '3'
-                    },
-                    {
-                        value: '6',
-                        label: ' 详细评审（技术）',
-                        type: '4'
-                    },
-                    {
-                        value: '7',
-                        label: '详细评审（技术）汇总',
-                        type: '5'
-                    },
-                    {
-                        value: '8',
-                        label: '评审汇总',
-                        type: '5'
-                    },
-                ],
-
-            },
-            msg: [{////个人形式审计表数据接口
-                number: '1',
-                date: '投标人名称',
-                name: '√',
-                province: '√',
-                city: '√',
-            }, {
-                number: '2',
-                date: '资质',
-                name: '√',
-                province: '√',
-                city: '√',
-            },
-                {
-                    number: '3',
-                    date: '审查项目',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                },
-                {
-                    number: '结论',
-                    date: '审查标准与营业执照、资质证书是否一致',
-                    name: '合格',
-                    province: '合格',
-                    city: '合格',
-                }]
-        }
-    }
+    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
+    return return_val;
 });
 
 // 资格审查项汇总页面table接口
-
 Mock.mock('/api/table_data', 'post', (options) => {
     console.log(JSON.parse(options.body));
-    if (JSON.parse(options.body).type == 2) {
+    let return_val;
+    let get_type_num=JSON.parse(options.body).type;
+    if (get_type_num == 2) {
         let msg = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             msg.push({
@@ -1310,7 +781,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
             })
         }
 
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -1320,45 +791,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1',
 
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '1'
-                        },
-
-                        {
-                            value: '4',
-                            label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
-                            type: '3'
-                        },
-                        {
-                            value: '6',
-                            label: ' 详细评审（技术）',
-                            type: '4'
-                        },
-                        {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
-                            type: '5'
-                        },
-                        {
-                            value: '8',
-                            label: '评审汇总',
-                            type: '5'
-                        },
-                    ],
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'mylist': [
                         {
@@ -1403,7 +836,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 }
             }
         }
-    } else if (JSON.parse(options.body).type == 5) {
+    } else if (get_type_num == 4) {
         console.log(JSON.parse(options.body));
         let msg = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
@@ -1424,8 +857,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 ]//投标人
             })
         }
-
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -1435,45 +867,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1',
 
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '1'
-                        },
-
-                        {
-                            value: '4',
-                            label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
-                            type: '3'
-                        },
-                        {
-                            value: '6',
-                            label: ' 详细评审（技术）',
-                            type: '4'
-                        },
-                        {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
-                            type: '5'
-                        },
-                        {
-                            value: '8',
-                            label: '评审汇总',
-                            type: '5'
-                        },
-                    ],
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'mylist': [
                         {
@@ -1518,7 +912,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 }
             }
         }
-    } else if (JSON.parse(options.body).type == 7) {
+    } else if (get_type_num == 6) {
         console.log(JSON.parse(options.body));
         let msg = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
@@ -1539,7 +933,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 ]//投标人
             })
         }
-        return {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -1549,45 +943,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1',
 
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '1'
-                        },
-
-                        {
-                            value: '4',
-                            label: '符合性审查项',
-                            type: '2'
-                        },
-                        {
-                            value: '5',
-                            label: ' 符合性审查项汇总',
-                            type: '3'
-                        },
-                        {
-                            value: '6',
-                            label: ' 详细评审（技术）',
-                            type: '4'
-                        },
-                        {
-                            value: '7',
-                            label: '详细评审（技术）汇总',
-                            type: '5'
-                        },
-                        {
-                            value: '8',
-                            label: '评审汇总',
-                            type: '5'
-                        },
-                    ],
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'mylist': [
                         {
@@ -1633,244 +989,9 @@ Mock.mock('/api/table_data', 'post', (options) => {
             }
         }
     }
-
+    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
+    return return_val;
 });
-
-//   符合项汇总页面table接口
-// Mock.mock('/api/table_data_fhx', 'post', (options) => {
-//     console.log(JSON.parse(options.body));
-//     var msg = [];
-//     for (var i = 0; i < Random.integer(1, 5); i++) {
-//         msg.push({
-//             'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
-//             + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
-//             + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
-//             + '/' + '评委会',//     评标委员会
-//             'bagName': '第' + Random.natural(0, 9) + '包',//分包号
-//             'panduan1': "√",
-//             'evaluationFactors': Random.csentence(),//评审因素
-//             'panduan2': "√",
-//             'panduan3': "√",
-//             'bidder|1-5': [
-//                 {
-//                     name: "重庆网控科技发展有限公司"
-//                 }
-//             ]//投标人
-//         })
-//     }
-//
-//     return {
-//         'bidMsg': {
-//             id: Random.id(),
-//             'name': '2019年水利运输服务招标项目',
-//             'biaoNum': '0635—1909qwerN1197',
-//             'baohao': '0635—1909qwerN1197/1',
-//             //审查项
-//             'eviewrItemsMsg': {
-//                 'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-//                 //头部审查类型按钮
-//                 'viewType': [
-//                     {
-//                         value: '1',
-//                         label: '资格审查项',
-//                         type: '1',
-//
-//                     },
-//                     {
-//                         value: '2',
-//                         label: '资格审查项汇总',
-//                         type: '1'
-//                     },
-//
-//                     {
-//                         value: '4',
-//                         label: '符合性审查项',
-//                         type: '2'
-//                     },
-//                     {
-//                         value: '5',
-//                         label: ' 符合性审查项汇总',
-//                         type: '3'
-//                     },
-//                     {
-//                         value: '6',
-//                         label: ' 详细评审（技术）',
-//                         type: '4'
-//                     },
-//                     {
-//                         value: '7',
-//                         label: '详细评审（技术）汇总',
-//                         type: '5'
-//                     },
-//                     {
-//                         value: '8',
-//                         label: '评审汇总',
-//                         type: '5'
-//                     },
-//                 ],
-//                 'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
-//                 'mylist': [
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     },
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     },
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     }
-//                 ],
-//                 'evaluationLeader': '张三',
-//                 'other_explain': Random.csentence(),
-//                 'unlock_table': [
-//                     {num: '1', factor: '投标人名称', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 1},
-//                     {num: '2', factor: '资质', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 2},
-//                     {num: '3', factor: '审查项目', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 3},
-//                     {num: '结论', factor: '是否通过资格审查项检查', name: '合格', name1: '合格', name2: '合格', id: 4}
-//                 ],
-//                 'unlock_dialog_check': {
-//                     'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
-//                     'applicantPeole': Random.cname(),
-//                     'applicantTime': Random.datetime(),
-//                     'unlockObject': Random.cname(),
-//                     'applicantReason': '投标函格式',
-//                     'assessingOfficer': Random.cname(),
-//                     'assessingResult': Random.integer(0, 1),
-//                     'unlockReason': Random.csentence()
-//                 },
-//                 'msgBox': msg,
-//                 companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
-//             }
-//         }
-//     }
-// });
-
-//   详细技术项汇总页面table接口
-// Mock.mock('/api/table_data_xxjs', 'post', (options) => {
-//     console.log(JSON.parse(options.body));
-//     var msg = [];
-//     for (var i = 0; i < Random.integer(1, 5); i++) {
-//         msg.push({
-//             'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
-//             + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
-//             + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
-//             + '/' + '评委会',//     评标委员会
-//             'bagName': '第' + Random.natural(0, 9) + '包',//分包号
-//             'panduan1': "√",
-//             'evaluationFactors': Random.csentence(),//评审因素
-//             'panduan2': "√",
-//             'panduan3': "√",
-//             'bidder|1-5': [
-//                 {
-//                     name: "重庆网控科技发展有限公司"
-//                 }
-//             ]//投标人
-//         })
-//     }
-//
-//     return {
-//         'bidMsg': {
-//             id: Random.id(),
-//             'name': '2019年水利运输服务招标项目',
-//             'biaoNum': '0635—1909qwerN1197',
-//             'baohao': '0635—1909qwerN1197/1',
-//             //审查项
-//             'eviewrItemsMsg': {
-//                 'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-//                 //头部审查类型按钮
-//                 'viewType': [
-//                     {
-//                         value: '1',
-//                         label: '资格审查项',
-//                         type: '1',
-//
-//                     },
-//                     {
-//                         value: '2',
-//                         label: '资格审查项汇总',
-//                         type: '1'
-//                     },
-//
-//                     {
-//                         value: '4',
-//                         label: '符合性审查项',
-//                         type: '2'
-//                     },
-//                     {
-//                         value: '5',
-//                         label: ' 符合性审查项汇总',
-//                         type: '3'
-//                     },
-//                     {
-//                         value: '6',
-//                         label: ' 详细评审（技术）',
-//                         type: '4'
-//                     },
-//                     {
-//                         value: '7',
-//                         label: '详细评审（技术）汇总',
-//                         type: '5'
-//                     },
-//                     {
-//                         value: '8',
-//                         label: '评审汇总',
-//                         type: '5'
-//                     },
-//                 ],
-//                 'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
-//                 'mylist': [
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     },
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     },
-//                     {
-//                         dates: '5',
-//                         isFinish: '未完成',
-//                         id: Random.id(),
-//                         name: Random.cname(),
-//                     }
-//                 ],
-//                 'evaluationLeader': '张三',
-//                 'other_explain': Random.csentence(),
-//                 'unlock_table': [
-//                     {num: '1', factor: '详细评审1', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 1},
-//                     {num: '2', factor: '详细评审2', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 2},
-//                     {num: '3', factor: '详细评审3', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 3},
-//                     {num: '结论', factor: '是否通过资格审查项检查', name: '合格', name1: '合格', name2: '合格', id: 4}
-//                 ],
-//                 'unlock_dialog_check': {
-//                     'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
-//                     'applicantPeole': Random.cname(),
-//                     'applicantTime': Random.datetime(),
-//                     'unlockObject': Random.cname(),
-//                     'applicantReason': '投标函格式',
-//                     'assessingOfficer': Random.cname(),
-//                     'assessingResult': Random.integer(0, 1),
-//                     'unlockReason': Random.csentence()
-//                 },
-//                 'msgBox': msg,
-//                 companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
-//             }
-//         }
-//     }
-// });
 
 
 // 资格审查合格不合格接口
@@ -1918,10 +1039,14 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
     message: '成功!',
     data: ''
 });
+// 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态
 function get_data(type) {//type
     function set_type() {
+        if (type == 0) {
+            return [2, 3, 4, 4, 4, 4, 4,]
+        }
         if (type == 1) {
             return [1, 3, 4, 4, 4, 4, 4,]
         }
@@ -1962,27 +1087,27 @@ function get_data(type) {//type
         },
 
         {
-            value: '4',
+            value: '3',
             label: '符合性审查项',
             type: a[2]
         },
         {
-            value: '5',
+            value: '4',
             label: '符合性审查项汇总',
             type: a[3]
         },
         {
-            value: '6',
+            value: '5',
             label: '详细评审（技术）',
             type: a[4]
         },
         {
-            value: '7',
+            value: '6',
             label: '详细评审（技术）汇总',
             type: a[5]
         },
         {
-            value: '8',
+            value: '7',
             label: '评审汇总',
             type: a[6]
         },
@@ -2064,11 +1189,11 @@ let tijiao_xxjs = Mock.mock('/api/tijiao_xxjs', 'post', {
 // 资格审查项汇总页面table接口
 
 Mock.mock('/api/pingshen_huizong', 'post', (options) => {
-    console.log(JSON.parse(options.body));
+    // console.log(JSON.parse(options.body));
     var msg = [];
     var data_msg = [];
     var dataMsg = [];
-    for (var i = 0; i < Random.integer(1, 4); i++) {
+    for (var i = 0; i < Random.integer(3,8); i++) {
         msg.push({//报价评审弹框报价计算table
             'id': () => Random.id(),
             'bid_name': "重庆网控科技发展有限公司",
@@ -2111,33 +1236,33 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     {
                         value: '2',
                         label: '资格审查项汇总',
-                        type: '1'
+                        type: '2'
                     },
 
                     {
-                        value: '4',
+                        value: '3',
                         label: '符合性审查项',
-                        type: '2'
-                    },
-                    {
-                        value: '5',
-                        label: ' 符合性审查项汇总',
                         type: '3'
                     },
                     {
-                        value: '6',
-                        label: ' 详细评审（技术）',
+                        value: '4',
+                        label: ' 符合性审查项汇总',
                         type: '4'
                     },
                     {
-                        value: '7',
-                        label: '详细评审（技术）汇总',
+                        value: '5',
+                        label: ' 详细评审（技术）',
                         type: '5'
+                    },
+                    {
+                        value: '6',
+                        label: '详细评审（技术）汇总',
+                        type: '7'
                     },
                     {
                         value: '8',
                         label: '评审汇总',
-                        type: '5'
+                        type: '8'
                     },
                 ],
                 'isShow': Random.integer(0, 1),//0：提交前那个页面显示，1:提交前的页面
