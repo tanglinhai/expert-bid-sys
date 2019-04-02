@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row class="submitPrompt ">
-            <el-row class="textAlignC fs16">确认后您将不能再更改资格审查结果！</el-row>
+            <el-row class="textAlignC fs16">确认后您将不能再更改{{name}}结果！</el-row>
         </el-row>
         <el-row class="textAlignC pt40">
             <el-button size="small" type="primary" @click="comfrim">确认</el-button>
@@ -14,6 +14,11 @@
 <script>
     export default {
         name: "submit-prompt",
+        props:{
+            name:{
+                 type:String
+                }
+        },
         data(){
             return{
 
@@ -21,6 +26,7 @@
         },
          methods:{
             reback(){
+                console.log(this.name);
                 this.$store.state.failureEnery.submitPrompt=false;
             },
             comfrim(){

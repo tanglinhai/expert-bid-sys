@@ -46,7 +46,7 @@
                                     <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                     </el-button>
                                 </el-col>
-                                <el-col :span="12" class="textAlignR mian_btns" style="display: none">
+                                <el-col :span="12" class="textAlignR mian_btns">
                                     <el-button @click="submited_goback" type="primary" size="small">返回</el-button>
                                 </el-col>
                             </el-row>
@@ -110,9 +110,7 @@
                 <div class="warp cf">
                     <div class="sortDiv fl">
                         <ul v-for="(item,index) in msg_box" class="sort_ul">
-                            <!--<li @click="getData(item,index)" class="aa" :key="item.key" :class="index ===i?'bc_66b':'bc_none'">{{item.company_name}}</li>-->
 
-                            <!--<li @click="getData(item,index)" class="aa" :key="item.key" :class="['aa',{'bc_66b': index === i}]">{{item.company_name}}</li>-->
                             <li @click="getData(item,index,msg_box)" :key="item.key" :class="{'bc_66b': index === i}">
                                 {{item.company_name}}
                             </li>
@@ -137,7 +135,6 @@
                 :visible.sync="$store.state.failureEnery.bidEvaluation"
                 width="1000px"
         >
-            <!--<BidEvaluation :msg="msg_data"></BidEvaluation>-->
             <div class="BidEvaluation">
                 <!-- --------------------报价计算--------------------->
                 <div class="warp cf">
@@ -202,7 +199,6 @@
                 <p>请先点击页面【报价审核页面】按钮，设置投标人是否有效!</p>
             </div>
             <div class="textAlignC pt20">
-
                 <el-button size="small" @click="confirm_btn" type="primary"><i
                         class="icon iconfont icon-fanhuishouye1 mr5"></i>确定
                 </el-button>
@@ -256,12 +252,14 @@
         },
         mounted() {
             this.init();
+            $(".mian_btns ").hide();
+            $(".btns ").show();
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/pingshen_huizong', {type:7}, {//通过包id
+                this.$axios.post('/api/pingshen_huizong', {//通过包id
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
@@ -298,15 +296,14 @@
                     alert('5')
                 }
             },
-               /*------------------------评审汇总-----------------*/
+            /*------------------------评审汇总-----------------*/
             submit_btn() {//   提交
-                this.$axios.post('/api/pshz_tijiao', {type:7}, {
+                this.$axios.post('/api/pshz_tijiao', {type: 7}, {
                     data: this.form.desc
                 }).then(res => {
                     if (res.status == 200) {
-                        this.options=res.data.vue_type;
+                        this.options = res.data.vue_type;
                         this.msg_data.forEach((m, i) => {
-                            console.log(m.radio);
                             if (m.radio == 2) {
                                 this.a.push(m.radio)
                             }
@@ -315,12 +312,13 @@
                             this.$store.state.failureEnery.success_warning = true;
                         } else {
                             this.$store.state.failureEnery.success_warning = false;
+                            $(".mian_btns ").show();
                             this.$message({
                                 message: '提交成功',
                                 type: 'success'
                             });
                             $(".btns").hide();
-                            $(".mian_btns").show();
+
                         }
                     }
                 })
@@ -341,28 +339,33 @@
                 this.$store.state.failureEnery.sort = false;
             },
             getData(a, index, msg_box) {//每一个排序的li
-                this.i = index;
+                console.log(a, index, msg_box);
+                this.i = index;//点击上去的下标
                 this.obj = a;
-                this.sort_msg = msg_box;
+                this.sort_msg = msg_box;//当前的这个数据
             },
             sort_down() {//向下排序
-                if (this.i > 0) {
-                    let item = this.sort_msg[this.i];
-                    this.sort_msg.splice(this.i - 1, 0, item);
-                    this.sort_msg.splice(this.i + 1, 1);
+                if (this.i !== this.msg_box.length - 1) {
+                    let item = this.msg_box[this.i];
+                    this.msg_box.splice(this.i, 1);//把当前点击的这条先删掉，然后把这条的数据插到它下一条数据的后面去
+                    this.msg_box.splice(this.i + 1, 0, item);
+                    this.i = this.i + 1;
+                }
+                else if (this.i = this.msg_box.length - 1) {//如果是向下排序，最后一个就不能向下了
+                    this.i = this.msg_box.length - 1;
                 }
             },
             sort_up() {//向上排序
                 if (this.i > 0) {
-                    let item = this.sort_msg[this.i];
-                    this.sort_msg.splice(this.i - 1, 0, item);
-                    this.sort_msg.splice(this.i + 1, 1);
-                }
+                    let item = this.msg_box[this.i];
+                    this.msg_box.splice(this.i - 1, 0, item);
+                    this.msg_box.splice(this.i + 1, 1);
+                    this.i = this.i - 1;
+                }//如果是向上排序，最后一个就不能向上了
             },
             save() {//排序保存
-                console.log(this.sort_msg);
                 this.$axios.post('/api/sort_tijaio', 'post', {
-                    data: this.sort_msg,
+                    data: this.msg_box
                     // id:id
                 }).then(res => {
                     if (res.status == 200) {

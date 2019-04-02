@@ -69,11 +69,7 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="400">
             </el-pagination>
-            
         </div>
-
-       
-
     </div>
 </template>
 
