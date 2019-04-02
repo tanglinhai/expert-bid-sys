@@ -282,6 +282,9 @@
                 to_submit_prompt_name:"",//传给全部提交弹框的值
                 to_failure_entry_company_name:"",//传给不合格弹框的弹框的公司名
                 to_failure_entry_answer:"",//传给不合格弹框的弹框的问题
+
+                dialogAbandonedTender:false, //废标
+                dialogStandardChallengeInformation:false,//标中质询信息表
             }
         },
         created(){
