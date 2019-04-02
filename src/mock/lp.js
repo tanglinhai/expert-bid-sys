@@ -48,27 +48,7 @@ let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
                 {"id":"3-2","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
                 {"id":"3-3","baoname":"第三包","bianhao":"0635-1901qwerN1133/3","name":"益达天然产物有限公司"},
             ]
-        },
-        // {
-        //     "id":'4',
-        //     "bianhao":"0635-1901qwerN1133/4",
-        //     "children":[
-        //         {"id":"4-1","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"北京蓝天环境保护有限公司"},
-        //         {"id":"4-2","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-        //         {"id":"4-3","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-        //         {"id":"4-4","baoname":"第四包","bianhao":"0635-1901qwerN1133/4","name":"益达天然产物有限公司"},
-        //     ]
-        // },
-        // {
-        //     "id":'5',
-        //     "bianhao":"0635-1901qwerN1133/5",
-        //     "children":[
-        //         {"id":"4-1","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"北京蓝天环境保护有限公司"},
-        //         {"id":"4-2","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-        //         {"id":"4-3","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-        //         {"id":"4-4","baoname":"第五包","bianhao":"0635-1901qwerN1133/5","name":"益达天然产物有限公司"},
-        //     ]
-        // }
+        }
     ],
     'projectLeiFenxi|1-20':[{  //雷同性分析
         id: () => Random.id(),
@@ -224,6 +204,18 @@ let ReasonScrap=Mock.mock('/api/FeiBiao','post',{
     data: [1234]
 })
 //AbandonedTender废标弹框数据
+
+//标中质询信息列表(standardChallengeinformation.vue)
+let StandardChallengeList=Mock.mock('/api/StandardChallengeList','post',{
+    'standList|1-5':[{
+        inquiryConten:['111','222','444','333'],
+        questionTime:()=>Random.date()+Random.time(),
+        requestReplyTime:()=>Random.date(),
+        bidder:()=>csentence(3,15),
+        
+    }]
+})
+//标中质询信息列表(standardChallengeinformation.vue)
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })

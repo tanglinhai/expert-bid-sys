@@ -183,7 +183,7 @@
                 </el-col>
             </el-row>
         </div>
-        <el-dialog
+        <!-- <el-dialog
                 title="不合格录入"
                 :visible.sync="$store.state.failureEnery.show"
                 width="700px"
@@ -196,13 +196,44 @@
                 width="700px"
         >
             <SubmitPrompt></SubmitPrompt>
+        </el-dialog> -->
+
+        <!--废标弹框-->
+        <el-dialog
+            title="废标"
+            :visible.sync="dialogAbandonedTender"
+            width="700px"
+            >
+            <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
+        <!--废标弹框-->
+
+        <!--标中质询弹框-->
+        <el-dialog
+            title="标中质询信息列表"
+            :visible.sync="dialogStandardChallengeInformation"
+            width="900px"
+            >
+            <StandardChallengeInformation ></StandardChallengeInformation>
+        </el-dialog>
+        <!--标中质询弹框-->
+        <el-dialog
+                title="审查提示"
+                :visible.sync="$store.state.failureEnery.submitPrompt"
+                width="700px"
+        >
+            <SubmitPrompt></SubmitPrompt>
+        </el-dialog>
+
+
     </div>
 </template>
 
 <script>
     import FailureEntry from './FailureEntry';
     import SubmitPrompt from './SubmitPrompt';
+    import AbandonedTender from '../dialog/AbandonedTender';  //废标
+    import StandardChallengeInformation from '../dialog/StandardChallengeInformation';//标中质询
     import NavBar from './NavBar';
     export default {
         props: {
@@ -212,7 +243,11 @@
         components: {
             FailureEntry,
             SubmitPrompt,
-            NavBar
+            NavBar,
+
+            AbandonedTender,   //废标  
+            StandardChallengeInformation,
+
         },
         data() {
             return {
@@ -249,6 +284,9 @@
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
                 radioArr: [],//所有table的radio
+
+                dialogAbandonedTender:false, //废标
+                dialogStandardChallengeInformation:false,//标中质询信息表
             }
         },
         mounted() {
@@ -396,17 +434,22 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    alert('1');
+                    //alert('1');
+                    this.dialogAbandonedTender=true;
                 } else if (val === 'b') {//交通费标准
-                    alert('0')
+                    //alert('0')
+                    this.dialogStandardChallengeInformation=true;
                 } else if (val === 'c') {//报销汇总表
-                    alert('2')
+                    //console.log(window.location.protocol,window.location.hostname,window.location.host)
+                    window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    alert('3')
+                    //alert('3')
+                    window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    alert('4')
+                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    alert('5')
+                    //alert('5')
+                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
                 }
             },
             /*----------------- zTree ----------------------*/

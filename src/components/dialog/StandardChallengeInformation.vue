@@ -50,10 +50,6 @@
           property="operation"
           label="操作">
         </el-table-column>
-        <el-table-column
-          property=""
-          label="回复时间">
-        </el-table-column>
       </el-table>
       <div class="form_div"  style="display: none">
         <el-row class="mb15 mt15">
@@ -64,7 +60,7 @@
           </el-col>
         </el-row>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="新增投标人：" prop="type">
+          <el-form-item label="选择投标人：" prop="type">
             <el-checkbox-group v-model="ruleForm.type">
               <el-checkbox label="重庆网控科技发展有限公司" name="type"></el-checkbox>
               <el-checkbox label="普瑞太阳能有限公司" name="type"></el-checkbox>
@@ -73,6 +69,23 @@
           </el-form-item>
           <el-form-item label="质询内容：" prop="desc">
             <el-input type="textarea"  autosize  v-model="ruleForm.desc" ></el-input>
+          </el-form-item>
+          <el-form-item label="上传文件:" :label-width="ruleFormLabelWidth" class="clearfix mt15">
+            <el-input v-model="model.nameFiles" class="mr10 fl " style="width: 300px" size="small "></el-input>
+            <el-upload
+                    class="upload-demo"
+                    ref="upload2"
+                    action="/upload"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :auto-upload="false"
+            >
+
+                <el-button slot="trigger" size="small" >浏览文件</el-button>
+                <el-button style="margin-left: 10px;" size="small"
+                            @click="submitUpload('upload2')">上传到服务器
+                </el-button>
+            </el-upload>
           </el-form-item>
           <el-form-item label="要求回复时间：" >
             <el-col :span="11">
@@ -130,12 +143,7 @@
         }
       },
       mounted(){
-        // console.log(this.sta,22222222222222)
-        // this.tableData=this.sta;
-        // var localsunzai = this.$loaclStore.get('hldj_标中质询');
-        // if(localsunzai){
-        //   this.tableData=localsunzai;
-        // }
+        
       },
       methods: {
 
@@ -182,7 +190,7 @@
           add(){  //新增按钮
             $('.form_div').show();
           },
-          submitForm(formName) {  //校验
+          submitForm(formName) {  //提交校验
             this.$refs[formName].validate((valid) => {
               if (valid) {
                 //alert('submit!');
@@ -194,10 +202,9 @@
                     'inquiryConten':this.ruleForm.desc,
                     'requestReplyTime':this.ruleForm.date1,
                   });
-                 // this.$loaclStore.set('hldj_标中质询',this.tableData);   //存储表格推进去的值
                  console.log(this.tableData,8888);
                 }
-                this.$refs[formName].resetFields();   //初始化表单的值
+                //this.$refs[formName].resetFields();   //初始化表单的值
                 this.ruleForm.date1="";   //初始化时间得值
                 $('.form_div').hide();//新增表单隐藏
                 $(".tishiWrap").show();//倒计时内容开始展示
