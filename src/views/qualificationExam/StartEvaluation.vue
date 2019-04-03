@@ -236,7 +236,7 @@
                 :visible.sync="dialogStandardChallengeInformation"
                 width="900px"
         >
-            <StandardChallengeInformation></StandardChallengeInformation>
+            <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -305,6 +305,9 @@
                 to_failure_entry_answer: "",//传给不合格弹框的弹框的问题
                 dialogAbandonedTender: false, //废标
                 dialogStandardChallengeInformation: false,//标中质询信息表
+                cities:[],
+                tableDataTwo:[],
+                bzzxLoading:true, //标中质询loading
             }
         },
         created() {
@@ -470,7 +473,7 @@
                     }).then(res=>{
                         if(res.status == 200){
                             this.cities=res.data.cityOptions;
-                            this.tableData=res.data.standList;
+                            this.tableDataTwo=res.data.standList;
                             this.bzzxLoading=false;
                         }
                     })
