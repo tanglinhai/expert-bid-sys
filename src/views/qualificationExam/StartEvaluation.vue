@@ -486,7 +486,7 @@
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-                this.son_all_checked=treeNode.fristTableData.tableData;
+                console.log(event, treeId, treeNode);
                 if (treeNode.children) {
                         this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
@@ -494,6 +494,7 @@
                     this.$store.state.failureEnery.start_sublevel_show=false;
                     this.$store.state.failureEnery.parent_progress_show=true;
                   } else {
+                    this.son_all_checked=treeNode.fristTableData.tableData;
                      this.zNodes.children.forEach((m, i) => {
                         if (m.id == treeNode.id) {
                             this.$set(m, 'show', true)
