@@ -1,5 +1,4 @@
 <template>
-
     <div class="StandardChallengeInformation">
       <el-row class="mb15">
         <el-col :span="12" > <p  style="padding-top: 5px;" class=" fs16 ">标中质询信息列表</p></el-col>
@@ -16,6 +15,7 @@
         tooltip-effect="dark"
         border
         el-table__header-wrapper
+        v-loading="bzzxLoading"
         style="width: 100%">
         <!---->
         <el-table-column label="选择" width="70" center>
@@ -62,9 +62,10 @@
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
           <el-form-item label="选择投标人：" prop="type">
             <el-checkbox-group v-model="ruleForm.type">
-              <el-checkbox label="重庆网控科技发展有限公司" name="type"></el-checkbox>
+              <!-- <el-checkbox label="重庆网控科技发展有限公司" name="type"></el-checkbox>
               <el-checkbox label="普瑞太阳能有限公司" name="type"></el-checkbox>
-              <el-checkbox label="夏丰热工研究院有限公司" name="type"></el-checkbox>
+              <el-checkbox label="夏丰热工研究院有限公司" name="type"></el-checkbox> -->
+              <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="质询内容：" prop="desc">
@@ -112,20 +113,30 @@
 </template>
 
 <script>
+    // const cityOptions = ['上海', '北京', '广州', '深圳'];
     export default {
         name: "standard-challenge-information",
         props:{
           sta:{
             type:Array,
-          }
+          },
+          cities:{
+            type:Array,
+          }, //选择投标人
+          tableData:{
+            type:Array,  //标中质询信息列表
+          },
+          bzzxLoading:{
+            type:Boolean,
+          }, //标中质询loading
         },
       data() {
         return {
           count:'5',   //倒计时5秒
           radio:'1',  //弹框推进去得单选框
-          tableData: [
-            //{"bidder":111}
-          ],
+          // tableData: [
+          //   //{"bidder":111}
+          // ],
           ruleForm: {
             date1: '',
             type: [],
@@ -138,7 +149,9 @@
             desc: [
               {required: true, message: '质询内容不允许为空！', trigger: 'blur'}
             ]
-          }
+          },
+          
+          
         }
       },
       mounted(){
@@ -202,6 +215,7 @@
                     'requestReplyTime':this.ruleForm.date1,
                   });
                  console.log(this.tableData,8888);
+                 
                 }
                 //this.$refs[formName].resetFields();   //初始化表单的值
                 this.ruleForm.date1="";   //初始化时间得值

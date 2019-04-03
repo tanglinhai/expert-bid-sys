@@ -317,17 +317,27 @@
                 } else if (val === 'b') {//交通费标准
                     //alert('0')
                     this.dialogStandardChallengeInformation=true;
+                    this.bzzxLoading=true;
+                     this.$axios.post('/api/StandardChallengeList',{
+                        }).then(res=>{
+                            if(res.status == 200){
+                                //console.log(res.data)
+                               this.cities=res.data.cityOptions;
+                               this.tableData=res.data.standList;
+                               this.bzzxLoading=false;
+                            }
+                    })
                 } else if (val === 'c') {//报销汇总表
                     //alert('2')
-                    window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
+                   window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
                     //alert('3')
-                    window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
+                    window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    window.open('http://localhost:7000/SignaturePage', '_blank',);
+                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     //alert('5')
-                    window.open('http://localhost:7000/SignaturePage', '_blank',);
+                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
                 }
             },
             /*------------------------评审汇总-----------------*/
