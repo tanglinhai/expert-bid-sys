@@ -55,8 +55,8 @@
                       <div class="content_width">
                           <div id="svgDiv">  
                               <!-- <img style="float:left;width:100%; position:relative!important;cursor: pointer;" src="" type="image/svg+xml" class="svgimg div1" id="testsvg"/>   -->
-                              <img class="imgsvgRightone" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
-                              <img class="imgsvgRighttwo" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
+                              <img class="imgsvgRightone svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
+                              <img class="imgsvgRighttwo svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
                           </div>  
                       </div>
                   </div>
@@ -157,11 +157,11 @@ export default {
         download_files_key: '/js/plugins/bootstrap/js/url.js',
         callback: this.init
     });
-    this.$commonJs.getScriptFile.call(this, {
-        url: '/js/plugins/bootstrap/js/index1.js',
-        download_files_key: '/js/plugins/bootstrap/js/index1.js',
-        callback: this.init
-    });
+    // this.$commonJs.getScriptFile.call(this, {
+    //     url: '/js/plugins/bootstrap/js/index1.js',
+    //     download_files_key: '/js/plugins/bootstrap/js/index1.js',
+    //     callback: this.init
+    // });
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
         download_files_key: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
@@ -208,6 +208,7 @@ export default {
             }
         })
     },
+    
 
   },
 
@@ -225,16 +226,43 @@ export default {
             cursorborder:"0",  
             cursorborderradius:"3px"  
         }); 
+        $(".div1").Tdrag();
+        //如果浏览器不支持SVG图片，则会转为PNG  
+        $('.svgimg').svgmagic();  
+        $(".svgZoomBtn").click(function(){ 
+            var zoom = $(this).attr("zoom");  
+            var svgId = $(this).attr("svg");  
+            var cWidth = $("#"+svgId).width();  
+            var cHeight = $("#"+svgId).height(); 
+            if(zoom>0){  
+                cWidth += cWidth*0.2;  
+                cHeight += cHeight*0.2;
+                if(cWidth>=$("#svgDiv").width()){
+                    $(".content_width").width(3000);
+                }
+            }else if(zoom<0){  
+                cWidth -= cWidth*0.2;  
+                cHeight -=  cHeight*0.2;  
+            }
+            $("#"+svgId).width(cWidth);  
+            $("#"+svgId).height(cHeight);  
+        })
     },1000)
     $(document).on('click','.personUl li:even',function(){
+        $(".btnsFixed").show();
          $(".imgsvgRighttwo").hide();
          $(".imgsvgRightone").show();
     })
     
     $(document).on('click','.personUl li:odd',function(){
+        $(".btnsFixed").show();
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
+    $(document).ready(function(){  
+        
+        
+    });
   },
   watch:{
    
@@ -242,27 +270,5 @@ export default {
   }
 }
     
-    // $(document).ready(function(){  
-    //     $(".div1").Tdrag();
-    //     //如果浏览器不支持SVG图片，则会转为PNG  
-    //     $('.svgimg').svgmagic();  
-    //     $(".svgZoomBtn").click(function(){ 
-    //         var zoom = $(this).attr("zoom");  
-    //         var svgId = $(this).attr("svg");  
-    //         var cWidth = $("#"+svgId).width();  
-    //         var cHeight = $("#"+svgId).height(); 
-    //         if(zoom>0){  
-    //             cWidth += cWidth*0.2;  
-    //             cHeight += cHeight*0.2;
-    //             if(cWidth>=$("#svgDiv").width()){
-    //                 $(".content_width").width(3000);
-    //             }
-    //         }else if(zoom<0){  
-    //             cWidth -= cWidth*0.2;  
-    //             cHeight -=  cHeight*0.2;  
-    //         }
-    //         $("#"+svgId).width(cWidth);  
-    //         $("#"+svgId).height(cHeight);  
-    //     })
-    // });
+    
 </script>
