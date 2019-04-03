@@ -211,10 +211,15 @@ let StandardChallengeList=Mock.mock('/api/StandardChallengeList','post',{
         inquiryConten:['111','222','444','333'],
         questionTime:()=>Random.date()+Random.time(),
         requestReplyTime:()=>Random.date(),
-        bidder:()=>csentence(3,15),
+        bidder:()=>Random.csentence(3,15),
 
     }],
-    
+    cityOptions: ['重庆网控科技发展有限公司', '普瑞太阳能有限公司', '夏丰热工研究院有限公司'],
+})
+/*提交按钮的接口*/
+let StandardChallengeTijiao=Mock.mock('/api/StandardChallengeTijiao','post',{
+    code: 200,
+    data: [1234]
 })
 //标中质询信息列表(standardChallengeinformation.vue)
 
