@@ -23,7 +23,6 @@
           rules: {
             desc: [
               { required: true, message: '请填写内容废标理由!', trigger: 'blur' },
-
             ]
           },
           dialogGuanBi:false, //当前弹框关闭

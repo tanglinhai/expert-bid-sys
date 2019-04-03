@@ -40,17 +40,18 @@
                                         <h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>
                                     </div>
                                 </el-col>
-                                <el-col :span="12" class="textAlignR btns" v-if="!this.$store.state.failureEnery.is_pingshen_show" >
+                                <el-col :span="12" class="textAlignR btns"
+                                        v-if="!this.$store.state.failureEnery.is_pingshen_show">
                                     <el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审</el-button>
-                                    <el-button type="primary" size="small" @click="submit_btn" > 提交</el-button>
+                                    <el-button type="primary" size="small" @click="submit_btn('ruleForm')"> 提交
+                                    </el-button>
                                     <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                     </el-button>
                                 </el-col>
-                                <el-col :span="12" class="textAlignR mian_btns"  v-else>
+                                <el-col :span="12" class="textAlignR mian_btns" v-else>
                                     <el-button @click="submited_goback" type="primary" size="small">返回</el-button>
                                 </el-col>
                             </el-row>
-
                             <el-row>
                                 <el-table
                                         :data="tableData"
@@ -80,18 +81,13 @@
                                 </el-table>
                             </el-row>
                             <el-row>
-                                <el-col :span="2">
-                                    <div class="grid-content bg-purple textSty mt10">
-                                        <p>其他说明：<br>
-                                            (1000字以内)
-                                        </p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="16">
-                                    <div class="grid-content bg-purple">
-                                        <el-input type="textarea" v-model="form.desc"></el-input>
-                                        <!--{{other_explain}}-->
-                                    </div>
+                                <el-col :span="18">
+                                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"
+                                             class="demo-ruleForm">
+                                        <el-form-item label="评标意见 (2000字之内)：" prop="desc">
+                                            <el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input" :disabled="is_disabled"></el-input>
+                                        </el-form-item>
+                                    </el-form>
                                 </el-col>
                             </el-row>
                         </div>
@@ -99,6 +95,7 @@
                 </el-col>
             </el-row>
         </div>
+        <!----------------------投标人排序调整--------------------->
         <el-dialog
                 title="投标人排序调整"
                 :visible.sync="$store.state.failureEnery.sort"
@@ -106,11 +103,9 @@
                 class="sortDialog"
         >
             <div class="sort">
-                <!----------------------投标人排序调整--------------------->
                 <div class="warp cf">
                     <div class="sortDiv fl">
                         <ul v-for="(item,index) in msg_box" class="sort_ul">
-
                             <li @click="getData(item,index,msg_box)" :key="item.key" :class="{'bc_66b': index === i}">
                                 {{item.company_name}}
                             </li>
@@ -130,13 +125,13 @@
                 </div>
             </div>
         </el-dialog>
+        <!----------------------报价计算--------------------->
         <el-dialog
                 title="报价计算"
                 :visible.sync="$store.state.failureEnery.bidEvaluation"
                 width="1000px"
         >
             <div class="BidEvaluation">
-                <!-- --------------------报价计算--------------------->
                 <div class="warp cf">
                     <template>
                         <el-table
@@ -183,7 +178,7 @@
                     </template>
                 </div>
                 <div class="textAlignC pt20">
-                    <el-button size="small" @click="bidEvaluation_submit" type="primary" ><i
+                    <el-button size="small" @click="bidEvaluation_submit" type="primary"><i
                             class="icon iconfont icon-baocun1 mr5"></i>提交
                     </el-button>
                     <el-button size="small" @click="bidEvaluation_reback" type="primary"><i
@@ -192,6 +187,7 @@
                 </div>
             </div>
         </el-dialog>
+        <!----------------------报价计算end--------------------->
         <el-dialog title="成功提示"
                    :visible.sync="$store.state.failureEnery.success_warning"
                    width="700px">
@@ -206,21 +202,21 @@
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
-            title="废标"
-            :visible.sync="dialogAbandonedTender"
-            width="700px"
-            >
+                title="废标"
+                :visible.sync="dialogAbandonedTender"
+                width="700px"
+        >
             <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
         <!--废标弹框-->
 
         <!--标中质询弹框-->
         <el-dialog
-            title="标中质询信息列表"
-            :visible.sync="dialogStandardChallengeInformation"
-            width="900px"
-            >
-            <StandardChallengeInformation ></StandardChallengeInformation>
+                title="标中质询信息列表"
+                :visible.sync="dialogStandardChallengeInformation"
+                width="900px"
+        >
+            <StandardChallengeInformation></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -258,8 +254,14 @@
                 options: [],//头部按钮
                 /* -------头部包信息end-----*/
                 other_explain: "",//其他说明
-                form: {
-                    desc: '222'
+                ruleForm: {
+                    desc: ''
+                },
+                rules: {
+                    desc: [
+                        {required: true, message: '评标意见不能为空!', trigger: 'blur'},
+                        {min: 1, max: 2000, message: '长度在 1 到 2000 个字符', trigger: 'blur'}
+                    ]
                 },
                 msg_data: [],//评审报价(子组件)
                 /*-----------------排序----------*/
@@ -271,10 +273,10 @@
                 /*--------------报价计算-----------------*/
                 table_data: [],//报价计算table数据
                 /*--------------报价计算end-----------------*/
-                a: [],//radio等于2的数组
-
-                dialogAbandonedTender:false, //废标
-                dialogStandardChallengeInformation:false,//标中质询信息表
+                a: [],//radio存在有效(1)的数组
+                dialogAbandonedTender: false, //废标
+                dialogStandardChallengeInformation: false,//标中质询信息表
+                is_disabled:false
             }
         },
         created() {
@@ -282,79 +284,89 @@
         },
         mounted() {
             this.init();
-            // $(".mian_btns ").hide();
-            // $(".btns ").show();
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                 this.$axios.post('/api/pingshen_huizong', {type:this.$route.query.type })
+                this.$axios.post('/api/pingshen_huizong', {type: this.$route.query.type})
                     .then(res => {
-                    if (res.status === 200) {
-                        this.name = res.data.bidMsg.name;
-                        this.baohao = res.data.bidMsg.baohao;
-                        this.biaoNum = res.data.bidMsg.biaoNum;
-                        this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
-                        this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
-                        this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
-                        this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
-                        this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
-                        this.$store.state.failureEnery.isshow = false;
-                        if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
-                            this.$store.state.failureEnery.isshow = true;
-                        } else {
+                        if (res.status === 200) {
+                            this.name = res.data.bidMsg.name;
+                            this.baohao = res.data.bidMsg.baohao;
+                            this.biaoNum = res.data.bidMsg.biaoNum;
+                            this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                            this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
+                            this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
+                            this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
+                            this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                             this.$store.state.failureEnery.isshow = false;
+                            if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
+                                this.$store.state.failureEnery.isshow = true;
+                            } else {
+                                this.$store.state.failureEnery.isshow = false;
+                            }
                         }
-                    }
-                    this.page_loading = false;
-                })
+                        this.page_loading = false;
+                    })
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    //alert('1');
-                    this.dialogAbandonedTender=true;
+                    this.dialogAbandonedTender = true;
                 } else if (val === 'b') {//交通费标准
-                    //alert('0')
-                    this.dialogStandardChallengeInformation=true;
+                    this.dialogStandardChallengeInformation = true;
                 } else if (val === 'c') {//报销汇总表
-                    //alert('2')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    //alert('3')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    //alert('5')
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 }
             },
             /*------------------------评审汇总-----------------*/
-            submit_btn() {//   提交
-                this.$axios.post('/api/pshz_tijiao', {type: this.$route.query.type,data: this.form.desc}).then(res => {
-                    if (res.status == 200) {
-                        this.options = res.data.vue_type;
-                        this.msg_data.forEach((m, i) => {
-                            if (m.radio == 2) {
-                                this.a.push(m.radio)
+            submit_btn(formName) {//提交
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.$axios.post('/api/pshz_tijiao', {
+                            type: this.$route.query.type,
+                            data: this.ruleForm.desc
+                        }).then(res => {
+                            if (res.status == 200) {
+                                this.options = res.data.vue_type;
+                                this.msg_data.forEach((m, i) => {
+                                    if (m.radio == 1) {
+                                        this.a.push(m.radio)
+                                    }
+                                });
+                                if (this.a.length != 0) {
+                                    // alert('有效选中');
+                                    this.$message({
+                                        message: '提交成功！',
+                                        type: 'success'
+                                    });
+                                    this.$store.state.failureEnery.is_pingshen_show = true;
+                                    this.is_disabled=true;
+                                } else {
+                                    this.$store.state.failureEnery.success_warning = true;
+                                }
                             }
-                        });
-                        if (this.a.length === 3) {
-                            this.$store.state.failureEnery.success_warning = true;
-                        } else {
-                            this.$store.state.failureEnery.success_warning = false;
-                            this.$store.state.failureEnery.is_pingshen_show = true;
-                            this.$message({
-                                message: '提交成功',
-                                type: 'success'
-                            });
-                        }
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
                     }
-                })
+                });
             },
             submited_goback() {//掉接口
-                this.$store.state.failureEnery.is_pingshen_show = true;
+                this.$axios.post('/api/pingshenhuizong_fanhui', {
+                }).then(res => {
+                    if (res.status == 200) {
+                        this.$store.state.failureEnery.is_pingshen_show = false;
+                        this.is_disabled=false;
+                    }
+                });
             },
             /*------------------------评审汇总end-----------------*/
             /*-----------排序弹框----------*/
@@ -368,7 +380,6 @@
                 this.$store.state.failureEnery.sort = false;
             },
             getData(a, index, msg_box) {//每一个排序的li
-                console.log(a, index, msg_box);
                 this.i = index;//点击上去的下标
                 this.obj = a;
                 this.sort_msg = msg_box;//当前的这个数据
@@ -405,12 +416,11 @@
                     }
                 })
             },
-            /*-----------排序弹框end----------*/
-
-            /*-------------报价计算----------------*/
+            /*------------------------------排序弹框end-----------------------------------------*/
+            /*-------------------------------报价计算弹框---------------------------------------*/
             radio_is_valid(radio, id, tableKey, index, msg_box) {//报价审核是否有效
-                // console.log(radio, id, tableKey, index, msg_box);
-                this.$axios.post('/api/radio_is_valid', 'post', {
+                // radio:radio选中的状态：1：有效、2：无效, id：当选选中id, tableKey当选选中行数据, index：下标, msg_box：当前的table表数据
+                this.$axios.post('/api/radio_is_valid', {
                     id: id,
                     type: radio,
                 }).then(res => {
@@ -424,16 +434,14 @@
                         }
                     }
                 });
-                // console.log(this.msg_data);
             },
-            bidEvaluation_submit() {// 报价计算
-                // console.log(this.msg_data);
-                this.$axios.post('/api/radio_is_valid_tijiao', 'post', {
+            bidEvaluation_submit() {// 报价计算弹框提交
+                this.$axios.post('/api/radio_is_valid_tijiao', {
                     data: this.msg_data
                 }).then(res => {
                     if (res.status == 200) {
                         this.$message({
-                            message: '提交成功',
+                            message: '最新报价保存完成！',
                             type: 'success'
                         });
                         this.$store.state.failureEnery.bidEvaluation = false;
@@ -520,10 +528,6 @@
                         .pad {
                             padding-left: 28px;
                         }
-                    }
-                    .textSty {
-                        line-height: 21px;
-                        padding-left: 15px;
                     }
                 }
             }

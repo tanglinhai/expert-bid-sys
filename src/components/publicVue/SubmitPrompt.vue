@@ -26,11 +26,15 @@
         },
          methods:{
             reback(){
-                console.log(this.name);
                 this.$store.state.failureEnery.submitPrompt=false;
             },
-            comfrim(){
-                this.$store.state.failureEnery.submitPrompt=false;
+            comfrim(){//确定提交
+                this.$axios.post('/api/all_submit_confirm').then(res => {
+                    if(res.status == '200'){
+                        this.$store.state.failureEnery.flag = false;
+                        this.$store.state.failureEnery.submitPrompt = false;
+                    }
+                })
             }
         }
     }

@@ -14,7 +14,8 @@
                 <div class="grid-content bg-purple">
                     <el-dropdown @command="handleCommand">
                         <el-button type="primary" size="small">
-                            <i class="icon iconfont icon-caozuo  mr3"></i>操作<i class="el-icon-arrow-down el-icon--right"></i>
+                            <i class="icon iconfont icon-caozuo  mr3"></i>操作<i
+                                class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="a">废标</el-dropdown-item>
@@ -51,7 +52,7 @@
                 </el-col>
                 <!--点击ztree树显示-->
                 <el-col class="right_warp" :span="21">
-                    <el-row class="progress_div">
+                    <el-row class="progress_div" >
                         <el-col :span="12">
                             <div class="grid-content bg-purple  cf">
                                 <div style="width:122px" class="my_progress_word fl">我的进度</div>
@@ -59,13 +60,35 @@
                             </div>
                         </el-col>
                         <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                            <el-button @click="allChecked" plain size="mini" type="primary"><i class="icon iconfont icon-ic_qualified  mr3"></i>全部合格</el-button>
-                            <el-button size="mini" type="primary" @click="allSubmit"> <i class="icon iconfont icon-tijiao  mr3"></i>全部提交</el-button>
+                            <el-button @click="allChecked" plain size="mini" type="primary"><i
+                                    class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                            </el-button>
+                            <el-button size="mini" type="primary" @click="allSubmit"><i
+                                    class="icon iconfont icon-tijiao  mr3"></i>全部提交
+                            </el-button>
                         </el-row>
                     </el-row>
                     <div class="weitijiao">
                         <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index" :id="item.name"
                              v-if="item.show==true||item.show==undefined">
+                            <!-------------分支进度条以及提交------------------>
+                            <el-row class="progress_div" v-if="$store.state.failureEnery.start_sublevel_show">
+                                <el-col :span="12">
+                                    <div class="grid-content bg-purple  cf">
+                                        <div style="width:122px" class="my_progress_word fl">进度：</div>
+                                        <el-progress :percentage="completePercent" class="progress fl"></el-progress>
+                                    </div>
+                                </el-col>
+                                <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                    <el-button @click="sublevelAllChecked" plain size="mini" type="primary"><i
+                                            class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                    </el-button>
+                                    <el-button size="mini" type="primary" @click="sublevelSubmit"><i
+                                            class="icon iconfont icon-tijiao  mr3"></i>提交
+                                    </el-button>
+                                </el-row>
+                            </el-row>
+                            <!-------------分支进度条以及提交end------------------>
                             <el-row class="title_msg">
                                 <el-col>
                                     <p class="commonTitle fs14  col65">
@@ -187,7 +210,8 @@
                 :visible.sync="$store.state.failureEnery.show"
                 width="700px"
         >
-            <FailureEntry @childByValue="childByValue"  :company_name="to_failure_entry_company_name" :answer="to_failure_entry_answer"></FailureEntry>
+            <FailureEntry @childByValue="childByValue" :company_name="to_failure_entry_company_name"
+                          :answer="to_failure_entry_answer"></FailureEntry>
         </el-dialog>
         <el-dialog
                 title="审查提示"
@@ -198,21 +222,21 @@
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
-            title="废标"
-            :visible.sync="dialogAbandonedTender"
-            width="700px"
-            >
+                title="废标"
+                :visible.sync="dialogAbandonedTender"
+                width="700px"
+        >
             <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
         <!--废标弹框-->
 
         <!--标中质询弹框-->
         <el-dialog
-            title="标中质询信息列表"
-            :visible.sync="dialogStandardChallengeInformation"
-            width="900px"
-            >
-            <StandardChallengeInformation ></StandardChallengeInformation>
+                title="标中质询信息列表"
+                :visible.sync="dialogStandardChallengeInformation"
+                width="900px"
+        >
+            <StandardChallengeInformation></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -232,10 +256,7 @@
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     export default {
-        props: {
-            type: Number,
-            default: 1
-        },
+        props: {},
         components: {
             FailureEntry,
             SubmitPrompt,
@@ -258,7 +279,7 @@
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
                 personalAuditFormBtn: "",
-                /* -------树形图-----*/
+                /* ----------------------------------树形图-------------------------*/
                 setting: {   //zTree配置
                     view: {
                         dblClickExpand: this.dblClickExpand,
@@ -273,25 +294,24 @@
                     }
                 },
                 zNodes: [],
-                /* -------树形图end-----*/
+                /* ---------------------------------树形图end------------------------*/
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
                 radioArr: [],//所有table的radio
-                type_btn:'',//导航传值类型
-                to_submit_prompt_name:"",//传给全部提交弹框的值
-                to_failure_entry_company_name:"",//传给不合格弹框的弹框的公司名
-                to_failure_entry_answer:"",//传给不合格弹框的弹框的问题
-
-                dialogAbandonedTender:false, //废标
-                dialogStandardChallengeInformation:false,//标中质询信息表
+                type_btn: '',//导航传值类型
+                to_submit_prompt_name: "",//传给全部提交弹框的值
+                to_failure_entry_company_name: "",//传给不合格弹框的弹框的公司名
+                to_failure_entry_answer: "",//传给不合格弹框的弹框的问题
+                dialogAbandonedTender: false, //废标
+                dialogStandardChallengeInformation: false,//标中质询信息表
             }
         },
-        created(){
-            if(this.$route.query.type==undefined){
-                this.type_btn=1;
-               }else{
-                this.type_btn=this.$route.query.type;
+        created() {
+            if (this.$route.query.type == undefined) {
+                this.type_btn = 1;
+            } else {
+                this.type_btn = this.$route.query.type;
             }
         },
         mounted() {
@@ -316,13 +336,13 @@
                         fillCount++;
                     }
                 }
-                return fillCount === 0 ? 0 : ((fillCount / this.radioArr.length).toFixed(3) * 100 ).toFixed(1);
+                return fillCount === 0 ? 0 : ((fillCount / this.radioArr.length).toFixed(3) * 100).toFixed(1);
             }
         },
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/table_msg',{type:this.type_btn}).then(res => {
+                this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
@@ -330,8 +350,7 @@
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
-                        this.to_submit_prompt_name=this.zNodes.name;
-                        console.log(this.zNodes,this.to_submit_prompt_name);//树形图父级的值
+                        this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
                         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
                         if (res.data.bidMsg.type === 0) {
@@ -350,10 +369,9 @@
                     this.page_loading = false;
                 })
             },
-            failuredRadio(radio, id, index, tableKey,obj,a) {//合格不合格
-                console.log(radio, id, index, tableKey,obj,a);
-                this.to_failure_entry_company_name=obj.name;
-                this.to_failure_entry_answer=a;
+            failuredRadio(radio, id, index, tableKey, obj, a) {//合格不合格
+                this.to_failure_entry_company_name = obj.name;
+                this.to_failure_entry_answer = a;
                 this.$axios.post('/api/isFailure_fhx', 'post', {
                     id: id,
                     type: radio
@@ -383,12 +401,11 @@
                 }
                 this.$store.state.failureEnery.show = false;
             },
-            allChecked() {//全选
-                this.$axios.post('/api/allChecked_fhx',  {
+            allChecked() {//全选（不用区分url）
+                this.$axios.post('/api/allChecked_fhx', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
-                        console.log("1")
                         for (var i = 0; i < this.radioArr.length; i++) {
                             this.radioArr[i].radio = '合格';
                         }
@@ -397,9 +414,7 @@
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 var isAllF = true;
-
                 for (var i = 0; i < this.radioArr.length; i++) {
-                    console.log(this.radioArr[i].radio);
                     if (!this.radioArr[i].radio) {
                         isAllF = false;
                         break;
@@ -408,23 +423,19 @@
                 return isAllF;
             },
             allSubmit() {
-                console.log(this.radioArr);
                 let url;
                 if (this.isAllFilled()) {
-                    if(this.type_btn==3){
-                        url='/api/alltijiao_fhx';
-                    }else if(this.type_btn==1){
-                        url='/api/alltijiao';
+                    if (this.type_btn == 3) {
+                        url = '/api/alltijiao_fhx';
+                    } else if (this.type_btn == 1) {
+                        url = '/api/alltijiao';
                     }
-                    else if(this.type_btn==5){
-                        url='/api/alltijiao_xxjs';
+                    else if (this.type_btn == 5) {
+                        url = '/api/alltijiao_xxjs';
                     }
-                    console.log(url,'77');
-                    this.$axios.post(url, {type:parseInt(this.type_btn)+ 1}).then(res => {
-                        console.log(res);
+                    this.$axios.post(url, {type: parseInt(this.type_btn) + 1}).then(res => {
                         if (res.status == 200) {
-                            this.options=res.data.vue_type;
-                            this.$store.state.failureEnery.flag = false;
+                            this.options = res.data.vue_type;
                             this.$store.state.failureEnery.submitPrompt = true;
                             $(".hide_btn").hide();
                         } else {
@@ -451,26 +462,25 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    //alert('1');
-                    this.dialogAbandonedTender=true;
+                    this.dialogAbandonedTender = true;
                 } else if (val === 'b') {//交通费标准
-                    //alert('0')
-                    this.dialogStandardChallengeInformation=true;
+                   this.dialogStandardChallengeInformation = true;
                 } else if (val === 'c') {//报销汇总表
-                    //alert('2')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    //alert('3')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    //alert('5')
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 }
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
+                console.log(event, treeId, treeNode);
+                if(treeNode.id!=1){
+                    this.$store.state.failureEnery.start_sublevel_show=true;
+                }
                 if (treeNode.children) {
                     this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
@@ -488,10 +498,11 @@
                 $(".personalAuditFormTable").hide();
             },
             dblClickExpand(treeId, treeNode) {
+                console.log(treeId, treeNode);
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            check_pdf(i, obj) {
+            check_pdf(i, obj) {//查看pdf
                 this.$axios.post('/api/check_pdf_fhx', 'post', {
                     id: obj.id
                 }).then(res => {
@@ -499,7 +510,11 @@
                         localStorage.setItem("checkCredential", JSON.stringify(res.data.basicMessage.url));
                     }
                 })
-            }
+            },
+            sublevelAllChecked(){
+
+            },
+            sublevelSubmit(){}
         }
     }
 </script>
@@ -583,9 +598,9 @@
                                 left: -65px;
                                 color: red;
                                 font-size: 15px !important;
-                                top:-17px;
+                                top: -17px;
                                 width: 100px;
-                              }
+                            }
                             .el-progress-bar {
                                 padding-right: 0;
                             }

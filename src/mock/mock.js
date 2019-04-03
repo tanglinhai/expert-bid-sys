@@ -157,8 +157,7 @@ let esta = Mock.mock('/api/esta', 'post', {
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
-
-    console.log(JSON.parse(options.body));
+    // console.log(JSON.parse(options.body));
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 1) {
         let ms = [];
@@ -1076,7 +1075,7 @@ function get_data(type,is_submit_type) {//type
     set_type();
     var a;
     a = set_type();
-    console.log(a);
+    // console.log(a);
     return [
         {
             value: '1',
@@ -1190,7 +1189,6 @@ let tijiao_xxjs = Mock.mock('/api/tijiao_xxjs', 'post', {
 });
 
 // 资格审查项汇总页面table接口
-
 Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     // console.log(JSON.parse(options.body));
     var msg = [];
@@ -1199,7 +1197,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     let is_tijaio=Random.integer(0, 1);
     for (var i = 0; i < Random.integer(3,8); i++) {
         msg.push({//报价评审弹框报价计算table
-            'id': () => Random.id(),
+            'id': Random.id(),
             'bid_name': "重庆网控科技发展有限公司",
             'tender_offer': Random.integer(100, 9999),
             'bid_price': Random.integer(100, 9999),
@@ -1280,6 +1278,20 @@ let sort_down = Mock.mock('/api/sort_down', 'post', {
 });
 //排序(提交)
 let sort_tijaio = Mock.mock('/api/sort_tijaio', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
+//树形图页面全部提交弹框点击确定接口
+let all_submit_confirm = Mock.mock('/api/all_submit_confirm','post',{
+    id: () => Random.id(),
+    code: 200,
+    message: '确定提交!',
+    data: []
+});
+
+//评审汇总的提交之后返回按钮接口
+let pingshenhuizong_fanhui = Mock.mock('/api/pingshenhuizong_fanhui', 'post', {
     code: 200,
     message: '保存成功!',
     data: []

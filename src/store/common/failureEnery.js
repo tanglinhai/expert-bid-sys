@@ -10,7 +10,7 @@ export default {
         bidEvaluation:false ,//报价评审（评审汇总）
         success_warning:false ,//成功提示
         submitPrompt:false ,//全部提交提示
-        startEvaluation_type:1,
-        is_pingshen_show:false,
+        is_pingshen_show:false,//评审页面是否提交
+        start_sublevel_show:false,//评标页面（树形图）进度条以及全选，提交按钮是否显示
     }
 }

@@ -162,21 +162,21 @@
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
-            title="废标"
-            :visible.sync="dialogAbandonedTender"
-            width="700px"
-            >
+                title="废标"
+                :visible.sync="dialogAbandonedTender"
+                width="700px"
+        >
             <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
         </el-dialog>
         <!--废标弹框-->
 
         <!--标中质询弹框-->
         <el-dialog
-            title="标中质询信息列表"
-            :visible.sync="dialogStandardChallengeInformation"
-            width="900px"
-            >
-            <StandardChallengeInformation ></StandardChallengeInformation>
+                title="标中质询信息列表"
+                :visible.sync="dialogStandardChallengeInformation"
+                width="900px"
+        >
+            <StandardChallengeInformation></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -233,8 +233,8 @@
                     desc: ''
                 },
                 type: '',//导航传值类型
-                dialogAbandonedTender:false, //废标
-                dialogStandardChallengeInformation:false,//标中质询信息表
+                dialogAbandonedTender: false, //废标
+                dialogStandardChallengeInformation: false,//标中质询信息表
             }
         },
         created() {
@@ -275,22 +275,17 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    //alert('1');
-                    this.dialogAbandonedTender=true;
+                    this.dialogAbandonedTender = true;
                 } else if (val === 'b') {//交通费标准
-                    //alert('0')
-                    this.dialogStandardChallengeInformation=true;
+                    this.dialogStandardChallengeInformation = true;
                 } else if (val === 'c') {//报销汇总表
-                    //alert('2')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    //alert('3')
                     window.open('http://localhost:7000/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    //alert('5')
-                    window.open('http://localhost:7000/SignaturePage', '_blank',);
+                     window.open('http://localhost:7000/SignaturePage', '_blank',);
                 }
             },
             checkUnlockRecord() {
@@ -300,22 +295,21 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {
-                 let url;
-                if(this.type==4){
-                    url='/api/tijiao_fhx';
-                }else if(this.type==2){
-                    url='/api/tijiao';
+                let url;
+                if (this.type == 4) {
+                    url = '/api/tijiao_fhx';
+                } else if (this.type == 2) {
+                    url = '/api/tijiao';
                 }
-                else if(this.type==6){
-                    url='/api/tijiao_xxjs';
+                else if (this.type == 6) {
+                    url = '/api/tijiao_xxjs';
                 }
                 this.$axios.post(url, {
                     data: this.form.desc,
-                    type:parseInt(this.type)+ 1
+                    type: parseInt(this.type) + 1
                 }).then(res => {
                     if (res.status == 200) {
                         this.options = res.data.vue_type;
-                        console.log(this.options);
                         this.$message({
                             message: '提交成功',
                             type: 'success'
