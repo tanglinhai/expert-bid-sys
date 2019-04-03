@@ -247,7 +247,7 @@ let SignaturePage = Mock.mock('/api/SignaturePage','post',{
                 fileId:() => Random.id(),
                 fileName:()=>Random.csentence(3,10),
                 gmt_modified:()=>Random.date()+Random.time(),
-                "fileStatus|1":['1','2','3'],  //1代表待签，2待完成，3完成
+                "fileStatus|1":['3'],  //1代表待签，2待完成，3完成
             }]
         },
         {"menuName":"我的会签文档",
@@ -256,10 +256,16 @@ let SignaturePage = Mock.mock('/api/SignaturePage','post',{
                 fileId:() => Random.id(),
                 fileName:()=>Random.csentence(3,10),
                 gmt_modified:()=>Random.date()+Random.time(),
-                'fileStatus|1':['1','2','3'],  //1代表待签，2待完成，3完成
+                'fileStatus|1':['3'],  //1代表待签，2待完成，3完成
             }]
         }
     ]
+});
+let statuss = Mock.mock('/api/status','post',{
+    "resultCode":200,
+    "resultMsg":"签名已过期",
+    "resultBody":null,
+    'userStampStatus|1':['1','0'],  //1代表已签名，0代表未签名
 })
 //SignaturePage签字数据接口
 

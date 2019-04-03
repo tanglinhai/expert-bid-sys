@@ -104,6 +104,7 @@
 
 </style>
 <script>
+import { setTimeout } from 'timers';
 export default {
   name: 'SignaturePage',
   data() {
@@ -205,6 +206,29 @@ export default {
                 this.projectPackageName=res.data.resultBody.projectPackageName;
                 this.userNickname=res.data.resultBody.userNickname;
                 this.fileMenuList=res.data.fileMenuList;
+                //console.log(this.fileMenuList)
+                
+            }
+        })
+    },
+
+    statuss(){   //判断是否签名状态接口
+        this.$axios.post('/api/status', 'post', {
+            // id: id,
+            // type: radio
+        }).then(res => {
+            if (res.data.resultCode == 200) {
+                if(res.data.userStampStatus==1){
+                    $("#more2").css({"display":"block"});
+                    $("#more").hide(); 
+                    setTimeout(function(){
+                        if($(".personUl li:last-child em").text()=="完成完成"||$(".personUl:last-child li:last-child em").text()=="完成"){
+                            $(".tishimsgs").hide();
+                        }else{
+                            $(".tishimsgs").show();
+                        }
+                    },2000)
+                }
             }
         })
     },
@@ -213,7 +237,8 @@ export default {
   },
 
   mounted(){
-    this.qianziContent(),  //签字列表和项目信息展示
+    this.qianziContent(),  //签字列表和项目信息展示 
+    this.statuss(), //判断是否签名状态接口
     this.autodivheight(),
     window.onresize=this.autodivheight(); 
     $("#sucai").height($(document.body).height()-240);
@@ -259,10 +284,7 @@ export default {
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
-    $(document).ready(function(){  
-        
-        
-    });
+   
   },
   watch:{
    

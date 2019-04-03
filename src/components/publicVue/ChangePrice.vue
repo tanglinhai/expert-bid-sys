@@ -95,7 +95,7 @@
                   class="mt5 table_form1"
                   :data="model.arr"
                   size="small"
-                  max-height="450"
+                  
                   style="width: 100%"
                   :default-sort="{prop: 'date', order: 'descending'}"
                   border>
@@ -179,7 +179,7 @@
                   class="mt5 table_form1"
                   :data="model.arrbusiness"
                   size="small"
-                  max-height="350"
+                  
                   style="width: 100%"
                   :default-sort="{prop: 'date', order: 'descending'}"
                   border>
