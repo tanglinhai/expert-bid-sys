@@ -212,8 +212,9 @@ let StandardChallengeList=Mock.mock('/api/StandardChallengeList','post',{
         questionTime:()=>Random.date()+Random.time(),
         requestReplyTime:()=>Random.date(),
         bidder:()=>csentence(3,15),
-        
-    }]
+
+    }],
+    
 })
 //标中质询信息列表(standardChallengeinformation.vue)
 
