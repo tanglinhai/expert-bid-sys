@@ -233,7 +233,6 @@
                     desc: ''
                 },
                 type: '',//导航传值类型
-
                 dialogAbandonedTender:false, //废标
                 dialogStandardChallengeInformation:false,//标中质询信息表
             }
@@ -301,7 +300,6 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {
-                console.log(parseInt(this.type) + 1);
                  let url;
                 if(this.type==4){
                     url='/api/tijiao_fhx';
