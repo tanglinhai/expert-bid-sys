@@ -172,19 +172,12 @@
 
         <!--标中质询弹框-->
         <el-dialog
-<<<<<<< HEAD
-                title="标中质询信息列表"
-                :visible.sync="dialogStandardChallengeInformation"
-                width="900px"
-        >
-            <StandardChallengeInformation></StandardChallengeInformation>
-=======
             title="标中质询信息列表"
             :visible.sync="dialogStandardChallengeInformation"
             width="900px"
             >
-            <StandardChallengeInformation :cities="cities" :tableData="tableData" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
->>>>>>> 89cd4f707c32e68f19bd977ae50bc90d46bc43a5
+            <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
+
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -244,7 +237,7 @@
                 dialogAbandonedTender:false, //废标
                 dialogStandardChallengeInformation:false,//标中质询信息表
                 cities:[],
-                tableData:[],
+                tableDataTwo:[],
                 bzzxLoading:true, //标中质询loading
             }
         },
@@ -294,7 +287,7 @@
                     }).then(res=>{
                         if(res.status == 200){
                             this.cities=res.data.cityOptions;
-                            this.tableData=res.data.standList;
+                            this.tableDataTwo=res.data.standList;
                             this.bzzxLoading=false;
                         }
                     })

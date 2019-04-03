@@ -216,7 +216,7 @@
                 :visible.sync="dialogStandardChallengeInformation"
                 width="900px"
         >
-            <StandardChallengeInformation></StandardChallengeInformation>
+            <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
         <el-dialog
@@ -241,7 +241,9 @@
         components: {
             // Sort,
             // BidEvaluation,
-            NavBar
+            NavBar,
+            AbandonedTender,   //废标  
+            StandardChallengeInformation,
         },
         data() {
             return {
@@ -276,6 +278,9 @@
                 a: [],//radio存在有效(1)的数组
                 dialogAbandonedTender: false, //废标
                 dialogStandardChallengeInformation: false,//标中质询信息表
+                cities:[],
+                tableDataTwo:[],
+                bzzxLoading:true, //标中质询loading
                 is_disabled:false
             }
         },
@@ -320,7 +325,7 @@
                     }).then(res=>{
                         if(res.status == 200){
                             this.cities=res.data.cityOptions;
-                            this.tableData=res.data.standList;
+                            this.tableDataTwo=res.data.standList;
                             this.bzzxLoading=false;
                         }
                     })
