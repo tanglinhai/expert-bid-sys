@@ -223,5 +223,45 @@ let StandardChallengeTijiao=Mock.mock('/api/StandardChallengeTijiao','post',{
 })
 //标中质询信息列表(standardChallengeinformation.vue)
 
+//SignaturePage签字数据接口
+let SignaturePage = Mock.mock('/api/SignaturePage','post',{
+    resultBody:{
+        id:824,
+        peojectCode:"0635-1909N1268",
+        projectId:'2c90816d69c6ef430169c6fc0ef700ab',
+        projectContactNumber:"16651183417",
+        projectContactPerson:'王进',
+        projectName:'tlh招标项目-最低价1',
+        projectPackageCode:"0635-1909N1268/1",
+        projectPackageName:'第一包',
+        projectStatus:1,
+        userCompany:"测试单位",
+        userId:"201805151502504763292886916",
+        userName:null,
+        userNickname:"1",   //名字
+    },
+    fileMenuList:[
+        {"menuName":"我的签名文档",
+            "fileList|1-6":[
+            {
+                fileId:() => Random.id(),
+                fileName:()=>Random.csentence(3,10),
+                gmt_modified:()=>Random.date()+Random.time(),
+                "fileStatus|1":['1','2','3'],  //1代表待签，2待完成，3完成
+            }]
+        },
+        {"menuName":"我的会签文档",
+            "fileList|3-6":[
+            {
+                fileId:() => Random.id(),
+                fileName:()=>Random.csentence(3,10),
+                gmt_modified:()=>Random.date()+Random.time(),
+                'fileStatus|1':['1','2','3'],  //1代表待签，2待完成，3完成
+            }]
+        }
+    ]
+})
+//SignaturePage签字数据接口
+
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })

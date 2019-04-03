@@ -8,7 +8,7 @@
           <div class="leaderWrap leaders" style="height:135px;">
               <a class="leader2"><span class="userName">新增专家一号</span></a>
               <button class="btn repairSign" data-target=".bs-example-modal-lg" style="background-image:none;text-indent:0px;display:none;" role="button">补签</button>
-                <a class="btn downBtn" href="#" role="button">下载全部</a>
+                <a style="margin-top:95px;" class="btn downBtn" href="#" role="button">下载全部</a>
                 <div class="btn-group btn-group-md bgBtn">
                     <!-- <button type="button" class="btn btn-warning dropdown-toggle allNameShow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="experName" title="">全 部</span>
@@ -18,7 +18,7 @@
                         
                     </ul> -->
                     <template>
-                        <el-select size="small" class="selectOptions" v-model="value"  @change="selectAll" placeholder="请选择" style="width:186px; border:1px solid #f79d3c; border-radius:3px;">
+                        <el-select size="small" class="selectOptions" v-model="value"  @change="selectAll" placeholder="请选择" style="width:180px; border:1px solid #f79d3c; border-radius:3px;">
                             <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -134,7 +134,8 @@
         .btn-group{
             height:40px!important; 
             float:right; 
-            margin-top:-215px!important;
+            margin-top:95px!important;
+            background:white;
         }
     }
     .selectOptions {

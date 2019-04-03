@@ -7,43 +7,29 @@
           </a>
           <div class="leaderWrap">
               <a class="leader" @click="goto('/LeaderSignaturePage')" target="_blank" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
-              <a class="leader2"><span class="userName">新增专家一号</span></a>
+              <a class="leader2"><span class="userName">{{userNickname}}</span></a>
           </div>
           <div class="zjList Gdscroll" id="sucai">
-              <div class="indexPerson">
-                    <h5>我的签名文档</h5>
+
+              <div class="indexPerson" v-for="(item,index) in fileMenuList" :key="index" :name="index">
+                    <h5>{{item.menuName}}</h5>
                     <div class="personTitle">
                         <span>文件名称</span>
                         <span>创建时间</span>
                         <span>状态</span>
                       </div>
-                      <ul class="personUl">
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                      <ul class="personUl" >
+                        <li v-for='(item2,index) in item.fileList' :key="index">
+                            <p>{{item2.fileName}}</p>
+                            <span>{{item2.gmt_modified}}</span>
+                            <em v-if="item2.fileStatus==1">待签</em>
+                            <em v-else-if="item2.fileStatus==2">待完成</em>
+                            <em class="emsuccess" v-else>完成</em>
+                        </li>
                      </ul>
                      <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
-              <div class="indexPerson">
-                    <h5>我的会签文档</h5>
-                    <div class="personTitle">
-                        <span>文件名称</span>
-                        <span>创建时间</span>
-                        <span>状态</span>
-                      </div>
-                      <ul class="personUl">
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                     </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
-              </div>
+
           </div>
       </div>
       <div class="col-md-9 contentRight">
@@ -56,10 +42,10 @@
                           <div class="col-xs-2">包名称:</div>
                       </div>
                       <div class="row projects" style="font-weight:bold; line-height:20px; font-size:16px;">
-                          <div class="col-xs-6">雄安施工项目总承包（施工类）001</div>
-                          <div class="col-xs-2">0635-1809G281</div>
-                          <div class="col-xs-2">0635-1809G281/1</div>
-                          <div class="col-xs-2">第1包</div>
+                          <div class="col-xs-6">{{projectName}}</div>
+                          <div class="col-xs-2">{{peojectCode}}</div>
+                          <div class="col-xs-2">{{projectPackageCode}}</div>
+                          <div class="col-xs-2">{{projectPackageName}}</div>
                       </div>
                   </div>
               </h5>
@@ -69,8 +55,8 @@
                       <div class="content_width">
                           <div id="svgDiv">  
                               <!-- <img style="float:left;width:100%; position:relative!important;cursor: pointer;" src="" type="image/svg+xml" class="svgimg div1" id="testsvg"/>   -->
-                              <img class="imgsvgRightone" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
-                              <img class="imgsvgRighttwo" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
+                              <img class="imgsvgRightone svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
+                              <img class="imgsvgRighttwo svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
                           </div>  
                       </div>
                   </div>
@@ -122,7 +108,12 @@ export default {
   name: 'SignaturePage',
   data() {
     return {
-      
+      projectName:'',
+      peojectCode:'',
+      projectPackageCode:'',
+      projectPackageName:'',
+      userNickname:'',
+      fileMenuList:[],
     };
   },
   components: {
@@ -166,11 +157,11 @@ export default {
         download_files_key: '/js/plugins/bootstrap/js/url.js',
         callback: this.init
     });
-    this.$commonJs.getScriptFile.call(this, {
-        url: '/js/plugins/bootstrap/js/index1.js',
-        download_files_key: '/js/plugins/bootstrap/js/index1.js',
-        callback: this.init
-    });
+    // this.$commonJs.getScriptFile.call(this, {
+    //     url: '/js/plugins/bootstrap/js/index1.js',
+    //     download_files_key: '/js/plugins/bootstrap/js/index1.js',
+    //     callback: this.init
+    // });
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
         download_files_key: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
@@ -201,10 +192,29 @@ export default {
             });
     },
 
+    qianziContent(){  //签字列表和项目信息展示
+        this.$axios.post('/api/SignaturePage', 'post', {
+            // id: id,
+            // type: radio
+        }).then(res => {
+            if (res.status == 200) {
+                //console.log(res.data)
+                this.projectName=res.data.resultBody.projectName;
+                this.peojectCode=res.data.resultBody.peojectCode;
+                this.projectPackageCode=res.data.resultBody.projectPackageCode;
+                this.projectPackageName=res.data.resultBody.projectPackageName;
+                this.userNickname=res.data.resultBody.userNickname;
+                this.fileMenuList=res.data.fileMenuList;
+            }
+        })
+    },
+    
+
   },
 
   mounted(){
-    this.autodivheight()
+    this.qianziContent(),  //签字列表和项目信息展示
+    this.autodivheight(),
     window.onresize=this.autodivheight(); 
     $("#sucai").height($(document.body).height()-240);
     setTimeout(function(){
@@ -216,15 +226,43 @@ export default {
             cursorborder:"0",  
             cursorborderradius:"3px"  
         }); 
+        $(".div1").Tdrag();
+        //如果浏览器不支持SVG图片，则会转为PNG  
+        $('.svgimg').svgmagic();  
+        $(".svgZoomBtn").click(function(){ 
+            var zoom = $(this).attr("zoom");  
+            var svgId = $(this).attr("svg");  
+            var cWidth = $("#"+svgId).width();  
+            var cHeight = $("#"+svgId).height(); 
+            if(zoom>0){  
+                cWidth += cWidth*0.2;  
+                cHeight += cHeight*0.2;
+                if(cWidth>=$("#svgDiv").width()){
+                    $(".content_width").width(3000);
+                }
+            }else if(zoom<0){  
+                cWidth -= cWidth*0.2;  
+                cHeight -=  cHeight*0.2;  
+            }
+            $("#"+svgId).width(cWidth);  
+            $("#"+svgId).height(cHeight);  
+        })
     },1000)
-    $(".personUl li:even").click(function(){
-        $(".imgsvgRighttwo").hide();
-        $(".imgsvgRightone").show();
+    $(document).on('click','.personUl li:even',function(){
+        $(".btnsFixed").show();
+         $(".imgsvgRighttwo").hide();
+         $(".imgsvgRightone").show();
     })
-    $(".personUl li:odd").click(function(){
+    
+    $(document).on('click','.personUl li:odd',function(){
+        $(".btnsFixed").show();
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
+    $(document).ready(function(){  
+        
+        
+    });
   },
   watch:{
    
@@ -232,27 +270,5 @@ export default {
   }
 }
     
-    // $(document).ready(function(){  
-    //     $(".div1").Tdrag();
-    //     //如果浏览器不支持SVG图片，则会转为PNG  
-    //     $('.svgimg').svgmagic();  
-    //     $(".svgZoomBtn").click(function(){ 
-    //         var zoom = $(this).attr("zoom");  
-    //         var svgId = $(this).attr("svg");  
-    //         var cWidth = $("#"+svgId).width();  
-    //         var cHeight = $("#"+svgId).height(); 
-    //         if(zoom>0){  
-    //             cWidth += cWidth*0.2;  
-    //             cHeight += cHeight*0.2;
-    //             if(cWidth>=$("#svgDiv").width()){
-    //                 $(".content_width").width(3000);
-    //             }
-    //         }else if(zoom<0){  
-    //             cWidth -= cWidth*0.2;  
-    //             cHeight -=  cHeight*0.2;  
-    //         }
-    //         $("#"+svgId).width(cWidth);  
-    //         $("#"+svgId).height(cHeight);  
-    //     })
-    // });
+    
 </script>
