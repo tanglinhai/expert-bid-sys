@@ -234,8 +234,6 @@
                     desc: ''
                 },
                 type: '',//导航传值类型
-
-
                 dialogAbandonedTender:false, //废标
                 dialogStandardChallengeInformation:false,//标中质询信息表
                 cities:[],

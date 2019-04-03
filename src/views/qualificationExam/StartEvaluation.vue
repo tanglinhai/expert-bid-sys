@@ -52,7 +52,7 @@
                 </el-col>
                 <!--点击ztree树显示-->
                 <el-col class="right_warp" :span="21">
-                    <el-row class="progress_div" >
+                    <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
                         <el-col :span="12">
                             <div class="grid-content bg-purple  cf">
                                 <div style="width:122px" class="my_progress_word fl">我的进度</div>
@@ -134,7 +134,7 @@
                                     <el-radio :label="scope.row.ra2">不合格</el-radio>
                                   </el-radio-group>
                                 </span>
-                                        <span style="margin-left: 10px;color:red;" v-else>
+                                 <span style="margin-left: 10px;color:red;" v-else>
                                      <span v-if="scope.row.radio == '合格'">合格</span>
                                      <span v-else>不合格</span>
                                  </span>
@@ -218,7 +218,7 @@
                 :visible.sync="$store.state.failureEnery.submitPrompt"
                 width="700px"
         >
-            <SubmitPrompt :name="to_submit_prompt_name"></SubmitPrompt>
+            <SubmitPrompt :name="to_submit_prompt_name" :pro_num="completePercent" :baohao="to_submit_prompt_baohao"></SubmitPrompt>
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
@@ -239,13 +239,6 @@
             <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
-        <el-dialog
-                title="审查提示"
-                :visible.sync="$store.state.failureEnery.submitPrompt"
-                width="700px"
-        >
-            <SubmitPrompt></SubmitPrompt>
-        </el-dialog>
     </div>
 </template>
 
@@ -301,6 +294,7 @@
                 radioArr: [],//所有table的radio
                 type_btn: '',//导航传值类型
                 to_submit_prompt_name: "",//传给全部提交弹框的值
+                to_submit_prompt_baohao: "",//传给全部提交弹框的值
                 to_failure_entry_company_name: "",//传给不合格弹框的弹框的公司名
                 to_failure_entry_answer: "",//传给不合格弹框的弹框的问题
                 dialogAbandonedTender: false, //废标
@@ -308,6 +302,8 @@
                 cities:[],
                 tableDataTwo:[],
                 bzzxLoading:true, //标中质询loading
+                son_all_checked:[],//子节点全选
+                son_all_che:[],//子节点全选
             }
         },
         created() {
@@ -349,6 +345,7 @@
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
+                        this.to_submit_prompt_baohao=this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
@@ -416,7 +413,7 @@
                 });
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
-                var isAllF = true;
+                let isAllF = true;
                 for (var i = 0; i < this.radioArr.length; i++) {
                     if (!this.radioArr[i].radio) {
                         isAllF = false;
@@ -490,27 +487,28 @@
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
                 console.log(event, treeId, treeNode);
-                if(treeNode.id!=1){
-                    this.$store.state.failureEnery.start_sublevel_show=true;
-                }
                 if (treeNode.children) {
-                    this.zNodes.children.forEach((m, i) => {
+                        this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
-                    })
-                } else {
-                    this.zNodes.children.forEach((m, i) => {
+                    });
+                    this.$store.state.failureEnery.start_sublevel_show=false;
+                    this.$store.state.failureEnery.parent_progress_show=true;
+                  } else {
+                    this.son_all_checked=treeNode.fristTableData.tableData;
+                     this.zNodes.children.forEach((m, i) => {
                         if (m.id == treeNode.id) {
                             this.$set(m, 'show', true)
                         } else {
                             this.$set(m, 'show', false)
                         }
-                    })
+                    });
+                    this.$store.state.failureEnery.start_sublevel_show=true;
+                    this.$store.state.failureEnery.parent_progress_show=false;
                 }
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
             },
             dblClickExpand(treeId, treeNode) {
-                console.log(treeId, treeNode);
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
@@ -524,9 +522,62 @@
                 })
             },
             sublevelAllChecked(){
+                this.$axios.post('/api/allChecked_son', {
+                    // id:id
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.son_all_checked.forEach((s, f) => {
+                              this.radioArr.forEach((h, j) => {
+                                 if(s.id==h.id){
+                                     this.son_all_che.push(h)
+                                     h.radio='合格'
+                                 }
 
+                            })
+                        })
+
+                    }
+                });
             },
-            sublevelSubmit(){}
+            son_isAllFilled() {////子级全部提交：判断radio是否选中，全部选择为true，反之为false
+                let isAllF = true;
+                for (var i = 0; i <this.son_all_che.length; i++) {
+                    if (!this.son_all_che[i].radio) {
+                        isAllF = false;
+                        break;
+                    }
+                }
+                return isAllF;
+            },
+            sublevelSubmit(){//子级全部提交
+                 if(this.son_isAllFilled()){
+                     this.$axios.post('/api/son_allchecked_submit', {
+                     }).then(res => {
+                         if (res.status == 200) {
+                             this.$store.state.failureEnery.submitPrompt = true;
+                         } else {
+                             this.$message({
+                                 message: '请选择合格/不合格',
+                                 center: true,
+                                 type: 'error',
+                             });
+                         }
+                     }).catch(() => {
+                         this.$message({
+                             message: '请选择合格/不合格',
+                             center: true,
+                             type: 'error',
+                         });
+                     })
+                }else{
+                     this.$message({
+                         message: '请选择合格/不合格',
+                         center: true,
+                         type: 'error',
+                     });
+                }
+
+            }
         }
     }
 </script>

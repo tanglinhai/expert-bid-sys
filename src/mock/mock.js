@@ -221,7 +221,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             radio: '',
                                             id: 3,
                                         }],
-
                                     },
                                 },
                                 {
@@ -349,9 +348,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             type: '7'
                         },
                     ],
-
-
-                },
+               },
                 msg: [{////个人形式审计表数据接口
                     number: '1',
                     date: '投标人名称',
@@ -1295,6 +1292,19 @@ let pingshenhuizong_fanhui = Mock.mock('/api/pingshenhuizong_fanhui', 'post', {
     code: 200,
     message: '保存成功!',
     data: []
+});
+
+//子节点全部选中接口
+let allChecked_son = Mock.mock('/api/allChecked_son', 'post', {
+    code: 200,
+    message: '成功!',
+    data: ''
+});
+//子节点全部选中提交
+let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
+    status: 200,
+    message: '成功!',
+    data: '',
 });
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 
