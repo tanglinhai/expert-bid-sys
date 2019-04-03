@@ -241,17 +241,11 @@
                     desc: ''
                 },
                 type: '',//导航传值类型
-<<<<<<< HEAD
-                dialogAbandonedTender: false, //废标
-                dialogStandardChallengeInformation: false,//标中质询信息表
-=======
-
                 dialogAbandonedTender:false, //废标
                 dialogStandardChallengeInformation:false,//标中质询信息表
                 cities:[],
                 tableData:[],
                 bzzxLoading:true, //标中质询loading
->>>>>>> 89cd4f707c32e68f19bd977ae50bc90d46bc43a5
             }
         },
         created() {

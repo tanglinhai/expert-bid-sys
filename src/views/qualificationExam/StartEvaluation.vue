@@ -521,9 +521,11 @@
                 })
             },
             sublevelAllChecked(){
-
+                alert(0)
             },
-            sublevelSubmit(){}
+            sublevelSubmit(){
+                alert(2)
+            }
         }
     }
 </script>
