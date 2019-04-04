@@ -103,56 +103,19 @@ module.exports = {
     }
 */
 
-    config.optimization= {
-        splitChunks: {
-            chunks: 'async',
-            // 大于30KB才单独分离成chunk
-            minSize: 30000,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            name: true,
-            cacheGroups: {
-                default: {
-                    priority: -20,
-                    reuseExistingChunk: true,
-                },
-                vendors: {
-                    name: 'vendors',
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    chunks: "all"
-                },
-                /*jquery: {
-                    name: 'jquery',
-                    chunks: 'all',
-                    // 对jquery进行单独优化，优先级较高
-                    priority: 20,
-                    test: function(module){
-                        var context = module.context;
-                        return context && context.indexOf('jquery') >= 0
-                    }
-                }*/
+    config.optimization = !debug ? {
+      minimize: false,
+      minimizer: [new optimizeCss({
+          cssProcessorOptions: {
+            map: {
+              inline: false,
+              annotation: true,
             }
-        },
-        /*minimizer: [
-            // js mini
-            new UglifyJsPlugin({
-              cache: true,
-              parallel: true,
-              sourceMap: true // set to true if you want JS source maps
-            }),
-            // css mini
-            new OptimizeCSSPlugin({
-              cssProcessorOptions: {
-                  parser: require('postcss-safe-parser'),
-                  discardComments: {
-                      removeAll: true
-                  },
-              },
-              cssProcessor: require('cssnano'),
-            })
-        ]*/
-    }
+          }
+      }),new uglifyjsPlugin({
+          sourceMap: true
+      })],
+    } : {}
   },
 
  // vue-loader 配置项
