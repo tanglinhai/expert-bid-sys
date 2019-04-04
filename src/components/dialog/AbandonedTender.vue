@@ -32,7 +32,7 @@
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              //console.log(this.$data.ruleForm)
+              console.log(this.$data.ruleForm)
               //alert('submit!');
               this.$confirm('废标后,将无法更改评审结果,确定要将本标包废标么?', '信息', {
                 confirmButtonText: '确认废标',
@@ -41,7 +41,7 @@
                 center: true
               }).then(() => {
                 this.$axios.post('/api/FeiBiao', 'post', {
-                    // id:id
+                    // desc:this.$data.ruleForm.desc
                 }).then(res => {
                     if (res.data.code == 200) {
                       this.$emit('sonToFather',this.dialogGuanBi);
