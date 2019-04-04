@@ -30,7 +30,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <NavBar :msg="options"></NavBar>
+            <NavBar :msg="options" :type="type_btn"></NavBar>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">

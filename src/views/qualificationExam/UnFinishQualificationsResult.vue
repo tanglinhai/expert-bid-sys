@@ -29,7 +29,7 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <NavBar :msg="options"></NavBar>
+            <NavBar :msg="options" :type="type"></NavBar>
             <el-row class="center_part">
                 <el-col :span="24">
                     <template>
