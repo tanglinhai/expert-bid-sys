@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row" v-loading="signatureLoading">
       <div class="col-md-3 contentLeft">
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
@@ -75,7 +75,7 @@
     <div class="indexFix">
         <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
         <a id="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
-        <a id="more2" href="javascript:;" download="" class="btn2">签名回执</a>
+        <a id="more2" href="http://localhost:7000/img/download.svc" download="" class="btn2">签名回执</a>
     </div>
 
     <!-- 模态框（Modal） -->
@@ -115,6 +115,7 @@ export default {
       projectPackageName:'',
       userNickname:'',
       fileMenuList:[],
+      signatureLoading:true,
     };
   },
   components: {
@@ -194,6 +195,7 @@ export default {
     },
 
     qianziContent(){  //签字列表和项目信息展示
+        this.signatureLoading=true;
         this.$axios.post('/api/SignaturePage', 'post', {
             // id: id,
             // type: radio
@@ -207,6 +209,7 @@ export default {
                 this.userNickname=res.data.resultBody.userNickname;
                 this.fileMenuList=res.data.fileMenuList;
                 //console.log(this.fileMenuList)
+                this.signatureLoading=false;
                 
             }
         })

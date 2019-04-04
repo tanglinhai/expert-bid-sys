@@ -363,7 +363,7 @@
                         label="操作">
                         <template slot-scope="scope">
                             <el-button @click="ChakanhandleClick(scope.row)" size="small"><i class="el-icon-document"></i>&nbsp;&nbsp;查看</el-button>
-                            <a class="ml15" href="http://localhost:7002/img/download.svc" download=""><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
+                            <a class="ml15" href="http://localhost:7000/img/download.svc" download=""><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
                         </template>
                     </el-table-column>
                     </el-table>

@@ -1,22 +1,15 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row" v-loading="signatureLoading">
       <div class="col-md-3 contentLeft">
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
           </a>
-          <div class="leaderWrap leaders" style="height:135px;">
-              <a class="leader2"><span class="userName">新增专家一号</span></a>
+          <div class="xialalist leaders">
+              <a class="leader2"><span class="userName">{{userNickname}}</span></a>
               <button class="btn repairSign" data-target=".bs-example-modal-lg" style="background-image:none;text-indent:0px;display:none;" role="button">补签</button>
-                <a style="margin-top:95px;" class="btn downBtn" href="#" role="button">下载全部</a>
+                <a class="btn downBtn" href="#" role="button">下载全部</a>
                 <div class="btn-group btn-group-md bgBtn">
-                    <!-- <button type="button" class="btn btn-warning dropdown-toggle allNameShow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="experName" title="">全 部</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" id="choose">
-                        
-                    </ul> -->
                     <template>
                         <el-select size="small" class="selectOptions" v-model="value"  @change="selectAll" placeholder="请选择" style="width:180px; border:1px solid #f79d3c; border-radius:3px;">
                             <el-option
@@ -31,54 +24,21 @@
                 </div>
           </div>
           <div class="zjList Gdscroll" id="sucai">
-              <div class="indexPerson" id="111">
-                    <h5 style="text-align:left!important; text-indent:14px;">专家一号会签文档</h5>
+              <div class="indexPerson" v-for="(item,index) in fileMenuList" :key="index" :name="index" :id="item.id">
+                    <h5 style="text-align:left!important; text-indent:14px;">{{item.menuName}}</h5>
                     <div class="personTitle">
                         <span>文件名称</span>
                         <span>创建时间</span>
                         <span>状态</span>
                       </div>
-                      <ul class="personUl">
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                     </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
-              </div>
-              <div class="indexPerson" id="222">
-                    <h5 style="text-align:left!important; text-indent:14px;">专家二号会签文档</h5>
-                    <div class="personTitle">
-                        <span>文件名称</span>
-                        <span>创建时间</span>
-                        <span>状态</span>
-                      </div>
-                      <ul class="personUl">
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                     </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
-              </div>
-              <div class="indexPerson" id="333">
-                    <h5 style="text-align:left!important; text-indent:14px;">专家三号会签文档</h5>
-                    <div class="personTitle">
-                        <span>文件名称</span>
-                        <span>创建时间</span>
-                        <span>状态</span>
-                      </div>
-                      <ul class="personUl">
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
-                        <li><p>资格审查汇总报表</p><span>2019-01-11 18:25:04</span><em>待完成</em></li>
+                      <ul class="personUl" >
+                        <li v-for='(item2,index) in item.fileList' :key="index" :id='item2.fileId'>
+                            <p>{{item2.fileName}}</p>
+                            <span>{{item2.gmt_modified}}</span>
+                            <em v-if="item2.fileStatus==1">待签</em>
+                            <em v-else-if="item2.fileStatus==2">待完成</em>
+                            <em class="emsuccess" v-else>完成</em>
+                        </li>
                      </ul>
                      <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
@@ -94,10 +54,10 @@
                           <div class="col-xs-2">包名称:</div>
                       </div>
                       <div class="row projects" style="font-weight:bold; line-height:20px; font-size:16px;">
-                          <div class="col-xs-6">雄安施工项目总承包（施工类）001</div>
-                          <div class="col-xs-2">0635-1809G281</div>
-                          <div class="col-xs-2">0635-1809G281/1</div>
-                          <div class="col-xs-2">第1包</div>
+                         <div class="col-xs-6">{{projectName}}</div>
+                          <div class="col-xs-2">{{peojectCode}}</div>
+                          <div class="col-xs-2">{{projectPackageCode}}</div>
+                          <div class="col-xs-2">{{projectPackageName}}</div>
                       </div>
                   </div>
               </h5>
@@ -107,8 +67,8 @@
                       <div class="content_width">
                           <div id="svgDiv">  
                               <!-- <img style="float:left;width:100%; position:relative!important;cursor: pointer;" src="" type="image/svg+xml" class="svgimg div1" id="testsvg"/>   -->
-                              <img class="imgsvgRightone" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
-                              <img class="imgsvgRighttwo" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
+                               <img class="imgsvgRightone svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/rightone.png" type="image/svg+xml"/>
+                              <img class="imgsvgRighttwo svgimg div1" id="testsvg" style="float:left;width:80%; position:relative!important;cursor: pointer; left:10%; display:none;" src="@/assets/img/righttwo.png" type="image/svg+xml"/>
                           </div>  
                       </div>
                   </div>
@@ -131,12 +91,21 @@
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
     .leaders{
+        position: relative; 
+        z-index: 5;
+        background: white;
         .btn-group{
             height:40px!important; 
             float:right; 
-            margin-top:95px!important;
             background:white;
         }
+        .leader2{
+            margin-top:0px;
+        }
+    }
+    #sucai{
+        position: relative;
+        z-index: 2;
     }
     .selectOptions {
         .el-input__inner{
@@ -169,7 +138,14 @@ export default {
           id:'333',
           label: '专家三号'
         }],
-        value: '全部'
+        value: '000',
+        projectName:'',
+        peojectCode:'',
+        projectPackageCode:'',
+        projectPackageName:'',
+        userNickname:'',
+        fileMenuList:[],
+        signatureLoading:true,
     };
   },
   components: {
@@ -213,11 +189,11 @@ export default {
         download_files_key: '/js/plugins/bootstrap/js/url.js',
         callback: this.init
     });
-    this.$commonJs.getScriptFile.call(this, {
-        url: '/js/plugins/bootstrap/js/index1.js',
-        download_files_key: '/js/plugins/bootstrap/js/index1.js',
-        callback: this.init
-    });
+    // this.$commonJs.getScriptFile.call(this, {
+    //     url: '/js/plugins/bootstrap/js/index1.js',
+    //     download_files_key: '/js/plugins/bootstrap/js/index1.js',
+    //     callback: this.init
+    // });
     this.$commonJs.getScriptFile.call(this, {
         url: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
         download_files_key: '/js/plugins/bootstrap/js/plugin/jquery.svgmagic.js',
@@ -243,36 +219,43 @@ export default {
     },
 
     selectAll(){
-        console.log()
+        console.log(this.value)
         if(this.value=="000"){
-            $("#111").show();
-            $("#222").show();
-            $("#333").show();
+            $(".indexPerson").show();
+        }else{
+            $(".indexPerson").hide();
+            $("#"+this.value).show();
         }
-        if(this.value=="111"){
-            $("#111").show();
-            $("#222").hide();
-            $("#333").hide();
-        }
-        if(this.value=="222"){
-            console.log(this.value)
-            $("#111").hide();
-            $("#222").show();
-            $("#333").hide();
-        }
-        if(this.value=="333"){
-            $("#111").hide();
-            $("#222").hide();
-            $("#333").show();
-        }
-    }
+    },
+    leaderList(){  //签字列表和项目信息展示
+        this.signatureLoading=true;
+        this.$axios.post('/api/leaderAllList', 'post', {
+            // id: id,
+            // type: radio
+        }).then(res => {
+            if (res.status == 200) {
+                //console.log(res.data)
+                this.projectName=res.data.resultBody.projectName;
+                this.peojectCode=res.data.resultBody.peojectCode;
+                this.projectPackageCode=res.data.resultBody.projectPackageCode;
+                this.projectPackageName=res.data.resultBody.projectPackageName;
+                this.userNickname=res.data.resultBody.userNickname;
+                this.fileMenuList=res.data.resultBody.fileMenuList;
+                //console.log(this.fileMenuList)
+                this.signatureLoading=false;
+                
+            }
+        })
+    },
+   
 
   },
 
   mounted(){
-    this.autodivheight()
+    this.leaderList(),  //签字列表和项目信息展示
+    this.autodivheight(),
     window.onresize=this.autodivheight(); 
-    $("#sucai").height($(document.body).height()-240);
+    $("#sucai").height($(document.body).height()-140);
     setTimeout(function(){
         $("#sucai").niceScroll({ 
             cursorcolor:"#348fe2",  
@@ -282,15 +265,42 @@ export default {
             cursorborder:"0",  
             cursorborderradius:"3px"  
         }); 
+        $(".div1").Tdrag();
+        //如果浏览器不支持SVG图片，则会转为PNG  
+        $('.svgimg').svgmagic();  
+        $(".svgZoomBtn").click(function(){ 
+            var zoom = $(this).attr("zoom");  
+            var svgId = $(this).attr("svg");  
+            var cWidth = $("#"+svgId).width();  
+            var cHeight = $("#"+svgId).height(); 
+            if(zoom>0){  
+                cWidth += cWidth*0.2;  
+                cHeight += cHeight*0.2;
+                if(cWidth>=$("#svgDiv").width()){
+                    $(".content_width").width(3000);
+                }
+            }else if(zoom<0){  
+                cWidth -= cWidth*0.2;  
+                cHeight -=  cHeight*0.2;  
+            }
+            $("#"+svgId).width(cWidth);  
+            $("#"+svgId).height(cHeight);  
+        })
     },1000)
-    $(".personUl li:even").click(function(){
-        $(".imgsvgRighttwo").hide();
-        $(".imgsvgRightone").show();
+    $(document).on('click','.personUl li:even',function(){
+        $(".btnsFixed").show();
+         $(".imgsvgRighttwo").hide();
+         $(".imgsvgRightone").show();
     })
-    $(".personUl li:odd").click(function(){
+    
+    $(document).on('click','.personUl li:odd',function(){
+        $(".btnsFixed").show();
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
+
+    
+   
   },
   watch:{
    
@@ -298,27 +308,5 @@ export default {
   }
 }
     
-    // $(document).ready(function(){  
-    //     $(".div1").Tdrag();
-    //     //如果浏览器不支持SVG图片，则会转为PNG  
-    //     $('.svgimg').svgmagic();  
-    //     $(".svgZoomBtn").click(function(){ 
-    //         var zoom = $(this).attr("zoom");  
-    //         var svgId = $(this).attr("svg");  
-    //         var cWidth = $("#"+svgId).width();  
-    //         var cHeight = $("#"+svgId).height(); 
-    //         if(zoom>0){  
-    //             cWidth += cWidth*0.2;  
-    //             cHeight += cHeight*0.2;
-    //             if(cWidth>=$("#svgDiv").width()){
-    //                 $(".content_width").width(3000);
-    //             }
-    //         }else if(zoom<0){  
-    //             cWidth -= cWidth*0.2;  
-    //             cHeight -=  cHeight*0.2;  
-    //         }
-    //         $("#"+svgId).width(cWidth);  
-    //         $("#"+svgId).height(cHeight);  
-    //     })
-    // });
+    
 </script>

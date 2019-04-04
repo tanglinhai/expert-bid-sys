@@ -247,7 +247,7 @@ let SignaturePage = Mock.mock('/api/SignaturePage','post',{
                 fileId:() => Random.id(),
                 fileName:()=>Random.csentence(3,10),
                 gmt_modified:()=>Random.date()+Random.time(),
-                "fileStatus|1":['3'],  //1代表待签，2待完成，3完成
+                "fileStatus|1":['1','2','3'],  //1代表待签，2待完成，3完成
             }]
         },
         {"menuName":"我的会签文档",
@@ -256,7 +256,7 @@ let SignaturePage = Mock.mock('/api/SignaturePage','post',{
                 fileId:() => Random.id(),
                 fileName:()=>Random.csentence(3,10),
                 gmt_modified:()=>Random.date()+Random.time(),
-                'fileStatus|1':['3'],  //1代表待签，2待完成，3完成
+                'fileStatus|1':['1','2','3'],  //1代表待签，2待完成，3完成
             }]
         }
     ]
@@ -268,6 +268,58 @@ let statuss = Mock.mock('/api/status','post',{
     'userStampStatus|1':['1','0'],  //1代表已签名，0代表未签名
 })
 //SignaturePage签字数据接口
+
+//leaderSignaturePage接口
+let leaderAll=Mock.mock('/api/leaderAllList','post',{
+    "resultBody":{
+            id:824,
+            peojectCode:"0635-1909N1268",
+            projectId:'2c90816d69c6ef430169c6fc0ef700ab',
+            projectContactNumber:"16651183417",
+            projectContactPerson:'王进',
+            projectName:'tlh招标项目-最低价1',
+            projectPackageCode:"0635-1909N1268/1",
+            projectPackageName:'第一包',
+            projectStatus:1,
+            userCompany:"测试单位",
+            userId:"201805151502504763292886916",
+            userName:null,
+            userNickname:"1",   //名字
+       
+        fileMenuList:[
+            {
+                "menuName":"专家一号",
+                id:"111",
+                "fileList":[
+                    {"fileName":"评审专家意见表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:37","fileId":32231},
+                    {"fileName":"评审报告","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32234},
+                    {"fileName":"评审专家声明书","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32237},
+                    {"fileName":"评审委员会签字表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32240},
+                    {"fileName":"评审汇总表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32243}
+                ]
+            },
+            {
+                "menuName":"专家三号",
+                id:"333",
+                "fileList":[
+                    {"fileName":"评审委员会签字表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32241},
+                    {"fileName":"评审汇总表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:38","fileId":32244}
+                ]
+            },
+            {
+                "menuName":"专家二号",
+                id:"222",
+                "fileList":[
+                    {"fileName":"响应性评审个人报表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:37","fileId":32218},
+                    {"fileName":"响应性评审汇总报表","fileStatus|1":['1','2','3'],"gmt_modified":"2019-03-28 16:23:37","fileId":32221},
+                   
+                ]
+            }
+        ]
+    }
+    
+})
+//leaderSignaturePage接口
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })
