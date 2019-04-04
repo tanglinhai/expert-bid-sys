@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>中招联合信息股份有限公司</title>
+  <meta name="description" content="Signature Pad - HTML5 canvas based smooth signature drawing using variable width spline interpolation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="../js/plugins/bootstrap/css/signature-pad.css">
+  <script src="../js/plugins/bootstrap/js/jquery1.7.2.js"></script>
+  <script src="../js/plugins/bootstrap/js/url.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39365077-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+        '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+    $(function () {
+      //获取url后缀得参数
+      // 水印
+      urltoken = getParam("Token");
+      // 获取项目名称 
+      function plusWrite() {
+        $.ajax({
+          url: url + "/project/info?token=" + urltoken,
+          type: "post",
+          dataType: "json",
+          success: function (data) {
+            $(".load").hide();
+            if (data.resultCode == 200) {
+              $(".proJectTitle div").text(data.resultBody.projectName);
+            } 
+          }
+        })
+      }
+      plusWrite();
+      $(document).ready(function(){
+        status();
+      })
+      $(window).resize(function(){
+        if($("#signature-pad").width()>$("#signature-pad").height()){
+          $("html,body").animate({"scrollTop": "45px"}, 500);
+        }
+      })
+      function status() {
+        $.ajax({
+          url: url + "/stamp/status?token=" + urltoken,
+          type: "post",
+          dataType: "json",
+          success: function (data) {
+            if (data.resultCode == "200") {
+              if (data.resultBody.userStampStatus == "1") {
+                $(".successHtml").slideDown(300).siblings().remove();
+                $(".titleMsg p img").attr("src", "../image/error.png");
+                $(".msgShow").text("您已签名，请勿重新签名").next().hide();
+                $(".msgShow").css("color", "red");
+              }
+            }
+          }
+        })
+      }
+      // 获取水印
+      var str = "";
+      for (var i = 0; i < 25; i++) {
+        str += '<div class="waterRep"></div>'
+      }
+      $(".bgCanBox").append(str);
+      function waterRepeat() {
+        $.ajax({
+          url: url + "/user/info?token=" + urltoken,
+          type: "post",
+          dataType: "json",
+          success: function (data) {
+            if (data.resultCode == 200) {
+              $(".waterRep").text(data.resultBody.userNickname);
+            }
+          }
+        })
+      }
+      waterRepeat();
+      var savePNGButton = document.getElementsByClassName('save')[0];
+      savePNGButton.addEventListener("click", function (event) {
+        if (signaturePad.isEmpty()) {
+          $(this).text("请签名")
+          setTimeout(function () {
+            $(".save").text("确定签名")
+          }, 2000)
+        } else {
+          var dataURL = signaturePad.toDataURL(),
+          img = new Image();
+          img.src = dataURL;
+          img.width = 80;
+          img.height = 80;
+          $(".showImg").append(img);
+          $(".modal").fadeIn("slow");
+        }
+      });
+      $(".cancel").click(function () {
+        $(".modal").fadeOut("slow");
+        $(".showImg").html("");
+      })
+
+      $(".saveImage").click(function () {
+        $('.load').show();
+        var dataURL = signaturePad.toDataURL(),
+          img = new Image();
+        img.src = dataURL;
+        img.onload = function () {
+          var originWidth = this.width;
+          var originHeight = this.height;
+          var lastWidth = 140 * 4;
+          var lastHeight = 80 * 4;
+          if (originWidth < lastWidth || originHeight < lastHeight) {
+            originWidth = lastWidth;
+            originHeight = lastHeight;
+          }
+          var canvas = document.createElement('canvas');
+          var context = canvas.getContext('2d');
+          canvas.width = lastWidth;
+          canvas.height = lastHeight;
+          context.clearRect(0, 0, lastWidth, lastHeight);
+          context.drawImage(img, 0, 0, lastWidth, lastHeight);
+          var newUrl = canvas.toDataURL('image/png', 0.9);
+          var data = newUrl,
+            index = data.lastIndexOf("\,");
+          data = data.substring(index + 1, data.length);
+          $.ajax({
+            url: url + "/stamp/userStamp?token=" + urltoken,
+            type: "post",
+            data: {
+              "data": data
+            },
+            dataType: "json",
+            success: function (data) {
+              $('.load').hide();
+              if (data.resultCode == 200) {
+                $(".successHtml").slideDown(300).siblings().remove();
+                $(".msgShow").text("提交成功")
+              } else {
+                $(".successHtml").slideDown(300).siblings().remove();
+                $(".titleMsg p img").attr("src", "../image/error.png");
+                $(".msgShow").text(data.resultMsg).next().hide();
+                $(".msgShow").css("color", "red");
+              }
+            }
+          })
+        }
+      })
+    })
+  </script>
+</head>
+<body onselectstart="return false">
+  <div class="header">
+    <div class="logo">
+      <img src="../js/plugins/bootstrap/image/logo.png" alt="中招LOGO">
+    </div>
+    <div class="proJectTitle">
+      <div></div>
+    </div>
+  </div>
+
+  <div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body">
+      <canvas width="100%" height="100%" id="mycanvas"></canvas>
+      <div class="bgCanBox"></div>
+    </div>
+    <div class="signature-pad--footer">
+      <div class="description">
+        <div>
+          <img src="../js/plugins/bootstrap/image/title.png" alt="签字警告标识">
+        </div>
+        <div>请签名不要超出签名区，并保持签字充满签字区域</div>
+      </div>
+
+      <div class="signature-pad--actions">
+        <div>
+          <button type="button" class="button clear" data-action="clear">清除重签</button>
+        </div>
+        <div>
+          <button type="button" class="button save" data-action="save-png">确定签名</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" style="display:none">
+    <div class="modalCont">
+      <div>
+        <img src="../js/plugins/bootstrap/image/title.png" alt="">
+      </div>
+      <div class="msgShow">提交后将无法修改签名，是否确认提交</div>
+      <div class="showImg"></div>
+      <div>
+        <button class="cancel">取消</button>
+        <button class="saveImage">确认</button>
+      </div>
+    </div>
+  </div>
+  <div class="successHtml" style="display:none">
+    <div class="title">
+      <div>
+        <img src="../js/plugins/bootstrap/image/logo.png" alt="">
+      </div>
+      <div class="proJectTitle">
+        <div></div>
+      </div>
+    </div>
+    <div class="titleMsg">
+      <p>
+        <img src="../js/plugins/bootstrap/image/success.png" alt="">
+      </p>
+      <b class="msgShow">提交成功</b>
+      <p>请在PC端进行下一步操作</p>
+    </div>
+  </div>
+  <div class="load" style="display:none">
+    <p>
+      <img src="../js/plugins/bootstrap/image/loading.gif" alt="">
+    </p>
+    <p>加载中请稍等</p>
+  </div>
+  <script src="../js/plugins/bootstrap/js/plugin/signature_pad.umd.js"></script>
+  <script src="../js/plugins/bootstrap/js/app.js"></script>
+</body>
+</html>

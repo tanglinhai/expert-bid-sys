@@ -92,7 +92,7 @@
                 </p>
                 <img src="@/assets/img/ewm.png" alt="">
                 <strong>如果签名已完成，该页面会自动刷新</strong>
-                <a target="_blank" class="ewm_lianjie" style="display:none;">电脑端签名</a>
+                <a target="_blank" href="http://localhost:7000/page/TelPage.html" class="ewm_lianjie" style="display:none;">电脑端签名</a>
             </div>
         </div>
     </div>
