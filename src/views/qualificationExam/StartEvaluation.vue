@@ -621,11 +621,7 @@
                     color: #fff !important;
                 }
             }
-            .line {
-                border: 1px solid #e5e9ec;
-                position: relative;
-                top: 50px;
-            }
+
             .center_part {
                 padding: 15px;
                 .left_examine {

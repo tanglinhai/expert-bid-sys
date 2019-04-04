@@ -66,7 +66,7 @@
                                         <span>评标委员会组长：{{evaluationLeader}}</span>
                                     </div>
                                 </el-col>
-                                <el-col :span="12">
+                                <el-col :span="12" class="mb10">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
                                         <span class="hide_div"><el-button size="small" plain
                                                                           @click="submit">提交</el-button>
@@ -127,10 +127,9 @@
                                         </p>
                                     </div>
                                 </el-col>
-                                <el-col :span="16">
+                                <el-col :span="16" class="mt15">
                                     <div class="grid-content bg-purple">
                                         <el-input type="textarea" v-model="form.desc"></el-input>
-                                        <!--{{other_explain}}-->
                                     </div>
                                 </el-col>
                             </el-row>
@@ -360,29 +359,7 @@
         .mainContentWarp {
             background: white;
             border-radius: 5px;
-            .btns_grounp {
-                .el-button + .el-button {
-                    margin-left: 15px;
-                }
-                .el-button--warning {
-                    background-color: #ff6600;
-                    border-color: #ff6600;
-                    border: 1px solid #ff6600;
-                }
-                .el-button--warning:hover {
-                    background: #ff8600 !important;
-                }
-                .el-button--warning[data-v-4774750c]:hover {
-                    background: #e47932 !important;
-                    border-color: #e47932 !important;
-                    color: #fff !important;
-                }
-            }
-            .line {
-                border: 1px solid #e5e9ec;
-                position: relative;
-                top: 50px;
-            }
+
             .center_part {
                 padding: 15px;
                 .pro_table {

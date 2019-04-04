@@ -1,14 +1,18 @@
 <template>
     <div class="nav_bar">
         <div class="line"></div>
-        <el-row class="textAlignC pt30 pb30 btns_grounp">
-            <el-button
-                    :type="item.type ==1 ? 'success':item.type ==3 ? 'info'  :
+        <el-row class="textAlignC pt30 pb30 btns_grounp" >
+            <!--<el-button-->
+                    <!--:type="item.type ==1 ? 'success':item.type ==3 ? 'info'  :-->
+                    <!--item.type ==2 ? 'warning': ''"-->
+                    <!--:disabled="item.type ==4"-->
+                    <!--round v-for="item in msg" :value="item.value" @click="changeView(item.value)"-->
+            <!--&gt;{{item.label }}-->
+            <!--</el-button>-->
+            <div :type="item.type ==1 ? 'success':item.type ==3 ? 'info'  :
                     item.type ==2 ? 'warning': ''"
-                    :disabled="item.type ==4"
-                    round v-for="item in msg" :value="item.value" @click="changeView(item.value)"
-            >{{item.label }}
-            </el-button>
+                 :disabled="item.type ==4"
+                 round v-for="item in msg" :value="item.value" @click="changeView(item.value)" class="style_div">{{item.label}}</div>
         </el-row>
     </div>
 </template>
@@ -73,7 +77,26 @@
     .line {
         border: 1px solid #e5e9ec;
         position: relative;
-        top: 50px;
+        top: 70px;
+    }
+    .style_div{
+        width: 200px;
+        height: 35px;
+        display: inline-block;
+        margin-right: 10px;
+        border: 1px solid #e8e8e8;
+        border-bottom: 0px;
+        color: #828282;
+        font-family: Verdana;
+        font-size: 14px;
+        line-height: 35px;
+        &:hover{
+            border: 1px solid #559ece;
+            border-bottom: 0px;
+            background-color: #bdf9ff;
+            font-weight: bold;
+            padding-top: 10px;
+        }
     }
 }
 </style>
