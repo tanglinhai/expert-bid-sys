@@ -1,18 +1,16 @@
 <template>
     <div class="nav_bar">
-        <div class="line"></div>
-        <el-row class="textAlignC pt30 pb30 btns_grounp" >
-            <!--<el-button-->
-                    <!--:type="item.type ==1 ? 'success':item.type ==3 ? 'info'  :-->
-                    <!--item.type ==2 ? 'warning': ''"-->
-                    <!--:disabled="item.type ==4"-->
-                    <!--round v-for="item in msg" :value="item.value" @click="changeView(item.value)"-->
-            <!--&gt;{{item.label }}-->
-            <!--</el-button>-->
-            <div :type="item.type ==1 ? 'success':item.type ==3 ? 'info'  :
-                    item.type ==2 ? 'warning': ''"
-                 :disabled="item.type ==4"
-                 round v-for="item in msg" :value="item.value" @click="changeView(item.value)" class="style_div">{{item.label}}</div>
+        <el-row class="textAlignC btns_grounp" >
+            <div v-for="item in msg" 
+                :class="item.value == type ? 'nav_item hov': 'nav_item'" 
+                @click="changeView(item)" >
+                <div :class="item.type == 4 ? 'item jinyong': 'item'">
+                     <span :class="item.type ==1 ? 'iconfont icon-wancheng green':
+                                    item.type ==3 ? 'iconfont icon-tbd-project-task-number'  :
+                                    item.type ==2 ? 'iconfont icon-jinhangzhong blue': 'iconfont icon-jinyong'"></span>
+                     {{item.label}}
+                 </div>
+            </div>
         </el-row>
     </div>
 </template>
@@ -21,8 +19,11 @@
     export default {
         name: "nav-bar",
         props:{
+            type: {
+                type: String
+            },
             msg: {
-                type:Array
+                type: Array
             }
         },
         data(){
@@ -31,7 +32,11 @@
             }
         },
         methods:{
-            changeView(i) {      //路由跳转传参函数
+            changeView(item) {      //路由跳转传参函数
+                if(item.type == 4){
+                    return;
+                }
+                var i = item.value;
                 // console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1");
@@ -56,47 +61,69 @@
 
 <style lang="scss">
 .nav_bar{
+    overflow: hidden;
+    margin: auto;
+    padding: 30px 0;
     .btns_grounp {
-        .el-button + .el-button {
-            margin-left: 15px;
-        }
-        .el-button--warning {
-            background-color: #ff6600;
-            border-color: #ff6600;
-            border: 1px solid #ff6600;
-        }
-        .el-button--warning:hover {
-            background: #ff8600 !important;
-        }
-        .el-button--warning[data-v-4774750c]:hover {
-            background: #e47932 !important;
-            border-color: #e47932 !important;
-            color: #fff !important;
-        }
+        height: 50px;
+        border-bottom: 1px solid #c3c3c3;
     }
-    .line {
-        border: 1px solid #e5e9ec;
+    .nav_item{
         position: relative;
-        top: 70px;
-    }
-    .style_div{
         width: 200px;
-        height: 35px;
+        height: 50px;
         display: inline-block;
         margin-right: 10px;
-        border: 1px solid #e8e8e8;
-        border-bottom: 0px;
-        color: #828282;
-        font-family: Verdana;
-        font-size: 14px;
-        line-height: 35px;
-        &:hover{
-            border: 1px solid #559ece;
-            border-bottom: 0px;
-            background-color: #bdf9ff;
-            font-weight: bold;
-            padding-top: 10px;
+        .item{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border: 1px solid #c3c3c3;
+            border-radius: 4px 4px 0 0;
+            color: #606266;
+            font-family: Verdana;
+            font-size: 14px;
+            height: 35px;
+            line-height: 35px;
+            transition: height,line-height .5s,.5s;
+            cursor: pointer;
+            .iconfont {
+                font-size: 14px;
+            }
+            .green{
+                color: #35D437;
+            }
+            .blue{
+                color: #409EFF;
+            }
+
+            &:hover{
+                height: 42px;
+                line-height: 42px;
+                border: 1px solid #606266;
+                border-bottom: 1px solid #c3c3c3;
+            }
         }
+        .jinyong{
+            color: #909090;
+            cursor: default;
+            &:hover{
+                height: 35px;
+                line-height: 35px;
+                border: 1px solid #606266;
+                border-bottom: 1px solid #c3c3c3;
+            }
+        }
+    }
+    .hov{
+        .item{
+            height: 42px;
+            line-height: 42px;
+            border: 1px solid #606266;
+            border-bottom: 1px solid #c3c3c3;
+        }
+        
     }
 }
 </style>
