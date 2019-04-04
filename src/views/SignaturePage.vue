@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" v-loading="signatureLoading">
+    <div class="row" >
       <div class="col-md-3 contentLeft">
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
@@ -9,7 +9,7 @@
               <a class="leader" @click="goto('/LeaderSignaturePage')" target="_blank" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
               <a class="leader2"><span class="userName">{{userNickname}}</span></a>
           </div>
-          <div class="zjList Gdscroll" id="sucai">
+          <div class="zjList Gdscroll" id="sucai" v-loading="signatureLoading">
 
               <div class="indexPerson" v-for="(item,index) in fileMenuList" :key="index" :name="index">
                     <h5>{{item.menuName}}</h5>
@@ -223,16 +223,19 @@ export default {
         }).then(res => {
             if (res.data.resultCode == 200) {
                 if(res.data.userStampStatus==1){
+                    this.qianziContent(),  //签字列表和项目信息展示 
                     $("#more2").css({"display":"block"});
                     $("#more").hide(); 
                     setTimeout(function(){
                         if($(".personUl li:last-child em").text()=="完成完成"||$(".personUl:last-child li:last-child em").text()=="完成"){
                             $(".tishimsgs").hide();
+                            
                         }else{
                             $(".tishimsgs").show();
                         }
                     },2000)
                 }
+                
             }
         })
     },
@@ -241,6 +244,12 @@ export default {
   },
 
   mounted(){
+    var timer;        
+    var _this=this;
+    // timer = setInterval(function(){
+    //     _this.statuss();
+    // },3000)
+
     this.qianziContent(),  //签字列表和项目信息展示 
     this.statuss(), //判断是否签名状态接口
     this.autodivheight(),
@@ -276,21 +285,6 @@ export default {
             $("#"+svgId).width(cWidth);  
             $("#"+svgId).height(cHeight);  
         })
-
-        // var qrcode = new QRCode(document.getElementById("qrcode"), {
-        //     width : 270,
-        //     height : 270
-        // });
-        // function makeCode () {		
-        //     var elText = document.getElementById("text");
-        //     if (!elText.value) {
-        //         alert("Input a text");
-        //         elText.focus();
-        //         return;
-        //     }
-        //     qrcode.makeCode(elText.value);
-        // }
-        // makeCode ();
     },1000)
    $("#more").click(function(){    //签名按钮
         $(".model_tk").show();
