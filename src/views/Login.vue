@@ -336,18 +336,6 @@ export default {
               }
           })
       })
-      var fullscreen = function() {
-          var elem = document.body;
-          if (elem.webkitRequestFullScreen) {
-              elem.webkitRequestFullScreen();
-          } else if (elem.mozRequestFullScreen) {
-              elem.mozRequestFullScreen();
-          } else if (elem.requestFullScreen) {
-              elem.requestFullscreen();
-          } else {
-              //浏览器不支持全屏API或已被禁用  
-          }
-      }
     }
 
   },

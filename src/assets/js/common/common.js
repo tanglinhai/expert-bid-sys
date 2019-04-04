@@ -176,6 +176,22 @@ export default {
             return -1; //不是ie浏览器
         }
     },
+
+    /**
+     * [fullscreen 全屏函数]
+     */
+    fullscreen() {
+        var elem = document.body;
+        if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.requestFullScreen) {
+            elem.requestFullscreen();
+        } else {
+            //浏览器不支持全屏API或已被禁用  
+        }
+    },
     /**
      * [getCssFile 动态获取css文件]
      * @param  {[type]} params {

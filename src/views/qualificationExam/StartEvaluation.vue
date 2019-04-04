@@ -31,6 +31,7 @@
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
             <NavBar :msg="options" :type="type_btn"></NavBar>
+            <pdf :pdfUrl="currPdfUrl" ref="pdf"></pdf>
             <el-row class="center_part">
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
@@ -115,9 +116,8 @@
                                            <i class="el-icon-check mr5 "
                                               style="color: #67c23a"
                                               v-if="scope.row.radio=='合格'"></i>投标人：
-                                        <a @click="check_pdf(scope.$index, scope.row)" class="common_a_style"
-                                           href="/page/checkPDF/check_pdf.html" target="_blank"><i
-                                                class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                        <a @click="show_pdf(scope.$index, scope.row)" class="common_a_style">
+                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
                                             <i class="icon iconfont icon-pdf "></i>
                                         </a></span>
                                     </template>
@@ -256,6 +256,7 @@
             NavBar,
             AbandonedTender,   //废标  
             StandardChallengeInformation,
+            pdf: () => import('../../components/publicVue/Pdf')
         },
         data() {
             return {
@@ -304,6 +305,7 @@
                 bzzxLoading:true, //标中质询loading
                 son_all_checked:[],//子节点全选
                 son_all_che:[],//子节点全选
+                currPdfUrl: '',//当前点击pdf的url
             }
         },
         created() {
@@ -512,14 +514,9 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            check_pdf(i, obj) {//查看pdf
-                this.$axios.post('/api/check_pdf_fhx', 'post', {
-                    id: obj.id
-                }).then(res => {
-                    if (res.status === 200) {
-                        localStorage.setItem("checkCredential", JSON.stringify(res.data.basicMessage.url));
-                    }
-                })
+            show_pdf(i, obj) {//查看pdf
+                //this.$commonJs.fullscreen();
+                this.$refs.pdf.setPdf("/documents/younojsxia.pdf");
             },
             sublevelAllChecked(){
                 this.$axios.post('/api/allChecked_son', {

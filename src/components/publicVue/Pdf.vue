@@ -35,8 +35,11 @@ export default{
         });
     },
     methods:{
-        setPdf(){
-            var pdfUrl = "/documents/younojsxia.pdf";
+        setPdf(pdfUrl){
+            //var pdfUrl = this.pdfUrl// || "/documents/younojsxia.pdf";
+            if(!pdfUrl){
+                return;
+            }
             let pdfShow=$("#pdfShow");
             let options={
                 page:16,
