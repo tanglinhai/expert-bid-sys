@@ -11,8 +11,6 @@
                 <a href="/documents/younojsxia.pdf">下载PDF</a>
             </b>
         </div>
-        <div class="slideBar"><span class="iconfont icon-vertical-align-middl"></span></div>
-        <el-button class="exitFullMode" icon="iconfont icon-fullscreen-exit" size="mini">退出全屏模式</el-button>
     </div>
 </template>
 
@@ -80,7 +78,7 @@ export default{
             //chrome和FF、safrai等其他浏览器
                 return true;
             }
-        }
+        },
     }
 }
 </script>
@@ -92,9 +90,6 @@ export default{
     position: relative;
     #pdfShow{
         height: 100%;
-        padding-top: 15px;
-        margin-top: -15px;
-        box-sizing: border-box;
     }
     .tips_pdf{
         display: none;
@@ -114,32 +109,6 @@ export default{
             display: inline-block;
             margin-top:15px;
             margin-right: 142px;
-        }
-    }
-    .slideBar{
-        display: none;
-        height: 15px;
-        line-height: 15px;
-        background-color: #e6e6e6;
-        text-align: center;
-        cursor: n-resize;
-        transition: background-color,color .5s,.5s;
-        .iconfont{
-            font-size: 14px;
-        }
-        &:hover{
-            background-color: #37cac1;
-            color: #fff;
-        };
-    }
-    .exitFullMode{
-        display: none;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        .iconfont{
-            font-size: 13px !important;
-            padding-right: 2px;
         }
     }
 }
