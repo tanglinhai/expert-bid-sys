@@ -24,6 +24,7 @@
                             <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                             <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
                             <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                            <el-dropdown-item command="g">全屏操作</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -31,179 +32,181 @@
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
             <NavBar :msg="options" :type="type_btn"></NavBar>
-            <pdf :pdfUrl="currPdfUrl" ref="pdf"></pdf>
-            <el-row class="center_part">
-                <el-col class="left_examine  " :span="3">
-                    <el-row class="div_header">
-                        <el-col class="textAlignC mt20 mb15">
-                            <el-button type="primary" size="small" class="personalAuditFormBtn">
-                                <i class="icon iconfont icon-zigeshenchazhuti  mr3"></i>
-                                {{personalAuditFormBtn}}
-                            </el-button>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <h6 class="pl15  col747 pt15 pb10">审查项</h6>
-                        <div class="content_wrap">
-                            <div class="zTreeDemoBackground left">
-                                <ul id="treeDemo" class="ztree">{{msg}}</ul>
+            <div class="content pull_content">
+                <pdf :pdfUrl="currPdfUrl" ref="pdf"></pdf>
+                <el-row class="center_part">
+                    <el-col class="left_examine  " :span="3">
+                        <el-row class="div_header">
+                            <el-col class="textAlignC mt20 mb15">
+                                <el-button type="primary" size="small" class="personalAuditFormBtn">
+                                    <i class="icon iconfont icon-zigeshenchazhuti  mr3"></i>
+                                    {{personalAuditFormBtn}}
+                                </el-button>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <h6 class="pl15  col747 pt15 pb10">审查项</h6>
+                            <div class="content_wrap">
+                                <div class="zTreeDemoBackground left">
+                                    <ul id="treeDemo" class="ztree">{{msg}}</ul>
+                                </div>
+                            </div>
+                        </el-row>
+                    </el-col>
+                    <!--点击ztree树显示-->
+                    <el-col class="right_warp" :span="21">
+                        <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
+                            <el-col :span="12">
+                                <div class="grid-content bg-purple  cf">
+                                    <div style="width:122px" class="my_progress_word fl">我的进度</div>
+                                    <el-progress :percentage="completePercent" class="progress fl"></el-progress>
+                                </div>
+                            </el-col>
+                            <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                <el-button @click="allChecked" plain size="mini" type="primary"><i
+                                        class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                </el-button>
+                                <el-button size="mini" type="primary" @click="allSubmit"><i
+                                        class="icon iconfont icon-tijiao  mr3"></i>全部提交
+                                </el-button>
+                            </el-row>
+                        </el-row>
+                        <div class="weitijiao">
+                            <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index" :id="item.name"
+                                 v-if="item.show==true||item.show==undefined">
+                                <!-------------分支进度条以及提交------------------>
+                                <el-row class="progress_div" v-if="$store.state.failureEnery.start_sublevel_show">
+                                    <el-col :span="12">
+                                        <div class="grid-content bg-purple  cf">
+                                            <div style="width:122px" class="my_progress_word fl">进度：</div>
+                                            <el-progress :percentage="completePercent" class="progress fl"></el-progress>
+                                        </div>
+                                    </el-col>
+                                    <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                        <el-button @click="sublevelAllChecked" plain size="mini" type="primary"><i
+                                                class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                        </el-button>
+                                        <el-button size="mini" type="primary" @click="sublevelSubmit"><i
+                                                class="icon iconfont icon-tijiao  mr3"></i>提交
+                                        </el-button>
+                                    </el-row>
+                                </el-row>
+                                <!-------------分支进度条以及提交end------------------>
+                                <el-row class="title_msg">
+                                    <el-col>
+                                        <p class="commonTitle fs14  col65">
+                                            <span class="ml3 col409">{{item.fristTableData.question}}</span><span
+                                                class="ml3  col409">{{item.fristTableData.answer}}</span><span
+                                                class="ml15 mr10"> /</span><span
+                                                class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
+                                        </p>
+                                    </el-col>
+                                </el-row>
+                                <el-table
+                                        :data="item.fristTableData.tableData"
+                                        border
+                                        style="width: 100%;"
+                                        class="first_table"
+                                        :cell-style="rowStyle">
+                                    <el-table-column
+                                            prop="name"
+                                            label="名称">
+                                        <template slot-scope="scope">
+                                        <span style="margin-left: 10px">
+                                              <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                                 style="color: red"></i>
+                                               <i class="el-icon-check mr5 "
+                                                  style="color: #67c23a"
+                                                  v-if="scope.row.radio=='合格'"></i>投标人：
+                                            <a @click="show_pdf(scope.$index, scope.row)" class="common_a_style">
+                                                <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                                <i class="icon iconfont icon-pdf "></i>
+                                            </a></span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="pass"
+                                            label="是否合格">
+                                        <template slot-scope="scope">
+                                    <span style="margin-left: 10px" class="radios" v-if="$store.state.failureEnery.flag">
+                                      <el-radio-group
+                                              @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
+                                              ref="shet" v-model="scope.row.radio">
+                                        <el-radio :label="scope.row.ra1">合格</el-radio>
+                                        <el-radio :label="scope.row.ra2">不合格</el-radio>
+                                      </el-radio-group>
+                                    </span>
+                                     <span style="margin-left: 10px;color:red;" v-else>
+                                         <span v-if="scope.row.radio == '合格'">合格</span>
+                                         <span v-else>不合格</span>
+                                     </span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="kong"
+                                    >
+                                        <template slot-scope="scope">
+                                    <span style="margin-left: 10px">
+                                      {{scope.row.content}}
+                                    </span>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
                             </div>
                         </div>
-                    </el-row>
-                </el-col>
-                <!--点击ztree树显示-->
-                <el-col class="right_warp" :span="21">
-                    <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
-                        <el-col :span="12">
-                            <div class="grid-content bg-purple  cf">
-                                <div style="width:122px" class="my_progress_word fl">我的进度</div>
-                                <el-progress :percentage="completePercent" class="progress fl"></el-progress>
-                            </div>
-                        </el-col>
-                        <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                            <el-button @click="allChecked" plain size="mini" type="primary"><i
-                                    class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                            </el-button>
-                            <el-button size="mini" type="primary" @click="allSubmit"><i
-                                    class="icon iconfont icon-tijiao  mr3"></i>全部提交
-                            </el-button>
-                        </el-row>
-                    </el-row>
-                    <div class="weitijiao">
-                        <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index" :id="item.name"
-                             v-if="item.show==true||item.show==undefined">
-                            <!-------------分支进度条以及提交------------------>
-                            <el-row class="progress_div" v-if="$store.state.failureEnery.start_sublevel_show">
-                                <el-col :span="12">
-                                    <div class="grid-content bg-purple  cf">
-                                        <div style="width:122px" class="my_progress_word fl">进度：</div>
-                                        <el-progress :percentage="completePercent" class="progress fl"></el-progress>
-                                    </div>
-                                </el-col>
-                                <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                    <el-button @click="sublevelAllChecked" plain size="mini" type="primary"><i
-                                            class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                                    </el-button>
-                                    <el-button size="mini" type="primary" @click="sublevelSubmit"><i
-                                            class="icon iconfont icon-tijiao  mr3"></i>提交
-                                    </el-button>
-                                </el-row>
-                            </el-row>
-                            <!-------------分支进度条以及提交end------------------>
-                            <el-row class="title_msg">
-                                <el-col>
-                                    <p class="commonTitle fs14  col65">
-                                        <span class="ml3 col409">{{item.fristTableData.question}}</span><span
-                                            class="ml3  col409">{{item.fristTableData.answer}}</span><span
-                                            class="ml15 mr10"> /</span><span
-                                            class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
-                                    </p>
-                                </el-col>
-                            </el-row>
+                    </el-col>
+                    <!--点击个人形式审计表按钮显示-->
+                    <el-col class="personalAuditFormTable" :span="21">
+                        <div class="FormTableTitle">
+                            <span>分包号：0635-1909N987/1[第一包]</span>
+                            <span>评标委员会：0635-1909N987/1评委会</span>
+                        </div>
+                        <!--表格-->
+                        <template>
                             <el-table
-                                    :data="item.fristTableData.tableData"
-                                    border
-                                    style="width: 100%;"
-                                    class="first_table"
-                                    :cell-style="rowStyle">
+                                    :data="msgBox"
+                                    style="width: 100%">
                                 <el-table-column
-                                        prop="name"
-                                        label="名称">
-                                    <template slot-scope="scope">
-                                    <span style="margin-left: 10px">
-                                          <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
-                                             style="color: red"></i>
-                                           <i class="el-icon-check mr5 "
-                                              style="color: #67c23a"
-                                              v-if="scope.row.radio=='合格'"></i>投标人：
-                                        <a @click="show_pdf(scope.$index, scope.row)" class="common_a_style">
-                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
-                                            <i class="icon iconfont icon-pdf "></i>
-                                        </a></span>
-                                    </template>
+                                        prop="number"
+                                        align="center"
+                                        label="序号"
+                                        width="100">
                                 </el-table-column>
                                 <el-table-column
-                                        prop="pass"
-                                        label="是否合格">
-                                    <template slot-scope="scope">
-                                <span style="margin-left: 10px" class="radios" v-if="$store.state.failureEnery.flag">
-                                  <el-radio-group
-                                          @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
-                                          ref="shet" v-model="scope.row.radio">
-                                    <el-radio :label="scope.row.ra1">合格</el-radio>
-                                    <el-radio :label="scope.row.ra2">不合格</el-radio>
-                                  </el-radio-group>
-                                </span>
-                                 <span style="margin-left: 10px;color:red;" v-else>
-                                     <span v-if="scope.row.radio == '合格'">合格</span>
-                                     <span v-else>不合格</span>
-                                 </span>
-                                    </template>
+                                        prop="date"
+                                        align="center"
+                                        label="评审因素">
                                 </el-table-column>
                                 <el-table-column
-                                        prop="kong"
+                                        label="投标人"
+                                        align="center"
                                 >
-                                    <template slot-scope="scope">
-                                <span style="margin-left: 10px">
-                                  {{scope.row.content}}
-                                </span>
-                                    </template>
+                                    <el-table-column
+                                            prop="province"
+                                            align="center"
+                                            label="重庆网控科技发展有限公司">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="city"
+                                            align="center"
+                                            label="普瑞太阳能有限公司">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="name"
+                                            align="center"
+                                            label="夏丰热工研究院有限公司">
+                                    </el-table-column>
                                 </el-table-column>
                             </el-table>
-                        </div>
-                    </div>
-                </el-col>
-                <!--点击个人形式审计表按钮显示-->
-                <el-col class="personalAuditFormTable" :span="21">
-                    <div class="FormTableTitle">
-                        <span>分包号：0635-1909N987/1[第一包]</span>
-                        <span>评标委员会：0635-1909N987/1评委会</span>
-                    </div>
-                    <!--表格-->
-                    <template>
-                        <el-table
-                                :data="msgBox"
-                                style="width: 100%">
-                            <el-table-column
-                                    prop="number"
-                                    align="center"
-                                    label="序号"
-                                    width="100">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="date"
-                                    align="center"
-                                    label="评审因素">
-                            </el-table-column>
-                            <el-table-column
-                                    label="投标人"
-                                    align="center"
-                            >
-                                <el-table-column
-                                        prop="province"
-                                        align="center"
-                                        label="重庆网控科技发展有限公司">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="city"
-                                        align="center"
-                                        label="普瑞太阳能有限公司">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="name"
-                                        align="center"
-                                        label="夏丰热工研究院有限公司">
-                                </el-table-column>
-                            </el-table-column>
-                        </el-table>
-                        <el-row class="fs14 table_tips">
-                            <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
-                            </el-col>
-                            <el-col>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。</el-col>
-                        </el-row>
-                    </template>
-                </el-col>
-            </el-row>
+                            <el-row class="fs14 table_tips">
+                                <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
+                                </el-col>
+                                <el-col>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。</el-col>
+                            </el-row>
+                        </template>
+                    </el-col>
+                </el-row>
+            </div>
         </div>
         <el-dialog
                 title="不合格录入"
@@ -484,6 +487,8 @@
                     window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
+                } else if (val === 'g') {//全屏操作
+                    $('.content').addClass('pull_content');
                 }
             },
             /*----------------- zTree ----------------------*/
@@ -600,104 +605,114 @@
         .mainContentWarp {
             background: white;
             border-radius: 5px;
-            .btns_grounp {
-                .el-button + .el-button {
-                    margin-left: 15px;
-                }
-                .el-button--warning {
-                    background-color: #ff6600;
-                    border-color: #ff6600;
-                    border: 1px solid #ff6600;
-                }
-                .el-button--warning:hover {
-                    background: #ff8600 !important;
-                }
-                .el-button--warning[data-v-4774750c]:hover {
-                    background: #e47932 !important;
-                    border-color: #e47932 !important;
-                    color: #fff !important;
+            .content{
+                overflow:hidden;
+                .center_part {
+                    padding: 15px;
+                    .left_examine {
+                        background: #e4e9ec;
+                        border-radius: 10px;
+                        height: 820px;
+                        .div_header {
+                            border-bottom: 1px solid #bfc8cd;
+                        }
+                    }
+                    .right_warp {
+                        padding-left: 15px;
+                        border-radius: 5px;
+                        .progress_div {
+                            padding-top: 30px;
+                            padding-bottom: 10px;
+                            padding-left: 15px;
+                            font-size: 15px;
+                            .my_progress_word {
+                                width: 224px;
+                                color: red;
+                                line-height: 14px;
+                                margin-top: 2px;
+                            }
+                            .progress {
+                                width: 280px;
+                                .el-progress-bar__outer {
+                                    background-color: #ededed;
+                                    height: 15px !important;
+                                }
+                                .el-progress__text {
+                                    position: relative;
+                                    left: -65px;
+                                    color: red;
+                                    font-size: 15px !important;
+                                    top: -17px;
+                                    width: 100px;
+                                }
+                                .el-progress-bar {
+                                    padding-right: 0;
+                                }
+                            }
+                        }
+                        .title_msg {
+                            .commonTitle {
+                                font-size: 15px !important;
+                                margin-top: 20px;
+                            }
+                            .commonTitle:before {
+                                margin-top: -1px;
+                                margin-bottom: 20px;
+                            }
+                        }
+                        .first_table {
+                            .el-table__header-wrapper {
+                                display: none;
+                            }
+                        }
+                    }
+                    .personalAuditFormTable {
+                        display: none;
+                        padding-left: 15px;
+                        border-radius: 5px;
+                        .FormTableTitle {
+                            margin-bottom: 10px;
+                            span {
+                                font-size: 14px;
+                                margin-right: 20px;
+                            }
+                        }
+                        .table_tips {
+                            line-height: 23px;
+                            color: #606266;
+                            border-left: 1px solid #ebeef5;
+                            border-right: 1px solid #ebeef5;
+                            border-bottom: 1px solid #ebeef5;
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        }
+                    }
                 }
             }
+            .pull_content{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background: white;
 
-            .center_part {
-                padding: 15px;
-                .left_examine {
-                    background: #e4e9ec;
-                    border-radius: 10px;
-                    height: 820px;
-                    .div_header {
-                        border-bottom: 1px solid #bfc8cd;
+                #pdf{
+                    height: 60%;
+                    .pdfobject-container{
+                        height: 100%;
+                    }
+                    .slideBar{
+                        display: block;
+                    }
+                    .exitFullMode{
+                        display: block;
                     }
                 }
-                .right_warp {
-                    padding-left: 15px;
-                    border-radius: 5px;
-                    .progress_div {
-                        padding-top: 30px;
-                        padding-bottom: 10px;
-                        padding-left: 15px;
-                        font-size: 15px;
-                        .my_progress_word {
-                            width: 224px;
-                            color: red;
-                            line-height: 14px;
-                            margin-top: 2px;
-                        }
-                        .progress {
-                            width: 280px;
-                            .el-progress-bar__outer {
-                                background-color: #ededed;
-                                height: 15px !important;
-                            }
-                            .el-progress__text {
-                                position: relative;
-                                left: -65px;
-                                color: red;
-                                font-size: 15px !important;
-                                top: -17px;
-                                width: 100px;
-                            }
-                            .el-progress-bar {
-                                padding-right: 0;
-                            }
-                        }
-                    }
-                    .title_msg {
-                        .commonTitle {
-                            font-size: 15px !important;
-                            margin-top: 20px;
-                        }
-                        .commonTitle:before {
-                            margin-top: -1px;
-                            margin-bottom: 20px;
-                        }
-                    }
-                    .first_table {
-                        .el-table__header-wrapper {
-                            display: none;
-                        }
-                    }
-                }
-                .personalAuditFormTable {
-                    display: none;
-                    padding-left: 15px;
-                    border-radius: 5px;
-                    .FormTableTitle {
-                        margin-bottom: 10px;
-                        span {
-                            font-size: 14px;
-                            margin-right: 20px;
-                        }
-                    }
-                    .table_tips {
-                        line-height: 23px;
-                        color: #606266;
-                        border-left: 1px solid #ebeef5;
-                        border-right: 1px solid #ebeef5;
-                        border-bottom: 1px solid #ebeef5;
-                        padding-top: 5px;
-                        padding-bottom: 5px;
-                    }
+                .center_part {
+                    height: 40%;
+                    overflow-y: auto;
                 }
             }
         }

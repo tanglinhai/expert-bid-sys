@@ -11,6 +11,8 @@
                 <a href="/documents/younojsxia.pdf">下载PDF</a>
             </b>
         </div>
+        <div class="slideBar"><span class="iconfont icon-vertical-align-middl"></span></div>
+        <el-button class="exitFullMode" icon="iconfont icon-fullscreen-exit" size="mini">退出全屏模式</el-button>
     </div>
 </template>
 
@@ -24,7 +26,6 @@ export default{
         if(!pdfresult){
             $('#pdfShow').css('display','none');
             $('.tips_pdf').css('display','block');
-            console.log('----------------------------------------');
         }else{
             $('.tips_pdf').css('display','none');
         }
@@ -43,10 +44,12 @@ export default{
             let pdfShow=$("#pdfShow");
             let options={
                 page:16,
-                height: "800px",
+                width: "100%",
+                height: "100%",
                 forcePDFJS: true,
                 pdfOpenParams: {
                     toolbar:0,
+                    view:'FitH'
                  },
                 // fallbackLink: "<p>在线浏览PDF，您的浏览器需要安装adobe pdf阅读器,<a href='https://get.adobe.com/cn/reader/download/?installer=Reader_DC_2019.008.20071_Chinese_Simp_for__Windows&os=Windows%2010&browser_type=KHTML&browser_dist=Chrome&d=McAfee_Security_Scan_Plus_Chrome_Browser&dualoffer=false&mdualoffer=false&cr=false&stype=7752'>点击我安装adobePdf</a>,<br/>不安装，直接下载PDF文件使用本地阅读器浏览<a href='"+pdfUrl+"'>下载PDF文件</a></p>"
             };
@@ -85,11 +88,16 @@ export default{
 #pdf{
     background: #fff;
     height: 100%;
-
+    overflow: hidden;
+    position: relative;
     #pdfShow{
         height: 100%;
+        padding-top: 15px;
+        margin-top: -15px;
+        box-sizing: border-box;
     }
     .tips_pdf{
+        display: none;
         width: 37%;
         height: 115px;
         margin: 15px auto;
@@ -104,8 +112,34 @@ export default{
         }
         a{  
             display: inline-block;
-            margin-top:25px;
+            margin-top:15px;
             margin-right: 142px;
+        }
+    }
+    .slideBar{
+        display: none;
+        height: 15px;
+        line-height: 15px;
+        background-color: #e6e6e6;
+        text-align: center;
+        cursor: n-resize;
+        transition: background-color,color .5s,.5s;
+        .iconfont{
+            font-size: 14px;
+        }
+        &:hover{
+            background-color: #37cac1;
+            color: #fff;
+        };
+    }
+    .exitFullMode{
+        display: none;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        .iconfont{
+            font-size: 13px !important;
+            padding-right: 2px;
         }
     }
 }
