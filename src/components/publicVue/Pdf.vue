@@ -34,16 +34,17 @@ export default{
         });
     },
     methods:{
-        setPdf(pdfUrl){
+        setPdf({pdfUrl, loadingInstance} = {}){
             //var pdfUrl = this.pdfUrl// || "/documents/younojsxia.pdf";
             if(!pdfUrl){
                 return;
             }
             let pdfShow=$("#pdfShow");
             let options={
-                page:16,
+                page:1,
                 width: "100%",
-                height: "100%",
+                height: "auto",
+                PDFJS_URL: '/js/plugins/pdfjs-2.0.943/web/viewer.html',
                 forcePDFJS: true,
                 pdfOpenParams: {
                     toolbar:0,
@@ -51,7 +52,18 @@ export default{
                  },
                 // fallbackLink: "<p>在线浏览PDF，您的浏览器需要安装adobe pdf阅读器,<a href='https://get.adobe.com/cn/reader/download/?installer=Reader_DC_2019.008.20071_Chinese_Simp_for__Windows&os=Windows%2010&browser_type=KHTML&browser_dist=Chrome&d=McAfee_Security_Scan_Plus_Chrome_Browser&dualoffer=false&mdualoffer=false&cr=false&stype=7752'>点击我安装adobePdf</a>,<br/>不安装，直接下载PDF文件使用本地阅读器浏览<a href='"+pdfUrl+"'>下载PDF文件</a></p>"
             };
-            PDFObject.embed(pdfUrl, pdfShow, options);
+            setTimeout(function(){
+                PDFObject.embed(pdfUrl, pdfShow, options);
+                
+                /*pdfShow.find('.pdfobject').get(0).onreadystatechange = function(e){
+                    console.log(e, '====================================')
+                };*/
+                
+
+                /*this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+                  loadingInstance.close();
+                });*/
+            }, 1000);
         },
         isAcrobatPluginInstall() {
             //下面代码都是处理IE浏览器的情况 

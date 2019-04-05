@@ -552,9 +552,18 @@
             /*----------------- zTree end ----------------------*/
             show_pdf(i, obj) {//查看pdf
                 //this.$commonJs.fullscreen();
-                this.$refs.pdf.setPdf("/documents/younojsxia.pdf");
-                this.showPDF();
                 this._dom_c.$pdfShow = $('#pdfShow');
+                let loadingInstance = ELEMENT.Loading.service({
+                    target: this._dom_c.$pdfShow.get(0),
+                    text: '拼命加载中...',
+                    background: 'rgba(0,0,0,.75)'
+                });
+                this.$refs.pdf.setPdf({
+                    //pdfUrl: "http://localhost:7000/documents/younojsxia.pdf",
+                    pdfUrl: "https://pdfobject.com/pdf/sample-3pp.pdf",
+                    loadingInstance
+                });
+                this.showPDF();
             },
             sublevelAllChecked(){
                 this.$axios.post('/api/allChecked_son', {
@@ -722,6 +731,7 @@
                         border-radius: 30px;
                         color: #606266;
                         cursor: pointer;
+                        z-index: 2001;
                         &:hover{
                             color: #e27575;
                         }
@@ -729,6 +739,7 @@
                     #pdf{
                         #pdfShow{
                             position: relative;
+                            min-height: 200px;
                             .pdfobject{
                                 display: block;
                             }
