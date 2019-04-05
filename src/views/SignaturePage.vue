@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" v-loading="signatureLoading">
+    <div class="row" >
       <div class="col-md-3 contentLeft">
           <a href="javascript:;" class="logo">
               <img src="@/assets/img/logo_qianzi.png"/>
@@ -9,7 +9,7 @@
               <a class="leader" @click="goto('/LeaderSignaturePage')" target="_blank" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
               <a class="leader2"><span class="userName">{{userNickname}}</span></a>
           </div>
-          <div class="zjList Gdscroll" id="sucai">
+          <div class="zjList Gdscroll" id="sucai" v-loading="signatureLoading">
 
               <div class="indexPerson" v-for="(item,index) in fileMenuList" :key="index" :name="index">
                     <h5>{{item.menuName}}</h5>
@@ -84,13 +84,13 @@
             <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
             <strong class="ewm_tishimsg">请扫描二维码提交签名</strong>
             <div class="ewm">
-                <input  id="text" type="hidden" value="" style="width:80%" />
-                <!-- <div id="qrcode"></div> -->
+                <input  id="text" type="hidden" value="http://localhost:7000/page/TelPage.html" style="width:80%" />
+                <div id="qrcode"></div>
                 <p class="ewmsx">
                     <span>二维码已失效</span>
                     <a href="javascript:;" class="btnRefush">请刷新页面</a>
                 </p>
-                <img src="@/assets/img/ewm.png" alt="">
+                <!-- <img src="@/assets/img/ewm.png" alt=""> -->
                 <strong>如果签名已完成，该页面会自动刷新</strong>
                 <a target="_blank" href="http://localhost:7000/page/TelPage.html" class="ewm_lianjie" style="display:none;">电脑端签名</a>
             </div>
@@ -104,6 +104,7 @@
 
 </style>
 <script>
+
 import { setTimeout } from 'timers';
 export default {
   name: 'SignaturePage',
@@ -154,11 +155,11 @@ export default {
         download_files_key: '/js/plugins/bootstrap/js/plugin/qrcode.js',
         callback: this.init
     });
-    this.$commonJs.getScriptFile.call(this, {
-        url: '/js/plugins/bootstrap/js/url.js',
-        download_files_key: '/js/plugins/bootstrap/js/url.js',
-        callback: this.init
-    });
+    // this.$commonJs.getScriptFile.call(this, {
+    //     url: '/js/plugins/bootstrap/js/url.js',
+    //     download_files_key: '/js/plugins/bootstrap/js/url.js',
+    //     callback: this.init
+    // });
     // this.$commonJs.getScriptFile.call(this, {
     //     url: '/js/plugins/bootstrap/js/index1.js',
     //     download_files_key: '/js/plugins/bootstrap/js/index1.js',
@@ -222,16 +223,19 @@ export default {
         }).then(res => {
             if (res.data.resultCode == 200) {
                 if(res.data.userStampStatus==1){
+                    this.qianziContent(),  //签字列表和项目信息展示 
                     $("#more2").css({"display":"block"});
                     $("#more").hide(); 
                     setTimeout(function(){
                         if($(".personUl li:last-child em").text()=="完成完成"||$(".personUl:last-child li:last-child em").text()=="完成"){
                             $(".tishimsgs").hide();
+                            
                         }else{
                             $(".tishimsgs").show();
                         }
                     },2000)
                 }
+                
             }
         })
     },
@@ -240,6 +244,12 @@ export default {
   },
 
   mounted(){
+    var timer;        
+    var _this=this;
+    // timer = setInterval(function(){
+    //     _this.statuss();
+    // },3000)
+
     this.qianziContent(),  //签字列表和项目信息展示 
     this.statuss(), //判断是否签名状态接口
     this.autodivheight(),
@@ -276,6 +286,43 @@ export default {
             $("#"+svgId).height(cHeight);  
         })
     },1000)
+   $("#more").click(function(){    //签名按钮
+        $(".model_tk").show();
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 270,
+            height : 270
+        });
+        function makeCode () {		
+            var elText = document.getElementById("text");
+            if (!elText.value) {
+                alert("Input a text");
+                elText.focus();
+                return;
+            }
+            qrcode.makeCode(elText.value);
+        }
+        makeCode ();
+    });
+    $(".tkGuanbi").click(function(){   //弹框关闭按钮
+        $(".model_tk").hide();
+        //$("#text").val('');
+        $("#qrcode").html('');
+        $(".ewmsx").hide();
+       
+     });
+
+     $(".model_tk").click(function(){     //大弹框灰色点击
+        $(this).hide();
+        //$("#text").val('');
+        $("#qrcode").html('');
+        $(".ewmsx").hide();
+       
+    });
+
+    $(".modal-body").click(function(e){   //冒泡事件
+       var ev = e || event;
+       ev.stopPropagation();
+    });
     $(document).on('click','.personUl li:even',function(){
         $(".btnsFixed").show();
          $(".imgsvgRighttwo").hide();
@@ -287,6 +334,9 @@ export default {
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
+
+    
+    
    
   },
   watch:{

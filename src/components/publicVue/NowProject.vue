@@ -256,7 +256,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <Pdf class="pdf"></Pdf>
+            <Pdf class="pdf" ref="pdf_doc"></Pdf>
         </el-dialog>
         <!--文件列表弹框-->
     </div>
@@ -315,6 +315,7 @@
                 }
                 this.every_msg=obj;
                 setTimeout(() =>{
+                    this.$refs.pdf_doc.setPdf(obj.pdf_url);
                     this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
                 },100)
             },

@@ -54,7 +54,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'previewFile': '',
         'tenderDocuments': "",
         "attachement": "",
-        'pdf_url': ""
+        'pdf_url': "/documents/younojsxia.pdf"
     }],
 });
 // 修改密码页面登陆名以及密码
