@@ -256,7 +256,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <Pdf class="pdf" ref="pdf_doc"></Pdf>
+            <Pdf class="pdf" ref="pdf_doc" style="height: 500px"></Pdf>
         </el-dialog>
         <!--文件列表弹框-->
     </div>
@@ -304,6 +304,7 @@
                  });
             },
             bidding_doc_btn(obj) {//招标相关文件
+                console.log(obj.pdf_url);
                 this.docListDialogVisible = true;
                 if(obj.paymentType[0]==0){
                     this.checked1=true;
@@ -317,7 +318,7 @@
                 setTimeout(() =>{
                     this.$refs.pdf_doc.setPdf({pdfUrl: obj.pdf_url});
                     this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
-                },100)
+                },1000)
             },
        }
     }
