@@ -129,7 +129,8 @@
                                 </el-col>
                                 <el-col :span="16" class="mt15">
                                     <div class="grid-content bg-purple">
-                                        <el-input type="textarea" v-model="form.desc"></el-input>
+                                        <el-input type="textarea" v-model="form.desc" class="qita_expalin_input" ></el-input>
+                                        <div class="qita_expalin"></div>
                                     </div>
                                 </el-col>
                             </el-row>
@@ -306,7 +307,7 @@
             quaUnlockApplication() {
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
-            submit() {
+            submit() {//审查汇总
                 let url;
                 if (this.type == 4) {
                     url = '/api/tijiao_fhx';
@@ -316,6 +317,7 @@
                 else if (this.type == 6) {
                     url = '/api/tijiao_xxjs';
                 }
+                console.log(this.form.desc);
                 this.$axios.post(url, {
                     data: this.form.desc,
                     type: parseInt(this.type) + 1
@@ -327,7 +329,9 @@
                             type: 'success'
                         });
                         $(".hide_div").hide();
-                        // this.$router.push("/elect/complianceReviewItem");
+                        $('.qita_expalin').show();
+                        $(".qita_expalin").text(this.form.desc);
+                        $('.qita_expalin_input').hide()
                     }
                 })
             },

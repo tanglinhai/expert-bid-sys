@@ -9,7 +9,7 @@
                   <el-input type="textarea" v-model="ruleForm.desc" class="textarea"  autosize></el-input>
               </el-form-item>
               <el-form-item class="textAlignC">
-                  <el-button type="primary" @click="sendToP('ruleForm')" size="small" > <i class="icon iconfont icon-baocun1 mr5"  ></i> 确定</el-button>
+                  <el-button type="primary" @click="sendToP('ruleForm')" size="small" > <i class="icon iconfont icon-baocun1 mr5" ></i> 确定</el-button>
                   <el-button @click="$store.state.failureEnery.show=false" size="small" type="primary"> <i class="icon iconfont icon-fanhuishouye1 mr5"  ></i>返回</el-button>
               </el-form-item>
           </el-form>
@@ -38,7 +38,7 @@
                         { required: true, message: '请填写申请原因', trigger: 'blur',},
                     ]
                 },
-                obj:{}
+                obj:{},
             }
         },
         created() {

@@ -60,7 +60,7 @@
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item>
-                                <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg">
+                                <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg" :loading="mydataloading">
                                     保存
                                 </el-button>
                             </el-form-item>
@@ -136,7 +136,8 @@
                     new_pass_again: [
                         {validator: validatePass2, trigger: 'blur', required: true, message: '',}
                     ],
-                }
+                },
+                mydataloading: false,  //保存按钮loading
             }
         },
         created() {
@@ -144,7 +145,7 @@
         mounted() {
             this.$axios.post('/api/login').then(res => {
                 if (res.status === 200) {
-// console.log(res.data.msg.pass);
+                // console.log(res.data.msg.pass);
                     this.loginPass = res.data.msg.pass;
                 }
             });
@@ -213,9 +214,23 @@
                 $('.newpass_input').addClass("outline");
             },
             submitForm(formName) {
+                console.log(this.$data.ruleForm);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        this.mydataloading = true;
+                        this.$axios.post('/api/save_pass', 'post', {
+                            data: JSON.stringify(this.$data.ruleForm)
+                        }).then(res => {
+                            if (res.data.code == 200) {
+                                // console.log(res.data);
+                                this.mydataloading = false;
+                                this.$message({
+                                    type: 'success',
+                                    message: '密码修改成功',
+                                    center: true
+                                });
+                            }
+                        })
                     } else {
                         console.log('error submit!!');
                         return false;
