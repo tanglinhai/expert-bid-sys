@@ -176,7 +176,7 @@
 
     };
 
-    generatePDFJSiframe = function (targetNode, url, pdfOpenFragment, PDFJS_URL, id){
+    generatePDFJSiframe = function (targetNode, url, pdfOpenFragment, PDFJS_URL, id, options){
 
         var fullURL = PDFJS_URL + "?file=" + encodeURIComponent(url) + pdfOpenFragment;
         var scrollfix = (isIOS) ? "-webkit-overflow-scrolling: touch; overflow-y: scroll; " : "overflow: hidden; ";
@@ -185,8 +185,10 @@
         targetNode.style.position = "relative";
         targetNode.style.overflow = "auto";
         targetNode.innerHTML = iframe;
-        return targetNode.getElementsByTagName("iframe")[0];
-
+        var iframe_dom = targetNode.getElementsByTagName("iframe")[0];
+        if(options.onload)
+            iframe_dom.onload = options.onload;
+        return iframe_dom;
     };
 
     generateEmbedElement = function (targetNode, targetSelector, url, pdfOpenFragment, width, height, id){
@@ -249,17 +251,17 @@
         //If the forcePDFJS option is invoked, skip everything else and embed as directed
         if(forcePDFJS && PDFJS_URL){
 
-            return generatePDFJSiframe(targetNode, url, pdfOpenFragment, PDFJS_URL, id);
+            return generatePDFJSiframe(targetNode, url, pdfOpenFragment, PDFJS_URL, id, options);
 
         //If traditional support is provided, or if this is a modern browser and not iOS (see comment for supportsPDFs declaration)
         } else if(supportsPDFs || (assumptionMode && isModernBrowser && !isIOS)){
 
-            return generateEmbedElement(targetNode, targetSelector, url, pdfOpenFragment, width, height, id);
+            return generateEmbedElement(targetNode, targetSelector, url, pdfOpenFragment, width, height, id, options);
 
         //If everything else has failed and a PDFJS fallback is provided, try to use it
         } else if(PDFJS_URL){
 
-            return generatePDFJSiframe(targetNode, url, pdfOpenFragment, PDFJS_URL, id);
+            return generatePDFJSiframe(targetNode, url, pdfOpenFragment, PDFJS_URL, id, options);
 
         } else {
 

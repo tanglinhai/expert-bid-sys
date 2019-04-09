@@ -2,7 +2,6 @@ body {
   -webkit-perspective: 800px;
           perspective: 800px;
   height: 100vh;
-  margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
   font-family: 'Gudea', sans-serif;
@@ -398,7 +397,9 @@ input::-webkit-input-placeholder{
     color: #CECFD2;opacity:1;
 }
 html, body { 
-  padding: 0; margin: 0; font-size: 16px; 
+  padding: 0; 
+  margin: auto;
+   font-size: 16px; 
   background-repeat: no-repeat; 
   background-position: left top; 
   /*background-color: #242645; */

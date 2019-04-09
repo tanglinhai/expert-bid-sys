@@ -30,22 +30,22 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <el-button class="enterFullMode" 
+            <!-- <el-button class="enterFullMode" 
                     icon="iconfont icon-fullscreen" 
                     size="mini"
                     @click="enterFullMode"
-                >进入全屏模式</el-button>
+                >进入全屏模式</el-button> -->
             <NavBar :msg="options" :type="type_btn"></NavBar>
             <div class="content">
                 <div class="div_pdf">
-                    <pdf :pdfUrl="currPdfUrl" ref="pdf"></pdf>
-                    <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div>
+                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" v-for="item in pdfItems" v-show="item.show"></pdf>
+                    <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
-                <el-button class="exitFullMode" 
+                <!-- <el-button class="exitFullMode" 
                     icon="iconfont icon-fullscreen-exit" 
                     size="mini"
                     @click="exitFullMode"
-                >退出全屏模式</el-button>
+                >退出全屏模式</el-button> -->
 
                 <el-row class="center_part_wrap">
                     <div class="slideBar" id="slideBar"
@@ -330,6 +330,7 @@
                 son_all_che:[],//子节点全选
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
+                pdfItems: [],//动态插入pdf
             }
         },
         created() {
@@ -359,13 +360,28 @@
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
                 $center_part_wrap: $('.center_part_wrap'),
-                $pdfShow: $('#pdfShow'),
                 $content: $('.content'),
                 $slidebar: $('.slideBar'),
             };
             this._dom_c.$dom_body.mouseup(this.slideBarMouseup);
+            window.fullModeColumn = this.fullModeColumn;
+            window.fullModeRow = this.fullModeRow;
+            window.exitFullMode = this.exitFullMode;
+            window.closePDF = this.closePDF;
         },
         computed: {
+            currentPdfShow() {
+                for(var i=0;i<this.pdfItems.length;i++){
+                    if(this.pdfItems[i].show){
+                        var _tm = this.$refs[this.pdfItems[i].ref];
+                        if(typeof _tm != null && _tm.length == 1){
+                            return $(_tm[0].$el);
+                        }else{
+                            return $(_tm.$el);
+                        }
+                    }
+                }
+            },
             completePercent() {
                 let fillCount = 0;
                 for (var i = 0; i < this.radioArr.length; i++) {
@@ -552,17 +568,73 @@
             /*----------------- zTree end ----------------------*/
             show_pdf(i, obj) {//查看pdf
                 //this.$commonJs.fullscreen();
-                this._dom_c.$pdfShow = $('#pdfShow');
-                let loadingInstance = ELEMENT.Loading.service({
-                    target: this._dom_c.$pdfShow.get(0),
-                    text: '拼命加载中...',
-                    background: 'rgba(0,0,0,.75)'
-                });
-                this.$refs.pdf.setPdf({
-                    //pdfUrl: "http://localhost:7000/documents/younojsxia.pdf",
-                    pdfUrl: "https://pdfobject.com/pdf/sample-3pp.pdf",
-                    loadingInstance
-                });
+                //pdfItems: [],//动态插入pdfcurrPdfUrl
+                var currPDF;
+                for(var i=0;i<this.pdfItems.length;i++){
+                    if(this.pdfItems[i].ref == "pdf_"+obj.id){
+                        currPDF = this.pdfItems[i];
+                    }
+                    this.$set(this.pdfItems[i], 'show', false);
+                }
+                if(currPDF){//exist
+                    currPDF && this.$set(currPDF, 'show', true);
+                    if(this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')){
+                        var iframe;
+                        if(this.$refs[currPDF.ref] != null && this.$refs[currPDF.ref].length == 1){
+                            iframe = $(this.$refs[currPDF.ref][0].$el).find('iframe');
+                        }else{
+                            iframe = $(this.$refs[currPDF.ref].$el).find('iframe');
+                        }
+                        iframe.get(0).contentWindow.document.getElementById('presentationMode_exit').style.display = 'block';
+                    }
+                }else{// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
+                    var _this = this;
+                    this.pdfItems.push({
+                        currPdfUrl: 'https://pdfobject.com/pdf/sample-3pp.pdf',
+                        ref: "pdf_"+obj.id,
+                        show: true,
+                        /*loadingInstance: ELEMENT.Loading.service({
+                            target: this._dom_c.$div_pdf.get(0),
+                            text: '拼命加载中...',
+                            background: 'rgba(0,0,0,.75)'
+                        }),*/
+                        onload: function(){
+                            $(this.contentWindow.document.getElementById('toolbarViewerRight')).prepend(
+                                `<button 
+                                    id="presentationMode_column" 
+                                    class="toolbarButton presentationMode_column hiddenLargeView" 
+                                    onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    parent.fullModeColumn()"
+                                    title="切换到列模式">
+                                    <span>列模式</span>
+                                </button>
+                                <button 
+                                    id="presentationMode_row" 
+                                    class="toolbarButton presentationMode_row hiddenLargeView" 
+                                    onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    parent.fullModeRow()"
+                                    title="切换到行模式">
+                                    <span>行模式</span>
+                                </button>
+                                <button 
+                                    id="presentationMode_exit" 
+                                    class="toolbarButton presentationMode_exit hiddenLargeView" 
+                                    ${_this._dom_c.$content.hasClass('presentation_mode_row') || _this._dom_c.$content.hasClass('presentation_mode_column') ? '' : 'style="display:none;"'}
+                                    onclick="parent.exitFullMode();this.style.display='none';"
+                                    title="退出行/列模式">
+                                    <span>退出行/列模式</span>
+                                </button>`
+                            ).append(`<button 
+                                    id="closePdfDocument" 
+                                    class="toolbarButton closePdfDocument hiddenLargeView" 
+                                    onclick="parent.closePDF();"
+                                    title="关闭文档">
+                                    <span>关闭文档</span>
+                                </button>`);
+                        }
+                    });
+                }
+
                 this.showPDF();
             },
             sublevelAllChecked(){
@@ -624,26 +696,31 @@
             },
 
             slideBarMousedown(e){
-                this.hDiff = this._dom_c.$content.hasClass('pull_content') ? e.clientY - this._dom_c.$div_pdf.height()
-                    : e.clientY - this._dom_c.$slidebar.offset().top;
+                this.hDiff = this._dom_c.$content.hasClass('presentation_mode_row') ? e.clientY - this._dom_c.$div_pdf.height() :
+                            this._dom_c.$content.hasClass('presentation_mode_column') ? this._dom_c.$center_part_wrap.width() - e.clientX :
+                                 e.clientY - this._dom_c.$slidebar.offset().top;
                 this.slideBarIsControl = true;
                 this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
-                this._dom_c.$pdfShow.append('<div class="floating_div"></div>');
+                this.currentPdfShow.append('<div class="floating_div"></div>');
             },
             slideBarMouseup(){
                 this.slideBarIsControl = false;
                 this._dom_c.$dom_body.unbind('mousemove.slideBarMousemove');
-                this._dom_c.$pdfShow.find('.floating_div').remove();
+                this.currentPdfShow && this.currentPdfShow.find('.floating_div').remove();
             },
             slideBarMousemove(e){
                 e.originalEvent.preventDefault();
                 e.originalEvent.cancelBable = true;
                 e.originalEvent.stopPropagation();
                 if(this.slideBarIsControl){
-                    if(this._dom_c.$content.hasClass('pull_content')){
+                    if(this._dom_c.$content.hasClass('presentation_mode_row')){
                         var totalH = this._dom_c.$content.height();
                         this._dom_c.$div_pdf.height(((e.clientY-this.hDiff)/totalH)*100+'%');
                         this._dom_c.$center_part_wrap.height(((totalH-e.clientY+this.hDiff)/totalH)*100+'%');
+                    }else if(this._dom_c.$content.hasClass('presentation_mode_column')){
+                        var totalW = this._dom_c.$content.width();
+                        this._dom_c.$div_pdf.width(((totalW - e.clientX - this.hDiff)/totalW)*100+'%');
+                        this._dom_c.$center_part_wrap.width(((e.clientX+this.hDiff)/totalW)*100+'%');
                     }else if(this._dom_c.$content.hasClass('showPDF_content')){
                         this._dom_c.$div_pdf.height(
                             e.clientY - this.hDiff - parseInt(this._dom_c.$slidebar.css('margin-top')) - this._dom_c.$div_pdf.offset().top  +'px');
@@ -652,15 +729,28 @@
                 }
             },
             exitFullMode(){
-                this._dom_c.$content.removeClass('pull_content');
-                if(this._dom_c.$pdfShow.children().length == 1){
+                this._dom_c.$div_pdf.css({height: 'auto', width: 'auto'});
+                this._dom_c.$center_part_wrap.css({height: 'auto', width: 'auto'});
+                this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row');
+                console.log(this.currentPdfShow);
+                if(this.currentPdfShow.children().length == 1){
                     this._dom_c.$content.addClass('showPDF_content');
                 }
             },
-            enterFullMode(){
-                this._dom_c.$content.removeClass('showPDF_content ').addClass('pull_content');
+            fullModeColumn(){
+                this._dom_c.$div_pdf.css({height: '100%', width: '50%'});
+                this._dom_c.$center_part_wrap.css({height: '100%', width: '50%'});
+                this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column');
+            },
+            fullModeRow(){
+                this._dom_c.$div_pdf.css({height: '60%', width: 'auto'});
+                this._dom_c.$center_part_wrap.css({height: '40%', width: 'auto'});
+                this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row');
             },
             closePDF(){
+                if(this._dom_c.$content.hasClass('presentation_mode_column') || this._dom_c.$content.hasClass('presentation_mode_row')){
+                    this.exitFullMode();
+                }
                 this._dom_c.$content.removeClass('showPDF_content');
             },
             showPDF(){
@@ -692,7 +782,7 @@
             position: relative;
             background: white;
             border-radius: 5px;
-            .enterFullMode{
+            /* .enterFullMode{
                 display: block;
                 position: absolute;
                 top: 15px;
@@ -702,9 +792,9 @@
                     font-size: 13px !important;
                     padding-right: 2px;
                 }
-            }
+            } */
             .content{
-                .exitFullMode{
+                /* .exitFullMode{
                     display: none;
                     position: absolute;
                     top: 20px;
@@ -714,12 +804,12 @@
                         font-size: 13px !important;
                         padding-right: 2px;
                     }
-                }
+                } */
                 .div_pdf{
                     display: none;
                     position: relative;
                     border: 1px solid #c3c3c3;
-                    .closePDF{
+                    /* .closePDF{
                         display: none;
                         background-color: #fff;
                         position: absolute;
@@ -735,9 +825,9 @@
                         &:hover{
                             color: #e27575;
                         }
-                    }
-                    #pdf{
-                        #pdfShow{
+                    } */
+                    .my-pdf{
+                        .pdfShow{
                             position: relative;
                             min-height: 200px;
                             .pdfobject{
@@ -868,12 +958,74 @@
                 }
                 .div_pdf{
                     display: block;
-                    .closePDF{
+                    /* .closePDF{
                         display: block;
+                    } */
+                }
+            }
+            .presentation_mode_column{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background: white;
+                z-index: 2;
+                .div_pdf{
+                    position: relative;
+                    float: right;
+                    display: block !important;
+                    width: 50%;
+                    height: 100%;
+                    border: 0;
+                    .my-pdf{
+                        height: 100%;
+                        .pdfobject-container{
+                            height: 100%;
+                        }
+                    }
+                }
+                /* .exitFullMode{
+                    display: block;
+                } */
+                .center_part_wrap{
+                    position: relative;
+                    float: right;
+                    width: 50%;
+                    height: 100%;
+                    .slideBar{
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        margin-top: 0;
+                        width: 15px;
+                        height: 100%;
+                        cursor: w-resize;
+                        .iconfont {
+                            position: absolute;
+                            top: 50%;
+                            margin-top: -7px;
+                            left: 0;
+                            transform: rotateZ(90deg);
+                        }
+                    }
+                    .center_part {
+                        padding: 0;
+                        margin: 0;
+                        padding-right: 17px;
+                        height: 100%;
+                        box-sizing:border-box;
+                        .center_con{
+                            height: 100%;
+                            overflow-y: auto;
+                        }
+                        
                     }
                 }
             }
-            .pull_content{
+            .presentation_mode_row{
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -886,16 +1038,16 @@
                     position: relative;
                     display: block !important;
                     height: 60%;
-                    #pdf{
+                    .my-pdf{
                         height: 100%;
                         .pdfobject-container{
                             height: 100%;
                         }
                     }
                 }
-                .exitFullMode{
+                /* .exitFullMode{
                     display: block;
-                }
+                } */
                 .center_part_wrap{
                     height: 40%;
                     .slideBar{

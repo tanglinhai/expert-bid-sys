@@ -1,7 +1,7 @@
 ﻿<template>
-    <div id="pdf">
-        <div id="pdfShow"></div>
-        <div class="tips_pdf">
+    <div class="my-pdf">
+        <div class="pdfShow"></div>
+        <!-- <div class="tips_pdf">
             <b class="check_pdf_icon">
                 <img src="../../assets/img/check_pdf.png" alt="" />
             </b>
@@ -10,50 +10,64 @@
                 <a href="http://ardownload.adobe.com/pub/adobe/reader/win/9.x/9.3/chs/AdbeRdr930_zh_CN.exe" class="adobe">安装PDF阅读器软件 </a>
                 <a href="/documents/younojsxia.pdf">下载PDF</a>
             </b>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 export default{
+    props:{
+        pdfUrl:{
+            type: String
+        },
+        onload:{
+            type: Function
+        },
+    },
     data(){
         return {}
     },
     mounted(){
-        var pdfresult=this.isAcrobatPluginInstall();
+        /*var pdfresult=this.isAcrobatPluginInstall();
         if(!pdfresult){
             $('#pdfShow').css('display','none');
             $('.tips_pdf').css('display','block');
         }else{
             $('.tips_pdf').css('display','none');
-        }
+        }*/
         this.$commonJs.getScriptFile.call(this, {
-            url: '/js/plugins/pdfobject/pdfobject.min.js',
+            url: '/js/plugins/pdfobject/pdfobject.js',
             download_files_key: 'pdfobject',
             callback: this.setPdf
         });
     },
     methods:{
-        setPdf({pdfUrl, loadingInstance} = {}){
+        setPdf({pdfUrl, onload} = {}){
+            if(this.pdfUrl){
+                pdfUrl = this.pdfUrl;
+            }
+            if(this.onload){
+                onload = this.onload;
+            }
             //var pdfUrl = this.pdfUrl// || "/documents/younojsxia.pdf";
             if(!pdfUrl){
                 return;
             }
-            let pdfShow=$("#pdfShow");
+            let pdfShow=$(this.$el).find('.pdfShow');
             let options={
                 page:1,
                 width: "100%",
                 height: "auto",
                 PDFJS_URL: '/js/plugins/pdfjs-2.0.943/web/viewer.html',
                 forcePDFJS: true,
+                onload: onload,
                 pdfOpenParams: {
                     toolbar:0,
                     view:'FitH'
                  },
                 // fallbackLink: "<p>在线浏览PDF，您的浏览器需要安装adobe pdf阅读器,<a href='https://get.adobe.com/cn/reader/download/?installer=Reader_DC_2019.008.20071_Chinese_Simp_for__Windows&os=Windows%2010&browser_type=KHTML&browser_dist=Chrome&d=McAfee_Security_Scan_Plus_Chrome_Browser&dualoffer=false&mdualoffer=false&cr=false&stype=7752'>点击我安装adobePdf</a>,<br/>不安装，直接下载PDF文件使用本地阅读器浏览<a href='"+pdfUrl+"'>下载PDF文件</a></p>"
             };
-            setTimeout(function(){
-                PDFObject.embed(pdfUrl, pdfShow, options);
+            return PDFObject.embed(pdfUrl, pdfShow, options);
                 
                 /*pdfShow.find('.pdfobject').get(0).onreadystatechange = function(e){
                     console.log(e, '====================================')
@@ -63,9 +77,8 @@ export default{
                 /*this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
                   loadingInstance.close();
                 });*/
-            }, 1000);
         },
-        isAcrobatPluginInstall() {
+        /*isAcrobatPluginInstall() {
             //下面代码都是处理IE浏览器的情况 
             if((window.ActiveXObject)||(navigator.userAgent.indexOf("Trident") > -1)) {
                 for(x = 2; x < 10; x++) {
@@ -90,20 +103,20 @@ export default{
             //chrome和FF、safrai等其他浏览器
                 return true;
             }
-        },
+        },*/
     }
 }
 </script>
 <style lang="scss">
-#pdf{
+.my-pdf{
     background: #fff;
     height: 100%;
     overflow: hidden;
     position: relative;
-    #pdfShow{
+    .pdfShow{
         height: 100%;
     }
-    .tips_pdf{
+    /* .tips_pdf{
         display: none;
         width: 37%;
         height: 115px;
@@ -122,6 +135,6 @@ export default{
             margin-top:15px;
             margin-right: 142px;
         }
-    }
+    } */
 }
 </style>
