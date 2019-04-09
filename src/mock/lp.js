@@ -266,7 +266,9 @@ let statuss = Mock.mock('/api/status','post',{
     "resultMsg":"签名已过期",
     "resultBody":null,
     'userStampStatus|1':['1','0'],  //1代表已签名，0代表未签名
-})
+});
+
+
 //SignaturePage签字数据接口
 
 //leaderSignaturePage接口

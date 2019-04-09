@@ -6,7 +6,7 @@
               <img src="@/assets/img/logo_qianzi.png"/>
           </a>
           <div class="leaderWrap">
-              <a class="leader" @click="goto('/LeaderSignaturePage')" target="_blank" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
+              <a class="leader" @click="ToLeaderPage" href="javascript:;" style="visibility: inherit;">查看所有文档</a>
               <a class="leader2"><span class="userName">{{userNickname}}</span></a>
           </div>
           <div class="zjList Gdscroll" id="sucai" v-loading="signatureLoading">
@@ -17,8 +17,8 @@
                         <span>文件名称</span>
                         <span>创建时间</span>
                         <span>状态</span>
-                      </div>
-                      <ul class="personUl" >
+                    </div>
+                    <ul class="personUl" >
                         <li v-for='(item2,index) in item.fileList' :key="index">
                             <p>{{item2.fileName}}</p>
                             <span>{{item2.gmt_modified}}</span>
@@ -26,8 +26,8 @@
                             <em v-else-if="item2.fileStatus==2">待完成</em>
                             <em class="emsuccess" v-else>完成</em>
                         </li>
-                     </ul>
-                     <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
+                    </ul>
+                    <p style="font-size:14px; text-align:center;margin-top:20px; display:none">您，暂无签名文档！</p>
               </div>
 
           </div>
@@ -239,6 +239,10 @@ export default {
             }
         })
     },
+
+    ToLeaderPage(){  //签字页面得查看所有文档跳转点击
+        window.open(window.location.protocol+'//'+window.location.host+'/LeaderSignaturePage','_blank');
+    },
     
 
   },
@@ -246,6 +250,7 @@ export default {
   mounted(){
     var timer;        
     var _this=this;
+    var t;
     // timer = setInterval(function(){
     //     _this.statuss();
     // },3000)
@@ -302,6 +307,9 @@ export default {
             qrcode.makeCode(elText.value);
         }
         makeCode ();
+        t = setTimeout(function(){
+            $(".ewmsx").show();
+        },300000)
     });
     $(".tkGuanbi").click(function(){   //弹框关闭按钮
         $(".model_tk").hide();
@@ -334,6 +342,8 @@ export default {
         $(".imgsvgRightone").hide();
         $(".imgsvgRighttwo").show();
     })
+
+    
 
     
     
