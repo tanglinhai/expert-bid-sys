@@ -101,8 +101,9 @@
             &:hover{
                 height: 42px;
                 line-height: 42px;
-                border: 1px solid #606266;
+                border: 1px solid #559ece;
                 border-bottom: 1px solid #c3c3c3;
+                background-color: #bdf9ff;
             }
         }
         .jinyong{
@@ -113,6 +114,7 @@
                 line-height: 35px;
                 border: 1px solid #606266;
                 border-bottom: 1px solid #c3c3c3;
+                background-color: #fff;
             }
         }
     }
@@ -120,8 +122,9 @@
         .item{
             height: 42px;
             line-height: 42px;
-            border: 1px solid #606266;
+            border: 1px solid #559ece;
             border-bottom: 1px solid #c3c3c3;
+            background-color: #bdf9ff;
         }
         
     }

@@ -200,7 +200,7 @@
         }
 
         targetNode.className += " pdfobject-container";
-        targetNode.innerHTML = "<embed " + id + " class='pdfobject' src='" + url + pdfOpenFragment + "' type='application/pdf' style='overflow: auto; " + style + "'/>";
+        targetNode.innerHTML = "<embed onreadystatechange='alert(\"fdsfdsf\")' " + id + " class='pdfobject' src='" + url + pdfOpenFragment + "' type='application/pdf' style='overflow: auto; " + style + "'/>";
 
         return targetNode.getElementsByTagName("embed")[0];
 

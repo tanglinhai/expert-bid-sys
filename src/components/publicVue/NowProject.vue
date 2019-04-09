@@ -315,7 +315,7 @@
                 }
                 this.every_msg=obj;
                 setTimeout(() =>{
-                    this.$refs.pdf_doc.setPdf(obj.pdf_url);
+                    this.$refs.pdf_doc.setPdf({pdfUrl: obj.pdf_url});
                     this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
                 },100)
             },
