@@ -78,7 +78,7 @@
                           <button class="svgZoomBtn small" title="缩小" zoom="-1" svg="testsvg" data-inline="true"></button>  
                       </div>  
                       <div id="page2" class="paging"></div>
-                      <div id="callBack2"><span>1</span>/<em></em></div>
+                      <div id="callBack2"><span>1</span>/<em>1</em></div>
                   </div>
               </div>
           </div>
