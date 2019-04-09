@@ -50,8 +50,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
-                        console.log( this.$data.ruleForm);
+                        // console.log( this.$data.ruleForm);
                         this.mydataloading = true;
                         this.$axios.post('/api/save_apply_unlock', 'post', {
                             data: JSON.stringify(this.$data.ruleForm)

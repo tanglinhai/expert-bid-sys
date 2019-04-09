@@ -33,7 +33,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'bagName': '第' + Random.natural(0, 6) + Random.natural(5, 9) + '包',
         'starTime': () => Random.datetime(),
         'stopTime': () => Random.datetime(),
-        'type|1': [0, 1],
+        // 'type|1': [0, 1],
         'proBusinessNum': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'q' + 'w' + 'e' + 'r' + 'N'
         + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9),
@@ -101,6 +101,12 @@ let sendPhoneCode = Mock.mock('/api/sendPhoneCode', 'post', {
     message: '成功!',
     data: [1234]
 });
+//基本信息确定裁剪
+let comfirm_crop = Mock.mock('/api/comfirm_crop', 'post', {
+    code: 200,
+    message: '成功!',
+    data: []
+});
 //基本信息手机号绑定
 let phoneBinding = Mock.mock('/api/phoneBinding', 'post', {
     code: 200,
@@ -118,6 +124,12 @@ let Emailpd = Mock.mock('/api/Emailpd', 'post', {
     code: 200,
     message: '成功!',
     data: [1234]
+});
+//密码修改页面的保存接口
+let save_pass = Mock.mock('/api/save_pass', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
 });
 let esta = Mock.mock('/api/esta', 'post', {
     msg: {
@@ -152,7 +164,7 @@ let esta = Mock.mock('/api/esta', 'post', {
         }
     ]
 });
-//评标页面数据接口
+//评标( 审查项)页面数据接口
 
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
@@ -1228,7 +1240,6 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                 //头部审查类型按钮
                 'viewType':get_data(7,is_tijaio),
                 'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
-                'other_explain': Random.csentence(),//其他说明
                 'bidEvaluation': msg,
                 'review_summary': data_msg,
                 'sort_data': dataMsg,

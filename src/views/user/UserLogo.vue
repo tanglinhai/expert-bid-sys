@@ -109,7 +109,7 @@
                     <el-row>
                         <el-col :span="10" :offset="7">
                             <el-form-item >
-                                <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg">
+                                <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg" :loading="mydataloading">
                                     保存
                                 </el-button>
                             </el-form-item>
@@ -334,7 +334,7 @@
         mounted() {
             this.$axios.post('/api/isbindingEmailPhone').then(res => {
                 if (res.status == 200) {
-                    // console.log(res.data.data);
+                    console.log(res.data);
                     localStorage.setItem("loginData", JSON.stringify(res.data.data));
                     this.name = res.data.data.name;
                     this.pass = res.data.data.pass;
@@ -359,7 +359,8 @@
         methods: {
              // 提交的时候存到localstorage
             submitForm(formName) {
-                 this.$refs[formName].validate((valid) => {
+                console.log(this.$data.ruleForm);
+                this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.mydataloading = true;
                         this.$axios.post('/api/save', 'post', {
@@ -561,26 +562,24 @@
                     },
                 })
             },
-                    Confirm(){
-
-                       console.log('0')
-                        // console.log(dataOptions)
-                        this.$axios.post('/api/sendPhoneCode').then(res => {
-                            if (res.status == 200) {
-                        //     console.log(res.data);
-                        //     if(res.status == '200'){
-                                this.centerDialogVisible = !true;
-                                $("#image").cropper('destroy');
-                                $("#image").hide();
-                                alert('裁剪成功');
-                            }
-                        })
-                    },
-                    close(){
+            Confirm(){
+               console.log('0')
+                // console.log(dataOptions)
+                this.$axios.post('/api/comfirm_crop').then(res => {
+                    if (res.status == 200) {
+                //     console.log(res.data);
+                //     if(res.status == '200'){
+                        this.centerDialogVisible = !true;
                         $("#image").cropper('destroy');
                         $("#image").hide();
+                        alert('裁剪成功');
                     }
-
+                })
+            },
+            close(){
+                $("#image").cropper('destroy');
+                $("#image").hide();
+            }
         }
     }
 </script>

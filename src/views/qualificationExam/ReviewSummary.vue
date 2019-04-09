@@ -255,8 +255,7 @@
                 baohao: '',
                 options: [],//头部按钮
                 /* -------头部包信息end-----*/
-                other_explain: "",//其他说明
-                ruleForm: {
+                 ruleForm: {
                     desc: ''
                 },
                 rules: {
@@ -297,11 +296,11 @@
                 this.$axios.post('/api/pingshen_huizong', {type: this.$route.query.type})
                     .then(res => {
                         if (res.status === 200) {
+                            console.log(res.data);
                             this.name = res.data.bidMsg.name;
                             this.baohao = res.data.bidMsg.baohao;
                             this.biaoNum = res.data.bidMsg.biaoNum;
                             this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
-                            this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
                             this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
                             this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
                             this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;

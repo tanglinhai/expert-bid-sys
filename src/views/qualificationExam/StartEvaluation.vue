@@ -36,7 +36,7 @@
                 <el-col class="left_examine  " :span="3">
                     <el-row class="div_header">
                         <el-col class="textAlignC mt20 mb15">
-                            <el-button type="primary" size="small" class="personalAuditFormBtn">
+                            <el-button type="primary" size="small" class="personalAuditFormBtn" @click="personaBtn">
                                 <i class="icon iconfont icon-zigeshenchazhuti  mr3"></i>
                                 {{personalAuditFormBtn}}
                             </el-button>
@@ -64,8 +64,9 @@
                             <el-button @click="allChecked" plain size="mini" type="primary"><i
                                     class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                             </el-button>
+                            <!--:loading="mydataloading"-->
                             <el-button size="mini" type="primary" @click="allSubmit"><i
-                                    class="icon iconfont icon-tijiao  mr3"></i>全部提交
+                                    class="icon iconfont icon-tijiao  mr3" ></i>全部提交
                             </el-button>
                         </el-row>
                     </el-row>
@@ -154,13 +155,13 @@
                     </div>
                 </el-col>
                 <!--点击个人形式审计表按钮显示-->
-                <el-col class="personalAuditFormTable" :span="21">
+                <el-col class="personalAuditFormTable" :span="21" >
                     <div class="FormTableTitle">
                         <span>分包号：0635-1909N987/1[第一包]</span>
                         <span>评标委员会：0635-1909N987/1评委会</span>
                     </div>
                     <!--表格-->
-                    <template>
+                    <template >
                         <el-table
                                 :data="msgBox"
                                 style="width: 100%">
@@ -306,7 +307,7 @@
                 son_all_checked:[],//子节点全选
                 son_all_che:[],//子节点全选
                 currPdfUrl: '',//当前点击pdf的url
-            }
+             }
         },
         created() {
             if (this.$route.query.type == undefined) {
@@ -370,6 +371,10 @@
                     }
                     this.page_loading = false;
                 })
+            },
+            personalAuditFormBtn(){
+                // this.leftbtn_loading_table=true;
+                console.log('2')
             },
             failuredRadio(radio, id, index, tableKey, obj, a) {//合格不合格
                 this.to_failure_entry_company_name = obj.name;
@@ -435,8 +440,10 @@
                     else if (this.type_btn == 5) {
                         url = '/api/alltijiao_xxjs';
                     }
+
                     this.$axios.post(url, {type: parseInt(this.type_btn) + 1}).then(res => {
                         if (res.status == 200) {
+                            // this.mydataloading = false;
                             this.options = res.data.vue_type;
                             this.$store.state.failureEnery.submitPrompt = true;
                             $(".hide_btn").hide();
