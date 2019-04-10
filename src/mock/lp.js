@@ -114,19 +114,25 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
         personName:'张三',
         personTel:'13123434567',
         "personNumber|1":['352226199505120036','352266199505120036'],
+        projectInformation_name:'单信封-0305-1',
+        projectInformationbian_hao:'0635-1909qwerN1133',
     },
     toubiaorenInformation:[{
         toubiaorenName:'重庆网控科技发展有限公司',
         toubiaorenFenbao:'0635-198N517/1',
+        'baoname|1':['第一包','第二包','第三包']
     },{
         toubiaorenName:'普瑞太阳能有限公司',
         toubiaorenFenbao:'0635-198N517/1',
+        'baoname|1':['第一包','第二包','第三包']
     },{
         toubiaorenName:'夏丰热工研究院有限公司',
         toubiaorenFenbao:'0635-198N517/1',
+        'baoname|1':['第一包','第二包','第三包']
     },{
         'toubiaorenName|1':['北京有限公司','夏丰热工研究院有限公司'],
         toubiaorenFenbao:'0635-198N517/1',
+        'baoname|1':['第一包','第二包','第三包']
     }]
 });
 //申请回避弹框原因接口
