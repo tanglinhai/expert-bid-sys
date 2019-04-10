@@ -10,6 +10,12 @@
                                     item.type ==2 ? 'iconfont icon-jinhangzhong blue': 'iconfont icon-jinyong'"></span>
                      {{item.label}}
                  </div>
+                <div class="item1 ">
+                     <span :class="item.type ==1 ? 'iconfont icon-wancheng green':
+                                    item.type ==3 ? 'iconfont icon-tbd-project-task-number'  :
+                                    item.type ==2 ? 'iconfont icon-jinhangzhong blue': 'iconfont icon-jinyong'"></span>
+                    {{item.label}}
+                </div>
             </div>
         </el-row>
     </div>
@@ -37,7 +43,7 @@
                     return;
                 }
                 var i = item.value;
-                // console.log(i);
+                console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1");
                 } else if (i === '2') {
@@ -52,7 +58,22 @@
                      this.$router.push("/elect/UnFinishQualificationsResult?type=6");
                 }
                 else if (i === "7"){
-                    this.$router.push("/elect/ReviewSummary?type=7");
+                    this.$router.push("/elect/BusinessOther?type=7");
+                }
+                else if (i === "8"){
+                    this.$router.push("/elect/BusinessOther?type=8");
+                }
+                else if (i === "9"){
+                    this.$router.push("/elect/BusinessOther?type=9");
+                }
+                else if (i === "10"){
+                    this.$router.push("/elect/BusinessOther?type=10");
+                }
+                else if (i === "11"){
+                    this.$router.push("/elect/BusinessOther?type=11");
+                }
+                else if (i === "70"){
+                    this.$router.push("/elect/ReviewSummary?type=70");
                 }
             },
         }
@@ -70,10 +91,12 @@
     }
     .nav_item{
         position: relative;
-        width: 200px;
+        /*width: 200px;*/
         height: 50px;
         display: inline-block;
         margin-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         .item{
             position: absolute;
             bottom: 0;
@@ -104,6 +127,15 @@
                 border: 1px solid #559ece;
                 border-bottom: 1px solid #c3c3c3;
                 background-color: #bdf9ff;
+            }
+        }
+        .item1{
+            font-size: 14px;
+            height: 35px;
+            line-height: 35px;
+            visibility: hidden;
+            .iconfont {
+                font-size: 14px;
             }
         }
         .jinyong{

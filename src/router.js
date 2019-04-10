@@ -20,11 +20,12 @@ var routes = [
     {
       path: '/index',
       name: 'index',
-      redirect: '/index/indexcontent',
+      // redirect: '/index/indexcontent',
+      redirect: '/index/projects',
       component: () => import('./views/Home.vue'),
       children: [
         //首页
-        { name: '/index/indexcontent', path: '/index/indexcontent', component: () => import('./components/Index.vue') },
+        // { name: '/index/indexcontent', path: '/index/indexcontent', component: () => import('./components/Index.vue') },
         //项目列表页面
         { name: '/index/projects', path: '/index/projects', component: () => import('./components/Projects.vue') },
 
@@ -71,6 +72,8 @@ var routes = [
         { name: '/elect/UnFinishQualificationsResult', path: '/elect/UnFinishQualificationsResult', component: () => import('./views/qualificationExam/UnFinishQualificationsResult.vue') },
           // 详细评审（技术）汇总页面
          { name: '/elect/ReviewSummary', path: '/elect/ReviewSummary', component: () => import('./views/qualificationExam/ReviewSummary.vue') },
+          //商务技术服务定档其他
+         { name: '/elect/BusinessOther', path: '/elect/BusinessOther', component: () => import('./views/qualificationExam/BusinessOther.vue') },
       ]
     }
   ];

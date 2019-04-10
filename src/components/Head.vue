@@ -4,8 +4,8 @@
 			<img src="/img/logo_zzlh.png"/>
   	</div>
   	<el-menu :default-active="activeIndex" class="menu-le" mode="horizontal" @select="handleSelect">
-		  <el-menu-item index="1" @click="goto('/index/indexcontent')">首页</el-menu-item>
-		  <el-menu-item index="2" @click="goto('/index/projects')">评审项目</el-menu-item>
+		  <el-menu-item index="1" @click="goto('/index/projects')">首页</el-menu-item>
+		  <!--<el-menu-item index="2" @click="goto('/index/projects')">评审项目</el-menu-item>-->
 		</el-menu>
 
 

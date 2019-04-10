@@ -1,6 +1,14 @@
 <template>
     <div class="nowProject">
-        <el-collapse v-model="unmsg" @change="handleChange" class="collBox">
+        <el-row v-if="projectBag.length == 0" class="no_data">
+            <el-col :span="24">
+                <div class="grid-content bg-purple zeroBox">
+                    <img src="../../assets/img/no_data_icon.png" alt="">
+                    <span style="padding-left:5px;">当前还没有您参评的标包，请等待项目经理分配！</span>
+                </div>
+            </el-col>
+        </el-row>
+        <el-collapse v-model="unmsg" @change="handleChange" class="collBox" v-else>
             <el-collapse-item v-for="(item,index) in projectBag" :key="index" :name="index" class="outMain">
                 <!--头部-->
                 <template slot="title">
@@ -20,16 +28,9 @@
                         </el-row>
                     </div>
                 </template>
-                <!--<el-row v-if="msg.length == 0">-->
-                <!--<el-col :span="24">-->
-                <!--<div class="grid-content bg-purple zeroBox">-->
-                <!--&lt;!&ndash;<img src="../../../public/img/zl.png" alt="">&ndash;&gt;-->
-                <!--<span style="padding-left:5px;">暂无数据</span>-->
-                <!--</div>-->
-                <!--</el-col>-->
-                <!--</el-row>-->
+
                 <!--v-else-->
-                <el-row v-for="(item,index) in msg" :key="index" class="bag_msg">
+                <el-row v-for="(item,index) in msg" :key="index" class="bag_msg" >
                     <el-col class=' border_col'>
                         <el-col style="width:25%" class="expertName">
                             <span>专家组名称：{{item.groupName }}</span>
@@ -276,7 +277,7 @@
                 checked2: '',
                 checked3: '',
                 radio1: '',
-                every_msg:[],
+                every_msg: [],
             }
         },
         // 父组件传过来的值
@@ -298,34 +299,46 @@
 
         },
         methods: {
-            goto(url){//开始评标
-               this.$router.push({
+            goto(url) {//开始评标
+                this.$router.push({
                     path: url
-                 });
+                });
             },
             bidding_doc_btn(obj) {//招标相关文件
                 console.log(obj.pdf_url);
                 this.docListDialogVisible = true;
-                if(obj.paymentType[0]==0){
-                    this.checked1=true;
-                }if(obj.paymentType[1]==1){
-                    this.checked2=true;
+                if (obj.paymentType[0] == 0) {
+                    this.checked1 = true;
                 }
-                if(obj.paymentType[2]==2){
-                    this.checked3=true;
+                if (obj.paymentType[1] == 1) {
+                    this.checked2 = true;
                 }
-                this.every_msg=obj;
-                setTimeout(() =>{
+                if (obj.paymentType[2] == 2) {
+                    this.checked3 = true;
+                }
+                this.every_msg = obj;
+                setTimeout(() => {
                     this.$refs.pdf_doc.setPdf({pdfUrl: obj.pdf_url});
-                    this.radio1=$(".radioS")[obj.uploadWay].children[0].children[1].value;
-                },1000)
+                    this.radio1 = $(".radioS")[obj.uploadWay].children[0].children[1].value;
+                }, 1000)
             },
-       }
+        }
     }
 </script>
 
 <style lang="scss">
     .nowProject {
+        .zeroBox{
+            height: 84px;
+            line-height: 84px;
+            text-align:center;
+            border-bottom: 1px solid #f3f3f3;
+            img{
+                display: inline-block;
+                vertical-align: middle;
+                width: 60px;height: 60px;
+            }
+        }
         .collBox {
             overflow-x: hidden;
             .outMain {
@@ -423,6 +436,7 @@
                         }
                     }
                 }
+
             }
         }
         @media screen and (max-width: 1660px) {
