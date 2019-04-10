@@ -17,13 +17,13 @@ let tableMs = Mock.mock('/api/tableMsg', 'post', {
 });
 //评审项目数据列表
 let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
-    'projectBagMsg|1-5': [{
+    'projectBagMsg|0-5': [{
         id: () => Random.id(),
         'status|1': [0, 1, 2],
         'functionary': '@cname',
         'projectName': '辅助-招标投标法-最低评标价【二次公告】',
-
     }],
+    // 'projectBagMsg': [],
     'allBagMsg|1-3': [{
         ids: () => Random.id(),
         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
