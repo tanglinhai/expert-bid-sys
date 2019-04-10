@@ -163,6 +163,10 @@
                                                       </el-dropdown-menu>
                                                     </el-dropdown>
                                                 </span>
+                                                <div class="btn_locate iconfont icon-dingwei" 
+                                                    @click="locate_pdf(scope.$index, scope.row)"
+                                                    title="定位到关联投标文件说明处"
+                                                ></div>
                                                 </template>
                                             </el-table-column>
                                             <el-table-column
@@ -587,6 +591,11 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
+            //定位到关联投标文件说明处
+            locate_pdf(i, obj){
+                this.show_pdf(i, obj);
+                
+            },
             show_pdf(i, obj) {//查看pdf
                 //this.$commonJs.fullscreen();
                 //pdfItems: [],//动态插入pdfcurrPdfUrl
@@ -955,6 +964,24 @@
                                     }
                                     .el-icon-arrow-down {
                                         font-size: 12px;
+                                    }
+                                    div.cell{
+                                        position: relative;
+                                        .btn_locate{
+                                            position: absolute;
+                                            top: 0;
+                                            right: 0;
+                                            width: 30px;
+                                            height: 24px;
+                                            line-height: 24px;
+                                            font-size: 16px;
+                                            margin-right: 10px;
+                                            text-align: center;
+                                            cursor: pointer;
+                                            &:hover{
+                                                color: rgb(64, 158, 255);
+                                            }
+                                        }
                                     }
                                 }
                             }
