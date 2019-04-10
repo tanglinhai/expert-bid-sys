@@ -17,13 +17,13 @@ let tableMs = Mock.mock('/api/tableMsg', 'post', {
 });
 //评审项目数据列表
 let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
-    'projectBagMsg|0-5': [{
-        id: () => Random.id(),
-        'status|1': [0, 1, 2],
-        'functionary': '@cname',
-        'projectName': '辅助-招标投标法-最低评标价【二次公告】',
-    }],
-    // 'projectBagMsg': [],
+    // 'projectBagMsg|0-5': [{
+    //     id: () => Random.id(),
+    //     'status|1': [0, 1, 2],
+    //     'functionary': '@cname',
+    //     'projectName': '辅助-招标投标法-最低评标价【二次公告】',
+    // }],
+    'projectBagMsg': [],
     'allBagMsg|1-3': [{
         ids: () => Random.id(),
         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
@@ -213,8 +213,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             radio: '',
                                             id: 1,
                                             pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                                {pdf_name: 'pdf文件2', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件3', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -342,54 +342,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'mylist': ms,
                     //头部审查类型按钮
                     vue_type: get_data(1),
-                    // 'viewType': [
-                    //     {
-                    //         value: '1',
-                    //         label: '资格审查项',
-                    //         type: '1'
-                    //     },
-                    //     {
-                    //         value: '2',
-                    //         label: '资格审查项汇总',
-                    //         type: '2'
-                    //     },
-                    //
-                    //     {
-                    //         value: '3',
-                    //         label: '符合性审查项',
-                    //         type: '3'
-                    //     },
-                    //     {
-                    //         value: '4',
-                    //         label: ' 符合性审查项汇总',
-                    //         type: '4'
-                    //     },
-                    //     {
-                    //         value: '5',
-                    //         label: ' 详细评审（技术）',
-                    //         type: '5'
-                    //     },
-                    //     {
-                    //         value: '6',
-                    //         label: '详细评审（技术）汇总',
-                    //         type: '6'
-                    //     },
-                    //     {
-                    //         value: '7',
-                    //         label: '评审汇总',
-                    //         type: '7'
-                    //     },
-                    //     {
-                    //         value: '7',
-                    //         label: '评审汇总',
-                    //         type: '7'
-                    //     },
-                    //     {
-                    //         value: '7',
-                    //         label: '评审汇总',
-                    //         type: '7'
-                    //     },
-
                },
                 msg: [{////个人形式审计表数据接口
                     number: '1',
@@ -474,8 +426,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             radio: '',
                                             id: 2,
                                             pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                                {pdf_name: 'pdf文件2', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件3', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 2,
                                             people: '招标人2：',
@@ -759,7 +711,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                               ]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',

@@ -80,7 +80,7 @@
             // 初始子组件数据获取
             childMsg() {
                 this.pageLoading = true;
-                setInterval(() => {
+                // setInterval(() => {
                     this.$axios.post('/api/bagMsg').then(res => {
                         if (res.status === 200) {
                             this.pageLoading = false;
@@ -101,7 +101,7 @@
                             this.pageLoading = false;
                         }
                     });
-                }, 60000)
+                // }, 60000)
             },
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);

@@ -52,35 +52,38 @@
                     <div class="slideBar" id="slideBar"
                          @mousedown="slideBarMousedown($event)"
                     ><span class="iconfont icon-vertical-align-middl"></span></div>
-                    <el-row class="center_part">
-                        <el-row class="center_con">
-                            <el-col class="left_examine  " :span="3">
-                                <el-row class="div_header">
-                                    <el-col class="textAlignC mt20 mb15">
+                    <div class="center_part">
+                        <div class="center_con cf">
+                            <div class="left_examine " style="float: left;width: 170px">
+                                <div class="div_header">
+                                    <div class="textAlignC mt20 mb15">
                                         <el-button type="primary" size="small" class="personalAuditFormBtn">
-                                            <i class="icon iconfont icon-zigeshenchazhuti  mr3"></i>
+                                            <i class="icon iconfont icon-zigeshenchazhuti"></i>
                                             {{personalAuditFormBtn}}
                                         </el-button>
-                                    </el-col>
-                                </el-row>
-                                <el-row>
+                                    </div>
+                                </div>
+                                <div>
                                     <h6 class="pl15  col747 pt15 pb10">审查项</h6>
                                     <div class="content_wrap">
                                         <div class="zTreeDemoBackground left">
                                             <ul id="treeDemo" class="ztree">{{msg}}</ul>
                                         </div>
                                     </div>
-                                </el-row>
-                            </el-col>
+                                </div>
+                            </div>
                             <!--点击ztree树显示-->
-                            <el-col class="right_warp" :span="21">
+                            <div class="right_warp"  style="float: left;width: calc(100% - 185px)">
                                 <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
                                     <el-col :span="12">
-                                        <div class="grid-content bg-purple  cf">
-                                            <div style="width:122px" class="my_progress_word fl">我的进度</div>
-                                            <el-progress :percentage="completePercent"
-                                                         class="progress fl"></el-progress>
-                                        </div>
+                                        <el-row class="red">
+                                            <el-col style="width: 70px;font-size: 14px;" >
+                                                <div >我的进度：</div>
+                                            </el-col>
+                                            <el-col style="width: 278px">
+                                                <el-progress :percentage="completePercent"></el-progress>
+                                            </el-col>
+                                        </el-row>
                                     </el-col>
                                     <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
                                         <el-button @click="allChecked" plain size="mini" type="primary"><i
@@ -99,11 +102,14 @@
                                         <el-row class="progress_div"
                                                 v-if="$store.state.failureEnery.start_sublevel_show">
                                             <el-col :span="12">
-                                                <div class="grid-content bg-purple  cf">
-                                                    <div style="width:122px" class="my_progress_word fl">进度：</div>
-                                                    <el-progress :percentage="completePercent"
-                                                                 class="progress fl"></el-progress>
-                                                </div>
+                                                <el-row class="red">
+                                                    <el-col style="width: 70px;font-size: 14px;" >
+                                                        <div >我的进度：</div>
+                                                    </el-col>
+                                                    <el-col style="width: 278px">
+                                                        <el-progress :percentage="completePercent"></el-progress>
+                                                    </el-col>
+                                                </el-row>
                                             </el-col>
                                             <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
                                                 <el-button @click="sublevelAllChecked" plain size="mini" type="primary">
@@ -142,7 +148,6 @@
                                                        <i class="el-icon-check mr5 "
                                                           style="color: #67c23a"
                                                           v-if="scope.row.radio=='合格'"></i>投标人：
-                                                    <!--{{scope.row.pdf}}-->
                                                     <a v-if="scope.row.pdf.length<2" @click="show_pdf(scope.$index, scope.row)"
                                                        class="common_a_style">
                                                         <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
@@ -157,21 +162,9 @@
                                                       </span>
                                                       <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                         <el-dropdown-item
-                                                                @click.native="show_pdf(scope.$index, scope.row)"
-                                                        >PDF文件1.pdf<i
-                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                        <el-dropdown-item
-                                                                @click.native="show_pdf(scope.$index, scope.row)"
-                                                        >PDF文件2.pdf<i
-                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                        <el-dropdown-item
-                                                                @click.native="show_pdf(scope.$index, scope.row)"
-                                                        >PDF文件3.pdf<i
-                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                        <el-dropdown-item
-                                                                @click.native="show_pdf(scope.$index, scope.row)"
-                                                        >PDF文件4.pdf<i
-                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                                @click.native="show_pdf(scope.$index, scope.row)" v-for="(item ,index) in scope.row.pdf"
+                                                        >{{item.pdf_name}}<i
+                                                                class="icon iconfont icon-pdf" ></i></el-dropdown-item>
                                                       </el-dropdown-menu>
                                                     </el-dropdown>
                                                 </span>
@@ -212,7 +205,7 @@
                                         </el-table>
                                     </div>
                                 </div>
-                            </el-col>
+                            </div>
                             <!--点击个人形式审计表按钮显示-->
                             <el-col class="personalAuditFormTable" :span="21">
                                 <div class="FormTableTitle">
@@ -264,8 +257,8 @@
                                     </el-row>
                                 </template>
                             </el-col>
-                        </el-row>
-                    </el-row>
+                        </div>
+                    </div>
                 </el-row>
             </div>
         </div>
@@ -933,35 +926,12 @@
                             .right_warp {
                                 padding-left: 15px;
                                 border-radius: 5px;
-                                .progress_div {
-                                    padding-top: 30px;
-                                    padding-bottom: 10px;
-                                    padding-left: 15px;
-                                    font-size: 15px;
-                                    .my_progress_word {
-                                        width: 224px;
-                                        color: red;
-                                        line-height: 14px;
-                                        margin-top: 2px;
-                                    }
-                                    .progress {
-                                        width: 280px;
-                                        .el-progress-bar__outer {
-                                            background-color: #ededed;
-                                            height: 15px !important;
-                                        }
-                                        .el-progress__text {
-                                            position: relative;
-                                            left: -65px;
-                                            color: red;
-                                            font-size: 15px !important;
-                                            top: -17px;
-                                            width: 100px;
-                                        }
-                                        .el-progress-bar {
-                                            padding-right: 0;
-                                        }
-                                    }
+                                .el-progress__text{
+                                    color: red;
+                                }
+                                .el-progress-bar__outer {
+                                    background-color: #ededed;
+                                    height: 14px !important;
                                 }
                                 .title_msg {
                                     .commonTitle {
@@ -1001,6 +971,9 @@
                                                 color: rgb(64, 158, 255);
                                             }
                                         }
+                                    }
+                                    .cell{
+                                        padding-right: 40px;
                                     }
                                 }
                             }
