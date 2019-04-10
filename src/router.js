@@ -32,7 +32,15 @@ var routes = [
         //开始评标页面
         { name: '/index/beginEvaluation', path: '/index/beginEvaluation', component: () => import('./views/evaluationpage/beginEvaluation.vue') },
         //进入页面所有信息页面
+        
+        
+        //承诺书
+        { name: '/index/LetterCommitment', path: '/index/LetterCommitment', component: () => import('./views/evaluationpage/LetterCommitment.vue') },
+
+
         { name: '/index/AllInformation', path: '/index/AllInformation', component: () => import('./views/evaluationpage/AllInformation.vue') },
+         //进入页面所有信息页面
+         { name: '/index/AllInformation_beifen', path: '/index/AllInformation_beifen', component: () => import('./views/evaluationpage/AllInformation_beifen.vue') },
         //推荐组长页面和评标页面(包含按钮判断展示)
         { name: '/index/ElectedLeader', path: '/index/ElectedLeader', component: () => import('./views/evaluationpage/ElectedLeader.vue') },
         //推荐组长进入推荐轮数
