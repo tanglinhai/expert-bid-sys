@@ -212,6 +212,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -222,6 +225,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 2,
                                             people: '招标人2：',
@@ -232,6 +236,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
                                     },
                                 },
@@ -240,7 +247,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资格审查2",
-                                        question1: "审查标准",
+                                        question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
                                             index: 3,
@@ -252,6 +259,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -262,6 +270,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 5,
                                             people: '招标人2：',
@@ -272,6 +283,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
                                     },
                                 },
@@ -280,7 +294,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资格审查项目",
-                                        question1: "审查标准",
+                                        question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
                                             index: 6,
@@ -292,6 +306,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -301,7 +318,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
-                                            id: 8
+                                            id: 8,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 8,
                                             people: '招标人2：',
@@ -312,8 +332,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"} ]
                                         }],
-
                                     }
                                 },
                             ]
@@ -442,6 +462,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -452,6 +473,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 2,
                                             people: '招标人2：',
@@ -462,9 +486,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
-
-
                                     },
                                 },
                                 {
@@ -472,7 +497,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资质",
-                                        question1: "审查标准",
+                                        question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
                                             index: 3,
@@ -484,6 +509,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -494,6 +520,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 5,
                                             people: '招标人2：',
@@ -504,6 +533,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
 
                                     },
@@ -513,7 +545,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "审查项目",
-                                        question1: "审查标准",
+                                        question1: "审查标准：",
                                         answer1: "与营业执照、资质证书一致",
                                         tableData: [{
                                             index: 6,
@@ -525,6 +557,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -534,7 +567,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
-                                            id: 8
+                                            id: 8,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 8,
                                             people: '招标人2：',
@@ -545,6 +581,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
                                     }
                                 },
@@ -553,7 +592,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 
                     'mylist': ms,
                     //头部审查类型按钮
-
                 },
                 msg: [{////个人形式审计表数据接口
                     number: '1',
@@ -627,6 +665,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -637,6 +676,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 2,
                                             people: '招标人2：',
@@ -647,10 +689,11 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
-
-
-                                    },
+                                   },
                                 },
                                 {
                                     id: 102, pId: 1, name: "详细评审2", open: false,
@@ -669,6 +712,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -679,6 +723,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 5,
                                             people: '招标人2：',
@@ -689,8 +736,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
-
                                     },
                                 },
                                 {
@@ -710,6 +759,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -719,7 +769,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
-                                            id: 8
+                                            id: 8,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }, {
                                             index: 8,
                                             people: '招标人2：',
@@ -730,8 +783,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
+                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
+                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
                                         }],
-
                                     }
                                 },
                             ]
