@@ -277,7 +277,7 @@
             FailureEntry,
             SubmitPrompt,
             NavBar,
-            AbandonedTender,   //废标  
+            AbandonedTender,//废标
             StandardChallengeInformation,
             pdf: () => import('../../components/publicVue/Pdf')
         },
@@ -352,9 +352,6 @@
             setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
             }, 200);
-
-
-
             this._dom_c = {
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
@@ -391,6 +388,7 @@
                         this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
                         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
+                        console.log(res.data.bidMsg.eviewrItemsMsg.viewType);
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.flag = true;//未提交
                         } else {

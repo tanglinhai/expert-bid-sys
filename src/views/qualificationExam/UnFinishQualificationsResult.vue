@@ -72,8 +72,7 @@
                                                                           @click="submit">提交</el-button>
                                             <el-button size="small" plain
                                                        @click="individualTrial">查看个人资格审查项表</el-button></span>
-
-                                        <el-button size="small" plain @click="checkUnlockRecord">查看资格审查项解锁记录</el-button>
+                                        <el-button size="small" plain @click="checkUnlockRecord" class="ml10">查看资格审查项解锁记录</el-button>
                                         <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁</el-button>
                                     </div>
                                 </el-col>
@@ -363,7 +362,6 @@
         .mainContentWarp {
             background: white;
             border-radius: 5px;
-
             .center_part {
                 padding: 15px;
                 .pro_table {

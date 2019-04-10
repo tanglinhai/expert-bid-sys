@@ -321,45 +321,55 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 
                     'mylist': ms,
                     //头部审查类型按钮
-                    // vue_type:get_data(1),
-                    'viewType': [
-                        {
-                            value: '1',
-                            label: '资格审查项',
-                            type: '1'
-                        },
-                        {
-                            value: '2',
-                            label: '资格审查项汇总',
-                            type: '2'
-                        },
+                    vue_type: get_data(1),
+                    // 'viewType': [
+                    //     {
+                    //         value: '1',
+                    //         label: '资格审查项',
+                    //         type: '1'
+                    //     },
+                    //     {
+                    //         value: '2',
+                    //         label: '资格审查项汇总',
+                    //         type: '2'
+                    //     },
+                    //
+                    //     {
+                    //         value: '3',
+                    //         label: '符合性审查项',
+                    //         type: '3'
+                    //     },
+                    //     {
+                    //         value: '4',
+                    //         label: ' 符合性审查项汇总',
+                    //         type: '4'
+                    //     },
+                    //     {
+                    //         value: '5',
+                    //         label: ' 详细评审（技术）',
+                    //         type: '5'
+                    //     },
+                    //     {
+                    //         value: '6',
+                    //         label: '详细评审（技术）汇总',
+                    //         type: '6'
+                    //     },
+                    //     {
+                    //         value: '7',
+                    //         label: '评审汇总',
+                    //         type: '7'
+                    //     },
+                    //     {
+                    //         value: '7',
+                    //         label: '评审汇总',
+                    //         type: '7'
+                    //     },
+                    //     {
+                    //         value: '7',
+                    //         label: '评审汇总',
+                    //         type: '7'
+                    //     },
 
-                        {
-                            value: '3',
-                            label: '符合性审查项',
-                            type: '3'
-                        },
-                        {
-                            value: '4',
-                            label: ' 符合性审查项汇总',
-                            type: '4'
-                        },
-                        {
-                            value: '5',
-                            label: ' 详细评审（技术）',
-                            type: '5'
-                        },
-                        {
-                            value: '6',
-                            label: '详细评审（技术）汇总',
-                            type: '6'
-                        },
-                        {
-                            value: '7',
-                            label: '评审汇总',
-                            type: '7'
-                        },
-                    ],
                },
                 msg: [{////个人形式审计表数据接口
                     number: '1',
@@ -767,7 +777,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 
 // 资格审查项汇总页面table接口
 Mock.mock('/api/table_data', 'post', (options) => {
-    // console.log(JSON.parse(options.body));
+    console.log(JSON.parse(options.body));
     let return_val;
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 2) {
@@ -1052,78 +1062,116 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 // 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态：
-//is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态；zong_type：是否提交的状态( 是汇总页面提交)；
+//is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 function get_data(type,is_submit_type) {//type
     function set_type() {
         if (type == 0) {
-            return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4,]
+            return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
         }
         if (type == 1) {
-            return [1, 3, 4, 4, 4, 4, 4,]
+            return [1, 3, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,]
         }
         if (type == 2) {
-            return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,]
+            return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,4, 4, 4, 4, 4,]
         }
         if (type == 3) {//符合性审查项
-            return [1, 1, 1, is_submit_type?1:2, 4, 4, 4,]
+            return [1, 1, 1, is_submit_type?1:2, 4, 4, 4,4, 4, 4, 4, 4,]
         }
         if (type == 4) {//符合性审查项汇总
-            return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,]
+            return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,4, 4, 4, 4, 4,]
         }
         if (type == 5) {//详细
-            return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,]
+            return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,4, 4, 4, 4, 4,]
         }
         if (type == 6) {//详细汇总
-            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,4, 4, 4, 4, 4,]
         }
-        if (type == 7) {//详细汇总
-            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+        if (type == 7) {//定档
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+        }
+        if (type == 8) {//商务
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+        }
+        if (type == 10) {// 技术
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+        }
+        if (type == 11) {//服务
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+        }
+        if (type == 12) {//其他
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+        }
+        if (type == 70) {//评审汇总
+            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
         }
     }
 
     set_type();
     var a;
     a = set_type();
-    // console.log(a);
+    console.log(a);
     return [
         {
-            value: '1',
-            label: '资格审查项',
+            value: '1',//
+            label: '资格审查',
             type: a[0],
         },
         {
             value: '2',
-            label: '资格审查项汇总',
+            label: '资格审查汇总',
             type: a[1]
         },
-
         {
             value: '3',
-            label: '符合性审查项',
+            label: '符合性审查',
             type: a[2]
         },
         {
             value: '4',
-            label: '符合性审查项汇总',
+            label: '符合性审查汇总',
             type: a[3]
         },
         {
             value: '5',
-            label: '详细评审（技术）',
+            label: '详细评审(技术)',
             type: a[4]
         },
         {
             value: '6',
-            label: '详细评审（技术）汇总',
+            label: '详细评审(技术)汇总',
             type: a[5]
         },
         {
             value: '7',
-            label: '评审汇总',
+            label: '定档评议',
             type: a[6]
         },
+        {
+            value: '8',
+            label: '商务',
+            type: a[7]
+        },
+        {
+            value: '9',
+            label: '技术',
+            type: a[8]
+        },
+        {
+            value: '10',
+            label: '服务',
+            type: a[9]
+        },
+        {
+            value: '11',
+            label: '其他',
+            type: a[10]
+        },
+        {
+            value: '70',
+            label: '评审汇总',
+            type: a[11]
+        },
     ]
-
 }
 
 // 资格审查全部提交接口
@@ -1238,7 +1286,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
             //审查项
             'eviewrItemsMsg': {
                 //头部审查类型按钮
-                'viewType':get_data(7,is_tijaio),
+                'viewType':get_data(70,is_tijaio),
                 'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
                 'bidEvaluation': msg,
                 'review_summary': data_msg,
@@ -1269,7 +1317,7 @@ let pshz_tijiao = Mock.mock('/api/pshz_tijiao', 'post', {
     status: 200,
     message: '提交成功!',
     data: [],
-    vue_type: get_data(7),
+    vue_type: get_data(70),
 });
 
 //排序(向上)
@@ -1317,6 +1365,172 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
     message: '成功!',
     data: '',
 });
+
+
+//定档商务技术服务其他
+Mock.mock('/api/BusinessOther', 'post', (options) => {
+    console.log(JSON.parse(options.body));
+    let return_val;
+    let get_type_num=JSON.parse(options.body).type;
+    if (get_type_num == 7) {
+        return_val= {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
+                    'zhaunjia': '张三',
+                     companyName: ["重庆网控科技发展有限公司 ", "普瑞太阳能有限公司", "夏丰热工研究院有限公司",],
+                        dingdang_tableData: [{
+                            date: '2016-05-02',
+                            name: '王小虎',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }]
+                }
+            }
+        }
+    } else if (get_type_num == 8) {
+        let msg = [];
+        for (let i = 0; i < Random.integer(1, 5); i++) {
+            msg.push({
+                'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                + '/' + '评委会',//     评标委员会
+                'bagName': '第' + Random.natural(0, 9) + '包',//分包号
+                'panduan1': "√",
+                'evaluationFactors': Random.csentence(),//评审因素
+                'panduan2': "√",
+                'panduan3': "√",
+            })
+        }
+        return_val= {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
+                    'zhaunjia': '张三',
+                    'msgBox': msg,
+                    companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
+                }
+            }
+        }
+    }
+    else if (get_type_num == 9) {
+        // console.log(JSON.parse(options.body));
+        let msg = [];
+        for (let i = 0; i < Random.integer(1, 5); i++) {
+            msg.push({
+                'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                + '/' + '评委会',//     评标委员会
+                'bagName': '第' + Random.natural(0, 9) + '包',//分包号
+                'panduan1': "√",
+                'evaluationFactors': Random.csentence(),//评审因素
+                'panduan2': "√",
+                'panduan3': "√",
+            })
+        }
+        return_val= {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
+                    'zhaunjia': '张三',
+                    'msgBox': msg,
+                    companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
+                }
+            }
+        }
+    }
+    else if (get_type_num == 10) {
+        // console.log(JSON.parse(options.body));
+        let msg = [];
+        for (let i = 0; i < Random.integer(1, 5); i++) {
+            msg.push({
+                'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                + '/' + '评委会',//     评标委员会
+                'bagName': '第' + Random.natural(0, 9) + '包',//分包号
+                'panduan1': "√",
+                'evaluationFactors': Random.csentence(),//评审因素
+                'panduan2': "√",
+                'panduan3': "√",
+            })
+        }
+        return_val= {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
+                    'zhaunjia': '张三',
+                    'msgBox': msg,
+                    companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
+                }
+            }
+        }
+    }
+    else if (get_type_num == 11) {
+        // console.log(JSON.parse(options.body));
+        let msg = [];
+        for (let i = 0; i < Random.integer(1, 5); i++) {
+            msg.push({
+                'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                + '/' + '评委会',//     评标委员会
+                'bagName': '第' + Random.natural(0, 9) + '包',//分包号
+                'panduan1': "√",
+                'evaluationFactors': Random.csentence(),//评审因素
+                'panduan2': "√",
+                'panduan3': "√",
+            })
+        }
+        return_val= {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
+                    'zhaunjia': '张三',
+                    'msgBox': msg,
+                    companyName: ["重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"]
+                }
+            }
+        }
+    }
+    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
+    return return_val;
+});
+
+
+
+
+
+
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 
 
