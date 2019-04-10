@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <div class="grid-content bg-purple zeroBox">
                     <img src="../../assets/img/no_data_icon.png" alt="">
-                    <span style="padding-left:5px;">当前还没有您参评的标包，请等待项目经理分配！</span>
+                    <el-button class="btnBg" @click="refresh_btn">刷新</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -28,8 +28,6 @@
                         </el-row>
                     </div>
                 </template>
-
-                <!--v-else-->
                 <el-row v-for="(item,index) in msg" :key="index" class="bag_msg" >
                     <el-col class=' border_col'>
                         <el-col style="width:25%" class="expertName">
@@ -322,21 +320,26 @@
                     this.radio1 = $(".radioS")[obj.uploadWay].children[0].children[1].value;
                 }, 1000)
             },
-        }
+         }
     }
 </script>
 
 <style lang="scss">
     .nowProject {
         .zeroBox{
-            height: 84px;
-            line-height: 84px;
-            text-align:center;
+            margin: auto;
             border-bottom: 1px solid #f3f3f3;
+            position: relative;
+            width: 631px;
+            height: 245px;
+            .btnBg  {
+                position: absolute;
+                top: 150px;
+                right: 254px;
+            }
             img{
                 display: inline-block;
                 vertical-align: middle;
-                width: 60px;height: 60px;
             }
         }
         .collBox {
