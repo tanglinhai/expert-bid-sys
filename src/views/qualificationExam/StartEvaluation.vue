@@ -142,12 +142,12 @@
                                                     prop="name"
                                                     label="名称">
                                                 <template slot-scope="scope">
-                                                <span style="margin-left: 10px">
+                                                <span style="margin-left: 10px;display: inline-block;">
                                                       <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
                                                          style="color: red"></i>
                                                        <i class="el-icon-check mr5 "
                                                           style="color: #67c23a"
-                                                          v-if="scope.row.radio=='合格'"></i>投标人：
+                                                          v-if="scope.row.radio=='合格'"></i><span>投标人：</span>
                                                     <a v-if="scope.row.pdf.length<2" @click="show_pdf(scope.$index, scope.row)"
                                                        class="common_a_style">
                                                         <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
@@ -167,6 +167,7 @@
                                                                 class="icon iconfont icon-pdf" ></i></el-dropdown-item>
                                                       </el-dropdown-menu>
                                                     </el-dropdown>
+
                                                 </span>
                                                     <div class="btn_locate iconfont icon-dingwei"
                                                          @click="locate_pdf(scope.$index, scope.row)"
@@ -176,7 +177,7 @@
                                             </el-table-column>
                                             <el-table-column
                                                     prop="pass"
-                                                    label="是否合格">
+                                                    label="是否合格" width="200">
                                                 <template slot-scope="scope">
                                             <span style="margin-left: 10px" class="radios"
                                                   v-if="$store.state.failureEnery.flag">
@@ -195,6 +196,7 @@
                                             </el-table-column>
                                             <el-table-column
                                                     prop="kong"
+                                                    min-width="30%"
                                             >
                                                 <template slot-scope="scope">
                                             <span style="margin-left: 10px">
@@ -805,8 +807,7 @@
             margin-left: 7px;
         }
     }
-
-    .complianceReviewItem {
+     .complianceReviewItem {
         padding: 15px;
         background-color: #ededed;
         .bid_msg {
@@ -926,6 +927,7 @@
                             .right_warp {
                                 padding-left: 15px;
                                 border-radius: 5px;
+
                                 .el-progress__text{
                                     color: red;
                                 }
@@ -944,6 +946,9 @@
                                     }
                                 }
                                 .first_table {
+                                    .el-dropdown{
+                                        display: inline;
+                                    }
                                     .el-table__header-wrapper {
                                         display: none;
                                     }
@@ -1046,6 +1051,8 @@
                     float: right;
                     width: 50%;
                     height: 100%;
+                    max-width: 850px!important;
+                    overflow-x: scroll!important;
                     .slideBar {
                         display: block;
                         position: absolute;
@@ -1119,5 +1126,12 @@
                 }
             }
         }
+         /*.center_part_wrap {*/
+             /*@media screen and (max-width: 850px){*/
+                 /*overflow-x: scroll!important;*/
+                 /*z-index: 9999!important;*/
+             /*}*/
+         /*}*/
     }
+
 </style>
