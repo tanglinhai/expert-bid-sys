@@ -3,7 +3,7 @@
         <!-- 项目列表页面-->
         <el-row class="mb15">
             <el-col>
-                <el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目</el-button>
+                <el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3" ></i>专家评审/ 我的评审项目</el-button>
             </el-col>
         </el-row>
         <div class="main">
@@ -75,6 +75,7 @@
              this.childMsg();
         },
         methods: {
+
             // 初始子组件数据获取
             childMsg(){
                 this.pageLoading=true;
