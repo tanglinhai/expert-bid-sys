@@ -212,9 +212,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
 
                                         }, {
                                             index: 1,
@@ -226,7 +226,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
                                             people: '招标人3：',
@@ -237,7 +237,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
                                 },
@@ -258,9 +258,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -271,7 +271,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
                                             people: '招标人3：',
@@ -282,7 +282,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
                                 },
@@ -303,9 +303,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -316,7 +316,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
                                             people: '招标人3：',
@@ -327,7 +327,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     }
                                 },
@@ -409,7 +409,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -420,9 +422,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件2', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件3', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
                                             people: '招标人3：',
@@ -433,9 +433,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     },
                                 },
@@ -456,7 +454,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -467,9 +467,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
                                             people: '招标人3：',
@@ -480,9 +478,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
 
                                     },
@@ -504,7 +500,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -515,9 +513,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
                                             people: '招标人3：',
@@ -528,9 +524,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     }
                                 },
@@ -612,7 +606,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -623,9 +619,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
                                             people: '招标人3：',
@@ -636,9 +630,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                    },
                                 },
@@ -659,7 +651,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -670,9 +664,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
                                             people: '招标人3：',
@@ -683,9 +675,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     },
                                 },
@@ -706,8 +696,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                               ]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -718,9 +709,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
                                             people: '招标人3：',
@@ -731,9 +720,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     }
                                 },
