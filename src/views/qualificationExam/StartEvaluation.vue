@@ -136,10 +136,33 @@
                                                        <i class="el-icon-check mr5 "
                                                           style="color: #67c23a"
                                                           v-if="scope.row.radio=='合格'"></i>投标人：
-                                                    <a @click="show_pdf(scope.$index, scope.row)" class="common_a_style">
+                                                    <a v-if="scope.$index<2" @click="show_pdf(scope.$index, scope.row)" class="common_a_style">
                                                         <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
-                                                        <i class="icon iconfont icon-pdf "></i>
-                                                    </a></span>
+                                                        <i class="icon iconfont icon-pdf"></i>
+                                                    </a>
+                                                    <el-dropdown v-else trigger="click">
+                                                      <span class="el-dropdown-link">
+                                                        <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                        {{scope.row.name}}
+                                                        <i class="icon iconfont icon-pdf"></i>
+                                                        <i class="el-icon-arrow-down el-icon--right"></i>
+                                                      </span>
+                                                      <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                        <el-dropdown-item
+                                                            @click.native="show_pdf(scope.$index, scope.row)"
+                                                        >PDF文件1.pdf<i class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                        <el-dropdown-item
+                                                            @click.native="show_pdf(scope.$index, scope.row)"
+                                                        >PDF文件2.pdf<i class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                        <el-dropdown-item
+                                                            @click.native="show_pdf(scope.$index, scope.row)"
+                                                        >PDF文件3.pdf<i class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                        <el-dropdown-item
+                                                            @click.native="show_pdf(scope.$index, scope.row)"
+                                                        >PDF文件4.pdf<i class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                      </el-dropdown-menu>
+                                                    </el-dropdown>
+                                                </span>
                                                 </template>
                                             </el-table-column>
                                             <el-table-column
@@ -761,6 +784,11 @@
 </script>
 
 <style lang="scss">
+.table_pdf_drop_menu{
+    .icon-pdf{
+        margin-left: 7px;
+    }
+}
     .complianceReviewItem {
         padding: 15px;
         background-color: #ededed;
@@ -922,6 +950,13 @@
                                 .first_table {
                                     .el-table__header-wrapper {
                                         display: none;
+                                    }
+                                    .el-dropdown-link {
+                                        cursor: pointer;
+                                        color: #409EFF;
+                                    }
+                                    .el-icon-arrow-down {
+                                        font-size: 12px;
                                     }
                                 }
                             }
