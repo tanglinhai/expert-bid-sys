@@ -201,7 +201,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                         question: "资格审查评审项：",
                                         answer: "资格审查1",
                                         question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        answer1: "与营业执照、资质证书一致111",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -241,7 +241,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                         question: "资格审查评审项：",
                                         answer: "资格审查2",
                                         question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        answer1: "与营业执照、资质证书一致2222",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -280,8 +280,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资格审查项目",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准3",
+                                        answer1: "与营业执照、资质证书一致3333",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
@@ -430,8 +430,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
                                         answer: "投标人名称",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准4：",
+                                        answer1: "与营业执照、资质证书一致4444",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -472,8 +472,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资质",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准5",
+                                        answer1: "与营业执照、资质证书一致5555",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -513,8 +513,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "审查项目",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准6",
+                                        answer1: "与营业执照、资质证书一致6666",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
@@ -615,8 +615,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
                                         answer: "详细评审1",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准7：",
+                                        answer1: "与营业执照、资质证书一致77777",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -657,8 +657,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "详细评审2",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准8",
+                                        answer1: "与营业执照、资质证书一致8888",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -698,8 +698,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "详细评审3",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准9",
+                                        answer1: "与营业执照、资质证书一致999",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
