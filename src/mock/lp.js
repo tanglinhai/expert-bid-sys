@@ -7,7 +7,7 @@ const Random = Mock.Random;
 
 //beginEvaluation开始评标页面数据
 let tableMs = Mock.mock('/api/ProjectSubcontract', 'post', {
-    'projectTables|5': [{  //项目分包
+    projectTables: [{  //项目分包
         id: () => Random.id(),
         'baohao|1': ['0635-1909N974/1','0635-1909N974/2'],
         'baoName|1':['第一包','第二包','第三包'],
@@ -328,6 +328,93 @@ let leaderAll=Mock.mock('/api/leaderAllList','post',{
     
 })
 //leaderSignaturePage接口
+
+//协议书的同意按钮接口
+let agreeBtn=Mock.mock('/api/agreeBtn','post',{
+    code: 200,
+    data: [1234]
+})
+//协议书的同意按钮接口
+
+//参加评标按钮接口
+let EnterEvaluationButton=Mock.mock('/api/EnterEvaluationButton','post',{
+    code: 200,
+    data: [1234]
+})
+//参加评标按钮接口
+
+
+//公共导航接口
+let NavCommon=Mock.mock('/api/navcommons','post',{
+    navsAll:[{
+            value: '1',//
+            label: '承诺书',
+            types: 1,
+        },{
+            value: '2',//
+            label: '参加评标',
+            types: 2,
+        },{
+            value: '3',//
+            label: '评标',
+            types: 3,
+         },
+         //{
+        //     value: '4',//
+        //     label: '推举组长',
+        //     types: 4,
+        // },
+        {
+            value: '5',//
+            label: '资格审查',
+            types: 5,
+        },{
+            value: '6',//
+            label: '资格审查汇总',
+            types: 6,
+        },{
+            value: '7',//
+            label: '符合性审查',
+            types: 7,
+        },{
+            value: '8',//
+            label: '符合性审查汇总',
+            types: 8,
+        },{
+            value: '9',//
+            label: '详细评审',
+            types: 9,
+        },{
+            value: '10',//
+            label: '详细评审(技术)汇总',
+            types: 10,
+        },{
+            value: '11',//
+            label: '定档评议',
+            types: 11,
+        },{
+            value: '12',//
+            label: '商务',
+            types: 12,
+        },{
+            value: '13',//
+            label: '技术',
+            types: 13,
+        },{
+            value: '14',//
+            label: '服务',
+            types: 14,
+        },{
+            value: '15',//
+            label: '其他',
+            types: 15,
+        },{
+            value: '16',//
+            label: '评审汇总',
+            types: 16,
+        }]
+})
+//公共导航接口
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })
