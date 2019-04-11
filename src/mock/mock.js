@@ -193,15 +193,15 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'zTreeData': //树形图
                         {
-                            id: 1, pId: 0, name: "资格审查-#707478", open: true,
+                            id: 1, pId: 0, name: "资格审查-电脑硬件配置", open: true,
                             children: [
                                 {
-                                    id: 101, pId: 1, name: "资格审查1", open: false,
+                                    id: 101, pId: 1, name: "资格审查1：内存大小", open: false,
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
-                                        answer: "资格审查1",
+                                        answer: "内存大小大于8G",
                                         question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        answer1: "大于等于8G",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -212,9 +212,10 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件2', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件3', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -225,30 +226,28 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '1',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
                                 },
                                 {
-                                    id: 102, pId: 1, name: "资格审查2", open: false,
+                                    id: 102, pId: 1, name: "资格审查2：CPU型号", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格审查2",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        answer: "是否为INTEL生产",
+                                        question1: "审查标准",
+                                        answer1: "必须是INTEL生产",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -259,7 +258,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -270,32 +271,28 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
                                 },
                                 {
-                                    id: 103, pId: 1, name: "资格审查项目", open: false,
+                                    id: 103, pId: 1, name: "资格审查3：分辨率是否为15英寸以上", open: false,
                                     fristTableData: {
                                         question: "资格审查评审项：",
-                                        answer: "资格审查项目",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        answer: "分辨率是否为15英寸以上",
+                                        question1: "审查标准3",
+                                        answer1: "可达到1366*768以上即可",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
@@ -306,9 +303,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -319,20 +316,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass2: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"} ]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     }
                                 },
@@ -402,8 +397,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
                                         answer: "投标人名称",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准4：",
+                                        answer1: "与营业执照、资质证书一致4444",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -414,7 +409,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -425,22 +422,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件2', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件3', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '1',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     },
                                 },
@@ -449,8 +442,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "资质",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准5",
+                                        answer1: "与营业执照、资质证书一致5555",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -461,7 +454,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -472,22 +467,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
 
                                     },
@@ -497,8 +488,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "审查项目",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准6",
+                                        answer1: "与营业执照、资质证书一致6666",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
@@ -509,7 +500,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -520,22 +513,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass2: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     }
                                 },
@@ -605,8 +594,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {//第一个表格
                                         question: "资格审查评审项：",
                                         answer: "详细评审1",
-                                        question1: "审查标准：",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准7：",
+                                        answer1: "与营业执照、资质证书一致77777",
                                         tableData: [{
                                             index: 0,
                                             people: '招标人1：',
@@ -617,7 +606,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 1,
                                             people: '招标人2：',
@@ -628,22 +619,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '1',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                    },
                                 },
@@ -652,8 +639,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "详细评审2",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准8",
+                                        answer1: "与营业执照、资质证书一致8888",
                                         tableData: [{
                                             index: 3,
                                             people: '招标人1：',
@@ -664,7 +651,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"}]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 4,
                                             people: '招标人2：',
@@ -675,22 +664,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     },
                                 },
@@ -699,8 +684,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                     fristTableData: {
                                         question: "资格审查评审项：",
                                         answer: "详细评审3",
-                                        question1: "审查标准",
-                                        answer1: "与营业执照、资质证书一致",
+                                        question1: "审查标准9",
+                                        answer1: "与营业执照、资质证书一致999",
                                         tableData: [{
                                             index: 6,
                                             people: '招标人1：',
@@ -711,8 +696,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                               ]
+                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
                                         }, {
                                             index: 7,
                                             people: '招标人2：',
@@ -723,22 +709,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 8,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 8,
-                                            people: '招标人2：',
-                                            name: '[2] 夏丰热工研究院有限公司',
+                                            people: '招标人3：',
+                                            name: '[3] 夏丰热工研究院有限公司',
                                             pass2: '2',
                                             content: '',
                                             ra1: '合格',
                                             ra2: '不合格',
                                             radio: '',
                                             id: 9,
-                                            pdf: [{pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},
-                                                {pdf_name: 'pdf文件1', 'url1': "/documents/younojsxia.pdf"},]
+                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
                                     }
                                 },

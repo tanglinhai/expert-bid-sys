@@ -1,11 +1,9 @@
 <template>
-
+ <div class="Wheelpushing_wrap">
+    <NavCommon class="NavCommon" :aaa="aaa" :bbb="bbb" :ccc="ccc"></NavCommon>
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
-        <!--公共部分组件-->
-        <evaluationcommonVue :NoClick="NoClick" :PorjectName="PorjectName" :ProjectBianhao="ProjectBianhao" :projectZiliao="projectZiliaoList" :projectChaxun="projectChaxunList" :projectLeiFenxi="projectLeiFenxiList" :projectYinjianFenxi="projectYinjianFenxiList"></evaluationcommonVue>
-        <!--公共部分组件-->
-        <div class="evaluationcommon mt20 cf">
+        <div class="evaluationcommon cf">
             <div class="textAlignC cole02 fs20" v-if="waitTitshi">请等待其他专家推举... ...</div>
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                 <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第{{LunNumber}}轮</h5>
@@ -71,17 +69,16 @@
             </el-pagination>
         </div>
     </div>
+ </div>
 </template>
 
 <script>
-    import evaluationcommonVue from '../../components/publicVue/evaluationcommon.vue';
-import { setInterval, clearInterval } from 'timers';
-
+    import NavCommon from '../../components/publicVue/NavCommon.vue';
     export default {
         name: 'index',
         props: {},
         components: {
-            evaluationcommonVue
+           NavCommon  
         },
         data(){
             return {
@@ -106,7 +103,7 @@ import { setInterval, clearInterval } from 'timers';
                 }
         },
         mounted(){
-            this.ProjectZiliao(); //项目，资料，分析，硬件分析查看
+            
             this.tuijuData(); //推举评委会主人第1轮
 
             var _this=this;
@@ -136,29 +133,11 @@ import { setInterval, clearInterval } from 'timers';
                 this.PutRoundNumberLoading=true;
                 this.tuijuData();
             },
-            //项目，资料，分析，硬件分析查看
-            ProjectZiliao(){   
-                this.$axios.post('/api/ProjectZiliao',{
-                }).then(res=>{
-                    if(res.status == 200){
-                        //console.log(res.data)
-                        this.pageLoading=false;
-                        this.projectZiliaoList=res.data.projectZiliao;
-                        this.projectChaxunList=res.data.projectChaxun;
-                        this.projectLeiFenxiList=res.data.projectLeiFenxi;
-                        this.projectYinjianFenxiList=res.data.projectYinjianFenxi;
-                        this.PorjectName=res.data.PorjectName;
-                        this.ProjectBianhao=res.data.ProjectBianhao;
-                        $(".el-collapse-item__wrap").hide()
-                        setTimeout(function(){
-                            $(".el-collapse-item__wrap").show()
-                        },50)
-                    }
-                })
-            },
+            
 
             //推举评委会主人第1轮
             tuijuData(){
+                
                 this.$axios.post('/api/WheelPushing',{
                 }).then(res=>{
                     if(res.status == 200){
@@ -186,6 +165,7 @@ import { setInterval, clearInterval } from 'timers';
                             })
                         }
                         this.PutRoundNumberLoading=false;
+                        this.pageLoading=false;
                     }
                 })
             },
@@ -201,9 +181,23 @@ import { setInterval, clearInterval } from 'timers';
     }
 </script>
 <style lang="scss">
+.Wheelpushing_wrap{
+    overflow:hidden; 
+    padding-top:15px; 
+    background:#ededed;
+    .NavCommon{
+        width:8%; 
+        float:left; 
+        min-height:700px;
+
+    }
     .Allinformation {
-        background-color: #ededed;
-        padding: 15px 20px 15px 20px;
+         background-color: #ededed;
+        padding:0px 0% 15px 0%;
+        width:90%;
+        float:left;
+        margin-left:1%;
+        margin-right:1%;
         .ApplyAvoid {
             .demo-ruleForm{
                 .el-textarea__inner{
@@ -211,5 +205,11 @@ import { setInterval, clearInterval } from 'timers';
                 }
             }
         }
+        .evaluationcommon{
+             background:white;
+            border-radius:5px;
+            padding:15px;
+        }
     }
+}
 </style>

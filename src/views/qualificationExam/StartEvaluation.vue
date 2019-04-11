@@ -147,9 +147,8 @@
                                                          style="color: red"></i>
                                                        <i class="el-icon-check mr5 "
                                                           style="color: #67c23a"
-                                                          v-if="scope.row.radio=='合格'"></i><span>投标人：</span>
-                                                    <a v-if="scope.row.pdf.length<2" @click="show_pdf(scope.$index, scope.row)"
-                                                       class="common_a_style">
+                                                          v-if="scope.row.radio=='合格'"></i>投标人：
+                                                    <a v-if="scope.row.pdf.length<2" @click="show_pdf(0, scope.row.pdf[0])"     class="common_a_style">
                                                         <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
                                                         <i class="icon iconfont icon-pdf"></i>
                                                     </a>
@@ -162,7 +161,7 @@
                                                       </span>
                                                       <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                         <el-dropdown-item
-                                                                @click.native="show_pdf(scope.$index, scope.row)" v-for="(item ,index) in scope.row.pdf"
+                                                                @click.native="show_pdf(index, item)" v-for="(item ,index) in scope.row.pdf"
                                                         >{{item.pdf_name}}<i
                                                                 class="icon iconfont icon-pdf" ></i></el-dropdown-item>
                                                       </el-dropdown-menu>
@@ -608,7 +607,6 @@
 
             },
             show_pdf(i, obj) {//查看pdf
-                console.log(i, obj);
                 //this.$commonJs.fullscreen();
                 //pdfItems: [],//动态插入pdfcurrPdfUrl
                 var currPDF;
@@ -632,7 +630,7 @@
                 } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
                     var _this = this;
                     this.pdfItems.push({
-                        currPdfUrl: 'https://pdfobject.com/pdf/sample-3pp.pdf',
+                        currPdfUrl: obj.url1,
                         ref: "pdf_" + obj.id,
                         show: true,
                         /*loadingInstance: ELEMENT.Loading.service({

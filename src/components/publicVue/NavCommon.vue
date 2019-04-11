@@ -1,7 +1,6 @@
 <template>
     <div class="navcommon_wrap">
         <ul>
-           
             <li>
                 <el-popover
                     placement="right"
@@ -9,7 +8,7 @@
                     width="200"
                     trigger="hover"
                     content="承诺书">
-                    <el-button @click="goto('/index/AllInformation_beifen')" slot="reference">承诺书</el-button>
+                    <el-button @click="goto('/index/LetterCommitment')" slot="reference">承诺书</el-button>
                 </el-popover>
                 <span class="navcommon_line"></span>
             </li>
@@ -19,11 +18,33 @@
                     title="标题"
                     width="200"
                     trigger="hover"
-                    content="评审">
-                    <el-button @click="goto('/index/AllInformation_beifen')" slot="reference">参加评标</el-button>
+                    content="参加评标">
+                    <el-button :disabled="aaa" @click="goto('/index/AllInformation')" slot="reference">参加评标</el-button>
+                </el-popover>
+                <span class="navcommon_line"></span>
+            </li>
+            <li>
+                <el-popover
+                    placement="right"
+                    title="标题"
+                    width="200"
+                    trigger="hover"
+                    content="评标">
+                    <el-button :disabled="bbb" @click="goto('/index/ElectedLeader')" slot="reference">评标</el-button>
+                </el-popover>
+                <span class="navcommon_line"></span>
+            </li>
+            <li>
+                <el-popover
+                    placement="right"
+                    title="标题"
+                    width="200"
+                    trigger="hover"
+                    content="推举组长">
+                    <el-button :disabled="ccc" @click="goto('/index/WheelPushing')" slot="reference">推举组长</el-button>
                 </el-popover>
             </li>
-            
+           
         </ul>
     </div>
 </template>
@@ -34,12 +55,19 @@
         data(){
             return {
                 
-               
             }
         },
         // 父组件传过来的值
         props:{
-        
+            aaa:{
+                type:Boolean,
+            },
+            bbb:{
+                type:Boolean,
+            },
+            ccc:{
+                type:Boolean,
+            }
         },
         components:{
 
@@ -62,6 +90,7 @@
     .navcommon_wrap{
         border-radius:5px;
         padding:15px 0px;
+        
         ul{
             li{
                 margin-left:30%;

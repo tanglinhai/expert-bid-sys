@@ -1,6 +1,6 @@
 <template>
     <div class="Allinforation_wrap">
-        <NavCommon class="NavCommon"></NavCommon>
+        <NavCommon class="NavCommon" :aaa="aaa" :bbb="bbb" :ccc="ccc"></NavCommon>
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
@@ -77,7 +77,7 @@
                         prop="toubiaorenName"
                         label="投标人名称">
                         <template slot-scope="scope">
-                            <p @click="ChakanTk(scope.row)">{{scope.row.toubiaorenName}}</p>
+                            <a href="javascript:;" @click="ChakanTk(scope.row)">{{scope.row.toubiaorenName}}</a>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -96,22 +96,22 @@
                     :total="400">
                 </el-pagination>
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
-                    <el-col :span="12" :offset="6">
+                    <!-- <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar">
                             <el-checkbox v-model="checked"></el-checkbox>&nbsp;我已读并同意了此承诺书《承诺书协议》 
                         </div>
-                    </el-col>
+                    </el-col> -->
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
                             <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
-                            <el-button size="small" type="primary" :disabled="!checked" @click="goto('/index/ElectedLeader')">参加评标</el-button>
+                            <el-button size="small" type="primary"  @click="goto('/index/ElectedLeader')">参加评标</el-button>
                         </div>
                     </el-col>
                 </el-row>
             </div>
 
         <!--申请回避弹框-->
-        <el-dialog
+        <!-- <el-dialog
                 class="mar"
                 title="申请回避"
                 :visible.sync="dialogApplyAvoid"
@@ -129,7 +129,7 @@
                         </el-form-item>
                     </el-form>
                 </div>
-        </el-dialog>
+        </el-dialog> -->
         <!--申请回避弹框-->
         <!--文件查看弹框-->
         <el-dialog
@@ -219,8 +219,7 @@
                     name:"",
                 }],//招标文件查看弹框内容
                 ChakanPage1:1, //分页
-                checked:false, //我已读并同意了此承诺书是否可选
-                dialogApplyAvoid:false,
+                // dialogApplyAvoid:false,
                 ruleForm: {
                     desc: ''
                 },
@@ -229,6 +228,9 @@
                         { type:'string',required: true, message: '请填写申请原因', trigger: 'blur' }
                     ]
                 },
+                aaa:0,  //参加评标可点
+                bbb:1,  //参加评标不可点 
+                ccc:1,  //参加评标不可点
             }
         },
         mounted(){
@@ -280,33 +282,39 @@
                 })
             },
            applyAvoid(){//申请回避弹框
-                this.dialogApplyAvoid=true
-            },
-            submitForm(formName) { //申请回避事件
-                this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    //console.log(this.$data.ruleForm.desc,999)  //获取到的拒绝的值
-                    //alert(1)
-                    this.dialogApplyAvoid=false;
-                    this.$axios.post('/api/refuseWhy',{
-                        yuanyin:this.$data.ruleForm.desc,
-                    }).then(res=>{
-                        if(res.data.code=="200"){
-                            //console.log(this.$data.ruleForm.desc,888)
-                            this.$message({
-                                message: '回避原因提交完成',
-                                type: 'success'
-                            });
-                            this.$data.ruleForm.desc="";
-                        }
-                    })
-                } else {
-                    return false;
-                }
+                this.$confirm('回避后，将无法参与该标包的评标，确定回避？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                    }).then(() => {
+                    }).catch(() => {
                 });
-
-                // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
             },
+            // submitForm(formName) { //申请回避事件
+            //     this.$refs[formName].validate((valid) => {
+            //     if (valid) {
+            //         //console.log(this.$data.ruleForm.desc,999)  //获取到的拒绝的值
+            //         //alert(1)
+            //         this.dialogApplyAvoid=false;
+            //         this.$axios.post('/api/refuseWhy',{
+            //             yuanyin:this.$data.ruleForm.desc,
+            //         }).then(res=>{
+            //             if(res.data.code=="200"){
+            //                 //console.log(this.$data.ruleForm.desc,888)
+            //                 this.$message({
+            //                     message: '回避原因提交完成',
+            //                     type: 'success'
+            //                 });
+            //                 this.$data.ruleForm.desc="";
+            //             }
+            //         })
+            //     } else {
+            //         return false;
+            //     }
+            //     });
+
+            //     // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
+            // },
 
         }
     }
