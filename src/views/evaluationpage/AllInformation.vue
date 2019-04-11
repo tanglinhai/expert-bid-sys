@@ -1,6 +1,6 @@
 <template>
     <div class="Allinforation_wrap">
-        <NavCommon class="NavCommon" :aaa="aaa" :bbb="bbb" :ccc="ccc"></NavCommon>
+        <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
@@ -104,7 +104,7 @@
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
                             <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
-                            <el-button size="small" type="primary"  @click="goto('/index/ElectedLeader')">参加评标</el-button>
+                            <el-button size="small" type="primary"  @click="AgreeXieYi">参加评标</el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -198,6 +198,9 @@
         },
         data(){
             return {
+                navcommonsList:[],  //导航数据
+                number:'',   //导航当前第几步
+
                 pageLoading:true,  //loading
                 tBrMsgLoading:false,  //投标人信息列表loading效果
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
@@ -228,14 +231,17 @@
                         { type:'string',required: true, message: '请填写申请原因', trigger: 'blur' }
                     ]
                 },
-                aaa:0,  //参加评标可点
-                bbb:1,  //参加评标不可点 
-                ccc:1,  //参加评标不可点
+              
             }
+        },
+        created() {
+            //console.log(this.$route.query.type,999)
+            this.number=this.$route.query.types
         },
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
+            this.navcommonsListFun(); //导航接口
         },
         methods:{
             goto(url){//开始评标
@@ -290,6 +296,33 @@
                     }).catch(() => {
                 });
             },
+            navcommonsListFun(){
+                this.$axios.post('/api/navcommons',{
+                    //invitioninpval:this.invitioninpval,   //传值关键词
+                    //redshow:this.redshow,    //四个按钮选中的是id
+                }).then(res=>{
+                    if(res.status == 200){
+                       //console.log(res.data)
+                        this.navcommonsList=res.data.navsAll;
+                        this.$nextTick(function(){
+                            $("#2 button").addClass("backblue");
+                        })
+                    }
+                })
+            },
+
+            AgreeXieYi(){  //参加评标
+                this.$axios.post('/api/EnterEvaluationButton','post',{
+
+                }).then(res=>{
+                    if(res.status == 200){
+                        this.$router.push({
+                            path: '/index/ElectedLeader?types='+3,
+                        })
+                    }
+                })
+                
+            },
             // submitForm(formName) { //申请回避事件
             //     this.$refs[formName].validate((valid) => {
             //     if (valid) {
@@ -324,11 +357,7 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-    .NavCommon{
-        width:8%; 
-        float:left; 
-        min-height:100px;
-    }
+   
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;

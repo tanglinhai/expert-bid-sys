@@ -1,51 +1,35 @@
 <template>
     <div class="navcommon_wrap">
-        <ul>
-            <li>
-                <el-popover
-                    placement="right"
-                    title="标题"
-                    width="200"
-                    trigger="hover"
-                    content="承诺书">
-                    <el-button @click="goto('/index/LetterCommitment')" slot="reference">承诺书</el-button>
-                </el-popover>
-                <span class="navcommon_line"></span>
-            </li>
-            <li>
-                <el-popover
-                    placement="right"
-                    title="标题"
-                    width="200"
-                    trigger="hover"
-                    content="参加评标">
-                    <el-button :disabled="aaa" @click="goto('/index/AllInformation')" slot="reference">参加评标</el-button>
-                </el-popover>
-                <span class="navcommon_line"></span>
-            </li>
-            <li>
-                <el-popover
-                    placement="right"
-                    title="标题"
-                    width="200"
-                    trigger="hover"
-                    content="评标">
-                    <el-button :disabled="bbb" @click="goto('/index/ElectedLeader')" slot="reference">评标</el-button>
-                </el-popover>
-                <span class="navcommon_line"></span>
-            </li>
-            <li>
-                <el-popover
-                    placement="right"
-                    title="标题"
-                    width="200"
-                    trigger="hover"
-                    content="推举组长">
-                    <el-button :disabled="ccc" @click="goto('/index/WheelPushing')" slot="reference">推举组长</el-button>
-                </el-popover>
-            </li>
-           
-        </ul>
+        <el-scrollbar style="width:100%; height:700px; overflow-x:hidden">
+            <ul>
+                <li v-for="(item,index) in navcommonsList" :key="index" :number="number" :id="item.types" >
+                    <template v-if="number>=item.types">
+                        <el-popover
+                            placement="right"
+                            title=""
+                            width="100"
+                            :content='item.label'
+                            trigger="hover"
+                            >
+                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>
+                        </el-popover>
+                        <span class="navcommon_line" style="display:none"></span>
+                    </template>
+                    <template v-else>
+                        <el-popover
+                            placement="right"
+                            title=""
+                            width="100"
+                            :content='item.label'
+                            trigger="hover"
+                            >
+                            <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference">{{item.label}}</el-button>
+                        </el-popover>
+                        <span class="navcommon_line" style="border-left:2px solid #ccc"></span>
+                    </template>
+                </li> 
+            </ul>
+        </el-scrollbar>
     </div>
 </template>
 
@@ -54,18 +38,14 @@
         name: "evaluationcommon",
         data(){
             return {
-                
             }
         },
         // 父组件传过来的值
         props:{
-            aaa:{
-                type:Boolean,
+            navcommonsList:{
+                type:Array,
             },
-            bbb:{
-                type:Boolean,
-            },
-            ccc:{
+            number:{
                 type:Boolean,
             }
         },
@@ -73,7 +53,11 @@
 
         },
         mounted(){
-            
+            //console.log(this.number,8888)
+            if(this.number==1){
+                
+                //$("")
+            }
         },
         methods: {
             goto(url){ //路由
@@ -81,7 +65,19 @@
                     path: url
                 });
             },
-           
+           ToChangePage(types,number){   //导航点击值
+                console.log(types,number)
+               
+                if(types==1){
+                    this.$router.push("/index/LetterCommitment?types="+number);
+                }else if(types==2){
+                    this.$router.push("/index/AllInformation?types="+number);
+                }else if(types==3){
+                    this.$router.push("/index/ElectedLeader?types="+number);
+                }else if(types==4){
+                    this.$router.push("/index/WheelPushing?types="+number);
+                }   
+           }
         }
     }
 </script>
@@ -90,10 +86,17 @@
     .navcommon_wrap{
         border-radius:5px;
         padding:15px 0px;
-        
+        width:8%; 
+        float:left; 
+        .el-scrollbar__wrap{
+            overflow-x:hidden;
+        }
+        .el-scrollbar__bar .el-scrollbar__thumb {
+            background: #348fed;
+        }
         ul{
             li{
-                margin-left:30%;
+                margin-left:33%;
                 button{
                     display:block;
                     width:60px;
@@ -107,6 +110,9 @@
                         display: block;
                         width: 60px;
                         margin-left: -20px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                 }
                 .navcommon_line{
@@ -114,6 +120,11 @@
                     height:40px;
                     border-left:2px solid #84bb3c;
                     margin-left:30px;
+                }
+                 &:last-child{
+                   .navcommon_line{
+                       display:none;
+                   }
                 }
             }
         }

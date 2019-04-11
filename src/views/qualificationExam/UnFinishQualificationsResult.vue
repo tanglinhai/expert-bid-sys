@@ -155,9 +155,9 @@
         <el-dialog
                 title="个人初审类活动表"
                 :visible.sync="$store.state.failureEnery.individualTrial"
-                width="952px"
+                width="80%"
         >
-            <IndividualTrial :msgBox="individualTrialData" :msg="companyName"></IndividualTrial>
+            <IndividualTrial :msgBox="individualTrialData" :msg="companyName" :title_data="grcs_titile_data"></IndividualTrial>
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
@@ -228,7 +228,7 @@
                 look_unlock_dialog: [],//解锁申请记录
                 other_explain: "",//其他说明
                 individualTrialData: [],//查看个人资格审查项表弹框数据
-                companyName: '',
+                companyName: [],
                 form: {
                     desc: ''
                 },
@@ -238,6 +238,7 @@
                 cities:[],
                 tableDataTwo:[],
                 bzzxLoading:true, //标中质询loading
+                grcs_titile_data:{},//个人初审弹框的头部数据
             }
         },
         created() {
@@ -264,8 +265,11 @@
                         this.evaluationLeader = res.data.bidMsg.eviewrItemsMsg.evaluationLeader;
                         this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
                         this.look_unlock_dialog = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
-                        this.individualTrialData = res.data.bidMsg.eviewrItemsMsg.msgBox;
-                        this.companyName = res.data.bidMsg.eviewrItemsMsg.companyName;
+                        this.individualTrialData = res.data.bidMsg.eviewrItemsMsg.msgBox;//个人初审活动表
+                        console.log(res.data.bidMsg.eviewrItemsMsg);
+                        this.grcs_titile_data=res.data.bidMsg.eviewrItemsMsg.grcs_titile_data;
+                        this.companyName = res.data.bidMsg.eviewrItemsMsg.companyNameData;
+                        console.log(res.data.bidMsg.eviewrItemsMsg.companyNameData);
                         this.$store.state.failureEnery.isshow = false;
                         if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//1：解锁的那个页面显示，反之进度条的那个显示
                             this.$store.state.failureEnery.isshow = true;
