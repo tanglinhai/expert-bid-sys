@@ -38,7 +38,7 @@
             <NavBar :msg="options" :type="type_btn"></NavBar>
             <div class="content">
                 <div class="div_pdf">
-                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" v-for="item in pdfItems"
+                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr" v-for="item in pdfItems"
                          v-show="item.show"></pdf>
                     <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
@@ -142,34 +142,34 @@
                                                     prop="name"
                                                     label="名称">
                                                 <template slot-scope="scope">
-                                                <span style="margin-left: 10px">
-                                                      <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
-                                                         style="color: red"></i>
-                                                       <i class="el-icon-check mr5 "
-                                                          style="color: #67c23a"
-                                                          v-if="scope.row.radio=='合格'"></i>投标人：
-                                                    <a v-if="scope.row.pdf.length<2" @click="show_pdf(0, scope.row.pdf[0])"
-                                                       class="common_a_style">
-                                                        <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
-                                                        <i class="icon iconfont icon-pdf"></i>
-                                                    </a>
-                                                    <el-dropdown v-else trigger="click">
-                                                      <span class="el-dropdown-link">
-                                                        <i class="el-icon-search fs14 mr3 ver_al_m"></i>
-                                                        {{scope.row.name}}
-                                                        <i class="icon iconfont icon-pdf"></i>
-                                                        <i class="el-icon-arrow-down el-icon--right"></i>
-                                                      </span>
-                                                      <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
-                                                        <el-dropdown-item
-                                                                @click.native="show_pdf(index, item)" v-for="(item ,index) in scope.row.pdf"
-                                                        >{{item.pdf_name}}<i
-                                                                class="icon iconfont icon-pdf" ></i></el-dropdown-item>
-                                                      </el-dropdown-menu>
-                                                    </el-dropdown>
-                                                </span>
+                                                    <span style="margin-left: 10px">
+                                                          <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                                             style="color: red"></i>
+                                                           <i class="el-icon-check mr5 "
+                                                              style="color: #67c23a"
+                                                              v-if="scope.row.radio=='合格'"></i>投标人：
+                                                        <a v-if="scope.row.pdf.length<2" @click="show_pdf(scope.row.pdf[0])"
+                                                           class="common_a_style">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                        </a>
+                                                        <el-dropdown v-else trigger="click">
+                                                          <span class="el-dropdown-link">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                            {{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                            <i class="el-icon-arrow-down el-icon--right"></i>
+                                                          </span>
+                                                          <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                            <el-dropdown-item
+                                                                    @click.native="show_pdf(pdfItem)" v-for="(pdfItem ,index) in scope.row.pdf"
+                                                            >{{pdfItem.pdf_name}}<i
+                                                                    class="icon iconfont icon-pdf" ></i></el-dropdown-item>
+                                                          </el-dropdown-menu>
+                                                        </el-dropdown>
+                                                    </span>
                                                     <div class="btn_locate iconfont icon-dingwei"
-                                                         @click="locate_pdf(scope.$index, scope.row)"
+                                                         @click="locate_pdf(item.fristTableData, scope.row)"
                                                          title="定位到关联投标文件说明处"
                                                     ></div>
                                                 </template>
@@ -307,6 +307,7 @@
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import JSON from 'JSON';
     export default {
         props: {},
         components: {
@@ -402,6 +403,7 @@
             window.fullModeRow = this.fullModeRow;
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
+            window._locate_pdf_ = this._locate_pdf_;
         },
         computed: {
             currentPdfShow() {
@@ -427,6 +429,9 @@
             }
         },
         methods: {
+            jsonParse(obj){
+                return JSON.parse(obj);
+            },
             init() {   //初始化 table的数据
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
@@ -600,12 +605,41 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            //定位到关联投标文件说明处
-            locate_pdf(i, obj) {
-                this.show_pdf(i, obj);
+            getIframeDocument(refStr){
+                return this.getIframeWindow(refStr).document;
+            },
+            getIframeWindow(refStr){
+                var iframe;
+                if (this.$refs[refStr] != null && this.$refs[refStr].length == 1) {
+                    iframe = $(this.$refs[refStr][0].$el).find('iframe');
+                } else {
+                    iframe = $(this.$refs[refStr].$el).find('iframe');
+                }
+                return iframe.get(0).contentWindow;
+            },
+            _locate_pdf_(){
 
             },
-            show_pdf(i, obj) {//查看pdf
+            //定位到关联投标文件说明处
+            locate_pdf(question, bidder) {
+                var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
+                if(!relativePDF || relativePDF.length == 0){
+                    this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.show_pdf(bidder.pdf[0]);
+                    }).catch(() => {
+                                
+                    });
+                    return;
+                }
+                relativePDF = relativePDF[0];
+                var queryStr = question.question+question.answer;
+                this.show_pdf(relativePDF, queryStr);
+            },
+            show_pdf(obj, queryStr) {//查看pdf
                 //this.$commonJs.fullscreen();
                 //pdfItems: [],//动态插入pdfcurrPdfUrl
                 var currPDF;
@@ -618,18 +652,19 @@
                 if (currPDF) {//exist
                     currPDF && this.$set(currPDF, 'show', true);
                     if (this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')) {
-                        var iframe;
-                        if (this.$refs[currPDF.ref] != null && this.$refs[currPDF.ref].length == 1) {
-                            iframe = $(this.$refs[currPDF.ref][0].$el).find('iframe');
-                        } else {
-                            iframe = $(this.$refs[currPDF.ref].$el).find('iframe');
-                        }
-                        iframe.get(0).contentWindow.document.getElementById('presentationMode_exit').style.display = 'block';
+                        this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
+                    }
+                    if(queryStr){
+                        var iframeWindow = this.getIframeWindow(currPDF.ref);
+                        iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
+                        iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
                     }
                 } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
                     var _this = this;
                     this.pdfItems.push({
                         currPdfUrl: obj.url1,
+                        queryStr: queryStr,
+                        //currPdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
                         ref: "pdf_" + obj.id,
                         show: true,
                         /*loadingInstance: ELEMENT.Loading.service({

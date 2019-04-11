@@ -178,7 +178,7 @@
 
     generatePDFJSiframe = function (targetNode, url, pdfOpenFragment, PDFJS_URL, id, options){
 
-        var fullURL = PDFJS_URL + "?file=" + encodeURIComponent(url) + pdfOpenFragment;
+        var fullURL = PDFJS_URL + "?file=" + encodeURIComponent(url) + (options.queryStr?'&queryStr='+options.queryStr:'') + pdfOpenFragment;
         var scrollfix = (isIOS) ? "-webkit-overflow-scrolling: touch; overflow-y: scroll; " : "overflow: hidden; ";
         var iframe = "<div style='" + scrollfix + "position: absolute; top: 0; right: 0; bottom: 0; left: 0;'><iframe  " + id + " src='" + fullURL + "' style='border: none; width: 100%; height: 100%;' frameborder='0'></iframe></div>";
         targetNode.className += " pdfobject-container";
