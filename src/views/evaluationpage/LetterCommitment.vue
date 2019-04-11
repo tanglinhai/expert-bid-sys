@@ -1,6 +1,6 @@
 <template>
-    <div class="LetterComon_wrap">
-        <NavCommon class="NavCommon" :aaa="aaa" :bbb="bbb" :ccc="ccc"></NavCommon>
+    <div class="LetterComon_wrap" v-loading="pageloadding">
+        <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
         <div class="Allinformation cf">
             <div class="evaluationcommon letterComent cf">
                 <h5 class="h5">评标专家承诺书</h5>
@@ -23,7 +23,7 @@
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
-                            <el-button size="small" type="primary" @click="AgreeXieYi">同意</el-button>
+                            <el-button type="primary" @click="AgreeXieYi">同意</el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -35,6 +35,7 @@
 <script>
     
     import NavCommon from '../../components/publicVue/NavCommon.vue';
+    import { setTimeout } from 'timers';
     export default {
         name: 'index',
         props: {},
@@ -43,13 +44,21 @@
         },
         data(){
             return {
-               aaa:1,  //参加评标不可点 
-               bbb:1,  //参加评标不可点 
-               ccc:1,  //参加评标不可点 
+              navcommonsList:[],  //导航数据
+              number:'',   //导航当前第几步
+              pageloadding:true,  //进入页面loading展示
             }
         },
+        created() {
+            if (this.$route.query.types == undefined) {
+                this.number = 1;
+            } else {
+                this.number = this.$route.query.types;
+            }
+            
+        },
         mounted(){
-           
+            this.navcommonsListFun(); //导航接口
         },
         methods:{
             goto(url){//开始评标
@@ -58,10 +67,34 @@
                  });
             },
 
-            AgreeXieYi(){  //同意按钮
-                this.$router.push({
-                    path: '/index/AllInformation',
+            navcommonsListFun(){
+                this.pageloadding=true;
+                this.$axios.post('/api/navcommons',{
+                    //invitioninpval:this.invitioninpval,   //传值关键词
+                    //redshow:this.redshow,    //四个按钮选中的是id
+                }).then(res=>{
+                    if(res.status == 200){
+                       //console.log(res.data)
+                        this.navcommonsList=res.data.navsAll;
+                        this.$nextTick(function(){
+                            $("#1 button").addClass("backblue");
+                        })
+                        this.pageloadding=false;
+                    }
                 })
+            },
+
+            AgreeXieYi(){  //同意按钮
+                this.$axios.post('/api/agreeBtn','post',{
+
+                }).then(res=>{
+                    if(res.status == 200){
+                        this.$router.push({
+                            path: '/index/AllInformation?types='+2,
+                        })
+                    }
+                })
+                
             },
         }
     }
@@ -71,11 +104,7 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-    .NavCommon{
-        width:8%; 
-        float:left; 
-        min-height:100px;
-    }
+    
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;

@@ -1,6 +1,6 @@
 <template>
  <div class="Wheelpushing_wrap">
-    <NavCommon class="NavCommon" :aaa="aaa" :bbb="bbb" :ccc="ccc"></NavCommon>
+    <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
         <div class="evaluationcommon cf">
@@ -82,7 +82,9 @@
         },
         data(){
             return {
-                NoClick:1, //0不可点，1可点
+                navcommonsList:[],  //导航数据
+                number:'',   //导航当前第几步
+
                 pageLoading:true,  //loading
                 projectZiliaoList:[],  //项目资料列表
                 projectChaxunList:[],  //招标文件查看
@@ -102,9 +104,14 @@
                         
                 }
         },
+        created() {
+            //console.log(this.$route.query.type,999)
+            this.number=this.$route.query.types
+        },
         mounted(){
             
             this.tuijuData(); //推举评委会主人第1轮
+            this.navcommonsListFun(); //导航接口
 
             var _this=this;
             var setTime;
@@ -161,7 +168,7 @@
                         console.log(this.caozuoAlls.length,this.caozuoAlls,this.NumberRounddatas.length,7777)
                         if(this.caozuoAlls.length==this.NumberRounddatas.length){
                             this.$router.push({
-                                path: '/elect/StartEvaluation',
+                                path: '/elect/StartEvaluation?types=5',
                             })
                         }
                         this.PutRoundNumberLoading=false;
@@ -177,6 +184,21 @@
                 this.tuijuData();
             },
 
+            navcommonsListFun(){
+                this.$axios.post('/api/navcommons',{
+                    //invitioninpval:this.invitioninpval,   //传值关键词
+                    //redshow:this.redshow,    //四个按钮选中的是id
+                }).then(res=>{
+                    if(res.status == 200){
+                       //console.log(res.data)
+                        this.navcommonsList=res.data.navsAll;
+                        this.$nextTick(function(){
+                            $("#3 button").addClass("backblue");
+                        })
+                    }
+                })
+            },
+
         }
     }
 </script>
@@ -185,12 +207,7 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-    .NavCommon{
-        width:8%; 
-        float:left; 
-        min-height:700px;
-
-    }
+    
     .Allinformation {
          background-color: #ededed;
         padding:0px 0% 15px 0%;
