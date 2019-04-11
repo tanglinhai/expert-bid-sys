@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <div class="grid-content bg-purple zeroBox">
                     <img src="../../assets/img/no_data_icon.png" alt="">
-                    <el-button class="btnBg" @click="refresh_btn">刷新</el-button>
+                    <el-button class="btnBg" @click="refreshBtn">刷新</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -30,12 +30,15 @@
                 </template>
                 <el-row v-for="(item,index) in msg" :key="index" class="bag_msg" >
                     <el-col class=' border_col'>
-                        <el-col style="width:25%" class="expertName">
-                            <span>专家组名称：{{item.groupName }}</span>
-                        </el-col>
                         <el-col style="width:15%" class="bagNum">
-                            <div>包含分包：<span class="col409">{{item.bagName }}</span></div>
+                           <span class="col409">{{item.bagName }}</span>
                         </el-col>
+                        <el-col style="width:25%" class="expertName">
+                            <span>标包名称：{{item.biaobaomingcheng }}</span>
+                        </el-col>
+                        <!--<el-col style="width:15%" class="bagNum">-->
+                            <!--<div>包含分包：<span class="col409">{{item.bagName }}</span></div>-->
+                        <!--</el-col>-->
                         <el-col style="width:30%" :span="10" class="time_div">
                             <el-col style="width:50%" class="beginTime">
                                 <span>评标开始时间：<span class="cole02">{{item.starTime }}</span></span>
@@ -184,7 +187,6 @@
                     <el-col :span="6">
                         <div class="overflowText">{{every_msg.postage}}元</div>
                     </el-col>
-
                     <el-col :span="6">
                         <div class="overflowText textAlignR">投标保证金：</div>
                     </el-col>
@@ -297,6 +299,10 @@
 
         },
         methods: {
+            /*  * 点击刷新触发* */
+            refreshBtn(){
+                this.$emit('refreshHttp');
+            },
             goto(url) {//开始评标
                 this.$router.push({
                     path: url

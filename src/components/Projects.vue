@@ -32,7 +32,7 @@
             <div class="allContent">
                 <div v-loading="pageLoading">
                     <NowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr"
-                                ref="ccc"></NowProject>
+                                ref="ccc" @refreshHttp="childMsg"></NowProject>
                 </div>
             </div>
             <!--分页-->
@@ -80,28 +80,28 @@
             // 初始子组件数据获取
             childMsg() {
                 this.pageLoading = true;
-                // setInterval(() => {
-                    this.$axios.post('/api/bagMsg').then(res => {
-                        if (res.status === 200) {
-                            this.pageLoading = false;
-                            this.btn_search_loading = false;
-                            this.projectBagMsg = res.data.projectBagMsg;
-                            if(this.projectBagMsg.length==0) {
-                                $('.pageBox').hide();
-                                $(".search_warp ").hide();
-                                $(".no_data ").css('padding-top', '200px');
-                                $(".no_data ").css('padding-bottom', '200px');
-                            }
-                            this.msgBox = res.data.allBagMsg;
-                            for (let i = 0; i < this.projectBagMsg.length; i++) {
-                                this.arr.push(i)
-                            }
-                        } else {
-                            this.btn_search_loading = false;
-                            this.pageLoading = false;
+                this.$axios.post('/api/bagMsg').then(res => {
+                    if (res.status === 200) {
+                        console.log(res.data);
+                        this.pageLoading = false;
+                        this.btn_search_loading = false;
+                        this.projectBagMsg = res.data.projectBagMsg;
+                        console.log(this.projectBagMsg);
+                        if (this.projectBagMsg.length == 0) {
+                            $('.pageBox').hide();
+                            $(".search_warp ").hide();
+                            $(".no_data ").css('padding-top', '200px');
+                            $(".no_data ").css('padding-bottom', '200px');
                         }
-                    });
-                // }, 60000)
+                        this.msgBox = res.data.allBagMsg;
+                        for (let i = 0; i < this.projectBagMsg.length; i++) {
+                            this.arr.push(i)
+                        }
+                    } else {
+                        this.btn_search_loading = false;
+                        this.pageLoading = false;
+                    }
+                });
             },
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);

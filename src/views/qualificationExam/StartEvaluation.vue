@@ -73,12 +73,12 @@
                                 </div>
                             </div>
                             <!--点击ztree树显示-->
-                            <div class="right_warp"  style="float: left;width: calc(100% - 185px)">
+                            <div class="right_warp" style="float: left;width: calc(100% - 185px)">
                                 <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
                                     <el-col :span="12">
                                         <el-row class="red">
-                                            <el-col style="width: 70px;font-size: 14px;" >
-                                                <div >我的进度：</div>
+                                            <el-col style="width: 70px;font-size: 14px;">
+                                                <div>我的进度：</div>
                                             </el-col>
                                             <el-col style="width: 278px">
                                                 <el-progress :percentage="completePercent"></el-progress>
@@ -103,8 +103,8 @@
                                                 v-if="$store.state.failureEnery.start_sublevel_show">
                                             <el-col :span="12">
                                                 <el-row class="red">
-                                                    <el-col style="width: 70px;font-size: 14px;" >
-                                                        <div >我的进度：</div>
+                                                    <el-col style="width: 70px;font-size: 14px;">
+                                                        <div>我的进度：</div>
                                                     </el-col>
                                                     <el-col style="width: 278px">
                                                         <el-progress :percentage="completePercent"></el-progress>
@@ -148,7 +148,8 @@
                                                        <i class="el-icon-check mr5 "
                                                           style="color: #67c23a"
                                                           v-if="scope.row.radio=='合格'"></i>投标人：
-                                                    <a v-if="scope.row.pdf.length<2" @click="show_pdf(0, scope.row.pdf[0])"     class="common_a_style">
+                                                    <a v-if="scope.row.pdf.length<2"
+                                                       @click="show_pdf(0, scope.row.pdf[0])" class="common_a_style">
                                                         <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
                                                         <i class="icon iconfont icon-pdf"></i>
                                                     </a>
@@ -161,9 +162,10 @@
                                                       </span>
                                                       <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                         <el-dropdown-item
-                                                                @click.native="show_pdf(index, item)" v-for="(item ,index) in scope.row.pdf"
+                                                                @click.native="show_pdf(index, item)"
+                                                                v-for="(item ,index) in scope.row.pdf"
                                                         >{{item.pdf_name}}<i
-                                                                class="icon iconfont icon-pdf" ></i></el-dropdown-item>
+                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                       </el-dropdown-menu>
                                                     </el-dropdown>
 
@@ -210,43 +212,24 @@
                             <!--点击个人形式审计表按钮显示-->
                             <el-col class="personalAuditFormTable" :span="21">
                                 <div class="FormTableTitle">
-                                    <span>分包号：0635-1909N987/1[第一包]</span>
-                                    <span>评标委员会：0635-1909N987/1评委会</span>
+                                    <span>分包号：{{grzgTitleData.bagName}}</span>
+                                    <span>评标委员会：{{grzgTitleData.groupName}}</span>
                                 </div>
                                 <!--表格-->
                                 <template>
                                     <el-table
                                             :data="msgBox"
                                             style="width: 100%">
-                                        <el-table-column
-                                                prop="number"
-                                                align="center"
-                                                label="序号"
-                                                width="100">
-                                        </el-table-column>
-                                        <el-table-column
-                                                prop="date"
-                                                align="center"
-                                                label="评审因素">
-                                        </el-table-column>
-                                        <el-table-column
-                                                label="投标人"
-                                                align="center"
-                                        >
-                                            <el-table-column
-                                                    prop="province"
-                                                    align="center"
-                                                    label="重庆网控科技发展有限公司">
-                                            </el-table-column>
-                                            <el-table-column
-                                                    prop="city"
-                                                    align="center"
-                                                    label="普瑞太阳能有限公司">
-                                            </el-table-column>
-                                            <el-table-column
-                                                    prop="name"
-                                                    align="center"
-                                                    label="夏丰热工研究院有限公司">
+                                        <el-table-column prop="number" label="序号" header-align="left"
+                                                         align="left" fixed width="50"></el-table-column>
+                                        <el-table-column prop="evaluationFactors" header-align="left" label="评审因素" fixed
+                                                         width="165"></el-table-column>
+                                        <el-table-column header-align="left" label="投标人">
+                                            <el-table-column :label="item"
+                                                             v-for="(item,index ) in grcsMsgBoxTitle" >
+                                                <tempalte slot-scope="scope">
+                                                    <span  v-for="(i,idx ) in yinsu1" >{{i}}</span>
+                                                </tempalte>
                                             </el-table-column>
                                         </el-table-column>
                                     </el-table>
@@ -323,6 +306,8 @@
                 page_loading: false,
                 tableData: [],//table1数据
                 msgBox: [],//个人形式审计表table数据
+                grcsMsgBoxTitle: [],//个人形式审计表table的公司名以及内部数据数据
+                grzgTitleData: {},//个人形式审计表按钮切换table表头数据
                 idradionoprss: '',//table不合格的id
                 operationType: [],
                 /* -------头部包信息-----*/
@@ -368,6 +353,7 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
+                yinsu1:[]
 
             }
         },
@@ -432,11 +418,16 @@
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                     if (res.status === 200) {
+                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
+                        this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
+                        this.yinsu1 = res.data.bidMsg.yinsu1;//个人形式审计表table数据
+                        console.log(res.data.bidMsg.msg);
+                        this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
                         this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
@@ -449,7 +440,6 @@
                             $(".hide_btn").hide();
                         }
                         this.zNodes.children.forEach((m, i) => {
-                            console.log(m.fristTableData.tableData);
                             this.tableArr.push(m.fristTableData.tableData);
                             m.fristTableData.tableData.forEach((x, s) => {
                                 this.radioArr.push(x)
@@ -575,7 +565,6 @@
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-                console.log(event, treeId, treeNode);
                 if (treeNode.children) {
                     this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
@@ -771,7 +760,6 @@
                 this._dom_c.$div_pdf.css({height: 'auto', width: 'auto'});
                 this._dom_c.$center_part_wrap.css({height: 'auto', width: 'auto'});
                 this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row');
-                console.log(this.currentPdfShow);
                 if (this.currentPdfShow.children().length == 1) {
                     this._dom_c.$content.addClass('showPDF_content');
                 }
@@ -805,7 +793,8 @@
             margin-left: 7px;
         }
     }
-     .complianceReviewItem {
+
+    .complianceReviewItem {
         padding: 15px;
         background-color: #ededed;
         .bid_msg {
@@ -921,12 +910,24 @@
                                 .div_header {
                                     border-bottom: 1px solid #bfc8cd;
                                 }
+                                #treeDemo {
+                                    li {
+
+                                        .node_name {
+                                            width: 102px;
+                                            overflow: hidden;
+                                            float: right;
+                                            text-overflow: ellipsis;
+                                            white-space: nowrap;
+                                        }
+                                    }
+                                }
                             }
                             .right_warp {
                                 padding-left: 15px;
                                 border-radius: 5px;
 
-                                .el-progress__text{
+                                .el-progress__text {
                                     color: red;
                                 }
                                 .el-progress-bar__outer {
@@ -944,7 +945,7 @@
                                     }
                                 }
                                 .first_table {
-                                    .el-dropdown{
+                                    .el-dropdown {
                                         display: inline;
                                     }
                                     .el-table__header-wrapper {
@@ -975,7 +976,7 @@
                                             }
                                         }
                                     }
-                                    .cell{
+                                    .cell {
                                         padding-right: 40px;
                                     }
                                 }
@@ -1049,8 +1050,9 @@
                     float: right;
                     width: 50%;
                     height: 100%;
-                    max-width: 850px!important;
-                    overflow-x: scroll!important;
+                    min-width: 850px !important;
+                    overflow-x: scroll !important;
+                    z-index: 999;
                     .slideBar {
                         display: block;
                         position: absolute;
@@ -1078,7 +1080,6 @@
                             height: 100%;
                             overflow-y: auto;
                         }
-
                     }
                 }
             }
@@ -1119,17 +1120,9 @@
                             height: 100%;
                             overflow-y: auto;
                         }
-
                     }
                 }
             }
         }
-         /*.center_part_wrap {*/
-             /*@media screen and (max-width: 850px){*/
-                 /*overflow-x: scroll!important;*/
-                 /*z-index: 9999!important;*/
-             /*}*/
-         /*}*/
     }
-
 </style>
