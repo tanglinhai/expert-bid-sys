@@ -215,7 +215,7 @@
                                     <span>分包号：{{grzgTitleData.bagName}}</span>
                                     <span>评标委员会：{{grzgTitleData.groupName}}</span>
                                 </div>
-                                <!--表格-->
+                                <!--个人形式审计表表格-->
                                 <template>
                                     <el-table
                                             :data="msgBox"
