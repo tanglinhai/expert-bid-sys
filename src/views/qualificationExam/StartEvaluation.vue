@@ -808,13 +808,23 @@
                 }
             },
             fullModeColumn() {
-                this._dom_c.$div_pdf.css({height: '100%', width: '50%'});
-                this._dom_c.$center_part_wrap.css({height: '100%', width: '50%'});
+                var _this = this;
+                this._dom_c.$div_pdf.addClass('animate').css({height: '100%', width: '50%'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$div_pdf.removeClass('animate');
+                });
+                this._dom_c.$center_part_wrap.addClass('animate').css({height: '100%', width: '50%'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                });
                 this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column');
             },
             fullModeRow() {
-                this._dom_c.$div_pdf.css({height: '60%', width: 'auto'});
-                this._dom_c.$center_part_wrap.css({height: '40%', width: 'auto'});
+                var _this = this;
+                this._dom_c.$div_pdf.addClass('animate').css({height: '60%', width: 'auto'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$div_pdf.removeClass('animate');
+                });
+                this._dom_c.$center_part_wrap.addClass('animate').css({height: '40%', width: 'auto'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                });
                 this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row');
             },
             closePDF() {
@@ -881,6 +891,13 @@
                         padding-right: 2px;
                     }
                 } */
+                .animate{
+                  -webkit-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -moz-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -o-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -ms-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                }
                 .div_pdf {
                     display: none;
                     position: relative;
