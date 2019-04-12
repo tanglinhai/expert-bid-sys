@@ -37,6 +37,7 @@
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>
+		<!-- <div class="CommonProject"></div> -->
 
 		<!--环境检测弹框-->
 		<el-dialog
@@ -196,5 +197,16 @@ export default {
   	font-size: 18px;
   	padding-right: 7px;
   }
+	.CommonProject{
+		position: absolute;
+		width:500px;
+		height:100px;
+		background:black;
+		left:50%;
+		margin-left:-250px;
+		top:40px;
+		opacity: 0.2;
+		z-index:9999;
+	}
 }
 </style>

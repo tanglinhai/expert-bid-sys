@@ -77,15 +77,15 @@
                         prop="toubiaorenName"
                         label="投标人名称">
                         <template slot-scope="scope">
-                            <a href="javascript:;" @click="ChakanTk(scope.row)">{{scope.row.toubiaorenName}}</a>
+                            <span>{{scope.row.toubiaorenName}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column
                         prop="toubiaorenFenbao"
-                        label="所投分包">
+                        label="投标文件">
                     </el-table-column>
                 </el-table>
-                <el-pagination
+                <!-- <el-pagination
                     class="fr mt10"
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
@@ -94,7 +94,7 @@
                     :page-size="100"
                     layout="total, sizes, prev, pager, next, jumper"
                     :total="400">
-                </el-pagination>
+                </el-pagination> -->
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                     <!-- <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar">
@@ -104,7 +104,7 @@
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
                             <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
-                            <el-button size="small" type="primary"  @click="AgreeXieYi">参加评标</el-button>
+                            <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -132,7 +132,7 @@
         </el-dialog> -->
         <!--申请回避弹框-->
         <!--文件查看弹框-->
-        <el-dialog
+        <!-- <el-dialog
             title="投标文件列表"
             :visible.sync="chakancenterDialogVisible"
             width="60%"
@@ -181,7 +181,7 @@
             <span slot="footer" class="dialog-footer">
                 <el-button size="small" type="primary" @click="chakancenterDialogVisible = false">返回</el-button>
             </span>
-        </el-dialog>
+        </el-dialog> -->
         <!--文件查看弹框-->
         </div>
     </div>
@@ -216,12 +216,12 @@
                 tableData3:[  //投标人信息
                     
                 ],
-                ChakanTableData:[{
-                    bianhao:"",
-                    baoname:"",
-                    name:"",
-                }],//招标文件查看弹框内容
-                ChakanPage1:1, //分页
+                // ChakanTableData:[{
+                //     bianhao:"",
+                //     baoname:"",
+                //     name:"",
+                // }],//招标文件查看弹框内容
+                // ChakanPage1:1, //分页
                 // dialogApplyAvoid:false,
                 ruleForm: {
                     desc: ''
@@ -231,6 +231,8 @@
                         { type:'string',required: true, message: '请填写申请原因', trigger: 'blur' }
                     ]
                 },
+
+                BtnLoading:false,  //参加评标loading
               
             }
         },
@@ -257,17 +259,17 @@
                 this.tBrMsgLoading=true;
                 this.AllInformation();
             },
-            ChakanTk(item){  //投标人信息查看点击事件
-                console.log(item,999)
-                this.chakancenterDialogVisible=true;
-                this.ChakanTableData[0].bianhao=item.toubiaorenFenbao;
-                this.ChakanTableData[0].baoname=item.baoname;
-                this.ChakanTableData[0].name=item.toubiaorenName;
-            },
-            ChakanhandleClick(row){   //招标文件查看弹框的查看事件
-                console.log(row,999)
-                 window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf');
-            },
+            // ChakanTk(item){  //投标人信息查看点击事件
+            //     console.log(item,999)
+            //     this.chakancenterDialogVisible=true;
+            //     this.ChakanTableData[0].bianhao=item.toubiaorenFenbao;
+            //     this.ChakanTableData[0].baoname=item.baoname;
+            //     this.ChakanTableData[0].name=item.toubiaorenName;
+            // },
+            // ChakanhandleClick(row){   //招标文件查看弹框的查看事件
+            //     console.log(row,999)
+            //      window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf');
+            // },
 
             //专家个人信息,投标人信息接口
             AllInformation(){
@@ -312,10 +314,12 @@
             },
 
             AgreeXieYi(){  //参加评标
+                this.BtnLoading=true,
                 this.$axios.post('/api/EnterEvaluationButton','post',{
 
                 }).then(res=>{
                     if(res.status == 200){
+                        this.BtnLoading=false,
                         this.$router.push({
                             path: '/index/ElectedLeader?types='+3,
                         })
