@@ -38,8 +38,7 @@
             <NavBar :msg="options" :type="type_btn"></NavBar>
             <div class="content">
                 <div class="div_pdf">
-                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
-                         v-for="item in pdfItems"
+                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr" v-for="item in pdfItems"
                          v-show="item.show"></pdf>
                     <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
@@ -114,8 +113,7 @@
                                                     </el-row>
                                                 </el-col>
                                                 <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                                    <el-button @click="sublevelAllChecked" plain size="mini"
-                                                               type="primary">
+                                                    <el-button @click="sublevelAllChecked" plain size="mini" type="primary">
                                                         <i
                                                                 class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                     </el-button>
@@ -230,23 +228,23 @@
                                                          width="165"></el-table-column>
                                         <el-table-column header-align="left" label="投标人">
                                             <el-table-column :label="item"
-                                                             v-for="(item,index ) in grcsMsgBoxTitle">
+                                                             v-for="(item,index ) in grcsMsgBoxTitle" >
                                                 <tempalte slot-scope="scope">
-                                                    <span v-for="(i,idx ) in yinsu1">{{i}}</span>
+                                                    <span  v-for="(i,idx ) in yinsu1" >{{i}}</span>
                                                 </tempalte>
+                                                </el-table-column>
                                             </el-table-column>
-                                        </el-table-column>
-                                    </el-table>
-                                    <el-row class="fs14 table_tips">
-                                        <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
-                                        </el-col>
-                                        <el-col>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
-                                        </el-col>
-                                    </el-row>
-                                </template>
-                            </el-col>
+                                        </el-table>
+                                        <el-row class="fs14 table_tips">
+                                            <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
+                                            </el-col>
+                                            <el-col>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
+                                            </el-col>
+                                        </el-row>
+                                    </template>
+                                </el-col>
+                            </div>
                         </div>
-                    </div>
                 </el-row>
             </div>
         </div>
@@ -296,7 +294,6 @@
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     import JSON from 'JSON';
-
     export default {
         props: {},
         components: {
@@ -359,7 +356,7 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
-                yinsu1: []
+                yinsu1:[]
 
             }
         },
@@ -421,7 +418,7 @@
             }
         },
         methods: {
-            jsonParse(obj) {
+            jsonParse(obj){
                 return JSON.parse(obj);
             },
             init() {   //初始化 table的数据
@@ -600,10 +597,10 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            getIframeDocument(refStr) {
+            getIframeDocument(refStr){
                 return this.getIframeWindow(refStr).document;
             },
-            getIframeWindow(refStr) {
+            getIframeWindow(refStr){
                 var iframe;
                 if (this.$refs[refStr] != null && this.$refs[refStr].length == 1) {
                     iframe = $(this.$refs[refStr][0].$el).find('iframe');
@@ -612,13 +609,13 @@
                 }
                 return iframe.get(0).contentWindow;
             },
-            _locate_pdf_() {
+            _locate_pdf_(){
 
             },
             //定位到关联投标文件说明处
             locate_pdf(question, bidder) {
                 var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
-                if (!relativePDF || relativePDF.length == 0) {
+                if(!relativePDF || relativePDF.length == 0){
                     this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
@@ -631,7 +628,7 @@
                     return;
                 }
                 relativePDF = relativePDF[0];
-                var queryStr = question.question + question.answer;
+                var queryStr = question.question+question.answer;
                 this.show_pdf(relativePDF, queryStr);
             },
             show_pdf(obj, queryStr) {//查看pdf
@@ -649,7 +646,7 @@
                     if (this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')) {
                         this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
                     }
-                    if (queryStr) {
+                    if(queryStr){
                         var iframeWindow = this.getIframeWindow(currPDF.ref);
                         iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
                         iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
@@ -944,7 +941,7 @@
                         height: 100%;
                         box-sizing: border-box;
                         overflow: hidden;
-                        .center_con_wrap {
+                        .center_con_wrap{
                             height: 100%;
                             overflow-y: auto;
                             .center_con {
