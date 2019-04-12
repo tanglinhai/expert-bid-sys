@@ -38,7 +38,8 @@
             <NavBar :msg="options" :type="type_btn"></NavBar>
             <div class="content">
                 <div class="div_pdf">
-                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr" v-for="item in pdfItems"
+                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
+                         v-for="item in pdfItems"
                          v-show="item.show"></pdf>
                     <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
@@ -113,7 +114,8 @@
                                                     </el-row>
                                                 </el-col>
                                                 <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                                    <el-button @click="sublevelAllChecked" plain size="mini" type="primary">
+                                                    <el-button @click="sublevelAllChecked" plain size="mini"
+                                                               type="primary">
                                                         <i
                                                                 class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                     </el-button>
@@ -210,26 +212,28 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <!--点击个人形式审计表按钮显示-->
                                 <el-col class="personalAuditFormTable" :span="21">
                                     <div class="FormTableTitle">
                                         <span>分包号：{{grzgTitleData.bagName}}</span>
                                         <span>评标委员会：{{grzgTitleData.groupName}}</span>
                                     </div>
-                                    <!--表格-->
+                                    <!--个人形式审计表表格-->
                                     <template>
                                         <el-table
                                                 :data="msgBox"
                                                 style="width: 100%">
                                             <el-table-column prop="number" label="序号" header-align="left"
                                                              align="left" fixed width="50"></el-table-column>
-                                            <el-table-column prop="evaluationFactors" header-align="left" label="评审因素" fixed
+                                            <el-table-column prop="evaluationFactors" header-align="left" label="评审因素"
+                                                             fixed
                                                              width="165"></el-table-column>
                                             <el-table-column header-align="left" label="投标人">
                                                 <el-table-column :label="item"
-                                                                 v-for="(item,index ) in grcsMsgBoxTitle" >
+                                                                 v-for="(item,index ) in grcsMsgBoxTitle">
                                                     <tempalte slot-scope="scope">
-                                                        <span  v-for="(i,idx ) in yinsu1" >{{i}}</span>
+                                                        <span v-for="(i,idx ) in yinsu1">{{i}}</span>
                                                     </tempalte>
                                                 </el-table-column>
                                             </el-table-column>
@@ -294,6 +298,7 @@
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     import JSON from 'JSON';
+
     export default {
         props: {},
         components: {
@@ -356,7 +361,7 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
-                yinsu1:[]
+                yinsu1: []
 
             }
         },
@@ -418,7 +423,7 @@
             }
         },
         methods: {
-            jsonParse(obj){
+            jsonParse(obj) {
                 return JSON.parse(obj);
             },
             init() {   //初始化 table的数据
@@ -431,6 +436,7 @@
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
+                        console.log(res.data.bidMsg.msg);
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.yinsu1 = res.data.bidMsg.yinsu1;//个人形式审计表table数据
                         console.log(res.data.bidMsg.msg);
@@ -597,10 +603,10 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            getIframeDocument(refStr){
+            getIframeDocument(refStr) {
                 return this.getIframeWindow(refStr).document;
             },
-            getIframeWindow(refStr){
+            getIframeWindow(refStr) {
                 var iframe;
                 if (this.$refs[refStr] != null && this.$refs[refStr].length == 1) {
                     iframe = $(this.$refs[refStr][0].$el).find('iframe');
@@ -609,13 +615,13 @@
                 }
                 return iframe.get(0).contentWindow;
             },
-            _locate_pdf_(){
+            _locate_pdf_() {
 
             },
             //定位到关联投标文件说明处
             locate_pdf(question, bidder) {
                 var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
-                if(!relativePDF || relativePDF.length == 0){
+                if (!relativePDF || relativePDF.length == 0) {
                     this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
@@ -623,12 +629,12 @@
                     }).then(() => {
                         this.show_pdf(bidder.pdf[0]);
                     }).catch(() => {
-                                
+
                     });
                     return;
                 }
                 relativePDF = relativePDF[0];
-                var queryStr = question.question+question.answer;
+                var queryStr = question.question + question.answer;
                 this.show_pdf(relativePDF, queryStr);
             },
             show_pdf(obj, queryStr) {//查看pdf
@@ -646,7 +652,7 @@
                     if (this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')) {
                         this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
                     }
-                    if(queryStr){
+                    if (queryStr) {
                         var iframeWindow = this.getIframeWindow(currPDF.ref);
                         iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
                         iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
@@ -941,7 +947,7 @@
                         height: 100%;
                         box-sizing: border-box;
                         overflow: hidden;
-                        .center_con_wrap{
+                        .center_con_wrap {
                             height: 100%;
                             overflow-y: auto;
                             .center_con {
