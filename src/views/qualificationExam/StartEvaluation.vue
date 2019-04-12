@@ -97,33 +97,33 @@
                                         </el-row>
                                     </el-row>
                                     <div class="weitijiao">
+                                        <!-------------分支进度条以及提交------------------>
+                                        <el-row class="progress_div"
+                                                v-if="$store.state.failureEnery.start_sublevel_show">
+                                            <el-col :span="12">
+                                                <el-row class="red">
+                                                    <el-col style="width: 70px;font-size: 14px;">
+                                                        <div>进度：</div>
+                                                    </el-col>
+                                                    <el-col style="width: 278px">
+                                                        <el-progress :percentage="completePercent"></el-progress>
+                                                    </el-col>
+                                                </el-row>
+                                            </el-col>
+                                            <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                                <el-button @click="sublevelAllChecked" plain size="mini"
+                                                           type="primary">
+                                                    <i
+                                                            class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                                </el-button>
+                                                <el-button size="mini" type="primary" @click="sublevelSubmit"><i
+                                                        class="icon iconfont icon-tijiao  mr3"></i>提交
+                                                </el-button>
+                                            </el-row>
+                                        </el-row>
                                         <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index"
                                              :id="item.name"
                                              v-if="item.show==true||item.show==undefined">
-                                            <!-------------分支进度条以及提交------------------>
-                                            <el-row class="progress_div"
-                                                    v-if="$store.state.failureEnery.start_sublevel_show">
-                                                <el-col :span="12">
-                                                    <el-row class="red">
-                                                        <el-col style="width: 70px;font-size: 14px;">
-                                                            <div>我的进度：</div>
-                                                        </el-col>
-                                                        <el-col style="width: 278px">
-                                                            <el-progress :percentage="completePercent"></el-progress>
-                                                        </el-col>
-                                                    </el-row>
-                                                </el-col>
-                                                <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                                    <el-button @click="sublevelAllChecked" plain size="mini"
-                                                               type="primary">
-                                                        <i
-                                                                class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                                                    </el-button>
-                                                    <el-button size="mini" type="primary" @click="sublevelSubmit"><i
-                                                            class="icon iconfont icon-tijiao  mr3"></i>提交
-                                                    </el-button>
-                                                </el-row>
-                                            </el-row>
                                             <!-------------分支进度条以及提交end------------------>
                                             <el-row class="title_msg">
                                                 <el-col>
@@ -214,26 +214,35 @@
                                 </div>
 
                                 <!--点击个人形式审计表按钮显示-->
-                                <el-col class="personalAuditFormTable" :span="21">
-                                    <div class="FormTableTitle">
-                                        <span>分包号：{{grzgTitleData.bagName}}</span>
-                                        <span>评标委员会：{{grzgTitleData.groupName}}</span>
+                                <el-col class="personalAuditFormTable" style="float: left;width: calc(100% - 185px)">
+                                    <div class="FormTableTitle cf fs14">
+                                        <div class="fl">
+                                            <span>分包号：{{grzgTitleData.bagName}}</span>
+                                            <span>评标委员会：{{grzgTitleData.groupName}}</span>
+                                        </div>
+                                        <div class="fr">{{grzgTitleData.professorName}}</div>
                                     </div>
                                     <!--个人形式审计表表格-->
                                     <template>
                                         <el-table
                                                 :data="msgBox"
-                                                style="width: 100%">
+                                                size="small"
+                                                tooltip-effect="dark"
+                                                border
+                                                class="changePriceTable"
+                                                el-table__header-wrapper
+                                        >
                                             <el-table-column prop="number" label="序号" header-align="left"
                                                              align="left" fixed width="50"></el-table-column>
                                             <el-table-column prop="evaluationFactors" header-align="left" label="评审因素"
-                                                             fixed
-                                                             width="165"></el-table-column>
+                                                             fixed width="165"></el-table-column>
                                             <el-table-column header-align="left" label="投标人">
-                                                <el-table-column :label="item"
-                                                                 v-for="(item,index ) in grcsMsgBoxTitle">
+                                                <el-table-column :label="item.companyName"
+                                                                 v-for="(item,index ) in grcsMsgBoxTitle" width="165">
                                                     <tempalte slot-scope="scope">
-                                                        <span v-for="(i,idx ) in yinsu1">{{i}}</span>
+                                                        <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
+                                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
+                                                        </span>
                                                     </tempalte>
                                                 </el-table-column>
                                             </el-table-column>
@@ -361,8 +370,6 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
-                yinsu1: []
-
             }
         },
         created() {
@@ -430,16 +437,12 @@
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                     if (res.status === 200) {
-                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
-                        console.log(res.data.bidMsg.msg);
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
-                        this.yinsu1 = res.data.bidMsg.yinsu1;//个人形式审计表table数据
-                        console.log(res.data.bidMsg.msg);
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
@@ -487,7 +490,6 @@
                     }
                 })
             },
-
             childByValue: function (childValue) {       // childValue就是子组件传过来的值
                 if (this.obj.id == this.idradionoprss) {
                     this.obj.content = childValue;
@@ -717,10 +719,9 @@
                         this.son_all_checked.forEach((s, f) => {
                             this.radioArr.forEach((h, j) => {
                                 if (s.id == h.id) {
-                                    this.son_all_che.push(h)
-                                    h.radio = '合格'
+                                    this.son_all_che.push(h);
+                                    h.radio = '合格';
                                 }
-
                             })
                         })
 
@@ -773,6 +774,8 @@
                 this.slideBarIsControl = true;
                 this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
                 this.currentPdfShow.append('<div class="floating_div"></div>');
+                this._dom_c.$div_pdf.removeClass('animate');
+                this._dom_c.$center_part_wrap.removeClass('animate');
             },
             slideBarMouseup() {
                 this.slideBarIsControl = false;
@@ -808,13 +811,23 @@
                 }
             },
             fullModeColumn() {
-                this._dom_c.$div_pdf.css({height: '100%', width: '50%'});
-                this._dom_c.$center_part_wrap.css({height: '100%', width: '50%'});
+                var _this = this;
+                this._dom_c.$div_pdf.addClass('animate').css({height: '100%', width: '50%'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$div_pdf.removeClass('animate');
+                });
+                this._dom_c.$center_part_wrap.addClass('animate').css({height: '100%', width: '50%'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                });
                 this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column');
             },
             fullModeRow() {
-                this._dom_c.$div_pdf.css({height: '60%', width: 'auto'});
-                this._dom_c.$center_part_wrap.css({height: '40%', width: 'auto'});
+                var _this = this;
+                this._dom_c.$div_pdf.addClass('animate').css({height: '60%', width: 'auto'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$div_pdf.removeClass('animate');
+                });
+                this._dom_c.$center_part_wrap.addClass('animate').css({height: '40%', width: 'auto'}).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function() {
+                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                });
                 this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row');
             },
             closePDF() {
@@ -881,6 +894,13 @@
                         padding-right: 2px;
                     }
                 } */
+                .animate{
+                  -webkit-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -moz-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -o-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  -ms-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                }
                 .div_pdf {
                     display: none;
                     position: relative;
@@ -1039,7 +1059,6 @@
                                     .FormTableTitle {
                                         margin-bottom: 10px;
                                         span {
-                                            font-size: 14px;
                                             margin-right: 20px;
                                         }
                                     }
