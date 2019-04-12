@@ -1,6 +1,6 @@
 <template>
     <div class="LetterComon_wrap" v-loading="pageloadding">
-        <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
+        <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf">
             <div class="evaluationcommon letterComent cf">
                 <h5 class="h5">评标专家承诺书</h5>
@@ -34,32 +34,33 @@
 
 <script>
     
-    import NavCommon from '../../components/publicVue/NavCommon.vue';
+    // import NavCommon from '../../components/publicVue/NavCommon.vue';
     import { setTimeout } from 'timers';
     export default {
         name: 'index',
         props: {},
         components: {
-            NavCommon
+            // NavCommon
         },
         data(){
             return {
-              navcommonsList:[],  //导航数据
-              number:'',   //导航当前第几步
-              pageloadding:true,  //进入页面loading展示
+            //   navcommonsList:[],  //导航数据
+            //number:'',   //导航当前第几步
+              pageloadding:false,  //进入页面loading展示
               BtnLoading:false,  //同意按钮loadding
             }
         },
         created() {
             if (this.$route.query.types == undefined) {
-                this.number = 1;
+                this.$store.state.navCommon.types=1;
             } else {
-                this.number = this.$route.query.types;
+                this.$store.state.navCommon.types=this.$route.query.types;
             }
             
         },
         mounted(){
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
+            $(".NavCommon").show();
         },
         methods:{
             goto(url){//开始评标
@@ -95,6 +96,7 @@
                         this.$router.push({
                             path: '/index/AllInformation?types='+2,
                         })
+                        
                     }
                 })
                 
@@ -111,7 +113,7 @@
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;
-        width:90%;
+        width:98%;
         float:left;
         margin-left:1%;
         margin-right:1%;

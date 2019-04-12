@@ -75,6 +75,7 @@
         },
         mounted() {
             this.childMsg();
+            $(".NavCommon").hide();
         },
         methods: {
             // 初始子组件数据获取
@@ -137,6 +138,7 @@
     .projects {
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
+
         .main {
             background: white;
             border-radius: 5px;

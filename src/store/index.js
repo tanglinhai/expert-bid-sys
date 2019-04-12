@@ -7,6 +7,7 @@ import mutations from './mutations';
 
 import download_files from './common/download_files'
 import failureEnery from './common/failureEnery';
+import navCommon from './common/navCommon';   //公共导航vuex的js
 
 export default new Vuex.Store({
     actions,
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     mutations,
     modules: {
         download_files,
-        failureEnery
+        failureEnery,
+        navCommon
     }
 });
