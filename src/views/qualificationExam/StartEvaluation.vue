@@ -773,6 +773,8 @@
                 this.slideBarIsControl = true;
                 this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
                 this.currentPdfShow.append('<div class="floating_div"></div>');
+                this._dom_c.$div_pdf.removeClass('animate');
+                this._dom_c.$center_part_wrap.removeClass('animate');
             },
             slideBarMouseup() {
                 this.slideBarIsControl = false;
