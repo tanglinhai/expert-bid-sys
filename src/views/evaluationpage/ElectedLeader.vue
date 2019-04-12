@@ -4,8 +4,40 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
+                <!--表格-->
+                <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                    <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
+                </div>
+                <el-table
+                    v-loading="tBrMsgLoading"
+                    class="mt20 fl"
+                    :data="tableData3"
+                    :header-cell-style="getRowClass"
+                    style="width: 100%">
+                    <el-table-column
+                        type="index"
+                        label="序号"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="toubiaorenName"
+                        label="投标人名称">
+                        <template slot-scope="scope">
+                            <a href="javascript:;" @click="ChakanTk(scope.row)">{{scope.row.toubiaorenName}}</a>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                        prop="toubiaorenFenbao"
+                        label="投标文件">
+                        <template slot-scope="scope">
+                            <a href="http://localhost:7000/img/download.svc" download="">{{scope.row.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></a>
+                            
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!--表格-->
                 <div class="eletedChange fl">
-                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
                         <h5 class="commonTitle col348fe2 oneanonter">项目分包</h5>
                     </div>
                     <div class="bidevaluationexperts">
@@ -18,7 +50,7 @@
                 </div>
                 <!-- </template> -->
                 <!--表格-->
-                <div class="fl" style="width:100%;">
+                <div class="fl mt20" style="width:100%;">
                     <template>
                         <el-table
                         v-loading="ProjectFbLoading"
@@ -108,6 +140,58 @@
                 <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
             </el-dialog>
             <!--调整评标价弹框-->
+            <!--文件查看弹框-->
+            <el-dialog
+                title="投标文件列表"
+                :visible.sync="chakancenterDialogVisible"
+                width="60%"
+                center>
+                <span class="cf">
+                    <template>
+                        <el-table
+                        :data="ChakanTableData"
+                        :header-cell-style="getRowClass"
+                        style="width: 100%">
+                        <el-table-column
+                            prop="bianhao"
+                            label="分包号"
+                            width="230">
+                        </el-table-column>
+                        <el-table-column
+                            prop="baoname"
+                            label="包名称"
+                            width="350">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="文件名称"
+                            width="300">
+                        </el-table-column>
+                        <el-table-column
+                            label="操作">
+                            <template slot-scope="scope">
+                                <el-button @click="ChakanhandleClick(scope.row)" size="small"><i class="el-icon-document"></i>&nbsp;&nbsp;查看</el-button>
+                                <a class="ml15" href="http://localhost:7000/img/download.svc" download=""><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
+                            </template>
+                        </el-table-column>
+                        </el-table>
+                    </template>
+                    <!-- <el-pagination
+                        class="fr mt10"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="ChakanPage1"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination> -->
+                </span>
+                <span slot="footer" class="dialog-footer">
+                    <el-button size="small" type="primary" @click="chakancenterDialogVisible = false">返回</el-button>
+                </span>
+            </el-dialog>
+            <!--文件查看弹框-->
         </div>
     </div>
 </template>
@@ -142,6 +226,17 @@
                 ChangedialogVisible:false,  //调整评标价弹框
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
 
+                tBrMsgLoading:false,  //投标人信息列表loading效果
+                chakancenterDialogVisible: false, //文件查看弹框默认隐藏
+                tableData3:[  //投标人信息
+                    
+                ],
+                ChakanTableData:[{
+                    bianhao:"",
+                    baoname:"",
+                    name:"",
+                }],//招标文件查看弹框内容
+
                
             }
         },
@@ -160,6 +255,8 @@
             this.ProjectSubcontract();//项目分包数据
 
             this.navcommonsListFun(); //导航接口
+
+            this.AllInformation(); //专家个人信息,投标人信息接口
             
             
         },
@@ -244,6 +341,34 @@
                 this.$router.push({
                     path: '/index/WheelPushing?types='+3,
                 })
+            },
+
+            //专家个人信息,投标人信息接口
+            AllInformation(){
+                this.$axios.post('/api/CheckReferrals',{
+                }).then(res=>{
+                    if(res.status == 200){
+                        //console.log(res.data.personInformation)
+                        
+                        this.tableData3=res.data.toubiaorenInformation;
+                        //this.projectInformation[0].projectInformation_name=res.data.personInformation.projectInformation_name;
+                        //this.projectInformation[0].projectInformationbian_hao=res.data.personInformation.projectInformationbian_hao;
+                        this.tBrMsgLoading=false;
+                        this.pageLoading=false;
+
+                    }
+                })
+            },
+            ChakanTk(item){  //投标人信息查看点击事件
+                console.log(item,999)
+                this.chakancenterDialogVisible=true;
+                this.ChakanTableData[0].bianhao=item.toubiaorenFenbao;
+                this.ChakanTableData[0].baoname=item.baoname;
+                this.ChakanTableData[0].name=item.toubiaorenName;
+            },
+            ChakanhandleClick(row){   //招标文件查看弹框的查看事件
+                console.log(row,999)
+                 window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf');
             },
 
             sonToFather(val){  //子集得返回点击关闭事件传值
