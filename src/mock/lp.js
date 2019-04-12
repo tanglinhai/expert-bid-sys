@@ -119,19 +119,19 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
     },
     toubiaorenInformation:[{
         toubiaorenName:'重庆网控科技发展有限公司',
-        toubiaorenFenbao:'0635-198N517/1',
+        toubiaorenFenbao:'pad文件1',
         'baoname|1':['第一包','第二包','第三包']
     },{
         toubiaorenName:'普瑞太阳能有限公司',
-        toubiaorenFenbao:'0635-198N517/1',
+        toubiaorenFenbao:'pad文件2',
         'baoname|1':['第一包','第二包','第三包']
     },{
         toubiaorenName:'夏丰热工研究院有限公司',
-        toubiaorenFenbao:'0635-198N517/1',
+        toubiaorenFenbao:'pad文件4',
         'baoname|1':['第一包','第二包','第三包']
     },{
         'toubiaorenName|1':['北京有限公司','夏丰热工研究院有限公司'],
-        toubiaorenFenbao:'0635-198N517/1',
+        toubiaorenFenbao:'pad文件3',
         'baoname|1':['第一包','第二包','第三包']
     }]
 });
@@ -364,55 +364,56 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
         //     label: '推举组长',
         //     types: 4,
         // },
-        {
-            value: '5',//
-            label: '资格审查',
-            types: 5,
-        },{
-            value: '6',//
-            label: '资格审查汇总',
-            types: 6,
-        },{
-            value: '7',//
-            label: '符合性审查',
-            types: 7,
-        },{
-            value: '8',//
-            label: '符合性审查汇总',
-            types: 8,
-        },{
-            value: '9',//
-            label: '详细评审',
-            types: 9,
-        },{
-            value: '10',//
-            label: '详细评审(技术)汇总',
-            types: 10,
-        },{
-            value: '11',//
-            label: '定档评议',
-            types: 11,
-        },{
-            value: '12',//
-            label: '商务',
-            types: 12,
-        },{
-            value: '13',//
-            label: '技术',
-            types: 13,
-        },{
-            value: '14',//
-            label: '服务',
-            types: 14,
-        },{
-            value: '15',//
-            label: '其他',
-            types: 15,
-        },{
-            value: '16',//
-            label: '评审汇总',
-            types: 16,
-        }]
+        // {
+        //     value: '5',//
+        //     label: '资格审查',
+        //     types: 5,
+        // },{
+        //     value: '6',//
+        //     label: '资格审查汇总',
+        //     types: 6,
+        // },{
+        //     value: '7',//
+        //     label: '符合性审查',
+        //     types: 7,
+        // },{
+        //     value: '8',//
+        //     label: '符合性审查汇总',
+        //     types: 8,
+        // },{
+        //     value: '9',//
+        //     label: '详细评审',
+        //     types: 9,
+        // },{
+        //     value: '10',//
+        //     label: '详细评审(技术)汇总',
+        //     types: 10,
+        // },{
+        //     value: '11',//
+        //     label: '定档评议',
+        //     types: 11,
+        // },{
+        //     value: '12',//
+        //     label: '商务',
+        //     types: 12,
+        // },{
+        //     value: '13',//
+        //     label: '技术',
+        //     types: 13,
+        // },{
+        //     value: '14',//
+        //     label: '服务',
+        //     types: 14,
+        // },{
+        //     value: '15',//
+        //     label: '其他',
+        //     types: 15,
+        // },{
+        //     value: '16',//
+        //     label: '评审汇总',
+        //     types: 16,
+        // }
+        ]
 })
 //公共导航接口
 

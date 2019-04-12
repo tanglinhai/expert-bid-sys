@@ -23,7 +23,7 @@
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
-                            <el-button type="primary" @click="AgreeXieYi">同意</el-button>
+                            <el-button type="primary" @click="AgreeXieYi" :loading="BtnLoading">同意</el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -47,6 +47,7 @@
               navcommonsList:[],  //导航数据
               number:'',   //导航当前第几步
               pageloadding:true,  //进入页面loading展示
+              BtnLoading:false,  //同意按钮loadding
             }
         },
         created() {
@@ -85,10 +86,12 @@
             },
 
             AgreeXieYi(){  //同意按钮
+                this.BtnLoading=true,
                 this.$axios.post('/api/agreeBtn','post',{
 
                 }).then(res=>{
                     if(res.status == 200){
+                        this.BtnLoading=false,
                         this.$router.push({
                             path: '/index/AllInformation?types='+2,
                         })
