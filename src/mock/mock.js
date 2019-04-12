@@ -346,32 +346,115 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 },
                             ]
                         },
-
                     'mylist': ms,
                     vue_type: get_data(1),       //头部审查类型按钮
                },
-                yinsu1:['√','√','√'],
                 msg: [  //个人形式审计表数据接口(改动)
                     {
                         'number': '1',
-                        'evaluationFactors': '投标人名称',
-                        'yinsu1':'√',
-                        'yinsu2':'√'
-                     },
+                        'evaluationFactors': '资格审查1',
+                    },
                     {
                          'number': '2',
-                         'evaluationFactors': '投标人',
-                        'yinsu1':'√',
-                        'yinsu2':'√'
+                         'evaluationFactors': '资格审查2',
+                    },
+                    {
+                        'number': '3',
+                        'evaluationFactors': '资格审查3',
                     },
                     {
                         'number': '结论',
                         'evaluationFactors': '是否通过资格审查项检查',
-                        'yinsu1':'√',
-                        'yinsu2':'√'
                     }
                 ],
-                'companyNameData': [  '重庆网控科技发展有限公司','重庆网控科技发展有限公司',  '夏丰热工研究院有限公司' ],
+                'companyNameData': [
+                    {
+                        'companyName':'重庆网控科技发展有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["√",  "√","√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "×",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                ],
                 'grcs_titile_data':{
                     'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -497,7 +580,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             id: 6,
                                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
-
                                     },
                                 },
                                 {
@@ -551,33 +633,122 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'mylist': ms,
                     //头部审查类型按钮
                 },
-                msg: [{////个人形式审计表数据接口
-                    number: '1',
-                    date: '投标人名称',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                }, {
-                    number: '2',
-                    date: '资质',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                },
+                msg: [  //个人形式审计表数据接口(改动)
                     {
-                        number: '3',
-                        date: '审查项目',
-                        name: '√',
-                        province: '√',
-                        city: '√',
+                        'number': '1',
+                        'evaluationFactors': '投标人名称',
                     },
                     {
-                        number: '结论',
-                        date: '审查标准与营业执照、资质证书是否一致',
-                        name: '合格',
-                        province: '合格',
-                        city: '合格',
-                    }]
+                        'number': '2',
+                        'evaluationFactors': '资质',
+                    },
+                    {
+                        'number': '3',
+                        'evaluationFactors': '审查项目',
+                    },
+                    {
+                        'number': '结论',
+                        'evaluationFactors': '是否通过资格审查项检查',
+                    }
+                ],
+                'companyNameData': [
+                    {
+                        'companyName':'重庆网控科技发展有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["√", "√", "√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "×", "√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√", "√",'不合格']
+                            } ,
+                        ]
+                    },
+                ],
+                'grcs_titile_data':{
+                    'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                    + '/' + '评委会',//     评标委员会
+                    'bagName':  '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                    +'['+'第-包'+']',//分包号
+                }
             }
         }
 
@@ -748,33 +919,122 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     //头部审查类型按钮
 
                 },
-                msg: [{////个人形式审计表数据接口
-                    number: '1',
-                    date: '投标人名称',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                }, {
-                    number: '2',
-                    date: '资质',
-                    name: '√',
-                    province: '√',
-                    city: '√',
-                },
+                msg: [  //个人形式审计表数据接口(改动)
                     {
-                        number: '3',
-                        date: '审查项目',
-                        name: '√',
-                        province: '√',
-                        city: '√',
+                        'number': '1',
+                        'evaluationFactors': '详情评审1',
                     },
                     {
-                        number: '结论',
-                        date: '审查标准与营业执照、资质证书是否一致',
-                        name: '合格',
-                        province: '合格',
-                        city: '合格',
-                    }]
+                        'number': '2',
+                        'evaluationFactors': '详情评审2',
+                    },
+                    {
+                        'number': '3',
+                        'evaluationFactors': '详情评审3',
+                    },
+                    {
+                        'number': '结论',
+                        'evaluationFactors': '是否通过资格审查项检查',
+                    }
+                ],
+                'companyNameData': [
+                    {
+                        'companyName':'重庆网控科技发展有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["√", "√","√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "×","√",'合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                    {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },      {
+                        'companyName':'夏丰热工研究院有限公司',
+                        'zhaunjiadata_gs':[
+                            {
+                                'zhaunjia1':["×", "√","√",'不合格']
+                            } ,
+                        ]
+                    },
+                ],
+                'grcs_titile_data':{
+                    'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                    + '/' + '评委会',//     评标委员会
+                    'bagName':  '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
+                    + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
+                    +'['+'第-包'+']',//分包号
+                }
             }
         }
     }
@@ -782,7 +1042,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
     return return_val;
 });
 /*----------------------审查项页面数据接口end---------------------*/
-/*---------------------审查项汇总页面接口------------------*/
+/*---------------------  审查项汇总页面接口------------------*/
 Mock.mock('/api/table_data', 'post', (options) => {
     // console.log(JSON.parse(options.body));
     let return_val;
@@ -793,12 +1053,17 @@ Mock.mock('/api/table_data', 'post', (options) => {
             msg.push(
                   {
                     'xuhao': '1',
-                    'evaluationFactors': '标格步上外联只',
+                    'evaluationFactors': '资格审查1',
                 },
                 {
                     'xuhao': '2',
-                    'evaluationFactors': '定着值传',
-                 }, {
+                    'evaluationFactors': '资格审查2',
+                 },
+                {
+                    'xuhao': '3',
+                    'evaluationFactors': '资格审查3',
+                },
+                {
                      'xuhao': '结论',
                     'evaluationFactors': '是否通过资格审查项检查',
                 }
@@ -836,11 +1101,49 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     ],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
-                    'unlock_table': [
-                        {num: '1', factor: '资格审查1', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 1},
-                        {num: '2', factor: '资格审查2', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 2},
-                        {num: '3', factor: '资格审查项目', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 3},
-                        {num: '结论', factor: '是否通过资格审查项检查', name: '合格', name1: '合格', name2: '合格', id: 4}
+                    'unlock_table_data':[
+                        {
+                            'number': '1',
+                            'evaluationFactors': '资格审查1',
+                        },
+                        {
+                            'number': '2',
+                            'evaluationFactors': '资格审查2',
+                        },
+                        {
+                            'number': '3',
+                            'evaluationFactors': '资格审查3',
+                        },
+                        {
+                            'number': '结论',
+                            'evaluationFactors': '是否通过资格审查项检查',
+                        }
+                    ],
+                    'unlock_table_company_name': [
+                        {
+                            'companyName':'重庆网控科技发展有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)",  "√(5√0×)","√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'夏丰热工研究院有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格'],
+                                } ,
+                            ]
+                        },
                     ],
                     'unlock_dialog_check': {
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
@@ -859,15 +1162,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["√", "√",'合格']
+                                    'zhaunjia1':["√", "√", "√",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "√",'合格']
+                                    'zhaunjia1':["×", "√","√",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","√",'合格']
                                 }
                             ]
                         },
@@ -876,15 +1179,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -893,15 +1196,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -910,15 +1213,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -927,7 +1230,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
@@ -935,7 +1238,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -944,15 +1247,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -961,15 +1264,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","√",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         }, {
@@ -977,15 +1280,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","√",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -994,15 +1297,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -1011,15 +1314,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1028,15 +1331,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1045,15 +1348,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -1062,15 +1365,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -1079,15 +1382,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1096,15 +1399,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1126,12 +1429,17 @@ Mock.mock('/api/table_data', 'post', (options) => {
         msg.push(
             {
                 'xuhao': '1',
-                'evaluationFactors': '标格步上外联只',
+                'evaluationFactors': '投标人名称',
             },
             {
                 'xuhao': '2',
-                'evaluationFactors': '定着值传',
-            }, {
+                'evaluationFactors': '资质',
+            },
+            {
+                'xuhao': '3',
+                'evaluationFactors': '审查项目',
+            },
+            {
                 'xuhao': '结论',
                 'evaluationFactors': '是否通过资格审查项检查',
             }
@@ -1146,7 +1454,6 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
-
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'mylist': [
                         {
@@ -1170,11 +1477,49 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     ],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
-                    'unlock_table': [
-                        {num: '1', factor: '投标人名称', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 1},
-                        {num: '2', factor: '资质', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 2},
-                        {num: '3', factor: '审查项目', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 3},
-                        {num: '结论', factor: '是否通过资格审查项检查', name: '合格', name1: '合格', name2: '合格', id: 4}
+                    'unlock_table_data':[
+                        {
+                            'number': '1',
+                            'evaluationFactors': '投标人名称',
+                        },
+                        {
+                            'number': '2',
+                            'evaluationFactors': '资质',
+                        },
+                        {
+                            'number': '3',
+                            'evaluationFactors': '审查项目',
+                        },
+                        {
+                            'number': '结论',
+                            'evaluationFactors': '是否通过资格审查项检查',
+                        }
+                    ],
+                    'unlock_table_company_name': [
+                        {
+                            'companyName':'重庆网控科技发展有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)",  "√(5√0×)","√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'夏丰热工研究院有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格'],
+                                } ,
+                            ]
+                        },
                     ],
                     'unlock_dialog_check': {
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
@@ -1193,15 +1538,32 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["√", "√",'合格']
+                                    'zhaunjia1':["√", "×","√",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "√",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
+                                }
+                            ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjiamingcheng': "张三",
+                                    'zhaunjia1':["×","×", "×",'合格']
+                                } ,
+                                {
+                                    'zhaunjiamingcheng': "李二",
+                                    'zhaunjia1':["×","×", "×",'合格']
+                                },
+                                {
+                                    'zhaunjiamingcheng': "李四",
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 }
                             ]
                         },
@@ -1210,15 +1572,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 }
                             ]
                         },
@@ -1227,15 +1589,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 }
                             ]
                         },
@@ -1244,15 +1606,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 }
                             ]
                         },
@@ -1261,15 +1623,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 }
                             ]
                         },
@@ -1278,167 +1640,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","×", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        }, {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","×",'合格']
                                 }
                             ]
                         },
@@ -1459,16 +1669,21 @@ Mock.mock('/api/table_data', 'post', (options) => {
         msg.push(
             {
                 'xuhao': '1',
-                'evaluationFactors': '标格步上外联只',
+                'evaluationFactors': '详细评审1',
             },
             {
                 'xuhao': '2',
-                'evaluationFactors': '定着值传',
-            }, {
+                'evaluationFactors': '详细评审2',
+            },
+            {
+                'xuhao': '3',
+                'evaluationFactors': '详细评审3',
+            },
+            {
                 'xuhao': '结论',
                 'evaluationFactors': '是否通过资格审查项检查',
             }
-        )
+        );
         return_val= {
             'bidMsg': {
                 id: Random.id(),
@@ -1503,11 +1718,49 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     ],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
-                    'unlock_table': [
-                        {num: '1', factor: '详细评审1', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 1},
-                        {num: '2', factor: '详细评审2', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 2},
-                        {num: '3', factor: '详细评审3', name: '√(5√0×)', name1: '√(5√0×)', name2: '√(5√0×)', id: 3},
-                        {num: '结论', factor: '是否通过资格审查项检查', name: '合格', name1: '合格', name2: '合格', id: 4}
+                    'unlock_table_data':[
+                        {
+                            'number': '1',
+                            'evaluationFactors': '详细评审1',
+                        },
+                        {
+                            'number': '2',
+                            'evaluationFactors': '详细评审2',
+                        },
+                        {
+                            'number': '3',
+                            'evaluationFactors': '详细评审3',
+                        },
+                        {
+                            'number': '结论',
+                            'evaluationFactors': '是否通过资格审查项检查',
+                        }
+                    ],
+                    'unlock_table_company_name': [
+                        {
+                            'companyName':'重庆网控科技发展有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)",  "√(5√0×)","√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格']
+                                } ,
+                            ]
+                        },
+                        {
+                            'companyName':'夏丰热工研究院有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格'],
+                                } ,
+                            ]
+                        },
                     ],
                     'unlock_dialog_check': {
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
@@ -1526,15 +1779,32 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["√", "√",'合格']
+                                    'zhaunjia1':["√","√", "√",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "√",'合格']
+                                    'zhaunjia1':["×", "√","√",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","√",'合格']
+                                }
+                            ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjiamingcheng': "张三",
+                                    'zhaunjia1':["×", "√","×",'合格']
+                                } ,
+                                {
+                                    'zhaunjiamingcheng': "李二",
+                                    'zhaunjia1':["×", "×","√",'合格']
+                                },
+                                {
+                                    'zhaunjiamingcheng': "李四",
+                                    'zhaunjia1':["×", "×","√",'合格']
                                 }
                             ]
                         },
@@ -1543,15 +1813,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "×","√",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -1560,15 +1830,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1577,15 +1847,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1594,15 +1864,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1611,32 +1881,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
-                                },
-                                {
-                                    'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         }, {
@@ -1644,15 +1897,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1661,15 +1914,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1678,15 +1931,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1695,15 +1948,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1712,15 +1965,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1729,15 +1982,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -1746,15 +1999,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 }
                             ]
                         },
@@ -1763,15 +2016,15 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjiamingcheng': "张三",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×","√", "×",'合格']
                                 } ,
                                 {
                                     'zhaunjiamingcheng': "李二",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 },
                                 {
                                     'zhaunjiamingcheng': "李四",
-                                    'zhaunjia1':["×", "×",'合格']
+                                    'zhaunjia1':["×", "√","×",'合格']
                                 }
                             ]
                         },
@@ -2145,7 +2398,7 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 });
 
 
-//定档商务技术服务其他
+  /*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     console.log(JSON.parse(options.body));
     let return_val;
@@ -2303,7 +2556,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
     return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
     return return_val;
 });
-
+/*----------------------定档商务技术服务其他end-----------------*/
 
 
 

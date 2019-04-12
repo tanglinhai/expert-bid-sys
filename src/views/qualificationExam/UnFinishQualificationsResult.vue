@@ -72,38 +72,33 @@
                                                                           @click="submit">提交</el-button>
                                             <el-button size="small" plain
                                                        @click="individualTrial">查看个人资格审查项表</el-button></span>
-                                        <el-button size="small" plain @click="checkUnlockRecord" class="ml10">查看资格审查项解锁记录</el-button>
+                                        <el-button size="small" plain @click="checkUnlockRecord" class="ml10">
+                                            查看资格审查项解锁记录
+                                        </el-button>
                                         <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁</el-button>
                                     </div>
                                 </el-col>
                             </el-row>
                             <el-table
                                     :data="unlock_table"
+                                    size="small"
+                                    tooltip-effect="dark"
                                     border
-                                    style="width:100%"
+                                    class="changePriceTable"
+                                    el-table__header-wrapper
                             >
-                                <el-table-column
-                                        prop="num"
-                                        label="序号"
-                                        width="120px">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="factor"
-                                        label="评审因素">
-                                </el-table-column>
-                                <el-table-column
-                                        label="投标人">
-                                    <el-table-column
-                                            prop="name"
-                                            label="重庆网控科技发展有限公司">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="name1"
-                                            label="普瑞太阳能有限公司">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="name2"
-                                            label="夏丰热工研究院有限公司">
+                                <el-table-column prop="number" label="序号" header-align="left"
+                                                 align="left" fixed width="50"></el-table-column>
+                                <el-table-column prop="evaluationFactors" header-align="left" label="评审因素" fixed
+                                                 width="165"></el-table-column>
+                                <el-table-column header-align="left" label="投标人">
+                                    <el-table-column :label="item.companyName"
+                                                     v-for="(item,index ) in unlock_table_company_name">
+                                        <tempalte slot-scope="scope">
+                                                        <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
+                                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
+                                                        </span>
+                                        </tempalte>
                                     </el-table-column>
                                 </el-table-column>
                             </el-table>
@@ -128,7 +123,8 @@
                                 </el-col>
                                 <el-col :span="16" class="mt15">
                                     <div class="grid-content bg-purple">
-                                        <el-input type="textarea" v-model="form.desc" class="qita_expalin_input" ></el-input>
+                                        <el-input type="textarea" v-model="form.desc"
+                                                  class="qita_expalin_input"></el-input>
                                         <div class="qita_expalin"></div>
                                     </div>
                                 </el-col>
@@ -157,7 +153,8 @@
                 :visible.sync="$store.state.failureEnery.individualTrial"
                 width="80%"
         >
-            <IndividualTrial :msgBox="individualTrialData" :msg="companyName" :title_data="grcs_titile_data"></IndividualTrial>
+            <IndividualTrial :msgBox="individualTrialData" :msg="companyName"
+                             :title_data="grcs_titile_data"></IndividualTrial>
         </el-dialog>
         <!--废标弹框-->
         <el-dialog
@@ -171,11 +168,12 @@
 
         <!--标中质询弹框-->
         <el-dialog
-            title="标中质询信息列表"
-            :visible.sync="dialogStandardChallengeInformation"
-            width="900px"
-            >
-            <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo" :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
+                title="标中质询信息列表"
+                :visible.sync="dialogStandardChallengeInformation"
+                width="900px"
+        >
+            <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo"
+                                          :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
 
         </el-dialog>
         <!--标中质询弹框-->
@@ -233,12 +231,13 @@
                     desc: ''
                 },
                 type: '',//导航传值类型
-                dialogAbandonedTender:false, //废标
-                dialogStandardChallengeInformation:false,//标中质询信息表
-                cities:[],
-                tableDataTwo:[],
-                bzzxLoading:true, //标中质询loading
-                grcs_titile_data:{},//个人初审弹框的头部数据
+                dialogAbandonedTender: false, //废标
+                dialogStandardChallengeInformation: false,//标中质询信息表
+                cities: [],
+                tableDataTwo: [],
+                bzzxLoading: true, //标中质询loading
+                grcs_titile_data: {},//个人初审弹框的头部数据
+                unlock_table_company_name: [],//汇总页面table（评审因素汇总）
             }
         },
         created() {
@@ -261,15 +260,14 @@
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.mylist;
-                        this.unlock_table = res.data.bidMsg.eviewrItemsMsg.unlock_table;
+                        this.unlock_table = res.data.bidMsg.eviewrItemsMsg.unlock_table_data;
+                        this.unlock_table_company_name = res.data.bidMsg.eviewrItemsMsg.unlock_table_company_name;
                         this.evaluationLeader = res.data.bidMsg.eviewrItemsMsg.evaluationLeader;
                         this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
                         this.look_unlock_dialog = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
                         this.individualTrialData = res.data.bidMsg.eviewrItemsMsg.msgBox;//个人初审活动表
-                        console.log(res.data.bidMsg.eviewrItemsMsg);
-                        this.grcs_titile_data=res.data.bidMsg.eviewrItemsMsg.grcs_titile_data;
+                        this.grcs_titile_data = res.data.bidMsg.eviewrItemsMsg.grcs_titile_data;
                         this.companyName = res.data.bidMsg.eviewrItemsMsg.companyNameData;
-                        console.log(res.data.bidMsg.eviewrItemsMsg.companyNameData);
                         this.$store.state.failureEnery.isshow = false;
                         if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//1：解锁的那个页面显示，反之进度条的那个显示
                             this.$store.state.failureEnery.isshow = true;
@@ -282,26 +280,25 @@
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    this.dialogAbandonedTender=true;
+                    this.dialogAbandonedTender = true;
                 } else if (val === 'b') {//交通费标准
-                    this.dialogStandardChallengeInformation=true;
-                    this.bzzxLoading=true;
-                    this.$axios.post('/api/StandardChallengeList',{
-                    }).then(res=>{
-                        if(res.status == 200){
-                            this.cities=res.data.cityOptions;
-                            this.tableDataTwo=res.data.standList;
-                            this.bzzxLoading=false;
+                    this.dialogStandardChallengeInformation = true;
+                    this.bzzxLoading = true;
+                    this.$axios.post('/api/StandardChallengeList', {}).then(res => {
+                        if (res.status == 200) {
+                            this.cities = res.data.cityOptions;
+                            this.tableDataTwo = res.data.standList;
+                            this.bzzxLoading = false;
                         }
                     })
                 } else if (val === 'c') {//报销汇总表
-                    window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
                 } else if (val === 'd') {//报销汇总表-财政
-                    window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf', '_blank',);
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
                 } else if (val === 'e') {//报销情况查询-财政
-                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
-                    window.open(window.location.protocol+'//'+window.location.host+'/SignaturePage', '_blank',);
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 }
             },
             checkUnlockRecord() {
@@ -320,7 +317,6 @@
                 else if (this.type == 6) {
                     url = '/api/tijiao_xxjs';
                 }
-                console.log(this.form.desc);
                 this.$axios.post(url, {
                     data: this.form.desc,
                     type: parseInt(this.type) + 1
@@ -338,7 +334,7 @@
                     }
                 })
             },
-            individualTrial() {
+            individualTrial() {//查看个人资格审查项表
                 this.$store.state.failureEnery.individualTrial = true;
             },
         },
