@@ -50,7 +50,7 @@
                                     <!--<el-button size="small" plain-->
                                     <!--@click="check_unfinished_items">查看未完成项</el-button>-->
                                     <!--</span>-->
-                                    <el-button size="small" plain @click="save_btn" class="ml10">保存</el-button>
+                                    <el-button size="small" plain @click="saveBtn" class="ml10">保存</el-button>
                                     <!--<el-button size="small" plain @click="submit_business">提交商务</el-button>-->
                                     <el-button size="small" plain @click="submit_filing_comments">提交定档评议</el-button>
                                 </div>
@@ -73,8 +73,10 @@
                                         <el-table-column label="投标人">
                                             <el-table-column   :label="item" v-for="(item,index ) in companyname_toubiao"  width="450" :key="item.id">
                                                 <template  slot-scope="scope">
-                                                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                                                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                                                    <el-radio-group v-model="scope.row.resource" class="radio_group" >
+                                                        <el-radio label="1">是否是官方配置？（50.00分）</el-radio>
+                                                        <el-radio label="-1" style=" margin-left: 13px!important;">减</el-radio>
+                                                    </el-radio-group>
                                                 </template>
                                             </el-table-column>
                                         </el-table-column>
@@ -120,6 +122,7 @@
         },
         created() {
             this.type = this.$route.query.type;
+            console.log( this.type)
         },
         mounted() {
             this.init();
@@ -139,7 +142,7 @@
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.companyname_toubiao=res.data.bidMsg.eviewrItemsMsg.companyName;
                         this.dingdang_tableData=res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
-                        console.log(this.companyname_toubiao,res.data.bidMsg.eviewrItemsMsg.dingdang_tableData);
+                        // console.log(this.companyname_toubiao,res.data.bidMsg.eviewrItemsMsg.dingdang_tableData);
                     }
                     this.page_loading = false;
                 })
@@ -150,7 +153,8 @@
             check_unfinished_items() {//查看未完成项
 
             },
-            save_btn() {//保存
+            saveBtn() {//保存
+                console.log(this.companyname_toubiao);
 
             },
             submit_business() {//提交商务

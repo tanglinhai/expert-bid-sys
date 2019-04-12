@@ -215,9 +215,12 @@
 
                                 <!--点击个人形式审计表按钮显示-->
                                 <el-col class="personalAuditFormTable" style="float: left;width: calc(100% - 185px)">
-                                    <div class="FormTableTitle">
-                                        <span>分包号：{{grzgTitleData.bagName}}</span>
-                                        <span>评标委员会：{{grzgTitleData.groupName}}</span>
+                                    <div class="FormTableTitle cf fs14">
+                                        <div class="fl">
+                                            <span>分包号：{{grzgTitleData.bagName}}</span>
+                                            <span>评标委员会：{{grzgTitleData.groupName}}</span>
+                                        </div>
+                                        <div class="fr">{{grzgTitleData.professorName}}</div>
                                     </div>
                                     <!--个人形式审计表表格-->
                                     <template>
@@ -716,10 +719,9 @@
                         this.son_all_checked.forEach((s, f) => {
                             this.radioArr.forEach((h, j) => {
                                 if (s.id == h.id) {
-                                    this.son_all_che.push(h)
-                                    h.radio = '合格'
+                                    this.son_all_che.push(h);
+                                    h.radio = '合格';
                                 }
-
                             })
                         })
 
@@ -1038,7 +1040,6 @@
                                     .FormTableTitle {
                                         margin-bottom: 10px;
                                         span {
-                                            font-size: 14px;
                                             margin-right: 20px;
                                         }
                                     }
