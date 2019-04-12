@@ -208,7 +208,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 1,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf1_1',
+                                            pdf: [{
+                                                //增加字段 PDF id
+                                                id: 'pdf1_1', 
+                                                pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
                                                 {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
                                                 {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
 
@@ -222,6 +227,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 2,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf2_1',
                                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 2,
@@ -233,6 +240,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 3,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf3_1',
                                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
@@ -254,6 +263,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 4,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf1_2',
                                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
                                                 {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
                                                 {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
@@ -267,6 +278,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 5,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf2_1',
                                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                                         }, {
                                             index: 5,
@@ -278,6 +291,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 6,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf3_1',
                                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
                                         }],
                                     },
@@ -299,6 +314,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             ra2: '不合格',
                                             radio: '',
                                             id: 7,
+                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                                            relativePDF: 'pdf1_3',
                                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
                                                 {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
                                                 {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]

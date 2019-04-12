@@ -17,6 +17,9 @@
 <script>
 export default{
     props:{
+        queryStr:{
+            type: String
+        },
         pdfUrl:{
             type: String
         },
@@ -42,12 +45,15 @@ export default{
         });
     },
     methods:{
-        setPdf({pdfUrl, onload} = {}){
+        setPdf({pdfUrl, onload, queryStr} = {}){
             if(this.pdfUrl){
                 pdfUrl = this.pdfUrl;
             }
             if(this.onload){
                 onload = this.onload;
+            }
+            if(this.queryStr){
+                queryStr = this.queryStr;
             }
             //var pdfUrl = this.pdfUrl// || "/documents/younojsxia.pdf";
             if(!pdfUrl){
@@ -58,6 +64,7 @@ export default{
                 page:1,
                 width: "100%",
                 height: "auto",
+                queryStr,
                 PDFJS_URL: '/js/plugins/pdfjs-2.0.943/web/viewer.html',
                 forcePDFJS: true,
                 onload: onload,

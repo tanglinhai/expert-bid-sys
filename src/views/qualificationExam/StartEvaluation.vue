@@ -38,7 +38,8 @@
             <NavBar :msg="options" :type="type_btn"></NavBar>
             <div class="content">
                 <div class="div_pdf">
-                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" v-for="item in pdfItems"
+                    <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
+                         v-for="item in pdfItems"
                          v-show="item.show"></pdf>
                     <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
@@ -53,159 +54,162 @@
                          @mousedown="slideBarMousedown($event)"
                     ><span class="iconfont icon-vertical-align-middl"></span></div>
                     <div class="center_part">
-                        <div class="center_con cf">
-                            <div class="left_examine " style="float: left;width: 170px">
-                                <div class="div_header">
-                                    <div class="textAlignC mt20 mb15">
-                                        <el-button type="primary" size="small" class="personalAuditFormBtn">
-                                            <i class="icon iconfont icon-zigeshenchazhuti"></i>
-                                            {{personalAuditFormBtn}}
-                                        </el-button>
+                        <div class="center_con_wrap">
+                            <div class="center_con cf">
+                                <div class="left_examine " style="float: left;width: 170px">
+                                    <div class="div_header">
+                                        <div class="textAlignC mt20 mb15">
+                                            <el-button type="primary" size="small" class="personalAuditFormBtn">
+                                                <i class="icon iconfont icon-zigeshenchazhuti"></i>
+                                                {{personalAuditFormBtn}}
+                                            </el-button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <h6 class="pl15  col747 pt15 pb10">审查项</h6>
-                                    <div class="content_wrap">
-                                        <div class="zTreeDemoBackground left">
-                                            <ul id="treeDemo" class="ztree">{{msg}}</ul>
+                                    <div>
+                                        <h6 class="pl15  col747 pt15 pb10">审查项</h6>
+                                        <div class="content_wrap">
+                                            <div class="zTreeDemoBackground left">
+                                                <ul id="treeDemo" class="ztree">{{msg}}</ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--点击ztree树显示-->
-                            <div class="right_warp" style="float: left;width: calc(100% - 185px)">
-                                <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
-                                    <el-col :span="12">
-                                        <el-row class="red">
-                                            <el-col style="width: 70px;font-size: 14px;">
-                                                <div>我的进度：</div>
-                                            </el-col>
-                                            <el-col style="width: 278px">
-                                                <el-progress :percentage="completePercent"></el-progress>
-                                            </el-col>
-                                        </el-row>
-                                    </el-col>
-                                    <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                        <el-button @click="allChecked" plain size="mini" type="primary"><i
-                                                class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                                        </el-button>
-                                        <el-button size="mini" type="primary" @click="allSubmit"><i
-                                                class="icon iconfont icon-tijiao  mr3"></i>全部提交
-                                        </el-button>
-                                    </el-row>
-                                </el-row>
-                                <div class="weitijiao">
-                                    <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index"
-                                         :id="item.name"
-                                         v-if="item.show==true||item.show==undefined">
-                                        <!-------------分支进度条以及提交------------------>
-                                        <el-row class="progress_div"
-                                                v-if="$store.state.failureEnery.start_sublevel_show">
-                                            <el-col :span="12">
-                                                <el-row class="red">
-                                                    <el-col style="width: 70px;font-size: 14px;">
-                                                        <div>我的进度：</div>
-                                                    </el-col>
-                                                    <el-col style="width: 278px">
-                                                        <el-progress :percentage="completePercent"></el-progress>
-                                                    </el-col>
-                                                </el-row>
-                                            </el-col>
-                                            <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                                <el-button @click="sublevelAllChecked" plain size="mini" type="primary">
-                                                    <i
-                                                            class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                                                </el-button>
-                                                <el-button size="mini" type="primary" @click="sublevelSubmit"><i
-                                                        class="icon iconfont icon-tijiao  mr3"></i>提交
-                                                </el-button>
+                                <!--点击ztree树显示-->
+                                <div class="right_warp" style="float: left;width: calc(100% - 185px)">
+                                    <el-row class="progress_div" v-if="$store.state.failureEnery.parent_progress_show">
+                                        <el-col :span="12">
+                                            <el-row class="red">
+                                                <el-col style="width: 70px;font-size: 14px;">
+                                                    <div>我的进度：</div>
+                                                </el-col>
+                                                <el-col style="width: 278px">
+                                                    <el-progress :percentage="completePercent"></el-progress>
+                                                </el-col>
                                             </el-row>
+                                        </el-col>
+                                        <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                            <el-button @click="allChecked" plain size="mini" type="primary"><i
+                                                    class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                            </el-button>
+                                            <el-button size="mini" type="primary" @click="allSubmit"><i
+                                                    class="icon iconfont icon-tijiao  mr3"></i>全部提交
+                                            </el-button>
                                         </el-row>
-                                        <!-------------分支进度条以及提交end------------------>
-                                        <el-row class="title_msg">
-                                            <el-col>
-                                                <p class="commonTitle fs14  col65">
-                                                    <span class="ml3 col409">{{item.fristTableData.question}}</span><span
-                                                        class="ml3  col409">{{item.fristTableData.answer}}</span><span
-                                                        class="ml15 mr10"> /</span><span
-                                                        class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
-                                                </p>
-                                            </el-col>
-                                        </el-row>
-                                        <el-table
-                                                :data="item.fristTableData.tableData"
-                                                border
-                                                style="width: 100%;"
-                                                class="first_table"
-                                                :cell-style="rowStyle">
-                                            <el-table-column
-                                                    prop="name"
-                                                    label="名称">
-                                                <template slot-scope="scope">
-                                                <span style="margin-left: 10px;display: inline-block;">
-                                                      <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
-                                                         style="color: red"></i>
-                                                       <i class="el-icon-check mr5 "
-                                                          style="color: #67c23a"
-                                                          v-if="scope.row.radio=='合格'"></i>投标人：
-                                                    <a v-if="scope.row.pdf.length<2"
-                                                       @click="show_pdf(0, scope.row.pdf[0])" class="common_a_style">
-                                                        <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
-                                                        <i class="icon iconfont icon-pdf"></i>
-                                                    </a>
-                                                    <el-dropdown v-else trigger="click">
-                                                      <span class="el-dropdown-link">
-                                                        <i class="el-icon-search fs14 mr3 ver_al_m"></i>
-                                                        {{scope.row.name}}
-                                                        <i class="icon iconfont icon-pdf"></i>
-                                                        <i class="el-icon-arrow-down el-icon--right"></i>
-                                                      </span>
-                                                      <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
-                                                        <el-dropdown-item
-                                                                @click.native="show_pdf(index, item)"
-                                                                v-for="(item ,index) in scope.row.pdf"
-                                                        >{{item.pdf_name}}<i
-                                                                class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                      </el-dropdown-menu>
-                                                    </el-dropdown>
+                                    </el-row>
+                                    <div class="weitijiao">
+                                        <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index"
+                                             :id="item.name"
+                                             v-if="item.show==true||item.show==undefined">
+                                            <!-------------分支进度条以及提交------------------>
+                                            <el-row class="progress_div"
+                                                    v-if="$store.state.failureEnery.start_sublevel_show">
+                                                <el-col :span="12">
+                                                    <el-row class="red">
+                                                        <el-col style="width: 70px;font-size: 14px;">
+                                                            <div>我的进度：</div>
+                                                        </el-col>
+                                                        <el-col style="width: 278px">
+                                                            <el-progress :percentage="completePercent"></el-progress>
+                                                        </el-col>
+                                                    </el-row>
+                                                </el-col>
+                                                <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                                    <el-button @click="sublevelAllChecked" plain size="mini"
+                                                               type="primary">
+                                                        <i
+                                                                class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                                    </el-button>
+                                                    <el-button size="mini" type="primary" @click="sublevelSubmit"><i
+                                                            class="icon iconfont icon-tijiao  mr3"></i>提交
+                                                    </el-button>
+                                                </el-row>
+                                            </el-row>
+                                            <!-------------分支进度条以及提交end------------------>
+                                            <el-row class="title_msg">
+                                                <el-col>
+                                                    <p class="commonTitle fs14  col65">
+                                                        <span class="ml3 col409">{{item.fristTableData.question}}</span><span
+                                                            class="ml3  col409">{{item.fristTableData.answer}}</span><span
+                                                            class="ml15 mr10"> /</span><span
+                                                            class="ml3">{{item.fristTableData.question1}}</span><span>{{item.fristTableData.answer1}}</span>
+                                                    </p>
+                                                </el-col>
+                                            </el-row>
+                                            <el-table
+                                                    :data="item.fristTableData.tableData"
+                                                    border
+                                                    style="width: 100%;"
+                                                    class="first_table"
+                                                    :cell-style="rowStyle">
+                                                <el-table-column
+                                                        prop="name"
+                                                        label="名称">
+                                                    <template slot-scope="scope">
+                                                    <span style="margin-left: 10px;display: inline-block;">
+                                                          <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                                             style="color: red"></i>
+                                                           <i class="el-icon-check mr5 "
+                                                              style="color: #67c23a"
+                                                              v-if="scope.row.radio=='合格'"></i>投标人：
+                                                        <a v-if="scope.row.pdf.length<2"
+                                                           @click="show_pdf(scope.row.pdf[0])" class="common_a_style">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                        </a>
+                                                        <el-dropdown v-else trigger="click">
+                                                          <span class="el-dropdown-link">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                            {{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                            <i class="el-icon-arrow-down el-icon--right"></i>
+                                                          </span>
+                                                          <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                            <el-dropdown-item
+                                                                    @click.native="show_pdf(pdfItem)"
+                                                                    v-for="(pdfItem ,index) in scope.row.pdf"
+                                                            >{{pdfItem.pdf_name}}<i
+                                                                    class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                          </el-dropdown-menu>
+                                                        </el-dropdown>
 
+                                                    </span>
+                                                        <div class="btn_locate iconfont icon-dingwei"
+                                                             @click="locate_pdf(item.fristTableData, scope.row)"
+                                                             title="定位到关联投标文件说明处"
+                                                        ></div>
+                                                    </template>
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="pass"
+                                                        label="是否合格" width="200">
+                                                    <template slot-scope="scope">
+                                                <span style="margin-left: 10px" class="radios"
+                                                      v-if="$store.state.failureEnery.flag">
+                                                  <el-radio-group
+                                                          @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
+                                                          ref="shet" v-model="scope.row.radio">
+                                                    <el-radio :label="scope.row.ra1">合格</el-radio>
+                                                    <el-radio :label="scope.row.ra2">不合格</el-radio>
+                                                  </el-radio-group>
                                                 </span>
-                                                    <div class="btn_locate iconfont icon-dingwei"
-                                                         @click="locate_pdf(scope.$index, scope.row)"
-                                                         title="定位到关联投标文件说明处"
-                                                    ></div>
-                                                </template>
-                                            </el-table-column>
-                                            <el-table-column
-                                                    prop="pass"
-                                                    label="是否合格" width="200">
-                                                <template slot-scope="scope">
-                                            <span style="margin-left: 10px" class="radios"
-                                                  v-if="$store.state.failureEnery.flag">
-                                              <el-radio-group
-                                                      @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
-                                                      ref="shet" v-model="scope.row.radio">
-                                                <el-radio :label="scope.row.ra1">合格</el-radio>
-                                                <el-radio :label="scope.row.ra2">不合格</el-radio>
-                                              </el-radio-group>
-                                            </span>
-                                                    <span style="margin-left: 10px;color:red;" v-else>
-                                                 <span v-if="scope.row.radio == '合格'">合格</span>
-                                                 <span v-else>不合格</span>
-                                             </span>
-                                                </template>
-                                            </el-table-column>
-                                            <el-table-column
-                                                    prop="kong"
-                                                    min-width="30%"
-                                            >
-                                                <template slot-scope="scope">
-                                            <span style="margin-left: 10px">
-                                              {{scope.row.content}}
-                                            </span>
-                                                </template>
-                                            </el-table-column>
-                                        </el-table>
+                                                        <span style="margin-left: 10px;color:red;" v-else>
+                                                     <span v-if="scope.row.radio == '合格'">合格</span>
+                                                     <span v-else>不合格</span>
+                                                 </span>
+                                                    </template>
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="kong"
+                                                        min-width="30%"
+                                                >
+                                                    <template slot-scope="scope">
+                                                <span style="margin-left: 10px">
+                                                  {{scope.row.content}}
+                                                </span>
+                                                    </template>
+                                                </el-table-column>
+                                            </el-table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -226,9 +230,9 @@
                                                          width="165"></el-table-column>
                                         <el-table-column header-align="left" label="投标人">
                                             <el-table-column :label="item"
-                                                             v-for="(item,index ) in grcsMsgBoxTitle" >
+                                                             v-for="(item,index ) in grcsMsgBoxTitle">
                                                 <tempalte slot-scope="scope">
-                                                    <span  v-for="(i,idx ) in yinsu1" >{{i}}</span>
+                                                    <span v-for="(i,idx ) in yinsu1">{{i}}</span>
                                                 </tempalte>
                                             </el-table-column>
                                         </el-table-column>
@@ -291,6 +295,8 @@
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import JSON from 'JSON';
+
     export default {
         props: {},
         components: {
@@ -353,7 +359,7 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
-                yinsu1:[]
+                yinsu1: []
 
             }
         },
@@ -389,6 +395,7 @@
             window.fullModeRow = this.fullModeRow;
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
+            window._locate_pdf_ = this._locate_pdf_;
         },
         computed: {
             currentPdfShow() {
@@ -414,6 +421,9 @@
             }
         },
         methods: {
+            jsonParse(obj) {
+                return JSON.parse(obj);
+            },
             init() {   //初始化 table的数据
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
@@ -590,12 +600,41 @@
                 return treeNode.level > 0;
             },
             /*----------------- zTree end ----------------------*/
-            //定位到关联投标文件说明处
-            locate_pdf(i, obj) {
-                this.show_pdf(i, obj);
+            getIframeDocument(refStr) {
+                return this.getIframeWindow(refStr).document;
+            },
+            getIframeWindow(refStr) {
+                var iframe;
+                if (this.$refs[refStr] != null && this.$refs[refStr].length == 1) {
+                    iframe = $(this.$refs[refStr][0].$el).find('iframe');
+                } else {
+                    iframe = $(this.$refs[refStr].$el).find('iframe');
+                }
+                return iframe.get(0).contentWindow;
+            },
+            _locate_pdf_() {
 
             },
-            show_pdf(i, obj) {//查看pdf
+            //定位到关联投标文件说明处
+            locate_pdf(question, bidder) {
+                var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
+                if (!relativePDF || relativePDF.length == 0) {
+                    this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.show_pdf(bidder.pdf[0]);
+                    }).catch(() => {
+
+                    });
+                    return;
+                }
+                relativePDF = relativePDF[0];
+                var queryStr = question.question + question.answer;
+                this.show_pdf(relativePDF, queryStr);
+            },
+            show_pdf(obj, queryStr) {//查看pdf
                 //this.$commonJs.fullscreen();
                 //pdfItems: [],//动态插入pdfcurrPdfUrl
                 var currPDF;
@@ -608,18 +647,19 @@
                 if (currPDF) {//exist
                     currPDF && this.$set(currPDF, 'show', true);
                     if (this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')) {
-                        var iframe;
-                        if (this.$refs[currPDF.ref] != null && this.$refs[currPDF.ref].length == 1) {
-                            iframe = $(this.$refs[currPDF.ref][0].$el).find('iframe');
-                        } else {
-                            iframe = $(this.$refs[currPDF.ref].$el).find('iframe');
-                        }
-                        iframe.get(0).contentWindow.document.getElementById('presentationMode_exit').style.display = 'block';
+                        this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
+                    }
+                    if (queryStr) {
+                        var iframeWindow = this.getIframeWindow(currPDF.ref);
+                        iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
+                        iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
                     }
                 } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
                     var _this = this;
                     this.pdfItems.push({
                         currPdfUrl: obj.url1,
+                        queryStr: queryStr,
+                        //currPdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
                         ref: "pdf_" + obj.id,
                         show: true,
                         /*loadingInstance: ELEMENT.Loading.service({
@@ -889,6 +929,7 @@
                         text-align: center;
                         cursor: n-resize;
                         transition: background-color, color .5s, .5s;
+                        background-color: #fff;
                         z-index: 1;
                         .iconfont {
                             font-size: 14px;
@@ -900,106 +941,114 @@
                     ;
                     }
                     .center_part {
-                        .center_con {
-                            padding: 15px;
-                            .left_examine {
-                                background: #e4e9ec;
-                                border-radius: 10px;
-                                height: 820px;
-                                /*width:170px;*/
-                                .div_header {
-                                    border-bottom: 1px solid #bfc8cd;
-                                }
-                                #treeDemo {
-                                    li {
+                        height: 100%;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        .center_con_wrap {
+                            height: 100%;
+                            overflow-y: auto;
+                            .center_con {
+                                padding: 15px;
+                                min-width: 850px !important;
+                                .left_examine {
+                                    background: #e4e9ec;
+                                    border-radius: 10px;
+                                    height: 820px;
+                                    /*width:170px;*/
+                                    .div_header {
+                                        border-bottom: 1px solid #bfc8cd;
+                                    }
+                                    #treeDemo {
+                                        li {
 
-                                        .node_name {
-                                            width: 102px;
-                                            overflow: hidden;
-                                            float: right;
-                                            text-overflow: ellipsis;
-                                            white-space: nowrap;
-                                        }
-                                    }
-                                }
-                            }
-                            .right_warp {
-                                padding-left: 15px;
-                                border-radius: 5px;
-
-                                .el-progress__text {
-                                    color: red;
-                                }
-                                .el-progress-bar__outer {
-                                    background-color: #ededed;
-                                    height: 14px !important;
-                                }
-                                .title_msg {
-                                    .commonTitle {
-                                        font-size: 15px !important;
-                                        margin-top: 20px;
-                                    }
-                                    .commonTitle:before {
-                                        margin-top: -1px;
-                                        margin-bottom: 20px;
-                                    }
-                                }
-                                .first_table {
-                                    .el-dropdown {
-                                        display: inline;
-                                    }
-                                    .el-table__header-wrapper {
-                                        display: none;
-                                    }
-                                    .el-dropdown-link {
-                                        cursor: pointer;
-                                        color: #409EFF;
-                                    }
-                                    .el-icon-arrow-down {
-                                        font-size: 12px;
-                                    }
-                                    div.cell {
-                                        position: relative;
-                                        .btn_locate {
-                                            position: absolute;
-                                            top: 0;
-                                            right: 0;
-                                            width: 30px;
-                                            height: 24px;
-                                            line-height: 24px;
-                                            font-size: 16px;
-                                            margin-right: 10px;
-                                            text-align: center;
-                                            cursor: pointer;
-                                            &:hover {
-                                                color: rgb(64, 158, 255);
+                                            .node_name {
+                                                width: 102px;
+                                                overflow: hidden;
+                                                float: right;
+                                                text-overflow: ellipsis;
+                                                white-space: nowrap;
                                             }
                                         }
                                     }
-                                    .cell {
-                                        padding-right: 40px;
+                                }
+                                .right_warp {
+                                    padding-left: 15px;
+                                    border-radius: 5px;
+
+                                    .el-progress__text {
+                                        color: red;
+                                    }
+                                    .el-progress-bar__outer {
+                                        background-color: #ededed;
+                                        height: 14px !important;
+                                    }
+                                    .title_msg {
+                                        .commonTitle {
+                                            font-size: 15px !important;
+                                            margin-top: 20px;
+                                        }
+                                        .commonTitle:before {
+                                            margin-top: -1px;
+                                            margin-bottom: 20px;
+                                        }
+                                    }
+                                    .first_table {
+                                        .el-dropdown {
+                                            display: inline;
+                                        }
+                                        .el-table__header-wrapper {
+                                            display: none;
+                                        }
+                                        .el-dropdown-link {
+                                            cursor: pointer;
+                                            color: #409EFF;
+                                        }
+                                        .el-icon-arrow-down {
+                                            font-size: 12px;
+                                        }
+                                        div.cell {
+                                            position: relative;
+                                            .btn_locate {
+                                                position: absolute;
+                                                top: 0;
+                                                right: 0;
+                                                width: 30px;
+                                                height: 24px;
+                                                line-height: 24px;
+                                                font-size: 16px;
+                                                margin-right: 10px;
+                                                text-align: center;
+                                                cursor: pointer;
+                                                &:hover {
+                                                    color: rgb(64, 158, 255);
+                                                }
+                                            }
+                                        }
+                                        .cell {
+                                            padding-right: 40px;
+                                        }
                                     }
                                 }
-                            }
-                            .personalAuditFormTable {
-                                display: none;
-                                padding-left: 15px;
-                                border-radius: 5px;
-                                .FormTableTitle {
-                                    margin-bottom: 10px;
-                                    span {
-                                        font-size: 14px;
-                                        margin-right: 20px;
+                                .personalAuditFormTable {
+                                    display: none;
+                                    padding-left: 15px;
+                                    border-radius: 5px;
+                                    .FormTableTitle {
+                                        margin-bottom: 10px;
+                                        span {
+                                            font-size: 14px;
+                                            margin-right: 20px;
+                                        }
                                     }
-                                }
-                                .table_tips {
-                                    line-height: 23px;
-                                    color: #606266;
-                                    border-left: 1px solid #ebeef5;
-                                    border-right: 1px solid #ebeef5;
-                                    border-bottom: 1px solid #ebeef5;
-                                    padding-top: 5px;
-                                    padding-bottom: 5px;
+                                    .table_tips {
+                                        line-height: 23px;
+                                        color: #606266;
+                                        border-left: 1px solid #ebeef5;
+                                        border-right: 1px solid #ebeef5;
+                                        border-bottom: 1px solid #ebeef5;
+                                        padding-top: 5px;
+                                        padding-bottom: 5px;
+                                    }
                                 }
                             }
                         }
@@ -1050,8 +1099,6 @@
                     float: right;
                     width: 50%;
                     height: 100%;
-                    min-width: 850px !important;
-                    overflow-x: scroll !important;
                     z-index: 999;
                     .slideBar {
                         display: block;
@@ -1074,12 +1121,13 @@
                         padding: 0;
                         margin: 0;
                         padding-right: 17px;
-                        height: 100%;
-                        box-sizing: border-box;
-                        .center_con {
-                            height: 100%;
-                            overflow-y: auto;
-                        }
+                        /* .center_con_wrap{
+                            .center_con {
+                                height: 100%;
+                                overflow-y: auto;
+                                min-width: 850px !important;
+                            }
+                        } */
                     }
                 }
             }
@@ -1115,11 +1163,12 @@
                     .center_part {
                         padding-top: 17px;
                         margin-top: -17px;
-                        height: 100%;
-                        .center_con {
+                        /* .center_con_wrap{
                             height: 100%;
                             overflow-y: auto;
-                        }
+                            .center_con {
+                            }
+                        } */
                     }
                 }
             }

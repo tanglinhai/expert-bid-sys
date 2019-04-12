@@ -24,7 +24,7 @@
   line-height: 1.0;
 }
 
-.textLayer > div {
+.textLayer > span {
   color: transparent;
   position: absolute;
   white-space: pre;
@@ -505,24 +505,24 @@ select {
   display: none;
 }
 
-.pdfPresentationMode:-webkit-full-screen .textLayer > div {
+.pdfPresentationMode:-webkit-full-screen .textLayer > span {
   cursor: none;
 }
 
-.pdfPresentationMode:-moz-full-screen .textLayer > div {
+.pdfPresentationMode:-moz-full-screen .textLayer > span {
   cursor: none;
 }
 
-.pdfPresentationMode:-ms-fullscreen .textLayer > div {
+.pdfPresentationMode:-ms-fullscreen .textLayer > span {
   cursor: none;
 }
 
-.pdfPresentationMode:fullscreen .textLayer > div {
+.pdfPresentationMode:fullscreen .textLayer > span {
   cursor: none;
 }
 
 .pdfPresentationMode.pdfPresentationModeControls > *,
-.pdfPresentationMode.pdfPresentationModeControls .textLayer > div {
+.pdfPresentationMode.pdfPresentationModeControls .textLayer > span {
   cursor: default;
 }
 
@@ -1301,17 +1301,14 @@ html[dir='rtl'] .toolbarButton.pageDown::before {
   content: url(images/toolbarButton-zoomIn.png);
 }
 
-
-
 .toolbarButton.closePdfDocument::before,
   .secondaryToolbarButton.closePdfDocument::before {
     content: url(images/closePdfDocument.png);
 }
-
 .toolbarButton.presentationMode_exit::before,
-  .secondaryToolbarButton.presentationMode_exit::before {
+.secondaryToolbarButton.presentationMode_exit::before {
     content: url(images/toolbarButton-presentationMode_exit.png);
-  }
+}
 .toolbarButton.presentationMode_column::before,
 .secondaryToolbarButton.presentationMode_column::before {
   content: url(images/toolbarButton-presentationMode_column.png);
@@ -1586,6 +1583,11 @@ html[dir='rtl'] .verticalToolbarSeparator {
   padding: 10px 30px 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+#thumbnailView > a:active,
+#thumbnailView > a:focus {
+  outline: 0;
 }
 
 .thumbnail {
@@ -2010,19 +2012,19 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   mix-blend-mode: screen;
 }
 
-#viewer.textLayer-visible .textLayer > div {
+#viewer.textLayer-visible .textLayer > span {
   background-color: rgba(255, 255, 0, 0.1);
   color: black;
   border: solid 1px rgba(255, 0, 0, 0.5);
   box-sizing: border-box;
 }
 
-#viewer.textLayer-hover .textLayer > div:hover {
+#viewer.textLayer-hover .textLayer > span:hover {
   background-color: white;
   color: black;
 }
 
-#viewer.textLayer-shadow .textLayer > div {
+#viewer.textLayer-shadow .textLayer > span {
   background-color: rgba(255,255,255, .6);
   color: black;
 }
@@ -2060,7 +2062,7 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   display: none;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx) {
+@media screen and (-webkit-min-device-pixel-ratio: 1.1), screen and (min-resolution: 1.1dppx) {
   /* Rules for Retina screens */
   .toolbarButton::before {
     -webkit-transform: scale(0.5);
@@ -2147,8 +2149,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     content: url(images/toolbarButton-zoomOut@2x.png);
   }
 
-
-
   .toolbarButton.closePdfDocument::before,
   .secondaryToolbarButton.closePdfDocument::before {
     content: url(images/closePdfDocument@2x.png);
@@ -2169,8 +2169,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   .secondaryToolbarButton.presentationMode::before {
     content: url(images/toolbarButton-presentationMode@2x.png);
   }
-
-
 
   .toolbarButton.print::before,
   .secondaryToolbarButton.print::before {
