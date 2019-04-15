@@ -359,11 +359,11 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             label: '评标',
             types: 3,
          },
-         {
-            value: '4',//
-            label: '推举组长',
-            types: 4,
-        },
+        //  {
+        //     value: '4',//
+        //     label: '推举组长',
+        //     types: 4,
+        // },
         {
             value: '5',//
             label: '资格审查',
