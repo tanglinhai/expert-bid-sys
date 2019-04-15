@@ -64,7 +64,7 @@
             },
            ToChangePage(types,number){   //导航点击值
                 // console.log(types,2222)
-                console.log(types,2,number, this.$store.state.navCommon.types,333)
+                console.log(types,number, this.$store.state.navCommon.types,333)
                 // console.log(this.$store.state.navCommon.types,4444)
                 setTimeout(function(){
                     $(".NavCommon ul li button").removeClass("backblue");
