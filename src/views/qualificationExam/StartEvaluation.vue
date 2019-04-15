@@ -1,4 +1,5 @@
 <template>
+    <div class="pingbiao_warp">
     <div class="complianceReviewItem">
         <el-row class="fs14 bid_msg mb15">
             <el-col :span="4">
@@ -30,8 +31,8 @@
             </el-col>
         </el-row>
         <div class="mainContentWarp" v-loading="page_loading">
-            <!-- <el-button class="enterFullMode" 
-                    icon="iconfont icon-fullscreen" 
+            <!-- <el-button class="enterFullMode"
+                    icon="iconfont icon-fullscreen"
                     size="mini"
                     @click="enterFullMode"
                 >进入全屏模式</el-button> -->
@@ -43,8 +44,8 @@
                          v-show="item.show"></pdf>
                     <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                 </div>
-                <!-- <el-button class="exitFullMode" 
-                    icon="iconfont icon-fullscreen-exit" 
+                <!-- <el-button class="exitFullMode"
+                    icon="iconfont icon-fullscreen-exit"
                     size="mini"
                     @click="exitFullMode"
                 >退出全屏模式</el-button> -->
@@ -297,6 +298,7 @@
                                           :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
         </el-dialog>
         <!--标中质询弹框-->
+    </div>
     </div>
 </template>
 
@@ -849,10 +851,19 @@
             margin-left: 7px;
         }
     }
+.pingbiao_warp{
+    overflow:hidden;
+    padding-top:15px;
+    background:#ededed;
 
+}
     .complianceReviewItem {
-        padding: 15px;
         background-color: #ededed;
+        padding:0px 0% 15px 0%;
+        width:98%;
+        float:left;
+        margin-left:1%;
+        margin-right:1%;
         .bid_msg {
             line-height: 32px;
             .select {

@@ -56,7 +56,6 @@
             } else {
                 this.$store.state.navCommon.types=this.$route.query.types;
             }
-            
         },
         mounted(){
             //this.navcommonsListFun(); //导航接口

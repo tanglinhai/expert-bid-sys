@@ -54,7 +54,7 @@ export default {
         this.$store.state.navCommon.types=this.$route.query.types;
         this.number=this.$store.state.navCommon.types
     }
-    console.log(this.$store.state.navCommon.types,this.$route.query.types,55555555555)
+    // console.log(this.$store.state.navCommon.types,this.$route.query.types,55555555555)
             
   },
   mounted(){
@@ -82,7 +82,7 @@ export default {
   },
   updated(){
     this.number=this.$store.state.navCommon.types
-    console.log(this.number,77777777)
+    // console.log(this.number,77777777)
     $(".NavCommon ul li button").removeClass("backblue");
     $(".NavCommon ul #"+this.number).find("button").addClass("backblue");
   }
