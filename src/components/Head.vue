@@ -37,9 +37,16 @@
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>
-		<!-- <div class="CommonProject">
-			
-		</div> -->
+		<div class="CommonProject">
+				<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
+				<p>项目名称:单信封-0305-1</p>
+				<p>项目编号:0635-1909qwerN1133</p>
+				<el-collapse-transition>
+					<div v-show="show3">
+						<p>项目资料:招标文件(pdf)</p>
+					</div>
+				</el-collapse-transition>
+		</div>
 
 		<!--环境检测弹框-->
 		<el-dialog
@@ -89,6 +96,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
 			environmentTestDialogVisible: false,  //环境检测弹框默认展开
+			show3: false,  //导航默认隐藏
     };
   },
   methods: {
@@ -202,13 +210,30 @@ export default {
 	.CommonProject{
 		position: absolute;
 		width:500px;
-		height:59px;
+		min-height:54px;
 		background:#fff6ec;
 		left:50%;
 		margin-left:-350px;
 		top:0px;
 		border:1px solid #ffdcb3;
+		padding-top:5px;
 		z-index:9999;
+		.jiantou{
+			position: absolute;
+			right:10px;
+			top:20px;
+			color:#c46e0f;
+			cursor: pointer;
+		}
+		p{
+			font-size:14px;
+			line-height:22px;
+			color:#c46e0f;
+			margin-left:10px;
+			&:last-child{
+				margin-bottom:5px;
+			}
+		}
 	}
 }
 </style>
