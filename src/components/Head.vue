@@ -13,7 +13,7 @@
 		  <el-menu-item index="1">
 		  	<a href="javascript:void(0);" @click="environmentTestDialogVisible=true"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
-		  <el-submenu index="2" popper-class="head-submenu">
+		  <el-submenu index="2" popper-class="head-submenu" style="display:none">
 		    <template slot="title">
 		    	<i class="iconfont icon-jiaoseqiehuan"></i>角色切换
 		    </template>
@@ -28,6 +28,9 @@
 		  <el-menu-item index="4">
 		  	<a href="http://www.365trade.com.cn/ggtz/index.jhtml" target="_blank"><i class="iconfont icon-xitonggonggao"></i>系统公告</a>
 		  </el-menu-item>
+		 <el-menu-item>
+		  	<a>评标专家：</a>
+		  </el-menu-item>
 		  <el-submenu index="5" popper-class="head-submenu">
 		    <template slot="title">
 		    	<img src=""/>张三
@@ -38,14 +41,14 @@
 		  </el-submenu>
 		</el-menu>
 		<div class="CommonProject">
-				<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
-				<p>项目名称:单信封-0305-1</p>
-				<p>项目编号:0635-1909qwerN1133</p>
-				<el-collapse-transition>
-					<div v-show="show3">
-						<p>项目资料:招标文件(pdf)</p>
-					</div>
-				</el-collapse-transition>
+			<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
+			<p>项目名称:单信封-0305-1</p>
+			<p>项目编号:0635-1909qwerN1133</p>
+			<el-collapse-transition>
+				<div v-show="show3">
+					<p>项目资料:招标文件(pdf)</p>
+				</div>
+			</el-collapse-transition>
 		</div>
 
 		<!--环境检测弹框-->

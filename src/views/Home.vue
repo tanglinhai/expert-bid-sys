@@ -1,15 +1,28 @@
 <template>
   <div class="home">
   	<Head/>
-    <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
-    <transition :name="transitionName">
-      <router-view class="Router"/>
-    </transition>
+    <div class="WrapBig">
+      <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
+      <transition :name="transitionName">
+        <router-view class="Router"/>
+      </transition>
+    </div>
   	<Foot/>
   </div>
 </template>
 <style lang="scss">
 .home{
+  .WrapBig{
+    position: relative;
+    .Router{
+      padding-left:75px;
+    }
+    .NavCommon{
+      height:95%;
+      position:absolute;
+    }
+  }
+  
   /* .Router{
     position: absolute;
     width: 100%;

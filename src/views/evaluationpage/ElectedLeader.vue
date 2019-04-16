@@ -342,7 +342,7 @@
 
             AgreeXieYi(){  //参加评标
                 this.$router.push({
-                    path: '/index/WheelPushing?types='+3,
+                    path: '/index/WheelPushing?types=3',
                 })
                 
             },

@@ -93,7 +93,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/AllInformation?types='+2,
+                            path: '/index/AllInformation?types=2',
                         })
                         
                     }

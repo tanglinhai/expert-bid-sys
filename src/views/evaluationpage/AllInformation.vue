@@ -4,7 +4,7 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
-                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                 <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                     <h5 class="commonTitle col348fe2 oneanonter">项目信息</h5>
                 </div>
                 <el-table
@@ -31,7 +31,7 @@
                         label="招标文件">
                     </el-table-column>
                    
-                </el-table>
+                </el-table> -->
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
                     <h5 class="commonTitle col348fe2 oneanonter">专家个人信息</h5>
                 </div>
@@ -206,9 +206,9 @@
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
-                projectInformation:[  //项目信息
-                    {projectInformationname:'项目名称：',projectInformation_name:'',projectInformationbianhao:'项目编号：',projectInformationbian_hao:''}
-                ],
+                // projectInformation:[  //项目信息
+                //     {projectInformationname:'项目名称：',projectInformation_name:'',projectInformationbianhao:'项目编号：',projectInformationbian_hao:''}
+                // ],
                 tableData2:[  //专家个人信息
                     {name:'姓名：',num:'',tel:"手机：",telNum:'18700000003'},
                     {name:'证件号码：',num:'352226199505120036'},
@@ -284,8 +284,8 @@
                         this.tableData2[0].telNum=res.data.personInformation.personTel;
                         this.tableData2[1].num=res.data.personInformation.personNumber;
                         this.tableData3=res.data.toubiaorenInformation;
-                        this.projectInformation[0].projectInformation_name=res.data.personInformation.projectInformation_name;
-                        this.projectInformation[0].projectInformationbian_hao=res.data.personInformation.projectInformationbian_hao;
+                        // this.projectInformation[0].projectInformation_name=res.data.personInformation.projectInformation_name;
+                        // this.projectInformation[0].projectInformationbian_hao=res.data.personInformation.projectInformationbian_hao;
                         this.tBrMsgLoading=false;
                         this.pageLoading=false;
 
@@ -324,7 +324,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/ElectedLeader?types='+3,
+                            path: '/index/ElectedLeader?types=3',
                         })
                         
                     }

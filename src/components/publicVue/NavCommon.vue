@@ -1,6 +1,6 @@
 <template>
     <div class="navcommon_wrap">
-        <el-scrollbar style="width:100%; height:700px; overflow-x:hidden">
+        <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;">
             <ul>
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" >
                     <template v-if="number>=item.types">
