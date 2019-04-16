@@ -70,7 +70,7 @@
                                     <el-col :span="12" class="mb10">
                                         <div class="grid-content bg-purple btnBox" style="text-align:right;">
                                         <span class="hide_div"><el-button size="small" plain
-                                                                          @click="submit">提交</el-button>
+                                                                          @click="submit" :loading="submit_huizong">提交</el-button>
                                             <el-button size="small" plain
                                                        @click="individualTrial">查看个人资格审查项表</el-button></span>
                                             <el-button size="small" plain @click="checkUnlockRecord" class="ml10">
@@ -201,10 +201,6 @@
 
     export default {
         name: "unFinishQualificationsResult",
-        props: {
-            type: Number,
-            default: 2
-        },
         components: {
             ViewUnlockRecord,
             QualificationUnlock,
@@ -242,9 +238,11 @@
                 bzzxLoading: true, //标中质询loading
                 grcs_titile_data: {},//个人初审弹框的头部数据
                 unlock_table_company_name: [],//汇总页面table（评审因素汇总）
+                submit_huizong:false,//汇总页面提交
             }
         },
         created() {
+            console.log(this.$route.query.type);
             this.type = this.$route.query.type;
         },
         mounted() {
@@ -312,6 +310,7 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {//审查汇总
+                this.submit_huizong=true;
                 let url;
                 if (this.type == 4) {
                     url = '/api/tijiao_fhx';
@@ -326,6 +325,7 @@
                     type: parseInt(this.type) + 1
                 }).then(res => {
                     if (res.status == 200) {
+                        this.submit_huizong=false;
                         this.options = res.data.vue_type;
                         this.$message({
                             message: '提交成功',

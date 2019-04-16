@@ -100,7 +100,7 @@
                                     <el-button size="small"><i class="el-icon-message"></i>查看</el-button>
                                 </div>
                                 <div v-if="scope.row.status==1">
-                                    <el-button size="small" @click="goto('/elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>评标</el-button>
+                                    <el-button size="small" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
                                     <el-button size="small" @click="adjustedValuation(scope.row)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                                 </div>
                                 <div v-if="scope.row.status==2">
@@ -236,8 +236,8 @@
                     baoname:"",
                     name:"",
                 }],//招标文件查看弹框内容
+                BtnLoading:false,  //评标按钮loadding
 
-               
             }
         },
         created() {
@@ -264,6 +264,20 @@
             
         },
         methods:{
+            evaluationBidBtn(){
+                this.BtnLoading=true;
+                this.$axios.post('/api/evaluationBidBtn','post',{
+
+                }).then(res=>{
+                    if(res.status == 200){
+                        this.BtnLoading=false;
+                        this.$router.push({
+                            // path: '/elect/StartEvaluation?types=4',
+                            path: '/elect/StartEvaluation',
+                        })
+                    }
+                })
+            },
             goto(url){//开始评标
                this.$router.push({
                     path: url

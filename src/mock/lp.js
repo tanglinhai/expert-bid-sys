@@ -1,4 +1,5 @@
 ﻿import Mock from 'mockjs';
+import JSON from "JSON";
 Mock.setup({
     timeout: 1000
 });
@@ -342,6 +343,10 @@ let EnterEvaluationButton=Mock.mock('/api/EnterEvaluationButton','post',{
     data: [1234]
 })
 //参加评标按钮接口
+let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
+    code: 200,
+    data: [1234]
+})
 
 
 //公共导航接口
@@ -359,11 +364,6 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             label: '评标',
             types: 3,
          },
-        //  {
-        //     value: '4',//
-        //     label: '推举组长',
-        //     types: 4,
-        // },
         {
             value: '4',//
             label: '资格审查',

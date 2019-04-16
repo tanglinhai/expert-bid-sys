@@ -237,10 +237,10 @@
             }
         },
         created() {
-            //console.log(this.$route.query.type,999)
+            // console.log(this.$route.query.types,999)
             //this.number=this.$route.query.types
             this.$store.state.navCommon.types=this.$route.query.types;
-            console.log(this.$store.state.navCommon.types,5)
+            // console.log(this.$store.state.navCommon.types,5)
         },
         mounted(){
             

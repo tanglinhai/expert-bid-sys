@@ -1,128 +1,130 @@
 <template>
-    <div class="personal_user_logo">
-        <!--user_logo-->
-        <div class="main">
-            <div class="user_logo_con">
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="140px" class="demo-ruleForm">
-                    <el-row class="mb15">
-                        <el-col>
-                            <div class="grid-content bg-purple-dark  ">
-                                <h5 class="commonTitle col348fe2">我的基本信息 </h5>
-                            </div>
-                        </el-col>
-                    </el-row>
-                    <el-row class="header_upload_div">
-                        <el-col :span="10" :offset="7">
-                            <el-form-item label="头像：" prop="touxiang" class="fs14 head_div cf">
-                                <!-- 头像上传裁剪---------------------- -->
-                                <div class="headerBox">
-                                     <img :src="imageUrl" alt="头像" class="headerImg" @click="crop_Header_Img">
+    <div class="personal_user_warp">
+        <div class="personal_user_logo">
+            <!--user_logo-->
+            <div class="main">
+                <div class="user_logo_con">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="140px" class="demo-ruleForm">
+                        <el-row class="mb15">
+                            <el-col>
+                                <div class="grid-content bg-purple-dark  ">
+                                    <h5 class="commonTitle col348fe2">我的基本信息 </h5>
                                 </div>
-                                <!-- -------------------------------- -->
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item label="姓名：" prop="name">
-                                <el-input v-model="ruleForm.name" size="medium"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item label="性别：" prop="resource">
-                                <el-radio-group v-model="ruleForm.resource">
-                                    <el-radio label="男"></el-radio>
-                                    <el-radio label="女"></el-radio>
-                                </el-radio-group>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item label="绑定邮箱：" prop="email">
-                                <!--若邮箱未绑定，则显示1@1.com,否则显示ruleForm.email-->
-                                <el-col :span="19">
-                                    <div v-if="ruleForm.email != ''" key="1">
-                                        {{ruleForm.email}}
-                                        (<span class="co5da">已绑定</span>)
+                            </el-col>
+                        </el-row>
+                        <el-row class="header_upload_div">
+                            <el-col :span="10" :offset="7">
+                                <el-form-item label="头像：" prop="touxiang" class="fs14 head_div cf">
+                                    <!-- 头像上传裁剪---------------------- -->
+                                    <div class="headerBox">
+                                        <img :src="imageUrl" alt="头像" class="headerImg" @click="crop_Header_Img">
                                     </div>
-                                    <div v-else key="2">1@12.com( <span class="coreds">未绑定</span>)</div>
-                                </el-col>
-                                <!--如果ruleForm.email不为空显示修改绑定按钮，反之显示绑定按钮-->
-                                <el-col :span="5" >
-                                    <el-button
-                                            class="mr10 ml10"
-                                            v-if="ruleForm.email != ''"
-                                            @click='modify_binding'
-                                            size="small"
-                                            key="1">
-                                        <i class="icon iconfont  mr5 "></i>修改绑定
+                                    <!-- -------------------------------- -->
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
+                                <el-form-item label="姓名：" prop="name">
+                                    <el-input v-model="ruleForm.name" size="medium"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
+                                <el-form-item label="性别：" prop="resource">
+                                    <el-radio-group v-model="ruleForm.resource">
+                                        <el-radio label="男"></el-radio>
+                                        <el-radio label="女"></el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
+                                <el-form-item label="绑定邮箱：" prop="email">
+                                    <!--若邮箱未绑定，则显示1@1.com,否则显示ruleForm.email-->
+                                    <el-col :span="19">
+                                        <div v-if="ruleForm.email != ''" key="1">
+                                            {{ruleForm.email}}
+                                            (<span class="co5da">已绑定</span>)
+                                        </div>
+                                        <div v-else key="2">1@12.com( <span class="coreds">未绑定</span>)</div>
+                                    </el-col>
+                                    <!--如果ruleForm.email不为空显示修改绑定按钮，反之显示绑定按钮-->
+                                    <el-col :span="5">
+                                        <el-button
+                                                class="mr10 ml10"
+                                                v-if="ruleForm.email != ''"
+                                                @click='modify_binding'
+                                                size="small"
+                                                key="1">
+                                            <i class="icon iconfont  mr5 "></i>修改绑定
+                                        </el-button>
+                                        <el-button
+                                                size="small"
+                                                class="mr10 ml10 "
+                                                v-else
+                                                @click='binding'
+                                                key="2">
+                                            <i class="icon iconfont  mr5"></i>绑定
+                                        </el-button>
+                                    </el-col>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
+                                <el-form-item label="绑定手机号：" prop="componyTel">
+                                    <el-row>
+                                        <el-col :span="19">
+                                            <div v-if="ruleForm.componyTel != ''" key="1">
+                                                {{ruleForm.componyTel}}
+                                                (<span class="co5da">已绑定</span>)
+                                            </div>
+                                            <div v-else key="2">15501013754 （<span class="coreds">未绑定</span>）</div>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-button
+                                                    class="mr10 ml10 "
+                                                    size="small"
+                                                    v-if="ruleForm.componyTel != ''"
+                                                    @click="phoneModifyBinding"
+                                                    key="1">
+                                                <i class="icon iconfont  mr5"></i>修改绑定
+                                            </el-button>
+                                            <el-button
+                                                    class="mr10 ml10 "
+                                                    v-else
+                                                    @click='phoneBinding'
+                                                    size="small"
+                                                    key="2">
+                                                <i class="icon iconfont  mr5"></i>绑定
+                                            </el-button>
+                                        </el-col>
+                                    </el-row>
+                                    <!--绑定微信公众号-->
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm('ruleForm')" size="medium"
+                                               class="btnBg" :loading="mydataloading">
+                                        保存
                                     </el-button>
-                                    <el-button
-                                            size="small"
-                                            class="mr10 ml10 "
-                                            v-else
-                                            @click='binding'
-                                            key="2">
-                                        <i class="icon iconfont  mr5"></i>绑定
-                                    </el-button>
-                                </el-col>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                            <el-row>
-                                <el-col :span="10" :offset="7">
-                                    <el-form-item label="绑定手机号：" prop="componyTel">
-                                        <el-row>
-                                            <el-col :span="19">
-                                                <div v-if="ruleForm.componyTel != ''" key="1">
-                                                    {{ruleForm.componyTel}}
-                                                    (<span class="co5da">已绑定</span>)
-                                                </div>
-                                                <div v-else key="2">15501013754 （<span class="coreds">未绑定</span>）</div>
-                                            </el-col>
-                                            <el-col :span="5" >
-                                                <el-button
-                                                        class="mr10 ml10 "
-                                                        size="small"
-                                                        v-if="ruleForm.componyTel != ''"
-                                                        @click="phoneModifyBinding"
-                                                        key="1">
-                                                    <i class="icon iconfont  mr5"></i>修改绑定
-                                                </el-button>
-                                                <el-button
-                                                        class="mr10 ml10 "
-                                                        v-else
-                                                        @click='phoneBinding'
-                                                        size="small"
-                                                        key="2">
-                                                    <i class="icon iconfont  mr5"></i>绑定
-                                                </el-button>
-                                            </el-col>
-                                        </el-row>
-                                        <!--绑定微信公众号-->
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                    <el-row>
-                        <el-col :span="10" :offset="7">
-                            <el-form-item >
-                                <el-button type="primary" @click="submitForm('ruleForm')" size="medium" class="btnBg" :loading="mydataloading">
-                                    保存
-                                </el-button>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                 </el-form>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-form>
+                </div>
             </div>
-        </div>
-        <!--邮箱绑定弹框-->
-        <el-dialog
-                title="邮箱绑定"
-                :visible.sync="dialogVisible"
-                width="666px">
+            <!--邮箱绑定弹框-->
+            <el-dialog
+                    title="邮箱绑定"
+                    :visible.sync="dialogVisible"
+                    width="666px">
         <span>
           <el-form
                   :label-position="labelPosition"
@@ -137,16 +139,17 @@
                         <el-input size="medium" v-model="AddressruleForm.adress" clearable></el-input>
                </el-form-item>
                <el-form-item>
-                    <el-button  v-if="AddressruleForm.isSend" @click="handleSend" size="small" key="1" >
-                        <i class=" icon iconfont  " ></i>
+                    <el-button v-if="AddressruleForm.isSend" @click="handleSend" size="small" key="1">
+                        <i class=" icon iconfont  "></i>
                         发送验证码</el-button>
-                   <el-button size="medium" v-else :disabled="true"  key="2">
+                   <el-button size="medium" v-else :disabled="true" key="2">
                          <i class=" icon iconfont  mr5"></i>
                          重新发送({{AddressruleForm.sendTime}})
                    </el-button>
                </el-form-item>
               <el-form-item label="邮箱验证码：" prop="email_code">
-                <el-input v-model="AddressruleForm.emailCode" size="medium" placeholder="请填入收到的验证码" clearable></el-input>
+                <el-input v-model="AddressruleForm.emailCode" size="medium" placeholder="请填入收到的验证码"
+                          clearable></el-input>
               </el-form-item>
               <!--绑定邮箱-->
                  <el-form-item style="text-align: center;margin-left: -62px;">
@@ -156,18 +159,18 @@
                               @click="bingdingEmail('AddressruleForm')"
                               :loading="myemailloading"
                               :disabled="AddressruleForm.isSend||AddressruleForm.emailCode=== ''">
-                          <i  class="icon iconfont  mr5"></i>
+                          <i class="icon iconfont  mr5"></i>
                           绑定邮箱
                       </el-button>
                  </el-form-item>
           </el-form>
         </span>
-        </el-dialog>
-        <!--手机号绑定弹框-->
-        <el-dialog
-                title="手机绑定"
-                :visible.sync="phoneBindingDialog"
-                width="666px">
+            </el-dialog>
+            <!--手机号绑定弹框-->
+            <el-dialog
+                    title="手机绑定"
+                    :visible.sync="phoneBindingDialog"
+                    width="666px">
             <span class="fs12 co33">
             <el-form
                     :label-position="labelPosition"
@@ -212,7 +215,8 @@
                         </el-button>
                      </el-form-item>
                       <el-form-item label="手机验证码：">
-                          <el-input v-model="dynamicValidateFormTel.telCode" size="medium" placeholder="请输入收到的验证码" clearable></el-input>
+                          <el-input v-model="dynamicValidateFormTel.telCode" size="medium" placeholder="请输入收到的验证码"
+                                    clearable></el-input>
                       </el-form-item>
                       <el-form-item style="text-align: center;margin-left: -62px;">
                            <el-button
@@ -227,48 +231,51 @@
                       </el-form-item>
               </el-form>
             </span>
-        </el-dialog>
-        <!-- 裁剪dialog------------------------------  -->
-        <el-dialog
-                :visible.sync="centerDialogVisible"
-                width="700px"
-                @close="close"
-                center>
-            <div class="cropBox">
-                <div class="img-container" style="width:85%;float:left;">
-                    <img id="image" alt="Picture" class="cropper-hidden" style="display: none !important;">
+            </el-dialog>
+            <!-- 裁剪dialog------------------------------  -->
+            <el-dialog
+                    :visible.sync="centerDialogVisible"
+                    width="700px"
+                    @close="close"
+                    center>
+                <div class="cropBox">
+                    <div class="img-container" style="width:85%;float:left;">
+                        <img id="image" alt="Picture" class="cropper-hidden" style="display: none !important;">
+                    </div>
+                    <div id="preview_box" class="docs-preview clearfix" style="float:left;margin-left:15px;">
+                        <div class="img-preview" style="width:82px;height:82px;"></div>
+                    </div>
                 </div>
-                <div id="preview_box" class="docs-preview clearfix" style="float:left;margin-left:15px;">
-                    <div class="img-preview" style="width:82px;height:82px;"></div>
-                </div>
-            </div>
-            <div style="clear:both;"></div>
-            <div style="padding-top:15px;">
-                <el-upload
-                        class="upload-demo"
-                        ref="cropper_upload"
-                        action="/upload"
-                        :on-change="onChangeFile"
-                        :auto-upload="false"
-                        id="upImage"
-                        style="float:left;"
-                >
-                    <el-button slot="trigger" size="small" >选择图片</el-button>
-                    <el-button style="margin-left: 10px;" size="small" id="up" @click="submitUpload('cropper_upload','upImage')">上传图片</el-button>
-                    <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                </el-upload>
-                <el-button type="primary" @click="Confirm" style="float:right;" size="small">确认裁剪使用</el-button>
                 <div style="clear:both;"></div>
-            </div>
-        </el-dialog>
-        <!-- ----------------------------------------------------- -->
+                <div style="padding-top:15px;">
+                    <el-upload
+                            class="upload-demo"
+                            ref="cropper_upload"
+                            action="/upload"
+                            :on-change="onChangeFile"
+                            :auto-upload="false"
+                            id="upImage"
+                            style="float:left;"
+                    >
+                        <el-button slot="trigger" size="small">选择图片</el-button>
+                        <el-button style="margin-left: 10px;" size="small" id="up"
+                                   @click="submitUpload('cropper_upload','upImage')">上传图片
+                        </el-button>
+                        <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+                    </el-upload>
+                    <el-button type="primary" @click="Confirm" style="float:right;" size="small">确认裁剪使用</el-button>
+                    <div style="clear:both;"></div>
+                </div>
+            </el-dialog>
+            <!-- ----------------------------------------------------- -->
+        </div>
     </div>
 </template>
 
 <script>
     import txph from '../../assets/img/txph.png'
     //头像裁剪坐标变量保存---------
-    var dataOptions="";
+    var dataOptions = "";
     export default {
         name: 'personal_user_logo',
         props: {},
@@ -325,9 +332,9 @@
                     ]
                 },
                 // 头像裁剪数据绑定 -----------------
-                centerDialogVisible:false,
+                centerDialogVisible: false,
                 // beforeCropImgUrl:'',
-                afterCropImgUrl:'',
+                afterCropImgUrl: '',
                 // ---------------------------------
             };
         },
@@ -357,7 +364,7 @@
             });
         },
         methods: {
-             // 提交的时候存到localstorage
+            // 提交的时候存到localstorage
             submitForm(formName) {
                 console.log(this.$data.ruleForm);
                 this.$refs[formName].validate((valid) => {
@@ -529,10 +536,10 @@
                 this.phoneBindingDialog = true;
             },
             // 头像裁剪上传操作-----------------------------
-            crop_Header_Img(){
-                this.centerDialogVisible=true;
+            crop_Header_Img() {
+                this.centerDialogVisible = true;
             },
-            submitUpload(uploadImg,id_num) {
+            submitUpload(uploadImg, id_num) {
                 $("#image").cropper('destroy');
                 $("#image").hide();
                 var options = {
@@ -562,13 +569,13 @@
                     },
                 })
             },
-            Confirm(){
-               console.log('0')
+            Confirm() {
+                console.log('0')
                 // console.log(dataOptions)
                 this.$axios.post('/api/comfirm_crop').then(res => {
                     if (res.status == 200) {
-                //     console.log(res.data);
-                //     if(res.status == '200'){
+                        //     console.log(res.data);
+                        //     if(res.status == '200'){
                         this.centerDialogVisible = !true;
                         $("#image").cropper('destroy');
                         $("#image").hide();
@@ -576,7 +583,7 @@
                     }
                 })
             },
-            close(){
+            close() {
                 $("#image").cropper('destroy');
                 $("#image").hide();
             }
@@ -584,80 +591,88 @@
     }
 </script>
 <style lang="scss">
-    .personal_user_logo {
-        background-color: #ededed;
-        padding: 15px 20px 15px 20px;
-        .main {
-            background: white;
-            border-radius: 5px;
-            .user_logo_con {
-                padding: 15px;
-                .demo-ruleForm{
-                    .header_upload_div{
-                        .head_div{
-                            .headerBox{
-                                width: 82px;
-                                height: 82px;
-                                border: 1px dashed #d9d9d9;
-                                -webkit-border-radius: 6px;
-                                -moz-border-radius: 6px;
-                                -ms-border-radius: 6px;
-                                -o-border-radius: 6px;
-                                border-radius: 6px;
-                                text-align: center;
-                                cursor: pointer;
-                                .headerImg{
-                                    width: 80px;
-                                    height: 80px;
-                                    vertical-align: middle;
-                                }
+    .personal_user_warp {
+        overflow: hidden;
+        padding-top: 15px;
+        background: #ededed;
+        .personal_user_logo {
+            background-color: #ededed;
+            padding: 0px 0% 15px 0%;
+            width: 98%;
+            float: left;
+            margin-left: 1%;
+            margin-right: 1%;
+            .main {
+                background: white;
+                border-radius: 5px;
+                .user_logo_con {
+                    padding: 15px;
+                    .demo-ruleForm {
+                        .header_upload_div {
+                            .head_div {
+                                .headerBox {
+                                    width: 82px;
+                                    height: 82px;
+                                    border: 1px dashed #d9d9d9;
+                                    -webkit-border-radius: 6px;
+                                    -moz-border-radius: 6px;
+                                    -ms-border-radius: 6px;
+                                    -o-border-radius: 6px;
+                                    border-radius: 6px;
+                                    text-align: center;
+                                    cursor: pointer;
+                                    .headerImg {
+                                        width: 80px;
+                                        height: 80px;
+                                        vertical-align: middle;
+                                    }
 
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-            .cropBox{
+            .cropBox {
 
+                .img-container,
+                .img-preview {
+                    background-color: #f7f7f7;
+                    text-align: center;
+                    width: 100%;
+                }
 
-            .img-container,
-            .img-preview {
-                background-color: #f7f7f7;
-                text-align: center;
-                width: 100%;
+                .img-container {
+                    margin-bottom: 1rem;
+                    max-height: 500px;
+                    min-height: 325px;
+                }
+
+                .img-container > img {
+                    max-width: 100%;
+                }
+
+                .docs-preview {
+                    margin-right: -1rem;
+                }
+
+                .img-preview {
+                    float: left;
+                    margin-bottom: .5rem;
+                    margin-right: .5rem;
+                    overflow: hidden;
+                    width: 200px;
+                    height: 200px;
+                }
+
+                .img-preview > img {
+                    max-width: 100%;
+                }
+
             }
-
-            .img-container {
-                margin-bottom: 1rem;
-                max-height: 500px;
-                min-height: 325px;
+            .el-upload-list {
+                display: none !important;
             }
-
-            .img-container > img {
-                max-width: 100%;
-            }
-
-            .docs-preview {
-                margin-right: -1rem;
-            }
-
-            .img-preview {
-                float: left;
-                margin-bottom: .5rem;
-                margin-right: .5rem;
-                overflow: hidden;
-                width: 200px;
-                height:200px;
-            }
-
-            .img-preview > img {
-                max-width: 100%;
-            }
-
-        }
-        .el-upload-list {
-            display: none!important;
         }
     }
 </style>

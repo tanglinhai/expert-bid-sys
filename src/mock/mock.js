@@ -161,11 +161,11 @@ let esta = Mock.mock('/api/esta', 'post', {
         }
     ]
 });
-/*----------------------审查项页面数据接口---------------------*/
+// /*----------------------审查项页面数据接口---------------------*/
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
-    // console.log(JSON.parse(options.body));
+    console.log(JSON.parse(options.body));
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 1) {
         let ms = [];
@@ -212,7 +212,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             relativePDF: 'pdf1_1',
                                             pdf: [{
                                                 //增加字段 PDF id
-                                                id: 'pdf1_1', 
+                                                id: 'pdf1_1',
                                                 pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
                                                 {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
                                                 {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
@@ -1052,7 +1052,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 /*----------------------审查项页面数据接口end---------------------*/
 /*---------------------  审查项汇总页面接口------------------*/
 Mock.mock('/api/table_data', 'post', (options) => {
-    // console.log(JSON.parse(options.body));
+    console.log(JSON.parse(options.body));
     let return_val;
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 2) {//是区别那个页面
@@ -2104,6 +2104,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {//type
+    console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
