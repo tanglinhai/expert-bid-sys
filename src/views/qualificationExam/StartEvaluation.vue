@@ -893,11 +893,7 @@
                     }
                 } */
                 .animate{
-                  -webkit-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                  -moz-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                  -o-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                  -ms-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                  transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                  transition: height,width .5s,.5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
                 }
                 .div_pdf {
                     display: none;
