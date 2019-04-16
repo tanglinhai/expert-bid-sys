@@ -193,7 +193,7 @@
 
 <script>
     import ViewUnlockRecord from '../../components/publicVue/ViewUnlockRecord';
-    import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';
+    import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';//资格审查项汇总解锁申请
     import IndividualTrial from '../../components/publicVue/IndividualTrial';
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标

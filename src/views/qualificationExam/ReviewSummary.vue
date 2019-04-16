@@ -45,13 +45,16 @@
                                             v-if="!this.$store.state.failureEnery.is_pingshen_show">
                                         <el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审
                                         </el-button>
-                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')" :loading="myloading"> 提交
+                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')"
+                                                   :loading="myloading"> 提交
                                         </el-button>
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                         </el-button>
                                     </el-col>
                                     <el-col :span="12" class="textAlignR mian_btns" v-else>
-                                        <el-button @click="submited_goback" type="primary" size="small">返回</el-button>
+                                        <el-button @click="submited_goback" type="primary" size="small"
+                                                   :loading="myloading_back">返回
+                                        </el-button>
                                     </el-col>
                                 </el-row>
                                 <el-row>
@@ -121,7 +124,7 @@
                         </ul>
                     </div>
                     <div class="textAlignC pt20">
-                        <el-button size="small" @click="save" type="primary"><i
+                        <el-button size="small" @click="save" type="primary" :loading="myloading_sort"><i
                                 class="icon iconfont icon-baocun1 mr5"></i>保存
                         </el-button>
                         <el-button size="small" @click="reback" type="primary"><i
@@ -183,7 +186,8 @@
                         </template>
                     </div>
                     <div class="textAlignC pt20">
-                        <el-button size="small" @click="bidEvaluation_submit" type="primary"><i
+                        <el-button size="small" @click="bidEvaluation_submit" type="primary"
+                                   :loading="bidEvaluation_submit_loading"><i
                                 class="icon iconfont icon-baocun1 mr5"></i>提交
                         </el-button>
                         <el-button size="small" @click="bidEvaluation_reback" type="primary"><i
@@ -288,11 +292,15 @@
                 tableDataTwo: [],
                 bzzxLoading: true, //标中质询loading
                 is_disabled: false,
-                myloading:false,//评审汇总提交loading
+                myloading: false,//评审汇总提交loading
+                myloading_back: false,//返回评审汇总loading
+                myloading_sort: false,// 排序提交返回loading
+                bidEvaluation_submit_loading: false,//报价计算提交loading
             }
         },
         created() {
             this.$route.query.type
+            console.log(this.$route.query.type);
         },
         mounted() {
             this.init();
@@ -304,7 +312,6 @@
                 this.$axios.post('/api/pingshen_huizong', {type: this.$route.query.type})
                     .then(res => {
                         if (res.status === 200) {
-                            console.log(res.data);
                             this.name = res.data.bidMsg.name;
                             this.baohao = res.data.bidMsg.baohao;
                             this.biaoNum = res.data.bidMsg.biaoNum;
@@ -347,7 +354,6 @@
             },
             /*------------------------评审汇总-----------------*/
             submit_btn(formName) {//提交
-
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.myloading = true;
@@ -356,24 +362,21 @@
                             data: this.ruleForm.desc
                         }).then(res => {
                             if (res.status == 200) {
-
                                 this.options = res.data.vue_type;
                                 this.msg_data.forEach((m, i) => {
                                     if (m.radio == 1) {
                                         this.a.push(m.radio)
                                     }
                                 });
-
                                 if (this.a.length != 0) {
                                     // alert('有效选中');
-
                                     this.$message({
                                         message: '提交成功！',
                                         type: 'success'
                                     });
                                     this.$store.state.failureEnery.is_pingshen_show = true;
                                     this.is_disabled = true;
-                                    this.mydataloading = false;
+                                    // this.mydataloading = false;
                                 } else {
                                     this.$store.state.failureEnery.success_warning = true;
                                 }
@@ -386,8 +389,10 @@
                 });
             },
             submited_goback() {//掉接口
+                this.myloading_back = true;
                 this.$axios.post('/api/pingshenhuizong_fanhui', {}).then(res => {
                     if (res.status == 200) {
+                        this.myloading_back = false;
                         this.$store.state.failureEnery.is_pingshen_show = false;
                         this.is_disabled = false;
                     }
@@ -429,11 +434,13 @@
                 }//如果是向上排序，最后一个就不能向上了
             },
             save() {//排序保存
+                this.myloading_sort = true;
                 this.$axios.post('/api/sort_tijaio', 'post', {
                     data: this.msg_box
                     // id:id
                 }).then(res => {
                     if (res.status == 200) {
+                        this.myloading_sort = false;
                         this.$message({
                             message: '保存成功',
                             type: 'success'
@@ -461,10 +468,12 @@
                 });
             },
             bidEvaluation_submit() {// 报价计算弹框提交
+                this.bidEvaluation_submit_loading = true;
                 this.$axios.post('/api/radio_is_valid_tijiao', {
                     data: this.msg_data
                 }).then(res => {
                     if (res.status == 200) {
+                        this.bidEvaluation_submit_loading = false;
                         this.$message({
                             message: '最新报价保存完成！',
                             type: 'success'
@@ -479,6 +488,7 @@
             /*-------------报价计算end----------------*/
             confirm_btn() {
                 this.$store.state.failureEnery.success_warning = false;
+                this.myloading = false;
             }
         }
     }

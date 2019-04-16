@@ -29,7 +29,7 @@
                 ruleForm: {
                     type: [],
                     desc: '',
-                    mydataloading: false,  //保存按钮loading
+
                 },
                 rules: {
                     type: [
@@ -38,7 +38,8 @@
                     desc: [
                         { required: true, message: '请填写申请原因', trigger: 'blur' }
                     ]
-                }
+                },
+                mydataloading:false
             }
         },
         created() {
@@ -50,14 +51,12 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        // console.log( this.$data.ruleForm);
                         this.mydataloading = true;
                         this.$axios.post('/api/save_apply_unlock', 'post', {
                             data: JSON.stringify(this.$data.ruleForm)
                         }).then(res => {
                             if (res.data.code == 200) {
-                                // console.log(res.data);
-                                this.mydataloading = false;
+                                this.mydataloading=false;
                                 this.$message({
                                     type: 'success',
                                     message: '保存成功',

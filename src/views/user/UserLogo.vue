@@ -339,6 +339,7 @@
             };
         },
         mounted() {
+            $(".CommonProject").hide();
             this.$axios.post('/api/isbindingEmailPhone').then(res => {
                 if (res.status == 200) {
                     console.log(res.data);

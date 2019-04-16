@@ -76,6 +76,7 @@
         mounted() {
             this.childMsg();
             $(".NavCommon").hide();
+            $(".CommonProject").hide();
         },
         methods: {
             // 初始子组件数据获取

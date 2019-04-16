@@ -165,7 +165,7 @@ let esta = Mock.mock('/api/esta', 'post', {
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
-    console.log(JSON.parse(options.body));
+       console.log(JSON.parse(options.body));
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 1) {
         let ms = [];
@@ -1052,7 +1052,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
 /*----------------------审查项页面数据接口end---------------------*/
 /*---------------------  审查项汇总页面接口------------------*/
 Mock.mock('/api/table_data', 'post', (options) => {
-    console.log(JSON.parse(options.body));
+    // console.log(JSON.parse(options.body));
     let return_val;
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 2) {//是区别那个页面
@@ -2104,7 +2104,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {//type
-    console.log(type, is_submit_type);
+    // console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2125,10 +2125,11 @@ function get_data(type,is_submit_type) {//type
             return [1, 1, 1, 1, 1, is_submit_type?1:2, 4,4, 4, 4, 4, 4,]
         }
         if (type == 6) {//详细汇总
-            return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,4, 4, 4, 4, 4,]
+            // return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,4, 4, 4, 4, 4,]//之前的
+            return [1, 1, 1, 1, 1, 1 , is_submit_type?1:2,3,3,3,3,3]
         }
         if (type == 7) {//定档
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?2:1,3,3,3,3]
         }
         if (type == 8) {//商务
             return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
@@ -2410,11 +2411,11 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 
   /*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
-    console.log(JSON.parse(options.body));
+    // console.log(JSON.parse(options.body));
     let return_val;
     var submit_type= Random.integer(0, 1);
     let get_type_num=JSON.parse(options.body).type;
-    console.log(get_type_num,'222');
+    // console.log(get_type_num,'222');
     if (get_type_num == 7) {
         return_val= {
             'bidMsg': {
@@ -2427,7 +2428,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'zhaunjia': '张三',
-                     companyName: ["重庆网控科技发展有限公司 ", "普瑞太阳能有限公司", "夏丰热工研究院有限公司",],
+                     companyName: ["重庆网控科技发展有限公司（1） ", "普瑞太阳能有限公司（2）", "夏丰热工研究院有限公司（3）",],
                         dingdang_tableData: [{
                             date: '2016-05-02',
                             name: '王小虎',

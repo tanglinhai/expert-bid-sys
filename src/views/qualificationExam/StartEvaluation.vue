@@ -89,11 +89,15 @@
                                                     </el-col>
                                                 </el-row>
                                             </el-col>
-                                            <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
-                                                <el-button @click="allChecked" plain size="mini" type="primary" :loading="allCheckedBtnLoading"><i
-                                                        class="icon iconfont icon-ic_qualified  mr3"  ></i>全部合格
+                                            <el-row :span="10" style="padding:0; float:right;"
+                                                    :class=" $store.state.failureEnery.flag==false ?'hide_div':'nohide_div'"
+                                                    id="hide_btn">
+                                                <el-button @click="allChecked" plain size="mini" type="primary"
+                                                           :loading="allCheckedBtnLoading"><i
+                                                        class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                 </el-button>
-                                                <el-button size="mini" type="primary" @click="allSubmit" :loading="allSubmitBtnLoading"><i
+                                                <el-button size="mini" type="primary" @click="allSubmit"
+                                                           :loading="allSubmitBtnLoading"><i
                                                         class="icon iconfont icon-tijiao  mr3"></i>全部提交
                                                 </el-button>
                                             </el-row>
@@ -112,13 +116,15 @@
                                                         </el-col>
                                                     </el-row>
                                                 </el-col>
-                                                <el-row :span="10" style="padding:0; float:right;" class="hide_btn">
+                                                <el-row :span="10" style="padding:0; float:right;" id="hide_btn"
+                                                        :class=" $store.state.failureEnery.flag==false ?'hide_div':'nohide_div'">
                                                     <el-button @click="sublevelAllChecked" plain size="mini"
                                                                type="primary" :loading="sonAllCheckedBtnLoading">
                                                         <i
                                                                 class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                     </el-button>
-                                                    <el-button size="mini" type="primary" @click="sublevelSubmit" :loading="sonAllSubmitBtnLoading"><i
+                                                    <el-button size="mini" type="primary" @click="sublevelSubmit"
+                                                               :loading="sonAllSubmitBtnLoading"><i
                                                             class="icon iconfont icon-tijiao  mr3"></i>提交
                                                     </el-button>
                                                 </el-row>
@@ -186,19 +192,19 @@
                                                             prop="pass"
                                                             label="是否合格" width="200">
                                                         <template slot-scope="scope">
-                                                <span style="margin-left: 10px" class="radios"
-                                                      v-if="$store.state.failureEnery.flag">
-                                                  <el-radio-group
-                                                          @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
-                                                          ref="shet" v-model="scope.row.radio">
-                                                    <el-radio :label="scope.row.ra1">合格</el-radio>
-                                                    <el-radio :label="scope.row.ra2">不合格</el-radio>
-                                                  </el-radio-group>
-                                                    </span>
-                                                                <span style="margin-left: 10px;color:red;" v-else>
-                                                         <span v-if="scope.row.radio == '合格'">合格</span>
-                                                         <span v-else>不合格</span>
-                                                     </span>
+                                                            <span style="margin-left: 10px" class="radios"
+                                                                  v-if="$store.state.failureEnery.flag">
+                                                              <el-radio-group
+                                                                      @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
+                                                                      ref="shet" v-model="scope.row.radio">
+                                                                <el-radio :label="scope.row.ra1">合格</el-radio>
+                                                                <el-radio :label="scope.row.ra2">不合格</el-radio>
+                                                              </el-radio-group>
+                                                            </span>
+                                                            <span style="margin-left: 10px;color:red;" v-else>
+                                                                 <span v-if="scope.row.radio == '合格'">合格</span>
+                                                                 <span v-else>不合格</span>
+                                                             </span>
                                                         </template>
                                                     </el-table-column>
                                                     <el-table-column
@@ -378,10 +384,10 @@
                 currPdfUrl: '',//当前点击pdf的url
                 slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
-                allCheckedBtnLoading:false,//父级全选按钮loadding
-                allSubmitBtnLoading:false,//父级提交按钮loadding
-                sonAllSubmitBtnLoading:false,//子级提交按钮loadding
-                sonAllCheckedBtnLoading:false,//父级提交按钮loadding
+                allCheckedBtnLoading: false,//父级全选按钮loadding
+                allSubmitBtnLoading: false,//父级提交按钮loadding
+                sonAllSubmitBtnLoading: false,//子级提交按钮loadding
+                sonAllCheckedBtnLoading: false,//父级提交按钮loadding
             }
         },
         created() {
@@ -466,7 +472,7 @@
                             this.$store.state.failureEnery.flag = true;//未提交
                         } else {
                             this.$store.state.failureEnery.flag = false;//已提交
-                            $(".hide_btn").hide();
+                            $("#hide_btn").hide();
                         }
                         this.zNodes.children.forEach((m, i) => {
                             this.tableArr.push(m.fristTableData.tableData);
@@ -510,21 +516,21 @@
                 this.$store.state.failureEnery.show = false;
             },
             allChecked() {//全选（不用区分url）
-                this.allCheckedBtnLoading=true;
+                this.allCheckedBtnLoading = true;
                 this.$axios.post('/api/allChecked_fhx', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
-                        for (var i = 0; i < this.radioArr.length; i++) {
+                        for (let i = 0; i < this.radioArr.length; i++) {
                             this.radioArr[i].radio = '合格';
                         }
-                        this.allCheckedBtnLoading=false;
+                        this.allCheckedBtnLoading = false;
                     }
                 });
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 let isAllF = true;
-                for (var i = 0; i < this.radioArr.length; i++) {
+                for (let i = 0; i < this.radioArr.length; i++) {
                     if (!this.radioArr[i].radio) {
                         isAllF = false;
                         break;
@@ -533,7 +539,7 @@
                 return isAllF;
             },
             allSubmit() {//父级提交
-                this.allSubmitBtnLoading=true;
+                this.allSubmitBtnLoading = true;
                 let url;
                 if (this.isAllFilled()) {
                     if (this.type_btn == 3) {
@@ -546,23 +552,10 @@
                     }
                     this.$axios.post(url, {type: parseInt(this.type_btn) + 1}).then(res => {
                         if (res.status == 200) {
-                            this.allSubmitBtnLoading=false;
+                            this.allSubmitBtnLoading = false;
                             this.options = res.data.vue_type;
                             this.$store.state.failureEnery.submitPrompt = true;
-                            $(".hide_btn").hide();
-                        } else {
-                            this.$message({
-                                message: '请选择合格/不合格',
-                                center: true,
-                                type: 'error',
-                            });
                         }
-                    }).catch(() => {
-                        this.$message({
-                            message: '请选择合格/不合格',
-                            center: true,
-                            type: 'error',
-                        });
                     })
                 } else {
                     this.$message({
@@ -597,12 +590,20 @@
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
+                console.log(this.$store.state.failureEnery.flag);
+
+                // if(this.$store.state.failureEnery.flag===false){
+
+                // this.$nextTick(function(){
+                //     $('#hide_btn').hide();
+                // })
                 if (treeNode.children) {
                     this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
                     });
                     this.$store.state.failureEnery.start_sublevel_show = false;
                     this.$store.state.failureEnery.parent_progress_show = true;
+
                 } else {
                     this.son_all_checked = treeNode.fristTableData.tableData;
                     this.zNodes.children.forEach((m, i) => {
@@ -617,6 +618,9 @@
                 }
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
+
+                // }
+
             },
             dblClickExpand(treeId, treeNode) {
                 return treeNode.level > 0;
@@ -729,12 +733,12 @@
                 this.showPDF();
             },
             sublevelAllChecked() {
-                this.sonAllCheckedBtnLoading=true;
+                this.sonAllCheckedBtnLoading = true;
                 this.$axios.post('/api/allChecked_son', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
-                            this.son_all_checked.forEach((s, f) => {
+                        this.son_all_checked.forEach((s, f) => {
                             this.radioArr.forEach((h, j) => {
                                 if (s.id == h.id) {
                                     this.son_all_che.push(h);
@@ -742,7 +746,7 @@
                                 }
                             })
                         });
-                        this.sonAllCheckedBtnLoading=false;
+                        this.sonAllCheckedBtnLoading = false;
                     }
                 });
             },
@@ -757,11 +761,11 @@
                 return isAllF;
             },
             sublevelSubmit() {//子级全部提交
-                this.sonAllSubmitBtnLoading=true;
+                this.sonAllSubmitBtnLoading = true;
                 if (this.son_isAllFilled()) {
                     this.$axios.post('/api/son_allchecked_submit', {}).then(res => {
                         if (res.status == 200) {
-                            this.sonAllSubmitBtnLoading=false;
+                            this.sonAllSubmitBtnLoading = false;
                             this.$store.state.failureEnery.submitPrompt = true;
                         } else {
                             this.$message({
@@ -881,6 +885,15 @@
             margin-left: 7px;
         }
     }
+
+    .hide_div {
+        display: none;
+    }
+
+    .nohide_div {
+        display: block;
+    }
+
     .el-progress__text {
         font-size: 14px;
         color: #606266;
@@ -889,359 +902,360 @@
         margin-left: 5px;
         line-height: 1;
     }
+
     .pingbiao_warp {
         overflow: hidden;
         padding-top: 15px;
         background: #ededed;
-    .complianceReviewItem {
-        background-color: #ededed;
-        padding: 0px 0% 15px 0%;
-        width: 98%;
-        float: left;
-        margin-left: 1%;
-        margin-right: 1%;
-        .bid_msg {
-            line-height: 32px;
-            .select {
-                .el-dropdown {
-                    vertical-align: top;
-                }
-                .el-dropdown + .el-dropdown {
-                    margin-left: 15px;
-                }
-                .el-icon-arrow-down {
-                    font-size: 12px;
+        .complianceReviewItem {
+            background-color: #ededed;
+            padding: 0px 0% 15px 0%;
+            width: 98%;
+            float: left;
+            margin-left: 1%;
+            margin-right: 1%;
+            .bid_msg {
+                line-height: 32px;
+                .select {
+                    .el-dropdown {
+                        vertical-align: top;
+                    }
+                    .el-dropdown + .el-dropdown {
+                        margin-left: 15px;
+                    }
+                    .el-icon-arrow-down {
+                        font-size: 12px;
+                    }
                 }
             }
-        }
-        .mainContentWarp {
-            position: relative;
-            background: white;
-            border-radius: 5px;
-            /* .enterFullMode{
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                z-index: 1;
-                .iconfont{
-                    font-size: 13px !important;
-                    padding-right: 2px;
-                }
-            } */
-            .content {
-                /* .exitFullMode{
-                    display: none;
+            .mainContentWarp {
+                position: relative;
+                background: white;
+                border-radius: 5px;
+                /* .enterFullMode{
+                    display: block;
                     position: absolute;
-                    top: 20px;
-                    left: 20px;
-                    z-index: 2;
+                    top: 15px;
+                    right: 15px;
+                    z-index: 1;
                     .iconfont{
                         font-size: 13px !important;
                         padding-right: 2px;
                     }
                 } */
-                .animate {
-                    -webkit-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                    -moz-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                    -o-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                    -ms-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                    transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                }
-                .div_pdf {
-                    display: none;
-                    position: relative;
-                    border: 1px solid #c3c3c3;
-                    /* .closePDF{
+                .content {
+                    /* .exitFullMode{
                         display: none;
-                        background-color: #fff;
                         position: absolute;
-                        top: -15px;
-                        right: 0;
-                        width: 30px;
-                        height: 30px;
-                        font-size: 30px;
-                        border-radius: 30px;
-                        color: #606266;
-                        cursor: pointer;
-                        z-index: 2001;
-                        &:hover{
-                            color: #e27575;
+                        top: 20px;
+                        left: 20px;
+                        z-index: 2;
+                        .iconfont{
+                            font-size: 13px !important;
+                            padding-right: 2px;
                         }
                     } */
-                    .my-pdf {
-                        .pdfShow {
-                            position: relative;
-                            min-height: 200px;
-                            .pdfobject {
-                                display: block;
-                            }
-                            .floating_div {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                z-index: 1;
-                            }
-                        }
+                    .animate {
+                        -webkit-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        -moz-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        -o-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        -ms-transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        transition: all .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
                     }
-                }
-                .center_part_wrap {
-                    .slideBar {
-                        position: relative;
+                    .div_pdf {
                         display: none;
-                        height: 15px;
-                        line-height: 15px;
-                        margin-top: 15px;
-                        border: 1px solid #37cac1;
-                        color: #37cac1;
-                        text-align: center;
-                        cursor: n-resize;
-                        transition: background-color, color .5s, .5s;
-                        background-color: #fff;
-                        z-index: 1;
-                        .iconfont {
-                            font-size: 14px;
-                        }
-                        &:hover {
-                            background-color: #37cac1;
-                            color: #fff;
-                        }
-                    ;
-                    }
-                    .center_part {
-                        height: 100%;
-                        box-sizing: border-box;
-                        overflow: hidden;
-                        .center_con_wrap {
-                            height: 100%;
-                            overflow-y: auto;
-                            .center_con {
-                                padding: 15px;
-                                min-width: 850px !important;
-                                .left_examine {
-                                    background: #e4e9ec;
-                                    border-radius: 10px;
-                                    height: 820px;
-                                    /*width:170px;*/
-                                    .div_header {
-                                        border-bottom: 1px solid #bfc8cd;
-                                    }
-                                    #treeDemo {
-                                        li {
-
-                                            .node_name {
-                                                width: 102px;
-                                                overflow: hidden;
-                                                float: right;
-                                                text-overflow: ellipsis;
-                                                white-space: nowrap;
-                                            }
-                                        }
-                                    }
+                        position: relative;
+                        border: 1px solid #c3c3c3;
+                        /* .closePDF{
+                            display: none;
+                            background-color: #fff;
+                            position: absolute;
+                            top: -15px;
+                            right: 0;
+                            width: 30px;
+                            height: 30px;
+                            font-size: 30px;
+                            border-radius: 30px;
+                            color: #606266;
+                            cursor: pointer;
+                            z-index: 2001;
+                            &:hover{
+                                color: #e27575;
+                            }
+                        } */
+                        .my-pdf {
+                            .pdfShow {
+                                position: relative;
+                                min-height: 200px;
+                                .pdfobject {
+                                    display: block;
                                 }
-                                .right_warp {
-                                    padding-left: 15px;
-                                    border-radius: 5px;
+                                .floating_div {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    z-index: 1;
+                                }
+                            }
+                        }
+                    }
+                    .center_part_wrap {
+                        .slideBar {
+                            position: relative;
+                            display: none;
+                            height: 15px;
+                            line-height: 15px;
+                            margin-top: 15px;
+                            border: 1px solid #37cac1;
+                            color: #37cac1;
+                            text-align: center;
+                            cursor: n-resize;
+                            transition: background-color, color .5s, .5s;
+                            background-color: #fff;
+                            z-index: 1;
+                            .iconfont {
+                                font-size: 14px;
+                            }
+                            &:hover {
+                                background-color: #37cac1;
+                                color: #fff;
+                            }
+                        ;
+                        }
+                        .center_part {
+                            height: 100%;
+                            box-sizing: border-box;
+                            overflow: hidden;
+                            .center_con_wrap {
+                                height: 100%;
+                                overflow-y: auto;
+                                .center_con {
+                                    padding: 15px;
+                                    min-width: 850px !important;
+                                    .left_examine {
+                                        background: #e4e9ec;
+                                        border-radius: 10px;
+                                        height: 820px;
+                                        /*width:170px;*/
+                                        .div_header {
+                                            border-bottom: 1px solid #bfc8cd;
+                                        }
+                                        #treeDemo {
+                                            li {
 
-                                    .el-progress__text {
-                                        color: red;
-                                    }
-                                    .el-progress-bar__outer {
-                                        background-color: #ededed;
-                                        height: 14px !important;
-                                    }
-                                    .title_msg {
-                                        .commonTitle {
-                                            font-size: 15px !important;
-                                            margin-top: 20px;
-                                        }
-                                        .commonTitle:before {
-                                            margin-top: -1px;
-                                            margin-bottom: 20px;
-                                        }
-                                    }
-                                    .first_table {
-                                        .el-dropdown {
-                                            display: inline;
-                                        }
-                                        .el-table__header-wrapper {
-                                            display: none;
-                                        }
-                                        .el-dropdown-link {
-                                            cursor: pointer;
-                                            color: #409EFF;
-                                        }
-                                        .el-icon-arrow-down {
-                                            font-size: 12px;
-                                        }
-                                        div.cell {
-                                            position: relative;
-                                            .btn_locate {
-                                                position: absolute;
-                                                top: 0;
-                                                right: 0;
-                                                width: 30px;
-                                                height: 24px;
-                                                line-height: 24px;
-                                                font-size: 16px;
-                                                margin-right: 10px;
-                                                text-align: center;
-                                                cursor: pointer;
-                                                &:hover {
-                                                    color: rgb(64, 158, 255);
+                                                .node_name {
+                                                    width: 102px;
+                                                    overflow: hidden;
+                                                    float: right;
+                                                    text-overflow: ellipsis;
+                                                    white-space: nowrap;
                                                 }
                                             }
                                         }
-                                        .cell {
-                                            padding-right: 40px;
+                                    }
+                                    .right_warp {
+                                        padding-left: 15px;
+                                        border-radius: 5px;
+
+                                        .el-progress__text {
+                                            color: red;
+                                        }
+                                        .el-progress-bar__outer {
+                                            background-color: #ededed;
+                                            height: 14px !important;
+                                        }
+                                        .title_msg {
+                                            .commonTitle {
+                                                font-size: 15px !important;
+                                                margin-top: 20px;
+                                            }
+                                            .commonTitle:before {
+                                                margin-top: -1px;
+                                                margin-bottom: 20px;
+                                            }
+                                        }
+                                        .first_table {
+                                            .el-dropdown {
+                                                display: inline;
+                                            }
+                                            .el-table__header-wrapper {
+                                                display: none;
+                                            }
+                                            .el-dropdown-link {
+                                                cursor: pointer;
+                                                color: #409EFF;
+                                            }
+                                            .el-icon-arrow-down {
+                                                font-size: 12px;
+                                            }
+                                            div.cell {
+                                                position: relative;
+                                                .btn_locate {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    right: 0;
+                                                    width: 30px;
+                                                    height: 24px;
+                                                    line-height: 24px;
+                                                    font-size: 16px;
+                                                    margin-right: 10px;
+                                                    text-align: center;
+                                                    cursor: pointer;
+                                                    &:hover {
+                                                        color: rgb(64, 158, 255);
+                                                    }
+                                                }
+                                            }
+                                            .cell {
+                                                padding-right: 40px;
+                                            }
                                         }
                                     }
-                                }
-                                .personalAuditFormTable {
-                                    display: none;
-                                    padding-left: 15px;
-                                    border-radius: 5px;
-                                    .FormTableTitle {
-                                        margin-bottom: 10px;
-                                        span {
-                                            margin-right: 20px;
+                                    .personalAuditFormTable {
+                                        display: none;
+                                        padding-left: 15px;
+                                        border-radius: 5px;
+                                        .FormTableTitle {
+                                            margin-bottom: 10px;
+                                            span {
+                                                margin-right: 20px;
+                                            }
                                         }
-                                    }
-                                    .table_tips {
-                                        line-height: 23px;
-                                        color: #606266;
-                                        border-left: 1px solid #ebeef5;
-                                        border-right: 1px solid #ebeef5;
-                                        border-bottom: 1px solid #ebeef5;
-                                        padding-top: 5px;
-                                        padding-bottom: 5px;
+                                        .table_tips {
+                                            line-height: 23px;
+                                            color: #606266;
+                                            border-left: 1px solid #ebeef5;
+                                            border-right: 1px solid #ebeef5;
+                                            border-bottom: 1px solid #ebeef5;
+                                            padding-top: 5px;
+                                            padding-bottom: 5px;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-            .showPDF_content {
-                .center_part_wrap {
-                    .slideBar {
+                .showPDF_content {
+                    .center_part_wrap {
+                        .slideBar {
+                            display: block;
+                        }
+                    }
+                    .div_pdf {
                         display: block;
+                        /* .closePDF{
+                            display: block;
+                        } */
                     }
                 }
-                .div_pdf {
-                    display: block;
-                    /* .closePDF{
+                .presentation_mode_column {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    background: white;
+                    z-index: 2;
+                    .div_pdf {
+                        position: relative;
+                        float: right;
+                        display: block !important;
+                        width: 50%;
+                        height: 100%;
+                        border: 0;
+                        .my-pdf {
+                            height: 100%;
+                            .pdfobject-container {
+                                height: 100%;
+                            }
+                        }
+                    }
+                    /* .exitFullMode{
                         display: block;
                     } */
-                }
-            }
-            .presentation_mode_column {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                background: white;
-                z-index: 2;
-                .div_pdf {
-                    position: relative;
-                    float: right;
-                    display: block !important;
-                    width: 50%;
-                    height: 100%;
-                    border: 0;
-                    .my-pdf {
+                    .center_part_wrap {
+                        position: relative;
+                        float: right;
+                        width: 50%;
                         height: 100%;
-                        .pdfobject-container {
-                            height: 100%;
-                        }
-                    }
-                }
-                /* .exitFullMode{
-                    display: block;
-                } */
-                .center_part_wrap {
-                    position: relative;
-                    float: right;
-                    width: 50%;
-                    height: 100%;
-                    z-index: 999;
-                    .slideBar {
-                        display: block;
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        margin-top: 0;
-                        width: 15px;
-                        height: 100%;
-                        cursor: w-resize;
-                        .iconfont {
+                        z-index: 999;
+                        .slideBar {
+                            display: block;
                             position: absolute;
-                            top: 50%;
-                            margin-top: -7px;
-                            left: 0;
-                            transform: rotateZ(90deg);
+                            top: 0;
+                            right: 0;
+                            margin-top: 0;
+                            width: 15px;
+                            height: 100%;
+                            cursor: w-resize;
+                            .iconfont {
+                                position: absolute;
+                                top: 50%;
+                                margin-top: -7px;
+                                left: 0;
+                                transform: rotateZ(90deg);
+                            }
+                        }
+                        .center_part {
+                            padding: 0;
+                            margin: 0;
+                            padding-right: 17px;
+                            /* .center_con_wrap{
+                                .center_con {
+                                    height: 100%;
+                                    overflow-y: auto;
+                                    min-width: 850px !important;
+                                }
+                            } */
                         }
                     }
-                    .center_part {
-                        padding: 0;
-                        margin: 0;
-                        padding-right: 17px;
-                        /* .center_con_wrap{
-                            .center_con {
+                }
+                .presentation_mode_row {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    background: white;
+                    z-index: 2;
+                    .div_pdf {
+                        position: relative;
+                        display: block !important;
+                        height: 60%;
+                        .my-pdf {
+                            height: 100%;
+                            .pdfobject-container {
+                                height: 100%;
+                            }
+                        }
+                    }
+                    /* .exitFullMode{
+                        display: block;
+                    } */
+                    .center_part_wrap {
+                        height: 40%;
+                        .slideBar {
+                            display: block;
+                            margin-top: 0;
+                        }
+                        .center_part {
+                            padding-top: 17px;
+                            margin-top: -17px;
+                            /* .center_con_wrap{
                                 height: 100%;
                                 overflow-y: auto;
-                                min-width: 850px !important;
-                            }
-                        } */
-                    }
-                }
-            }
-            .presentation_mode_row {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                background: white;
-                z-index: 2;
-                .div_pdf {
-                    position: relative;
-                    display: block !important;
-                    height: 60%;
-                    .my-pdf {
-                        height: 100%;
-                        .pdfobject-container {
-                            height: 100%;
+                                .center_con {
+                                }
+                            } */
                         }
-                    }
-                }
-                /* .exitFullMode{
-                    display: block;
-                } */
-                .center_part_wrap {
-                    height: 40%;
-                    .slideBar {
-                        display: block;
-                        margin-top: 0;
-                    }
-                    .center_part {
-                        padding-top: 17px;
-                        margin-top: -17px;
-                        /* .center_con_wrap{
-                            height: 100%;
-                            overflow-y: auto;
-                            .center_con {
-                            }
-                        } */
                     }
                 }
             }
         }
-    }
     }
 </style>

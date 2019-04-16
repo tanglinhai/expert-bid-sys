@@ -12,6 +12,7 @@ export default {
         submitPrompt:false ,//全部提交提示
         is_pingshen_show:false,//评审页面是否提交
         start_sublevel_show:false,//评标页面（树形图）进度条以及全选，提交按钮是否显示
-        parent_progress_show:true
+        parent_progress_show:true,
+        alltijiaoqueding:0
     }
 }

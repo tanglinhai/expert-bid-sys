@@ -36,7 +36,7 @@
                 <el-row class="center_part">
                     <el-col :span="24">
                         <div class="unlock_table-warp fs14">
-                            <el-row>
+                            <el-row class="progress_btns">
                                 <el-col :span="12">
                                     <div class="grid-content bg-purple">
                                         <div style="width:122px" class="my_progress_word fl">进度：</div>
@@ -45,6 +45,7 @@
                                 </el-col>
                                 <el-col :span="12" class="mb15">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
+                                        <span> 专家：评审专家五</span>
                                         <!--<span class="hide_div">-->
                                         <!--<el-button size="small" plain-->
                                         <!--@click="check_schedule">查看定档表</el-button>-->
@@ -58,28 +59,25 @@
                                 </el-col>
                                 <!--table-->
                             </el-row>
-                            <el-row>
+                            <el-row class="table_warp">
                                 <!------------------------------------定档评议table-------------------------------->
                                 <template>
                                     <el-table
                                             :data="dingdang_tableData"
-                                            style="width: 100%">
+                                            style="width: 100%" class="dingdang_table">
                                         <el-table-column
                                                 label="打分项"
                                                 width="450" fixed>
                                             <template slot-scope="scope">
-                                                商务1（50.00分）
+                                                <span class="leixing red mr20">商务</span><span>商务1（50.00分）</span>
                                             </template>
                                         </el-table-column>
                                         <el-table-column label="投标人">
                                             <el-table-column :label="item" v-for="(item,index ) in companyname_toubiao"
                                                              width="450" :key="item.id">
                                                 <template slot-scope="scope">
-                                                    <el-radio-group v-model="scope.row.resource" class="radio_group">
-                                                        <el-radio label="1">是否是官方配置？（50.00分）</el-radio>
-                                                        <el-radio label="-1" style=" margin-left: 13px!important;">减
-                                                        </el-radio>
-                                                    </el-radio-group>
+                                                    <el-checkbox v-model="is_checkbox" name="item.id">是否是官方配置？（50.00分）</el-checkbox>
+                                                    <!--<input type="checkbox" :value="val.id" v-model="menusId" @change="CheckChange">-->
                                                 </template>
                                             </el-table-column>
                                         </el-table-column>
@@ -122,6 +120,7 @@
                 options: [],//头部导航按钮数组
                 companyname_toubiao: [],//定档评议table的投标人数组
                 dingdang_tableData: [],//定档评议table
+                is_checkbox:false,
             }
         },
         created() {
@@ -174,6 +173,9 @@
                 this.pageLoading = true;
                 this.init();
             },
+            // checked(a,b){
+            //     console.log(a,b)
+            // }
         }
     }
 </script>
@@ -222,29 +224,52 @@
                     }
                     .unlock_table-warp {
                         color: #606266;
-                        .my_progress_word {
-                            width: 224px;
-                            color: red;
-                            line-height: 14px;
-                            margin-top: 2px;
-                        }
-                        .progress {
-                            width: 280px;
-                            .el-progress-bar__outer {
-                                background-color: #ededed;
-                                height: 15px !important;
-                            }
-                            .el-progress__text {
-                                position: relative;
-                                left: -65px;
+                        .progress_btns {
+                            .my_progress_word {
+                                width: 224px;
                                 color: red;
-                                font-size: 15px !important;
-                                top: -17px;
-                                width: 100px;
+                                line-height: 14px;
+                                margin-top: 2px;
                             }
-                            .el-progress-bar {
-                                padding-right: 0;
+                            .progress {
+                                width: 280px;
+                                .el-progress-bar__outer {
+                                    background-color: #ededed;
+                                    height: 15px !important;
+                                }
+                                .el-progress__text {
+                                    position: relative;
+                                    left: -65px;
+                                    color: red;
+                                    font-size: 15px !important;
+                                    top: -17px;
+                                    width: 100px;
+                                }
+                                .el-progress-bar {
+                                    padding-right: 0;
+                                }
                             }
+                        }
+                        .table_warp{
+                           .dingdang_table{
+                              /* div.cell {
+                                   position: relative;
+                                   .leixing {
+                                       position: absolute;
+                                       top: -4px;
+                                       left: 0;
+                                       width: 40px;
+                                       color: red;
+                                       margin-right: 10px;
+                                       !*height: 24px;*!
+                                       !*line-height: 24px;*!
+                                       !*font-size: 16px;*!
+                                       !*margin-right: 10px;*!
+                                       !*text-align: center;*!
+
+                                   }
+                               }*/
+                           }
                         }
                         .pageBox {
                             text-align: right;

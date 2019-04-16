@@ -401,7 +401,6 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-    
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;
@@ -412,7 +411,6 @@
         .el-collapse,.el-collapse-item__wrap{
             border:none;
         }
-        
         .evaluationcommon{
              background:white;
             border-radius:5px;

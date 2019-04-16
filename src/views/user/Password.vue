@@ -147,6 +147,7 @@
         created() {
         },
         mounted() {
+            $(".CommonProject").hide();
             this.$axios.post('/api/login').then(res => {
                 if (res.status === 200) {
                     // console.log(res.data.msg.pass);
