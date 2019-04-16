@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-  	<Head/>
+  	<Head :ProjectInformationsAll='ProjectInformationsAll' v-loading="CommonLeftNavsLoading"/>
     <div class="WrapBig">
       <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
       <transition :name="transitionName">
@@ -54,6 +54,7 @@ export default {
       navcommonsList:[],  //导航数据
       number:'',   //导航当前第几步
       CommonLeftNavsLoading:true,  //左侧导航添加loading 事件
+      ProjectInformationsAll:'',  //头部项目信息
     }
   },
   components: {
@@ -85,7 +86,7 @@ export default {
             if(res.status == 200){
                 //console.log(res.data)
                 this.navcommonsList=res.data.navsAll;
-               
+                this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;
                 this.CommonLeftNavsLoading=false;
                 

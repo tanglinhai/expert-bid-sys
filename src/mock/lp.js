@@ -351,6 +351,11 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 
 //公共导航接口
 let NavCommon=Mock.mock('/api/navcommons','post',{
+    ProjectInformationsAll:{
+        projectName:'单信封-0305-1',
+        projectNumber:'0635-1909qwerN1133',
+        projectWenjian:'招标文件(pdf)',
+    },
     navsAll:[{
             value: '1',//
             label: '承诺书',

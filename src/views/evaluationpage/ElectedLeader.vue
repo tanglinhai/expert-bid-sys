@@ -40,13 +40,13 @@
                     <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
                         <h5 class="commonTitle col348fe2 oneanonter">项目分包</h5>
                     </div>
-                    <div class="bidevaluationexperts">
+                    <!-- <div class="bidevaluationexperts">
                         <div class="bidexpert">
                             评标专家：
                             <span>张三</span>
                         </div>
                         <el-button size="small" type="primary" @click.stop="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;&nbsp;查看推举情况</el-button>           
-                    </div>
+                    </div> -->
                 </div>
                 <!-- </template> -->
                 <!--表格-->
@@ -114,7 +114,7 @@
                 <!--表格-->
             </div>
             <!--推举情况弹框-->
-            <el-dialog
+            <!-- <el-dialog
                 title="推举主任情况"
                 :visible.sync="dialogSelectionDirector"
                 width="50%"
@@ -130,7 +130,7 @@
                         </el-col>
                     </el-row>
                 </div>
-            </el-dialog>
+            </el-dialog> -->
             <!--推举情况弹框-->
             <!--调整评标价弹框-->
             <el-dialog
@@ -214,15 +214,15 @@
                 TkOneloading:true,
                 pageLoading:true,  //loading
 
-                ElevatedSituationLoading:false, //推举情况弹框loading
+                // ElevatedSituationLoading:false, //推举情况弹框loading
                 ProjectFbLoading:false,  //项目分包表格loading
                 projectTableData: [],  //项目分包信息
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
-                dialogSelectionDirector:false,  //推举情况弹框默认隐藏
+                // dialogSelectionDirector:false,  //推举情况弹框默认隐藏
                 leader:'',  //推举主任情况组长
                 baohao:'',  //推举主任情况包号
-                CheckReferralsList:[],  //推举主任情况弹框数据
+                // CheckReferralsList:[],  //推举主任情况弹框数据
                 ChangedialogVisible:false,  //调整评标价弹框
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
 
@@ -306,21 +306,21 @@
                 })
             },
             //查看推举情况按钮事件
-            LookTuiju(){
-                this.dialogSelectionDirector=true;
-                this.ElevatedSituationLoading=true;
-                this.$axios.post('/api/CheckReferralsTuiju',{
+            // LookTuiju(){
+            //     this.dialogSelectionDirector=true;
+            //     this.ElevatedSituationLoading=true;
+            //     this.$axios.post('/api/CheckReferralsTuiju',{
 
-                }).then(res=>{
-                    if(res.status==200){
-                       //console.log(res.data,88888) 
-                        this.leader=res.data.leader;
-                        this.baohao=res.data.baohao;
-                        this.CheckReferralsList = res.data.CheckReferralsList;
-                        this.ElevatedSituationLoading=false;
-                    }
-                })
-            },
+            //     }).then(res=>{
+            //         if(res.status==200){
+            //            //console.log(res.data,88888) 
+            //             this.leader=res.data.leader;
+            //             this.baohao=res.data.baohao;
+            //             this.CheckReferralsList = res.data.CheckReferralsList;
+            //             this.ElevatedSituationLoading=false;
+            //         }
+            //     })
+            // },
 
             //调整评标价点击事件
             adjustedValuation(row){
@@ -443,20 +443,20 @@
                 height:40px;
             }
         }
-        .failureEntryDialog{
-            .failureoOject{
-            line-height: 38px;
-            height: 38px;
-            border-top: 1px dotted #ccc;
-            border-bottom: 1px dotted #ccc;
-            }
-            .dijilun{
-            line-height: 38px;
-            height: 38px;
-            border-bottom: 1px dotted #ccc;
-            margin-bottom: 25px;
-            }
-        }
+        // .failureEntryDialog{
+        //     .failureoOject{
+        //     line-height: 38px;
+        //     height: 38px;
+        //     border-top: 1px dotted #ccc;
+        //     border-bottom: 1px dotted #ccc;
+        //     }
+        //     .dijilun{
+        //     line-height: 38px;
+        //     height: 38px;
+        //     border-bottom: 1px dotted #ccc;
+        //     margin-bottom: 25px;
+        //     }
+        // }
     }
 }
 </style>
