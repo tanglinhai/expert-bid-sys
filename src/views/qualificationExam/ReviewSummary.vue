@@ -45,7 +45,7 @@
                                             v-if="!this.$store.state.failureEnery.is_pingshen_show">
                                         <el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审
                                         </el-button>
-                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')"> 提交
+                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')" :loading="myloading"> 提交
                                         </el-button>
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                         </el-button>
@@ -287,7 +287,8 @@
                 cities: [],
                 tableDataTwo: [],
                 bzzxLoading: true, //标中质询loading
-                is_disabled: false
+                is_disabled: false,
+                myloading:false,//评审汇总提交loading
             }
         },
         created() {
@@ -346,27 +347,33 @@
             },
             /*------------------------评审汇总-----------------*/
             submit_btn(formName) {//提交
+
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        this.myloading = true;
                         this.$axios.post('/api/pshz_tijiao', {
                             type: this.$route.query.type,
                             data: this.ruleForm.desc
                         }).then(res => {
                             if (res.status == 200) {
+
                                 this.options = res.data.vue_type;
                                 this.msg_data.forEach((m, i) => {
                                     if (m.radio == 1) {
                                         this.a.push(m.radio)
                                     }
                                 });
+
                                 if (this.a.length != 0) {
                                     // alert('有效选中');
+
                                     this.$message({
                                         message: '提交成功！',
                                         type: 'success'
                                     });
                                     this.$store.state.failureEnery.is_pingshen_show = true;
                                     this.is_disabled = true;
+                                    this.mydataloading = false;
                                 } else {
                                     this.$store.state.failureEnery.success_warning = true;
                                 }
