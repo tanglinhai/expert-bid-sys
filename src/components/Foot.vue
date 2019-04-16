@@ -22,12 +22,15 @@ export default {
 .foot {
     font-family: PingFangSC-Semibold;
     border-top: 1px solid #e8e8e8;
-    padding: 30px;
     margin: 0 auto;
     font-size: 12px;
     text-align: center;
     color: #999;
     background-color: #fff;
+    width:100%;
+    float:left;
+    padding:30px 0px;
+
     a {
 		    color: #a4a4a4;
 		}

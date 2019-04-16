@@ -75,6 +75,7 @@
         },
         mounted() {
             this.childMsg();
+            $(".NavCommon").hide();
         },
         methods: {
             // 初始子组件数据获取
@@ -82,11 +83,11 @@
                 this.pageLoading = true;
                 this.$axios.post('/api/bagMsg').then(res => {
                     if (res.status === 200) {
-                        console.log(res.data);
+                        // console.log(res.data);
                         this.pageLoading = false;
                         this.btn_search_loading = false;
                         this.projectBagMsg = res.data.projectBagMsg;
-                        console.log(this.projectBagMsg);
+                        // console.log(this.projectBagMsg);
                         if (this.projectBagMsg.length == 0) {
                             $('.pageBox').hide();
                             $(".search_warp ").hide();
@@ -137,6 +138,7 @@
     .projects {
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
+
         .main {
             background: white;
             border-radius: 5px;

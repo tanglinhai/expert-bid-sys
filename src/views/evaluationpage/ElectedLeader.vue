@@ -1,6 +1,6 @@
 <template>
     <div class="Elected_wrap">
-        <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
+        <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
@@ -197,19 +197,19 @@
 </template>
 
 <script>
-    import NavCommon from '../../components/publicVue/NavCommon.vue';
+    // import NavCommon from '../../components/publicVue/NavCommon.vue';
     import ChangePrice from '../../components/publicVue/ChangePrice.vue';
     export default {
         name: 'index',
         props: {},
         components: {
             ChangePrice,
-            NavCommon
+            // NavCommon
         },
         data(){
             return {
-                navcommonsList:[],  //导航数据
-                number:'',   //导航当前第几步
+                // navcommonsList:[],  //导航数据
+                 number:'',   //导航当前第几步
 
                 TkOneloading:true,
                 pageLoading:true,  //loading
@@ -242,9 +242,10 @@
         },
         created() {
             if (this.$route.query.types == undefined) {
-                this.number = 1;
+                this.$store.state.navCommon.types=1;
             } else {
-                this.number = this.$route.query.types;
+                this.$store.state.navCommon.types=this.$route.query.types;
+                console.log(this.$store.state.navCommon.types,6)
             }
         },
         mounted(){
@@ -254,9 +255,11 @@
             },15000)
             this.ProjectSubcontract();//项目分包数据
 
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
 
             this.AllInformation(); //专家个人信息,投标人信息接口
+
+            $(".NavCommon").show();
             
             
         },
@@ -296,7 +299,7 @@
 
                 }).then(res=>{
                     if(res.status==200){
-                       console.log(res.data,88888) 
+                       //console.log(res.data,88888) 
                         this.leader=res.data.leader;
                         this.baohao=res.data.baohao;
                         this.CheckReferralsList = res.data.CheckReferralsList;
@@ -315,7 +318,7 @@
                     id:row.id,   //点击得id
                 }).then(res=>{
                     if(res.status == 200){
-                        console.log(res.data,99999)
+                        //console.log(res.data,99999)
                        this.ChangePriceTk=res.data.msgBox;
                        this.TkOneloading=false;
                     }
@@ -341,6 +344,7 @@
                 this.$router.push({
                     path: '/index/WheelPushing?types='+3,
                 })
+                
             },
 
             //专家个人信息,投标人信息接口
@@ -387,7 +391,7 @@
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;
-        width:90%;
+        width:98%;
         float:left;
         margin-left:1%;
         margin-right:1%;

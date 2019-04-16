@@ -12,6 +12,9 @@
     &:hover{
         color:white!important;
     }
+    &:visited,&:focus{
+        color:white!important; 
+    }
 }
 .col409{
  color:#409EFF;

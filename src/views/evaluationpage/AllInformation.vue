@@ -1,6 +1,6 @@
 <template>
     <div class="Allinforation_wrap">
-        <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
+        <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
@@ -189,19 +189,19 @@
 
 <script>
     
-    import NavCommon from '../../components/publicVue/NavCommon.vue';
+    // import NavCommon from '../../components/publicVue/NavCommon.vue';
     export default {
         name: 'index',
         props: {},
         components: {
-            NavCommon
+            // NavCommon
         },
         data(){
             return {
-                navcommonsList:[],  //导航数据
-                number:'',   //导航当前第几步
+                // navcommonsList:[],  //导航数据
+               // number:'',   //导航当前第几步
 
-                pageLoading:true,  //loading
+                pageLoading:false,  //loading
                 tBrMsgLoading:false,  //投标人信息列表loading效果
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
                 PorjectName:'',   //项目名称
@@ -238,12 +238,15 @@
         },
         created() {
             //console.log(this.$route.query.type,999)
-            this.number=this.$route.query.types
+            //this.number=this.$route.query.types
+            this.$store.state.navCommon.types=this.$route.query.types;
+            console.log(this.$store.state.navCommon.types,5)
         },
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
+            $(".NavCommon").show();
         },
         methods:{
             goto(url){//开始评标
@@ -323,6 +326,7 @@
                         this.$router.push({
                             path: '/index/ElectedLeader?types='+3,
                         })
+                        
                     }
                 })
                 
@@ -365,7 +369,7 @@
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;
-        width:90%;
+        width:98%;
         float:left;
         margin-left:1%;
         margin-right:1%;

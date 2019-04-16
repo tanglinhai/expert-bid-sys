@@ -1,6 +1,6 @@
 <template>
  <div class="Wheelpushing_wrap">
-    <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
+    <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
         <div class="evaluationcommon cf">
@@ -73,16 +73,16 @@
 </template>
 
 <script>
-    import NavCommon from '../../components/publicVue/NavCommon.vue';
+    // import NavCommon from '../../components/publicVue/NavCommon.vue';
     export default {
         name: 'index',
         props: {},
         components: {
-           NavCommon  
+        //    NavCommon  
         },
         data(){
             return {
-                navcommonsList:[],  //导航数据
+                //navcommonsList:[],  //导航数据
                 number:'',   //导航当前第几步
 
                 pageLoading:true,  //loading
@@ -106,12 +106,15 @@
         },
         created() {
             //console.log(this.$route.query.type,999)
-            this.number=this.$route.query.types
+            this.$store.state.navCommon.types=this.$route.query.types;
+            console.log(this.$store.state.navCommon.types,7)
         },
         mounted(){
             
             this.tuijuData(); //推举评委会主人第1轮
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
+
+            $(".NavCommon").show();
 
             var _this=this;
             var setTime;
@@ -171,6 +174,7 @@
                                 path: '/elect/StartEvaluation?types=5',
                             })
                         }
+                        
                         this.PutRoundNumberLoading=false;
                         this.pageLoading=false;
                     }
@@ -207,11 +211,10 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-    
     .Allinformation {
-         background-color: #ededed;
+        background-color: #ededed;
         padding:0px 0% 15px 0%;
-        width:90%;
+        width:98%;
         float:left;
         margin-left:1%;
         margin-right:1%;

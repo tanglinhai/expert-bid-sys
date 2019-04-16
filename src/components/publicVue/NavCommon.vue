@@ -2,7 +2,7 @@
     <div class="navcommon_wrap">
         <el-scrollbar style="width:100%; height:700px; overflow-x:hidden">
             <ul>
-                <li v-for="(item,index) in navcommonsList" :key="index" :number="number" :id="item.types" >
+                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" >
                     <template v-if="number>=item.types">
                         <el-popover
                             placement="right"
@@ -11,7 +11,7 @@
                             :content='item.label'
                             trigger="hover"
                             >
-                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>
+                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
                         <span class="navcommon_line" style="display:none"></span>
                     </template>
@@ -38,6 +38,7 @@
         name: "evaluationcommon",
         data(){
             return {
+               
             }
         },
         // 父组件传过来的值
@@ -46,18 +47,14 @@
                 type:Array,
             },
             number:{
-                type:Boolean,
+                type:Number,
             }
         },
         components:{
 
         },
         mounted(){
-            //console.log(this.number,8888)
-            if(this.number==1){
-                
-                //$("")
-            }
+           
         },
         methods: {
             goto(url){ //路由
@@ -66,8 +63,13 @@
                 });
             },
            ToChangePage(types,number){   //导航点击值
-                console.log(types,number)
-               
+                // console.log(types,2222)
+                console.log(types,number, this.$store.state.navCommon.types,333)
+                // console.log(this.$store.state.navCommon.types,4444)
+                setTimeout(function(){
+                    $(".NavCommon ul li button").removeClass("backblue");
+                    $(".NavCommon ul #"+types).find("button").addClass("backblue");
+                },200)
                 if(types==1){
                     this.$router.push("/index/LetterCommitment?types="+number);
                 }else if(types==2){
@@ -78,7 +80,8 @@
                     this.$router.push("/index/WheelPushing?types="+number);
                 }   
            }
-        }
+        },
+        
     }
 </script>
 
@@ -86,7 +89,7 @@
     .navcommon_wrap{
         border-radius:5px;
         padding:15px 0px;
-        width:8%; 
+        min-width:75px; 
         float:left; 
         .el-scrollbar__wrap{
             overflow-x:hidden;
@@ -96,7 +99,7 @@
         }
         ul{
             li{
-                margin-left:33%;
+                margin-left:0;
                 button{
                     display:block;
                     width:60px;

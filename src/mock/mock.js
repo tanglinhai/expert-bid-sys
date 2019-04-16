@@ -369,11 +369,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 ],
                 'companyNameData': [
                     {
-                        'companyName':'重庆网控科技发展有限公司',
-                        'zhaunjiadata_gs':[
+                       'companyName':'重庆网控科技发展有限公司',
+                       'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["√",  "√","√",'合格']
                             } ,
+
                         ]
                     },
                     {
@@ -464,6 +465,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
+                    'professorName':'张三'
                 }
             }
         }
@@ -662,7 +664,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                        'zhaunjiadata_gs':[
+                             'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'合格']
                             } ,
@@ -670,7 +672,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                        'zhaunjiadata_gs':[
+                           'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "×", "√",'合格']
                             } ,
@@ -678,7 +680,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                        'zhaunjiadata_gs':[
+                          'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
@@ -686,7 +688,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                        'zhaunjiadata_gs':[
+                           'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
@@ -732,6 +734,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },      {
                         'companyName':'夏丰热工研究院有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -748,6 +751,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
+                    'professorName':'张三'
                 }
             }
         }
@@ -914,10 +918,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 },
                             ]
                         },
-
                     'mylist': ms,
                     //头部审查类型按钮
-
                 },
                 msg: [  //个人形式审计表数据接口(改动)
                     {
@@ -940,6 +942,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 'companyNameData': [
                     {
                         'companyName':'重庆网控科技发展有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["√", "√","√",'合格']
@@ -948,6 +951,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√","√",'合格']
@@ -956,6 +960,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "×","√",'合格']
@@ -964,6 +969,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√","√",'不合格']
@@ -972,6 +978,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
+
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√","√",'不合格']
@@ -1034,6 +1041,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
+                    'professorName':'张三'
                 }
             }
         }
@@ -1047,7 +1055,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
     // console.log(JSON.parse(options.body));
     let return_val;
     let get_type_num=JSON.parse(options.body).type;
-    if (get_type_num == 2) {
+    if (get_type_num == 2) {//是区别那个页面
         let msg = [];
         // for (var i = 0; i < Random.integer(1, 5); i++) {
             msg.push(
@@ -1067,7 +1075,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                      'xuhao': '结论',
                     'evaluationFactors': '是否通过资格审查项检查',
                 }
-            )
+            );
         // }
         return_val= {
             'bidMsg': {
@@ -2090,19 +2098,20 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
     message: '成功!',
     data: ''
 });
-// 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
+//蓝色icon是正在进行，绿色icon：完成，灰色的文本icon是可以点；
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态：
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
+
 function get_data(type,is_submit_type) {//type
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
         }
-        if (type == 1) {
+        if (type == 1) {//资格审查
             return [1, 3, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,]
         }
-        if (type == 2) {
+        if (type == 2) {//资格审查汇总
             return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,4, 4, 4, 4, 4,]
         }
         if (type == 3) {//符合性审查项
@@ -2112,28 +2121,28 @@ function get_data(type,is_submit_type) {//type
             return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,4, 4, 4, 4, 4,]
         }
         if (type == 5) {//详细
-            return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,4, 4, 4, 4, 4,]
+            return [1, 1, 1, 1, 1, is_submit_type?1:2, 4,4, 4, 4, 4, 4,]
         }
         if (type == 6) {//详细汇总
             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,4, 4, 4, 4, 4,]
         }
         if (type == 7) {//定档
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 8) {//商务
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 10) {// 技术
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 11) {//服务
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 12) {//其他
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 70) {//评审汇总
-            return [1, 1, 1, 1, 1, 1 ,1,1,1,1,1, is_submit_type?1:2,]
+            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
     }
 
@@ -2402,7 +2411,9 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     console.log(JSON.parse(options.body));
     let return_val;
+    var submit_type= Random.integer(0, 1);
     let get_type_num=JSON.parse(options.body).type;
+    console.log(get_type_num,'222');
     if (get_type_num == 7) {
         return_val= {
             'bidMsg': {
@@ -2410,6 +2421,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
@@ -2447,6 +2459,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
@@ -2479,6 +2492,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
@@ -2511,6 +2525,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
@@ -2543,6 +2558,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'name': '2019年水利运输服务招标项目',
                 'biaoNum': '0635—1909qwerN1197',
                 'baohao': '0635—1909qwerN1197/1',
+                'type':submit_type,//是否提交过
                 //审查项
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
@@ -2553,7 +2569,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
             }
         }
     }
-    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1);
+    return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1,submit_type);
     return return_val;
 });
 /*----------------------定档商务技术服务其他end-----------------*/
