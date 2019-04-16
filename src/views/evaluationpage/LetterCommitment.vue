@@ -61,6 +61,7 @@
         mounted(){
             //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
+            $(".CommonProject").show();
         },
         methods:{
             goto(url){//开始评标
