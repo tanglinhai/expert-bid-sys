@@ -1,7 +1,7 @@
 <template>
   <div class="home">
   	<Head/>
-    <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon>
+    <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
     <transition :name="transitionName">
       <router-view class="Router"/>
     </transition>
@@ -40,6 +40,7 @@ export default {
       transitionName: 'slide-right',  // 默认动态路由变化为slide-right
       navcommonsList:[],  //导航数据
       number:'',   //导航当前第几步
+      CommonLeftNavsLoading:true,  //左侧导航添加loading 事件
     }
   },
   components: {
@@ -63,6 +64,7 @@ export default {
   methods:{
     navcommonsListFun(){
         this.pageloadding=true;
+        this.CommonLeftNavsLoading=true;
         this.$axios.post('/api/navcommons',{
             //invitioninpval:this.invitioninpval,   //传值关键词
             //redshow:this.redshow,    //四个按钮选中的是id
@@ -70,11 +72,9 @@ export default {
             if(res.status == 200){
                 //console.log(res.data)
                 this.navcommonsList=res.data.navsAll;
-                // this.$nextTick(function(){
-                //     //
-                    
-                // })
+               
                 this.pageloadding=false;
+                this.CommonLeftNavsLoading=false;
                 
             }
         })
