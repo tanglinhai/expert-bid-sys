@@ -201,10 +201,6 @@
 
     export default {
         name: "unFinishQualificationsResult",
-        props: {
-            type: Number,
-            default: 2
-        },
         components: {
             ViewUnlockRecord,
             QualificationUnlock,
