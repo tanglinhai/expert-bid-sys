@@ -1,16 +1,16 @@
 <template>
     <div class="projects">
         <!-- 项目列表页面-->
-        <el-row class="mb15">
-            <el-col>
-                <el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目
-                </el-button>
-            </el-col>
-        </el-row>
+        <!--<el-row class="mb15">-->
+            <!--<el-col>-->
+                <!--<el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目-->
+                <!--</el-button>-->
+            <!--</el-col>-->
+        <!--</el-row>-->
         <div class="main">
             <el-row class="pro_msg_warp cf">
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                    <h5 class="commonTitle col348fe2">项目信息</h5>
+                    <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目</h5>
                 </div>
                 <div class="fl search_warp textAlignR ">
                     <el-input
@@ -76,6 +76,7 @@
         mounted() {
             this.childMsg();
             $(".NavCommon").hide();
+            $(".CommonProject").hide();
         },
         methods: {
             // 初始子组件数据获取
@@ -138,7 +139,7 @@
     .projects {
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
-
+        padding-left:0px!important;
         .main {
             background: white;
             border-radius: 5px;

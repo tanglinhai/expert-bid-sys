@@ -1,6 +1,6 @@
 <template>
     <div class="navcommon_wrap">
-        <el-scrollbar style="width:100%; height:700px; overflow-x:hidden">
+        <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;">
             <ul>
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" >
                     <template v-if="number>=item.types">
@@ -62,9 +62,9 @@
                     path: url
                 });
             },
-           ToChangePage(types,number){   //导航点击值
-                // console.log(types,2222)
-                console.log(types,number, this.$store.state.navCommon.types,333)
+           ToChangePage(types,number){   //导航点击值//types
+                console.log(types,number);
+                // console.log(types,number, this.$store.state.navCommon.types,333)
                 // console.log(this.$store.state.navCommon.types,4444)
                 setTimeout(function(){
                     $(".NavCommon ul li button").removeClass("backblue");
@@ -77,7 +77,7 @@
                 }else if(types==3){
                     this.$router.push("/index/ElectedLeader?types="+number);
                 }else if(types==4){
-                    this.$router.push("/index/WheelPushing?types="+number);
+                    this.$router.push("/elect/StartEvaluation?types="+number);
                 }   
            }
         },

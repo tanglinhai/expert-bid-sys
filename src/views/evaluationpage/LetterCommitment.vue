@@ -51,6 +51,7 @@
             }
         },
         created() {
+            console.log(this.$route.query.types);
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
@@ -60,6 +61,7 @@
         mounted(){
             //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
+            $(".CommonProject").show();
         },
         methods:{
             goto(url){//开始评标
@@ -93,12 +95,10 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/AllInformation?types='+2,
+                            path: '/index/AllInformation?types=2',
                         })
-                        
                     }
                 })
-                
             },
         }
     }

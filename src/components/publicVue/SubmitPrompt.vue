@@ -8,7 +8,7 @@
         </el-row>
         <el-row class="textAlignC pt20">
             <el-button size="small" type="primary" @click="comfrim">确认</el-button>
-            <el-button size="small" type="primary" @click="reback">返回</el-button>
+            <el-button size="small" type="primary" @click="reback">取消</el-button>
         </el-row>
     </div>
 </template>
@@ -46,8 +46,9 @@
                         } else {
                             this.$store.state.failureEnery.submitPrompt = false;
                             this.$store.state.failureEnery.flag = false;
+                            $("#hide_btn").hide();
+                            this.$store.state.failureEnery.alltijiaoqueding=1;
                         }
-
                     }
                 })
             }

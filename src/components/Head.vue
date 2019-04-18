@@ -6,14 +6,26 @@
   	<el-menu :default-active="activeIndex" class="menu-le" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1" @click="goto('/index/projects')">首页</el-menu-item>
 		  <!--<el-menu-item index="2" @click="goto('/index/projects')">评审项目</el-menu-item>-->
-		</el-menu>
-
+	</el-menu>
+	<el-menu class="menu-le topNavs">
+		<div class="CommonProject">
+			<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
+			<p>项目名称:{{ProjectInformationsAll.projectName}}</p>
+			<p>项目编号:{{ProjectInformationsAll.projectNumber}}</p>
+			<el-collapse-transition>
+				<div v-show="show3">
+					<p>项目资料:{{ProjectInformationsAll.projectWenjian}}</p>
+				</div>
+			</el-collapse-transition>
+		</div>
+	</el-menu>
+	
 
   	<el-menu :default-active="activeIndex2" class="menu-ri" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1">
 		  	<a href="javascript:void(0);" @click="environmentTestDialogVisible=true"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
-		  <el-submenu index="2" popper-class="head-submenu">
+		  <el-submenu index="2" popper-class="head-submenu" style="display:none">
 		    <template slot="title">
 		    	<i class="iconfont icon-jiaoseqiehuan"></i>角色切换
 		    </template>
@@ -28,25 +40,19 @@
 		  <el-menu-item index="4">
 		  	<a href="http://www.365trade.com.cn/ggtz/index.jhtml" target="_blank"><i class="iconfont icon-xitonggonggao"></i>系统公告</a>
 		  </el-menu-item>
+		 <el-menu-item class="NavsInformations">
+		  	<p>评标专家：</p>
+		  </el-menu-item>
 		  <el-submenu index="5" popper-class="head-submenu">
 		    <template slot="title">
 		    	<img src=""/>张三
 		    </template>
 		    <el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>
 		    <el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>
+			<el-menu-item class="tuiju" index="5-4" @click="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>查看推举情况</el-menu-item>
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>
-		<div class="CommonProject">
-				<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
-				<p>项目名称:单信封-0305-1</p>
-				<p>项目编号:0635-1909qwerN1133</p>
-				<el-collapse-transition>
-					<div v-show="show3">
-						<p>项目资料:招标文件(pdf)</p>
-					</div>
-				</el-collapse-transition>
-		</div>
 
 		<!--环境检测弹框-->
 		<el-dialog
@@ -84,19 +90,49 @@
 			</el-row>
 		</el-dialog>
 		<!--环境检测弹框-->
+
+		<!--推举情况弹框-->
+            <el-dialog
+                title="推举主任情况"
+                :visible.sync="dialogSelectionDirector"
+                width="50%"
+            >
+                <div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
+                    <div class="failureoOject">
+                        {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
+                    </div>
+                    <el-row class="textAlignC dijilun" v-for="(item,index) in CheckReferralsList" :key="index">
+                        <el-col :span="4">第{{item.number}}轮</el-col>
+                        <el-col :span="16">
+                            <span v-for="(item,index) in item.children" :key="index">{{item.name}}({{item.peopleNumber}}票)</span>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-dialog>
+        <!--推举情况弹框-->
+
+
   </div>
 </template>
 
 <script>
 export default {
   name: 'head',
-  props: {},
+  props: {
+	  ProjectInformationsAll:{
+		type:Array,
+	  }
+  },
   data() {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-			environmentTestDialogVisible: false,  //环境检测弹框默认展开
-			show3: false,  //导航默认隐藏
+	  environmentTestDialogVisible: false,  //环境检测弹框默认展开
+	  show3: false,  //导航默认隐藏
+
+	  ElevatedSituationLoading:false, //推举情况弹框loading
+	  dialogSelectionDirector:false,  //推举情况弹框默认隐藏
+	  CheckReferralsList:[],  //推举主任情况弹框数据
     };
   },
   methods: {
@@ -107,7 +143,24 @@ export default {
     	this.$router.push({
     		path: url
     	});
-    },
+	},
+	
+	//查看推举情况按钮事件
+	LookTuiju(){
+		this.dialogSelectionDirector=true;
+		this.ElevatedSituationLoading=true;
+		this.$axios.post('/api/CheckReferralsTuiju',{
+
+		}).then(res=>{
+			if(res.status==200){
+				//console.log(res.data,88888) 
+				this.leader=res.data.leader;
+				this.baohao=res.data.baohao;
+				this.CheckReferralsList = res.data.CheckReferralsList;
+				this.ElevatedSituationLoading=false;
+			}
+		})
+	},
 
   }
 }
@@ -121,6 +174,24 @@ export default {
 	.el-dialog__title{
 		color:red;
 		font-size:14px;
+	}
+}
+.NavsInformations{
+	padding-right:0px!important;
+	margin-right:-9px!important;
+}
+.failureEntryDialog{
+	.failureoOject{
+		line-height: 38px;
+		height: 38px;
+		border-top: 1px dotted #ccc;
+		border-bottom: 1px dotted #ccc;
+	}
+	.dijilun{
+		line-height: 38px;
+		height: 38px;
+		border-bottom: 1px dotted #ccc;
+		margin-bottom: 25px;
 	}
 }
 .environmentFirst{
@@ -207,31 +278,40 @@ export default {
   	font-size: 18px;
   	padding-right: 7px;
   }
-	.CommonProject{
-		position: absolute;
-		width:500px;
-		min-height:54px;
-		background:#fff6ec;
-		left:50%;
-		margin-left:-350px;
-		top:0px;
-		border:1px solid #ffdcb3;
-		padding-top:5px;
-		z-index:9999;
-		.jiantou{
+  .topNavs{
+	position: relative;
+	margin-left:10%;
+		.CommonProject{
 			position: absolute;
-			right:10px;
-			top:20px;
-			color:#c46e0f;
-			cursor: pointer;
+			width:500px;
+			min-height:54px;
+			background:#fff6ec;
+			border:1px solid #ffdcb3;
+			padding-top:5px;
+			z-index:3;
+			.jiantou{
+				position: absolute;
+				right:10px;
+				top:20px;
+				color:#c46e0f;
+				cursor: pointer;
+			}
+			p{
+				font-size:14px;
+				line-height:22px;
+				color:#c46e0f;
+				margin-left:10px;
+				&:last-child{
+					margin-bottom:5px;
+				}
+			}
 		}
-		p{
-			font-size:14px;
-			line-height:22px;
-			color:#c46e0f;
-			margin-left:10px;
-			&:last-child{
-				margin-bottom:5px;
+	}
+	@media screen and (max-width: 1380px){
+		.topNavs{
+			margin-left:5%;
+			.CommonProject{
+				width:400px;
 			}
 		}
 	}
