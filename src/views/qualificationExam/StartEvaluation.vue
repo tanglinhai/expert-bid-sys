@@ -1058,7 +1058,6 @@
                                     .right_warp {
                                         padding-left: 15px;
                                         border-radius: 5px;
-
                                         .el-progress__text {
                                             color: red;
                                         }
