@@ -80,8 +80,8 @@ export default {
         this.pageloadding=true;
         this.CommonLeftNavsLoading=true;
         this.$axios.post('/api/navcommons',{
-            //invitioninpval:this.invitioninpval,   //传值关键词
-            //redshow:this.redshow,    //四个按钮选中的是id
+            //step:this.number,  //点击时候当前第几步
+            //id:id    //哪个用户
         }).then(res=>{
             if(res.status == 200){
                 //console.log(res.data)

@@ -74,12 +74,51 @@
 
     <div class="indexFix">
         <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
-        <a id="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
+        <a id="more" @click="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
         <a id="more2" href="http://localhost:7000/img/download.svc" download="" class="btn2">签名回执</a>
     </div>
 
     <!-- 模态框（Modal） -->
     <div class="model_tk">
+        <div class="ChangeCA" @click.stop>
+            <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
+            <a href="javascript:;" @click="SelectBj">
+                <img src="@/assets/img/logo222.png"/>
+                北京CA
+            </a>
+            <a href="javascript:;" @click="SelectHebei">
+                <img src="@/assets/img/logo111.png"/>
+                河北CA
+            </a>
+        </div>
+        <div class="HebeiQianzi" @click.stop>
+            <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
+            <img class="logo111" src="@/assets/img/logo111.png"/>
+            <span>河北签章入口</span>
+            <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="130px" class="demo-ruleForm">
+                <el-form-item
+                    label="证书编号："
+                    prop="Zhengshubianhao"
+                    :rules="[
+                    { required: true, message: '证书编号不能为空'}
+                    ]"
+                >
+                    <el-input type="Zhengshubianhao" v-model.number="numberValidateForm.Zhengshubianhao" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item
+                    label="签章密码："
+                    prop="Qianzhangpasword"
+                    :rules="[
+                    { required: true, message: '签章密码不能为空'}
+                    ]"
+                >
+                    <el-input type="Qianzhangpasword" v-model.number="numberValidateForm.Qianzhangpasword" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item class="hebeiBtns">
+                    <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
         <div class="modal-body">
             <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
             <strong class="ewm_tishimsg">请扫描二维码提交签名</strong>
@@ -96,15 +135,100 @@
             </div>
         </div>
     </div>
-
+    <!--不是组长而且组长未选择签字地区判断-->
+    <el-dialog
+        title="系统提示"
+        :visible.sync="TipdialogVisible"
+        width="30%"
+        :before-close="handleClose">
+        <span>请等待专家组长选择签名方式！</span>
+        <span slot="footer" class="dialog-footer">
+            <el-button size="small" @click="TipdialogVisible = false">取 消</el-button>
+            <el-button size="small" type="primary" @click="TipdialogVisible = false">确 定</el-button>
+        </span>
+    </el-dialog>
+    <!--不是组长而且组长未选择签字地区判断-->
   </div>
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
-
+.model_tk{
+    .ChangeCA{
+        position: absolute;
+        width: 500px;
+        height: 440px;
+        top: 50%;
+        margin-top: -220px;
+        left: 50%;
+        margin-left: -250px;
+        background: white;
+        border-radius: 20px;
+        padding-top:80px;
+        a{
+            display:inline-block;
+            width:160px;
+            height:240px;
+            margin-left:60px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            font-size:16px;
+            text-align: center;
+            color:#BEBEBE;
+            background:white;
+            img{
+                display:block;
+                margin:20px auto;
+                margin-top:65px;
+            }
+            &:hover{
+                background:#1295F2;
+                color:white;
+            }
+        }
+        .tkGuanbi{
+           right: 12px;
+           top: 14px;
+           position: absolute;
+        }
+    };
+    .HebeiQianzi{
+        position: absolute;
+        width: 500px;
+        height: 440px;
+        top: 50%;
+        margin-top: -220px;
+        left: 50%;
+        margin-left: -250px;
+        background: white;
+        border-radius: 20px;
+        .tkGuanbi{
+           right: 12px;
+           top: 14px;
+           position: absolute;
+        }
+        .logo111{
+            display:block;
+            margin:20px auto;
+        }
+        >span{
+            display: block;
+            text-align: center;
+            font-size:16px;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+        .hebeiBtns{
+            text-align: center;
+            margin-left:-130px;
+        }
+        .el-input{
+            width:80%;
+        }
+    }
+} 
 </style>
 <script>
-
+var t;
 import { setTimeout } from 'timers';
 export default {
   name: 'SignaturePage',
@@ -117,6 +241,13 @@ export default {
       userNickname:'',
       fileMenuList:[],
       signatureLoading:true,
+
+      TipdialogVisible:false,  //未选择签字地区且不是组长得提示弹框
+      numberValidateForm: {
+          Zhengshubianhao: '',  //证书编号
+          Qianzhangpasword:'',  //签章密码
+      }
+      
     };
   },
   components: {
@@ -183,7 +314,7 @@ export default {
 
   },
   methods: {
-   
+    
     autodivheight(){
         $(".scrollHei").height($(document.body).height()-110);//加载进来右侧滚动条显示位置
         $("#sucai").height($(document.body).height()-240);
@@ -244,13 +375,126 @@ export default {
         window.open(window.location.protocol+'//'+window.location.host+'/LeaderSignaturePage','_blank');
     },
     
+     //$("#more").click(function(){    //签名按钮
+    more(){  //签名按钮
+        this.$axios.post('/api/BeijingOrHebei', 'post', {
+            // id: id,
+            // type: radio
+        }).then(res => {
+            if (res.data.resultCode == 200) {
+                console.log(res.data.resultBody.role,res.data.resultBody.system,777)
+                if(res.data.resultBody.role==0&&res.data.resultBody.system===' '){
+                    console.log(res.data.resultBody.role,res.data.resultBody.system,88888)
+                    this.TipdialogVisible=true;
+                }else if((res.data.resultBody.role==0&&res.data.resultBody.system=='0')||(res.data.resultBody.role==1&&res.data.resultBody.system=='0')){
+                    //console.log("111111")
+                    $(".model_tk").show();
+                    $(".modal-body").show();
+                    $(".HebeiQianzi").hide();
+                    $(".ChangeCA").hide();
+                    var qrcode = new QRCode(document.getElementById("qrcode"), {
+                        width : 270,
+                        height : 270
+                    });
+                    function makeCode () {		
+                        var elText = document.getElementById("text");
+                        if (!elText.value) {
+                            alert("Input a text");
+                            elText.focus();
+                            return;
+                        }
+                        qrcode.makeCode(elText.value);
+                    }
+                    makeCode ();
+                    t = setTimeout(function(){
+                        $(".ewmsx").show();
+                    },300000)
+                }else if((res.data.resultBody.role==0&&res.data.resultBody.system=='1')||(res.data.resultBody.role==1&&res.data.resultBody.system=='1')){
+                    $(".model_tk").show();
+                    $(".modal-body").hide();
+                    $(".ChangeCA").hide();
+                    clearTimeout(t);
+                    $(".HebeiQianzi").show();
+                }else if(res.data.resultBody.role==1&&res.data.resultBody.system===' '){
+                    $(".model_tk").show();
+                    $(".modal-body").hide();
+                    clearTimeout(t);
+                    $(".HebeiQianzi").hide();
+                    $(".ChangeCA").show();
+                }
+            }
+
+        })
+        
+    },
+    //});
+    SelectBj(){  //选择北京ca签章
+        this.$axios.post('/stamp/chooseSys', 'post', {
+                systemId:0  //选择北京
+        }).then(res => {
+            if (res.data.resultCode == 200) {
+                $(".modal-body").show();
+                $(".HebeiQianzi").hide();
+                $(".ChangeCA").hide();
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width : 270,
+                    height : 270
+                });
+                function makeCode () {		
+                    var elText = document.getElementById("text");
+                    if (!elText.value) {
+                        alert("Input a text");
+                        elText.focus();
+                        return;
+                    }
+                    qrcode.makeCode(elText.value);
+                }
+                makeCode ();
+                t = setTimeout(function(){
+                    $(".ewmsx").show();
+                },300000)
+            }
+        })
+    },
+    SelectHebei(){//选择河北ca签章
+        this.$axios.post('/stamp/chooseSys', 'post', {
+                systemId:1  //选择河北
+        }).then(res => {
+            if (res.data.resultCode == 200) {
+                 $(".modal-body").hide();
+                 $(".ChangeCA").hide();
+                 clearTimeout(t);
+                 $(".HebeiQianzi").show();
+            }
+        })
+    },
+
+    submitForm(formName) {   //河北签章
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            //console.log(this.$data.numberValidateForm.Qianzhangpasword); //签章密码
+            this.$axios.post('/stamp/seal', 'post', {
+                 code:this.$data.numberValidateForm.Zhengshubianhao, //证书编号
+                 pwd:this.$data.numberValidateForm.Qianzhangpasword  //签章密码
+            }).then(res => {
+                if (res.data.resultCode == 200) {
+                    $(".model_tk").hide();
+                    this.$refs[formName].resetFields();
+                }
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+    },
 
   },
 
   mounted(){
     var timer;        
     var _this=this;
-    var t;
+    
     // timer = setInterval(function(){
     //     _this.statuss();
     // },3000)
@@ -291,26 +535,7 @@ export default {
             $("#"+svgId).height(cHeight);  
         })
     },1000)
-   $("#more").click(function(){    //签名按钮
-        $(".model_tk").show();
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width : 270,
-            height : 270
-        });
-        function makeCode () {		
-            var elText = document.getElementById("text");
-            if (!elText.value) {
-                alert("Input a text");
-                elText.focus();
-                return;
-            }
-            qrcode.makeCode(elText.value);
-        }
-        makeCode ();
-        t = setTimeout(function(){
-            $(".ewmsx").show();
-        },300000)
-    });
+  
     $(".tkGuanbi").click(function(){   //弹框关闭按钮
         $(".model_tk").hide();
         //$("#text").val('');
