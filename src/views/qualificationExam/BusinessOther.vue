@@ -70,11 +70,11 @@
                                 <!--table-->
                             </el-row>
                             <el-row class="table_warp">
-                                <!------------------------------------定档评议table-------------------------------->
                                 <template>
+                                    <!------------------------------------定档评议table-------------------------------->
                                     <el-table
                                             :data="dingdang_tableData"
-                                            style="width: 100%" class="dingdang_table">
+                                            style="width: 100%" class="dingdang_table" v-if="type==7">
                                         <el-table-column
                                                 label="打分项"
                                                 width="450" fixed prop="grade">
@@ -87,15 +87,105 @@
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              width="450" :key="index">
                                                 <template slot-scope="scope">
-                                                    <!--<span v-show="!scope.row['radio' + i] && bool">这个公司没有被选中</span>-->
                                                     <el-checkbox v-model="scope.row['radio' + index]"
-                                                                 @change="changeCheckbox">
-                                                        是否是官方配置？{{index}}（50.00分）
+                                                                 @change="changeCheckbox" :label="item.laber">
+                                                        <!--是否是官方配置？（50.00分）-->
                                                     </el-checkbox>
+                                                    <span @click="scoreShowsBtn">编辑</span>
                                                 </template>
                                             </el-table-column>
                                         </el-table-column>
                                     </el-table>
+                                    <!------------------------------------定档评议table  end-------------------------------->
+                                    <!----------------------------技术 -------------------------->
+                                    <el-table
+                                            :data="dingdang_tableData"
+                                            style="width: 100%" class="dingdang_table" v-if="type==8">
+                                        <el-table-column
+                                                label="项目"
+                                                width="450" fixed prop="grade">
+                                        </el-table-column>
+                                        <el-table-column label="投标人">
+                                            <el-table-column :label="item.companyName"
+                                                             v-for="(item,index ) in companyname_toubiao"
+                                                             width="450" :key="index">
+                                                <template slot-scope="scope">
+                                                    <div>
+                                                        <div v-if="scope.row.type === 'radio'">
+                                                            <el-radio-group v-model="scope.row['radio' + index]">
+                                                                <el-radio :label="0" >A（10.00）分</el-radio>
+                                                                <el-radio :label="1">B（20.00）分</el-radio>
+                                                                <el-radio :label="2">C（30.00）分</el-radio>
+                                                            </el-radio-group>
+                                                        </div>
+                                                        <div v-if="scope.row.type === 'input'">
+                                                            <div>是否官方配置（10.00-50.00）</div>
+                                                            <div class="cf">
+                                                                <el-input v-model="scope.row['input' + index]"
+                                                                          size="small" placeholder="请输入内容"
+                                                                          style="width: 150px" class="fl"></el-input>
+                                                                <div class="fl"
+                                                                     style=" line-height: 30px;margin-left: 5px">分
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div v-if="scope.row.type === 'string'">
+                                                            <!--{{index}}-->
+                                                            <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
+                                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
+                                                        </span>
+                                                            {{scope.row['str' + index]}}
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </el-table-column>
+                                        </el-table-column>
+                                    </el-table>
+                                    <!--------------------服务----------------------->
+                                    <!--<el-table-->
+                                    <!--:data="dingdang_tableData"-->
+                                    <!--style="width: 100%" class="dingdang_table" v-if="type==9">-->
+                                    <!--<el-table-column-->
+                                    <!--label="1111"-->
+                                    <!--width="450" fixed prop="grade">-->
+                                    <!--</el-table-column>-->
+                                    <!--<el-table-column label="投标人" >-->
+                                    <!--<el-table-column :label="item.companyName"-->
+                                    <!--v-for="(item,index ) in companyname_toubiao"-->
+                                    <!--width="450" :key="index">-->
+                                    <!--<template slot-scope="scope">-->
+                                    <!--<el-radio-group v-model="radio">-->
+                                    <!--<el-radio :label="3">A（10.00）分</el-radio>-->
+                                    <!--<el-radio :label="6">B（20.00）分</el-radio>-->
+                                    <!--<el-radio :label="9">C（30.00）分</el-radio>-->
+                                    <!--</el-radio-group>-->
+                                    <!--</template>-->
+                                    <!--</el-table-column>-->
+                                    <!--</el-table-column>-->
+                                    <!--</el-table>-->
+                                    <!--、技术、服务、其他table-->
+                                    <!-----------------其他---------------->
+                                    <el-table
+                                    :data="dingdang_tableData"
+                                    style="width: 100%" class="dingdang_table" v-if="type==10">
+                                    <el-table-column
+                                    label="10"
+                                    width="450" fixed prop="grade">
+                                    </el-table-column>
+                                    <el-table-column label="投标人" >
+                                    <el-table-column :label="item.companyName"
+                                    v-for="(item,index ) in companyname_toubiao"
+                                    width="450" :key="index">
+                                    <template slot-scope="scope">
+
+                                    </template>
+                                    </el-table-column>
+                                    </el-table-column>
+                                    </el-table>
+
+
+                                    <!----------------------------商务、技术、服务、其他 table  end-------------------------->
                                 </template>
                             </el-row>
                             <!--分页-->
@@ -130,6 +220,13 @@
             >
                 <ViewUnfinishedItems :viewUnfinishedData="viewUnfinishedData"></ViewUnfinishedItems>
             </el-dialog>
+            <el-dialog
+                    title="评分说明编辑 "
+                    :visible.sync="$store.state.failureEnery.ScoreShows"
+                    width="700px"
+            >
+                <ScoreShows ></ScoreShows>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -137,14 +234,17 @@
 <script>
     import NavBar from '../../components/publicVue/NavBar';
     import ViewSchedule from '../../components/publicVue/ViewSchedule';
+    import ScoreShows from '../../components/publicVue/ScoreShows';
     import ViewUnfinishedItems from '../../components/publicVue/ViewUnfinishedItems';
+
 
     export default {
         name: "business-other",
         components: {
             NavBar,
             ViewSchedule,
-            ViewUnfinishedItems
+            ViewUnfinishedItems,
+            ScoreShows
         },
         data() {
             return {
@@ -262,7 +362,7 @@
             },
             submit_business() {//提交商务
             },
-            submit_filing_comments() {//提交定档评议
+            submit_filing_comments() {//提交定档评议（需要掉接口）
                 let bool = true;//预制变量，当发现有复选框未选中时，就将值变为false
                 this.dingdang_tableData.forEach(e => {
                     this.companyname_toubiao.forEach((k, i) => {
@@ -277,7 +377,21 @@
                 });
                 //如果走完上面的代码 bool的值还是true说明复选框都被选了，否则肯定有未被选中的
                 if (bool) {//可提交
-                    alert('可提交');
+                    let url;
+                    if (this.type == 7) {
+                        url = '/api/dingdang_tijiao';
+                    }
+                    // else if (this.type_btn == 1) {
+                    //     url = '/api/alltijiao';
+                    // }
+                    // else if (this.type_btn == 5) {
+                    //     url = '/api/alltijiao_xxjs';
+                    // }
+                    this.$axios.post(url, {type: parseInt(this.type_btn)}).then(res => {
+                        if (res.status == 200) {
+                            alert('可提交');
+                        }
+                    })
                 } else {
                     this.$message({
                         message: '您尚为所有投标人添加划档信息，请添加后再提交！',
@@ -298,6 +412,9 @@
                 this.pageLoading = true;
                 this.init();
             },
+            scoreShowsBtn(){//评分说明编辑
+                this.$store.state.failureEnery.ScoreShows = true;
+            },
         }
     }
 </script>
@@ -311,6 +428,7 @@
         margin-left: 5px;
         line-height: 1;
     }
+
     .dingdang_warp {
         overflow: hidden;
         padding-top: 15px;

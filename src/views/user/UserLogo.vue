@@ -42,6 +42,13 @@
                         </el-row>
                         <el-row>
                             <el-col :span="10" :offset="7">
+                                <el-form-item label="证件号码：" prop="resource">
+                                    {{IDNumber}}
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="10" :offset="7">
                                 <el-form-item label="绑定邮箱：" prop="email">
                                     <!--若邮箱未绑定，则显示1@1.com,否则显示ruleForm.email-->
                                     <el-col :span="19">
@@ -125,112 +132,112 @@
                     title="邮箱绑定"
                     :visible.sync="dialogVisible"
                     width="666px">
-        <span>
-          <el-form
-                  :label-position="labelPosition"
-                  label-width="100px"
-                  :model="AddressruleForm"
-                  :rules="rules"
-                  ref="AddressruleForm">
-               <el-form-item label="邮箱绑定：">
-                 <p>{{ruleForm.email!= ''? ruleForm.email:"无"}}</p>
-               </el-form-item>
-               <el-form-item label="邮箱地址：" prop="adress">
-                        <el-input size="medium" v-model="AddressruleForm.adress" clearable></el-input>
-               </el-form-item>
-               <el-form-item>
-                    <el-button v-if="AddressruleForm.isSend" @click="handleSend" size="small" key="1">
-                        <i class=" icon iconfont  "></i>
-                        发送验证码</el-button>
-                   <el-button size="medium" v-else :disabled="true" key="2">
-                         <i class=" icon iconfont  mr5"></i>
-                         重新发送({{AddressruleForm.sendTime}})
-                   </el-button>
-               </el-form-item>
-              <el-form-item label="邮箱验证码：" prop="email_code">
-                <el-input v-model="AddressruleForm.emailCode" size="medium" placeholder="请填入收到的验证码"
-                          clearable></el-input>
-              </el-form-item>
-              <!--绑定邮箱-->
-                 <el-form-item style="text-align: center;margin-left: -62px;">
-                      <el-button
-                              type="primary"
-                              size="small"
-                              @click="bingdingEmail('AddressruleForm')"
-                              :loading="myemailloading"
-                              :disabled="AddressruleForm.isSend||AddressruleForm.emailCode=== ''">
-                          <i class="icon iconfont  mr5"></i>
-                          绑定邮箱
-                      </el-button>
-                 </el-form-item>
-          </el-form>
-        </span>
+<span>
+<el-form
+        :label-position="labelPosition"
+        label-width="100px"
+        :model="AddressruleForm"
+        :rules="rules"
+        ref="AddressruleForm">
+<el-form-item label="邮箱绑定：">
+<p>{{ruleForm.email!= ''? ruleForm.email:"无"}}</p>
+</el-form-item>
+<el-form-item label="邮箱地址：" prop="adress">
+<el-input size="medium" v-model="AddressruleForm.adress" clearable></el-input>
+</el-form-item>
+<el-form-item>
+<el-button v-if="AddressruleForm.isSend" @click="handleSend" size="small" key="1">
+<i class=" icon iconfont  "></i>
+发送验证码</el-button>
+<el-button size="medium" v-else :disabled="true" key="2">
+<i class=" icon iconfont  mr5"></i>
+重新发送({{AddressruleForm.sendTime}})
+</el-button>
+</el-form-item>
+<el-form-item label="邮箱验证码：" prop="email_code">
+<el-input v-model="AddressruleForm.emailCode" size="medium" placeholder="请填入收到的验证码"
+          clearable></el-input>
+</el-form-item>
+    <!--绑定邮箱-->
+<el-form-item style="text-align: center;margin-left: -62px;">
+<el-button
+        type="primary"
+        size="small"
+        @click="bingdingEmail('AddressruleForm')"
+        :loading="myemailloading"
+        :disabled="AddressruleForm.isSend||AddressruleForm.emailCode=== ''">
+<i class="icon iconfont  mr5"></i>
+绑定邮箱
+</el-button>
+</el-form-item>
+</el-form>
+</span>
             </el-dialog>
             <!--手机号绑定弹框-->
             <el-dialog
                     title="手机绑定"
                     :visible.sync="phoneBindingDialog"
                     width="666px">
-            <span class="fs12 co33">
-            <el-form
-                    :label-position="labelPosition"
-                    label-width="110px"
-                    :model="dynamicValidateFormTel"
-                    :rules="rulesTel"
-                    ref="dynamicValidateFormTel">
-                  <el-form-item label="绑定手机：">
-                      <p>{{ruleForm.componyTel != "" ?ruleForm.componyTel : "无"}}</p>
-                  </el-form-item>
-                       <el-form-item label="手机号码：" prop="tel">
-                       <el-input size="medium" v-model="dynamicValidateFormTel.tel" clearable></el-input>
-                  </el-form-item>
-                  <el-form-item label="图片验证码：" prop="imgCode">
-                       <el-input
-                               size="medium"
-                               v-model="dynamicValidateFormTel.imgCode"
-                               class="picnumIpt"
-                               style="width: 200px"
-                               clearable>
-                       </el-input>
-                       <i class="fa fa-shield"></i>
-                       <canvas id="canvass" class="poi" width="70" height="30"></canvas>
-                  </el-form-item>
-                  <el-form-item>
-                        <el-button
-                                v-if="dynamicValidateFormTel.isSend"
-                                @click="handleSendTel"
-                                size="small"
-                                key="1"
-                        >
-                            <i class="icon iconfont  mr5"></i>发送验证码
-                        </el-button>
-                        <el-button
-                                v-else
-                                :disabled="true"
-                                type="primary"
-                                size="small"
-                                key="2">
-                            <i class=" icon iconfont icon-zhongxinfasong mr5"></i>
-                            重新发送({{dynamicValidateFormTel.sendTime}})
-                        </el-button>
-                     </el-form-item>
-                      <el-form-item label="手机验证码：">
-                          <el-input v-model="dynamicValidateFormTel.telCode" size="medium" placeholder="请输入收到的验证码"
-                                    clearable></el-input>
-                      </el-form-item>
-                      <el-form-item style="text-align: center;margin-left: -62px;">
-                           <el-button
-                                   type="primary"
-                                   :disabled="dynamicValidateFormTel.isSend||dynamicValidateFormTel.telCode === ''"
-                                   @click="handleBindTel(dynamicValidateFormTel)"
-                                   :loading="myphoneloading"
-                                   size="small">
-                               <i class="icon fs14 icon-bangdingshouji mr5"></i>
-                               绑定手机
-                           </el-button>
-                      </el-form-item>
-              </el-form>
-            </span>
+<span class="fs12 co33">
+<el-form
+        :label-position="labelPosition"
+        label-width="110px"
+        :model="dynamicValidateFormTel"
+        :rules="rulesTel"
+        ref="dynamicValidateFormTel">
+<el-form-item label="绑定手机：">
+<p>{{ruleForm.componyTel != "" ?ruleForm.componyTel : "无"}}</p>
+</el-form-item>
+<el-form-item label="手机号码：" prop="tel">
+<el-input size="medium" v-model="dynamicValidateFormTel.tel" clearable></el-input>
+</el-form-item>
+<el-form-item label="图片验证码：" prop="imgCode">
+<el-input
+        size="medium"
+        v-model="dynamicValidateFormTel.imgCode"
+        class="picnumIpt"
+        style="width: 200px"
+        clearable>
+</el-input>
+<i class="fa fa-shield"></i>
+<canvas id="canvass" class="poi" width="70" height="30"></canvas>
+</el-form-item>
+<el-form-item>
+<el-button
+        v-if="dynamicValidateFormTel.isSend"
+        @click="handleSendTel"
+        size="small"
+        key="1"
+>
+<i class="icon iconfont  mr5"></i>发送验证码
+</el-button>
+<el-button
+        v-else
+        :disabled="true"
+        type="primary"
+        size="small"
+        key="2">
+<i class=" icon iconfont icon-zhongxinfasong mr5"></i>
+重新发送({{dynamicValidateFormTel.sendTime}})
+</el-button>
+</el-form-item>
+<el-form-item label="手机验证码：">
+<el-input v-model="dynamicValidateFormTel.telCode" size="medium" placeholder="请输入收到的验证码"
+          clearable></el-input>
+</el-form-item>
+<el-form-item style="text-align: center;margin-left: -62px;">
+<el-button
+        type="primary"
+        :disabled="dynamicValidateFormTel.isSend||dynamicValidateFormTel.telCode === ''"
+        @click="handleBindTel(dynamicValidateFormTel)"
+        :loading="myphoneloading"
+        size="small">
+<i class="icon fs14 icon-bangdingshouji mr5"></i>
+绑定手机
+</el-button>
+</el-form-item>
+</el-form>
+</span>
             </el-dialog>
             <!-- 裁剪dialog------------------------------  -->
             <el-dialog
@@ -331,11 +338,12 @@
                         {pattern: /^\d{4}$/, message: '手机图片验证码不正确', trigger: 'blur'}
                     ]
                 },
-                // 头像裁剪数据绑定 -----------------
+// 头像裁剪数据绑定 -----------------
                 centerDialogVisible: false,
-                // beforeCropImgUrl:'',
+// beforeCropImgUrl:'',
                 afterCropImgUrl: '',
-                // ---------------------------------
+// ---------------------------------
+                IDNumber: ''//证件号码
             };
         },
         mounted() {
@@ -346,15 +354,16 @@
                     localStorage.setItem("loginData", JSON.stringify(res.data.data));
                     this.name = res.data.data.name;
                     this.pass = res.data.data.pass;
+                    this.IDNumber = res.data.massageList.IDNumber;
                     if (this.ruleForm.email == res.data.massageList.emaile) {
-                        // this.$message('当前邮箱已绑定');
+// this.$message('当前邮箱已绑定');
                     } else if (this.ruleForm.email != res.data.massageList.emaile) {
-                        // this.$message('当前邮箱未绑定');
+// this.$message('当前邮箱未绑定');
                     }
                     else if (this.ruleForm.componyTel == res.data.massageList.phoneNum) {
-                        // this.$message('当前手机号码已绑定');
+// this.$message('当前手机号码已绑定');
                     } else if (this.ruleForm.componyTel != res.data.massageList.phoneNum) {
-                        // this.$message('当前手机号未绑定');
+// this.$message('当前手机号未绑定');
                     }
                     else if (res.data.type.value == 1) {
                         this.isshow_headpic = true;
@@ -365,7 +374,7 @@
             });
         },
         methods: {
-            // 提交的时候存到localstorage
+// 提交的时候存到localstorage
             submitForm(formName) {
                 console.log(this.$data.ruleForm);
                 this.$refs[formName].validate((valid) => {
@@ -375,7 +384,7 @@
                             data: JSON.stringify(this.$data.ruleForm)
                         }).then(res => {
                             if (res.data.code == 200) {
-                                // console.log(res.data);
+// console.log(res.data);
                                 this.mydataloading = false;
                                 this.$message({
                                     type: 'success',
@@ -390,7 +399,7 @@
                     }
                 });
             },
-            //点击发送按钮（邮箱弹窗）
+//点击发送按钮（邮箱弹窗）
             handleSend() {
                 let that = this;
                 this.$refs['AddressruleForm'].validate((valid) => {
@@ -415,12 +424,12 @@
                             }
                         }, 1000)
                     } else {
-                        // console.log('error submit!!');
+// console.log('error submit!!');
                         return false;
                     }
                 });
             },
-            //绑定邮箱按钮
+//绑定邮箱按钮
             bingdingEmail() {
                 if (this.AddressruleForm.emailCode == this.acceptEmailCode) {
                     this.myemailloading = true;
@@ -445,7 +454,7 @@
                     });
                 }
             },
-            //绑定手机按钮
+//绑定手机按钮
             handleBindTel() {
                 if (this.dynamicValidateFormTel.telCode == this.acceptPhoneCode) {
                     this.myphoneloading = true;
@@ -470,7 +479,7 @@
                     });
                 }
             },
-            //发送手机验证码
+//发送手机验证码
             handleSendTel() {
                 let that = this;
                 this.$refs['dynamicValidateFormTel'].validate((valid) => {
@@ -505,7 +514,7 @@
                     }
                 });
             },
-            //填充验证码
+//填充验证码
             fillVerificationCode(verificationCode) {
                 let canvas = document.getElementById('canvass');
                 let ctx = canvas.getContext('2d');
@@ -515,17 +524,17 @@
                     ctx.drawImage(img, 0, 0);
                 };
             },
-            //邮箱修改绑定
+//邮箱修改绑定
             modify_binding() {
                 this.dialogVisible = true;
                 this.AddressruleForm.adress = '';
                 this.AddressruleForm.isSend = true;
             },
-            //邮箱绑定
+//邮箱绑定
             binding() {
                 this.dialogVisible = true;
             },
-            //手机修改绑定
+//手机修改绑定
             phoneModifyBinding() {
                 this.phoneBindingDialog = true;
                 this.dynamicValidateFormTel.tel = '';
@@ -536,7 +545,7 @@
             phoneBinding() {
                 this.phoneBindingDialog = true;
             },
-            // 头像裁剪上传操作-----------------------------
+// 头像裁剪上传操作-----------------------------
             crop_Header_Img() {
                 this.centerDialogVisible = true;
             },
@@ -556,9 +565,9 @@
                     key: uploadImg,
                     id: id_num,
                     callbacks: function (data, status) {
-                        // console.log(data,status);
+// console.log(data,status);
                         data.files.forEach((item) => {
-                            // console.log(item)
+// console.log(item)
                             var str = item.path;
                             var urlReg = str.replace(/\\/g, "/");
                             var laterUrl = urlReg.lastIndexOf("/");
@@ -572,11 +581,11 @@
             },
             Confirm() {
                 console.log('0')
-                // console.log(dataOptions)
+// console.log(dataOptions)
                 this.$axios.post('/api/comfirm_crop').then(res => {
                     if (res.status == 200) {
-                        //     console.log(res.data);
-                        //     if(res.status == '200'){
+//     console.log(res.data);
+//     if(res.status == '200'){
                         this.centerDialogVisible = !true;
                         $("#image").cropper('destroy');
                         $("#image").hide();
@@ -677,3 +686,89 @@
         }
     }
 </style>
+
+
+<!--<template>-->
+    <!--<div>-->
+        <!--<el-table-->
+                <!--:data="dingdang_tableData"-->
+                <!--style="width: 100%" class="dingdang_table">-->
+            <!--<el-table-column-->
+                    <!--label="打分项"-->
+                    <!--width="450" fixed prop="grade">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column label="投标人">-->
+                <!--<el-table-column :label="item.companyName"-->
+                                 <!--v-for="(item,index ) in companyNameList"-->
+                                 <!--width="450" :key="index">-->
+                    <!--<template slot-scope="scope">-->
+                        <!--<div>-->
+                            <!--<div v-if="scope.row.type === 'radio'">-->
+                                <!--<el-radio-group v-model="scope.row['radio' + index]">-->
+                                    <!--<el-radio v-for="(val,i) in scope.row.radioList" :label="i">{{val.name}}</el-radio>-->
+                                <!--</el-radio-group>-->
+                            <!--</div>-->
+                            <!--<div v-if="scope.row.type === 'input'">-->
+                                <!--<div>是否官方配置（10-50）分</div>-->
+                                <!--<el-input v-model="scope.row['input' + index]" size="small"-->
+                                          <!--placeholder="请输入内容"></el-input>-->
+                            <!--</div>-->
+                            <!--<div v-if="scope.row.type === 'string'">-->
+                                <!--<span v-for="(amt,idx ) in  scope.row.zhaunjiadata_gs">-->
+                                        <!--&lt;!&ndash;<span>{{amt.zhaunjia1[scope.$index]}}</span>&ndash;&gt;-->
+                                      <!--{{amt}}-->
+                                 <!--</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</template>-->
+                <!--</el-table-column>-->
+            <!--</el-table-column>-->
+        <!--</el-table>-->
+    <!--</div>-->
+<!--</template>-->
+<!--<script>-->
+
+    <!--export default {-->
+        <!--name: "business-other",-->
+        <!--components: {},-->
+        <!--data() {-->
+            <!--return {-->
+                <!--dingdang_tableData: [//打分项-->
+                    <!--{grade: '第一章、商务 （30.00分）', type: 'radio',  radioList:[{name:'A: 10分'},{name:'b: 20分'},{name:'b: 30分'}]},-->
+                    <!--{grade: '第一章、 商务1（50.00分）', type: 'input',  radioList:[{name:'A: 10分'},{name:'b: 20分'},{name:'b: 30分'}]},-->
+                    <!--{grade: '商务小计（分）', type: 'string',  zhaunjiadata_gs:['10分','3分','0']},-->
+                    <!--{grade: '总分小计（分）', type: 'string',  zhaunjiadata_gs:['10分','3分','0']},-->
+                <!--],-->
+                <!--companyNameList: [//(投标人)公司名-->
+                    <!--{-->
+                        <!--companyName: "重庆网控科技发展有限公司（1）",-->
+                        <!--// zhaunjiadata_gs: [-->
+                        <!--//     {-->
+                        <!--//         zhaunjia1: ["", "", "10", '10']-->
+                        <!--//     },-->
+                        <!--// ]-->
+                    <!--},-->
+                    <!--{-->
+                        <!--companyName: "普瑞太阳能有限公司（2）",-->
+                        <!--// zhaunjiadata_gs: [-->
+                        <!--//     {-->
+                        <!--//         zhaunjia1: ['', "", "10", '10']-->
+                        <!--//     },-->
+                        <!--// ]-->
+                    <!--},-->
+                    <!--{-->
+                        <!--companyName: "夏丰热工研究院有限公司（3）",-->
+                        <!--// zhaunjiadata_gs: [-->
+                        <!--//     {-->
+                        <!--//         zhaunjia1: ["", "", "20", '20']-->
+                        <!--//     },-->
+                        <!--// ]-->
+                    <!--},-->
+                <!--],-->
+            <!--}-->
+        <!--},-->
+    <!--}-->
+<!--</script>-->
+<!--<style>-->
+
+<!--</style>-->

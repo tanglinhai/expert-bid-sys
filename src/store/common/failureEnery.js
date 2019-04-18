@@ -15,6 +15,7 @@ export default {
         parent_progress_show:true,
         viewSchedule:false,//查看定档表弹框
         ViewUnfinishedItems:false,//查看未完成项
+        ScoreShows:false,//评分说明编辑
 
     }
 }
