@@ -4,34 +4,6 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
-                 <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                    <h5 class="commonTitle col348fe2 oneanonter">项目信息</h5>
-                </div>
-                <el-table
-                    class="mt20 fl"
-                    :data="projectInformation"
-                    :show-header="false"
-                    border
-                    style="width: 100%">
-                    <el-table-column
-                        prop="projectInformationname"
-                        label="1"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="projectInformation_name"
-                        label="招标文件">
-                    </el-table-column>
-                    <el-table-column
-                        prop="projectInformationbianhao"
-                        label="招标文件">
-                    </el-table-column>
-                    <el-table-column
-                        prop="projectInformationbian_hao"
-                        label="招标文件">
-                    </el-table-column>
-                   
-                </el-table> -->
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
                     <h5 class="commonTitle col348fe2 oneanonter">专家个人信息</h5>
                 </div>
@@ -85,16 +57,7 @@
                         label="投标文件">
                     </el-table-column>
                 </el-table>
-                <!-- <el-pagination
-                    class="fr mt10"
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="ChakanPage1"
-                    :page-sizes="[100, 200, 300, 400]"
-                    :page-size="100"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="400">
-                </el-pagination> -->
+                
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                     <!-- <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar">
@@ -131,58 +94,6 @@
                 </div>
         </el-dialog> -->
         <!--申请回避弹框-->
-        <!--文件查看弹框-->
-        <!-- <el-dialog
-            title="投标文件列表"
-            :visible.sync="chakancenterDialogVisible"
-            width="60%"
-            center>
-            <span class="cf">
-                <template>
-                    <el-table
-                    :data="ChakanTableData"
-                    :header-cell-style="getRowClass"
-                    style="width: 100%">
-                    <el-table-column
-                        prop="bianhao"
-                        label="分包号"
-                        width="230">
-                    </el-table-column>
-                    <el-table-column
-                        prop="baoname"
-                        label="包名称"
-                        width="350">
-                    </el-table-column>
-                    <el-table-column
-                        prop="name"
-                        label="文件名称"
-                        width="300">
-                    </el-table-column>
-                     <el-table-column
-                        label="操作">
-                        <template slot-scope="scope">
-                            <el-button @click="ChakanhandleClick(scope.row)" size="small"><i class="el-icon-document"></i>&nbsp;&nbsp;查看</el-button>
-                            <a class="ml15" href="http://localhost:7000/img/download.svc" download=""><el-button size="small"><i class="el-icon-download"></i>&nbsp;&nbsp;下载</el-button></a>
-                        </template>
-                    </el-table-column>
-                    </el-table>
-                </template>
-                <el-pagination
-                    class="fr mt10"
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="ChakanPage1"
-                    :page-sizes="[100, 200, 300, 400]"
-                    :page-size="100"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="400">
-                </el-pagination>
-            </span>
-            <span slot="footer" class="dialog-footer">
-                <el-button size="small" type="primary" @click="chakancenterDialogVisible = false">返回</el-button>
-            </span>
-        </el-dialog> -->
-        <!--文件查看弹框-->
         </div>
     </div>
 </template>
@@ -206,9 +117,7 @@
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
-                // projectInformation:[  //项目信息
-                //     {projectInformationname:'项目名称：',projectInformation_name:'',projectInformationbianhao:'项目编号：',projectInformationbian_hao:''}
-                // ],
+               
                 tableData2:[  //专家个人信息
                     {name:'姓名：',num:'',tel:"手机：",telNum:'18700000003'},
                     {name:'证件号码：',num:'352226199505120036'},
@@ -216,13 +125,6 @@
                 tableData3:[  //投标人信息
                     
                 ],
-                // ChakanTableData:[{
-                //     bianhao:"",
-                //     baoname:"",
-                //     name:"",
-                // }],//招标文件查看弹框内容
-                // ChakanPage1:1, //分页
-                // dialogApplyAvoid:false,
                 ruleForm: {
                     desc: ''
                 },
@@ -262,20 +164,9 @@
                 this.tBrMsgLoading=true;
                 this.AllInformation();
             },
-            // ChakanTk(item){  //投标人信息查看点击事件
-            //     console.log(item,999)
-            //     this.chakancenterDialogVisible=true;
-            //     this.ChakanTableData[0].bianhao=item.toubiaorenFenbao;
-            //     this.ChakanTableData[0].baoname=item.baoname;
-            //     this.ChakanTableData[0].name=item.toubiaorenName;
-            // },
-            // ChakanhandleClick(row){   //招标文件查看弹框的查看事件
-            //     console.log(row,999)
-            //      window.open(window.location.protocol+'//'+window.location.host+'/img/receipt.pdf');
-            // },
-
             //专家个人信息,投标人信息接口
             AllInformation(){
+                this.tBrMsgLoading=true;
                 this.$axios.post('/api/CheckReferrals',{
                 }).then(res=>{
                     if(res.status == 200){
@@ -284,8 +175,6 @@
                         this.tableData2[0].telNum=res.data.personInformation.personTel;
                         this.tableData2[1].num=res.data.personInformation.personNumber;
                         this.tableData3=res.data.toubiaorenInformation;
-                        // this.projectInformation[0].projectInformation_name=res.data.personInformation.projectInformation_name;
-                        // this.projectInformation[0].projectInformationbian_hao=res.data.personInformation.projectInformationbian_hao;
                         this.tBrMsgLoading=false;
                         this.pageLoading=false;
 
@@ -365,7 +254,6 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
-   
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;

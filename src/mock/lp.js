@@ -276,6 +276,26 @@ let statuss = Mock.mock('/api/status','post',{
 });
 
 
+let BeijingOrHebei=Mock.mock('/api/BeijingOrHebei','post',{  //点击批量签字得接口
+    "resultCode": 200,
+    "resultMsg": "",
+    "resultBody":
+        {
+            'role|1':[0,1],     // 0:普通评标专家， 1：评标专家组长
+            'system|1':[' ','0','1']////,  //空：未选择签字系统，0：主平台签字系统， 1：河北签字系统
+        }
+});
+
+let seal = Mock.mock('/stamp/seal','post',{   //河北签章提交接口
+    "resultCode": 200,
+});
+
+let chooseSys = Mock.mock('/stamp/chooseSys','post',{  //选择北京或者河北得签字系统接口
+    "resultCode": 200,
+
+});
+
+
 //SignaturePage签字数据接口
 
 //leaderSignaturePage接口
@@ -355,11 +375,12 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
         projectName:'单信封-0305-1',
         projectNumber:'0635-1909qwerN1133',
         projectWenjian:'招标文件(pdf)',
+        PersonName:'张三'
     },
     navsAll:[{
             value: '1',//
-            label: '承诺书',
-            types: 1,
+            label: '承诺书',  //步数字段
+            types: 1,  //types代表第几步对应相对应得步数
         },{
             value: '2',//
             label: '参加评标',

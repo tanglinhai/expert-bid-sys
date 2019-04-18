@@ -45,7 +45,7 @@
 		  </el-menu-item>
 		  <el-submenu index="5" popper-class="head-submenu">
 		    <template slot="title">
-		    	<img src=""/>张三
+		    	<img src=""/>{{ProjectInformationsAll.PersonName}}
 		    </template>
 		    <el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>
 		    <el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>
@@ -92,24 +92,24 @@
 		<!--环境检测弹框-->
 
 		<!--推举情况弹框-->
-            <el-dialog
-                title="推举主任情况"
-                :visible.sync="dialogSelectionDirector"
-                width="50%"
-            >
-                <div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
-                    <div class="failureoOject">
-                        {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
-                    </div>
-                    <el-row class="textAlignC dijilun" v-for="(item,index) in CheckReferralsList" :key="index">
-                        <el-col :span="4">第{{item.number}}轮</el-col>
-                        <el-col :span="16">
-                            <span v-for="(item,index) in item.children" :key="index">{{item.name}}({{item.peopleNumber}}票)</span>
-                        </el-col>
-                    </el-row>
-                </div>
-            </el-dialog>
-        <!--推举情况弹框-->
+				<el-dialog
+						title="推举主任情况"
+						:visible.sync="dialogSelectionDirector"
+						width="50%"
+				>
+						<div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
+								<div class="failureoOject">
+										{{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
+								</div>
+								<el-row class="textAlignC dijilun" v-for="(item,index) in CheckReferralsList" :key="index">
+										<el-col :span="4">第{{item.number}}轮</el-col>
+										<el-col :span="16">
+												<span v-for="(item,index) in item.children" :key="index">{{item.name}}({{item.peopleNumber}}票)</span>
+										</el-col>
+								</el-row>
+						</div>
+				</el-dialog>
+		<!--推举情况弹框-->
 
 
   </div>
@@ -150,7 +150,7 @@ export default {
 		this.dialogSelectionDirector=true;
 		this.ElevatedSituationLoading=true;
 		this.$axios.post('/api/CheckReferralsTuiju',{
-
+				//id:id,
 		}).then(res=>{
 			if(res.status==200){
 				//console.log(res.data,88888) 
