@@ -226,7 +226,7 @@
                 look_unlock_dialog: [],//解锁申请记录
                 other_explain: "",//其他说明
                 individualTrialData: [],//查看个人资格审查项表弹框数据
-                companyName: [],
+                companyName: [],//查看个人资格审查项表弹框投标人
                 form: {
                     desc: ''
                 },

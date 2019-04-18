@@ -88,9 +88,9 @@
                     callback(new Error('与原密码不符'));
                 }
                 else {
-                    // if (this.ruleForm.new_pass_again !== '') {
-                    //     this.$refs.ruleForm.validateField('new_pass_again');
-                    // }
+// if (this.ruleForm.new_pass_again !== '') {
+//     this.$refs.ruleForm.validateField('new_pass_again');
+// }
                     callback();
                 }
             };
@@ -100,11 +100,11 @@
                 } else if (value.length < 8) {
                     callback(new Error('请输入一个长度最少是 8 的字符串'));
                 } else if (value.length >= 8) {
-                    // let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+// let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
                     let targ = /^(?=.*[a-z])(?=.*[A-Z])[^]{8,16}$/;
                     if (!targ.test(value)) {
                         console.log(value);
-                        // 密码为数字和字母的组合，至少包含一位大写字母和一位小写字母
+// 密码为数字和字母的组合，至少包含一位大写字母和一位小写字母
                         callback(new Error('密码为数字和字母的组合，至少包含一位大写字母和一位小写字母'));
                     }
                     callback();
@@ -150,7 +150,7 @@
             $(".CommonProject").hide();
             this.$axios.post('/api/login').then(res => {
                 if (res.status === 200) {
-                    // console.log(res.data.msg.pass);
+// console.log(res.data.msg.pass);
                     this.loginPass = res.data.msg.pass;
                 }
             });
@@ -176,9 +176,9 @@
                             }
                         }
                     }
-                    // else if(string.length>0&&string.length<6){
-                    //     $(".red_text").text("请输入一个长度最少是8的字符串")
-                    // }
+// else if(string.length>0&&string.length<6){
+//     $(".red_text").text("请输入一个长度最少是8的字符串")
+// }
                     else {
                         noticeAssign(null);
                     }
@@ -229,7 +229,7 @@
                             data: JSON.stringify(this.$data.ruleForm)
                         }).then(res => {
                             if (res.data.code == 200) {
-                                // console.log(res.data);
+// console.log(res.data);
                                 this.mydataloading = false;
                                 this.$message({
                                     type: 'success',
@@ -290,9 +290,9 @@
                                     }
                                     .transition {
                                         transition: background-color .5s ease-in;
-                                        -moz-transition: background-color .5s ease-in;
-                                        -webkit-transition: background-color .5s ease-in;
-                                        -o-transition: background-color .5s ease-in;
+                                         -moz-transition: background-color .5s ease-in;
+                                         -webkit-transition: background-color .5s ease-in;
+                                         -o-transition: background-color .5s ease-in;
                                     }
                                 }
                                 .tips_text {
@@ -316,3 +316,4 @@
         }
     }
 </style>
+
