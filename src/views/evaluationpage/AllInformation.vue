@@ -4,72 +4,125 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
-                <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
-                    <h5 class="commonTitle col348fe2 oneanonter">专家个人信息</h5>
+                <div class="LayoutLeftSide">
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                        <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
+                    </div>
+                    <!-- <el-table
+                        v-loading="tBrMsgLoading"
+                        class="fl"
+                        :data="tableData3"
+                        border
+                        style="width: 100%">
+                        <el-table-column
+                            type="index"
+                            label="序号"
+                            width="180">
+                        </el-table-column>
+                        <el-table-column
+                            prop="toubiaorenName"
+                            label="投标人名称">
+                            <template slot-scope="scope">
+                                <span>{{scope.row.toubiaorenName}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="toubiaorenFenbao"
+                            label="投标文件">
+                        </el-table-column>
+                    </el-table> -->
+                    <ul class="ul">
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em>北京蓝天环境保护有限公司</em>
+                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <el-table
-                    class="mt20 fl"
-                    :data="tableData2"
-                    :show-header="false"
-                    border
-                    style="width: 100%">
-                    <el-table-column
-                        prop="name"
-                        label="1"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="num"
-                        label="招标文件">
-                    </el-table-column>
-                    <el-table-column
-                        prop="tel"
-                        label="招标文件">
-                    </el-table-column>
-                    <el-table-column
-                        prop="telNum"
-                        label="招标文件">
-                    </el-table-column>
-                </el-table>
-                <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
-                    <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
-                </div>
-                <el-table
-                    v-loading="tBrMsgLoading"
-                    class="mt20 fl"
-                    :data="tableData3"
-                    border
-                    style="width: 100%">
-                    <el-table-column
-                        type="index"
-                        label="序号"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="toubiaorenName"
-                        label="投标人名称">
-                        <template slot-scope="scope">
-                            <span>{{scope.row.toubiaorenName}}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column
-                        prop="toubiaorenFenbao"
-                        label="投标文件">
-                    </el-table-column>
-                </el-table>
-                
-                <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
-                    <!-- <el-col :span="12" :offset="6">
-                        <div class="grid-content bg-purple mar">
-                            <el-checkbox v-model="checked"></el-checkbox>&nbsp;我已读并同意了此承诺书《承诺书协议》 
-                        </div>
-                    </el-col> -->
-                    <el-col :span="12" :offset="6">
-                        <div class="grid-content bg-purple mar mt20">
-                            <el-button size="small" type="primary" @click="applyAvoid">申请回避</el-button>
-                            <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
-                        </div>
-                    </el-col>
+                <el-row class="LayoutRightSide">
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                        <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
+                    </div>
+                    <div class="fr">
+                        当前状态
+                        <el-tag>已完成</el-tag>
+                    </div>
+                    <div class="grid-content bg-purple fl" style="margin-left:30px;">
+                        <el-button size="small"  @click="applyAvoid">申请回避</el-button>
+                        <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
+                    </div>
                 </el-row>
             </div>
 
@@ -118,10 +171,7 @@
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
                
-                tableData2:[  //专家个人信息
-                    {name:'姓名：',num:'',tel:"手机：",telNum:'18700000003'},
-                    {name:'证件号码：',num:'352226199505120036'},
-                ],
+               
                 tableData3:[  //投标人信息
                     
                 ],
@@ -171,9 +221,7 @@
                 }).then(res=>{
                     if(res.status == 200){
                         //console.log(res.data.personInformation)
-                        this.tableData2[0].num=res.data.personInformation.personName;
-                        this.tableData2[0].telNum=res.data.personInformation.personTel;
-                        this.tableData2[1].num=res.data.personInformation.personNumber;
+                        
                         this.tableData3=res.data.toubiaorenInformation;
                         this.tBrMsgLoading=false;
                         this.pageLoading=false;
@@ -269,9 +317,104 @@
             }
         }
         .evaluationcommon{
-            background:white;
             border-radius:5px;
-            padding:15px;
+            position: relative;
+            .LayoutLeftSide{
+                margin-right:280px;
+                background:white;
+                .grid-content{
+                    background:white;
+                    width:100%;
+                    padding:20px 0px;
+                    border-radius:5px 5px 0px 0px;
+                    .commonTitle:before{
+                        margin-left:15px;
+                    }
+                }
+                .ul{
+                    border-radius:0px 0px 5px 5px;
+                    margin-left:15px;
+                    min-height:500px;
+                    li{
+                        display: inline-block;
+                        margin-right: 15px;
+                        margin-bottom:20px;
+                        a{
+                            display: block;
+                            border: 1px solid #c4c4c4;
+                            -webkit-border-radius: 6px;
+                            -moz-border-radius: 6px;
+                            -ms-border-radius: 6px;
+                            -o-border-radius: 6px;
+                            border-radius: 6px;
+                            padding: 15px;
+                            overflow: hidden;
+                            color: #414141;
+                            position: relative;
+                            &:hover{
+                                background:#ededed;
+                            }
+                            span{
+                                position: absolute;
+                                display: inline-block;
+                                background: #348fed;
+                                color: white;
+                                width: 18px;
+                                height: 18px;
+                                -webkit-border-radius: 0 0 100%;
+                                -moz-border-radius: 0 0 100%;
+                                -ms-border-radius: 0 0 100%;
+                                -o-border-radius: 0 0 100%;
+                                border-radius: 0 0 100%;
+                                text-indent: 2px;
+                                top: 0px;
+                                left: 0px;
+                                line-height: 18px;
+                            }
+                            .evaluationcommon_chakan_right p {
+                                float: left;
+                                margin-left: 7px;
+                                font-size:14px;
+                                em{
+                                    display:block;
+                                    color:#62a1e3;
+                                    margin-bottom:10px;
+                                }
+                                strong{
+                                    b{
+                                        color:#5260e9;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .LayoutRightSide{
+               overflow: hidden;
+                width: 266px;
+                background: white;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+                border-radius: 5px;
+                position: absolute;
+                right: 0px;
+                top:0px;
+                height: 100%;
+                .grid-content{
+                    padding:20px 0px;
+                    width:80%;
+                    .commonTitle:before{
+                        margin-left:15px;
+                    }
+                    .el-button{
+                        width:100px;
+                        height:74px;
+                    }
+                }
+            }
         }
     }
 }
