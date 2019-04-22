@@ -4,30 +4,12 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <div class="evaluationcommon cf">
-                <div class="LayoutLeftSide">
-                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                        <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
-                    </div>
-                    <ul class="ul">
-                        <li v-for="(item,index) in tableData3" :key="index">
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">{{item.baoname}}</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>{{item.toubiaorenName}}</em>
-                                        <strong>招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                       
-                    </ul>
-                </div>
+               <MessageCommon :tableData3="tableData3" :dianji="0"></MessageCommon>
                 <el-row class="LayoutRightSide">
                     <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                         <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
                     </div>
-                    <div class="fr">
+                    <div class="fr mr20">
                         当前状态
                         <el-tag>已完成</el-tag>
                     </div>
@@ -66,11 +48,13 @@
 <script>
     
     // import NavCommon from '../../components/publicVue/NavCommon.vue';
+    import MessageCommon from '../../components/publicVue/MessageCommon.vue'
     export default {
         name: 'index',
         props: {},
         components: {
             // NavCommon
+            MessageCommon
         },
         data(){
             return {
@@ -228,77 +212,6 @@
         .evaluationcommon{
             border-radius:5px;
             position: relative;
-            .LayoutLeftSide{
-                margin-right:280px;
-                background:white;
-                .grid-content{
-                    background:white;
-                    width:100%;
-                    padding:20px 0px;
-                    border-radius:5px 5px 0px 0px;
-                    .commonTitle:before{
-                        margin-left:15px;
-                    }
-                }
-                .ul{
-                    border-radius:0px 0px 5px 5px;
-                    margin-left:15px;
-                    min-height:500px;
-                    li{
-                        display: inline-block;
-                        margin-right: 15px;
-                        margin-bottom:20px;
-                        a{
-                            display: block;
-                            border: 1px solid #c4c4c4;
-                            -webkit-border-radius: 6px;
-                            -moz-border-radius: 6px;
-                            -ms-border-radius: 6px;
-                            -o-border-radius: 6px;
-                            border-radius: 6px;
-                            padding: 15px;
-                            overflow: hidden;
-                            color: #414141;
-                            position: relative;
-                            &:hover{
-                                background:#ededed;
-                            }
-                            span{
-                                position: absolute;
-                                display: inline-block;
-                                background: #348fed;
-                                color: white;
-                                width: 18px;
-                                height: 18px;
-                                -webkit-border-radius: 0 0 100%;
-                                -moz-border-radius: 0 0 100%;
-                                -ms-border-radius: 0 0 100%;
-                                -o-border-radius: 0 0 100%;
-                                border-radius: 0 0 100%;
-                                text-indent: 2px;
-                                top: 0px;
-                                left: 0px;
-                                line-height: 18px;
-                            }
-                            .evaluationcommon_chakan_right p {
-                                float: left;
-                                margin-left: 7px;
-                                font-size:14px;
-                                em{
-                                    display:block;
-                                    color:#62a1e3;
-                                    margin-bottom:10px;
-                                }
-                                strong{
-                                    b{
-                                        color:#5260e9;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
             .LayoutRightSide{
                overflow: hidden;
                 width: 266px;
