@@ -3,9 +3,86 @@
         <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
+            <el-row class="fs14 bid_msg mb15">
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>标名称：</span><span>2019年水利运输服务招标项目</span></div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple-light"><span>标号：</span><span>0635—1909qwerN1197</span></div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>包号：</span><span>0635—1909qwerN1197/1</span></div>
+                </el-col>
+            </el-row>
             <div class="evaluationcommon cf">
+                <div class="LayoutLeftSide">
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                        <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
+                    </div>
+                    <ul class="ul">
+                        <li v-for="(item,index) in tableData3" :key="index">
+                            <a href="javascript:;">
+                                <span style="background: rgb(52, 143, 237);">{{item.baoname}}</span>
+                                <div class="evaluationcommon_chakan_right">
+                                    <p>
+                                        <em @click="ChakanTk(item)">{{item.toubiaorenName}}</em>
+                                        <a href="http://localhost:7000/img/download.svc" download="">招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></a>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <el-row class="LayoutRightSide">
+                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                        <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
+                    </div>
+                    <div class="fr">
+                        当前状态
+                        <template v-if="projectTableData.status==0">
+                            <el-tag>进行中</el-tag>
+                        </template>
+                        <template v-if="projectTableData.status==3">
+                            <el-tag>已废标</el-tag>
+                        </template>
+                        <template v-if="projectTableData.status==1||projectTableData.status==4||projectTableData.status==5">
+                            <el-tag>进行中</el-tag>
+                        </template>
+                        <template v-if="projectTableData.status==2||projectTableData.status==6">
+                            <el-tag>已完成</el-tag>
+                        </template>
+                    </div>
+                    <div class="grid-content bg-purple fl" style="margin-left:44px;">
+                        <template v-if="projectTableData.status==0" @click="AgreeXieYi">
+                            <el-button size="small"  style="margin-left:50px;"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
+                        </template>
+                        <template v-if="projectTableData.status==3">
+                            <el-button  style="margin-left:50px;" size="small" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-message"></i>查看</el-button>
+                        </template>
+                        <template v-if="projectTableData.status==1">
+                            <el-button size="small" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
+                            <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
+                        </template>
+                        <template v-if="projectTableData.status==2">
+                            <el-button style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>评标</el-button>
+                        </template>
+                        <template v-if="projectTableData.status==4">
+                            <el-button style="margin-left:50px;" size="small" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
+                        </template>
+                        <template v-if="projectTableData.status==5">
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="padding:9px 5px;" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
+                            <el-button size="small" style=" padding:9px 5px;" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
+                        </template>
+                        <template v-if="projectTableData.status==6">
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
+                        </template>
+                    </div>
+                </el-row>
+            </div>
                 <!--表格-->
-                <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                     <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
                 </div>
                 <el-table
@@ -34,23 +111,16 @@
                             
                         </template>
                     </el-table-column>
-                </el-table>
+                </el-table> -->
                 <!--表格-->
-                <div class="eletedChange fl">
+                <!-- <div class="eletedChange fl">
                     <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL mt20">
                         <h5 class="commonTitle col348fe2 oneanonter">项目分包</h5>
                     </div>
-                    <!-- <div class="bidevaluationexperts">
-                        <div class="bidexpert">
-                            评标专家：
-                            <span>张三</span>
-                        </div>
-                        <el-button size="small" type="primary" @click.stop="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>&nbsp;&nbsp;查看推举情况</el-button>           
-                    </div> -->
-                </div>
+                </div> -->
                 <!-- </template> -->
                 <!--表格-->
-                <div class="fl mt20" style="width:100%;">
+                <!-- <div class="fl mt20" style="width:100%;">
                     <template>
                         <el-table
                         v-loading="ProjectFbLoading"
@@ -110,28 +180,9 @@
                         </el-table-column>
                         </el-table>
                     </template>
-                </div>
+                </div> -->
                 <!--表格-->
-            </div>
-            <!--推举情况弹框-->
-            <!-- <el-dialog
-                title="推举主任情况"
-                :visible.sync="dialogSelectionDirector"
-                width="50%"
-            >
-                <div class="failureEntryDialog" v-loading="ElevatedSituationLoading">
-                    <div class="failureoOject">
-                        {{baohao}}:评委组长为[<span class="cole02">{{leader}}</span> ]
-                    </div>
-                    <el-row class="textAlignC dijilun" v-for="(item,index) in CheckReferralsList" :key="index">
-                        <el-col :span="4">第{{item.number}}轮</el-col>
-                        <el-col :span="16">
-                            <span v-for="(item,index) in item.children" :key="index">{{item.name}}({{item.peopleNumber}}票)</span>
-                        </el-col>
-                    </el-row>
-                </div>
-            </el-dialog> -->
-            <!--推举情况弹框-->
+            
             <!--调整评标价弹框-->
             <el-dialog
                 title="投标人最新报价列表"
@@ -176,16 +227,6 @@
                         </el-table-column>
                         </el-table>
                     </template>
-                    <!-- <el-pagination
-                        class="fr mt10"
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="ChakanPage1"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="400">
-                    </el-pagination> -->
                 </span>
                 <span slot="footer" class="dialog-footer">
                     <el-button size="small" type="primary" @click="chakancenterDialogVisible = false">返回</el-button>
@@ -197,7 +238,7 @@
 </template>
 
 <script>
-    // import NavCommon from '../../components/publicVue/NavCommon.vue';
+    
     import ChangePrice from '../../components/publicVue/ChangePrice.vue';
     export default {
         name: 'index',
@@ -208,21 +249,19 @@
         },
         data(){
             return {
-                // navcommonsList:[],  //导航数据
-                 number:'',   //导航当前第几步
+               
 
                 TkOneloading:true,
                 pageLoading:true,  //loading
 
-                // ElevatedSituationLoading:false, //推举情况弹框loading
+                
                 ProjectFbLoading:false,  //项目分包表格loading
-                projectTableData: [],  //项目分包信息
+                projectTableData: {},  //项目分包信息
                 PorjectName:'',   //项目名称
                 ProjectBianhao:'', //项目编号
-                // dialogSelectionDirector:false,  //推举情况弹框默认隐藏
                 leader:'',  //推举主任情况组长
                 baohao:'',  //推举主任情况包号
-                // CheckReferralsList:[],  //推举主任情况弹框数据
+
                 ChangedialogVisible:false,  //调整评标价弹框
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
 
@@ -252,10 +291,8 @@
             var _this=this;
             setInterval(function(){
               _this.ProjectSubcontract();//项目分包数据  
-            },15000)
+            },300000)
             this.ProjectSubcontract();//项目分包数据
-
-            //this.navcommonsListFun(); //导航接口
 
             this.AllInformation(); //专家个人信息,投标人信息接口
 
@@ -305,22 +342,7 @@
                     }
                 })
             },
-            //查看推举情况按钮事件
-            // LookTuiju(){
-            //     this.dialogSelectionDirector=true;
-            //     this.ElevatedSituationLoading=true;
-            //     this.$axios.post('/api/CheckReferralsTuiju',{
-
-            //     }).then(res=>{
-            //         if(res.status==200){
-            //            //console.log(res.data,88888) 
-            //             this.leader=res.data.leader;
-            //             this.baohao=res.data.baohao;
-            //             this.CheckReferralsList = res.data.CheckReferralsList;
-            //             this.ElevatedSituationLoading=false;
-            //         }
-            //     })
-            // },
+          
 
             //调整评标价点击事件
             adjustedValuation(row){
@@ -354,7 +376,7 @@
                 })
             },
 
-            AgreeXieYi(){  //参加评标
+            AgreeXieYi(){  //推举组长
                 this.$router.push({
                     path: '/index/WheelPushing?types=3',
                 })
@@ -369,8 +391,7 @@
                         //console.log(res.data.personInformation)
                         
                         this.tableData3=res.data.toubiaorenInformation;
-                        //this.projectInformation[0].projectInformation_name=res.data.personInformation.projectInformation_name;
-                        //this.projectInformation[0].projectInformationbian_hao=res.data.personInformation.projectInformationbian_hao;
+                      
                         this.tBrMsgLoading=false;
                         this.pageLoading=false;
 
@@ -412,15 +433,111 @@
             border:none;
         }
         .evaluationcommon{
-             background:white;
             border-radius:5px;
-            padding:15px;
-            .oneanonter{
-              height:20px;
-              line-height:20px;
-              &:before{
-                  margin-top:1px;
-              }
+            position: relative;
+            .LayoutLeftSide{
+                margin-right:280px;
+                background:white;
+                .grid-content{
+                    background:white;
+                    width:100%;
+                    padding:20px 0px;
+                    border-radius:5px 5px 0px 0px;
+                    .commonTitle:before{
+                        margin-left:15px;
+                    }
+                }
+                .ul{
+                    border-radius:0px 0px 5px 5px;
+                    margin-left:15px;
+                    min-height:500px;
+                    li{
+                        display: inline-block;
+                        margin-right: 15px;
+                        margin-bottom:20px;
+                        >a{
+                            display: block;
+                            border: 1px solid #c4c4c4;
+                            -webkit-border-radius: 6px;
+                            -moz-border-radius: 6px;
+                            -ms-border-radius: 6px;
+                            -o-border-radius: 6px;
+                            border-radius: 6px;
+                            padding: 15px;
+                            overflow: hidden;
+                            color: #414141;
+                            position: relative;
+                            &:hover{
+                                background:#ededed;
+                            }
+                            span{
+                                position: absolute;
+                                display: inline-block;
+                                background: #348fed;
+                                color: white;
+                                width: 18px;
+                                height: 18px;
+                                -webkit-border-radius: 0 0 100%;
+                                -moz-border-radius: 0 0 100%;
+                                -ms-border-radius: 0 0 100%;
+                                -o-border-radius: 0 0 100%;
+                                border-radius: 0 0 100%;
+                                text-indent: 2px;
+                                top: 0px;
+                                left: 0px;
+                                line-height: 18px;
+                            }
+                            .evaluationcommon_chakan_right p {
+                                float: left;
+                                margin-left: 7px;
+                                font-size:14px;
+                                em{
+                                    display:block;
+                                    color:#62a1e3;
+                                    margin-bottom:10px;
+                                    &:hover{
+                                        color:#ba2636;
+                                    }
+                                }
+                                a{
+                                    b{
+                                        color:#5260e9;
+                                    }
+                                    &:hover{
+                                        b{
+                                            color:#ba2636;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .LayoutRightSide{
+               overflow: hidden;
+                width: 266px;
+                background: white;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+                border-radius: 5px;
+                position: absolute;
+                right: 0px;
+                top:0px;
+                height: 100%;
+                .grid-content{
+                    padding:20px 0px;
+                    width:80%;
+                    .commonTitle:before{
+                        margin-left:15px;
+                    }
+                    .el-button{
+                        height:44px;
+                        margin-bottom:20px;
+                    }
+                }
             }
             .bidevaluationexperts{
                 position:absolute;

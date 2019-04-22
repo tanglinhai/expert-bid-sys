@@ -8,107 +8,19 @@
                     <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                         <h5 class="commonTitle col348fe2 oneanonter">投标人信息</h5>
                     </div>
-                    <!-- <el-table
-                        v-loading="tBrMsgLoading"
-                        class="fl"
-                        :data="tableData3"
-                        border
-                        style="width: 100%">
-                        <el-table-column
-                            type="index"
-                            label="序号"
-                            width="180">
-                        </el-table-column>
-                        <el-table-column
-                            prop="toubiaorenName"
-                            label="投标人名称">
-                            <template slot-scope="scope">
-                                <span>{{scope.row.toubiaorenName}}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            prop="toubiaorenFenbao"
-                            label="投标文件">
-                        </el-table-column>
-                    </el-table> -->
                     <ul class="ul">
-                        <li>
+                        <li v-for="(item,index) in tableData3" :key="index">
                             <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
+                                <span style="background: rgb(52, 143, 237);">{{item.baoname}}</span>
                                 <div class="evaluationcommon_chakan_right">
                                     <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
+                                        <em>{{item.toubiaorenName}}</em>
+                                        <strong>招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></strong>
                                     </p>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span style="background: rgb(52, 143, 237);">1</span>
-                                <div class="evaluationcommon_chakan_right">
-                                    <p>
-                                        <em>北京蓝天环境保护有限公司</em>
-                                        <strong>招标文件：<b>今天招标文件是<i class="icon iconfont icon-pdf"></i></b></strong>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <el-row class="LayoutRightSide">
@@ -162,9 +74,6 @@
         },
         data(){
             return {
-                // navcommonsList:[],  //导航数据
-               // number:'',   //导航当前第几步
-
                 pageLoading:false,  //loading
                 tBrMsgLoading:false,  //投标人信息列表loading效果
                 chakancenterDialogVisible: false, //文件查看弹框默认隐藏

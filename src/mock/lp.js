@@ -8,12 +8,13 @@ const Random = Mock.Random;
 
 //beginEvaluation开始评标页面数据
 let tableMs = Mock.mock('/api/ProjectSubcontract', 'post', {
-    projectTables: [{  //项目分包
+    projectTables: {  //项目分包
         id: () => Random.id(),
         'baohao|1': ['0635-1909N974/1','0635-1909N974/2'],
         'baoName|1':['第一包','第二包','第三包'],
-        'status|1':['0','1','2','3'],
-    }]
+        'status|1':['0','1','2','3','4','5','6'],  //0推举组长 1.评标 调整评标价  2.评标  3.查看  4.第一信封评标 5.第一信封查看  第二信封评标  调整评标价 6.第一信封查看  第二信封查看
+        id:1234567,
+    }
 });
 
 let ProjectZiliao = Mock.mock('/api/ProjectZiliao', 'post', {
@@ -121,19 +122,19 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
     toubiaorenInformation:[{
         toubiaorenName:'重庆网控科技发展有限公司',
         toubiaorenFenbao:'pad文件1',
-        'baoname|1':['第一包','第二包','第三包']
+        baoname:1,
     },{
         toubiaorenName:'普瑞太阳能有限公司',
         toubiaorenFenbao:'pad文件2',
-        'baoname|1':['第一包','第二包','第三包']
+        baoname:1,
     },{
         toubiaorenName:'夏丰热工研究院有限公司',
         toubiaorenFenbao:'pad文件4',
-        'baoname|1':['第一包','第二包','第三包']
+        baoname:1,
     },{
         'toubiaorenName|1':['北京有限公司','夏丰热工研究院有限公司'],
         toubiaorenFenbao:'pad文件3',
-        'baoname|1':['第一包','第二包','第三包']
+        baoname:1,
     }]
 });
 //申请回避弹框原因接口
