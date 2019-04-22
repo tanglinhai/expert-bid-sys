@@ -74,7 +74,7 @@
 
     <div class="indexFix">
         <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
-        <a id="more" @click="more" style="display:block;" href="javascript:;" class="btns">批量签字</a>
+        <a id="more" @click="more" style="display:block;" href="javascript:;" class="btns"><i v-if="moreLoading" class="el-icon-loading"></i>&nbsp;&nbsp;批量签字</a>
         <a id="more2" href="http://localhost:7000/img/download.svc" download="" class="btn2">签名回执</a>
     </div>
 
@@ -82,11 +82,11 @@
     <div class="model_tk">
         <div class="ChangeCA" @click.stop>
             <img class="tkGuanbi" src="@/assets/img/guanbi.png"/>
-            <a href="javascript:;" @click="SelectBj">
+            <a href="javascript:;" @click="SelectBj" v-loading="BjLoading">
                 <img src="@/assets/img/logo222.png"/>
                 北京CA
             </a>
-            <a href="javascript:;" @click="SelectHebei">
+            <a href="javascript:;" @click="SelectHebei" v-loading="HbLoading">
                 <img src="@/assets/img/logo111.png"/>
                 河北CA
             </a>
@@ -115,7 +115,7 @@
                     <el-input type="Qianzhangpasword" v-model.number="numberValidateForm.Qianzhangpasword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item class="hebeiBtns">
-                    <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
+                    <el-button type="primary" :loading="HbTjLoaing" @click="submitForm('numberValidateForm')">提交</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -246,7 +246,11 @@ export default {
       numberValidateForm: {
           Zhengshubianhao: '',  //证书编号
           Qianzhangpasword:'',  //签章密码
-      }
+      },
+      moreLoading:false,  //批量签字按钮的loading
+      BjLoading:false,  //选择北京ca的loading
+      HbLoading:false,  //选择河北ca的loading
+      HbTjLoaing:false, //选择河北ca输入信息提交loading
       
     };
   },
@@ -377,11 +381,13 @@ export default {
     
      //$("#more").click(function(){    //签名按钮
     more(){  //签名按钮
+        this.moreLoading=true;
         this.$axios.post('/api/BeijingOrHebei', 'post', {
             // id: id,
             // type: radio
         }).then(res => {
             if (res.data.resultCode == 200) {
+                this.moreLoading=false;
                 console.log(res.data.resultBody.role,res.data.resultBody.system,777)
                 if(res.data.resultBody.role==0&&res.data.resultBody.system===' '){
                     console.log(res.data.resultBody.role,res.data.resultBody.system,88888)
@@ -429,10 +435,12 @@ export default {
     },
     //});
     SelectBj(){  //选择北京ca签章
+        this.BjLoading=true;
         this.$axios.post('/stamp/chooseSys', 'post', {
                 systemId:0  //选择北京
         }).then(res => {
             if (res.data.resultCode == 200) {
+                this.BjLoading=false;
                 $(".modal-body").show();
                 $(".HebeiQianzi").hide();
                 $(".ChangeCA").hide();
@@ -457,10 +465,12 @@ export default {
         })
     },
     SelectHebei(){//选择河北ca签章
+        this.HbLoading=true;
         this.$axios.post('/stamp/chooseSys', 'post', {
                 systemId:1  //选择河北
         }).then(res => {
             if (res.data.resultCode == 200) {
+                 this.HbLoading=false;
                  $(".modal-body").hide();
                  $(".ChangeCA").hide();
                  clearTimeout(t);
@@ -473,11 +483,13 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             //console.log(this.$data.numberValidateForm.Qianzhangpasword); //签章密码
+            this.HbTjLoaing=true;
             this.$axios.post('/stamp/seal', 'post', {
                  code:this.$data.numberValidateForm.Zhengshubianhao, //证书编号
                  pwd:this.$data.numberValidateForm.Qianzhangpasword  //签章密码
             }).then(res => {
                 if (res.data.resultCode == 200) {
+                    this.HbTjLoaing=false;
                     $(".model_tk").hide();
                     this.$refs[formName].resetFields();
                 }
