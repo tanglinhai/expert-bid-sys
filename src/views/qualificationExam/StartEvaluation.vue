@@ -120,8 +120,7 @@
                                                         :class=" $store.state.failureEnery.flag==false ?'hide_div':'nohide_div'">
                                                     <el-button @click="sublevelAllChecked" plain size="mini"
                                                                type="primary" :loading="sonAllCheckedBtnLoading">
-                                                        <i
-                                                                class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                                        <i   class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                     </el-button>
                                                     <el-button size="mini" type="primary" @click="sublevelSubmit"
                                                                :loading="sonAllSubmitBtnLoading"><i
@@ -310,6 +309,20 @@
                                               :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
             </el-dialog>
             <!--标中质询弹框-->
+            <!--全部选中提示弹框-->
+            <el-dialog
+                    title="全部选中提示"
+                    :visible.sync="$store.state.failureEnery.determineOperating"
+                    width="30%"
+            >
+                <el-row class="textAlignC fs14" style="line-height: 30px">
+                    您确定要执行此操作！
+                </el-row>
+                <el-row class="textAlignC pt20">
+                    <el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>
+                    <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
+                </el-row>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -391,7 +404,6 @@
             }
         },
         created() {
-            console.log(this.$route.query.type);
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -485,6 +497,7 @@
                 })
             },
             failuredRadio(radio, id, index, tableKey, obj, a) {//合格不合格
+                console.log(radio, id, index, tableKey, obj, a);
                 this.to_failure_entry_company_name = obj.name;
                 this.to_failure_entry_answer = a;
                 this.$axios.post('/api/isFailure_fhx', 'post', {
@@ -516,17 +529,7 @@
                 this.$store.state.failureEnery.show = false;
             },
             allChecked() {//全选（不用区分url）
-                this.allCheckedBtnLoading = true;
-                this.$axios.post('/api/allChecked_fhx', {
-                    // id:id
-                }).then(res => {
-                    if (res.status === 200) {
-                        for (let i = 0; i < this.radioArr.length; i++) {
-                            this.radioArr[i].radio = '合格';
-                        }
-                        this.allCheckedBtnLoading = false;
-                    }
-                });
+                this.$store.state.failureEnery.determineOperating = true;
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 let isAllF = true;
@@ -540,6 +543,7 @@
             },
             allSubmit() {//父级提交
                 this.allSubmitBtnLoading = true;
+                this.$store.state.failureEnery.submitPrompt = true;
                 let url;
                 if (this.isAllFilled()) {
                     if (this.type_btn == 3) {
@@ -554,15 +558,11 @@
                         if (res.status == 200) {
                             this.allSubmitBtnLoading = false;
                             this.options = res.data.vue_type;
-                            this.$store.state.failureEnery.submitPrompt = true;
+                            // this.$store.state.failureEnery.submitPrompt = true;
                         }
                     })
                 } else {
-                    this.$message({
-                        message: '请选择合格/不合格',
-                        center: true,
-                        type: 'error',
-                    });
+                    this.allSubmitBtnLoading = false;
                 }
             },
             handleCommand(val) {//弹框群
@@ -590,20 +590,12 @@
             },
             /*----------------- zTree ----------------------*/
             zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-                console.log(this.$store.state.failureEnery.flag);
-
-                // if(this.$store.state.failureEnery.flag===false){
-
-                // this.$nextTick(function(){
-                //     $('#hide_btn').hide();
-                // })
                 if (treeNode.children) {
                     this.zNodes.children.forEach((m, i) => {
                         this.$set(m, 'show', true)
                     });
                     this.$store.state.failureEnery.start_sublevel_show = false;
                     this.$store.state.failureEnery.parent_progress_show = true;
-
                 } else {
                     this.son_all_checked = treeNode.fristTableData.tableData;
                     this.zNodes.children.forEach((m, i) => {
@@ -618,9 +610,6 @@
                 }
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();
-
-                // }
-
             },
             dblClickExpand(treeId, treeNode) {
                 return treeNode.level > 0;
@@ -874,7 +863,24 @@
             },
             showPDF() {
                 this._dom_c.$content.addClass('showPDF_content');
-            }
+            },
+            comfrimAllChecked() {
+                this.allCheckedBtnLoading = true;
+                this.$store.state.failureEnery.determineOperating = false;
+                this.$axios.post('/api/allChecked_fhx', {
+                    // id:id
+                }).then(res => {
+                    if (res.status === 200) {
+                        for (let i = 0; i < this.radioArr.length; i++) {
+                            this.radioArr[i].radio = '合格';
+                        }
+                        this.allCheckedBtnLoading = false;
+                    }
+                });
+            },
+            rebackAllChecked() {
+                this.$store.state.failureEnery.determineOperating = false;
+            },
         }
     }
 </script>
@@ -956,7 +962,7 @@
                         }
                     } */
                     .animate {
-                        transition: height,width .5s,.5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        transition: height, width .5s, .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
                     }
                     .div_pdf {
                         display: none;

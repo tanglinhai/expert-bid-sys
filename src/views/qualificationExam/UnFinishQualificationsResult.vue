@@ -181,11 +181,42 @@
             </el-dialog>
             <!--标中质询弹框-->
             <el-dialog
-                    title="审查提示"
-                    :visible.sync="$store.state.failureEnery.submitPrompt"
-                    width="700px"
+                    title="汇总提交提示"
+                    :visible.sync="$store.state.failureEnery.huizongSubmit"
+                    width="30%"
             >
-                <SubmitPrompt></SubmitPrompt>
+                <el-row class="textAlignC fs14" style="line-height: 30px">
+                    您确定进行{{huizongSubmitTips }}操作吗？
+                </el-row>
+                <el-row class="textAlignC pt20">
+                    <el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>
+                    <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
+                </el-row>
+                <el-dialog
+                        width="30%"
+                        title="消息提示"
+                        :visible.sync="$store.state.failureEnery.tijiaoHuizong"
+                        append-to-body>
+                    <el-row style="margin:10px auto;">
+                        <el-row style="  border:1px solid #ccc;">
+                            <el-row class="textAlignC fs14" style="line-height: 30px">
+                                <div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">
+                                    <img src="../../assets/img/xiaolian.png" alt=""
+                                         style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">
+                                </div>
+                            </el-row>
+                            <el-row>
+                                <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">  {{huizongSubmitTips }}提交成功！</p>
+                            </el-row>
+                        </el-row>
+                        <el-row>
+                            <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span id="sec">{{count}}</span>]秒后自动关闭</div>
+                        </el-row>
+                        <el-row class="textAlignC pt20">
+                            <el-button size="small" type="primary" @click="huizongSubmitSucceed">确认</el-button>
+                        </el-row>
+                    </el-row>
+                </el-dialog>
             </el-dialog>
         </div>
     </div>
@@ -193,6 +224,7 @@
 
 <script>
     import ViewUnlockRecord from '../../components/publicVue/ViewUnlockRecord';
+    // import DetermineOperating from '../../components/publicVue/DetermineOperating';
     import QualificationUnlock from '../../components/publicVue/QuaUnlockApplication';//资格审查项汇总解锁申请
     import IndividualTrial from '../../components/publicVue/IndividualTrial';
     import NavBar from '../../components/publicVue/NavBar';
@@ -208,9 +240,11 @@
             NavBar,
             AbandonedTender,   //废标  
             StandardChallengeInformation,
+            // DetermineOperating
         },
         data() {
             return {
+                huizongSubmitTips:'',
                 page_loading: false,
                 tableData: [],//table1数据
                 /* -------头部包信息-----*/
@@ -239,14 +273,22 @@
                 grcs_titile_data: {},//个人初审弹框的头部数据
                 unlock_table_company_name: [],//汇总页面table（评审因素汇总）
                 submit_huizong:false,//汇总页面提交
+                count: '5',   //汇总页面提交成功弹框倒计时5秒
             }
         },
         created() {
-            console.log(this.$route.query.type);
             this.type = this.$route.query.type;
         },
         mounted() {
-            this.init();
+            if(this.type==2){
+                this.huizongSubmitTips='资格审查汇总';
+            }else if(this.type==4){
+                this.huizongSubmitTips='符合项审查汇总';
+            }else if(this.type==6){
+                this.huizongSubmitTips='详细评审（技术）汇总';
+            }
+           this.init();
+
         },
         computed: {},
         methods: {
@@ -310,7 +352,41 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {//审查汇总
+                this.$store.state.failureEnery.huizongSubmit = true;
+                // this.submit_huizong=true;
+                // let url;
+                // if (this.type == 4) {
+                //     url = '/api/tijiao_fhx';
+                // } else if (this.type == 2) {
+                //     url = '/api/tijiao';
+                // }
+                // else if (this.type == 6) {
+                //     url = '/api/tijiao_xxjs';
+                // }
+                // this.$axios.post(url, {
+                //     data: this.form.desc,
+                //     type: parseInt(this.type) + 1
+                // }).then(res => {
+                //     if (res.status == 200) {
+                //         this.submit_huizong=false;
+                //         this.options = res.data.vue_type;
+                //         this.$message({
+                //             message: '提交成功',
+                //             type: 'success'
+                //         });
+                //         $(".hide_div").hide();
+                //         $('.qita_expalin').show();
+                //         $(".qita_expalin").text(this.form.desc);
+                //         $('.qita_expalin_input').hide()
+                //     }
+                // })
+            },
+            individualTrial() {//查看个人资格审查项表
+                this.$store.state.failureEnery.individualTrial = true;
+            },
+            comfrimAllChecked(){
                 this.submit_huizong=true;
+                this.$store.state.failureEnery.huizongSubmit = false;
                 let url;
                 if (this.type == 4) {
                     url = '/api/tijiao_fhx';
@@ -327,19 +403,30 @@
                     if (res.status == 200) {
                         this.submit_huizong=false;
                         this.options = res.data.vue_type;
-                        this.$message({
-                            message: '提交成功',
-                            type: 'success'
-                        });
-                        $(".hide_div").hide();
-                        $('.qita_expalin').show();
-                        $(".qita_expalin").text(this.form.desc);
-                        $('.qita_expalin_input').hide()
+                        this.$store.state.failureEnery.tijiaoHuizong=true;
+                        // this.$message({
+                        //     message: '提交成功',
+                        //     type: 'success'
+                        // });
+                        //
+                        //
+                        // $(".hide_div").hide();
+                        // $('.qita_expalin').show();
+                        // $(".qita_expalin").text(this.form.desc);
+                        // $('.qita_expalin_input').hide()
+                        //
                     }
                 })
             },
-            individualTrial() {//查看个人资格审查项表
-                this.$store.state.failureEnery.individualTrial = true;
+            huizongSubmitSucceed(){
+                this.$store.state.failureEnery.tijiaoHuizong=false;
+                $(".hide_div").hide();
+                $('.qita_expalin').show();
+                $(".qita_expalin").text(this.form.desc);
+                $('.qita_expalin_input').hide()
+            },
+            rebackAllChecked(){
+                this.$store.state.failureEnery.huizongSubmit = false;
             },
         },
     }

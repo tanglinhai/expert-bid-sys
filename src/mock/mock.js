@@ -2445,6 +2445,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                      ],
                     "dingdang_tableData":[//打分项
                         { "grade":'商务  商务1（50.00分）', },
+
                         // { "grade":'商务   商务2（50.00分）',},
                      ],
                     'msgBox': msg,
@@ -2718,35 +2719,85 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
+                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
-                        {"companyName":"重庆网控科技发展有限公司（1）",
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjia1':["", "","10",'10']
-                                } ,
+                        {"title":"重庆网控科技发展有限公司（1） ",
+                            'pdfList':[
+                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
                             ]
                         },
-                        {"companyName": "普瑞太阳能有限公司（2）",
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjia1':["", "","10",'10']
-                                } ,
-                            ] } ,
-                        {"companyName":"夏丰热工研究院有限公司（3）",
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjia1':["", "", "20",'20']
-                                } ,
-                            ] },
+                        {"title": "普瑞太阳能有限公司（2）",
+                            'pdfList':[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            'pdfList':[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
                     ],
-                    "dingdang_tableData":[//打分项
-                        { "grade":'第一章、商务 （30.00分）', 'type':'radio'},
-                        { "grade":'第一章、 商务1（50.00分）','type':'input'},
-                        { "grade":'商务小计（分）','type':'string',},
-                        { "grade":'总分小计（分）','type':'string',},
+                    // 'companyNameList': [//(商务table投标人)公司名
+                    //     {title: '夏丰热工研究院有限公司（测试）（1） '},
+                    //     {title: '阿里巴巴（2）'},
+                    //     {title: '普瑞太阳能有限公司（测试）（3）'}
+                    // ],
+                    "dingdang_tableData":[
+
+                        {
+                            projectName: '第一章，商务10分',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: 'A 10分', num: 10},
+                                {typeTitle: 'B 20分', num: 20 },
+                                {typeTitle: 'C 30分', num: 30,}
+                                ],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1:'',
+                            value2:'' ,
+                            value3: ''
+                        },
+                        {
+                            projectName: '第二章，商务20分',
+                            type: 'input',// 两步法
+                            radioList: [],
+                            min: 10,
+                            max: 50,
+                            tit: '是否是官方配置？',
+                            value1: '',
+                            value2: '',
+                            value3: ''
+                        },
+
+                        {
+                            projectName: '商务小计',
+                            type: 'numberShangwu',
+                            radioList: [],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1: 0,
+                            value2:0,
+                            value3:0,
+                        },
+                        {
+                            projectName: '总计',
+                            type: 'numberTotle',
+                            radioList: [ ],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1: 0,
+                            value2: 0,
+                            value3: 0
+                        },
                     ],
-                    'msgBox': msg,
-                    'committeeGudges': [
+                    'msgBox': msg,//查看定档评议弹框表投标人数据
+                    'committeeGudges': [//查看定档评议表table数据
                         {
                             'companyName':'重庆网科技发展有限公司',
                             'zhaunjiadata_gs':[
@@ -2970,15 +3021,14 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         },
 
                     ],
-                    // "重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"],
-                    'viewScheduleTitileData':{
+                    'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                         + '/' + '评委会',//     评标委员会
                         'bagName': '第' + Random.natural(0, 9) + '包',//分包号
                     },
-                    'viewUnfinishedData':[
+                    'viewUnfinishedData':[//未完成弹框table数据
                         {
                             'gongyingshang': '重庆网控科技发展有限公司',//序号
                             'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
@@ -3018,9 +3068,23 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
                     'companyNameList': [//(投标人)公司名
-                        {"companyName":"重庆网控科技发展有限公司（1） "},
-                        {"companyName": "普瑞太阳能有限公司（2）"} ,
-                        {"companyName":"夏丰热工研究院有限公司（3）"},
+                        {"companyName":"重庆网控科技发展有限公司（1） ",
+                         'pdfList':[
+                             {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                             {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
+                             ]
+                        },
+                        {"companyName": "普瑞太阳能有限公司（2）",
+                            'pdfList':[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                               ]
+                        },
+
+                        {"companyName":"夏丰热工研究院有限公司（3）",
+                            'pdfList':[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
                     ],
                     "dingdang_tableData":[//打分项
                         { "grade":'商务  商务1（50.00分）', },
@@ -3860,6 +3924,13 @@ let dingdang_save = Mock.mock('/api/dingdang_save', 'post', {
     message: '成功!',
     data: '',
     vue_type: get_data(7),
+});
+//商务保存接口
+let business_save = Mock.mock('/api/business_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: '',
+    vue_type: get_data(8),
 });
 /*---------------------定档接口end----------------------*/
 

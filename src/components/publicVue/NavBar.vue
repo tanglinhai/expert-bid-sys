@@ -39,11 +39,12 @@
         },
         methods:{
             changeView(item) {      //路由跳转传参函数
+                // console.log(item);
                 if(item.type == 4){
                     return;
                 }
                 var i = item.value;
-                console.log(i);
+                // console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1");
                 } else if (i === '2') {

@@ -10,6 +10,6 @@ export default {
 </script>
 <style lang="scss">
 .personal_user_info {
-    
+
 }
 </style>
