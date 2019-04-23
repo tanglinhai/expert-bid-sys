@@ -972,7 +972,7 @@
                         }
                     } */
                     .animate {
-                        transition: all 1s;
+                        transition: top,left,right,bottom .8s,.8s,.8s,.8s;
                     }
                     .div_pdf {
                         display: none;
