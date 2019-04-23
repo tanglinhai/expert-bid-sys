@@ -4,7 +4,7 @@
     <div class="WrapBig">
       <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
       <transition :name="transitionName">
-        <router-view class="Router"/>
+        <router-view class="Router" :key="$route.fullPath"/>
       </transition>
     </div>
   	<Foot/>
