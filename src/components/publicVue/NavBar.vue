@@ -67,7 +67,7 @@
                 else if (i === "9"){
                     this.$router.push("/elect/BusinessOther?type=9");
                 }
-                else if (i === "10"){
+                else if (i ==="10"){
                     this.$router.push("/elect/BusinessOther?type=10");
                 }
                 else if (i === "11"){

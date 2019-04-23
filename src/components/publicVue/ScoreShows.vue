@@ -29,10 +29,23 @@
         },
         methods: {
             saveForm(formName) {
-                console.log( this.ruleForm.desc);
+                console.log( this.$data.ruleForm.desc);
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        this.$axios.post('/api/saveEditor', 'post', {
+                            data: this.$data.ruleForm.desc ,
+                        }).then(res => {
+                            if (res.data.code == 200) {
+                                this.$emit("childByValue",this.$data.ruleForm.desc);
+                                this.$data.ruleForm.desc='';
+                                this.$store.state.failureEnery.ScoreShows = false;
+                                this.$message({
+                                    type: 'success',
+                                    message: '编辑成功',
+                                    center: true
+                                });
+                            }
+                        })
                     } else {
                         console.log('error submit!!');
                         return false;
