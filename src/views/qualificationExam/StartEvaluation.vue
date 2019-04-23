@@ -38,7 +38,7 @@
                     >进入全屏模式</el-button> -->
                 <NavBar :msg="options" :type="type_btn"></NavBar>
                 <div class="content">
-                    <div class="div_pdf">
+                    <div class="div_pdf animate">
                         <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
                              v-for="item in pdfItems"
                              v-show="item.show"></pdf>
@@ -50,7 +50,7 @@
                         @click="exitFullMode"
                     >退出全屏模式</el-button> -->
 
-                    <el-row class="center_part_wrap">
+                    <el-row class="center_part_wrap animate">
                         <div class="slideBar" id="slideBar"
                              @mousedown="slideBarMousedown($event)"
                         ><span class="iconfont icon-vertical-align-middl"></span></div>
@@ -825,35 +825,44 @@
             },
             fullModeColumn() {
                 var _this = this;
-                this._dom_c.$div_pdf.addClass('animate').css({
-                    height: '100%',
-                    width: '50%'
-                }).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                    _this._dom_c.$div_pdf.removeClass('animate');
+                //this._dom_c.$content.get(0).setAttribute('class','content');
+
+                this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                    _this._dom_c.$content.removeClass('presentation_mode_column_animate');
+                    /*_this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                        _this._dom_c.$div_pdf.removeClass('animate');
+                    });*/
                 });
-                this._dom_c.$center_part_wrap.addClass('animate').css({
-                    height: '100%',
-                    width: '50%'
-                }).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                this._dom_c.$center_part_wrap.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                    _this._dom_c.$content.removeClass('presentation_mode_column_animate');
+                    /*_this._dom_c.$center_part_wrap.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                        _this._dom_c.$center_part_wrap.removeClass('animate');
+                    });*/
                 });
-                this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column');
+                this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column presentation_mode_column_animate');
             },
             fullModeRow() {
                 var _this = this;
-                this._dom_c.$div_pdf.addClass('animate').css({
-                    height: '60%',
-                    width: 'auto'
-                }).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                    _this._dom_c.$div_pdf.removeClass('animate');
+                /*this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row presentation_mode_row_animate');*/
+                //this._dom_c.$content.get(0).setAttribute('class','content');
+
+
+                this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                    _this._dom_c.$content.removeClass('presentation_mode_row_animate');
+                    /*_this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                        _this._dom_c.$div_pdf.removeClass('animate');
+                    });*/
+
                 });
-                this._dom_c.$center_part_wrap.addClass('animate').css({
-                    height: '40%',
-                    width: 'auto'
-                }).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                    _this._dom_c.$center_part_wrap.removeClass('animate');
+                this._dom_c.$center_part_wrap.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                    _this._dom_c.$content.removeClass('presentation_mode_row_animate');
+                    /*_this._dom_c.$center_part_wrap.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                        _this._dom_c.$center_part_wrap.removeClass('animate');
+                    });*/
                 });
-                this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row');
+                
+                this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_row presentation_mode_row_animate');
+
             },
             closePDF() {
                 if (this._dom_c.$content.hasClass('presentation_mode_column') || this._dom_c.$content.hasClass('presentation_mode_row')) {
@@ -950,6 +959,7 @@
                     }
                 } */
                 .content {
+                    background-color: #000;
                     /* .exitFullMode{
                         display: none;
                         position: absolute;
@@ -962,7 +972,7 @@
                         }
                     } */
                     .animate {
-                        transition: height, width .5s, .5s cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                        transition: all 1s;
                     }
                     .div_pdf {
                         display: none;
@@ -1004,6 +1014,7 @@
                         }
                     }
                     .center_part_wrap {
+                        background: white;
                         .slideBar {
                             position: relative;
                             display: none;
@@ -1014,7 +1025,7 @@
                             color: #37cac1;
                             text-align: center;
                             cursor: n-resize;
-                            transition: background-color, color .5s, .5s;
+                            //transition: background-color, color .5s, .5s;
                             background-color: #fff;
                             z-index: 1;
                             .iconfont {
@@ -1159,14 +1170,17 @@
                     width: 100%;
                     height: 100%;
                     overflow: hidden;
-                    background: white;
-                    z-index: 2;
+                    z-index: 4;
                     .div_pdf {
-                        position: relative;
-                        float: right;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 50%;
+                        float: none;
                         display: block !important;
-                        width: 50%;
-                        height: 100%;
+                        /* width: 50%;
+                        height: 100%; */
                         border: 0;
                         .my-pdf {
                             height: 100%;
@@ -1179,10 +1193,11 @@
                         display: block;
                     } */
                     .center_part_wrap {
-                        position: relative;
-                        float: right;
-                        width: 50%;
-                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 50%;
                         z-index: 999;
                         .slideBar {
                             display: block;
@@ -1215,6 +1230,23 @@
                         }
                     }
                 }
+                
+                .presentation_mode_column_animate {
+                    .div_pdf {
+                        top: 30%;
+                        left: 52%;
+                        bottom: 30%;
+                        right: 36%;
+                    }
+                    .center_part_wrap {
+                        top: 30%;
+                        left: 36%;
+                        bottom: 30%;
+                        right: 52%;
+                    }
+                }
+                
+
                 .presentation_mode_row {
                     position: fixed;
                     top: 0;
@@ -1222,12 +1254,16 @@
                     width: 100%;
                     height: 100%;
                     overflow: hidden;
-                    background: white;
-                    z-index: 2;
+                    z-index: 4;
                     .div_pdf {
-                        position: relative;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 50%;
+                        right: 0;
                         display: block !important;
-                        height: 60%;
+                        /* width: 100%;
+                        height: 60%; */
                         .my-pdf {
                             height: 100%;
                             .pdfobject-container {
@@ -1239,7 +1275,13 @@
                         display: block;
                     } */
                     .center_part_wrap {
-                        height: 40%;
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        /* width: 100%;
+                        height: 40%; */
                         .slideBar {
                             display: block;
                             margin-top: 0;
@@ -1254,6 +1296,22 @@
                                 }
                             } */
                         }
+                    }
+                }
+
+
+                .presentation_mode_row_animate {
+                    .div_pdf {
+                        top: 30%;
+                        left: 40%;
+                        bottom: 52%;
+                        right: 40%;
+                    }
+                    .center_part_wrap {
+                        top: 52%;
+                        left: 40%;
+                        bottom: 30%;
+                        right: 40%;
                     }
                 }
             }
