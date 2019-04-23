@@ -5,13 +5,13 @@
             <!--开始评标页面-->
             <el-row class="fs14 bid_msg mb15">
                 <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>2019年水利运输服务招标项目</span></div>
+                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>0635—1909qwerN1197</span></div>
+                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>包号：</span><span>0635—1909qwerN1197/1</span></div>
+                    <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
             </el-row>
             <div class="evaluationcommon cf">
@@ -22,13 +22,10 @@
                     </div>
                     <div class="fr mr20">
                         当前状态
-                        <template v-if="projectTableData.status==0">
-                            <el-tag>进行中</el-tag>
-                        </template>
                         <template v-if="projectTableData.status==3">
                             <el-tag>已废标</el-tag>
                         </template>
-                        <template v-if="projectTableData.status==1||projectTableData.status==4||projectTableData.status==5">
+                        <template v-if="projectTableData.status==0||projectTableData.status==1||projectTableData.status==4||projectTableData.status==5">
                             <el-tag>进行中</el-tag>
                         </template>
                         <template v-if="projectTableData.status==2||projectTableData.status==6">
@@ -216,6 +213,10 @@
                
                 BtnLoading:false,  //评标按钮loadding
 
+                name:'',  //标名称
+                biaoNum:'', //标号
+                baohao:'', //包号
+
             }
         },
         created() {
@@ -236,10 +237,25 @@
             this.AllInformation(); //专家个人信息,投标人信息接口
 
             $(".NavCommon").show();
+
+            this.baoInformations(); //头部包信息
             
             
         },
         methods:{
+            baoInformations(){   //头部包信息
+                this.$axios.post('/api/baoInformations','post',{
+
+                }).then(res=>{
+                   // console.log(res,88888)
+                    if(res.status == 200){
+                        this.name=res.data.result.name;
+                        this.biaoNum=res.data.result.biaoNum;
+                        this.baohao=res.data.result.baohao;
+                    }
+                })
+            },
+
             evaluationBidBtn(){
                 this.BtnLoading=true;
                 this.$axios.post('/api/evaluationBidBtn','post',{
