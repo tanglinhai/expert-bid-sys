@@ -39,11 +39,12 @@
         },
         methods:{
             changeView(item) {      //路由跳转传参函数
+                // console.log(item);
                 if(item.type == 4){
                     return;
                 }
                 var i = item.value;
-                console.log(i);
+                // console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1");
                 } else if (i === '2') {
@@ -66,7 +67,7 @@
                 else if (i === "9"){
                     this.$router.push("/elect/BusinessOther?type=9");
                 }
-                else if (i === "10"){
+                else if (i ==="10"){
                     this.$router.push("/elect/BusinessOther?type=10");
                 }
                 else if (i === "11"){

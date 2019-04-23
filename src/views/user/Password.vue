@@ -1,319 +1,157 @@
 <template>
-    <div class="personal_password_warp">
-        <div class="personal_password">
-            <div class="main">
-                <div class="passwordContent">
-                    <el-row class="mb15">
-                        <el-col>
-                            <div class="grid-content bg-purple-dark  ">
-                                <h5 class="commonTitle col348fe2">密码验证</h5>
-                            </div>
-                        </el-col>
-                    </el-row>
-                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm"
-                             size="medium">
-                        <el-row>
-                            <el-col :span="10" :offset="7">
-                                <el-form-item label="原密码：" prop="old_pass">
-                                    <el-input v-model="ruleForm.old_pass" size="medium"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10" :offset="7">
-                                <el-form-item label="新密码：" prop="new_pass">
-                                    <el-input v-model="ruleForm.new_pass" size="medium"
-                                              placeholder="密码为8位-16位并且由字母数字组成"
-                                              @input="OnPass"
-                                              @focus="focus"
-                                              @blur="blur"
-                                              maxlength="16"
-                                              type="password"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10" :offset="7">
-                                <el-form-item class="progress_bar_item">
-                                    <div class="progress_bar">
-                                        <!--密码强度-->
-                                        <div class="tips cf">
-                                            <div class="weak"></div>
-                                            <div class="middle"></div>
-                                            <div class="strong"></div>
-                                        </div>
-                                        <div class="tips_text">
-                                            <div class="weak_text">弱</div>
-                                            <div class="middle_text">中</div>
-                                            <div class="strong_text"> 强</div>
+    <!--账簿登记-->
+    <div>
+        <el-button size = "small" @click = "bol = true"></el-button>
+        <el-progress :percentage="completePercent"></el-progress>
+
+        <el-table
+                :data="tableData.data"
+                style="width: 100%" class="dingdang_table">
+            <el-table-column
+                    label="项目"
+                    min-width="150" fixed prop="projectName">
+            </el-table-column>
+            <el-table-column label="投标人">
+                <el-table-column :label="item.title"
+                                 v-for="(item,index ) in tableData.clumnList"
+                                 min-width="250" :key="index">
+                    <template slot-scope="scope">
+                        <div>
+                            <div v-if="!bol">
+                                <div v-if="scope.row.type === 'radio'">
+                                    <el-radio-group v-model="scope.row['value' + (index + 1)]">
+                                        <el-radio :label="val.num" v-for="val in scope.row.radioList">{{val.typeTitle}}</el-radio>
+                                    </el-radio-group>
+                                </div>
+                                <div v-if="scope.row.type === 'input'">
+                                    <div>{{scope.row.tit}} ({{scope.row.min}}.00-{{scope.row.max}}.00)</div>
+                                    <div class="cf">
+                                        <el-input v-model.trim="scope.row['value' + (index + 1)]"
+                                                  size="small" placeholder="请输入内容"
+                                                  @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                  style="width: 150px" class="fl"></el-input>
+                                        <div class="fl"
+                                             style=" line-height: 30px;margin-left: 5px">分
                                         </div>
                                     </div>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10" :offset="7">
-                                <el-form-item label="再次输入新密码：" prop="new_pass_again">
-                                    <el-input v-model="ruleForm.new_pass_again" size="medium" class="newpass_input"
-                                              maxlength="16" type="password"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10" :offset="7">
-                                <el-form-item>
-                                    <el-button type="primary" @click="submitForm('ruleForm')" size="medium"
-                                               class="btnBg" :loading="mydataloading">
-                                        保存
-                                    </el-button>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                    </el-form>
-                </div>
-            </div>
-        </div>
+                                </div>
+                                <div v-if="scope.row.type === 'number'">
+                                    {{scope.row['value' + (index + 1)]}}
+                                </div>
+                            </div>
+                            <div v-else>
+                                {{scope.row['value' + (index + 1)]}}
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table-column>
+        </el-table>
     </div>
 </template>
-
 <script>
+
+
     export default {
-        name: 'personal_password',
-        props: {},
         data() {
-            let validateOldPass = (rule, value, callback) => {//原密码
-                if (value === '') {
-                    callback(new Error('原密码不能为空'));
-                } else if (value !== this.loginPass) {
-                    callback(new Error('与原密码不符'));
-                }
-                else {
-// if (this.ruleForm.new_pass_again !== '') {
-//     this.$refs.ruleForm.validateField('new_pass_again');
-// }
-                    callback();
-                }
-            };
-            let validatePass = (rule, value, callback) => {
-                if (!value) {
-                    callback(new Error('请输入新密码'));
-                } else if (value.length < 8) {
-                    callback(new Error('请输入一个长度最少是 8 的字符串'));
-                } else if (value.length >= 8) {
-// let targ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
-                    let targ = /^(?=.*[a-z])(?=.*[A-Z])[^]{8,16}$/;
-                    if (!targ.test(value)) {
-                        console.log(value);
-// 密码为数字和字母的组合，至少包含一位大写字母和一位小写字母
-                        callback(new Error('密码为数字和字母的组合，至少包含一位大写字母和一位小写字母'));
-                    }
-                    callback();
-                }
-            };
-            let validatePass2 = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请再次输入密码'));
-                } else if (value.length < 8) {
-                    callback(new Error('请输入一个长度最少是 8 的字符串'));
-                }
-                else if (value !== this.ruleForm.new_pass) {
-                    callback(new Error('请两次输入相同的密码'));
-                } else {
-                    callback();
-                }
-            };
             return {
-                ruleForm: {
-                    old_pass: '',
-                    new_pass: '',
-                    new_pass_again: '',
-                    loginPass: '',//原登陆密码
+                bol: false,//是否提交
+                tableData: {
+                    clumnList: [
+                        {title: '夏丰热工研究院有限公司（测试）（1） '},
+                        {title: '阿里巴巴（2）'},
+                        {title: '普瑞太阳能有限公司（测试）（3）'}
+                    ],
+                    data: [
+                        {
+                            projectName: '第一章，商务10分',
+                            type: 'radio',
+                            radioList: [{typeTitle: 'A 10分', num: 10}, {
+                                typeTitle: 'B 20分',
+                                num: 20
+                            }, {typeTitle: 'C 30分', num: 30}],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1: '',
+                            value2: '',
+                            value3: ''
+                        },
+                        {
+                            projectName: '第二章，商务20分',
+                            type: 'input',
+                            radioList: [],
+                            min: 10,
+                            max: 50,
+                            tit: '是否是官方配置？',
+                            value1: '',
+                            value2: '',
+                            value3: ''
+                        },
+                        {
+                            projectName: '商务小计',
+                            type: 'number',
+                            radioList: [],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1: '10',
+                            value2: '20',
+                            value3: '30'
+                        },
+                        {
+                            projectName: '总计',
+                            type: 'number',
+                            radioList: [],
+                            min: null,
+                            max: null,
+                            tit: '',
+                            value1: '10',
+                            value2: '20',
+                            value3: '30'
+                        },
+                    ]
                 },
-                rules: {
-                    old_pass: [
-                        {validator: validateOldPass, trigger: 'blur', required: true, message: '',},
-                    ],
-                    new_pass: [
-                        {validator: validatePass, trigger: 'blur', required: true,},
-                        {min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur'}
-                    ],
-                    new_pass_again: [
-                        {validator: validatePass2, trigger: 'blur', required: true, message: '',}
-                    ],
-                },
-                mydataloading: false,  //保存按钮loading
             }
         },
-        created() {
-        },
-        mounted() {
-            $(".CommonProject").hide();
-            this.$axios.post('/api/login').then(res => {
-                if (res.status === 200) {
-// console.log(res.data.msg.pass);
-                    this.loginPass = res.data.msg.pass;
-                }
-            });
+        completePercent() {
+            console.log(this.tableData.data);
+            let num = 0;
+                let allNum = (this.tableData.data.length-2) * this.tableData.clumnList.length;
+                let arr = this.tableData.data.slice(0,-2);//去除最后两项
+                arr.forEach(e => { //循环表数据
+                    this.tableData.clumnList.forEach((k, i) => {
+                        if (e[`value${i}`] !== '') {
+                            console.log(e[`value${i}`]);
+                            num++;
+                        }
+                    })
+                });
+                return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
         },
         methods: {
-            OnPass() { //键盘弹起
-                console.log(this.ruleForm.new_pass, this.ruleForm.new_pass.length);
-                AuthPasswd(this.ruleForm.new_pass);
+            changes(value,rowIndex,colIndex,rowList) {
+                if (/[^\d]/.test(value)) {/*替换非数字字符  */
+                    this.$message({
+                        type: 'warning',
+                        message: '请输入数字！'
+                    });
+                    this.tableData.data[rowIndex]['value'+colIndex] = '';
+                }else {
+                    if(Number(value) >= rowList.min && Number(value) <= rowList.max){
 
-                function AuthPasswd(string) {//效验
-                    if (string.length >= 6) {
-                        if (/[a-zA-Z]+/.test(string) && /[0-9]+/.test(string) && /\W+\D+/.test(string)) {
-                            noticeAssign(1);
-                        } else if (/[a-zA-Z]+/.test(string) || /[0-9]+/.test(string) || /\W+\D+/.test(string)) {
-                            if (/[a-zA-Z]+/.test(string) && /[0-9]+/.test(string)) {
-                                noticeAssign(-1);
-                            } else if (/\[a-zA-Z]+/.test(string) && /\W+\D+/.test(string)) {
-                                noticeAssign(-1);
-                            } else if (/[0-9]+/.test(string) && /\W+\D+/.test(string)) {
-                                noticeAssign(-1);
-                            } else {
-                                noticeAssign(0);
-                            }
-                        }
-                    }
-// else if(string.length>0&&string.length<6){
-//     $(".red_text").text("请输入一个长度最少是8的字符串")
-// }
-                    else {
-                        noticeAssign(null);
-                    }
-                }
-
-                function noticeAssign(num) {//进度条
-                    if (num == 1) {
-                        $('.weak').css({backgroundColor: 'red'});
-                        $('.middle').css({backgroundColor: 'orange'});
-                        $('.strong').css({backgroundColor: 'green'});
-                        $('.strong').addClass("transition");
-                        $(".red_text").text("");
-                    } else if (num == -1) {
-                        $('.weak').css({backgroundColor: 'red'});
-                        $('.middle').css({backgroundColor: 'orange'});
-                        $('.middle').addClass("transition");
-                        $('.strong').css({backgroundColor: ''});
-                        $(".red_text").text("密码为数字和字母的组合，至少包含一位大写字母和一位小写字母");
-                    } else if (num == 0) {
-                        $('.weak').css({backgroundColor: 'red'});
-                        $('.middle').css({backgroundColor: ''});
-                        $('.strong').css({backgroundColor: ''});
-                        $('.weak').addClass("transition");
-
-                    } else {
-                        $('.weak').css({backgroundColor: ''});
-                        $('.middle').css({backgroundColor: ''});
-                        $('.strong').css({backgroundColor: ''});
+                    }else {
+                        this.$message({
+                            type: 'warning',
+                            message: `输入值在${rowList.min}-${rowList.max}之间`
+                        });
+                        this.tableData.data[rowIndex]['value'+colIndex] = '';
                     }
                 }
             },
-            blur() {
-                if (this.ruleForm.new_pass.length > 0 && this.ruleForm.new_pass.length < 6) {
-                    console.log(this.ruleForm.new_pass.length);
-                    $(".red_text").text("请输入一个长度最少是8的字符串");
-                    $('.newpass_input').addClass("focus");
-                } else if (this.ruleForm.new_pass == "") {
-                    $(".red_text").text("必填字段");
-                }
-                $('.newpass_input').addClass("outline");
-            },
-            submitForm(formName) {
-                console.log(this.$data.ruleForm);
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.mydataloading = true;
-                        this.$axios.post('/api/save_pass', 'post', {
-                            data: JSON.stringify(this.$data.ruleForm)
-                        }).then(res => {
-                            if (res.data.code == 200) {
-// console.log(res.data);
-                                this.mydataloading = false;
-                                this.$message({
-                                    type: 'success',
-                                    message: '密码修改成功',
-                                    center: true
-                                });
-                            }
-                        })
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
+        },
+        mounted(){
+
         }
-    }
+    };
 </script>
-<style lang="scss">
-    .personal_password_warp {
-        overflow: hidden;
-        padding-top: 15px;
-        background: #ededed;
-        .personal_password {
-            background-color: #ededed;
-            padding: 0px 0% 15px 0%;
-            width: 98%;
-            float: left;
-            margin-left: 1%;
-            margin-right: 1%;
-            .main {
-                background: white;
-                border-radius: 5px;
-                .passwordContent {
-                    padding: 15px;
-                    .progress_bar_item {
-                        .el-form-item__content {
-                            margin-left: 0 !important;
-                            .progress_bar {
-                                .tips {
-                                    width: 234px;
-                                    height: 16px;
-                                    border: 1px solid #ccc;
-                                    margin-left: 149px;
-                                    border-radius: 20px;
-                                    .strong, .middle, .weak {
-                                        float: left;
-                                        width: 74px;
-                                        height: 10px;
-                                        background-color: #ccc;
-                                        margin-top: 2.5px;
-                                        margin-left: 3px;
-                                    }
-                                    .weak {
-                                        border-radius: 20px 0 0 20px;
-                                    }
-                                    .strong {
-                                        border-radius: 0 20px 20px 0;
-                                    }
-                                    .transition {
-                                        transition: background-color .5s ease-in;
-                                         -moz-transition: background-color .5s ease-in;
-                                         -webkit-transition: background-color .5s ease-in;
-                                         -o-transition: background-color .5s ease-in;
-                                    }
-                                }
-                                .tips_text {
-                                    width: 234px;
-                                    height: 16px;
-                                    margin-left: 152px;
-                                    line-height: 16px;
-                                    .strong_text, .middle_text, .weak_text {
-                                        float: left;
-                                        width: 74px;
-                                        height: 10px;
-                                        color: #707070;
-                                        text-align: center;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-</style>
-
