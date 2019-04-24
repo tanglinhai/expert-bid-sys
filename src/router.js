@@ -13,8 +13,8 @@ var routes = [
       component: () => import('./views/SignaturePage.vue')  //签字
     },
     {
-      // path: '/LeaderSignaturePage',
-      // name: 'LeaderSignaturePage',
+      path: '/LeaderSignaturePage',
+      name: 'LeaderSignaturePage',
       component: () => import('./views/LeaderSignaturePage.vue') //组长查看
     },
     {
