@@ -103,9 +103,6 @@
                                         <el-table-column
                                                 label="打分项"
                                                 min-width="150" fixed prop="grade" v-if='type==7'>
-                                            <!--<template slot-scope="scope">-->
-                                            <!--<span class="leixing red mr20">商务</span><span>商务1（50.00分）</span>-->
-                                            <!--</template>-->
                                         </el-table-column>
                                         <el-table-column
                                                 label="项目"
@@ -626,9 +623,8 @@
                     // }
                     this.$axios.post(url, {type: parseInt(this.type_btn)}).then(res => {
                         if (res.status == 200) {
-                            alert('可提交');
+                            // alert('可提交');
                             this.$store.state.failureEnery.dingdang_tijiao_state = false;
-
                         }
                     })
                 } else {
