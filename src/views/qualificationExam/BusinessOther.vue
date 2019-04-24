@@ -86,7 +86,7 @@
                                                 提交服务
                                             </el-button>
                                              <el-button size="small" plain @click="submitOther"
-                                                              class="submit_business" v-if="type==11">
+                                                        class="submit_business" v-if="type==11">
                                                 提交其他
                                             </el-button>
                                         </span>
@@ -104,12 +104,13 @@
                                                 label="打分项"
                                                 min-width="150" fixed prop="grade" v-if='type==7'>
                                         </el-table-column>
+
                                         <el-table-column
                                                 label="项目"
                                                 min-width="150" fixed prop="projectName" v-if='type==8||9||10 '>
                                         </el-table-column>
+
                                         <el-table-column label="投标人">
-                                            <!-- 复选法-->
                                             <el-table-column :label="item.companyName"
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              min-width="250" :key="index" v-if="type==7">
@@ -130,13 +131,14 @@
                                                     <div v-if="scope.row.type === 'radio'">
                                                         <el-radio-group
                                                                 v-model="scope.row['value' + (index + 1)]"
-                                                                v-if="$store.state.failureEnery.business_tijiao">
+                                                                v-if="$store.state.failureEnery.business_tijiao"
+                                                                @change="changeRadios(index + 1)">
                                                             <el-radio :label="val.num"
                                                                       v-for="val in scope.row.radioList">
                                                                 {{val.typeTitle}}
                                                             </el-radio>
                                                         </el-radio-group>
-                                                        <span v-else> {{scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                     <!--两步法-->
                                                     <div v-if="scope.row.type === 'input'">
@@ -149,8 +151,10 @@
                                                                            v-model.trim="scope.row['value' + (index + 1)]"
                                                                            size="small" placeholder="请输入内容"
                                                                            @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                           @keydown.enter.native="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
                                                                            style="width: 150px"
-                                                                           class="fl"></el-input>
+                                                                           class="fl"
+                                                                           clearable></el-input>
                                                                 <div class="fl"
                                                                      style=" line-height: 30px;margin-left: 5px">分
                                                                 </div>
@@ -158,24 +162,65 @@
                                                          </span>
                                                         <span v-else>{{scope.row['value' + (index + 1)]}}</span>
                                                     </div>
+
+                                                    <!--复选法-->
+                                                    <div v-if="scope.row.type === 'checkbox'">
+                                                        <el-checkbox-group
+                                                                v-model="scope.row['value' + (index + 1)]"
+                                                                @change="changeCheck( index + 1)">
+                                                            <el-checkbox :label="val.num"
+                                                                         v-for="val in scope.row.radioList">
+                                                                {{val.typeTitle}}
+                                                            </el-checkbox>
+                                                        </el-checkbox-group>
+                                                    </div>
+                                                    <!--布局法-->
+                                                    <div v-if="scope.row.type ==='inputSelect'">
+                                                        <el-select v-model="scope.row['value' + (index + 1)]"
+                                                                   placeholder="" clearable style="width: 150px"
+                                                                   size="small"
+                                                                   @change="changeInputSelect(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)">
+                                                            <el-option :label="val.num"
+                                                                       :value="val.num"
+                                                                       :key="val.num"
+                                                                       v-for="val in scope.row.radioList">
+                                                            </el-option>
+                                                        </el-select>
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
+                                                    </div>
+                                                    <!-- 人工录入法-->
+                                                    <div v-if="scope.row.type === 'inputLabour'">
+                                                        <el-input
+                                                                v-model.trim="scope.row['value' + (index + 1)]"
+                                                                size="small" placeholder="请输入内容"
+                                                                @blur="changesInputLabour(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                style="width: 150px"
+                                                                class="fl"
+                                                                clearable></el-input>
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
+                                                    </div>
                                                     <!--商务-->
                                                     <div v-if="scope.row.type === 'numberShangwu'">
                                                         <span v-if="$store.state.failureEnery.business_tijiao">
                                                             {{scope.row['value' + (index + 1)]}}
                                                         </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                     <!--总计是商务技术其他服务的和-->
                                                     <div v-if="scope.row.type === 'numberTotle'">
                                                         <span v-if="$store.state.failureEnery.business_tijiao">
                                                             {{scope.row['value' + (index + 1)]}}
                                                         </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{ scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                 </template>
                                             </el-table-column>
-                                            <!--技术-->
-                                            <!--复选法-->
+
+
+
+
                                             <el-table-column :label="item.title"
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              min-width="250" :key="index" v-if="type==9">
@@ -183,80 +228,73 @@
                                                     <div v-if="scope.row.type === 'radio'">
                                                         <el-radio-group
                                                                 v-model="scope.row['value' + (index + 1)]"
-                                                                v-if="$store.state.failureEnery.business_tijiao">
+                                                        >
                                                             <el-radio :label="val.num"
                                                                       v-for="val in scope.row.radioList">
                                                                 {{val.typeTitle}}
                                                             </el-radio>
                                                         </el-radio-group>
-                                                        <span v-else> {{scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                     <div v-if="scope.row.type === 'input'">
-                                                        <span v-if="$store.state.failureEnery.business_tijiao">
-                                                            <div>{{scope.row.tit}}
-                                                                ({{scope.row.min}}.00-{{scope.row.max}}.00)
+                                                        <div>{{scope.row.tit}}
+                                                            ({{scope.row.min}}.00-{{scope.row.max}}.00)
+                                                        </div>
+                                                        <div class="cf">
+                                                            <el-input
+                                                                    v-model.trim="scope.row['value' + (index + 1)]"
+                                                                    size="small" placeholder="请输入内容"
+                                                                    @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                    style="width: 150px"
+                                                                    class="fl"></el-input>
+                                                            <div class="fl ml5"
+                                                                 style="line-height: 30px;">分
                                                             </div>
-                                                            <div class="cf">
-                                                                   <el-input
-                                                                           v-model.trim="scope.row['value' + (index + 1)]"
-                                                                           size="small" placeholder="请输入内容"
-                                                                           @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
-                                                                           style="width: 150px"
-                                                                           class="fl"></el-input>
-                                                                <div class="fl"
-                                                                     style=" line-height: 30px;margin-left: 5px">分
-                                                                </div>
-                                                            </div>
-                                                         </span>
-                                                        <span v-else>{{scope.row['value' + (index + 1)]}}</span>
+                                                        </div>
                                                     </div>
                                                     <div v-if="scope.row.type ==='inputSelect'">
                                                         <el-select v-model="scope.row['value' + (index + 1)]"
-                                                                   placeholder="" clearable>
+                                                                   placeholder="" clearable style="width: 150px"
+                                                                   size="small"
+                                                                   clearable
+                                                                   @change="changeInputSelect(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)">
                                                             <el-option :label="val.num"
                                                                        :value="val.num"
                                                                        :key="val.num"
                                                                        v-for="val in scope.row.radioList">
                                                             </el-option>
                                                         </el-select>
-                                                        <!--<span @click="scoreShowsBtn(scope.row['id' + (index + 1)] )">编辑</span>-->
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
                                                     </div>
                                                     <div v-if="scope.row.type === 'inputLabour'">
-                                                        <!--<span v-if="$store.state.failureEnery.business_tijiao">-->
                                                         <el-input
                                                                 v-model.trim="scope.row['value' + (index + 1)]"
                                                                 size="small" placeholder="请输入内容"
                                                                 @blur="changesInputLabour(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
                                                                 style="width: 150px"
-                                                                class="fl"></el-input>
-                                                        <!--</span>-->
-                                                        <!--<span v-else>{{scope.row['value' + (index + 1)]}}</span>-->
+                                                                class="fl"
+                                                                clearable></el-input>
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
                                                     </div>
                                                     <div v-if="scope.row.type === 'checkbox'">
-                                                        <span>
-                                                            <el-checkbox-group
-                                                                    v-model="scope.row['value' + (index + 1)]"  @change="changeCheck(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)">
-                                                                <el-checkbox :label="val.num"
-                                                                             v-for="val in scope.row.radioList">
-                                                                    {{val.typeTitle}}
-                                                                </el-checkbox>
-                                                            </el-checkbox-group>
-                                                             <!--{{scope.row['value' + (index + 1)]}}-->
-                                                        </span>
+                                                        <el-checkbox-group
+                                                                v-model="scope.row['value' + (index + 1)]"
+                                                                @change="changeCheck(index + 1)">
+                                                            <el-checkbox :label="val.num"
+                                                                         v-for="val in scope.row.radioList">
+                                                                {{val.typeTitle}}
+                                                            </el-checkbox>
+                                                        </el-checkbox-group>
                                                     </div>
                                                     <div v-if="scope.row.type === 'numberJishu'">
-                                                            <span v-if="$store.state.failureEnery.business_tijiao">
-                                                                {{scope.row['value' + (index + 1)]}}
-                                                                 {{submitPrice+scope.row['value' + (index + 1)]}}
-                                                            </span>
-                                                        <span v-else>{{submitPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        {{scope.row['value' + (index + 1)]}}
                                                     </div>
                                                     <!--总计是商务技术其他服务的和-->
                                                     <div v-if="scope.row.type === 'numberTotle'">
-                                                            <span v-if="$store.state.failureEnery.business_tijiao">
-                                                                {{scope.row['value' + (index + 1)]}}
-                                                            </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span>
+                                                            {{scope.row['value' + (index + 1)]}}
+                                                        </span>
                                                     </div>
                                                 </template>
                                             </el-table-column>
@@ -268,27 +306,29 @@
                                                 <template slot-scope="scope">
                                                     <div v-if="scope.row.type ==='inputSelect'">
                                                         <el-select v-model="scope.row['value' + (index + 1)]"
-                                                                   placeholder="" clearable>
+                                                                   placeholder="" clearable style="width: 150px"
+                                                                   size="small" @change="changeInputSelect(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)">
                                                             <el-option :label="val.num"
                                                                        :value="val.num"
                                                                        :key="val.num"
                                                                        v-for="val in scope.row.radioList">
                                                             </el-option>
                                                         </el-select>
-                                                        <!--<span @click="scoreShowsBtn(scope.row['id' + (index + 1)] )">编辑</span>-->
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
                                                     </div>
                                                     <div v-if="scope.row.type === 'numberFuwu'">
                                                             <span v-if="$store.state.failureEnery.business_tijiao">
                                                                 {{scope.row['value' + (index + 1)]}}
                                                             </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{businesssPrice + scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                     <!--总计是商务技术其他服务的和-->
                                                     <div v-if="scope.row.type === 'numberTotle'">
                                                             <span v-if="$store.state.failureEnery.business_tijiao">
                                                                 {{scope.row['value' + (index + 1)]}}
                                                             </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{businesssPrice + scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                 </template>
                                             </el-table-column>
@@ -298,32 +338,30 @@
                                                              min-width="250" :key="index" v-if=" type==11">
                                                 <template slot-scope="scope">
                                                     <!--人工录入法-->
-
-
                                                     <div v-if="scope.row.type === 'inputLabour'">
-                                                        <!--<span v-if="$store.state.failureEnery.business_tijiao">-->
-                                                       <el-input
-                                                               v-model.trim="scope.row['value' + (index + 1)]"
-                                                               size="small" placeholder="请输入内容"
-                                                               @blur="changesInputLabour(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
-                                                               style="width: 150px"
-                                                               class="fl"></el-input>
-                                                         <!--</span>-->
-                                                        <!--<span v-else>{{scope.row['value' + (index + 1)]}}</span>-->
+                                                        <el-input
+                                                                v-model.trim="scope.row['value' + (index + 1)]"
+                                                                size="small" placeholder="请输入内容"
+                                                                @blur="changesInputLabour(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                style="width: 150px"
+                                                                class="fl"
+                                                                clearable></el-input>
+                                                        <i class="icon iconfont icon-bianjiedit26  ml10 bianjiIcon"
+                                                           @click="scoreShowsBtn(scope.$index,index + 1)"></i>
                                                     </div>
                                                     <!--商务-->
                                                     <div v-if="scope.row.type === 'numberOther'">
                                                         <span v-if="$store.state.failureEnery.business_tijiao">
                                                             {{scope.row['value' + (index + 1)]}}
                                                         </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{businesssPrice + scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                     <!--总计是商务技术其他服务的和-->
                                                     <div v-if="scope.row.type === 'numberTotle'">
                                                         <span v-if="$store.state.failureEnery.business_tijiao">
                                                             {{scope.row['value' + (index + 1)]}}
                                                         </span>
-                                                        <span v-else>{{businesssPrice+scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{businesssPrice + scope.row['value' + (index + 1)]}}</span>
                                                     </div>
                                                 </template>
                                             </el-table-column>
@@ -365,10 +403,18 @@
             </el-dialog>
             <el-dialog
                     title="评分说明编辑 "
-                    :visible.sync="$store.state.failureEnery.ScoreShows"
+                    :visible.sync="scoreShowsDialog "
                     width="700px"
             >
-                <ScoreShows @childByValue="childByValue"></ScoreShows>
+                <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item label=" 评分说明： " prop="desc">
+                        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                    </el-form-item>
+                    <el-form-item class="mb15 textAlignC mt30 el-row" style="margin-left: -50px">
+                        <el-button type="primary" @click="saveFormScoreShows('ruleForm')" size="small">保存</el-button>
+                        <el-button @click="rebackFormScoreShows('ruleForm')" size="small" type="primary">返回</el-button>
+                    </el-form-item>
+                </el-form>
             </el-dialog>
             <el-dialog
                     title="提示"
@@ -376,8 +422,8 @@
                     width="700px"
             >
                 <SubmitPrompt :name="to_submit_prompt_name" :pro_num="completePercent"
-                              :baohao="to_submit_prompt_baohao" :type="type"></SubmitPrompt>
-
+                              :baohao="to_submit_prompt_baohao" :type="type"
+                              :dingdang_tableData="dingdang_tableData"></SubmitPrompt>
             </el-dialog>
         </div>
     </div>
@@ -386,7 +432,6 @@
 <script>
     import NavBar from '../../components/publicVue/NavBar';
     import ViewSchedule from '../../components/publicVue/ViewSchedule';
-    import ScoreShows from '../../components/publicVue/ScoreShows';
     import ViewUnfinishedItems from '../../components/publicVue/ViewUnfinishedItems';
     import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
 
@@ -396,7 +441,6 @@
             NavBar,
             ViewSchedule,
             ViewUnfinishedItems,
-            ScoreShows,
             SubmitPrompt
         },
         data() {
@@ -417,8 +461,15 @@
                 arrA: [],//存放radio,input的数组
                 to_submit_prompt_name: [],
                 idradionoprss: '',//table不合格的id
-                rowData:{},
-                submitPrice:0
+                rowData: {},
+                submitPrice: 0,
+                rowIndex: 0,//记录点击的是那行
+                colIndex: 0,//记录点击的是那列
+                ruleForm: {//评分说明数据
+                    desc: ''
+                },
+                scoreShowsDialog: false,//编辑评分说明
+
             }
         },
         created() {
@@ -489,22 +540,9 @@
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
                 }
             },
-            businesssPrice() {//商务性价格调整小计
-                let arr = this.dingdang_tableData.slice(0, -1);
-                let amt = 0;
-                arr.forEach(e => {
-                    amt += Number(e.value1);
-                });
-                return amt;
+            xiaoji(){
+
             },
-            submitPrice(){
-                let arr = this.dingdang_tableData.slice(0, -1);
-                let amt = 0;
-                arr.forEach(e => {
-                    amt += Number(e.value1);
-                });
-                return amt;
-            }
         },
         mounted() {
             this.init();
@@ -516,34 +554,6 @@
             }
         },
         methods: {
-            changeCheck(value, rowIndex, colIndex, rowList){
-                let sumAmt;
-                let arr=[];
-                console.log(value, rowIndex, colIndex, rowList);
-                    this.rowData=rowList;
-                this.rowData.value1.forEach((k,i)=>{
-                    arr.push( Number(k))
-                });
-                sumAmt = arr.reduce(function (e, b) {
-                    return e + b;
-                }) ;
-                console.log(sumAmt);
-                this.submitPrice=sumAmt;
-                // rowList
-            },
-            // childByValue: function (childValue) { // childValue就是子组件传过来的值
-            //      console.log(childValue);
-            //     // if (this.obj.id == this.idradionoprss) {
-            //         this.obj.gradeExplain = childValue;
-            //     // }
-            //     this.$store.state.failureEnery.ScoreShows = false;
-            // },
-            checkPdf(column, event) {
-                this.companyname_toubiao.forEach((k, i) => {
-                    if (k.title == column.label) {
-                    }
-                })
-            },
             init() {
                 this.page_loading = true;
                 this.$axios.post('/api/BusinessOther', {type: this.type}, {//通过包id
@@ -569,13 +579,15 @@
                     this.page_loading = false;
                 })
             },
+            checkPdf(column, event) {
+            },
             checkSchedule() {//查看定档表
                 this.$store.state.failureEnery.viewSchedule = true;
             },
             checkUnfinishedItems() {//查看未完成项
                 this.$store.state.failureEnery.ViewUnfinishedItems = true;
             },
-            saveBtn() {//保存
+            saveBtn() {//保存（传递radio选中的值）
                 let url;
                 if (this.type == 7) {
                     url = '/api/dingdang_save';
@@ -586,8 +598,11 @@
                 // else if (this.type == 5) {
                 //     url = '/api/alltijiao_xxjs';
                 // }
-                this.$axios.post(url, {type: parseInt(this.type)}).then(res => {
+                this.$axios.post(url, {
+                    type: parseInt(this.type)
+                }).then(res => {
                     if (res.status == 200) {
+                        this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
                         this.$message({
                             message: '保存成功！',
                             type: 'success',
@@ -595,7 +610,6 @@
                     }
                 })
             },
-
             submitFilingComments() {//提交定档评议（需要掉接口）
                 let bool = true;//预制变量，当发现有复选框未选中时，就将值变为false
                 this.dingdang_tableData.forEach(e => {
@@ -638,18 +652,12 @@
                 this.$store.state.failureEnery.submitPrompt = true;
             },
             submitJishu() {// 提交技术
-                // console.log(this.dingdang_tableData);
                 this.$store.state.failureEnery.jishu_tijiao_state = true;
             },
             submitServe() {// 提交服务
-                console.log(this.dingdang_tableData);
-                this.dingdang_tableData.forEach((k,i)=>{
-                    if(k.type==checkbox){
-                        console.log(k)
-                    }
-                })
+
             },
-            submitOther(){
+            submitOther() {
                 console.log(this.dingdang_tableData);
             },
             handleSizeChange(val) {
@@ -659,14 +667,47 @@
                 this.pageLoading = true;
                 this.init();
             },
-            scoreShowsBtn(obj) {//评分说明编辑
-                console.log(obj);
-                // obj.radioList.forEach((k,i)=>{
-                //     console.log(k);
-                // });
-                this.$store.state.failureEnery.ScoreShows = true;
+            changeRadios(index) { // 商务小计
+                let arr = [];//存放除了小计和总计的数据
+                let amt = 0;//商务小计
+                arr = this.dingdang_tableData.slice(0, -2);
+                arr.forEach((k, i) => {
+                    console.log(k['value' + index],'0');
+                    amt += k['value' + index] != '' ? Number(k['value' + index]) : 0;//点击那个列radio,input为不空，则小计为每一行vulue1的和，反之为0
+                    console.log(amt);
+                });
+                this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
             },
-            changes(value, rowIndex, colIndex, rowList) {
+
+            changeCheck(index ) {
+                let amt=0;
+                let arr = [];
+                arr = this.dingdang_tableData.slice(0, -2);
+                arr.forEach((k, i) => {
+                    // console.log(k['value' + index],'1');
+                    if(k['value' + index] .length!=0 ){
+                        console.log(k['value' + index],'9088');
+                        k['value' + index].forEach((j, index) => {
+                            amt+= Number(j)
+                        });
+                        console.log(amt);
+                    }
+                    this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index]= amt;
+                 })
+            },
+
+            changeInputSelect(value, rowIndex, colIndex, rowList){
+                let arr = [];
+                let amt = 0;
+                arr = this.dingdang_tableData.slice(0, -2);
+                arr.forEach((k, i) => {
+                    amt += k['value' + colIndex] != '' ? Number(k['value' + colIndex]) : 0;
+                });
+                this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + colIndex] = amt;
+
+            },
+            changes(value, rowIndex, colIndex, rowList) { //两步方失去焦点取值
+                // console.log(value, rowIndex, colIndex, rowList);
                 if (/[^\d]/.test(value)) {/*替换非数字字符  */
                     this.$message({
                         type: 'warning',
@@ -675,6 +716,13 @@
                     this.dingdang_tableData[rowIndex]['value' + colIndex] = '';
                 } else {
                     if (Number(value) >= rowList.min && Number(value) <= rowList.max) {
+                        let arr = [];
+                        let amt = 0;
+                        arr = this.dingdang_tableData.slice(0, -2);
+                        arr.forEach((k, i) => {
+                            amt += k['value' + colIndex] != '' ? Number(k['value' + colIndex]) : 0;
+                        });
+                        this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + colIndex] = amt;
                     } else {
                         this.$message({
                             type: 'warning',
@@ -684,7 +732,7 @@
                     }
                 }
             },
-            changesInputLabour(value, rowIndex, colIndex, rowList){
+            changesInputLabour(value, rowIndex, colIndex, rowList) {
                 if (/[^\d]/.test(value)) {/*替换非数字字符  */
                     this.$message({
                         type: 'warning',
@@ -693,6 +741,13 @@
                     this.dingdang_tableData[rowIndex]['value' + colIndex] = '';
                 } else {
                     if (Number(value) >= rowList.min && Number(value) <= rowList.max) {
+                        let arr = [];
+                        let amt = 0;
+                        arr = this.dingdang_tableData.slice(0, -2);
+                        arr.forEach((k, i) => {
+                            amt += k['value' + colIndex] != '' ? Number(k['value' + colIndex]) : 0;
+                        });
+                        this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + colIndex] = amt;
                     } else {
                         this.$message({
                             type: 'warning',
@@ -701,7 +756,40 @@
                         this.dingdang_tableData[rowIndex]['value' + colIndex] = '';
                     }
                 }
+            },
+            /*-----------------编辑评分说明--------------------*/
+            scoreShowsBtn(rowIndex, colIndex) {//评分说明编辑按钮
+                this.scoreShowsDialog = true;
+                this.rowIndex = rowIndex;
+                this.colIndex = colIndex;
+            },
+            saveFormScoreShows(formName) {//保存评分说明
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.$axios.post('/api/saveEditor', 'post', {
+                            data: this.$data.ruleForm.desc,
+                        }).then(res => {
+                            if (res.data.code == 200) {
+                                this.dingdang_tableData[this.rowIndex]['gradeExplain' + this.colIndex] = this.$data.ruleForm.desc;
+                                this.$data.ruleForm.desc = '';
+                                this.scoreShowsDialog = false;
+                                this.$message({
+                                    type: 'success',
+                                    message: '编辑成功',
+                                    center: true
+                                });
+                            }
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            rebackFormScoreShows() {//编辑评分返回按钮
+                this.scoreShowsDialog = false;
             }
+            /*-----------------编辑评分说明end--------------------*/
         }
     }
 </script>
@@ -715,6 +803,7 @@
         margin-left: 5px;
         line-height: 1;
     }
+
     .dingdang_warp {
         overflow: hidden;
         padding-top: 15px;
@@ -768,6 +857,10 @@
                     }
                     .table_warp {
                         .dingdang_table {
+                            .bianjiIcon {
+                                margin-top: 4px;
+                                display: inline-block;
+                            }
                             /* div.cell {
                                  position: relative;
                                  .leixing {
