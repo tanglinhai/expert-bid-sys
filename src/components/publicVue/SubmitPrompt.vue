@@ -85,12 +85,13 @@
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
-                if(this.type==8 ){
+                if(this.type==8 ||9||10||11){
                     this.$axios.post('/api/business_save').then(res => { //商务接口
                         if (res.status == '200') {
                             if (this.pro_num != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
                             } else {
+                                console.log(this.dingdang_tableData, res.data.data);
                                 this.$set(this.dingdang_tableData,this.dingdang_tableData.length - 1 ,res.data.data);
                                 this.$store.state.failureEnery.tijiao100 = true;
                                 this.$store.state.failureEnery.business_tijiao = false;

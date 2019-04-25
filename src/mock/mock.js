@@ -2740,101 +2740,101 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
 
 
 
-{
-    projectName: '第一章、其他(1.00分-60.00分)',
-    type: 'inputLabour',// 人工录入法
-    radioList: [],
-    min: 1,
-    max: 60,
-    tit: '是否是官方配置？',
-    value1: '',
-    value2: '',
-    value3: ''
-},
-
-{
-    projectName: '第一章、服务1(50.00分)',
-    type: 'inputSelect',// 布距法
-    radioList: [{
-        num: '0',
-        typeTitle: '0',
-        gradeExplain:'',
-
-    }, {
-        num: '5',
-        typeTitle: '5',
-        gradeExplain:"",
-
-    }, {
-        num: '10',
-        typeTitle: '10',
-        gradeExplain:"",
-
-    }, {
-        num: '15',
-        typeTitle: '15',
-        gradeExplain:"",
-
-    }, {
-        num: "20",
-        typeTitle: '20',
-        gradeExplain:"" ,
-
-    },{
-        num: '25',
-        typeTitle: '25',
-        gradeExplain:"",
-
-    }, {
-        num: '30',
-        typeTitle: '30',
-        gradeExplain:"",
-
-    }, {
-        num: '35',
-        typeTitle: '35',
-        gradeExplain:"",
-
-    }, {
-        num: '40',
-        typeTitle: '40',
-        gradeExplain:"",
-
-    },{
-        num: '45',
-        typeTitle: '45',
-        gradeExplain:"",
-
-    }, {
-        num: '50',
-        typeTitle: '50',
-        gradeExplain:"",
-    },
-    ],
-    min: 10,
-    max: 50,
-    tit: '是否是官方配置？',
-    value1: '',
-    value2: '',
-    value3: '',//有多少个投标人就有多少个value(index+1)
-    typeTitle: '10',
-},
-                        {
-                            projectName: '第一章，技术(14.00)分',
-                            type: 'checkbox',//单选
-                            radioList: [
-                                {typeTitle: 'A (2.00)分', num: '2'},
-                                {typeTitle: 'B (3.00)分', num:'3' },
-                                {typeTitle: 'C (4.00)分', num: '4',},
-                                {typeTitle: 'D (5.00)分', num: '5',}
-                            ],
-                            min: null,
-                            max: null,
-                            tit: '',
-                            value1:[],
-                            value2:[] ,
-                            value3: [],
-                        },
+// {
+//     projectName: '第一章、其他(1.00分-60.00分)',
+//     type: 'inputLabour',// 人工录入法
+//     radioList: [],
+//     min: 1,
+//     max: 60,
+//     tit: '是否是官方配置？',
+//     value1: '',
+//     value2: '',
+//     value3: ''
+// },
+//
+// {
+//     projectName: '第一章、服务1(50.00分)',
+//     type: 'inputSelect',// 布距法
+//     radioList: [{
+//         num: '0',
+//         typeTitle: '0',
+//         gradeExplain:'',
+//
+//     }, {
+//         num: '5',
+//         typeTitle: '5',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '10',
+//         typeTitle: '10',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '15',
+//         typeTitle: '15',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: "20",
+//         typeTitle: '20',
+//         gradeExplain:"" ,
+//
+//     },{
+//         num: '25',
+//         typeTitle: '25',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '30',
+//         typeTitle: '30',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '35',
+//         typeTitle: '35',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '40',
+//         typeTitle: '40',
+//         gradeExplain:"",
+//
+//     },{
+//         num: '45',
+//         typeTitle: '45',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '50',
+//         typeTitle: '50',
+//         gradeExplain:"",
+//     },
+//     ],
+//     min: 10,
+//     max: 50,
+//     tit: '是否是官方配置？',
+//     value1: '',
+//     value2: '',
+//     value3: '',//有多少个投标人就有多少个value(index+1)
+//     typeTitle: '10',
+// },
+//                         {
+//                             projectName: '第一章，技术(14.00)分',
+//                             type: 'checkbox',//单选
+//                             radioList: [
+//                                 {typeTitle: 'A (2.00)分', num: '2'},
+//                                 {typeTitle: 'B (3.00)分', num:'3' },
+//                                 {typeTitle: 'C (4.00)分', num: '4',},
+//                                 {typeTitle: 'D (5.00)分', num: '5',}
+//                             ],
+//                             min: null,
+//                             max: null,
+//                             tit: '',
+//                             value1:[],
+//                             value2:[] ,
+//                             value3: [],
+//                         },
 
 
 
@@ -4307,6 +4307,26 @@ let dingdang_save = Mock.mock('/api/dingdang_save', 'post', {
     vue_type: get_data(7),
 });
 
+//技术保存接口
+let jishu_save = Mock.mock('/api/jishu_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(9),
+});
 //商务保存接口
 let business_save = Mock.mock('/api/business_save', 'post', {
     status: 200,
@@ -4328,7 +4348,46 @@ let business_save = Mock.mock('/api/business_save', 'post', {
     vue_type: get_data(8),
 });
 
+//商务保存接口
+let fuwu_save = Mock.mock('/api/fuwu_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(10),
+});
 
+let qita_save = Mock.mock('/api/qita_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(11),
+});
 //服务编辑弹框保存成功
 let saveEditor = Mock.mock('/api/saveEditor', 'post', {
     code: 200,
