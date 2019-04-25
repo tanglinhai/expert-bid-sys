@@ -1,4 +1,5 @@
-﻿import Mock from 'mockjs';
+﻿
+import Mock from 'mockjs';
 
 import JSON from 'JSON';
 
@@ -26,7 +27,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
     'allBagMsg|1-3': [{
         ids: () => Random.id(),
         'biaobaomingcheng':  Random.natural(0, 6) + Random.natural(5, 9)+ Random.natural(0, 6) + Random.natural(5, 9) +Random.natural(0, 6) + Random.natural(5, 9) + 'J'
-             + '/' +  Random.natural(0, 6) + Random.natural(5, 9),
+        + '/' +  Random.natural(0, 6) + Random.natural(5, 9),
         'bagName': '第' + Random.natural(0, 6) + Random.natural(5, 9) + '包',
         'starTime': () => Random.datetime(),
         'stopTime': () => Random.datetime(),
@@ -348,15 +349,15 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         },
                     'mylist': ms,
                     vue_type: get_data(1),       //头部审查类型按钮
-               },
+                },
                 msg: [  //个人形式审计表数据接口(改动)
                     {
                         'number': '1',
                         'evaluationFactors': '资格审查1',
                     },
                     {
-                         'number': '2',
-                         'evaluationFactors': '资格审查2',
+                        'number': '2',
+                        'evaluationFactors': '资格审查2',
                     },
                     {
                         'number': '3',
@@ -369,8 +370,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 ],
                 'companyNameData': [
                     {
-                       'companyName':'重庆网控科技发展有限公司',
-                       'zhaunjiadata_gs':[
+                        'companyName':'重庆网控科技发展有限公司',
+                        'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["√",  "√","√",'合格']
                             } ,
@@ -664,7 +665,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                             'zhaunjiadata_gs':[
+                        'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'合格']
                             } ,
@@ -672,7 +673,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                           'zhaunjiadata_gs':[
+                        'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "×", "√",'合格']
                             } ,
@@ -680,7 +681,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                          'zhaunjiadata_gs':[
+                        'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
@@ -688,7 +689,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     },
                     {
                         'companyName':'夏丰热工研究院有限公司',
-                           'zhaunjiadata_gs':[
+                        'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
@@ -824,7 +825,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                             id: 3,
                                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
                                         }],
-                                   },
+                                    },
                                 },
                                 {
                                     id: 102, pId: 1, name: "详细评审2", open: false,
@@ -1057,24 +1058,24 @@ Mock.mock('/api/table_data', 'post', (options) => {
     if (get_type_num == 2) {//是区别那个页面
         let msg = [];
         // for (var i = 0; i < Random.integer(1, 5); i++) {
-            msg.push(
-                  {
-                    'xuhao': '1',
-                    'evaluationFactors': '资格审查1',
-                },
-                {
-                    'xuhao': '2',
-                    'evaluationFactors': '资格审查2',
-                 },
-                {
-                    'xuhao': '3',
-                    'evaluationFactors': '资格审查3',
-                },
-                {
-                     'xuhao': '结论',
-                    'evaluationFactors': '是否通过资格审查项检查',
-                }
-            );
+        msg.push(
+            {
+                'xuhao': '1',
+                'evaluationFactors': '资格审查1',
+            },
+            {
+                'xuhao': '2',
+                'evaluationFactors': '资格审查2',
+            },
+            {
+                'xuhao': '3',
+                'evaluationFactors': '资格审查3',
+            },
+            {
+                'xuhao': '结论',
+                'evaluationFactors': '是否通过资格审查项检查',
+            }
+        );
         // }
         return_val= {
             'bidMsg': {
@@ -1419,7 +1420,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
-                        // "重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"],
+                    // "重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"],
                     'grcs_titile_data':{
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -1450,7 +1451,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'evaluationFactors': '是否通过资格审查项检查',
             }
         );
-         return_val= {
+        return_val= {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -2403,7 +2404,7 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 });
 
 
-  /*----------------------定档商务技术服务其他-----------------*/
+/*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
@@ -2429,16 +2430,15 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
-                     'companyNameList': [//(投标人)公司名
-                         {"companyName":"重庆网控科技发展有限公司（1）" ,'laber':' 是否是官方配置？（50.00分）'},
-                         {"companyName": "普瑞太阳能有限公司（2）",'laber':' 是否是官方配置？（50.00分）'} ,
-                         {"companyName":"夏丰热工研究院有限公司（3）",'laber':' 是否是官方配置？（50.00分）'},
-                     ],
+                    'companyNameList': [//(投标人)公司名
+                        {"companyName":"重庆网控科技发展有限公司（1）" ,'laber':' 是否是官方配置？（50.00分）'},
+                        {"companyName": "普瑞太阳能有限公司（2）",'laber':' 是否是官方配置？（50.00分）'} ,
+                        {"companyName":"夏丰热工研究院有限公司（3）",'laber':' 是否是官方配置？（50.00分）'},
+                    ],
                     "dingdang_tableData":[//打分项
                         { "grade":'商务  商务1（50.00分）', },
-
                         // { "grade":'商务   商务2（50.00分）',},
-                     ],
+                    ],
                     'msgBox': msg,
                     'committeeGudges': [
                         {
@@ -2672,20 +2672,20 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         + '/' + '评委会',//     评标委员会
                         'bagName': '第' + Random.natural(0, 9) + '包',//分包号
                     },
-                   'viewUnfinishedData':[
-                       {
-                           'gongyingshang': '重庆网控科技发展有限公司',//序号
-                           'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
-                       },
-                       {
-                           'gongyingshang': '普瑞太阳能有限公司',//序号
-                           'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
-                       },
-                       {
-                           'gongyingshang': '夏丰热工研究院有限公司',//序号
-                           'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
-                       },
-                   ]
+                    'viewUnfinishedData':[
+                        {
+                            'gongyingshang': '重庆网控科技发展有限公司',//序号
+                            'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
+                        },
+                        {
+                            'gongyingshang': '普瑞太阳能有限公司',//序号
+                            'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
+                        },
+                        {
+                            'gongyingshang': '夏丰热工研究院有限公司',//序号
+                            'dafenxiangweizhi': ' 第1.0页；商务1 ',//打分项
+                        },
+                    ]
                 }
             }
         }
@@ -2710,7 +2710,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
-                     'gongzuo_name':'评分',
+                    'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
                         {"title":"重庆网控科技发展有限公司（1） ",
                             'pdfList':[
@@ -2736,7 +2736,112 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     //     {title: '普瑞太阳能有限公司（测试）（3）'}
                     // ],
                     "dingdang_tableData":[
+                          /*加的数据*/
 
+
+
+// {
+//     projectName: '第一章、其他(1.00分-60.00分)',
+//     type: 'inputLabour',// 人工录入法
+//     radioList: [],
+//     min: 1,
+//     max: 60,
+//     tit: '是否是官方配置？',
+//     value1: '',
+//     value2: '',
+//     value3: ''
+// },
+//
+// {
+//     projectName: '第一章、服务1(50.00分)',
+//     type: 'inputSelect',// 布距法
+//     radioList: [{
+//         num: '0',
+//         typeTitle: '0',
+//         gradeExplain:'',
+//
+//     }, {
+//         num: '5',
+//         typeTitle: '5',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '10',
+//         typeTitle: '10',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '15',
+//         typeTitle: '15',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: "20",
+//         typeTitle: '20',
+//         gradeExplain:"" ,
+//
+//     },{
+//         num: '25',
+//         typeTitle: '25',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '30',
+//         typeTitle: '30',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '35',
+//         typeTitle: '35',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '40',
+//         typeTitle: '40',
+//         gradeExplain:"",
+//
+//     },{
+//         num: '45',
+//         typeTitle: '45',
+//         gradeExplain:"",
+//
+//     }, {
+//         num: '50',
+//         typeTitle: '50',
+//         gradeExplain:"",
+//     },
+//     ],
+//     min: 10,
+//     max: 50,
+//     tit: '是否是官方配置？',
+//     value1: '',
+//     value2: '',
+//     value3: '',//有多少个投标人就有多少个value(index+1)
+//     typeTitle: '10',
+// },
+//                         {
+//                             projectName: '第一章，技术(14.00)分',
+//                             type: 'checkbox',//单选
+//                             radioList: [
+//                                 {typeTitle: 'A (2.00)分', num: '2'},
+//                                 {typeTitle: 'B (3.00)分', num:'3' },
+//                                 {typeTitle: 'C (4.00)分', num: '4',},
+//                                 {typeTitle: 'D (5.00)分', num: '5',}
+//                             ],
+//                             min: null,
+//                             max: null,
+//                             tit: '',
+//                             value1:[],
+//                             value2:[] ,
+//                             value3: [],
+//                         },
+
+
+
+
+
+
+                        /*加的数据*/
                         {
                             projectName: '第一章，商务10分',
                             type: 'radio',//单选
@@ -2744,7 +2849,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {typeTitle: 'A 10分', num: 10},
                                 {typeTitle: 'B 20分', num: 20 },
                                 {typeTitle: 'C 30分', num: 30,}
-                                ],
+                            ],
                             min: null,
                             max: null,
                             tit: '',
@@ -3077,149 +3182,112 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             ]
                         },
                     ],
-                    // 'companyNameList': [//(商务table投标人)公司名
-                    //     {title: '夏丰热工研究院有限公司（测试）（1） '},
-                    //     {title: '阿里巴巴（2）'},
-                    //     {title: '普瑞太阳能有限公司（测试）（3）'}
-                    // ],
                     "dingdang_tableData":[
-                        {
-                            projectName: '第一章，商务10分',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: 'A 10分', num: 10},
-                                {typeTitle: 'B 20分', num: 20 },
-                                {typeTitle: 'C 30分', num: 30,}
-                            ],
-                            min: null,
-                            max: null,
-                            tit: '',
-                            value1:'',
-                            value2:'' ,
-                            value3: ''
-                        },
-                        {
-                            projectName: '第二章，商务20分',
-                            type: 'input',// 两步法
-                            radioList: [],
-                            min: 10,
-                            max: 50,
-                            tit: '是否是官方配置？',
-                            value1: '',
-                            value2: '',
-                            value3: ''
-                        },
-                        {
-                            projectName: '商务小计',
-                            type: 'numberShangwu',
-                            radioList: [],
-                            min: null,
-                            max: null,
-                            tit: '',
-                            value1: 0,
-                            value2:0,
-                            value3:0,
-                        },
-                       {
-                            projectName: '第一章、其他(1.00分-60.00分)',
-                            type: 'inputLabour',// 两步法
-                            radioList: [],
-                            min: 1,
-                            max: 60,
-                            tit: '是否是官方配置？',
-                            value1: '',
-                            value2: '',
-                            value3: ''
-                        },
-                        {
-                            projectName: '其他小计',
-                            type: 'numberOther',
-                            radioList: [],
-                            min: null,
-                            max: null,
-                            tit: '',
-                            value1: 0,
-                            value2:0,
-                            value3:0,
-                        },
-
-                        {
-                            projectName: '第一章、服务1(50.00分)',
-                            type: 'inputSelect',// 两步法
-                            radioList: [{
-                                num: '0',
-                                typeTitle: '0',
-                                gradeExplain:'',
-
-                            }, {
-                                num: '5',
-                                typeTitle: '5',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '10',
-                                typeTitle: '10',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '15',
-                                typeTitle: '15',
-                                gradeExplain:"",
-
-                            }, {
-                                num: "20",
-                                typeTitle: '20',
-                                gradeExplain:"" ,
-
-                            },{
-                                num: '25',
-                                typeTitle: '25',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '30',
-                                typeTitle: '30',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '35',
-                                typeTitle: '35',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '40',
-                                typeTitle: '40',
-                                gradeExplain:"",
-
-                            },{
-                                num: '45',
-                                typeTitle: '45',
-                                gradeExplain:"",
-
-                            }, {
-                                num: '50',
-                                typeTitle: '50',
-                                gradeExplain:"",
-                            },
-                            ],
-                            min: 10,
-                            max: 50,
-                            tit: '是否是官方配置？',
-                            value1: '',
-                            value2: '',
-                            value3: '',//有多少个投标人就有多少个value(index+1)
-                        },
-                        {
-                            projectName: '服务小计',
-                            type: 'numberFuwu',
-                            radioList: [],
-                            min: null,
-                            max: null,
-                            tit: '',
-                            value1: 0,
-                            value2:0,
-                            value3:0,
-                        },
+                        // {
+                        //     projectName: '第一章，商务10分',
+                        //     type: 'radio',//单选
+                        //     radioList: [
+                        //         {typeTitle: 'A 10分', num: 10},
+                        //         {typeTitle: 'B 20分', num: 20 },
+                        //         {typeTitle: 'C 30分', num: 30,}
+                        //     ],
+                        //     min: null,
+                        //     max: null,
+                        //     tit: '',
+                        //     value1:'',
+                        //     value2:'' ,
+                        //     value3: ''
+                        // },
+                        // {
+                        //     projectName: '第二章，商务20分',
+                        //     type: 'input',// 两步法
+                        //     radioList: [],
+                        //     min: 10,
+                        //     max: 50,
+                        //     tit: '是否是官方配置？',
+                        //     value1: '',
+                        //     value2: '',
+                        //     value3: ''
+                        // },
+                        //
+                        // {
+                        //     projectName: '第一章、其他(1.00分-60.00分)',
+                        //     type: 'inputLabour',// 两步法
+                        //     radioList: [],
+                        //     min: 1,
+                        //     max: 60,
+                        //     tit: '是否是官方配置？',
+                        //     value1: '',
+                        //     value2: '',
+                        //     value3: ''
+                        // },
+                        //
+                        // {
+                        //     projectName: '第一章、服务1(50.00分)',
+                        //     type: 'inputSelect',// 两步法
+                        //     radioList: [{
+                        //         num: '0',
+                        //         typeTitle: '0',
+                        //         gradeExplain:'',
+                        //
+                        //     }, {
+                        //         num: '5',
+                        //         typeTitle: '5',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '10',
+                        //         typeTitle: '10',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '15',
+                        //         typeTitle: '15',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: "20",
+                        //         typeTitle: '20',
+                        //         gradeExplain:"" ,
+                        //
+                        //     },{
+                        //         num: '25',
+                        //         typeTitle: '25',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '30',
+                        //         typeTitle: '30',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '35',
+                        //         typeTitle: '35',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '40',
+                        //         typeTitle: '40',
+                        //         gradeExplain:"",
+                        //
+                        //     },{
+                        //         num: '45',
+                        //         typeTitle: '45',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '50',
+                        //         typeTitle: '50',
+                        //         gradeExplain:"",
+                        //     },
+                        //     ],
+                        //     min: 10,
+                        //     max: 50,
+                        //     tit: '是否是官方配置？',
+                        //     value1: '',
+                        //     value2: '',
+                        //     value3: '',//有多少个投标人就有多少个value(index+1)
+                        // },
                         {
                             projectName: '第一章，技术(14.00)分',
                             type: 'checkbox',//单选
@@ -3550,69 +3618,45 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             ]
                         },
                     ],
-                    // 'companyNameList': [//(商务table投标人)公司名
-                    //     {title: '夏丰热工研究院有限公司（测试）（1） '},
-                    //     {title: '阿里巴巴（2）'},
-                    //     {title: '普瑞太阳能有限公司（测试）（3）'}
-                    // ],
-                    "dingdang_tableData":[
+                     "dingdang_tableData":[
                         {
                             projectName: '第一章、服务1(50.00分)',
                             type: 'inputSelect',// 两步法
                             radioList: [{
                                 num: '0',
                                 typeTitle: '0',
-                                gradeExplain:'',
-
                             }, {
                                 num: '5',
                                 typeTitle: '5',
-                                gradeExplain:"",
-
                             }, {
                                 num: '10',
                                 typeTitle: '10',
-                                gradeExplain:"",
-
                             }, {
                                 num: '15',
                                 typeTitle: '15',
                                 gradeExplain:"",
-
                             }, {
                                 num: "20",
                                 typeTitle: '20',
-                                gradeExplain:"" ,
-
                             },{
                                 num: '25',
                                 typeTitle: '25',
-                                gradeExplain:"",
-
                             }, {
                                 num: '30',
                                 typeTitle: '30',
-                                gradeExplain:"",
-
                             }, {
                                 num: '35',
                                 typeTitle: '35',
-                                gradeExplain:"",
-
                             }, {
                                 num: '40',
                                 typeTitle: '40',
-                                gradeExplain:"",
-
                             },{
                                 num: '45',
                                 typeTitle: '45',
                                 gradeExplain:"",
-
                             }, {
                                 num: '50',
                                 typeTitle: '50',
-                                gradeExplain:"",
                             },
                             ],
                             min: 10,
@@ -3621,6 +3665,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: '',
                             value2: '',
                             value3: '',//有多少个投标人就有多少个value(index+1)
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '服务小计',
@@ -3632,6 +3679,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '总计',
@@ -3642,7 +3692,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -3868,7 +3921,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 }
                             ]
                         },
-
                     ],
                     'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
@@ -3950,7 +4002,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '是否是官方配置？',
                             value1: '',
                             value2: '',
-                            value3: ''
+                            value3: '',
+                            gradeExplain1:"",
+                            gradeExplain2:"",
+                            gradeExplain3:""
                         },
                         {
                             projectName: '其他小计',
@@ -3962,6 +4017,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:"",
+                            gradeExplain2:"",
+                            gradeExplain3:"",
                         },
                         {
                             projectName: '总计',
@@ -3972,7 +4030,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:"",
+                            gradeExplain2:"",
+                            gradeExplain3:""
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4224,7 +4285,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 }
             }
         }
-   }
+    }
     return_val.bidMsg.eviewrItemsMsg.viewType=get_data(get_type_num-1,submit_type);
     return return_val;
 });
@@ -4246,22 +4307,113 @@ let dingdang_save = Mock.mock('/api/dingdang_save', 'post', {
     vue_type: get_data(7),
 });
 
+//技术保存接口
+let jishu_save = Mock.mock('/api/jishu_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(9),
+});
 //商务保存接口
 let business_save = Mock.mock('/api/business_save', 'post', {
     status: 200,
     message: '成功!',
-    data: '',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
     vue_type: get_data(8),
 });
 
+//商务保存接口
+let fuwu_save = Mock.mock('/api/fuwu_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(10),
+});
 
+let qita_save = Mock.mock('/api/qita_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(11),
+});
 //服务编辑弹框保存成功
 let saveEditor = Mock.mock('/api/saveEditor', 'post', {
     code: 200,
     message: '保存成功!',
     data: []
 });
-
+//商务提交
+let submitBusiness = Mock.mock('/api/submitBusiness','post',{
+    id: () => Random.id(),
+    code: 200,
+    message: '确定提交!',
+    data:  {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    }
+});
 
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 
