@@ -1,15 +1,15 @@
 <template>
     <div class="submitPrompt ">
         <el-row class="textAlignC fs14" style="line-height: 30px">您的{{name}}工作已进行 [&nbsp;<span
-                class="red">{{pro_num}}%</span>&nbsp;], 请确认您已经完成本包 [&nbsp;<span class="red">{{baohao}}</span>&nbsp;]的{{name}}工作
+                class="red">{{pro_num}}%</span>&nbsp;], 请确认您已经完成本包 [&nbsp;<span class="red">{{baohao}}</span>&nbsp;]的{{name}}工作!
         </el-row>
         <el-row>
             <!--type=8:商务的时候可以通过[结果]进行查阅-->
-            <el-row class="textAlignC fs16" style="line-height: 30px" v-if="type=8">确认后您将不能再更改{{name}}结果！但可以通过点击[结果]进行查阅! </el-row>
+            <el-row class="textAlignC fs16" style="line-height: 30px" v-if="type=8||9||10||11">确认后您将不能再更改{{name}}结果！但可以通过点击[结果]进行查阅! </el-row>
             <el-row class="textAlignC fs16" style="line-height: 30px" v-else >确认后您将不能再更改{{name}}结果！</el-row>
         </el-row>
         <el-row class="textAlignC pt20">
-            <el-button size="small" type="primary" @click="comfrim">确认</el-button>
+            <el-button size="small" type="primary" @click="comfrim" >确认</el-button>
             <el-button size="small" type="primary" @click="reback">取消</el-button>
         </el-row>
 
@@ -68,10 +68,13 @@
             baohao: {
                 type: String
             },
-            type:{
-                type: Number
+            type1:{
+                type: String
             },
             dingdang_tableData:{
+                type:Array
+            },
+            companyname_toubiao:{
                 type:Array
             }
         },
@@ -80,26 +83,38 @@
                 count: '5',   //倒计时5秒
             }
         },
+        mounted(){
+            console.log(this.type1);
+        },
         methods: {
             reback() {
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
-                if(this.type==8 ||9||10||11){
-                    this.$axios.post('/api/business_save').then(res => { //商务接口
+                if(this.type==8){
+                    this.$axios.post('/api/business_tijiao').then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.pro_num != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
                             } else {
-                                console.log(this.dingdang_tableData, res.data.data);
+                                console.log(res.data.data);
+                                console.log(this.dingdang_tableData,res.data.data,this.dingdang_tableData.length - 1);
                                 this.$set(this.dingdang_tableData,this.dingdang_tableData.length - 1 ,res.data.data);
+                                // this.$set(this.dingdang_tableData,this.dingdang_tableData ,res.data.data);
                                 this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
+                                // this.$store.state.failureEnery.business_tijiao = false;
                                 this.goGrdoupRecor();//倒计时开始
                             }
                         }
                     })
-                }else{
+                }else if(this.type==9){
+                    console.log(this.type);
+                }else if(this.type==10){
+                    console.log(this.type);
+                }else if(this.type==11){
+                    console.log(this.type);
+                }
+                else{
                     this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
                         if (res.status == '200') {
                             if (this.pro_num != 100.0) {

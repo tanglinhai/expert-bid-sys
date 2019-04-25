@@ -2730,118 +2730,106 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             ]
                         },
                     ],
-                    // 'companyNameList': [//(商务table投标人)公司名
-                    //     {title: '夏丰热工研究院有限公司（测试）（1） '},
-                    //     {title: '阿里巴巴（2）'},
-                    //     {title: '普瑞太阳能有限公司（测试）（3）'}
-                    // ],
                     "dingdang_tableData":[
-                          /*加的数据*/
-
-
-
-// {
-//     projectName: '第一章、其他(1.00分-60.00分)',
-//     type: 'inputLabour',// 人工录入法
-//     radioList: [],
-//     min: 1,
-//     max: 60,
-//     tit: '是否是官方配置？',
-//     value1: '',
-//     value2: '',
-//     value3: ''
-// },
-//
-// {
-//     projectName: '第一章、服务1(50.00分)',
-//     type: 'inputSelect',// 布距法
-//     radioList: [{
-//         num: '0',
-//         typeTitle: '0',
-//         gradeExplain:'',
-//
-//     }, {
-//         num: '5',
-//         typeTitle: '5',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '10',
-//         typeTitle: '10',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '15',
-//         typeTitle: '15',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: "20",
-//         typeTitle: '20',
-//         gradeExplain:"" ,
-//
-//     },{
-//         num: '25',
-//         typeTitle: '25',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '30',
-//         typeTitle: '30',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '35',
-//         typeTitle: '35',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '40',
-//         typeTitle: '40',
-//         gradeExplain:"",
-//
-//     },{
-//         num: '45',
-//         typeTitle: '45',
-//         gradeExplain:"",
-//
-//     }, {
-//         num: '50',
-//         typeTitle: '50',
-//         gradeExplain:"",
-//     },
-//     ],
-//     min: 10,
-//     max: 50,
-//     tit: '是否是官方配置？',
-//     value1: '',
-//     value2: '',
-//     value3: '',//有多少个投标人就有多少个value(index+1)
-//     typeTitle: '10',
-// },
-//                         {
-//                             projectName: '第一章，技术(14.00)分',
-//                             type: 'checkbox',//单选
-//                             radioList: [
-//                                 {typeTitle: 'A (2.00)分', num: '2'},
-//                                 {typeTitle: 'B (3.00)分', num:'3' },
-//                                 {typeTitle: 'C (4.00)分', num: '4',},
-//                                 {typeTitle: 'D (5.00)分', num: '5',}
-//                             ],
-//                             min: null,
-//                             max: null,
-//                             tit: '',
-//                             value1:[],
-//                             value2:[] ,
-//                             value3: [],
-//                         },
-
-
-
-
-
-
-                        /*加的数据*/
+                        // /*加的数据*/
+                        //
+                        // {
+                        //     projectName: '第一章、其他(1.00分-60.00分)',
+                        //     type: 'inputLabour',// 人工录入法
+                        //     radioList: [],
+                        //     min: 1,
+                        //     max: 60,
+                        //     tit: '是否是官方配置？',
+                        //     value1: '',
+                        //     value2: '',
+                        //     value3: ''
+                        // },
+                        //
+                        // {
+                        //     projectName: '第一章、服务1(50.00分)',
+                        //     type: 'inputSelect',// 布距法
+                        //     radioList: [{
+                        //         num: '0',
+                        //         typeTitle: '0',
+                        //         gradeExplain:'',
+                        //
+                        //     }, {
+                        //         num: '5',
+                        //         typeTitle: '5',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '10',
+                        //         typeTitle: '10',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '15',
+                        //         typeTitle: '15',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: "20",
+                        //         typeTitle: '20',
+                        //         gradeExplain:"" ,
+                        //
+                        //     },{
+                        //         num: '25',
+                        //         typeTitle: '25',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '30',
+                        //         typeTitle: '30',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '35',
+                        //         typeTitle: '35',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '40',
+                        //         typeTitle: '40',
+                        //         gradeExplain:"",
+                        //
+                        //     },{
+                        //         num: '45',
+                        //         typeTitle: '45',
+                        //         gradeExplain:"",
+                        //
+                        //     }, {
+                        //         num: '50',
+                        //         typeTitle: '50',
+                        //         gradeExplain:"",
+                        //     },
+                        //     ],
+                        //     min: 10,
+                        //     max: 50,
+                        //     tit: '是否是官方配置？',
+                        //     value1: '',
+                        //     value2: '',
+                        //     value3: '',//有多少个投标人就有多少个value(index+1)
+                        //     typeTitle: '10',
+                        // },
+                        // {
+                        //     projectName: '第一章，技术(14.00)分',
+                        //     type: 'checkbox',//复选
+                        //     radioList: [
+                        //         {typeTitle: 'A (2.00)分', num: '2'},
+                        //         {typeTitle: 'B (3.00)分', num:'3' },
+                        //         {typeTitle: 'C (4.00)分', num: '4',},
+                        //         {typeTitle: 'D (5.00)分', num: '5',}
+                        //     ],
+                        //     min: null,
+                        //     max: null,
+                        //     tit: '',
+                        //     value1:[],
+                        //     value2:[] ,
+                        //     value3: [],
+                        // },
+                        //
+                        // /*加的数据*/
                         {
                             projectName: '第一章，商务10分',
                             type: 'radio',//单选
@@ -3183,33 +3171,33 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         },
                     ],
                     "dingdang_tableData":[
-                        // {
-                        //     projectName: '第一章，商务10分',
-                        //     type: 'radio',//单选
-                        //     radioList: [
-                        //         {typeTitle: 'A 10分', num: 10},
-                        //         {typeTitle: 'B 20分', num: 20 },
-                        //         {typeTitle: 'C 30分', num: 30,}
-                        //     ],
-                        //     min: null,
-                        //     max: null,
-                        //     tit: '',
-                        //     value1:'',
-                        //     value2:'' ,
-                        //     value3: ''
-                        // },
-                        // {
-                        //     projectName: '第二章，商务20分',
-                        //     type: 'input',// 两步法
-                        //     radioList: [],
-                        //     min: 10,
-                        //     max: 50,
-                        //     tit: '是否是官方配置？',
-                        //     value1: '',
-                        //     value2: '',
-                        //     value3: ''
-                        // },
-                        //
+                    //     {
+                    //         projectName: '第一章，商务10分',
+                    //         type: 'radio',//单选
+                    //         radioList: [
+                    //             {typeTitle: 'A 10分', num: 10},
+                    //             {typeTitle: 'B 20分', num: 20 },
+                    //             {typeTitle: 'C 30分', num: 30,}
+                    //         ],
+                    //         min: null,
+                    //         max: null,
+                    //         tit: '',
+                    //         value1:'',
+                    //         value2:'' ,
+                    //         value3: ''
+                    //     },
+                    //     {
+                    //         projectName: '第二章，商务20分',
+                    //         type: 'input',// 两步法
+                    //         radioList: [],
+                    //         min: 10,
+                    //         max: 50,
+                    //         tit: '是否是官方配置？',
+                    //         value1: '',
+                    //         value2: '',
+                    //         value3: ''
+                    //     },
+
                         // {
                         //     projectName: '第一章、其他(1.00分-60.00分)',
                         //     type: 'inputLabour',// 两步法
@@ -3221,7 +3209,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         //     value2: '',
                         //     value3: ''
                         // },
-                        //
+
                         // {
                         //     projectName: '第一章、服务1(50.00分)',
                         //     type: 'inputSelect',// 两步法
@@ -3618,7 +3606,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             ]
                         },
                     ],
-                     "dingdang_tableData":[
+                    "dingdang_tableData":[
                         {
                             projectName: '第一章、服务1(50.00分)',
                             type: 'inputSelect',// 两步法
@@ -3987,11 +3975,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             ]
                         },
                     ],
-                    // 'companyNameList': [//(商务table投标人)公司名
-                    //     {title: '夏丰热工研究院有限公司（测试）（1） '},
-                    //     {title: '阿里巴巴（2）'},
-                    //     {title: '普瑞太阳能有限公司（测试）（3）'}
-                    // ],
                     "dingdang_tableData":[
                         {
                             projectName: '第一章、其他(1.00分-60.00分)',
@@ -4307,44 +4290,27 @@ let dingdang_save = Mock.mock('/api/dingdang_save', 'post', {
     vue_type: get_data(7),
 });
 
-//技术保存接口
-let jishu_save = Mock.mock('/api/jishu_save', 'post', {
-    status: 200,
-    message: '成功!',
-    data: {
-        projectName: '总计',
-        type: 'numberTotle',
-        radioList: [ ],
-        min: null,
-        max: null,
-        tit: '',
-        value1: 23,
-        value2: 45,
-        value3: 36,
-        gradeExplain1:"",
-        gradeExplain2:"",
-        gradeExplain3:""
-    },
-    vue_type: get_data(9),
-});
+
 //商务保存接口
 let business_save = Mock.mock('/api/business_save', 'post', {
     status: 200,
     message: '成功!',
-    data: {
-        projectName: '总计',
-        type: 'numberTotle',
-        radioList: [ ],
-        min: null,
-        max: null,
-        tit: '',
-        value1: 23,
-        value2: 45,
-        value3: 36,
-        gradeExplain1:"",
-        gradeExplain2:"",
-        gradeExplain3:""
-    },
+    data:
+        {
+            projectName: '总计',
+            type: 'numberTotle',
+            radioList: [ ],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 23,
+            value2: 45,
+            value3: 36,
+            gradeExplain1:"",
+            gradeExplain2:"",
+            gradeExplain3:""
+        },
+
     vue_type: get_data(8),
 });
 
@@ -4368,7 +4334,7 @@ let fuwu_save = Mock.mock('/api/fuwu_save', 'post', {
     },
     vue_type: get_data(10),
 });
-
+//其他保存接口
 let qita_save = Mock.mock('/api/qita_save', 'post', {
     status: 200,
     message: '成功!',
@@ -4411,9 +4377,166 @@ let submitBusiness = Mock.mock('/api/submitBusiness','post',{
         value3: 36,
         gradeExplain1:"",
         gradeExplain2:"",
-        gradeExplain3:""
-    }
+        gradeExplain3:"",
+    },
+    vue_type: get_data(8),
 });
+
+//技术保存接口
+let jishu_save = Mock.mock('/api/jishu_save', 'post', {
+    status: 200,
+    message: '成功!',
+    data: {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:""
+    },
+    vue_type: get_data(9),
+});
+
+
+//商务提交
+let business_tijiao = Mock.mock('/api/business_tijiao', 'post', {
+    status: 200,
+    message: '成功!',
+    data: [
+        // {
+    //     projectName: '总计',
+    //     type: 'numberTotle',
+    //     radioList: [ ],
+    //     min: null,
+    //     max: null,
+    //     tit: '',
+    //     value1: 23,
+    //     value2: 45,
+    //     value3: 36,
+    //     gradeExplain1:"",
+    //     gradeExplain2:"",
+    //     gradeExplain3:"",
+    // },
+        {
+            projectName: '第一章，商务10分',
+                type: 'radio',//单选
+            radioList: [
+
+        ],
+            min: null,
+            max: null,
+            tit: '',
+            value1:10,
+            value2:10 ,
+            value3: 10
+        },
+        {
+            projectName: '第二章，商务20分',
+            type: 'input',// 两步法
+            radioList: [],
+            min: 10,
+            max: 50,
+            tit: '',
+            value1: 10,
+            value2: 10,
+            value3: 10
+        },
+        {
+            projectName: '商务小计',
+            type: 'numberShangwu',
+            radioList: [],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 10,
+            value2:10,
+            value3:10,
+        },
+        {
+            projectName: '总计',
+             type: 'numberTotle',
+            radioList: [ ],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 23,
+            value2: 45,
+            value3: 36
+        },
+        ],
+    vue_type: get_data(8),
+});
+
+//技术提交
+let jishu_tijiao = Mock.mock('/api/jishu_tijiao', 'post', {
+    status: 200,
+    message: '成功!',
+    data:  {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:"",
+    },
+    vue_type: get_data(9),
+});
+//服务提交
+let fuwu_tijiao = Mock.mock('/api/fuwu_tijiao', 'post', {
+    status: 200,
+    message: '成功!',
+    data:  {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:"",
+    },
+    vue_type: get_data(10),
+});
+
+//其他提交
+let qita_tijiao = Mock.mock('/api/qita_tijiao', 'post', {
+    status: 200,
+    message: '成功!',
+    data:  {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:"",
+    },
+    vue_type: get_data(11),
+});
+
+
+
 
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
 
