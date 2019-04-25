@@ -75,6 +75,12 @@ var routes = [
           //商务技术服务定档其他
          { name: '/elect/BusinessOther', path: '/elect/BusinessOther', component: () => import('./views/qualificationExam/BusinessOther.vue') },
       ]
+    },
+    // 组长
+    {
+      path:'/groupLeader',
+      name:'groupLeader',
+      component: () => import('./views/leader/Index.vue'),
     }
   ];
 
