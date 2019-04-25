@@ -33,8 +33,8 @@
                         </template>
                     </div>
                     <div class="grid-content bg-purple fl" style="margin-left:44px;">
-                        <template v-if="projectTableData.status==0" @click="AgreeXieYi">
-                            <el-button size="small"  style="margin-left:50px;"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
+                        <template v-if="projectTableData.status==0" >
+                            <el-button size="small" @click="AgreeXieYi" style="margin-left:50px;"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                         </template>
                         <template v-if="projectTableData.status==3">
                             <el-button  style="margin-left:50px;" size="small" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-message"></i>查看</el-button>
@@ -332,6 +332,7 @@
             },
 
             AgreeXieYi(){  //推举组长
+            console.log("1")
                 this.$router.push({
                     path: '/index/WheelPushing?types=3',
                 })
