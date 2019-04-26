@@ -125,6 +125,8 @@
                 biaoNum:'', //标号
                 baohao:'', //包号
 
+                val:'',  //四种方式传值
+
                 //测试表格
                 // tableData: [
                 //     {
@@ -185,7 +187,8 @@
             // console.log(this.$route.query.types,999)
             //this.number=this.$route.query.types
             this.$store.state.navCommon.types=this.$route.query.types;
-            // console.log(this.$store.state.navCommon.types,5)
+             console.log(this.$route.query.methodType,5)
+            this.val=this.$route.query.methodType;
         },
         mounted(){
             
@@ -270,7 +273,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/ElectedLeader?types=3',
+                            path: '/index/ElectedLeader?types=3&methodType='+this.val,
                         })
                         
                     }
