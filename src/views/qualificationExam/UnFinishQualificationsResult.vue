@@ -156,7 +156,7 @@
                     :visible.sync="$store.state.failureEnery.individualTrial"
                     width="80%"
             >
-                <IndividualTrial :msgBox="individualTrialData" :msg="companyName"
+                <IndividualTrial :msgBoxData="individualTrialData" :msg="companyName"
                                  :title_data="grcs_titile_data"></IndividualTrial>
             </el-dialog>
             <!--废标弹框-->
@@ -253,7 +253,7 @@
                 baohao: '',
                 options: [],//头部按钮
                 /* -------头部包信息end-----*/
-                msgBox: [],
+                msgBox: [],//专家进度页面数据
                 completePercent: 0,
                 evaluationLeader: "",//评标委员会组长
                 unlock_table: [],//所有专家都是100%的时候显示的table

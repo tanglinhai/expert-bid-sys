@@ -47,7 +47,7 @@
                 </el-col>
             </el-row>
             <el-table
-                    :data="msgBox"
+                    :data="msgBoxData"
                     size="small"
                     tooltip-effect="dark"
                     border
@@ -85,7 +85,7 @@
         name: 'individualTrial',
         components: {},
         props: {
-            msgBox: {
+            msgBoxData: {
                 type: Array,
             },
             msg:{

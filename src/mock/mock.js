@@ -2102,6 +2102,8 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {//type
+    console.log(type, is_submit_type);
+
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2126,28 +2128,29 @@ function get_data(type,is_submit_type) {//type
             return [1, 1, 1, 1, 1, 1 , is_submit_type?1:2,3,3,3,3,3]
         }
         if (type == 7) {//定档
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?2:1,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 , is_submit_type?1:2,3,3,3,3,3]
         }
         if (type == 8) {//商务
             return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
         }
         if (type == 9) {// 技术
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 ,1, 1,is_submit_type?1:2,3,3,3]
         }
         if (type == 10) {//服务
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 ,1, 1,1,is_submit_type?1:2,3,3]
         }
         if (type == 11) {//其他
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 ,1, 1,1,1,is_submit_type?1:2,3]
         }
         if (type == 70) {//评审汇总
-            return [1, 1, 1, 1, 1, 1 ,1, is_submit_type?1:2,3,3,3,3]
+            return [1, 1, 1, 1, 1, 1 ,1,  1,1,1,1,is_submit_type?1:2]
         }
     }
 
     set_type();
     var a;
     a = set_type();
+
     return [
         {
             value: '1',//
@@ -2407,7 +2410,7 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 /*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     let return_val;
-    var submit_type= Random.integer(0, 1);
+    var submit_type= 1;
     let get_type_num=JSON.parse(options.body).type;
     if (get_type_num == 7) {
         let msg = [];
@@ -4408,76 +4411,8 @@ let jishu_save = Mock.mock('/api/jishu_save', 'post', {
 let business_tijiao = Mock.mock('/api/business_tijiao', 'post', {
     status: 200,
     message: '成功!',
-    data: [
-        // {
-    //     projectName: '总计',
-    //     type: 'numberTotle',
-    //     radioList: [ ],
-    //     min: null,
-    //     max: null,
-    //     tit: '',
-    //     value1: 23,
-    //     value2: 45,
-    //     value3: 36,
-    //     gradeExplain1:"",
-    //     gradeExplain2:"",
-    //     gradeExplain3:"",
-    // },
+    data:
         {
-            projectName: '第一章，商务10分',
-                type: 'radio',//单选
-            radioList: [
-
-        ],
-            min: null,
-            max: null,
-            tit: '',
-            value1:10,
-            value2:10 ,
-            value3: 10
-        },
-        {
-            projectName: '第二章，商务20分',
-            type: 'input',// 两步法
-            radioList: [],
-            min: 10,
-            max: 50,
-            tit: '',
-            value1: 10,
-            value2: 10,
-            value3: 10
-        },
-        {
-            projectName: '商务小计',
-            type: 'numberShangwu',
-            radioList: [],
-            min: null,
-            max: null,
-            tit: '',
-            value1: 10,
-            value2:10,
-            value3:10,
-        },
-        {
-            projectName: '总计',
-             type: 'numberTotle',
-            radioList: [ ],
-            min: null,
-            max: null,
-            tit: '',
-            value1: 23,
-            value2: 45,
-            value3: 36
-        },
-        ],
-    vue_type: get_data(8),
-});
-
-//技术提交
-let jishu_tijiao = Mock.mock('/api/jishu_tijiao', 'post', {
-    status: 200,
-    message: '成功!',
-    data:  {
         projectName: '总计',
         type: 'numberTotle',
         radioList: [ ],
@@ -4491,6 +4426,131 @@ let jishu_tijiao = Mock.mock('/api/jishu_tijiao', 'post', {
         gradeExplain2:"",
         gradeExplain3:"",
     },
+    // [{
+    //         projectName: '第一章，商务10分',
+    //             type: 'radio',//单选
+    //         radioList: [
+    //
+    //     ],
+    //         min: null,
+    //         max: null,
+    //         tit: '',
+    //         value1:10,
+    //         value2:10 ,
+    //         value3: 10
+    //     },
+    //     {
+    //         projectName: '第二章，商务20分',
+    //         type: 'input',// 两步法
+    //         radioList: [],
+    //         min: 10,
+    //         max: 50,
+    //         tit: '',
+    //         value1: 10,
+    //         value2: 10,
+    //         value3: 10
+    //     },
+    //     {
+    //         projectName: '商务小计',
+    //         type: 'numberShangwu',
+    //         radioList: [],
+    //         min: null,
+    //         max: null,
+    //         tit: '',
+    //         value1: 10,
+    //         value2:10,
+    //         value3:10,
+    //     },
+    //     {
+    //         projectName: '总计',
+    //          type: 'numberTotle',
+    //         radioList: [ ],
+    //         min: null,
+    //         max: null,
+    //         tit: '',
+    //         value1: 23,
+    //         value2: 45,
+    //         value3: 36
+    //     },
+    //     ],
+    vue_type: get_data(8),
+});
+
+//技术提交
+let jishu_tijiao = Mock.mock('/api/jishu_tijiao', 'post', {
+    status: 200,
+    message: '成功!',
+    data:[
+        {
+            projectName: '第一章，技术(14.00)分',
+            type: 'checkbox',//单选
+            radioList: [
+                // {typeTitle: 'A (2.00)分', num: '2'},
+                // {typeTitle: 'B (3.00)分', num:'3' },
+                // {typeTitle: 'C (4.00)分', num: '4',},
+                // {typeTitle: 'D (5.00)分', num: '5',}
+            ],
+            min: null,
+            max: null,
+            tit: '',
+            value1:[],
+            value2:[] ,
+            value3:[],
+        },
+        {
+            projectName: '技术小计',
+            type: 'numberJishu',
+            radioList: [],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 20,
+            value2:30,
+            value3:40,
+        },
+        {
+            projectName: '总计',
+            type: 'numberTotle',
+            radioList: [ ],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 50,
+            value2: 40,
+            value3: 70
+        },
+    ],
+    // data:  {
+    //     projectName: '总计',
+    //     type: 'numberTotle',
+    //     radioList: [ ],
+    //     min: null,
+    //     max: null,
+    //     tit: '',
+    //     value1: 23,
+    //     value2: 45,
+    //     value3: 36,
+    //     gradeExplain1:"",
+    //     gradeExplain2:"",
+    //     gradeExplain3:"",
+    // },
+ //    data1:  {
+ //        projectName: '第一章，技术(14.00)分',
+ //            type: 'checkbox',//单选
+ //        radioList: [
+ //    // {typeTitle: 'A (2.00)分', num: '2'},
+ //    // {typeTitle: 'B (3.00)分', num:'3' },
+ //    // {typeTitle: 'C (4.00)分', num: '4',},
+ //    // {typeTitle: 'D (5.00)分', num: '5',}
+ // ],
+ //    min: null,
+ //    max: null,
+ //    tit: '',
+ //    value1:10,
+ //    value2:23 ,
+ //    value3: 34,
+ //
+ //    },
     vue_type: get_data(9),
 });
 //服务提交

@@ -35,7 +35,7 @@
                     <el-col :span="24">
                         <template>
                             <div class="unlock_table-warp fs14">
-                                <el-row>
+                                <el-row >
                                     <el-col :span="12">
                                         <div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">
                                             <h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>
@@ -51,6 +51,7 @@
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                         </el-button>
                                     </el-col>
+
                                     <el-col :span="12" class="textAlignR mian_btns" v-else>
                                         <el-button @click="submited_goback" type="primary" size="small"
                                                    :loading="myloading_back">返回
@@ -236,6 +237,7 @@
             >
                 <SubmitPrompt></SubmitPrompt>
             </el-dialog>
+
         </div>
     </div>
 </template>
@@ -489,7 +491,30 @@
             confirm_btn() {
                 this.$store.state.failureEnery.success_warning = false;
                 this.myloading = false;
-            }
+            },
+            handleCommand(val) {//弹框群
+                if (val === 'a') {//人员信息
+                    this.dialogAbandonedTender = true;
+                } else if (val === 'b') {//交通费标准
+                    this.dialogStandardChallengeInformation = true;
+                    this.bzzxLoading = true;
+                    this.$axios.post('/api/StandardChallengeList', {}).then(res => {
+                        if (res.status == 200) {
+                            this.cities = res.data.cityOptions;
+                            this.tableDataTwo = res.data.standList;
+                            this.bzzxLoading = false;
+                        }
+                    })
+                } else if (val === 'c') {//报销汇总表
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                } else if (val === 'd') {//报销汇总表-财政
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                } else if (val === 'e') {//报销情况查询-财政
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                } else if (val === 'f') {//点击修改密码
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                }
+            },
         }
     }
 </script>
