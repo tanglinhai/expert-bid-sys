@@ -23,6 +23,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'status|1': [0, 1, 2],
         'functionary': '@cname',
         'projectName': '辅助-招标投标法-最低评标价【二次公告】',
+
     }],
     'allBagMsg|1-3': [{
         ids: () => Random.id(),
@@ -31,7 +32,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'bagName': '第' + Random.natural(0, 6) + Random.natural(5, 9) + '包',
         'starTime': () => Random.datetime(),
         'stopTime': () => Random.datetime(),
-        // 'type|1': [0, 1],
+        'methodType': Random.integer(1,2,3,4),//新加的（合理低价的还是综合评标）1:合理低价的;2:综合评标；3:双信封；4：单信封
         'proBusinessNum': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'q' + 'w' + 'e' + 'r' + 'N'
         + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9),
@@ -2102,7 +2103,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {//type
-    console.log(type, is_submit_type);
+    // console.log(type, is_submit_type);
 
     function set_type() {
         if (type == 0) {

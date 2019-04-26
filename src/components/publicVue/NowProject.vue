@@ -49,7 +49,13 @@
                         </el-col>
                         <el-col style="width:30%" class="btns_div">
                             <el-col :span="11" class="begin_bidding" style="text-align: right">
-                                <el-button size="small" class="btnBg" @click="goto('/index/LetterCommitment')"><i
+                                <!--`/bidder/ShenqinApplyContent?type=${this.type}&stepsNum=2`-->
+                                <!--@click="goto(`/index/LetterCommitment?methodType=${item.methodType}`)"-->
+                                <el-button size="small" class="btnBg"
+                                           @click="beginPingbiao(item.methodType)"
+                                >
+
+                                    <i
                                         class="icon iconfont icon-kaishi mr3"></i>开始评标
                                 </el-button>
                             </el-col>
@@ -303,10 +309,9 @@
             refreshBtn(){
                 this.$emit('refreshHttp');
             },
-            goto(url) {//开始评标
-                this.$router.push({
-                    path: url
-                });
+            beginPingbiao(val){
+                this.$store.state.failureEnery.methodNum=val;
+                this.$router.push("/index/LetterCommitment");
             },
             bidding_doc_btn(obj) {//招标相关文件
                 console.log(obj.pdf_url);

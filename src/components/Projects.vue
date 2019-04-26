@@ -32,7 +32,7 @@
             <div class="allContent">
                 <div v-loading="pageLoading">
                     <NowProject :msg="msgBox" :projectMsg="list" :projectBag="projectBagMsg" :unmsg="arr"
-                                ref="ccc" @refreshHttp="childMsg"></NowProject>
+                                ref="ccc" @refreshHttp="childMsg" ></NowProject>
                 </div>
             </div>
             <!--分页-->
@@ -88,7 +88,6 @@
                         this.pageLoading = false;
                         this.btn_search_loading = false;
                         this.projectBagMsg = res.data.projectBagMsg;
-                        // console.log(this.projectBagMsg);
                         if (this.projectBagMsg.length == 0) {
                             $('.pageBox').hide();
                             $(".search_warp ").hide();

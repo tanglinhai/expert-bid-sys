@@ -228,10 +228,10 @@
             }
         },
         mounted(){
-            var _this=this;
+            let _this=this;
             setInterval(function(){
               _this.ProjectSubcontract();//项目分包数据  
-            },300000)
+            },300000);
             this.ProjectSubcontract();//项目分包数据
 
             this.AllInformation(); //专家个人信息,投标人信息接口

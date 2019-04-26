@@ -32,7 +32,15 @@
             <div class="mainContentWarp" v-loading="page_loading">
                 <NavBar :msg="options"></NavBar>
                 <el-row class="center_part">
-                    <el-col :span="24">
+                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
+                      <p>评审合理低价的进度条</p>
+
+
+
+
+                    </el-col>
+
+                    <el-col :span="24" v-else>
                         <template>
                             <div class="unlock_table-warp fs14">
                                 <el-row >
@@ -100,6 +108,9 @@
                             </div>
                         </template>
                     </el-col>
+
+
+
                 </el-row>
             </div>
             <!----------------------投标人排序调整--------------------->
@@ -318,6 +329,7 @@
                             this.baohao = res.data.bidMsg.baohao;
                             this.biaoNum = res.data.bidMsg.biaoNum;
                             this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                            console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
                             this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
                             this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
                             this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;

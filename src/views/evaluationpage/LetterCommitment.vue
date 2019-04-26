@@ -52,6 +52,7 @@
         },
         created() {
             console.log(this.$route.query.types);
+            console.log(this.$store.state.failureEnery.methodNum,'1');
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
