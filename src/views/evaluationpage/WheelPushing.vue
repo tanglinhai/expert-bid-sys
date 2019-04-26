@@ -123,13 +123,18 @@
                 NumberRounddatas:[],  //推举评委会主人第几轮
                 LunNumber:'', //推举评委会主人标题轮数
                 PutRoundNumberLoading:false, //推举评委会主人loading
+
+                val:'',  //四种方式传值
                         
                 }
+
+                
         },
         created() {
             //console.log(this.$route.query.type,999)
             this.$store.state.navCommon.types=this.$route.query.types;
             console.log(this.$store.state.navCommon.types,7)
+            this.val=this.$route.query.methodType;
         },
         mounted(){
             
@@ -193,7 +198,7 @@
                         console.log(this.caozuoAlls.length,this.caozuoAlls,this.NumberRounddatas.length,7777)
                         if(this.caozuoAlls.length==this.NumberRounddatas.length){
                             this.$router.push({
-                                path: '/elect/StartEvaluation?types=5',
+                                path: '/elect/StartEvaluation?types=5&methodType='+this.val,
                             })
                         }
                         

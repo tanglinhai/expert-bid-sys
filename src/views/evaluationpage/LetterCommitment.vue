@@ -48,11 +48,14 @@
             //number:'',   //导航当前第几步
               pageloadding:false,  //进入页面loading展示
               BtnLoading:false,  //同意按钮loadding
+              
+              val:'',  //四种方式传值
             }
         },
         created() {
             console.log(this.$route.query.types);
-            console.log(this.$store.state.failureEnery.methodNum,'1');
+            console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
+            this.val=this.$route.query.methodType;
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
@@ -96,7 +99,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/AllInformation?types=2',
+                            path: '/index/AllInformation?types=2&methodType='+this.val,
                         })
                     }
                 })
