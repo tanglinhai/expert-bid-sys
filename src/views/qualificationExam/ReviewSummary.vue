@@ -32,7 +32,7 @@
             <div class="mainContentWarp" v-loading="page_loading">
                 <NavBar :msg="options"></NavBar>
                 <!--1:合理低价；2：综合评标；3：双信封；4：单信封-->
-                <el-row class="center_part" v-if="$store.state.failureEnery.methodNum==1">
+                <el-row class="center_part" v-if="methodNum==1">
                     <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
                       <p>评审合理低价的进度条</p>
 
@@ -109,12 +109,18 @@
 
                 </el-row>
 
-                <el-row class="center_part" v-if="$store.state.failureEnery.methodNum==2">
+                <el-row class="center_part" v-if="methodNum==2">
                     <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
-                        <p>评审综合评标的进度条</p>
+                       <div >
+                           <el-button size="small" plain @click="pingfenUnlockRecord" class="ml10">
+                               评分解锁
+                           </el-button>
+                       </div>
+
+
+
 
                     </el-col>
-
                     <el-col :span="24" v-else>
                         11111
                         <!--<template>-->
@@ -323,12 +329,45 @@
                 <SubmitPrompt></SubmitPrompt>
             </el-dialog>
 
+
+            <el-dialog
+                    title="评分解锁申请"
+                    :visible.sync="dialogFormVisible"
+                    width="700px"
+            >
+                <ReviewLockRequest></ReviewLockRequest>
+            </el-dialog>
+            <el-dialog
+                    title="查看专家个人打分表"
+                    :visible.sync="dialogVisible"
+                    width="1000px"
+            >
+                <CheckProScore></CheckProScore>
+            </el-dialog>
+            <el-dialog
+                    title="投标人分项得分表"
+                    :visible.sync="dialogBindScore"
+                    width="1000px"
+            >
+                <CheckProScore></CheckProScore>
+            </el-dialog>
+            <el-dialog
+                    title="计算报价得分"
+                    :visible.sync="dialogScoring"
+                    width="900px"
+            >
+                <Scoring></Scoring>
+            </el-dialog>
+
+
         </div>
     </div>
 </template>
 
 <script>
-    // import Sort from '../../components/publicVue/Sort';
+    import Scoring from '../../components/publicVue/Scoring';
+    import BiddingAdvice from '../../components/publicVue/BiddingAdvice';
+    import ReviewLockRequest from '../../components/publicVue/ReviewLockRequest';
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
@@ -383,11 +422,12 @@
                 myloading_back: false,//返回评审汇总loading
                 myloading_sort: false,// 排序提交返回loading
                 bidEvaluation_submit_loading: false,//报价计算提交loading
+                methodNum:'',//区分那种评标方法
             }
         },
         created() {
-            console.log(this.$store.state.failureEnery.methodNum,'000');
-            console.log(this.$route.query.type);
+            console.log(this.$route.query.type,this.$route.query.methodNum);
+            this.methodNum=this.$route.query.methodNum;
         },
         mounted() {
             this.init();
@@ -601,6 +641,9 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 }
             },
+            pingfenUnlockRecord(){
+
+            }
         }
     }
 </script>
