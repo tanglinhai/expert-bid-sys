@@ -310,8 +310,7 @@
                 this.$emit('refreshHttp');
             },
             beginPingbiao(val){
-                this.$store.state.failureEnery.methodNum=val;
-                this.$router.push("/index/LetterCommitment");
+                this.$router.push(`/index/LetterCommitment?methodType=${val}`);
             },
             bidding_doc_btn(obj) {//招标相关文件
                 console.log(obj.pdf_url);

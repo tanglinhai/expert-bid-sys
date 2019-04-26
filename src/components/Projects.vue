@@ -88,6 +88,8 @@
                         this.pageLoading = false;
                         this.btn_search_loading = false;
                         this.projectBagMsg = res.data.projectBagMsg;
+                        console.log(res.data.projectBagMsg);
+                        // this.$store.state.failureEnery.methodNum=val;
                         if (this.projectBagMsg.length == 0) {
                             $('.pageBox').hide();
                             $(".search_warp ").hide();

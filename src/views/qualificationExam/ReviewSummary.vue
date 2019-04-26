@@ -31,12 +31,10 @@
             </el-row>
             <div class="mainContentWarp" v-loading="page_loading">
                 <NavBar :msg="options"></NavBar>
-                <el-row class="center_part">
+                <!--1:合理低价；2：综合评标；3：双信封；4：单信封-->
+                <el-row class="center_part" v-if="$store.state.failureEnery.methodNum==1">
                     <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
                       <p>评审合理低价的进度条</p>
-
-
-
 
                     </el-col>
 
@@ -109,7 +107,83 @@
                         </template>
                     </el-col>
 
+                </el-row>
 
+                <el-row class="center_part" v-if="$store.state.failureEnery.methodNum==2">
+                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
+                        <p>评审综合评标的进度条</p>
+
+                    </el-col>
+
+                    <el-col :span="24" v-else>
+                        11111
+                        <!--<template>-->
+                            <!--<div class="unlock_table-warp fs14">-->
+                                <!--<el-row >-->
+                                    <!--<el-col :span="12">-->
+                                        <!--<div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">-->
+                                            <!--<h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>-->
+                                        <!--</div>-->
+                                    <!--</el-col>-->
+                                    <!--<el-col :span="12" class="textAlignR btns"-->
+                                            <!--v-if="!this.$store.state.failureEnery.is_pingshen_show">-->
+                                        <!--<el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审-->
+                                        <!--</el-button>-->
+                                        <!--<el-button type="primary" size="small" @click="submit_btn('ruleForm')"-->
+                                                   <!--:loading="myloading"> 提交-->
+                                        <!--</el-button>-->
+                                        <!--<el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序-->
+                                        <!--</el-button>-->
+                                    <!--</el-col>-->
+
+                                    <!--<el-col :span="12" class="textAlignR mian_btns" v-else>-->
+                                        <!--<el-button @click="submited_goback" type="primary" size="small"-->
+                                                   <!--:loading="myloading_back">返回-->
+                                        <!--</el-button>-->
+                                    <!--</el-col>-->
+                                <!--</el-row>-->
+                                <!--<el-row>-->
+                                    <!--<el-table-->
+                                            <!--:data="tableData"-->
+                                            <!--border-->
+                                            <!--style="width:100%">-->
+                                        <!--<el-table-column-->
+                                                <!--width="120px"-->
+                                                <!--prop="num"-->
+                                                <!--label="投标序号">-->
+                                        <!--</el-table-column>-->
+                                        <!--<el-table-column-->
+                                                <!--prop="name"-->
+                                                <!--label="投标人">-->
+                                        <!--</el-table-column>-->
+                                        <!--<el-table-column-->
+                                                <!--prop="tender_offer"-->
+                                                <!--label="投标报价(人民币)">-->
+                                        <!--</el-table-column>-->
+                                        <!--<el-table-column-->
+                                                <!--prop="total"-->
+                                                <!--label="评标价(人名币)">-->
+                                        <!--</el-table-column>-->
+                                        <!--<el-table-column-->
+                                                <!--prop="ranking"-->
+                                                <!--label="排名">-->
+                                        <!--</el-table-column>-->
+                                    <!--</el-table>-->
+                                <!--</el-row>-->
+                                <!--<el-row class="mt15">-->
+                                    <!--<el-col :span="18">-->
+                                        <!--<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"-->
+                                                 <!--class="demo-ruleForm">-->
+                                            <!--<el-form-item label="评标意见 (2000字之内)：" prop="desc">-->
+                                                <!--<el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"-->
+                                                          <!--:disabled="is_disabled"></el-input>-->
+                                            <!--</el-form-item>-->
+                                        <!--</el-form>-->
+                                    <!--</el-col>-->
+                                <!--</el-row>-->
+                            <!--</div>-->
+                        <!--</template>-->
+                    </el-col>
 
                 </el-row>
             </div>
@@ -244,8 +318,8 @@
             <el-dialog
                     title="审查提示"
                     :visible.sync="$store.state.failureEnery.submitPrompt"
-                    width="700px"
-            >
+                    width="700px"            >
+
                 <SubmitPrompt></SubmitPrompt>
             </el-dialog>
 
@@ -312,7 +386,7 @@
             }
         },
         created() {
-            this.$route.query.type
+            console.log(this.$store.state.failureEnery.methodNum,'000');
             console.log(this.$route.query.type);
         },
         mounted() {
