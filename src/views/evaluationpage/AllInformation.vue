@@ -3,6 +3,17 @@
         <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
+            <el-row class="fs14 bid_msg mb15">
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
+                </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
+                </el-col>
+            </el-row>
             <div class="evaluationcommon cf">
                <MessageCommon :tableData3="tableData3" :dianji="0"></MessageCommon>
                 <el-row class="LayoutRightSide">
@@ -41,6 +52,37 @@
                 </div>
         </el-dialog> -->
         <!--申请回避弹框-->
+
+        <!--多头表格-->
+        <!-- <template>
+            <el-table
+                :data="tableData"
+                style="width: 100%">
+                <el-table-column
+                prop="date"
+                label="日期"
+                width="150">
+                </el-table-column>
+                <el-table-column label="配送信息">
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="120">
+                    </el-table-column>
+                    <el-table-column label="地址">
+                        <el-table-column
+                            :label="item.province"
+                            width="120" v-for="(item,index) in tablesNeiContent" :key="index">
+                            <template slot-scope="scope">
+                                <span v-for="(item2,index2) in item.zhaunjiadata_gs">{{item2.zhaunjia1[scope.$index]}}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table-column>
+                </el-table-column>
+            </el-table>
+        </template> -->
+        <!--多头表格-->
+
         </div>
     </div>
 </template>
@@ -78,6 +120,64 @@
                 },
 
                 BtnLoading:false,  //参加评标loading
+
+                name:'',  //标名称
+                biaoNum:'', //标号
+                baohao:'', //包号
+
+                //测试表格
+                // tableData: [
+                //     {
+                //         date: '2016-05-03',
+                //         name: '王小虎',
+                //     }, 
+                //     {
+                //         date: '2016-05-02',
+                //         name: '王小虎',
+                //     }, 
+                //     {
+                //         date: '2016-05-02',
+                //         name: '王小虎',
+                //     }, 
+                //     {
+                //         date: '2016-05-02',
+                //         name: '王小虎',
+                //     }, 
+                //     {
+                //         date: '2016-05-02',
+                //         name: '王小虎',
+                //     }
+                // ],
+                // tablesNeiContent:[{
+                //     province:'公司一',
+                //     'zhaunjiadata_gs':[
+                //         {
+                //             'zhaunjia1':["√(5√0×)",  "√(6√0×)","√(5√0×)",'合格']
+                //         } ,
+                //     ]
+                // },{
+                //     province:'公司二',
+                //     'zhaunjiadata_gs':[
+                //         {
+                //             'zhaunjia1':["√(6√0×)",  "√(5√0×)","√(6√0×)",'不合格']
+                //         } ,
+                //     ]
+                // },{
+                //     province:'公司三',
+                //     'zhaunjiadata_gs':[
+                //         {
+                //             'zhaunjia1':["√(7√0×)",  "√(5√0×)","√(7√0×)",'合格']
+                //         } ,
+                //     ]
+                // },{
+                //     province:'公司四',
+                //     'zhaunjiadata_gs':[
+                //         {
+                //             'zhaunjia1':["√(8√0×)",  "√(5√0×)","√(8√0×)",'不合格']
+                //         } ,
+                //     ]
+                // }]
+                //测试表格
               
             }
         },
@@ -92,6 +192,8 @@
             this.AllInformation(); //专家个人信息,投标人信息接口
             //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
+
+            this.baoInformations(); //头部包信息
         },
         methods:{
             goto(url){//开始评标
@@ -99,6 +201,20 @@
                     path: url
                  });
             },
+
+            baoInformations(){   //头部包信息
+                this.$axios.post('/api/baoInformations','post',{
+
+                }).then(res=>{
+                   // console.log(res,88888)
+                    if(res.status == 200){
+                        this.name=res.data.result.name;
+                        this.biaoNum=res.data.result.biaoNum;
+                        this.baohao=res.data.result.baohao;
+                    }
+                })
+            },
+
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },

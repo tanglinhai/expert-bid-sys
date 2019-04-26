@@ -37,26 +37,26 @@
                             <el-button size="small" @click="AgreeXieYi" style="margin-left:50px;"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                         </template>
                         <template v-if="projectTableData.status==3">
-                            <el-button  style="margin-left:50px;" size="small" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-message"></i>查看</el-button>
+                            <el-button  style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?types=4')"><i class="el-icon-message"></i>查看</el-button>
                         </template>
                         <template v-if="projectTableData.status==1">
                             <el-button size="small" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
                             <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                         </template>
                         <template v-if="projectTableData.status==2">
-                            <el-button style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>评标</el-button>
+                            <el-button style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?types=4')"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button style="margin-left:50px;" size="small" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==5">
-                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('/elect/StartEvaluation?typs=4')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
                             <el-button size="small" style="padding:9px 5px;" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
                             <el-button size="small" style=" padding:9px 5px;" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                         </template>
                         <template v-if="projectTableData.status==6">
-                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
-                            <el-button size="small" style="padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('/elect/StartEvaluation?types=4')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="padding:9px 5px;" @click="goto('/elect/StartEvaluation?types=4')"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
                         </template>
                     </div>
                 </el-row>
