@@ -149,32 +149,32 @@ let WheelPushing=Mock.mock('/api/WheelPushing','post',{
     'LunNumber|1':['1','3','4'],
     leaderList:[{
         id:111,
-        zuanjiaName:'1',  //专家姓名
-        depiaoshu:'1',  //得票数
+        zuanjiaName:'萧勇',  //专家姓名
+        depiaoshu:'1票',  //得票数
         tel:13121223333, //手机号
         zjhao:'2345',  //证件号
         danwei:'测试单位',   //单位 
         'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
     },{
         id:222,
-        zuanjiaName:'2',  //专家姓名
-        depiaoshu:'0',  //得票数
+        zuanjiaName:'孔芳',  //专家姓名
+        depiaoshu:'0票',  //得票数
         tel:13121223333, //手机号
         zjhao:'1234',  //证件号
         danwei:'测试单位',   //单位
         'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
     },{
         id:333,
-        zuanjiaName:'3',  //专家姓名
-        depiaoshu:'5',  //得票数
+        zuanjiaName:'姚涛',  //专家姓名
+        depiaoshu:'5票',  //得票数
         tel:13121223333, //手机号
         zjhao:'5678',  //证件号
         danwei:'测试单位',   //单位
         'caozuo|1':[2,1,3],  //1推举 2未签到  3已推举
     },{
         id:444,
-        zuanjiaName:'4',  //专家姓名
-        depiaoshu:'0',  //得票数
+        zuanjiaName:'刘涛',  //专家姓名
+        depiaoshu:'0票',  //得票数
         tel:13121223333, //手机号
         zjhao:'23456',  //证件号
         danwei:'单位',   //单位
@@ -399,14 +399,13 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             types: 2,
         },{
             value: '3',//
-            label: '评标',
+            label: '推举组长',
             types: 3,
-         },
-        {
-            value: '4',//
-            label: '资格审查',
-            types: 4,
         },{
+            value: '4',//
+            label: '评标',
+            types: 4,
+         },{
             value: '5',//
             label: '资格审查汇总',
             types: 5,

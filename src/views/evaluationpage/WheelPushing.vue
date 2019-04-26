@@ -8,6 +8,28 @@
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                 <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第{{LunNumber}}轮</h5>
             </div>
+            <!-- <ul class="tuijuUlList mt20">
+                <li v-for="(item,index) in NumberRounddatas" :key="index" :style="item.caozuo==1?'border:1px solid #409eff':item.caozuo==3?'border:1px solid #67c23a':'border:1px solid #909399'">
+                    <img src="../../assets/img/txph.png" alt="">
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.zuanjiaName}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.depiaoshu}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.tel}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.zjhao}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.danwei}}</p>
+                    <el-button size="small" type="primary" style="cursor:pointer;" v-if="item.caozuo==1" @click="tuijuAgain">
+                        <i class="icon iconfont icon-shou"></i>&nbsp;推举
+                    </el-button>
+                    <el-button type="info" size="small" v-if="item.caozuo==2">
+                        未签到
+                    </el-button>
+                    <el-button type="success" size="small" v-if="item.caozuo==3">
+                        已推举
+                    </el-button>
+                    <el-button v-if="item.caozuo==4" style="visibility:hidden; height:32px;">
+                       
+                    </el-button>
+                </li>
+            </ul> -->
            <template>
                 <el-table
                 v-loading="PutRoundNumberLoading"
@@ -120,7 +142,7 @@
             var setTime;
             setTime=setInterval(function(){
                 _this.tuijuData(); //推举评委会主人第1轮
-            },15000)
+            },20000)
         },
         methods:{
             goto(url){//开始评标
@@ -229,7 +251,32 @@
              background:white;
             border-radius:5px;
             padding:15px;
+            .tuijuUlList{
+                float:left;
+                width:100%;
+                li{
+                    float:left;
+                    margin-right:20px;
+                    padding:20px;
+                    border:1px solid #909399;
+                    border-radius:5px;
+                    img{
+                        display:block;
+                        margin:0 auto;
+                    }
+                    p{
+                        text-align:center;
+                        font-size:14px;
+                        line-height:20px;
+                    }
+                    button{
+                        display:block;
+                        margin:6px auto;
+                    }
+                }
+            }
         }
+        
     }
 }
 </style>
