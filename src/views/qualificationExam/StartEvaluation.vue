@@ -36,7 +36,7 @@
                         size="mini"
                         @click="enterFullMode"
                     >进入全屏模式</el-button> -->
-                <NavBar :msg="options" :type="type_btn"></NavBar>
+                <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
                 <div class="content">
                     <div class="div_pdf">
                         <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
@@ -401,9 +401,12 @@
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
+                methodType:''
             }
         },
         created() {
+            console.log(this.$route.query.methodType);
+            this.methodType=this.$route.query.methodType;
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
