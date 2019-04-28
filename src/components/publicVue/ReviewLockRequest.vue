@@ -10,7 +10,13 @@
                 </el-form-item>
                 <el-form-item label="解锁申请类别：" prop="resource">
                     <el-radio-group v-model="ruleForm.resource">
-                        <el-radio label="1">商务</el-radio>
+                        <el-radio :label="val.num" v-for="val in radioList"> {{val.typeTitle}}</el-radio>
+                        <!--<el-radio label="2">技术</el-radio>-->
+                        <!--<el-radio label="3">服务</el-radio>-->
+                        <!--<el-radio label="4">其他</el-radio>-->
+
+
+
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="申请原因：" prop="desc">
@@ -58,7 +64,9 @@
                 this.dialogFormVisible = true;
             },
             submitForm(formName) {
+                // console.log(formName);
                 this.$refs[formName].validate((valid) => {
+                    console.log( this.$data.ruleForm);
                     if (valid) {
                         alert('submit!');
                     } else {

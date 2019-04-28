@@ -32,7 +32,7 @@
             </el-row>
             <!--主体-->
             <div class="mainContentWarp" v-loading="page_loading">
-                <NavBar :msg="options" :type="type"></NavBar>
+                <NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>
                 <el-row class="center_part">
                     <el-col :span="24">
                         <div class="unlock_table-warp fs14">
@@ -163,7 +163,6 @@
 
                                                     <!--复选法-->
                                                     <div v-if="scope.row.type === 'checkbox'">
-
                                                          <span v-if=" $store.state.failureEnery.business_tijiao">
                                                             <el-checkbox-group
                                                                     v-model="scope.row['value' + (index + 1)]"
@@ -732,9 +731,12 @@
                     desc: ''
                 },
                 scoreShowsDialog: false,//编辑评分说明
+                methodType:""
             }
         },
         created() {
+            console.log(this.$route.query.methodType);
+            this.methodType=this.$route.query.methodType;
             this.type = this.$route.query.type;
 
         },

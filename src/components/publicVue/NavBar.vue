@@ -50,8 +50,6 @@
                 // console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1&methodType="+methodType);
-                    // path: '/index/AllInformation?types=2&methodType='+this.val,
-                    // methodType='+this.val,
                 } else if (i === '2') {
                    this.$router.push("/elect/UnFinishQualificationsResult?type=2&methodType="+methodType);
                 } else if (i === "3") {

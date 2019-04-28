@@ -32,7 +32,7 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'bagName': '第' + Random.natural(0, 6) + Random.natural(5, 9) + '包',
         'starTime': () => Random.datetime(),
         'stopTime': () => Random.datetime(),
-        'methodType': Random.integer(1,2,3,4),//新加的（合理低价的还是综合评标）1:合理低价的;2:综合评标；3:双信封；4：单信封
+        'methodType': Random.integer(1,2,3,),//新加的（合理低价的还是综合评标）1:合理低价的;2:综合评标；3:最低价
         'proBusinessNum': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'q' + 'w' + 'e' + 'r' + 'N'
         + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9),
@@ -2261,7 +2261,7 @@ let check_pdf_xxjs = Mock.mock('/api/check_pdf_xxjs', 'post', {
     'basicMessage': {
         url: "/documents/younojsxia.pdf"
     }
-})
+});
 //资格审查项目审查提交（table）
 let tijiao = Mock.mock('/api/tijiao', 'post', {
     code: 200,
@@ -2289,52 +2289,135 @@ let tijiao_xxjs = Mock.mock('/api/tijiao_xxjs', 'post', {
 
 // 资格审查项汇总页面table接口
 Mock.mock('/api/pingshen_huizong', 'post', (options) => {
-    var msg = [];
-    var data_msg = [];
-    var dataMsg = [];
-    let is_tijaio=Random.integer(0, 1);
-    for (var i = 0; i < Random.integer(3,8); i++) {
-        msg.push({//报价评审弹框报价计算table
-            'id': Random.id(),
-            'bid_name': "重庆网控科技发展有限公司",
-            'tender_offer': Random.integer(100, 9999),
-            'bid_price': Random.integer(100, 9999),
-            'base_rice': Random.integer(100, 9999),
-            'bias_ratio': Random.integer(0, 100),
-            'radio': 2,
-        });
-        data_msg.push({//评审汇总table
-            'id': Random.id(),
-            'num': Random.integer(1, 7),
-            'name': "重庆网控科技发展有限公司",
-            'tender_offer': '10000.0000',
-            'total': '10000.0000',
-            'ranking': Random.integer(1, 7),
-        });
-        dataMsg.push({
-            'company_name': Random.csentence(1, 10),
-            'id': Random.id(),
-            'ranking': Random.integer(1, 7),
-        })
-    }
-
-    return {
-        'bidMsg': {
-            id: Random.id(),
-            'name': '2019年水利运输服务招标项目',
-            'biaoNum': '0635—1909qwerN1197',
-            'baohao': '0635—1909qwerN1197/1',
-            //审查项
-            'eviewrItemsMsg': {
-                //头部审查类型按钮
-                'viewType':get_data(70,is_tijaio),
-                'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
-                'bidEvaluation': msg,
-                'review_summary': data_msg,
-                'sort_data': dataMsg,
+    let get_type_num=JSON.parse(options.body).type;
+    let methodType=JSON.parse(options.body).methodType;
+    if(get_type_num==70&& methodType==1){//合理低价
+        let msg = [];
+        let data_msg = [];
+        let dataMsg = [];
+        let is_tijaio=Random.integer(0, 1);
+        for (let i = 0; i < Random.integer(3,8); i++) {
+            msg.push({//报价评审弹框报价计算table
+                'id': Random.id(),
+                'bid_name': "重庆网控科技发展有限公司",
+                'tender_offer': Random.integer(100, 9999),
+                'bid_price': Random.integer(100, 9999),
+                'base_rice': Random.integer(100, 9999),
+                'bias_ratio': Random.integer(0, 100),
+                'radio': 2,
+            });
+            data_msg.push({//评审汇总table
+                'id': Random.id(),
+                'num': Random.integer(1, 7),
+                'name': "重庆网控科技发展有限公司",
+                'tender_offer': '10000.0000',
+                'total': '10000.0000',
+                'ranking': Random.integer(1, 7),
+            });
+            dataMsg.push({//排序
+                'company_name': Random.csentence(1, 10),
+                'id': Random.id(),
+                'ranking': Random.integer(1, 7),
+            });
+        }
+        return {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    //头部审查类型按钮
+                    'viewType':get_data(70,is_tijaio),
+                    'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
+                    'bidEvaluation': msg,
+                    'review_summary': data_msg,
+                    'sort_data': dataMsg,//排序
+                }
             }
         }
+    }else if(get_type_num==70 && methodType==2){//综合评标
+        let msg = [];
+        let data_msg = [];
+        let dataMsg = [];
+        let is_tijaio=Random.integer(0, 1);
+        for (let i = 0; i < Random.integer(3,8); i++) {
+            data_msg.push({//评审汇总table
+
+            });
+         }
+        return {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                'eviewrItemsMsg': {
+                    //头部审查类型按钮
+                    'viewType':get_data(70,is_tijaio),
+                    'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
+                    'bidEvaluation': [{//计算报价得分
+                        toubiaoPrice: '31,000,00',
+                        name: '夏丰热工研究院有限公司',
+                        evaluationBid: '31,000,00',
+                        standardPrice:'30,000,00',
+                        beitaValue:'-10.00',
+                        scoringSystem:'52.2',
+                        score: ''
+                    },{
+                        toubiaoPrice: '28,000,00 ',
+                        name: '普瑞太阳能有限公司',
+                        evaluationBid: '28,000,00',
+                        standardPrice:'30,000,00',
+                        beitaValue:'-20.00',
+                        scoringSystem:'45.2',
+                        score: ''
+                    }, {
+                        toubiaoPrice: '30,000,00',
+                        name: '夏风热工研究有限公司',
+                        evaluationBid: '30,000,00',
+                        standardPrice:'30,000,00',
+                        beitaValue:'-0.00',
+                        scoringSystem:'53',
+                        score: ''
+                    }],
+                    'review_summary': data_msg,
+                    'pingbiao_yijian': dataMsg,//排序
+                    'jiesuoData':{
+                        'radioList': [{
+                            value: '1',
+                            label:'商务'
+                            },{
+                                value: '2',
+                                label:'技术'
+                            }, {
+                                value: '3',
+                                label:'服务'
+                            },{
+                                value: '4',
+                                label:'其他'
+                            } ],
+                        'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
+                    }
+                }
+            }
+        }
+    }else if(get_type_num==70&& methodType==3){//最低价
+
+
+
     }
+});
+
+
+//评审汇总页面报价分计算弹框提交接口
+
+let score_quotation_tijiao = Mock.mock('/api/score_quotation_tijiao', 'post', {
+    code: 200,
+    message: '成功!',
+    data: '',
+    type: ''
 });
 
 //报价审核是否有效接口

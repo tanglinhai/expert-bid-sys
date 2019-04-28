@@ -30,7 +30,7 @@
                 </el-col>
             </el-row>
             <div class="mainContentWarp" v-loading="page_loading">
-                <NavBar :msg="options" :type="type"></NavBar>
+                <NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>
                 <el-row class="center_part">
                     <el-col :span="24">
                         <template>
@@ -274,9 +274,12 @@
                 unlock_table_company_name: [],//汇总页面table（评审因素汇总）
                 submit_huizong:false,//汇总页面提交
                 count: '5',   //汇总页面提交成功弹框倒计时5秒
+                methodType:''
             }
         },
         created() {
+            console.log(this.$route.query.methodType);
+            this.methodType=this.$route.query.methodType;
             this.type = this.$route.query.type;
         },
         mounted() {

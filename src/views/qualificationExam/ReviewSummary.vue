@@ -30,18 +30,18 @@
                 </el-col>
             </el-row>
             <div class="mainContentWarp" v-loading="page_loading">
-                <NavBar :msg="options"></NavBar>
-                <!--1:合理低价；2：综合评标；3：双信封；4：单信封-->
-                <el-row class="center_part" v-if="methodNum==1">
-                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
-                      <p>评审合理低价的进度条</p>
+                <NavBar :msg="options" :methodType="methodType"></NavBar>
+                <!--1:合理低价；2：综合评标；3：最低价-->
+                <el-row class="center_part" v-if="methodType==1">
+                    <!--<el-col :span="24"  v-if="$store.state.failureEnery.isshow" >-->
+                    <!--<p>评审合理低价的进度条</p>-->
 
-                    </el-col>
+                    <!--</el-col>-->
 
-                    <el-col :span="24" v-else>
+                    <el-col :span="24">
                         <template>
                             <div class="unlock_table-warp fs14">
-                                <el-row >
+                                <el-row>
                                     <el-col :span="12">
                                         <div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">
                                             <h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>
@@ -108,89 +108,88 @@
                     </el-col>
 
                 </el-row>
-
-                <el-row class="center_part" v-if="methodNum==2">
-                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
-                       <div >
-                           <el-button size="small" plain @click="pingfenUnlockRecord" class="ml10">
-                               评分解锁
-                           </el-button>
-                       </div>
-
-
-
-
+                <!--综合评标-->
+                <el-row class="center_part" v-if="methodType==2">
+                    <el-col :span="24">
+                        <div class="fr">
+                            <el-button size="small" plain @click="reviewLockRequest" class="ml10">
+                                评分解锁
+                            </el-button>
+                            <el-button size="small" plain @click="scoreQuotation" class="ml10">
+                                报价计算得分
+                            </el-button>
+                        </div>
                     </el-col>
-                    <el-col :span="24" v-else>
+                    <el-col :span="24"
+                    >
                         11111
                         <!--<template>-->
-                            <!--<div class="unlock_table-warp fs14">-->
-                                <!--<el-row >-->
-                                    <!--<el-col :span="12">-->
-                                        <!--<div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">-->
-                                            <!--<h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>-->
-                                        <!--</div>-->
-                                    <!--</el-col>-->
-                                    <!--<el-col :span="12" class="textAlignR btns"-->
-                                            <!--v-if="!this.$store.state.failureEnery.is_pingshen_show">-->
-                                        <!--<el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审-->
-                                        <!--</el-button>-->
-                                        <!--<el-button type="primary" size="small" @click="submit_btn('ruleForm')"-->
-                                                   <!--:loading="myloading"> 提交-->
-                                        <!--</el-button>-->
-                                        <!--<el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序-->
-                                        <!--</el-button>-->
-                                    <!--</el-col>-->
+                        <!--<div class="unlock_table-warp fs14">-->
+                        <!--<el-row >-->
+                        <!--<el-col :span="12">-->
+                        <!--<div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">-->
+                        <!--<h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>-->
+                        <!--</div>-->
+                        <!--</el-col>-->
+                        <!--<el-col :span="12" class="textAlignR btns"-->
+                        <!--v-if="!this.$store.state.failureEnery.is_pingshen_show">-->
+                        <!--<el-button type="primary" size="small" @click="bidEvaluation_btn"> 报价评审-->
+                        <!--</el-button>-->
+                        <!--<el-button type="primary" size="small" @click="submit_btn('ruleForm')"-->
+                        <!--:loading="myloading"> 提交-->
+                        <!--</el-button>-->
+                        <!--<el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序-->
+                        <!--</el-button>-->
+                        <!--</el-col>-->
 
-                                    <!--<el-col :span="12" class="textAlignR mian_btns" v-else>-->
-                                        <!--<el-button @click="submited_goback" type="primary" size="small"-->
-                                                   <!--:loading="myloading_back">返回-->
-                                        <!--</el-button>-->
-                                    <!--</el-col>-->
-                                <!--</el-row>-->
-                                <!--<el-row>-->
-                                    <!--<el-table-->
-                                            <!--:data="tableData"-->
-                                            <!--border-->
-                                            <!--style="width:100%">-->
-                                        <!--<el-table-column-->
-                                                <!--width="120px"-->
-                                                <!--prop="num"-->
-                                                <!--label="投标序号">-->
-                                        <!--</el-table-column>-->
-                                        <!--<el-table-column-->
-                                                <!--prop="name"-->
-                                                <!--label="投标人">-->
-                                        <!--</el-table-column>-->
-                                        <!--<el-table-column-->
-                                                <!--prop="tender_offer"-->
-                                                <!--label="投标报价(人民币)">-->
-                                        <!--</el-table-column>-->
-                                        <!--<el-table-column-->
-                                                <!--prop="total"-->
-                                                <!--label="评标价(人名币)">-->
-                                        <!--</el-table-column>-->
-                                        <!--<el-table-column-->
-                                                <!--prop="ranking"-->
-                                                <!--label="排名">-->
-                                        <!--</el-table-column>-->
-                                    <!--</el-table>-->
-                                <!--</el-row>-->
-                                <!--<el-row class="mt15">-->
-                                    <!--<el-col :span="18">-->
-                                        <!--<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"-->
-                                                 <!--class="demo-ruleForm">-->
-                                            <!--<el-form-item label="评标意见 (2000字之内)：" prop="desc">-->
-                                                <!--<el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"-->
-                                                          <!--:disabled="is_disabled"></el-input>-->
-                                            <!--</el-form-item>-->
-                                        <!--</el-form>-->
-                                    <!--</el-col>-->
-                                <!--</el-row>-->
-                            <!--</div>-->
+                        <!--<el-col :span="12" class="textAlignR mian_btns" v-else>-->
+                        <!--<el-button @click="submited_goback" type="primary" size="small"-->
+                        <!--:loading="myloading_back">返回-->
+                        <!--</el-button>-->
+                        <!--</el-col>-->
+                        <!--</el-row>-->
+                        <!--<el-row>-->
+                        <!--<el-table-->
+                        <!--:data="tableData"-->
+                        <!--border-->
+                        <!--style="width:100%">-->
+                        <!--<el-table-column-->
+                        <!--width="120px"-->
+                        <!--prop="num"-->
+                        <!--label="投标序号">-->
+                        <!--</el-table-column>-->
+                        <!--<el-table-column-->
+                        <!--prop="name"-->
+                        <!--label="投标人">-->
+                        <!--</el-table-column>-->
+                        <!--<el-table-column-->
+                        <!--prop="tender_offer"-->
+                        <!--label="投标报价(人民币)">-->
+                        <!--</el-table-column>-->
+                        <!--<el-table-column-->
+                        <!--prop="total"-->
+                        <!--label="评标价(人名币)">-->
+                        <!--</el-table-column>-->
+                        <!--<el-table-column-->
+                        <!--prop="ranking"-->
+                        <!--label="排名">-->
+                        <!--</el-table-column>-->
+                        <!--</el-table>-->
+                        <!--</el-row>-->
+                        <!--<el-row class="mt15">-->
+                        <!--<el-col :span="18">-->
+                        <!--<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"-->
+                        <!--class="demo-ruleForm">-->
+                        <!--<el-form-item label="评标意见 (2000字之内)：" prop="desc">-->
+                        <!--<el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"-->
+                        <!--:disabled="is_disabled"></el-input>-->
+                        <!--</el-form-item>-->
+                        <!--</el-form>-->
+                        <!--</el-col>-->
+                        <!--</el-row>-->
+                        <!--</div>-->
                         <!--</template>-->
                     </el-col>
-
                 </el-row>
             </div>
             <!----------------------投标人排序调整--------------------->
@@ -324,50 +323,111 @@
             <el-dialog
                     title="审查提示"
                     :visible.sync="$store.state.failureEnery.submitPrompt"
-                    width="700px"            >
+                    width="700px">
 
                 <SubmitPrompt></SubmitPrompt>
             </el-dialog>
-
-
             <el-dialog
                     title="评分解锁申请"
                     :visible.sync="dialogFormVisible"
                     width="700px"
             >
-                <ReviewLockRequest></ReviewLockRequest>
+                <div class="reviewLockRequest">
+                    <el-form :model="ruleFormLockRequest" :rules="ruleFormLockRequestRule" ref="ruleFormLockRequest" label-width="120px" class="demo-ruleForm">
+                        <el-form-item label="提出专家：" prop="type">
+                            <el-checkbox-group v-model="ruleFormLockRequest.type">
+                                <el-checkbox v-for="item in unlockDataCheckbox" :label="item" :key="item" >{{item}}</el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                        <el-form-item label="解锁申请类别：" prop="resource">
+                            <el-radio-group v-model="ruleFormLockRequest.resource">
+                                <el-radio :label="item.value" v-for="item in unlockDataRadio"> {{item.label}}</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="申请原因：" prop="desc">
+                            <el-input type="textarea" v-model="ruleFormLockRequest.desc"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleFormLockRequest')" size="small"> <i class="icon iconfont icon-baocun1 mr5"  ></i>保存</el-button>
+                            <el-button @click="resetForm('ruleFormLockRequest')" size="small" type="primary"> <i class="icon iconfont icon-eraser mr5"  ></i>重置</el-button>
+                            <el-button @click="reback" size="small" type="primary"> <i class="icon iconfont icon-fanhuishouye1 mr5"  ></i>返回</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
             </el-dialog>
-            <el-dialog
-                    title="查看专家个人打分表"
-                    :visible.sync="dialogVisible"
-                    width="1000px"
-            >
-                <CheckProScore></CheckProScore>
-            </el-dialog>
-            <el-dialog
-                    title="投标人分项得分表"
-                    :visible.sync="dialogBindScore"
-                    width="1000px"
-            >
-                <CheckProScore></CheckProScore>
-            </el-dialog>
+            <!--<el-dialog-->
+                    <!--title="查看专家个人打分表"-->
+                    <!--:visible.sync="dialogVisible"-->
+                    <!--width="1000px"-->
+            <!--&gt;-->
+                <!--<CheckProScore></CheckProScore>-->
+            <!--</el-dialog>-->
+            <!--<el-dialog-->
+                    <!--title="投标人分项得分表"-->
+                    <!--:visible.sync="dialogBindScore"-->
+                    <!--width="1000px"-->
+            <!--&gt;-->
+                <!--<CheckProScore></CheckProScore>-->
+            <!--</el-dialog>-->
+            <!--计算报价得分-->
             <el-dialog
                     title="计算报价得分"
                     :visible.sync="dialogScoring"
                     width="900px"
             >
-                <Scoring></Scoring>
+                <div class="Scoring">
+                    <el-row class="failureEntryDialog">
+                        <el-table
+                                ref="multipleTable"
+                                :data="scoreQuotationData"
+                                size="small"
+                                tooltip-effect="dark"
+                                border
+                                class="changePriceTable"
+                                el-table__header-wrapper>
+                            <el-table-column prop="name" header-align="left" label="投标人名称"
+                                             width="250px"></el-table-column>
+                            <el-table-column prop="toubiaoPrice" header-align="left" label="投标报价（元）"></el-table-column>
+                            <el-table-column prop="evaluationBid" header-align="left" label="评标价（元）"></el-table-column>
+                            <el-table-column prop="standardPrice" header-align="left" label="基准价（M）"></el-table-column>
+                            <el-table-column prop="beitaValue" header-align="left" label="β（%）"></el-table-column>
+                            <el-table-column prop="scoringSystem" header-align="left" label="系统计算得分"></el-table-column>
+                            <el-table-column prop="expertConfirmScore" header-align="left" label="专家确认得分" width="220px">
+                                <template slot-scope="scope">
+                                    <el-row class="cf">
+                                        <el-input size="small" :value="scope.row.score" class="fl"
+                                                  style="width:169px"></el-input>
+                                        <div class="red fl textAlignC mt5" style="width:25px;">&nbsp;*</div>
+                                    </el-row>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                        <el-row class="red lin-height35">
+                            提示：报价得分、计算基准价由系统根据招标文件中设定的计算方法自动生成。
+                        </el-row>
+                        <el-row class="textAlignC mt30">
+                            <el-button @click="acceptanceSystemScor" size="small" type="primary"><i
+                                    class="icon iconfont icon-fanhuishouye1 mr5"></i>接受系统计算得分
+                            </el-button>
+                            <el-button @click="sumbitScoring" size="small" type="primary"><i
+                                    class="icon iconfont icon-tijiao mr5"></i>提交
+                            </el-button>
+                            <el-button @click="rebackScoring" size="small" type="primary"><i
+                                    class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                            </el-button>
+                        </el-row>
+                    </el-row>
+                </div>
+
             </el-dialog>
-
-
         </div>
     </div>
 </template>
 
 <script>
-    import Scoring from '../../components/publicVue/Scoring';
+
     import BiddingAdvice from '../../components/publicVue/BiddingAdvice';
-    import ReviewLockRequest from '../../components/publicVue/ReviewLockRequest';
+    import ReviewLockRequest from '../../components/publicVue/ReviewLockRequest';//评分解锁
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
@@ -376,11 +436,13 @@
         name: "unFinishQualificationsResult",
         props: {},
         components: {
-            // Sort,
+
             // BidEvaluation,
             NavBar,
             AbandonedTender,   //废标  
             StandardChallengeInformation,
+            ReviewLockRequest,
+
         },
         data() {
             return {
@@ -422,12 +484,34 @@
                 myloading_back: false,//返回评审汇总loading
                 myloading_sort: false,// 排序提交返回loading
                 bidEvaluation_submit_loading: false,//报价计算提交loading
-                methodNum:'',//区分那种评标方法
+                methodType: '',//区分那种评标方法
+                dialogFormVisible: false,//评分解锁弹框
+                dialogScoring: false,//标价计算得分弹框
+                scoreQuotationData: [],//标价计算得分数据
+                unlockDataCheckbox: [],//解锁复选框数据
+                unlockDataRadio: [],//解锁单选框数据
+                ruleFormLockRequestRule:{
+                    type: [
+                        { type: 'array', required: true, message: '请至少选择一个提出专家', trigger: 'change' }
+                    ],
+                    resource: [
+                        { required: true, message: '请选择活动资源', trigger: 'change' }
+                    ],
+                    desc: [
+                        { required: true, message: '请填写申请原因', trigger: 'blur' }
+                    ]
+                },
+
+                ruleFormLockRequest:{
+                    type: [],
+                    desc: '',
+                    resource: '1',
+                }
             }
         },
         created() {
-            console.log(this.$route.query.type,this.$route.query.methodNum);
-            this.methodNum=this.$route.query.methodNum;
+            // console.log(this.$route.query.methodType);
+            this.methodType = this.$route.query.methodType;
         },
         mounted() {
             this.init();
@@ -436,15 +520,19 @@
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/pingshen_huizong', {type: this.$route.query.type})
-                    .then(res => {
+                this.$axios.post('/api/pingshen_huizong', {
+                    type: this.$route.query.type,
+                    methodType: this.$route.query.methodType
+                }) .then(res => {
                         if (res.status === 200) {
                             this.name = res.data.bidMsg.name;
                             this.baohao = res.data.bidMsg.baohao;
                             this.biaoNum = res.data.bidMsg.biaoNum;
                             this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
-                            console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
+                            this.scoreQuotationData = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
                             this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
+                            this.unlockDataCheckbox=res.data.bidMsg.eviewrItemsMsg.jiesuoData.checkedList;
+                            this.unlockDataRadio=res.data.bidMsg.eviewrItemsMsg.jiesuoData.radioList;
                             this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
                             this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                             this.$store.state.failureEnery.isshow = false;
@@ -511,7 +599,6 @@
                             }
                         })
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });
@@ -610,14 +697,14 @@
                     }
                 })
             },
-            bidEvaluation_reback() {
+            bidEvaluation_reback() {//报价计算弹框返回按钮
                 this.$store.state.failureEnery.bidEvaluation = false;
             },
-            /*-------------报价计算end----------------*/
-            confirm_btn() {
+            confirm_btn() {//报价计算确定按钮
                 this.$store.state.failureEnery.success_warning = false;
                 this.myloading = false;
             },
+            /*-------------报价计算end----------------*/
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
                     this.dialogAbandonedTender = true;
@@ -641,8 +728,68 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 }
             },
-            pingfenUnlockRecord(){
+            reviewLockRequest() {//评分解锁按钮
+                this.dialogFormVisible = true;
+            },
+            /*---------------------------------标价计算得分---------------*/
+            scoreQuotation() {//标价计算得分按钮
+                this.dialogScoring = true;
+            },
+            sumbitScoring() {//标价计算得分提交
+                let isNotFilled = false;
+                for (let i = 0; i < this.scoreQuotationData.length; i++) {
+                    if (!$.trim(this.scoreQuotationData[i].score)) {
+                        isNotFilled = true;
+                        break;
+                    }
+                }
+                if (isNotFilled) {
+                    this.$message('请先填写计算得分或者接受系统计算得分！');
+                } else {
+                    this.$axios.post('/api/score_quotation_tijiao', {data: this.scoreQuotationData}).then(res => {
+                        if (res.status == 200) {
+                                 this.$message({
+                                message: '最新报价保存完成！',
+                                type: 'success'
+                            });
+                            this.dialogScoring = false;
+                        }
+                    })
+                }
+            },
+            rebackScoring() {//接受系统计算得分返回按钮
+                this.dialogScoring = false;
+            },
+            acceptanceSystemScor() {//接受系统计算得分
+                for (let i = 0; i < this.length.length; i++) {
+                    this.scoreQuotationData[i].score = this.scoreQuotationData[i].scoringSystem;
+                }
+            },
 
+            /*-----------------------标价计算得分end---------------*/
+
+        /*--------------------解锁--------------------*/
+
+
+
+
+
+            submitForm(formName) {
+                // console.log(formName);
+                this.$refs[formName].validate((valid) => {
+                    console.log( this.$data.ruleForm);
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            reback(){
+                this.dialogFormVisible=true;
             }
         }
     }
