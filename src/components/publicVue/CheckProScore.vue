@@ -2,7 +2,7 @@
     <div class="checkProScore">
         <!----------------------查看专家个人打分表和投标人分项得分表--------------------->
             <div class="biaoba_fisrt">
-                <el-row class="marginB15">
+                <el-row class="mb15">
                     <el-col :span="4" ><div class="grid-content bg-purple-dark">分包号：第1包</div></el-col>
                     <el-col :span="20"><div class="grid-content bg-purple-dark">专家组：0635-1909N987/1评委会 </div></el-col>
                 </el-row>
@@ -13,9 +13,10 @@
                         border
                         class="changePriceTable"
                         el-table__header-wrapper
-                        :summary-method="getSummaries"
                         width="100%"
-                        show-summary>
+                       >
+                    <!--show-summary-->
+                    <!--:summary-method="getSummaries"-->
                     <el-table-column type="index"  label="序号" header-align="left"
                                      align="left"></el-table-column>
                     <el-table-column prop="project" header-align="left" label="项目" width="180" ></el-table-column>
@@ -56,7 +57,7 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <el-row class="marginB15 text-center marginT30">
+            <el-row class="mab15 textAlignC mt30">
                 <el-button   type="primary" size="small"><i class="icon iconfont icon-fanhuishouye1 mr5"  ></i>返回</el-button>
             </el-row>
     </div>
@@ -64,7 +65,7 @@
 <script>
 
     export default {
-        name: 'individualTrial',
+        name: 'CheckProScore',
         components: {},
         data() {
             return {
@@ -99,14 +100,12 @@
                     panduan___1:'50',
                     panduan___2:'50',
                     panduan___3:'50',
-                }
-        ],
+                }],
             }
         },
         created() {
         },
         mounted() {
-
         },
         methods: {
             checkProScore() {

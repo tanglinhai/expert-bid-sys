@@ -1154,7 +1154,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
-                    'unlock_dialog_check': {
+                    'unlock_dialog_check':[{
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
@@ -1163,7 +1163,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                         'assessingOfficer': Random.cname(),
                         'assessingResult': Random.integer(0, 1),
                         'unlockReason': Random.csentence()
-                    },
+                    }],
                     'msgBox': msg,
                     'companyNameData': [
                         {
@@ -1529,7 +1529,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
-                    'unlock_dialog_check': {
+                    'unlock_dialog_check': [{
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
@@ -1538,7 +1538,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                         'assessingOfficer': Random.cname(),
                         'assessingResult': Random.integer(0, 1),
                         'unlockReason': Random.csentence()
-                    },
+                    }],
                     'msgBox': msg,
                     'companyNameData': [
                         {
@@ -1769,7 +1769,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
-                    'unlock_dialog_check': {
+                    'unlock_dialog_check':[ {
                         'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
@@ -1778,7 +1778,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                         'assessingOfficer': Random.cname(),
                         'assessingResult': Random.integer(0, 1),
                         'unlockReason': Random.csentence()
-                    },
+                    }],
                     'msgBox': msg,
                     'companyNameData': [
                         {
@@ -2384,7 +2384,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     }],
                     'review_summary': data_msg,
                     'pingbiao_yijian': dataMsg,//排序
-                    'jiesuoData':{
+                    'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
                             label:'商务'
@@ -2399,7 +2399,27 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                                 label:'其他'
                             } ],
                         'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
-                    }
+                        "tippsDialogName":'解锁申请'//评分解锁成功提示框的name
+                    },
+                    'unlock_dialog_check':[ {
+                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
+                        'applicantPeole': Random.cname(),
+                        'applicantTime': Random.datetime(),
+                        'unlockObject': Random.cname(),
+                        'applicantReason': '投标函格式',
+                        'assessingOfficer': Random.cname(),
+                        'assessingResult': Random.integer(0, 1),
+                        'unlockReason': Random.csentence()
+                    },{
+                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
+                        'applicantPeole': Random.cname(),
+                        'applicantTime': Random.datetime(),
+                        'unlockObject': Random.cname(),
+                        'applicantReason': '投标函格式',
+                        'assessingOfficer': Random.cname(),
+                        'assessingResult': Random.integer(0, 1),
+                        'unlockReason': Random.csentence()
+                    }],
                 }
             }
         }
@@ -4564,77 +4584,21 @@ let business_tijiao = Mock.mock('/api/business_tijiao', 'post', {
 let jishu_tijiao = Mock.mock('/api/jishu_tijiao', 'post', {
     status: 200,
     message: '成功!',
-    data:[
-        {
-            projectName: '第一章，技术(14.00)分',
-            type: 'checkbox',//单选
-            radioList: [
-                // {typeTitle: 'A (2.00)分', num: '2'},
-                // {typeTitle: 'B (3.00)分', num:'3' },
-                // {typeTitle: 'C (4.00)分', num: '4',},
-                // {typeTitle: 'D (5.00)分', num: '5',}
-            ],
-            min: null,
-            max: null,
-            tit: '',
-            value1:[],
-            value2:[] ,
-            value3:[],
-        },
-        {
-            projectName: '技术小计',
-            type: 'numberJishu',
-            radioList: [],
-            min: null,
-            max: null,
-            tit: '',
-            value1: 20,
-            value2:30,
-            value3:40,
-        },
-        {
-            projectName: '总计',
-            type: 'numberTotle',
-            radioList: [ ],
-            min: null,
-            max: null,
-            tit: '',
-            value1: 50,
-            value2: 40,
-            value3: 70
-        },
-    ],
-    // data:  {
-    //     projectName: '总计',
-    //     type: 'numberTotle',
-    //     radioList: [ ],
-    //     min: null,
-    //     max: null,
-    //     tit: '',
-    //     value1: 23,
-    //     value2: 45,
-    //     value3: 36,
-    //     gradeExplain1:"",
-    //     gradeExplain2:"",
-    //     gradeExplain3:"",
-    // },
- //    data1:  {
- //        projectName: '第一章，技术(14.00)分',
- //            type: 'checkbox',//单选
- //        radioList: [
- //    // {typeTitle: 'A (2.00)分', num: '2'},
- //    // {typeTitle: 'B (3.00)分', num:'3' },
- //    // {typeTitle: 'C (4.00)分', num: '4',},
- //    // {typeTitle: 'D (5.00)分', num: '5',}
- // ],
- //    min: null,
- //    max: null,
- //    tit: '',
- //    value1:10,
- //    value2:23 ,
- //    value3: 34,
- //
- //    },
+    data:  {
+        projectName: '总计',
+        type: 'numberTotle',
+        radioList: [ ],
+        min: null,
+        max: null,
+        tit: '',
+        value1: 23,
+        value2: 45,
+        value3: 36,
+        gradeExplain1:"",
+        gradeExplain2:"",
+        gradeExplain3:"",
+    },
+
     vue_type: get_data(9),
 });
 //服务提交
@@ -4680,9 +4644,21 @@ let qita_tijiao = Mock.mock('/api/qita_tijiao', 'post', {
 });
 
 
+//综合评标评审汇总页面评分解锁申请弹框保存接口
+let ruleFormLockRequestSave = Mock.mock('/api/ruleFormLockRequestSave', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
+//综合评标评标意见弹框保存接口
+let saveBiddingAdvice = Mock.mock('/api/saveBiddingAdvice', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 
 
-Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"})
+Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"});
 
 
-Mock.mock('/Ajax/LoginFalse', 'post', {"Status": "Erro", "Erro": "账号名或密码或验证码有误"})
+Mock.mock('/Ajax/LoginFalse', 'post', {"Status": "Erro", "Erro": "账号名或密码或验证码有误"});

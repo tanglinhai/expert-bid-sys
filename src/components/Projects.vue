@@ -1,12 +1,6 @@
 <template>
     <div class="projects">
         <!-- 项目列表页面-->
-        <!--<el-row class="mb15">-->
-            <!--<el-col>-->
-                <!--<el-button type="primary" size="medium"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目-->
-                <!--</el-button>-->
-            <!--</el-col>-->
-        <!--</el-row>-->
         <div class="main">
             <el-row class="pro_msg_warp cf">
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
@@ -95,6 +89,9 @@
                             $(".search_warp ").hide();
                             $(".no_data ").css('padding-top', '200px');
                             $(".no_data ").css('padding-bottom', '200px');
+                        }else if(this.projectBagMsg.length != 0){
+                            $('.pageBox').show();
+                            $(".search_warp ").show();
                         }
                         this.msgBox = res.data.allBagMsg;
                         for (let i = 0; i < this.projectBagMsg.length; i++) {
@@ -140,7 +137,7 @@
     .projects {
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
-        padding-left:0px!important;
+        padding-left:20px!important;
         .main {
             background: white;
             border-radius: 5px;

@@ -53,7 +53,7 @@
 
                                 <el-col :span="12" class="mb15">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <span >
+                                        <span>
                                             <el-button size="small" plain
                                                        @click="checkUnfinishedItems">查看未完成项
                                             </el-button>
@@ -90,21 +90,9 @@
                                             style="width: 100%" class="dingdang_table" @header-click="checkPdf">
                                         <el-table-column
                                                 label="项目"
-                                                min-width="150" fixed prop="projectName" >
+                                                min-width="150" fixed prop="projectName">
                                         </el-table-column>
                                         <el-table-column label="投标人">
-                                            <!--<el-table-column :label="item.companyName"-->
-                                                             <!--v-for="(item,index ) in companyname_toubiao"-->
-                                                             <!--min-width="250" :key="index" v-if="type==7">-->
-                                                <!--<template slot-scope="scope">-->
-                                                    <!--<el-checkbox v-model="scope.row['radio' + index]"-->
-                                                                 <!--:label="item.laber"-->
-                                                                 <!--v-if="$store.state.failureEnery.dingdang_tijiao_state">-->
-                                                        <!--&lt;!&ndash;是否是官方配置？（50.00分）&ndash;&gt;-->
-                                                    <!--</el-checkbox>-->
-                                                    <!--<span v-else>{{item.laber}} </span>-->
-                                                <!--</template>-->
-                                            <!--</el-table-column>-->
                                             <el-table-column :label="item.title"
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              min-width="250" :key="index" v-if="type==8">
@@ -158,7 +146,7 @@
                                                             </el-checkbox-group>
                                                          </span>
 
-                                                        <span v-else >{{scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{getCheckNum(scope.row['value' + (index + 1)])}}</span>
                                                     </div>
                                                     <!--布局法-->
 
@@ -261,7 +249,7 @@
                                                                 </el-checkbox>
                                                             </el-checkbox-group>
                                                          </span>
-                                                        <span v-else >{{ scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{getCheckNum(scope.row['value' + (index + 1)])}}</span>
                                                     </div>
                                                     <!--布局法-->
 
@@ -361,7 +349,7 @@
                                                                 </el-checkbox>
                                                             </el-checkbox-group>
                                                          </span>
-                                                        <span v-else @childByValue="childByValue">{{scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else >{{getCheckNum(scope.row['value' + (index + 1)])}}</span>
                                                     </div>
                                                     <!--布局法-->
 
@@ -456,14 +444,14 @@
                                                          <span v-if=" $store.state.failureEnery.business_tijiao">
                                                             <el-checkbox-group
                                                                     v-model="scope.row['value' + (index + 1)]"
-                                                                    @change="changeCheck( index + 1 ,scope.row['value' + (index + 1)])" >
+                                                                    @change="changeCheck( index + 1 ,scope.row['value' + (index + 1)])">
                                                                 <el-checkbox :label="val.num"
                                                                              v-for="val in scope.row.radioList">
                                                                     {{val.typeTitle}}
                                                                 </el-checkbox>
                                                             </el-checkbox-group>
                                                          </span>
-                                                        <span v-else>{{scope.row['value' + (index + 1)]}}</span>
+                                                        <span v-else>{{getCheckNum(scope.row['value' + (index + 1)])}}</span>
                                                     </div>
                                                     <!--布局法-->
 
@@ -715,31 +703,17 @@
                     desc: ''
                 },
                 scoreShowsDialog: false,//编辑评分说明
-                methodType:""
+                methodType: ""
             }
         },
         created() {
             console.log(this.$route.query.methodType);
-            this.methodType=this.$route.query.methodType;
+            this.methodType = this.$route.query.methodType;
             this.type = this.$route.query.type;
 
         },
         computed: {
             completePercent() {
-                // if (this.type == 7) {
-                //     let num = 0;
-                //     let allNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
-                //     this.dingdang_tableData.forEach(e => { //循环表数据
-                //         this.companyname_toubiao.forEach((k, i) => {
-                //             if (`radio${i}` in e) {
-                //                 if (e[`radio${i}`]) {
-                //                     num++;
-                //                 }
-                //             }
-                //         })
-                //     });
-                //     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
-                // } else
                 if (this.type == 8) {
                     let num = 0;
                     let allNum = (this.dingdang_tableData.length - 2) * this.companyname_toubiao.length;
@@ -839,10 +813,7 @@
             },
             saveBtn() {//保存（传递radio选中的值）
                 let url;
-                if (this.type == 7) {
-                    url = '/api/dingdang_save';
-                }
-                else if (this.type == 8) {
+                if (this.type == 8) {
                     url = '/api/business_save';
                 }
                 else if (this.type == 9) {
@@ -866,44 +837,6 @@
                     }
                 })
             },
-            submitFilingComments() {//提交定档评议（需要掉接口）
-                let bool = true;//预制变量，当发现有复选框未选中时，就将值变为false
-                // console.log(this.dingdang_tableData);
-                this.dingdang_tableData.forEach(e => {
-                    this.companyname_toubiao.forEach((k, i) => {
-                        if (`radio${i}` in e) {//判断当前行数据是否已经有这个变量，（一进页面没点击前是没有的）(全部选中的时候都为true, 反之为false)
-                            if (!e[`radio${i}`]) { //即使已经有了，也可能再次点击时把值变成了false，（如果复选框未选中）
-                                bool = false;//变为false
-                            }
-                        } else {// 当前复选框从未被点过,所以值还是false
-                            bool = false;//变为false
-                        }
-                    })
-                });
-                //如果走完上面的代码 bool的值还是true说明复选框都被选了，否则肯定有未被选中的
-                if (bool) {//可提交
-                    let url;
-                    if (this.type == 7) {
-                        url = '/api/dingdang_tijiao';
-                    }
-                    // else if (this.type_btn == 1) {
-                    //     url = '/api/alltijiao';
-                    // }
-                    // else if (this.type_btn == 5) {
-                    //     url = '/api/alltijiao_xxjs';
-                    // }
-                    this.$axios.post(url, {type: parseInt(this.type) + 1}).then(res => {
-                        if (res.status == 200) {
-                            this.$store.state.failureEnery.dingdang_tijiao_state = false;
-                        }
-                    })
-                } else {
-                    this.$message({
-                        message: '您尚为所有投标人添加划档信息，请添加后再提交！',
-                        type: 'warning',
-                    });
-                }
-            },
             submitBusiness() {//商务提交
                 this.$store.state.failureEnery.submitPrompt = true;
 
@@ -925,19 +858,17 @@
                 this.pageLoading = true;
                 this.init();
             },
+            getCheckNum(arr){
+                return arr.reduce((a,b) => {
+                    return  Number(a)+Number(b)
+                })
+            },
             changeCheck(index, obj) {//复选法
-                // let sum=0;
-                // obj.forEach(k=>{
-                //     // console.log(k);
-                //     // Number(k)
-                //     sum+= Number(k);
-                // });
-                // console.log(sum);
                 let amt = 0;
                 let arr = [];
                 arr = this.dingdang_tableData.slice(0, -2);
                 arr.forEach((k, i) => {
-                    // console.log(k['value' + index]);
+                    console.log(k['value' + index]);
                     if (Array.isArray(k['value' + index])) {//是数组
                         if (k['value' + index].length != 0) {
                             let num = 0;
@@ -1094,13 +1025,12 @@
             },
             /*-----------------编辑评分说明end--------------------*/
 
-
             reback() {
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
                 if (this.type == 8) {
-                    this.$axios.post('/api/business_tijiao',{type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                    this.$axios.post('/api/business_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
@@ -1114,15 +1044,12 @@
                         }
                     })
                 } else if (this.type == 9) {
-                    this.$axios.post('/api/jishu_tijiao',{type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                    this.$axios.post('/api/jishu_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
                             } else {
                                 this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                                // console.log(res.data.data);
-                                this.dingdang_tableData=res.data.data;
-                                // console.log(this.dingdang_tableData);
                                 this.$store.state.failureEnery.tijiao100 = true;
                                 this.$store.state.failureEnery.business_tijiao = false;
                                 this.goGrdoupRecor();//倒计时开始
@@ -1131,7 +1058,7 @@
                     })
                 } else if (this.type == 10) {
                     console.log(this.type);
-                    this.$axios.post('/api/fuwu_tijiao',{type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                    this.$axios.post('/api/fuwu_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
@@ -1145,7 +1072,7 @@
                     })
                 } else if (this.type == 11) {
                     console.log(this.type);
-                    this.$axios.post('/api/qita_tijiao',{type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                    this.$axios.post('/api/qita_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
                                 this.$store.state.failureEnery.tijiaoNot100 = true;
@@ -1158,6 +1085,11 @@
                         }
                     })
                 }
+            },
+            getCheckNum(arr){
+                return arr.reduce((a,b) => {
+                    return  Number(a)+Number(b)
+                })
             },
             tijiaoNot100Comfrim() {//未完成100%确定
                 this.$store.state.failureEnery.tijiaoNot100 = false;
@@ -1215,7 +1147,6 @@
         margin-left: 5px;
         line-height: 1;
     }
-
     .dingdang_warp {
         overflow: hidden;
         padding-top: 15px;
@@ -1256,7 +1187,6 @@
                         .el-progress-bar {
                             width: 35%;
                         }
-
                     }
                     .unlock_table-warp {
                         color: #606266;
@@ -1273,23 +1203,6 @@
                                 margin-top: 4px;
                                 display: inline-block;
                             }
-                            /* div.cell {
-                                 position: relative;
-                                 .leixing {
-                                     position: absolute;
-                                     top: -4px;
-                                     left: 0;
-                                     width: 40px;
-                                     color: red;
-                                     margin-right: 10px;
-                                     !*height: 24px;*!
-                                     !*line-height: 24px;*!
-                                     !*font-size: 16px;*!
-                                     !*margin-right: 10px;*!
-                                     !*text-align: center;*!
-
-                                 }
-                             }*/
                         }
                     }
                     .pageBox {
