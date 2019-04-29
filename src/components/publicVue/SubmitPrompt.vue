@@ -90,23 +90,23 @@
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
-                if(this.type==8){
-                    this.$axios.post('/api/business_tijiao').then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
-                        if (res.status == '200') {
-                            if (this.pro_num != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
-                            } else {
-                                console.log(res.data.data);
-                                console.log(this.dingdang_tableData,res.data.data,this.dingdang_tableData.length - 1);
-                                this.$set(this.dingdang_tableData,this.dingdang_tableData.length - 1 ,res.data.data);
-                                // this.$set(this.dingdang_tableData,this.dingdang_tableData ,res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
-                            }
-                        }
-                    })
-                }
+                // if(this.type==8){
+                //     this.$axios.post('/api/business_tijiao').then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                //         if (res.status == '200') {
+                //             if (this.pro_num != 100.0) {
+                //                 this.$store.state.failureEnery.tijiaoNot100 = true;
+                //             } else {
+                //                 console.log(res.data.data);
+                //                 console.log(this.dingdang_tableData,res.data.data,this.dingdang_tableData.length - 1);
+                //                 this.$set(this.dingdang_tableData,this.dingdang_tableData.length - 1 ,res.data.data);
+                //                 // this.$set(this.dingdang_tableData,this.dingdang_tableData ,res.data.data);
+                //                 this.$store.state.failureEnery.tijiao100 = true;
+                //                 this.$store.state.failureEnery.business_tijiao = false;
+                //                 this.goGrdoupRecor();//倒计时开始
+                //             }
+                //         }
+                //     })
+                // }
                     // else if(this.type==9){
                 //     console.log(this.type);
                 // }else if(this.type==10){
@@ -114,19 +114,20 @@
                 // }else if(this.type==11){
                 //     console.log(this.type);
                 // }
-                // else if{
-                //     this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
-                //         if (res.status == '200') {
-                //             if (this.pro_num != 100.0) {
-                //                 this.$store.state.failureEnery.tijiaoNot100 = true;
-                //             } else {
-                //                 this.$store.state.failureEnery.tijiao100 = true;
-                //
-                //                 this.goGrdoupRecor();//倒计时开始
-                //             }
-                //         }
-                //     })
-                // }
+
+                 // if{
+                    this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
+                        if (res.status == '200') {
+                            if (this.pro_num != 100.0) {
+                                this.$store.state.failureEnery.tijiaoNot100 = true;
+                            } else {
+                                this.$store.state.failureEnery.tijiao100 = true;
+
+                                this.goGrdoupRecor();//倒计时开始
+                            }
+                        }
+                    })
+
             },
             tijiaoNot100Comfrim() {//未完成100%确定
                 this.$store.state.failureEnery.tijiaoNot100 = false;
