@@ -13,6 +13,9 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
+                </el-col>
             </el-row>
             <div class="evaluationcommon cf">
                <MessageCommon :tableData3="tableData3" :dianji="0"></MessageCommon>
@@ -124,6 +127,7 @@
                 name:'',  //标名称
                 biaoNum:'', //标号
                 baohao:'', //包号
+                projectWenjian:'',  //项目资料
 
                 val:'',  //四种方式传值
 
@@ -214,6 +218,7 @@
                         this.name=res.data.result.name;
                         this.biaoNum=res.data.result.biaoNum;
                         this.baohao=res.data.result.baohao;
+                        this.projectWenjian=res.data.result.projectWenjian;
                     }
                 })
             },

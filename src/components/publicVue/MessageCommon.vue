@@ -13,8 +13,8 @@
                             <a href="http://localhost:7000/img/download.svc" download="">招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></a>
                         </p>
                         <p v-else>
-                            <em>{{item.toubiaorenName}}</em>
-                            <a>招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></a>
+                            <b style="display:block; color: #62a1e3; margin-bottom: 10px;">{{item.toubiaorenName}}</b>
+                            <strong>招标文件：<b>{{item.toubiaorenFenbao}}</b></strong>
                         </p>
                     </div>
                 </a>
