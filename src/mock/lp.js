@@ -303,6 +303,7 @@ let baoInformations=Mock.mock('/api/baoInformations','post',{
         'name': '2019年水利运输服务招标项目',
         'biaoNum': '0635—1909qwerN1197',
         'baohao': '0635—1909qwerN1197/1',
+        'projectWenjian':'pdf文件',  //项目资料
     }
 })
 //包信息接口

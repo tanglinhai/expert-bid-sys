@@ -37,7 +37,7 @@
                     <el-col :span="24">
                         <div class="unlock_table-warp fs14">
                             <el-row class="progress_btns">
-                                <el-col :span="12" v-if="type!=7">
+                                <el-col :span="12">
                                     <el-row class="red">
                                         <el-col style="width: 70px;font-size: 14px;">
                                             <div>我的进度：</div>
@@ -50,22 +50,10 @@
                                         </el-col>
                                     </el-row>
                                 </el-col>
-                                <el-col :span="12" v-else>
-                                    <p>&nbsp;</p>
-                                </el-col>
+
                                 <el-col :span="12" class="mb15">
                                     <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <span> 专家：{{evaluationExpert}}</span>
-                                        <span>下拉</span>
-                                        <!-- 定档评议-->
-                                        <span v-if="type==7">
-                                            <el-button size="small" plain @click="saveBtn" class="ml10">保存</el-button>
-                                            <el-button size="small" plain @click="submitFilingComments"
-                                                       class="submitFilingCommentsBtn">提交定档评议
-                                            </el-button>
-                                        </span>
-                                        <!--商务-->
-                                        <span v-if="type!=7">
+                                        <span >
                                             <el-button size="small" plain
                                                        @click="checkUnfinishedItems">查看未完成项
                                             </el-button>
@@ -101,26 +89,22 @@
                                             :data="dingdang_tableData"
                                             style="width: 100%" class="dingdang_table" @header-click="checkPdf">
                                         <el-table-column
-                                                label="打分项"
-                                                min-width="150" fixed prop="grade" v-if='type==7'>
-                                        </el-table-column>
-                                        <el-table-column
                                                 label="项目"
-                                                min-width="150" fixed prop="projectName" v-else>
+                                                min-width="150" fixed prop="projectName" >
                                         </el-table-column>
                                         <el-table-column label="投标人">
-                                            <el-table-column :label="item.companyName"
-                                                             v-for="(item,index ) in companyname_toubiao"
-                                                             min-width="250" :key="index" v-if="type==7">
-                                                <template slot-scope="scope">
-                                                    <el-checkbox v-model="scope.row['radio' + index]"
-                                                                 :label="item.laber"
-                                                                 v-if="$store.state.failureEnery.dingdang_tijiao_state">
-                                                        <!--是否是官方配置？（50.00分）-->
-                                                    </el-checkbox>
-                                                    <span v-else>{{item.laber}} </span>
-                                                </template>
-                                            </el-table-column>
+                                            <!--<el-table-column :label="item.companyName"-->
+                                                             <!--v-for="(item,index ) in companyname_toubiao"-->
+                                                             <!--min-width="250" :key="index" v-if="type==7">-->
+                                                <!--<template slot-scope="scope">-->
+                                                    <!--<el-checkbox v-model="scope.row['radio' + index]"-->
+                                                                 <!--:label="item.laber"-->
+                                                                 <!--v-if="$store.state.failureEnery.dingdang_tijiao_state">-->
+                                                        <!--&lt;!&ndash;是否是官方配置？（50.00分）&ndash;&gt;-->
+                                                    <!--</el-checkbox>-->
+                                                    <!--<span v-else>{{item.laber}} </span>-->
+                                                <!--</template>-->
+                                            <!--</el-table-column>-->
                                             <el-table-column :label="item.title"
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              min-width="250" :key="index" v-if="type==8">

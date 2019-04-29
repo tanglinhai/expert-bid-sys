@@ -12,11 +12,11 @@
 			<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
 			<p>项目名称:{{ProjectInformationsAll.projectName}}</p>
 			<p>项目编号:{{ProjectInformationsAll.projectNumber}}</p>
-			<el-collapse-transition>
+			<!-- <el-collapse-transition>
 				<div v-show="show3">
 					<p>项目资料:{{ProjectInformationsAll.projectWenjian}}</p>
 				</div>
-			</el-collapse-transition>
+			</el-collapse-transition> -->
 		</div>
 	</el-menu>
 	
@@ -47,8 +47,8 @@
 		    <template slot="title">
 		    	<img src=""/>{{ProjectInformationsAll.PersonName}}
 		    </template>
-		    <el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>
-		    <el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>
+		    <!--<el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>-->
+		    <!--<el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>-->
 			<el-menu-item class="tuiju" index="5-4" @click="LookTuiju"><i class="icon iconfont icon-zhuanjiazhuye"></i>查看推举情况</el-menu-item>
 		    <el-menu-item index="5-6"><i class="iconfont icon-tuichu"></i>安全退出</el-menu-item>
 		  </el-submenu>

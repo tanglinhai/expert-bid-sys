@@ -2183,11 +2183,11 @@ function get_data(type,is_submit_type) {//type
             label: '详细评审(技术)汇总',
             type: a[5]
         },
-        {
-            value: '7',
-            label: '定档评议',
-            type: a[6]
-        },
+        // {
+        //     value: '7',
+        //     label: '定档评议',
+        //     type: a[6]
+        // },
         {
             value: '8',
             label: '商务',

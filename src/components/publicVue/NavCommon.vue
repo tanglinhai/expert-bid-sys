@@ -21,7 +21,6 @@
                             title=""
                             width="100"
                             :content='item.label'
-                            trigger="hover"
                             >
                             <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference">{{item.label}}</el-button>
                         </el-popover>

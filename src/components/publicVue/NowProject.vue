@@ -39,7 +39,7 @@
                         <!--<el-col style="width:15%" class="bagNum">-->
                             <!--<div>包含分包：<span class="col409">{{item.bagName }}</span></div>-->
                         <!--</el-col>-->
-                        <el-col style="width:30%" :span="10" class="time_div">
+                        <el-col style="width:40%" :span="10" class="time_div">
                             <el-col style="width:50%" class="beginTime">
                                 <span>评标开始时间：<span class="cole02">{{item.starTime }}</span></span>
                             </el-col>
@@ -47,23 +47,17 @@
                                 <span>评标截至时间：<span class="cole02">{{item.stopTime }}</span></span>
                             </el-col>
                         </el-col>
-                        <el-col style="width:30%" class="btns_div">
+                        <el-col style="width:20%" class="btns_div">
                             <el-col :span="11" class="begin_bidding" style="text-align: right">
-                                <!--`/bidder/ShenqinApplyContent?type=${this.type}&stepsNum=2`-->
-                                <!--@click="goto(`/index/LetterCommitment?methodType=${item.methodType}`)"-->
-                                <el-button size="small" class="btnBg"
-                                           @click="beginPingbiao(item.methodType)"
-                                >
-
-                                    <i
-                                        class="icon iconfont icon-kaishi mr3"></i>开始评标
+                                <el-button size="small" class="btnBg"     @click="beginPingbiao(item.methodType)" >
+                                    <i  class="icon iconfont icon-kaishi mr3"></i>开始评标
                                 </el-button>
                             </el-col>
-                            <el-col :span="11" class="bidding_doc" style="margin-left: 15px">
-                                <el-button size="small" @click="bidding_doc_btn(item)"><i
-                                        class="icon iconfont icon-wenjian mr3"></i>招标相关文件
-                                </el-button>
-                            </el-col>
+                            <!--<el-col :span="11" class="bidding_doc" style="margin-left: 15px">-->
+                                <!--<el-button size="small" @click="bidding_doc_btn(item)"><i-->
+                                        <!--class="icon iconfont icon-wenjian mr3"></i>招标相关文件-->
+                                <!--</el-button>-->
+                            <!--</el-col>-->
                         </el-col>
                     </el-col>
                 </el-row>
