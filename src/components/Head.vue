@@ -12,11 +12,11 @@
 			<i :class="show3?'jiantou el-icon-arrow-up':'jiantou el-icon-arrow-down'" @click="show3 = !show3"></i>
 			<p>项目名称:{{ProjectInformationsAll.projectName}}</p>
 			<p>项目编号:{{ProjectInformationsAll.projectNumber}}</p>
-			<el-collapse-transition>
+			<!-- <el-collapse-transition>
 				<div v-show="show3">
 					<p>项目资料:{{ProjectInformationsAll.projectWenjian}}</p>
 				</div>
-			</el-collapse-transition>
+			</el-collapse-transition> -->
 		</div>
 	</el-menu>
 	
