@@ -61,9 +61,9 @@
                 }else if (i === "6"){
                      this.$router.push("/elect/UnFinishQualificationsResult?type=6&methodType="+methodType);
                 }
-                else if (i === "7"){
-                    this.$router.push("/elect/BusinessOther?type=7&methodType="+methodType);
-                }
+                // else if (i === "7"){
+                //     this.$router.push("/elect/BusinessOther?type=7&methodType="+methodType);
+                // }
                 else if (i === "8"){
                     this.$router.push("/elect/BusinessOther?type=8&methodType="+methodType);
                 }
