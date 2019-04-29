@@ -14,6 +14,7 @@ import commonJs from '@/assets/js/common/common.js';
 
 import './mock/mock';
 import './mock/lp';
+import './mock/leader'
 
 Vue.prototype.$commonJs = commonJs;
 Vue.config.productionTip = false;
