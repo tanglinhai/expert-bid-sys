@@ -9,7 +9,7 @@
                             title=""
                             width="100"
                             :content='item.label'
-                            trigger="click"
+                            trigger="hover"
                             >
                             <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
@@ -21,7 +21,6 @@
                             title=""
                             width="100"
                             :content='item.label'
-                            trigger="click"
                             >
                             <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference">{{item.label}}</el-button>
                         </el-popover>
