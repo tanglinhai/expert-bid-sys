@@ -81,6 +81,9 @@ var routes = [
       path:'/groupLeader',
       name:'groupLeader',
       component: () => import('./views/leader/Index.vue'),
+      children:[
+        { name: '/groupLeader/ViewBe', path: '/groupLeader/ViewBe', component: () => import('./views/leader/ViewBe.vue')}
+      ]
     }
   ];
 
