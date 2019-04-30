@@ -72,12 +72,12 @@
                         label="姓名"
                         width="120">
                     </el-table-column>
-                    <el-table-column label="地址">
+                    <el-table-column :label="items.aaa" v-for="(items,index3) in tableWrap" :key="index3">
                         <el-table-column
                             :label="item.province"
-                            width="120" v-for="(item,index) in tablesNeiContent" :key="index">
+                            width="120" v-for="(item,index) in items.tablesNeiContent" :key="index">
                             <template slot-scope="scope">
-                                <span v-for="(item2,index2) in item.zhaunjiadata_gs">{{item2.zhaunjia1[scope.$index]}}</span>
+                                <span v-for="(item2,index2) in item.zhaunjiadata_gs" :key="index2">{{item2.zhaunjia1[scope.$index]}}</span>
                             </template>
                         </el-table-column>
                     </el-table-column>
@@ -154,35 +154,42 @@
                 //         name: '王小虎',
                 //     }
                 // ],
-                // tablesNeiContent:[{
-                //     province:'公司一',
-                //     'zhaunjiadata_gs':[
-                //         {
-                //             'zhaunjia1':["√(5√0×)",  "√(6√0×)","√(5√0×)",'合格']
-                //         } ,
-                //     ]
+                // tableWrap:[{
+                //     aaa:"地址一",
+                //     tablesNeiContent:[{
+                //         province:'公司一',
+                //         'zhaunjiadata_gs':[
+                //             {
+                //                 'zhaunjia1':["√(5√0×)",  "√(6√0×)","√(5√0×)",'合格']
+                //             } ,
+                //         ]
+                //     },{
+                //         province:'公司二',
+                //         'zhaunjiadata_gs':[
+                //             {
+                //                 'zhaunjia1':["√(6√0×)",  "√(5√0×)","√(6√0×)",'不合格']
+                //             } ,
+                //         ]
+                //     }]
                 // },{
-                //     province:'公司二',
-                //     'zhaunjiadata_gs':[
-                //         {
-                //             'zhaunjia1':["√(6√0×)",  "√(5√0×)","√(6√0×)",'不合格']
-                //         } ,
-                //     ]
-                // },{
-                //     province:'公司三',
-                //     'zhaunjiadata_gs':[
-                //         {
-                //             'zhaunjia1':["√(7√0×)",  "√(5√0×)","√(7√0×)",'合格']
-                //         } ,
-                //     ]
-                // },{
-                //     province:'公司四',
-                //     'zhaunjiadata_gs':[
-                //         {
-                //             'zhaunjia1':["√(8√0×)",  "√(5√0×)","√(8√0×)",'不合格']
-                //         } ,
-                //     ]
+                //     aaa:"地址二",
+                //     tablesNeiContent:[{
+                //         province:'公司三',
+                //         'zhaunjiadata_gs':[
+                //             {
+                //                 'zhaunjia1':["√(555√0×)",  "√(6555√0×)","√(5555√0×)",'合格']
+                //             } ,
+                //         ]
+                //     },{
+                //         province:'公司四',
+                //         'zhaunjiadata_gs':[
+                //             {
+                //                 'zhaunjia1':["√(623√0×)",  "√(545√0×)","√(6454√0×)",'不合格']
+                //             } ,
+                //         ]
+                //     }]
                 // }]
+                
                 //测试表格
               
             }
