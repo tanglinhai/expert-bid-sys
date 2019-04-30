@@ -10,7 +10,7 @@
                 <div class="grid-content bg-purple-dark">
                     <el-input
                         placeholder="项目名称关键字进行检索"
-                        v-model="seach_value"
+                        v-model="search_value"
                         clearable size="small" class="wi260 ">
                     </el-input>
                     <el-button type="primary"
@@ -94,7 +94,7 @@
 export default {
     data() {
         return {
-            seach_value:'',
+            search_value:'',
             search_loading:false,
             projectTitleData:[],
             projectConData:[],
@@ -119,19 +119,27 @@ export default {
             })
         },
         search(){
-            this.bodyLoading=true;
-            this.search_loading=true;
-            this.$axios.post('/api/leaderBagMsg',{
-                value:this.seach_value,
-            }).then(res => {
-                if(res.status == 200){
-                    this.search_loading=false;
-                    this.bodyLoading=false;
-                    this.projectTitleData = res.data.bagTitleMsg;
-                    this.projectConData = res.data.bagConMsg;
-                    this.seach_value="";
-                }
-            })
+            if(this.search_value == '' || this.search_value == undefined){
+                this.$message({
+                    message: '请输入关键字再查询',
+                    type: 'warning',
+                    center: true
+                });
+            }else{
+                this.bodyLoading=true;
+                this.search_loading=true;
+                this.$axios.post('/api/leaderBagMsg',{
+                    value:this.search_value,
+                }).then(res => {
+                    if(res.status == 200){
+                        this.search_loading=false;
+                        this.bodyLoading=false;
+                        this.projectTitleData = res.data.bagTitleMsg;
+                        this.projectConData = res.data.bagConMsg;
+                        this.seach_value="";
+                    }
+                })
+            }
         },
         handleChange(val) {
             console.log(val);
