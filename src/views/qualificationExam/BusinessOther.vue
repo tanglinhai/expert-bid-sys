@@ -97,6 +97,7 @@
                                                              v-for="(item,index ) in companyname_toubiao"
                                                              min-width="250" :key="index" v-if="type==8">
                                                 <template slot-scope="scope">
+
                                                     <!--单选法-->
                                                     <div v-if="scope.row.type === 'radio'">
                                                         <el-radio-group
