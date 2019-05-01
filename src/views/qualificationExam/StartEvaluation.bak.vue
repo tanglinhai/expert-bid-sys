@@ -438,12 +438,6 @@
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
             window._locate_pdf_ = this._locate_pdf_;
-
-
-            /*this.$commonJs.getScriptFile.call(this, {
-                url: '/js/plugins/html2canvas.js',
-                download_files_key: 'html2canvas.js'
-            });*/
         },
         computed: {
             currentPdfShow() {
