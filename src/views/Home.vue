@@ -96,7 +96,7 @@ export default {
   },
   updated(){
     this.number=this.$store.state.navCommon.types
-    // console.log(this.number,77777777)
+    //console.log(this.number,77777777)
     $(".NavCommon ul li button").removeClass("backblue");
     $(".NavCommon ul #"+this.number).find("button").addClass("backblue");
   }

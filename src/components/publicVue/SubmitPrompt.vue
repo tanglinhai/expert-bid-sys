@@ -1,12 +1,10 @@
 <template>
     <div class="submitPrompt ">
         <el-row class="textAlignC fs14" style="line-height: 30px">您的{{name}}工作已进行 [&nbsp;<span
-                class="red">{{pro_num}}%</span>&nbsp;], 请确认您已经完成本包 [&nbsp;<span class="red">{{baohao}}</span>&nbsp;]的{{name}}工作
+                class="red">{{pro_num}}%</span>&nbsp;], 请确认您已经完成本包 [&nbsp;<span class="red">{{baohao}}</span>&nbsp;]的{{name}}工作!
         </el-row>
         <el-row>
-            <!--type=8:商务的时候可以通过[结果]进行查阅-->
-            <el-row class="textAlignC fs16" style="line-height: 30px" v-if="type=8">确认后您将不能再更改{{name}}结果！但可以通过点击[结果]进行查阅! </el-row>
-            <el-row class="textAlignC fs16" style="line-height: 30px" v-else >确认后您将不能再更改{{name}}结果！</el-row>
+                 <el-row class="textAlignC fs16" style="line-height: 30px" >确认后您将不能再更改{{name}}结果！</el-row>
         </el-row>
         <el-row class="textAlignC pt20">
             <el-button size="small" type="primary" @click="comfrim">确认</el-button>
@@ -40,18 +38,19 @@
                         </div>
                     </el-row>
                     <el-row>
-                        <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">{{name}}评审成功！</p>
+                        <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">
+                            {{name}}评审成功！</p>
                     </el-row>
                 </el-row>
                 <el-row>
-                    <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span id="sec">{{count}}</span>]秒后自动关闭</div>
+                    <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span id="sec">{{count}}</span>]秒后自动关闭
+                    </div>
                 </el-row>
                 <el-row class="textAlignC pt20">
                     <el-button size="small" type="primary" @click="tijiao100Comfrim">确认</el-button>
                 </el-row>
             </el-row>
         </el-dialog>
-
     </div>
 </template>
 
@@ -68,11 +67,14 @@
             baohao: {
                 type: String
             },
-            type:{
-                type: Number
+            type1: {
+                type: String
             },
-            dingdang_tableData:{
-                type:Array
+            dingdang_tableData: {
+                type: Array
+            },
+            companyname_toubiao: {
+                type: Array
             }
         },
         data() {
@@ -80,65 +82,54 @@
                 count: '5',   //倒计时5秒
             }
         },
+        mounted() {
+            console.log(this.type1);
+        },
         methods: {
             reback() {
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
-                if(this.type==8 ||9||10||11){
-                    this.$axios.post('/api/business_save').then(res => { //商务接口
-                        if (res.status == '200') {
-                            if (this.pro_num != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
-                            } else {
-                                console.log(this.dingdang_tableData, res.data.data);
-                                this.$set(this.dingdang_tableData,this.dingdang_tableData.length - 1 ,res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
-                            }
-                        }
-                    })
-                }else{
-                    this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
-                        if (res.status == '200') {
-                            if (this.pro_num != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
-                            } else {
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.goGrdoupRecor();//倒计时开始
-                            }
-                        }
-                    })
-                }
-            },
-            tijiaoNot100Comfrim() {//未完成100%确定
-                this.$store.state.failureEnery.tijiaoNot100 = false;
-            },
-            tijiao100Comfrim() {//完成100%确定
-                this.$store.state.failureEnery.tijiao100 = false;
-                this.$store.state.failureEnery.submitPrompt = false;
-                this.$store.state.failureEnery.flag = false;
-                $("#hide_btn").hide();
-            },
-            goGrdoupRecor() {//倒计时
-                const TIME_COUNT = 5;
-                if (!this.timer) {
-                    this.count = TIME_COUNT;
-                    this.show = false;
-                    this.timer = setInterval(() => {
-                        if (this.count > 0 && this.count <= TIME_COUNT) {
-                            this.count--;
+
+                this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
+                    if (res.status == '200') {
+                        if (this.pro_num != 100.0) {
+                            this.$store.state.failureEnery.tijiaoNot100 = true;
                         } else {
-                            this.show = true;
-                            clearInterval(this.timer);
-                            this.timer = null;
-                            this.$store.state.failureEnery.tijiao100 = false;
+                            this.$store.state.failureEnery.tijiao100 = true;
+                            this.goGrdoupRecor();//倒计时开始
                         }
-                    }, 1000)
-                }
-            },
-        }
+                    }
+                })
+
+        },
+        tijiaoNot100Comfrim() {//未完成100%确定
+            this.$store.state.failureEnery.tijiaoNot100 = false;
+        },
+        tijiao100Comfrim() {//完成100%确定
+            this.$store.state.failureEnery.tijiao100 = false;
+            this.$store.state.failureEnery.submitPrompt = false;
+            this.$store.state.failureEnery.flag = false;
+            $("#hide_btn").hide();
+        },
+        goGrdoupRecor() {//倒计时
+            const TIME_COUNT = 5;
+            if (!this.timer) {
+                this.count = TIME_COUNT;
+                this.show = false;
+                this.timer = setInterval(() => {
+                    if (this.count > 0 && this.count <= TIME_COUNT) {
+                        this.count--;
+                    } else {
+                        this.show = true;
+                        clearInterval(this.timer);
+                        this.timer = null;
+                        this.$store.state.failureEnery.tijiao100 = false;
+                    }
+                }, 1000)
+            }
+        },
+    }
     }
 </script>
 

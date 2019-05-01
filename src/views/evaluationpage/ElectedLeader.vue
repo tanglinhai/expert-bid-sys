@@ -13,6 +13,9 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
+                </el-col>
             </el-row>
             <div class="evaluationcommon cf">
                <MessageCommon :tableData3="tableData3" :dianji="1"></MessageCommon>
@@ -37,26 +40,26 @@
                             <el-button size="small" @click="AgreeXieYi" style="margin-left:50px;"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                         </template>
                         <template v-if="projectTableData.status==3">
-                            <el-button  style="margin-left:50px;" size="small" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-message"></i>查看</el-button>
+                            <el-button  style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-message"></i>查看</el-button>
                         </template>
                         <template v-if="projectTableData.status==1">
                             <el-button size="small" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
                             <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                         </template>
                         <template v-if="projectTableData.status==2">
-                            <el-button style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>评标</el-button>
+                            <el-button style="margin-left:50px;" size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button style="margin-left:50px;" size="small" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==5">
-                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('/elect/StartEvaluation?typs=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
                             <el-button size="small" style="padding:9px 5px;" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
                             <el-button size="small" style=" padding:9px 5px;" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                         </template>
                         <template v-if="projectTableData.status==6">
-                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
-                            <el-button size="small" style="padding:9px 5px;" @click="goto('elect/StartEvaluation?type=1')"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
+                            <el-button size="small" style="margin-left:-12px; padding:9px 5px;" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" style="padding:9px 5px;" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
                         </template>
                     </div>
                 </el-row>
@@ -216,6 +219,9 @@
                 name:'',  //标名称
                 biaoNum:'', //标号
                 baohao:'', //包号
+                projectWenjian:'',  //项目资料
+
+                val:'',  //四种方式传值
 
             }
         },
@@ -226,12 +232,13 @@
                 this.$store.state.navCommon.types=this.$route.query.types;
                 console.log(this.$store.state.navCommon.types,6)
             }
+            this.val=this.$route.query.methodType;
         },
         mounted(){
-            var _this=this;
+            let _this=this;
             setInterval(function(){
               _this.ProjectSubcontract();//项目分包数据  
-            },300000)
+            },300000);
             this.ProjectSubcontract();//项目分包数据
 
             this.AllInformation(); //专家个人信息,投标人信息接口
@@ -252,6 +259,7 @@
                         this.name=res.data.result.name;
                         this.biaoNum=res.data.result.biaoNum;
                         this.baohao=res.data.result.baohao;
+                        this.projectWenjian=res.data.result.projectWenjian;
                     }
                 })
             },
@@ -265,7 +273,7 @@
                         this.BtnLoading=false;
                         this.$router.push({
                             // path: '/elect/StartEvaluation?types=4',
-                            path: '/elect/StartEvaluation',
+                            path: '/elect/StartEvaluation?types=4&methodType='+this.val,
                         })
                     }
                 })
@@ -334,7 +342,7 @@
             AgreeXieYi(){  //推举组长
             console.log("1")
                 this.$router.push({
-                    path: '/index/WheelPushing?types=3',
+                    path: '/index/WheelPushing?types=3&methodType='+this.val,
                 })
                 
             },

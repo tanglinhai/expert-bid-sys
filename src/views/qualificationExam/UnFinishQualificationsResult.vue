@@ -30,7 +30,7 @@
                 </el-col>
             </el-row>
             <div class="mainContentWarp" v-loading="page_loading">
-                <NavBar :msg="options" :type="type"></NavBar>
+                <NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>
                 <el-row class="center_part">
                     <el-col :span="24">
                         <template>
@@ -156,7 +156,7 @@
                     :visible.sync="$store.state.failureEnery.individualTrial"
                     width="80%"
             >
-                <IndividualTrial :msgBox="individualTrialData" :msg="companyName"
+                <IndividualTrial :msgBoxData="individualTrialData" :msg="companyName"
                                  :title_data="grcs_titile_data"></IndividualTrial>
             </el-dialog>
             <!--废标弹框-->
@@ -253,7 +253,7 @@
                 baohao: '',
                 options: [],//头部按钮
                 /* -------头部包信息end-----*/
-                msgBox: [],
+                msgBox: [],//专家进度页面数据
                 completePercent: 0,
                 evaluationLeader: "",//评标委员会组长
                 unlock_table: [],//所有专家都是100%的时候显示的table
@@ -274,9 +274,12 @@
                 unlock_table_company_name: [],//汇总页面table（评审因素汇总）
                 submit_huizong:false,//汇总页面提交
                 count: '5',   //汇总页面提交成功弹框倒计时5秒
+                methodType:''
             }
         },
         created() {
+            console.log(this.$route.query.methodType);
+            this.methodType=this.$route.query.methodType;
             this.type = this.$route.query.type;
         },
         mounted() {

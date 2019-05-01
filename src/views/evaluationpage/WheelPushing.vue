@@ -8,6 +8,28 @@
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                 <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第{{LunNumber}}轮</h5>
             </div>
+            <!-- <ul class="tuijuUlList mt20">
+                <li v-for="(item,index) in NumberRounddatas" :key="index" :style="item.caozuo==1?'border:1px solid #409eff':item.caozuo==3?'border:1px solid #67c23a':'border:1px solid #909399'">
+                    <img src="../../assets/img/txph.png" alt="">
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.zuanjiaName}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.depiaoshu}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.tel}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.zjhao}}</p>
+                    <p :style="item.caozuo==1?'color:#409eff':item.caozuo==3?'color:#67c23a':'color:#909399'">{{item.danwei}}</p>
+                    <el-button size="small" type="primary" style="cursor:pointer;" v-if="item.caozuo==1" @click="tuijuAgain">
+                        <i class="icon iconfont icon-shou"></i>&nbsp;推举
+                    </el-button>
+                    <el-button type="info" size="small" v-if="item.caozuo==2">
+                        未签到
+                    </el-button>
+                    <el-button type="success" size="small" v-if="item.caozuo==3">
+                        已推举
+                    </el-button>
+                    <el-button v-if="item.caozuo==4" style="visibility:hidden; height:32px;">
+                       
+                    </el-button>
+                </li>
+            </ul> -->
            <template>
                 <el-table
                 v-loading="PutRoundNumberLoading"
@@ -101,13 +123,18 @@
                 NumberRounddatas:[],  //推举评委会主人第几轮
                 LunNumber:'', //推举评委会主人标题轮数
                 PutRoundNumberLoading:false, //推举评委会主人loading
+
+                val:'',  //四种方式传值
                         
                 }
+
+                
         },
         created() {
             //console.log(this.$route.query.type,999)
             this.$store.state.navCommon.types=this.$route.query.types;
             console.log(this.$store.state.navCommon.types,7)
+            this.val=this.$route.query.methodType;
         },
         mounted(){
             
@@ -120,7 +147,7 @@
             var setTime;
             setTime=setInterval(function(){
                 _this.tuijuData(); //推举评委会主人第1轮
-            },15000)
+            },20000)
         },
         methods:{
             goto(url){//开始评标
@@ -171,7 +198,7 @@
                         console.log(this.caozuoAlls.length,this.caozuoAlls,this.NumberRounddatas.length,7777)
                         if(this.caozuoAlls.length==this.NumberRounddatas.length){
                             this.$router.push({
-                                path: '/elect/StartEvaluation?types=5',
+                                path: '/elect/StartEvaluation?types=5&methodType='+this.val,
                             })
                         }
                         
@@ -229,7 +256,32 @@
              background:white;
             border-radius:5px;
             padding:15px;
+            .tuijuUlList{
+                float:left;
+                width:100%;
+                li{
+                    float:left;
+                    margin-right:20px;
+                    padding:20px;
+                    border:1px solid #909399;
+                    border-radius:5px;
+                    img{
+                        display:block;
+                        margin:0 auto;
+                    }
+                    p{
+                        text-align:center;
+                        font-size:14px;
+                        line-height:20px;
+                    }
+                    button{
+                        display:block;
+                        margin:6px auto;
+                    }
+                }
+            }
         }
+        
     }
 }
 </style>

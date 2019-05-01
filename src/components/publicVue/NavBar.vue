@@ -3,7 +3,7 @@
         <el-row class="textAlignC btns_grounp" >
             <div v-for="item in msg" 
                 :class="item.value == type ? 'nav_item hov': 'nav_item'" 
-                @click="changeView(item)" >
+                @click="changeView(item,methodType)">
                 <div :class="item.type == 4 ? 'item jinyong': 'item'">
                      <span :class="item.type ==1 ? 'iconfont icon-wancheng green':
                                     item.type ==3 ? 'iconfont icon-tbd-project-task-number'  :
@@ -30,6 +30,9 @@
             },
             msg: {
                 type: Array
+            },
+            methodType:{
+                type: String
             }
         },
         data(){
@@ -38,43 +41,43 @@
             }
         },
         methods:{
-            changeView(item) {      //路由跳转传参函数
-                // console.log(item);
+            changeView(item,methodType) {      //路由跳转传参函数
+                // console.log(item,methodType);
                 if(item.type == 4){
                     return;
                 }
                 var i = item.value;
                 // console.log(i);
                 if (i === '1') {
-                    this.$router.push("/elect/StartEvaluation?type=1");
+                    this.$router.push("/elect/StartEvaluation?type=1&methodType="+methodType);
                 } else if (i === '2') {
-                   this.$router.push("/elect/UnFinishQualificationsResult?type=2");
+                   this.$router.push("/elect/UnFinishQualificationsResult?type=2&methodType="+methodType);
                 } else if (i === "3") {
-                    this.$router.push("/elect/StartEvaluation?type=3");
+                    this.$router.push("/elect/StartEvaluation?type=3&methodType="+methodType);
                 }else if (i === "4"){
-                    this.$router.push("/elect/UnFinishQualificationsResult?type=4");
+                    this.$router.push("/elect/UnFinishQualificationsResult?type=4&methodType="+methodType);
                 }else if (i === "5"){
-                    this.$router.push("/elect/StartEvaluation?type=5");
+                    this.$router.push("/elect/StartEvaluation?type=5&methodType="+methodType);
                 }else if (i === "6"){
-                     this.$router.push("/elect/UnFinishQualificationsResult?type=6");
+                     this.$router.push("/elect/UnFinishQualificationsResult?type=6&methodType="+methodType);
                 }
-                else if (i === "7"){
-                    this.$router.push("/elect/BusinessOther?type=7");
-                }
+                // else if (i === "7"){
+                //     this.$router.push("/elect/BusinessOther?type=7&methodType="+methodType);
+                // }
                 else if (i === "8"){
-                    this.$router.push("/elect/BusinessOther?type=8");
+                    this.$router.push("/elect/BusinessOther?type=8&methodType="+methodType);
                 }
                 else if (i === "9"){
-                    this.$router.push("/elect/BusinessOther?type=9");
+                    this.$router.push("/elect/BusinessOther?type=9&methodType="+methodType);
                 }
                 else if (i ==="10"){
-                    this.$router.push("/elect/BusinessOther?type=10");
+                    this.$router.push("/elect/BusinessOther?type=10&methodType="+methodType);
                 }
                 else if (i === "11"){
-                    this.$router.push("/elect/BusinessOther?type=11");
+                    this.$router.push("/elect/BusinessOther?type=11&methodType="+methodType);
                 }
                 else if (i === "70"){
-                    this.$router.push("/elect/ReviewSummary?type=70");
+                    this.$router.push("/elect/ReviewSummary?type=70&methodType="+methodType);
                 }
             },
         }

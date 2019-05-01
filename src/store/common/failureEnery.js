@@ -23,6 +23,7 @@ export default {
         tijiaoHuizong:false,//汇总提交成功的消息弹框
         business_tijiao:true,//商务提交状态
         dingdang_tijiao_state:true,//定档提交状态
-        jishu_tijiao_state:true,//技术提交状态
+        jishu_tijiao_state:true,//技术提交状态，
+
     }
 }

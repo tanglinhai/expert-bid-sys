@@ -384,7 +384,7 @@
                             data: JSON.stringify(this.$data.ruleForm)
                         }).then(res => {
                             if (res.data.code == 200) {
-// console.log(res.data);
+                                  // console.log(res.data);
                                 this.mydataloading = false;
                                 this.$message({
                                     type: 'success',
