@@ -1,7 +1,7 @@
 <template>
     <div class="navcommon_wrap">
-        <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;">
-            <ul>
+        <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;" ref="myScrollbar">
+            <ul ref="wrap">
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" >
                     <template v-if="number>=item.types">
                         <el-popover
@@ -10,6 +10,7 @@
                             width="100"
                             :content='item.label'
                             trigger="hover"
+                            :ref='item'
                             >
                             <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
@@ -20,11 +21,12 @@
                             placement="right"
                             title=""
                             width="100"
-                            :content='item.label'
                             >
                             <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference">{{item.label}}</el-button>
                         </el-popover>
-                        <span class="navcommon_line" style="border-left:2px solid #ccc"></span>
+                        <span class="navcommon_line" style="border-left:2px solid #ccc; position:relative">
+                            <i class="el-icon-arrow-down" style="position: absolute;left: -10px; bottom: -5px; color: rgb(204, 204, 204);font-size: 18px;"></i>
+                        </span>
                     </template>
                 </li> 
             </ul>
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
     export default {
         name: "evaluationcommon",
         data(){
@@ -53,7 +56,6 @@
 
         },
         mounted(){
-           
         },
         methods: {
             goto(url){ //路由
@@ -80,6 +82,19 @@
                 }   
            }
         },
+        updated(){
+            let _this=this;
+            let div = _this.$refs["myScrollbar"].$refs["wrap"];
+            _this.$nextTick(()=>{
+                let sortsSelectHeight = ($(".backblue").parent().parent().index()+1)*60;
+                let zongHeightHalf=($("body").height()-290)/2;
+                console.log(zongHeightHalf)
+                //div.scrollTop=div.scrollHeight;
+                if(sortsSelectHeight>=zongHeightHalf){
+                    div.scrollTop=sortsSelectHeight-zongHeightHalf;
+                }
+            })
+        }
         
     }
 </script>
