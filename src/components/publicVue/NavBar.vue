@@ -42,7 +42,7 @@
         },
         methods:{
             changeView(item,methodType) {      //路由跳转传参函数
-                // console.log(item,methodType);
+                console.log(item,methodType);
                 if(item.type == 4){
                     return;
                 }

@@ -34,11 +34,9 @@
                     </el-table-column>
                 </el-table-column>
             </el-table>
-
-
         </div>
         <el-row class="mab15 textAlignC mt30">
-            <el-button type="primary" size="small"><i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回</el-button>
+            <el-button type="primary" size="small" @click="rebackCheckProScore"><i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回</el-button>
         </el-row>
     </div>
 </template>
@@ -74,7 +72,11 @@
         },
         mounted() {
         },
-        methods: {}
+        methods: {
+            rebackCheckProScore(){
+                this.$store.state.failureEnery.checkProScoreDialogVisible = false;
+            }
+        }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
