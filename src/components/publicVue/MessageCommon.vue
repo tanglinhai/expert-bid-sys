@@ -14,7 +14,7 @@
                         </p>
                         <p v-else>
                             <b style="display:block; color: #62a1e3; margin-bottom: 10px;">{{item.toubiaorenName}}</b>
-                            <strong>招标文件：<b>{{item.toubiaorenFenbao}}</b></strong>
+                            <strong style="display:none">招标文件：<b>{{item.toubiaorenFenbao}}</b></strong>
                         </p>
                     </div>
                 </a>
