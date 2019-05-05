@@ -64,7 +64,7 @@
                         </el-col>
                         <el-col :span="5">
                             <div class="grid-content bg-purple-dark overflowText">
-                                <el-button type="primary" size="small">查看评标</el-button>
+                                <el-button type="primary" size="small" @click="goto('/groupLeader/ViewBe')">查看评标</el-button>
                                 <el-button size="small" class="btnBg" @click="stopBe(stemp)" v-text=" stemp.btnStatus == 0 ? '暂停评标' : '恢复评标' "></el-button>
                                 <el-button size="small">结束评标</el-button>
                             </div>
@@ -104,9 +104,15 @@ export default {
         }
     },
     mounted() {
+        $(".NavCommon").hide();
         this.init();
     },
     methods: {
+        goto(url){//开始评标
+            this.$router.push({
+                path: url
+            });
+        },
         init(){
             this.bodyLoading=true;
             this.$axios.post('/api/leaderBagMsg').then(res => {
@@ -164,6 +170,9 @@ export default {
 <style lang="scss">
 @import '../../assets/css/common/font.scss'; 
 @import '../../assets/css/common/common.scss';
+.home .WrapBig .Router{
+    padding-left: 20px;
+}
 .leader{
     padding:15px 20px 15px 20px;
     .headerBox{
