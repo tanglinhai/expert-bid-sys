@@ -33,12 +33,8 @@
                 <NavBar :msg="options" :methodType="methodType"></NavBar>
                 <!--1:合理低价；2：综合评标；3：最低价-->
                 <el-row class="center_part" v-if="methodType==1">
-                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
-                            <p>评审合理低价的进度条</p>
-
-                    </el-col>
-
-                    <el-col :span="24" v-else>
+                    <!--合理低价没有进度条的页面-->
+                    <el-col :span="24">
                         <template>
                             <div class="unlock_table-warp fs14">
                                 <el-row>
@@ -57,7 +53,6 @@
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                         </el-button>
                                     </el-col>
-
                                     <el-col :span="12" class="textAlignR mian_btns" v-else>
                                         <el-button @click="submited_goback" type="primary" size="small"
                                                    :loading="myloading_back">返回
@@ -106,171 +101,98 @@
                             </div>
                         </template>
                     </el-col>
-
                 </el-row>
                 <!--综合评标-->
                 <el-row class="center_part" v-if="methodType==2">
-                    <el-col :span="24"  v-if="$store.state.failureEnery.isshow" >
-                        <!--<p>综合评标进度条</p>-->
-                        <el-row >
-                            <el-col :span="24">
-                                <template>
+                    <div v-if="isShowProgressPage==0">
+                        <el-col :span="24" >
+                            <!--<p>综合评标进度条</p>-->
+                            <el-row :span="24" class="mb15">
+                                <div class="fr">
+                                    <el-button size="small" plain  @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                </div>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="24">
                                     <el-table
                                             :data="msgBoxProgressZHPB"
                                             border
                                             style="width: 100%"
-                                            class="pro_table" v-if="$store.state.failureEnery.isshow">
+                                            class="pro_table">
                                         <el-table-column
-                                                prop="name"
-                                                label="评审专家"
-                                                width="120px"
-                                                align="center">
-                                        </el-table-column>
-                                        <el-table-column
-                                                label="资格审查项进度"
-                                                align="center">
+                                                v-for='(col) in tableHead'
+                                                :label="col.dataName"
+                                                :key="col.dataItem"
+                                                width="200px">
                                             <template slot-scope="scope">
-                                                <el-progress :percentage="scope.row.dates"></el-progress>
-                                            </template>
-                                        </el-table-column>
-                                        <el-table-column
-                                                label="是否提交资格审查结果"
-                                                align="center">
-                                            <template slot-scope="scope">
-                                                <span>{{scope.row.isFinish}}</span>
+                                        <span v-if="col.type === '1' ">{{
+                                            scope.row[col.dataItem]
+                                            }}</span>
+                                                <el-progress v-else :percentage="scope.row[col.dataItem]"></el-progress>
                                             </template>
                                         </el-table-column>
                                     </el-table>
-                                    <div class="unlock_table-warp fs14" v-else>
-                                        <el-row style="line-height:40px;">
-                                            <el-col :span="12">
-                                                <div class="grid-content bg-purple">
-                                                    <span>评标委员会组长：{{evaluationLeader}}</span>
-                                                </div>
-                                            </el-col>
-                                            <el-col :span="12" class="mb10">
-                                                <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <span class="hide_div"><el-button size="small" plain
-                                                                          @click="submit" :loading="submit_huizong">提交</el-button>
-                                            <el-button size="small" plain
-                                                       @click="individualTrial">查看个人资格审查项表</el-button></span>
-                                                    <el-button size="small" plain @click="checkUnlockRecord" class="ml10">
-                                                        查看资格审查项解锁记录
-                                                    </el-button>
-                                                    <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁
-                                                    </el-button>
-                                                </div>
-                                            </el-col>
-                                        </el-row>
-                                        <el-table
-                                                :data="unlock_table"
-                                                size="small"
-                                                tooltip-effect="dark"
-                                                border
-                                                class="changePriceTable"
-                                                el-table__header-wrapper
-                                        >
-                                            <el-table-column prop="number" label="序号" header-align="left"
-                                                             align="left" fixed width="50"></el-table-column>
-                                            <el-table-column prop="evaluationFactors" header-align="left" label="评审因素" fixed
-                                                             width="165"></el-table-column>
-                                            <el-table-column header-align="left" label="投标人">
-                                                <el-table-column :label="item.companyName"
-                                                                 v-for="(item,index ) in unlock_table_company_name">
-                                                    <tempalte slot-scope="scope">
-                                                        <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
-                                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
-                                                        </span>
-                                                    </tempalte>
-                                                </el-table-column>
-                                            </el-table-column>
-                                        </el-table>
-                                        <el-row class="unlock_table_msginfo">
-                                            <el-col :span="24">
-                                                <div class="grid-content bg-purple">
-                                                    <div class="letter">注：1、对于实质性响应项，凡资格审查项中有任何一条未通过评审要求，即界定为无效投标人。</div>
-                                                    <div class="letter pad">2、对于非实质响应项，当启用废标设置并且未通过评审要求的项数大于最大偏离项，即界定为无效投标人。
-                                                    </div>
-                                                    <div class="pad">
-                                                        3、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打“√”，不符合要求打“×”。结论为“合格”或“不合格”。
-                                                    </div>
-                                                </div>
-                                            </el-col>
-                                        </el-row>
-                                        <el-row>
-                                            <el-col :span="2">
-                                                <div class="grid-content bg-purple textSty mt10">
-                                                    <p>其他说明：<br>
-                                                        (1000字以内)
-                                                    </p>
-                                                </div>
-                                            </el-col>
-                                            <el-col :span="16" class="mt15">
-                                                <div class="grid-content bg-purple">
-                                                    <el-input type="textarea" v-model="form.desc"
-                                                              class="qita_expalin_input"></el-input>
-                                                    <div class="qita_expalin"></div>
-                                                </div>
-                                            </el-col>
-                                        </el-row>
-                                    </div>
-                                </template>
-                            </el-col>
-                        </el-row>
-
-
-                    </el-col>
-
-                    <el-col :span="24" class="mb15" v-else>
-                        <div class="fr">
-                            <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
-                            <el-button size="small" plain @click="scoreQuotation" class="ml10">报价计算得分</el-button>
-                            <el-button size="small" @click="biddingAdvice" plain class="ml10">评标意见</el-button>
-                            <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录</el-button>
-                            <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
-                            <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
-                        </div>
-                    </el-col>
-                    <el-col :span="24">
-                        <template>
-                            <el-table
-                                    :data="msgBox"
-                                    size="small"
-                                    tooltip-effect="dark"
-                                    border
-                                    class="changePriceTable"
-                                    el-table__header-wrapper
-                            >
-                                <el-table-column prop="bidder" label="投标人"   fixed>
-                                </el-table-column>
-                                <el-table-column prop="bidderNumber"
-                                                 label="投标序号"
-                                                 fixed></el-table-column>
-                                <el-table-column label="评标委员会">
-                                    <el-table-column :label="item.name"
-                                                     v-for="(item,index ) in pingshenweiyuanData"
-                                                     width="165">
-                                        <tempalte slot-scope="scope">
+                                </el-col>
+                            </el-row>
+                        </el-col>
+                    </div>
+                    <div v-if="isShowProgressPage!=0">
+                        <el-col :span="24" class="mb15">
+                            <div class="fr">
+                               <span class="hide_span">
+                                    <el-button size="small" plain @click="scoreQuotation" class="ml10">报价计算得分</el-button>
+                                    <el-button size="small" @click="biddingAdvice" plain class="ml10">评标意见</el-button>
+                                    <el-button size="small" plain @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">提交</el-button>
+                                </span>
+                                <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
+                                </el-button>
+                                <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
+                                <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
+                            </div>
+                        </el-col>
+                        <el-col :span="24">
+                            <template>
+                                <el-table
+                                        :data="msgBox"
+                                        size="small"
+                                        tooltip-effect="dark"
+                                        border
+                                        class="changePriceTable"
+                                        el-table__header-wrapper
+                                >
+                                    <el-table-column prop="bidder" label="投标人" fixed>
+                                    </el-table-column>
+                                    <el-table-column prop="bidderNumber"
+                                                     label="投标序号"
+                                                     fixed></el-table-column>
+                                    <el-table-column label="评标委员会">
+                                        <el-table-column :label="item.name"
+                                                         v-for="(item,index ) in pingshenweiyuanData"
+                                                         width="165">
+                                            <tempalte slot-scope="scope">
                                              <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
                                                 <span>{{amt.zhaunjia1[scope.$index]}}</span>
                                             </span>
-                                        </tempalte>
+                                            </tempalte>
+                                        </el-table-column>
                                     </el-table-column>
-                                </el-table-column>
-                                <el-table-column prop="pricePoints"
-                                                 label="报价分"
-                                                 fixed="right"></el-table-column>
-                                <el-table-column prop="finalScore"
-                                                 label="最终得分"
-                                                 fixed="right"></el-table-column>
-                                <el-table-column prop="ranking"
-                                                 label="名次"
-                                                 fixed="right"></el-table-column>
-
-                            </el-table>
-                        </template>
-                    </el-col>
+                                    <el-table-column prop="pricePoints"
+                                                     label="报价分"
+                                                     fixed="right"></el-table-column>
+                                    <el-table-column prop="finalScore"
+                                                     label="最终得分"
+                                                     fixed="right"></el-table-column>
+                                    <el-table-column prop="ranking"
+                                                     label="名次"
+                                                     fixed="right"></el-table-column>
+                                </el-table>
+                            </template>
+                        </el-col>
+                    </div>
                 </el-row>
+                <!--最低价-->
+                <!--<el-row class="center_part" v-if="methodType==3"></el-row>-->
             </div>
             <!----------------------投标人排序调整--------------------->
             <el-dialog
@@ -475,20 +397,20 @@
             </el-dialog>
             <el-dialog
                     title="查看专家个人打分表"
-                    :visible.sync="dialogVisible"
+                    :visible.sync=" $store.state.failureEnery.checkProScoreDialogVisible"
                     width="1800px"
             >
                 <CheckProScore :zhaunjiaGerenMarkData="zhaunjiaGerenMarkData" :biaoNum="biaoNum" :baohao="baohao"
                                :to_submit_prompt_baohao="to_submit_prompt_baohao" :companyNameData="companyNameData"
                                :pingshenzhaunjiaData="pingshenzhaunjiaData"></CheckProScore>
             </el-dialog>
-            <!--<el-dialog-->
-            <!--title="投标人分项得分表"-->
-            <!--:visible.sync="dialogBindScore"-->
-            <!--width="1000px"-->
-            <!--&gt;-->
-            <!--<CheckProScore></CheckProScore>-->
-            <!--</el-dialog>-->
+            <el-dialog
+            title="投标人分项得分表"
+            :visible.sync="dialogBindScore"
+            width="1000px"
+            >
+            <CheckProScore></CheckProScore>
+            </el-dialog>
             <!--计算报价得分-->
             <el-dialog
                     title="计算报价得分"
@@ -575,6 +497,19 @@
             </el-dialog>
             <!--解锁申请记录-->
 
+            <el-dialog
+                    title="全部选中提示"
+                    :visible.sync="$store.state.failureEnery.tijiaoDialogZHPB"
+                    width="30%"
+            >
+                <el-row class="textAlignC fs14" style="line-height: 30px">
+                    您确定进行评分汇总操作吗？
+                </el-row>
+                <el-row class="textAlignC pt20">
+                    <el-button size="small" type="primary" @click="comfrimSubmitZHPB">确认</el-button>
+                    <el-button size="small" type="primary" @click="rebackSubmitZHPB">取消</el-button>
+                </el-row>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -670,18 +605,21 @@
                 },
                 saveBiddingAdviceLoading: false,//评标意见弹框保存lodding
                 unlock_dialog_check: [],//评分解锁记录
-                dialogVisible: false,
                 zhaunjiaGerenMarkData: [],//专家个人打分表
                 to_submit_prompt_baohao: "",//专家个人打分表分包号第几包
                 companyNameData: [],
                 pingshenzhaunjiaData: [],
                 msgBox: [],//评审汇总table数据
                 pingshenweiyuanData: [],
-                msgBoxProgressZHPB:[],//综合评标页面进度条
+                msgBoxProgressZHPB: [],//综合评标页面进度条数据
+                tableHead: [],//综合评标页面进度条表格数据
+                isShowProgressPage: '',//0:进度条的页面，1表格的页面
+                submitFormLoadingZHPB:false,//综合评标提交按钮loding
             }
         },
         created() {
             this.methodType = this.$route.query.methodType;
+            console.log(this.methodType);
         },
         mounted() {
             this.init();
@@ -703,13 +641,16 @@
                         this.scoreQuotationData = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
                         this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
                         this.unlockDataCheckbox = res.data.bidMsg.eviewrItemsMsg.jiesuoData.checkedList;
+                        console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
+                        this.isShowProgressPage = res.data.bidMsg.eviewrItemsMsg.isShow;
                         this.unlockDataRadio = res.data.bidMsg.eviewrItemsMsg.jiesuoData.radioList;
                         this.unlock_dialog_check = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
                         this.tippsDialogName = res.data.bidMsg.eviewrItemsMsg.jiesuoData.tippsDialogName;
                         this.zhaunjiaGerenMarkData = res.data.bidMsg.eviewrItemsMsg.zhaunjiaGerenMarkData;
                         this.companyNameData = res.data.bidMsg.eviewrItemsMsg.companyNameData;
                         this.pingshenzhaunjiaData = res.data.bidMsg.eviewrItemsMsg.pingshenzhaunjiaData;
-                        console.log(res.data.bidMsg.eviewrItemsMsg.pingshenweiyuanData);
+                        this.msgBoxProgressZHPB = res.data.bidMsg.eviewrItemsMsg.tables;
+                        this.tableHead = res.data.bidMsg.eviewrItemsMsg.tableData;
                         this.pingshenweiyuanData = res.data.bidMsg.eviewrItemsMsg.pingshenweiyuanData;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.pingshenhuizongTableData;
                         this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
@@ -1022,8 +963,31 @@
             },
             //查看专家个人打分表
             checkProScoreBtn() {
-                this.dialogVisible = true;
+                this.$store.state.failureEnery.checkProScoreDialogVisible = true;
             },
+            reviewSummarySubmitZHPB(){//综合评标提交按钮
+               this.$store.state.failureEnery.tijiaoDialogZHPB=true;
+            },
+            comfrimSubmitZHPB(){//综合评标提交确定按钮
+                this.submitFormLoadingZHPB=true;
+                this.$axios.post('/api/submitBtnZHPB', 'post', {
+                    data: ''
+                }).then(res => {
+                    if (res.data.code == 200) {
+                        this.tipsDialog = true;
+                        this.goGrdoupRecor();//倒计时开始
+                        this.submitFormLoadingZHPB = false;
+                        this.$store.state.failureEnery.tijiaoDialogZHPB=false;
+                        $(".hide_span").hide();
+                    }
+                });
+            },
+            rebackSubmitZHPB(){//综合评标提交取消按钮
+                this.$store.state.failureEnery.tijiaoDialogZHPB=false;
+            },
+            bindScoreBtn(){
+                this.$store.state.failureEnery.checkProScoreDialogVisible = true;
+            }
         }
     }
 </script>
@@ -1068,9 +1032,6 @@
                         }
                         .el-progress-bar__inner {
                             background: #35D437;
-                        }
-                        .el-progress-bar {
-                            width: 35%;
                         }
                     }
                     .unlock_table-warp {

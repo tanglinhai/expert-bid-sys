@@ -2548,9 +2548,80 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             ]
                         },
                     ],
+                    tables: [{//综合评标页面进度条数据
+                        evaluationExpert: '评审专家七',
+                        businessReviewProgress: '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress:'5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家五',
+                        businessReviewProgress:  '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家一',
+                        businessReviewProgress:  '50',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }],
 
+                    tableData: [{
+                        dataItem: 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        dataName: '评审专家',//动态表头的名字
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'businessReviewProgress',
+                        dataName: '商务评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsBusinessReview',
+                        dataName: '是否提交商务评审结果',
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'technicalReviewProgress',
+                        dataName: '技术评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsTechnicalReview',
+                        dataName: '是否提交技术评审结果',
+                        type: '1'//文字
+
+                    }, {
+                        dataItem: 'serviceReviewProgress',
+                        dataName: '服务评审进度',
+                        type: '2'//进度条
+
+                    },{
+                        dataItem: 'isResultsServiceReview',
+                        dataName: '是否提交服务评审结果',
+                        type: '1'//文字
+
+                    },{
+                        dataItem: 'otherReviewProgress',
+                        dataName: '其他评审进度',
+                        type: '2'//进度条
+
+                    },{
+                        dataItem: 'isResultsOtherReview',
+                        dataName: '其他评审评审结果',
+                        type: '1'//文字
+                    }]
                     //没有用
-
                 },
             }
         }
@@ -2805,29 +2876,79 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             ]
                         },
                     ],
+                    tables: [{//综合评标页面进度条数据
+                        evaluationExpert: '评审专家七',
+                        businessReviewProgress: '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress:'5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家五',
+                        businessReviewProgress:  '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家一',
+                        businessReviewProgress:  '50',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }],
 
+                    tableData: [{
+                        dataItem: 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        dataName: '评审专家',//动态表头的名字
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'businessReviewProgress',
+                        dataName: '商务评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsBusinessReview',
+                        dataName: '是否提交商务评审结果',
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'technicalReviewProgress',
+                        dataName: '技术评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsTechnicalReview',
+                        dataName: '是否提交技术评审结果',
+                        type: '1'//文字
 
+                    }, {
+                        dataItem: 'serviceReviewProgress',
+                        dataName: '服务评审进度',
+                        type: '2'//进度条
 
-                    'mylist': [//综合评标页面进度条数据
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        }
-                    ],
+                    },{
+                        dataItem: 'isResultsServiceReview',
+                        dataName: '是否提交服务评审结果',
+                        type: '1'//文字
+
+                    },{
+                        dataItem: 'otherReviewProgress',
+                        dataName: '其他评审进度',
+                        type: '2'//进度条
+
+                    },{
+                        dataItem: 'isResultsOtherReview',
+                        dataName: '是否提交其他评审结果',
+                        type: '1'//文字
+                    }]
                 }
             }
         }
@@ -5065,6 +5186,12 @@ let saveBiddingAdvice = Mock.mock('/api/saveBiddingAdvice', 'post', {
     data: []
 });
 
+//综合评标表格提交按钮接口
+let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"});
 
