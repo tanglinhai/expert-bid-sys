@@ -85,7 +85,8 @@ var routes = [
       children:[
         { name: '/groupLeader/Index', path: '/groupLeader/Index', component: () => import('./views/leader/Index.vue')},
         { name: '/groupLeader/ViewBe', path: '/groupLeader/ViewBe', component: () => import('./views/leader/ViewBe.vue')},
-        { name: '/groupLeader/SignIn', path: '/groupLeader/SignIn', component: () => import('./views/leader/SignIn.vue')}
+        { name: '/groupLeader/SignIn', path: '/groupLeader/SignIn', component: () => import('./views/leader/SignIn.vue')},
+        { name: '/groupLeader/Examination', path: '/groupLeader/Examination', component: () => import('./views/leader/Examination.vue')},
       ]
     }
   ];

@@ -1,22 +1,32 @@
 <template>
     <div class="signIn">
+        <el-row class="onlyBtnBox">
+            <el-col :span="24">
+                <div class="grid-content bg-purple-dark">
+                    <el-button size="small">评标异常情况</el-button>
+                    <el-button size="small">评标解锁</el-button>
+                </div>
+            </el-col>
+        </el-row>
         <div class="contentBody">
             <el-row>
-                <el-col :span="3" v-for="(o, index) in 6" :key="o" :offset="index > 0 ? 1 : 0">
-                    <el-card :body-style="{ padding: '0px' }">
+                <el-col :span="2" v-for="(item, index) in cardMsg" :key="index" class="rowStyle">
+                    <el-card :body-style="{ padding: '0px'}" :class="{statusMod:item.diff == '组长' && item.status == 0 ? setMod=true : setMod=false}">
                         <div class="headPortraitBox">
                             <img src="../../assets/img/headportrait.jpg" alt=""> 
                         </div>
                         <div class="textBox">
-                            <h4>ceshi 003</h4>
-                            <h4>11111111</h4>
+                            <h4>{{item.name}}</h4>
+                            <h4>{{item.telNum}}</h4>
                         </div>
-                        <div style="padding: 14px;">
-                            <span>好吃的汉堡</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ currentDate }}</time>
-                                <el-button type="text" class="button">操作按钮</el-button>
-                            </div>
+                        <div style="text-align:center;padding-top:15px;">
+                            <el-tag size="small" v-if="item.status == 0">已签到</el-tag>
+                            <el-tag size="small" type="info" v-else>未签到</el-tag>
+                            <el-tag size="small" type="warning" v-if="item.votes > 0">{{item.votes}}票</el-tag>
+                            <el-tag size="small" type="info" v-else>{{item.votes}}票</el-tag>
+                        </div>
+                        <div v-if="item.diff == '组长'" class="diff">
+                            <span>{{item.diff}}</span>
                         </div>
                     </el-card>
                 </el-col>
@@ -30,39 +40,92 @@
 export default {
     data() {
         return {
-            currentDate: new Date()
+            cardMsg:[],
+            setRowMar:true,
+            setMod:false,
+            boderSty:{
+                border:'1px solid #ff6600',
+            }
         };
-    }
+    },
+    mounted() {
+        this.init();
+    },
+    methods: {
+        init(){
+            this.$axios.post('./api/cardMsg').then(res => {
+                if(res.status == 200){
+                    console.log(res);
+                    this.cardMsg=res.data.allCard;
+                }
+            })
+        }
+    },
 }
 </script>
 
 
 
 <style lang="scss">
+.navcommon_wrap ul li button{
+    width: 65px;
+    height: 40PX;
+    border-radius: 5px;
+}
 .signIn{
     padding: 15px 20px 15px 0px;
     padding-left: 95px !important;
+    .onlyBtnBox{
+        text-align: right;
+        padding-bottom: 15px;
+    }
     .contentBody{
         background: #fff;
         padding: 15px;
         border-radius: 5px;
-        .headPortraitBox{
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto;
-            margin-top: 15px;
-            overflow: hidden;
-            img{
-                width: 100%;
-                vertical-align: middle;
+        .rowStyle{
+            margin: 24px;
+            width: 146px;
+            .el-card{
+                position: relative;
+                border-radius:10px;
+                border: 1px solid #d9e0e7;
+                .headPortraitBox{
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    margin: 0 auto;
+                    margin-top: 15px;
+                    overflow: hidden;
+                    img{
+                        width: 100%;
+                        vertical-align: middle;
+                    }
+                }
+                .textBox{
+                    text-align: center;
+                    h4{
+                        margin: 15px 0;
+                    }
+                }
+                .diff{
+                    text-align: center;
+                    background: #ff6600;
+                    color: #fff;
+                    position: absolute;
+                    top: 10px;
+                    left: 50px;
+                    width: 100%;
+                    transform: rotateZ(45deg);
+                    font-size: 13px;
+                    padding: 4px;
+                }
             }
         }
-        .textBox{
-            text-align: center;
-            h4{
-                margin: 15px 0;
-            }
+        .statusMod{
+            border: 1px solid #ff6600 !important;
+            color:#ff6600 !important;
+            border-radius: 10px !important;
         }
     }
 }
