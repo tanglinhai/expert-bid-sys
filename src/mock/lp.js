@@ -304,6 +304,7 @@ let baoInformations=Mock.mock('/api/baoInformations','post',{
         'biaoNum': '0635—1909qwerN1197',
         'baohao': '0635—1909qwerN1197/1',
         'projectWenjian':'pdf文件',  //项目资料
+        'TheCurrentStatus|1':['已完成','进行中','已废标']
     }
 })
 //包信息接口

@@ -57,7 +57,26 @@
                         <div class="center_part">
                             <div class="center_con_wrap">
                                 <div class="center_con cf">
-                                    <div class="right_warp">
+                                    <div class="left_examine " style="float: left;width: 170px">
+                                        <div class="div_header">
+                                            <div class="textAlignC mt20 mb15">
+                                                <el-button type="primary" size="small" class="personalAuditFormBtn">
+                                                    <i class="icon iconfont icon-zigeshenchazhuti"></i>
+                                                    {{personalAuditFormBtn}}
+                                                </el-button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h6 class="pl15  col747 pt15 pb10">审查项</h6>
+                                            <div class="content_wrap">
+                                                <div class="zTreeDemoBackground left">
+                                                    <ul id="treeDemo" class="ztree">{{msg}}</ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--点击ztree树显示-->
+                                    <div class="right_warp" style="float: left;width: calc(100% - 185px)">
                                         <el-row class="progress_div"
                                                 v-if="$store.state.failureEnery.parent_progress_show">
                                             <el-col :span="12">
@@ -70,86 +89,184 @@
                                                     </el-col>
                                                 </el-row>
                                             </el-col>
-                                            <el-col :span="12" class="textAlignR cf">
-                                                <span id="hide_btn"
-                                                      :class="$store.state.failureEnery.flag==false ?'hide_div':'nohide_div'">
-                                                    <el-button @click="allChecked" plain size="mini"
-                                                               type="primary"
-                                                               :loading="allCheckedBtnLoading"><i
-                                                            class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
-                                                    </el-button>
-                                                    <el-button size="mini" type="primary" @click="allSubmit"
-                                                               :loading="allSubmitBtnLoading"><i
-                                                            class="icon iconfont icon-tijiao  mr3"></i>全部提交
-                                                    </el-button>
-                                                        </span>
-                                                <el-button type="primary" size="mini" @click="personalAuditForm"
-                                                           class="ml10">
-                                                    <i class="icon iconfont icon-zigeshenchazhuti"></i>
-                                                    {{personalAuditFormBtn}}
+                                            <el-row :span="10" style="padding:0; float:right;"
+                                                    :class=" $store.state.failureEnery.flag==false ?'hide_div':'nohide_div'"
+                                                    id="hide_btn">
+                                                <el-button @click="allChecked" plain size="mini" type="primary"
+                                                           :loading="allCheckedBtnLoading"><i
+                                                        class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                 </el-button>
-                                            </el-col>
+                                                <el-button size="mini" type="primary" @click="allSubmit"
+                                                           :loading="allSubmitBtnLoading"><i
+                                                        class="icon iconfont icon-tijiao  mr3"></i>全部提交
+                                                </el-button>
+                                            </el-row>
                                         </el-row>
                                         <div class="weitijiao">
-                                            <el-table
-                                                    :data="dingdang_tableData"
-                                                    style="width: 100% " class="dingdang_table mt15"
-                                                    @row-click="handleRowClick"
-                                                    highlight-current-row>
-                                                <el-table-column
-                                                        type="index"
-                                                        width="50" fixed>
-                                                </el-table-column>
-                                                <el-table-column
-                                                        label="评审因素"
-                                                        min-width="150" fixed prop="evaluationFactors">
-                                                </el-table-column>
-                                                <el-table-column label="投标人">
-                                                    <el-table-column :label="item.title"
-                                                                     v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" >
+                                            <!-------------分支进度条以及提交------------------>
+                                            <el-row class="progress_div"
+                                                    v-if="$store.state.failureEnery.start_sublevel_show">
+                                                <el-col :span="12">
+                                                    <el-row class="red">
+                                                        <el-col style="width: 70px;font-size: 14px;">
+                                                            <div>进度：</div>
+                                                        </el-col>
+                                                        <el-col style="width: 278px">
+                                                            <el-progress :percentage="completePercent"></el-progress>
+                                                        </el-col>
+                                                    </el-row>
+                                                </el-col>
+                                                <el-row :span="10" style="padding:0; float:right;" id="hide_btn"
+                                                        :class=" $store.state.failureEnery.flag==false ?'hide_div':'nohide_div'">
+                                                    <el-button @click="sublevelAllChecked" plain size="mini"
+                                                               type="primary" :loading="sonAllCheckedBtnLoading">
+                                                        <i   class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
+                                                    </el-button>
+                                                    <el-button size="mini" type="primary" @click="sublevelSubmit"
+                                                               :loading="sonAllSubmitBtnLoading"><i
+                                                            class="icon iconfont icon-tijiao  mr3"></i>提交
+                                                    </el-button>
+                                                </el-row>
+                                            </el-row>
+                                            <div class="first_warp" v-for="(item,index) in zNodes.children" :key="index"
+                                                 :id="item.name"
+                                                 v-if="item.show==true||item.show==undefined">
+                                                <!-------------分支进度条以及提交end------------------>
+                                                <el-row class="title_msg">
+                                                    <el-col>
+                                                        <p class="commonTitle fs14  col65">
+                                                            <span class="ml3 col409">{{item.fristTableData.question}}</span>
+                                                            <span class="ml3  col409">{{item.fristTableData.answer}}</span>
+                                                            <span class="ml15 mr10"> /</span>
+                                                            <span class="ml3">{{item.fristTableData.question1}}</span>
+                                                            <span>{{item.fristTableData.answer1}}</span>
+                                                        </p>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-table
+                                                        :data="item.fristTableData.tableData"
+                                                        border
+                                                        style="width: 100%;"
+                                                        class="first_table"
+                                                        :cell-style="rowStyle">
+                                                    <el-table-column
+                                                            prop="name"
+                                                            label="名称">
                                                         <template slot-scope="scope">
-                                                            <el-radio-group
-                                                                    v-model="scope.row['value' + (index + 1)]"
-                                                                    v-if="$store.state.failureEnery.business_tijiao"
-                                                                    @change="changeRadios(index + 1)">
-                                                                <el-radio :label="val.num"
-                                                                          v-for="val in scope.row.radioList">
-                                                                    {{val.typeTitle}}
-                                                                </el-radio>
-                                                            </el-radio-group>
-                                                            <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
-                                                            <a v-if="scope.row.pdf.length<2"
-                                                               @click="show_pdf(scope.row.pdf[0])" class="common_a_style ">
-                                                                <i class="el-icon-search fs14 mr3 ver_al_m ml10 mr5"></i>{{scope.row.name}}
-                                                                <i class="icon iconfont icon-pdf mr5"></i>
-                                                            </a>
-                                                            <el-dropdown v-else trigger="click" class="common_a_style">
-                                                                  <span class="el-dropdown-link">
-                                                                    <i class="el-icon-search fs14 mr3 ver_al_m  ml10 mr5"></i>
-                                                                    {{scope.row.name}}
-                                                                    <i class="icon iconfont icon-pdf mr5"></i>
-                                                                    <i class="el-icon-arrow-down el-icon--right"></i>
-                                                                  </span>
-                                                                <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu ml10 mr5">
-                                                                    <el-dropdown-item
-                                                                            @click.native="show_pdf(pdfItem)"
-                                                                            v-for="(pdfItem ,index) in scope.row.pdf"
-                                                                    >{{pdfItem.pdf_name}}<i
-                                                                            class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                                </el-dropdown-menu>
-                                                            </el-dropdown>
-                                                            <div class="btn_locate iconfont icon-dingwei" style="display: inline-block"
+                                                    <span style="margin-left: 10px;display: inline-block;">
+                                                        <i class="el-icon-close mr5 " v-if="scope.row.radio=='不合格'"
+                                                           style="color: red"></i>
+                                                        <i class="el-icon-check mr5 "
+                                                           style="color: #67c23a"
+                                                           v-if="scope.row.radio=='合格'"></i>投标人：
+                                                        <a v-if="scope.row.pdf.length<2"
+                                                           @click="show_pdf(scope.row.pdf[0])" class="common_a_style">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                        </a>
+                                                        <el-dropdown v-else trigger="click">
+                                                          <span class="el-dropdown-link">
+                                                            <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                            {{scope.row.name}}
+                                                            <i class="icon iconfont icon-pdf"></i>
+                                                            <i class="el-icon-arrow-down el-icon--right"></i>
+                                                          </span>
+                                                          <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                            <el-dropdown-item
+                                                                    @click.native="show_pdf(pdfItem)"
+                                                                    v-for="(pdfItem ,index) in scope.row.pdf"
+                                                            >{{pdfItem.pdf_name}}<i
+                                                                    class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                          </el-dropdown-menu>
+                                                        </el-dropdown>
+
+                                                    </span>
+                                                            <div class="btn_locate iconfont icon-dingwei"
                                                                  @click="locate_pdf(item.fristTableData, scope.row)"
                                                                  title="定位到关联投标文件说明处"
                                                             ></div>
                                                         </template>
                                                     </el-table-column>
-                                                </el-table-column>
-                                            </el-table>
-                                            <div class="dingWeiDiv" style="text-align: center;line-height: 50px;"><span class="biaozhunTitle" ></span>审查标准：<span class="biaozhunConent"></span></div>
+                                                    <el-table-column
+                                                            prop="pass"
+                                                            label="是否合格" width="200">
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px" class="radios"
+                                                                  v-if="$store.state.failureEnery.flag">
+                                                              <el-radio-group
+                                                                      @change="failuredRadio(scope.row.radio,scope.row.id,scope.$index,item.fristTableData.tableData,scope.row,item.fristTableData.answer)"
+                                                                      ref="shet" v-model="scope.row.radio">
+                                                                <el-radio :label="scope.row.ra1">合格</el-radio>
+                                                                <el-radio :label="scope.row.ra2">不合格</el-radio>
+                                                              </el-radio-group>
+                                                            </span>
+                                                            <span style="margin-left: 10px;color:red;" v-else>
+                                                                 <span v-if="scope.row.radio == '合格'">合格</span>
+                                                                 <span v-else>不合格</span>
+                                                             </span>
+                                                        </template>
+                                                    </el-table-column>
+                                                    <el-table-column
+                                                            prop="kong"
+                                                            min-width="30%"
+                                                    >
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px">
+                                                              {{scope.row.content}}
+                                                            </span>
+                                                        </template>
+                                                    </el-table-column>
+                                                </el-table>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <!--点击个人形式审计表按钮显示-->
+                                    <el-col class="personalAuditFormTable"
+                                            style="float: left;width: calc(100% - 185px)">
+                                        <div class="FormTableTitle cf fs14">
+                                            <div class="fl">
+                                                <span>分包号：{{grzgTitleData.bagName}}</span>
+                                                <span>评标委员会：{{grzgTitleData.groupName}}</span>
+                                            </div>
+                                            <div class="fr">{{grzgTitleData.professorName}}</div>
+                                        </div>
+                                        <!--个人形式审计表表格-->
+                                        <template>
+                                            <el-table
+                                                    :data="msgBox"
+                                                    size="small"
+                                                    tooltip-effect="dark"
+                                                    border
+                                                    class="changePriceTable"
+                                                    el-table__header-wrapper
+                                            >
+                                                <el-table-column prop="number" label="序号" header-align="left"
+                                                                 align="left" fixed width="50"></el-table-column>
+                                                <el-table-column prop="evaluationFactors" header-align="left"
+                                                                 label="评审因素"
+                                                                 fixed width="165"></el-table-column>
+                                                <el-table-column header-align="left" label="投标人">
+                                                    <el-table-column :label="item.companyName"
+                                                                     v-for="(item,index ) in grcsMsgBoxTitle"
+                                                                     width="165">
+                                                        <tempalte slot-scope="scope">
+                                                        <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
+                                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
+                                                        </span>
+                                                        </tempalte>
+                                                    </el-table-column>
+                                                </el-table-column>
+                                            </el-table>
+                                            <el-row class="fs14 table_tips">
+                                                <el-col>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
+                                                </el-col>
+                                                <el-col>
+                                                    2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
+                                                </el-col>
+                                            </el-row>
+                                        </template>
+                                    </el-col>
                                 </div>
                             </div>
                         </div>
@@ -206,59 +323,6 @@
                     <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
                 </el-row>
             </el-dialog>
-            <!--点击个人形式审计表按钮弹框-->
-            <el-dialog
-                    :title="personalAuditFormBtn"
-                    :visible.sync="personalAuditFormDialog"
-                    width="1300px"
-            >
-                <!--点击个人形式审计表按钮显示-->
-                <el-row class="personalAuditFormTable"
-                >
-                    <div class="FormTableTitle cf fs14 mb10">
-                        <div class="fl">
-                            <span>分包号：{{grzgTitleData.bagName}}</span>
-                            <span>评标委员会：{{grzgTitleData.groupName}}</span>
-                        </div>
-                        <div class="fr">{{grzgTitleData.professorName}}</div>
-                    </div>
-                    <!--个人形式审计表表格-->
-                    <template>
-                        <el-table
-                                :data="msgBox"
-                                size="small"
-                                tooltip-effect="dark"
-                                border
-                                class="changePriceTable"
-                                el-table__header-wrapper
-                        >
-                            <el-table-column prop="number" label="序号" header-align="left"
-                                             align="left" fixed width="50"></el-table-column>
-                            <el-table-column prop="evaluationFactors" header-align="left"
-                                             label="评审因素"
-                                             fixed width="165"></el-table-column>
-                            <el-table-column header-align="left" label="投标人">
-                                <el-table-column :label="item.companyName"
-                                                 v-for="(item,index ) in grcsMsgBoxTitle"
-                                                 width="165">
-                                    <tempalte slot-scope="scope">
-                                        <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
-                                            <span>{{amt.zhaunjia1[scope.$index]}}</span>
-                                        </span>
-                                    </tempalte>
-                                </el-table-column>
-                            </el-table-column>
-                        </el-table>
-                        <el-row class="fs14 table_tips mt5">
-                            <el-col style="line-height: 24px">注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
-                            </el-col>
-                            <el-col  style="line-height: 24px">
-                                2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
-                            </el-col>
-                        </el-row>
-                    </template>
-                </el-row>
-            </el-dialog>
         </div>
     </div>
 </template>
@@ -297,21 +361,21 @@
                 options: [],//头部按钮
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
-                personalAuditFormBtn: "",//个人资格审查项按钮数据
+                personalAuditFormBtn: "",
                 /* ----------------------------------树形图-------------------------*/
-                // setting: {   //zTree配置
-                //     view: {
-                //         dblClickExpand: this.dblClickExpand,
-                //     },
-                //     data: {
-                //         simpleData: {//使用的数据格式
-                //             enable: true
-                //         }
-                //     },
-                //     callback: {//点击回调函数
-                //         onClick: this.zTreeOnClick
-                //     }
-                // },
+                setting: {   //zTree配置
+                    view: {
+                        dblClickExpand: this.dblClickExpand,
+                    },
+                    data: {
+                        simpleData: {//使用的数据格式
+                            enable: true
+                        }
+                    },
+                    callback: {//点击回调函数
+                        onClick: this.zTreeOnClick
+                    }
+                },
                 zNodes: [],
                 /* ---------------------------------树形图end------------------------*/
                 /*-------------------右侧主体部分数据-------------------*/
@@ -337,16 +401,11 @@
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
-                methodType: '',
-                personalAuditFormDialog: false,//个人资格审查项按钮弹框
-                companyname_toubiao:[],//投标人数据
-                dingdang_tableData:[],//资格审查table数据
-                standardReviewTips:'',//
-
+                methodType:''
             }
         },
         created() {
-            this.methodType = this.$route.query.methodType;
+            this.methodType=this.$route.query.methodType;
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -354,17 +413,14 @@
             }
         },
         mounted() {
-
-
-            $(".dingWeiDiv").hide();
-            // $("#treeDemo").on('click', '#treeDemo_1_a', function () {
-            //     $(".right_warp").show();
-            //     $(".personalAuditFormTable").hide();
-            // });
-            // $(".personalAuditFormBtn").click(function () {
-            //     $(".personalAuditFormTable").show();
-            //     $(".right_warp").hide();
-            // });
+            $("#treeDemo").on('click', '#treeDemo_1_a', function () {
+                $(".right_warp").show();
+                $(".personalAuditFormTable").hide();
+            });
+            $(".personalAuditFormBtn").click(function () {
+                $(".personalAuditFormTable").show();
+                $(".right_warp").hide();
+            });
             this.init();
             setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
@@ -404,17 +460,14 @@
                     }
                 }
             },
-            completePercent(){
-                let num = 0;
-                let allNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
-                this.dingdang_tableData.forEach(e => { //循环表数据
-                    this.companyname_toubiao.forEach((k, i) => {
-                        if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
-                            num++;
-                        }
-                    });
-                });
-                return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
+            completePercent() {
+                let fillCount = 0;
+                for (var i = 0; i < this.radioArr.length; i++) {
+                    if (this.radioArr[i].radio) {
+                        fillCount++;
+                    }
+                }
+                return fillCount === 0 ? 0 : ((fillCount / this.radioArr.length).toFixed(3) * 100).toFixed(1);
             }
         },
         methods: {
@@ -433,9 +486,9 @@
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
-                        // this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
-                        // this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
-                        // $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
+                        this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
+                        this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
+                        $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.flag = true;//未提交
@@ -443,16 +496,12 @@
                             this.$store.state.failureEnery.flag = false;//已提交
                             $("#hide_btn").hide();
                         }
-                        // this.zNodes.children.forEach((m, i) => {
-                        //     this.tableArr.push(m.fristTableData.tableData);
-                        //     m.fristTableData.tableData.forEach((x, s) => {
-                        //         this.radioArr.push(x)
-                        //     })
-                        // })
-
-                        // console.log( res.data.bidMsg.eviewrItemsMsg.companyNameList);
-                        this.companyname_toubiao=res.data.bidMsg.eviewrItemsMsg.companyNameList;
-                        this.dingdang_tableData=res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                        this.zNodes.children.forEach((m, i) => {
+                            this.tableArr.push(m.fristTableData.tableData);
+                            m.fristTableData.tableData.forEach((x, s) => {
+                                this.radioArr.push(x)
+                            })
+                        })
                     }
                     this.page_loading = false;
                 })
@@ -549,31 +598,31 @@
                 }
             },
             /*----------------- zTree ----------------------*/
-            // zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-            //     if (treeNode.children) {
-            //         this.zNodes.children.forEach((m, i) => {
-            //             this.$set(m, 'show', true)
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = false;
-            //         this.$store.state.failureEnery.parent_progress_show = true;
-            //     } else {
-            //         this.son_all_checked = treeNode.fristTableData.tableData;
-            //         this.zNodes.children.forEach((m, i) => {
-            //             if (m.id == treeNode.id) {
-            //                 this.$set(m, 'show', true)
-            //             } else {
-            //                 this.$set(m, 'show', false)
-            //             }
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = true;
-            //         this.$store.state.failureEnery.parent_progress_show = false;
-            //     }
-            //     $(".right_warp").show();
-            //     $(".personalAuditFormTable").hide();
-            // },
-            // dblClickExpand(treeId, treeNode) {
-            //     return treeNode.level > 0;
-            // },
+            zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
+                if (treeNode.children) {
+                    this.zNodes.children.forEach((m, i) => {
+                        this.$set(m, 'show', true)
+                    });
+                    this.$store.state.failureEnery.start_sublevel_show = false;
+                    this.$store.state.failureEnery.parent_progress_show = true;
+                } else {
+                    this.son_all_checked = treeNode.fristTableData.tableData;
+                    this.zNodes.children.forEach((m, i) => {
+                        if (m.id == treeNode.id) {
+                            this.$set(m, 'show', true)
+                        } else {
+                            this.$set(m, 'show', false)
+                        }
+                    });
+                    this.$store.state.failureEnery.start_sublevel_show = true;
+                    this.$store.state.failureEnery.parent_progress_show = false;
+                }
+                $(".right_warp").show();
+                $(".personalAuditFormTable").hide();
+            },
+            dblClickExpand(treeId, treeNode) {
+                return treeNode.level > 0;
+            },
             /*----------------- zTree end ----------------------*/
             getIframeDocument(refStr) {
                 return this.getIframeWindow(refStr).document;
@@ -760,18 +809,12 @@
                 if (this.slideBarIsControl) {
                     if (this._dom_c.$content.hasClass('presentation_mode_row')) {
                         var totalH = this._dom_c.$content.height();
-                        this._dom_c.$div_pdf.css('height', ((e.clientY - this.hDiff) / totalH) * 100 + '%');
-                        this._dom_c.$center_part_wrap.css({
-                            'height': ((totalH - e.clientY + this.hDiff) / totalH) * 100 + '%',
-                            'top': ((e.clientY - this.hDiff) / totalH) * 100 + '%'
-                        });
+                        this._dom_c.$div_pdf.css('bottom', ((totalH - e.clientY + this.hDiff) / totalH) * 100 + '%');
+                        this._dom_c.$center_part_wrap.css('top', ((e.clientY - this.hDiff) / totalH) * 100 + '%');
                     } else if (this._dom_c.$content.hasClass('presentation_mode_column')) {
                         var totalW = this._dom_c.$content.width();
-                        this._dom_c.$div_pdf.css({
-                            'width': ((totalW - e.clientX - this.hDiff) / totalW) * 100 + '%',
-                            'left': ((e.clientX + this.hDiff) / totalW) * 100 + '%'
-                        });
-                        this._dom_c.$center_part_wrap.css('width', ((e.clientX + this.hDiff) / totalW) * 100 + '%');
+                        this._dom_c.$div_pdf.css('left', ((e.clientX + this.hDiff) / totalW) * 100 + '%');
+                        this._dom_c.$center_part_wrap.css('right', ((totalW - e.clientX - this.hDiff) / totalW) * 100 + '%');
                     } else if (this._dom_c.$content.hasClass('showPDF_content')) {
                         this._dom_c.$div_pdf.height(
                             e.clientY - this.hDiff - parseInt(this._dom_c.$slidebar.css('margin-top')) - this._dom_c.$div_pdf.offset().top + 'px');
@@ -780,421 +823,130 @@
                 }
             },
             exitFullMode() {
-                this._dom_c.$div_pdf.attr('style', "");
-                this._dom_c.$center_part_wrap.attr('style', "");
+                this._dom_c.$div_pdf.attr('style',"");
+                this._dom_c.$center_part_wrap.attr('style',"");
                 this._dom_c.$content.removeClass('fullMode presentation_mode_column presentation_mode_row');
                 if (this.currentPdfShow.children().length == 1) {
                     this._dom_c.$content.addClass('showPDF_content');
                 }
             },
-
-            initFullMode(modeType, isFirstInPresentation){
-                var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
+            initFullMode(isFirstInPresentation){
                 this._dom_c.$div_pdf.attr('style',"");
                 this._dom_c.$center_part_wrap.attr('style',"");
-                $('.my-pdf').css('width', conW+'px');
-                this._dom_c.$center_part.css('width', conW+'px');
-
-
-
-                if(modeType == 'column'){
-                    this._dom_c.$div_pdf.css({
-                        overflow: 'hidden',
-                        "z-index": 2
-                    });
-                    this._dom_c.$center_part_wrap.css({
-                        overflow: 'hidden',
-                        "z-index": 1
-                    });
-                    //this._dom_c.$slidebar.css('width', conW+'px');
-                }else{
-                    this._dom_c.$div_pdf.css({
-                        overflow: 'hidden',
-                        "z-index": 1
-                    });
-                    this._dom_c.$center_part_wrap.css({
-                        overflow: 'hidden',
-                        "z-index": 2
-                    });
-                    //this._dom_c.$slidebar.css('width', conW+'px');
-                }
-
-
-                var pdf_l;
-                var pdf_t;
-                var pdf_w;
-                var pdf_h;
-                
-                var cen_l;
-                var cen_t;
-                var cen_w;
-                var cen_h;
-
-                var pdfInput1;
-                var pdfLeftTop;
-                var pdfInput2;
-                var pdfWH;
-                var centerInput1;
-                var centerLeftTop;
-                var centerInput2;
-                var centerWH;
-                var num = 50;
-
                 if(isFirstInPresentation){
-                    var conH = this._dom_c.$content.height();
-                    var bodyW = document.body.clientWidth;
-                    var bodyH = document.body.clientHeight;
-                    var scrollTop = $('html,body').scrollTop();
-                    
-
+                    var conW = this._dom_c.$content.width();
+                    $('.my-pdf').css('width', conW+'px');
+                    this._dom_c.$center_part.css('width', conW+'px');
                     var pdfOffset = this._dom_c.$div_pdf.offset();
                     var part_wrapOffset = this._dom_c.$center_part_wrap.offset();
                     var pdfW = this._dom_c.$div_pdf.width();
                     var pdfH = this._dom_c.$div_pdf.height();
                     var partW = this._dom_c.$center_part_wrap.width();
                     var partH = this._dom_c.$center_part_wrap.height();
-
-
                     this._dom_c.$div_pdf.css({
                         position: 'absolute',
-                        top: (pdfOffset.top - scrollTop)/bodyH*100+'%',
-                        left: pdfOffset.left/bodyW*100+'%',
-                        width: pdfW/bodyW*100+'%',
-                        height: pdfH/bodyH*100+'%'
+                        top: pdfOffset.top+'px',
+                        bottom: document.body.clientHeight - pdfOffset.top - pdfH+'px',
+                        left: pdfOffset.left+'px',
+                        right: document.body.clientWidth - pdfOffset.left - pdfW+'px'
                     });
                     this._dom_c.$center_part_wrap.css({
                         position: 'absolute',
-                        top: (part_wrapOffset.top - scrollTop)/bodyH*100+'%',
-                        left: part_wrapOffset.left/bodyW*100+'%',
-                        width: partW/bodyW*100+'%',
-                        height: partH/bodyH*100+'%'
+                        top: part_wrapOffset.top+'px',
+                        bottom: document.body.clientHeight - part_wrapOffset.top - partH+'px',
+                        left: part_wrapOffset.left+'px',
+                        right: document.body.clientWidth - part_wrapOffset.left - partW+'px'
                     });
-                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
-                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
-                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
-                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
-                    
-                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
-                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
-                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
-                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
-
-                    if(modeType == 'column'){
-                        /**
-                         * .div_pdf {
-                                top: 30% !important;
-                                left: 52% !important;
-                                bottom: 30% !important;
-                                right: 36% !important;
-                            }
-                            .center_part_wrap {
-                                top: 30% !important;
-                                left: 36% !important;
-                                bottom: 30% !important;
-                                right: 52% !important;
-                            }
-                         */
-                        //pdf
-                        pdfInput1 = [
-                            [pdf_l,pdf_t],
-                            [90, -20],
-                            [80, pdf_t/3],
-                            [60, pdf_t],
-                            [52,30]
-                        ];
-                        pdfLeftTop = [];
-                        pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [13,30],
-                            [15,49],
-                            [18,45],
-                            [13,35]
-                        ];
-                        pdfWH = [];
-                        
-                        //center_part_wrap
-
-                        centerInput1 = [
-                            [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [36,30]
-                        ];
-                        centerLeftTop = [];
-                        centerInput2 = [
-                            [cen_w,cen_h],
-                            [4,5],
-                            [8,49],
-                            [20,40],
-                            [13,35]
-                        ];
-                        centerWH = [];
-                    }else{
-                        /*.presentation_mode_row_animate {
-                            .div_pdf {
-                                top: 30% !important;
-                                left: 40% !important;
-                                bottom: 52% !important;
-                                right: 40% !important;
-                            }
-                            .center_part_wrap {
-                                top: 52% !important;
-                                left: 40% !important;
-                                bottom: 30% !important;
-                                right: 40% !important;
-                            }
-                        }*/
-                        //pdf
-                        pdfInput1 = [
-                            [pdf_l,pdf_t],
-                            [38, 30],
-                            [80, 0],
-                            [45, -20],
-                            [40,30]
-                        ];
-                        pdfLeftTop = [];
-                        pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
-                        ];
-                        pdfWH = [];
-                        
-                        //center_part_wrap
-                        centerInput1 = [
-                            [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [40,52]
-                        ];
-                        centerLeftTop = [];
-                        centerInput2 = [
-                            [cen_w,cen_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
-                        ];
-                        centerWH = [];
-                    }
-                }else{
-
-                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
-                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
-                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
-                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
-                    
-                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
-                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
-                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
-                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
-
-                    if(modeType == 'column'){
-                        //pdf
-                        pdfInput1 = [
-                            [pdf_l,pdf_t],
-                            [90, -20],
-                            [80, pdf_t/3],
-                            [60, pdf_t],
-                            [52,30]
-                        ];
-                        pdfLeftTop = [];
-                        pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [13,30],
-                            [15,49],
-                            [18,45],
-                            [13,35]
-                        ];
-                        pdfWH = [];
-                        
-                        //center_part_wrap
-
-                        centerInput1 = [
-                            [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [36,30]
-                        ];
-                        centerLeftTop = [];
-                        centerInput2 = [
-                            [cen_w,cen_h],
-                            [4,5],
-                            [8,49],
-                            [20,40],
-                            [13,35]
-                        ];
-                        centerWH = [];
-                    }else{
-                        //pdf
-                        pdfInput1 = [
-                            [pdf_l,pdf_t],
-                            [38, 30],
-                            [80, 0],
-                            [45, -20],
-                            [40,30]
-                        ];
-                        pdfLeftTop = [];
-                        pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
-                        ];
-                        pdfWH = [];
-                        
-                        //center_part_wrap
-                        centerInput1 = [
-                            [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [40,52]
-                        ];
-                        centerLeftTop = [];
-                        centerInput2 = [
-                            [cen_w,cen_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
-                        ];
-                        centerWH = [];
-                    }
+                    /*var _this = this;
+                    setTimeout(function(){
+                    _this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column presentation_mode_column_animate animating');}, 1);*/
                 }
-                this.$commonJs.draw_bezier_curves(pdfInput1, num, pdfLeftTop);
-                this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
-                this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
-                this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
-
-
-
-
-
-                return {
-                    pdfLeftTop,
-                    pdfWH,
-                    centerLeftTop,
-                    centerWH,
-                    num
-                };
             },
             fullModeColumn() {
-                var _this = this;
-                var isFirstInPresentation = _this._dom_c.$content.hasClass('showPDF_content');
-                var points = _this.initFullMode('column', isFirstInPresentation);
-                _this._dom_c.$content.addClass('fullMode presentation_mode_column');
-                
-                var win = window;
-                win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
-                var count = 0;
-                function render(){
-                    if(count < points.num){
-                        _this._dom_c.$div_pdf.css({
-                            top: points.pdfLeftTop[count][1]+'%',
-                            left: points.pdfLeftTop[count][0]+'%',
-                            width: points.pdfWH[count][0]+'%',
-                            height: points.pdfWH[count][1]+'%'
-                        });
-                        _this._dom_c.$center_part_wrap.css({
-                            top: points.centerLeftTop[count][1]+'%',
-                            left: points.centerLeftTop[count][0]+'%',
-                            width: points.centerWH[count][0]+'%',
-                            height: points.centerWH[count][1]+'%'
-                        });
-                        win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
-                    }else{
-                        _this._dom_c.$div_pdf.animate({
-                            top: '0',
-                            left: '50%',
-                            width: '50%',
-                            height: '100%'
-                        }, {
-                            duration: 1000,
-                            easing: 'easeInOutBack',
-                            complete: function(){
-                                $('.my-pdf').attr('style',"");
-                                _this._dom_c.$center_part.attr('style',"");
-                                _this._dom_c.$slidebar.attr('style',"");
+                var isFirstInPresentation = this._dom_c.$content.hasClass('showPDF_content');
+                this.initFullMode(isFirstInPresentation);
+                this._dom_c.$content.addClass('fullMode');
+                this.$nextTick(function(){
+                    this._dom_c.$div_pdf.addClass('animate1');
+                    this._dom_c.$center_part_wrap.addClass('animate1');
+                    clearTimeout(window.fullModeColumn_setTimeout_value);
+                    var _this = this;
+                    window.fullModeColumn_setTimeout_value = setTimeout(function(){
+                        var transitionFlag = true;
+                        _this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column presentation_mode_column_animate animating');
+                        _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function (e) {
+                            if(e.target === e.currentTarget && transitionFlag) {
+                                transitionFlag = false;
+                                var transitionFlag_wrap = true;
+                                _this._dom_c.$div_pdf.removeClass('animate1').addClass('animate2');
+                                _this._dom_c.$center_part_wrap.removeClass('animate1').addClass('animate2');
+                                _this._dom_c.$div_pdf.attr('style',"");
+                                _this._dom_c.$center_part_wrap.attr('style',"");
+                                _this._dom_c.$content.removeClass('presentation_mode_column_animate');
+                                _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                                    if(e.target === e.currentTarget && transitionFlag_wrap) {
+                                        transitionFlag_wrap = false;
+                                        //_this._dom_c.$div_pdf.removeClass('animate');
+                                        clearTimeout(window.setTimeoutValue);
+                                        window.setTimeoutValue = setTimeout(function(){
+                                            isFirstInPresentation && $('.my-pdf').css('width', 'auto');
+                                            isFirstInPresentation && _this._dom_c.$center_part.css('width', 'auto');
+                                            _this._dom_c.$content.removeClass('animating');
+                                            _this._dom_c.$div_pdf.removeClass('animate2');
+                                            _this._dom_c.$center_part_wrap.removeClass('animate2');
+                                        }, 900);
+                                    }
+                                });
                             }
                         });
-                        _this._dom_c.$center_part_wrap.animate({
-                            top: '0',
-                            left: '0',
-                            width: '50%',
-                            height: '100%'
-                        }, {
-                            duration: 1000,
-                            easing: 'easeInOutBack',
-                            complete: function(){
-                                
-                            }
-                        });
-                    }
-                    count++;
-                }
-                win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
+                    }, 10);
+                });
+
             },
             fullModeRow() {
-                var _this = this;
                 var isFirstInPresentation = this._dom_c.$content.hasClass('showPDF_content');
-                var points = this.initFullMode('row', isFirstInPresentation);
-                this._dom_c.$content.addClass('fullMode presentation_mode_row');
-                var win = window;
-                win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
-                var count = 0;
-                function render(){
-                    if(count < points.num){
-                        _this._dom_c.$div_pdf.css({
-                            top: points.pdfLeftTop[count][1]+'%',
-                            left: points.pdfLeftTop[count][0]+'%',
-                            width: points.pdfWH[count][0]+'%',
-                            height: points.pdfWH[count][1]+'%'
-                        });
-                        _this._dom_c.$center_part_wrap.css({
-                            top: points.centerLeftTop[count][1]+'%',
-                            left: points.centerLeftTop[count][0]+'%',
-                            width: points.centerWH[count][0]+'%',
-                            height: points.centerWH[count][1]+'%'
-                        });
-                        win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
-                    }else{
-                        _this._dom_c.$div_pdf.animate({
-                            top: '0',
-                            left: '0',
-                            width: '100%',
-                            height: '60%'
-                        }, {
-                            duration: 1000,
-                            easing: 'easeOutExpo',
-                            complete: function(){
-                                $('.my-pdf').attr('style',"");
-                                _this._dom_c.$center_part.attr('style',"");
-                                _this._dom_c.$slidebar.attr('style',"");
+                this.initFullMode(isFirstInPresentation);
+                this._dom_c.$content.addClass('fullMode');
+                this.$nextTick(function(){
+                    /*this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row presentation_mode_row_animate');*/
+                    //this._dom_c.$content.get(0).setAttribute('class','content');
+                    this._dom_c.$div_pdf.addClass('animate1');
+                    this._dom_c.$center_part_wrap.addClass('animate1');
+                    $('.my-pdf').css('width', document.body.clientWidth+'px');
+                    this.$nextTick(function(){
+                        var _this = this;
+                        var transitionFlag = true;
+                        this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row presentation_mode_row_animate animating');
+                        this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function (e) {
+                            if(e.target === e.currentTarget && transitionFlag) {
+                                transitionFlag = false;
+                                var transitionFlag_wrap = true;
+                                _this._dom_c.$div_pdf.removeClass('animate1').addClass('animate2');
+                                _this._dom_c.$center_part_wrap.removeClass('animate1').addClass('animate2');
+                                _this._dom_c.$div_pdf.attr('style',"");
+                                _this._dom_c.$center_part_wrap.attr('style',"");
+                                _this._dom_c.$content.removeClass('presentation_mode_row_animate');
+                                _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
+                                    //_this._dom_c.$div_pdf.removeClass('animate');
+                                    if(e.target === e.currentTarget && transitionFlag_wrap) {
+                                        transitionFlag_wrap = false;
+                                        //_this._dom_c.$div_pdf.removeClass('animate');
+                                        clearTimeout(window.setTimeoutValue);
+                                        window.setTimeoutValue = setTimeout(function(){
+                                            $('.my-pdf').css('width', 'auto');
+                                            isFirstInPresentation && _this._dom_c.$center_part.css('width', 'auto');
+                                            _this._dom_c.$content.removeClass('animating');
+                                            _this._dom_c.$div_pdf.removeClass('animate2');
+                                            _this._dom_c.$center_part_wrap.removeClass('animate2');
+                                        }, 900);
+                                    }
+                                });
                             }
                         });
-                        _this._dom_c.$center_part_wrap.animate({
-                            top: '60%',
-                            left: '0',
-                            width: '100%',
-                            height: '40%'
-                        }, {
-                            duration: 1000,
-                            easing: 'easeOutExpo',
-                            complete: function(){
-                                
-                            }
-                        });
-                    }
-                    count++;
-                }
-                win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
+                    });
+                });
+                
+
             },
             closePDF() {
                 if (this._dom_c.$content.hasClass('presentation_mode_column') || this._dom_c.$content.hasClass('presentation_mode_row')) {
@@ -1222,33 +974,6 @@
             rebackAllChecked() {
                 this.$store.state.failureEnery.determineOperating = false;
             },
-            personalAuditForm() {
-                this.personalAuditFormDialog = true;
-            },
-            changeRadios(index){
-                console.log(index);
-
-            },
-            handleRowClick(row, column, event){
-                $(".dingWeiDiv").show();
-                this.standardReviewTips=row.standardReview;
-                $(".biaozhunConent").text(row.standardReview);
-            },
-            // data() {
-            //     return {
-            //         innerHeight: 0
-            //     };
-            // },
-            // methods: {
-            //     handleResizeWindow() {
-            //         this.innerHeight = window.innerHeight;
-            //     }
-            // },
-            // mounted() {
-            //     this.innerHeight = window.innerHeight;
-            //     util.addEvent(window, 'resize', this.handleResizeWindow);
-            //
-            // },
         }
     }
 </script>
@@ -1260,13 +985,13 @@
         }
     }
 
-    /*.hide_div {*/
-    /*display: none;*/
-    /*}*/
+    .hide_div {
+        display: none;
+    }
 
-    /*.nohide_div {*/
-    /*display: block;*/
-    /*}*/
+    .nohide_div {
+        display: block;
+    }
 
     .el-progress__text {
         font-size: 14px;
@@ -1331,10 +1056,10 @@
                         }
                     } */
                     .animate1 {
-                        transition: top, left, right, bottom .6s, .6s, .6s, .6s cubic-bezier(.04, .78, .16, .89);
+                        transition: top,left,right,bottom .6s,.6s,.6s,.6s cubic-bezier(.04,.78,.16,.89);
                     }
                     .animate2 {
-                        transition: top, left, right, bottom .4s, .4s, .4s, .4s cubic-bezier(.54, .06, .8, .24);
+                        transition: top,left,right,bottom .4s,.4s,.4s,.4s cubic-bezier(.54,.06,.8,.24);
                     }
                     .div_pdf {
                         display: none;
@@ -1419,7 +1144,6 @@
                                 overflow-y: auto;
                                 .center_con {
                                     padding: 15px;
-                                    /*padding: 15px 15px 205px 15px;*/
                                     min-width: 850px !important;
                                     .left_examine {
                                         background: #e4e9ec;
@@ -1443,7 +1167,7 @@
                                         }
                                     }
                                     .right_warp {
-                                        /*padding-left: 15px;*/
+                                        padding-left: 15px;
                                         border-radius: 5px;
                                         .el-progress__text {
                                             color: red;
@@ -1519,27 +1243,6 @@
                                             padding-bottom: 5px;
                                         }
                                     }
-
-                                    /* 用来设置当前页面element全局table的内间距 */
-                                    /*.el-table__row td{*/
-                                    /*padding: 0;*/
-                                    /*}*/
-                                    /* 用来设置当前页面element全局table 选中某行时的背景色*/
-                                    .el-table__body tr.current-row>td{
-                                        background-color: #b3d8ff !important;
-                                        /* color: #f19944; */  /* 设置文字颜色，可以选择不设置 */
-                                    }
-                                    /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
-                                    /*.el-table--enable-row-hover .el-table__body tr:hover>td {*/
-                                        /*background-color: #f19944;*/
-                                        /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
-                                    /*}*/
-                                }
-                                .dingWeiDiv{
-                                    width: 100%;
-                                    height: 50px;
-                                    background: #fff6ec;
-                                    border: 1px solid #ffdcb3;
                                 }
                             }
                         }
@@ -1559,7 +1262,7 @@
                     }
                 }
 
-                .fullMode {
+                .fullMode{
                     position: fixed;
                     top: 0;
                     left: 0;
@@ -1569,12 +1272,14 @@
                     z-index: 4;
                 }
 
+
                 .presentation_mode_column {
                     .div_pdf {
                         position: absolute;
                         top: 0;
+                        right: 0;
+                        bottom: 0;
                         left: 50%;
-                        width: 50%;
                         display: block !important;
                         /* width: 50%;
                         height: 100%; */
@@ -1594,7 +1299,8 @@
                         position: absolute;
                         top: 0;
                         left: 0;
-                        width: 50%;
+                        bottom: 0;
+                        right: 50%;
                         z-index: 999;
                         .slideBar {
                             display: block;
@@ -1627,10 +1333,8 @@
                         }
                     }
                 }
-
                 
-                /* .presentation_mode_column_animate {
-
+                .presentation_mode_column_animate {
                     .div_pdf {
                         top: 30% !important;
                         left: 52% !important;
@@ -1643,17 +1347,16 @@
                         bottom: 30% !important;
                         right: 52% !important;
                     }
-
-                } */
+                }
                 
-
 
                 .presentation_mode_row {
                     .div_pdf {
                         position: absolute;
                         top: 0;
                         left: 0;
-                        height: 60%;
+                        bottom: 50%;
+                        right: 0;
                         display: block !important;
                         border: 0;
                         /* width: 100%;
@@ -1672,7 +1375,8 @@
                         position: absolute;
                         top: 50%;
                         left: 0;
-                        height: 40%;
+                        bottom: 0;
+                        right: 0;
                         /* width: 100%;
                         height: 40%; */
                         .slideBar {
@@ -1693,23 +1397,23 @@
                 }
 
                 #t {
-                    animation: layerize cubic-bezier(0.4, 0, 0.2, 1) 1200ms 200ms forwards;
-                    font: italic 500 15rem "Roboto", sans-serif;
+                  animation: layerize cubic-bezier(0.4, 0, 0.2, 1) 1200ms 200ms forwards;
+                  font: italic 500 15rem "Roboto", sans-serif;
                 }
 
                 @keyframes layerize {
-                    0% {
-                        opacity: 0;
-                        transform: translate(0, 0);
-                        box-shadow: none;
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translate(-0.06667em, -0.06667em);
-                        box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
-                    }
+                  0% {
+                    opacity: 0;
+                    transform: translate(0, 0);
+                    box-shadow: none;
+                  }
+                  100% {
+                    opacity: 1;
+                    transform: translate(-0.06667em, -0.06667em);
+                    box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
+                  }
                 }
-                /* .presentation_mode_row_animate {
+                .presentation_mode_row_animate {
                     .div_pdf {
                         top: 30% !important;
                         left: 40% !important;
@@ -1722,16 +1426,14 @@
                         bottom: 30% !important;
                         right: 40% !important;
                     }
-                } */
+                }
 
 
 
-
-                /* .animating {
-
+                .animating {
                     .div_pdf {
                         overflow: hidden;
-                        .my-pdf {
+                        .my-pdf{
                             width: 1000px;
                             height: 1000px;
                         }
@@ -1739,17 +1441,15 @@
                     .center_part_wrap {
                         overflow: hidden;
                         .slideBar {
-
+                            
                         }
                         .center_part {
                             width: 1000px;
                             height: 1000px;
                         }
                     }
-                } */
+                }
             }
         }
     }
-
-
 </style>

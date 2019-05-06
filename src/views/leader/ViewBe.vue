@@ -1,23 +1,99 @@
 <template>
-    <div class="vbe">
-        <div style="height: 300px;">
-            <el-steps direction="vertical">
-                <el-step title="步骤 1"></el-step>
-                <el-step title="步骤 2"></el-step>
-                <el-step title="步骤 3" description="这是一段很长很长很长的描述性文字"></el-step>
-            </el-steps>
-        </div>
+    <div class="vbe">  
+        <el-row class="onlyBtnBox">
+            <el-col :span="24">
+                <div class="grid-content bg-purple-dark">
+                    <el-button size="small">评标异常情况</el-button>
+                    <el-button size="small">评标解锁</el-button>
+                </div>
+            </el-col>
+        </el-row>
+        <el-table
+            :data="tableData"
+            border
+            style="width: 100%"
+            class="tableBox"
+            v-loading="tableLoad"
+        >
+            <el-table-column
+                prop="name"
+                label="评审专家"
+                >
+            </el-table-column>
+            <el-table-column
+                label="资格审查进度"
+            >
+                <template slot-scope="scope">
+                    <div class="progressBox">
+                        <el-progress :percentage="0"></el-progress>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column
+                label="是否提交资格审查结果">
+                <template slot-scope="scope">
+                    <div>
+                        <span v-if="scope.row.status == 0">未完成</span>
+                        <span v-else>已完成</span>
+                    </div>
+                </template>
+            </el-table-column>
+        </el-table>
     </div>
 </template>
 
 
 <script>
 export default {
-    
+    data() {
+        return {
+            tableData:[],
+            tableLoad:false,
+        }
+    },
+    mounted() {
+        $(".NavCommon").show();
+        this.init();
+    },
+    methods: {
+        init(){
+            this.tableLoad=true;
+            this.$axios.post('./api/viewBeMsg').then(res => {
+                if(res.status == 200){
+                   console.log(res);
+                   this.tableLoad=false;
+                   this.tableData=res.data.leaderMsg;
+                }
+            })
+        }
+    },
 }
 </script>
 
 
 <style lang="scss">
-
+@import '../../assets/css/common/mixin.scss';
+.navcommon_wrap ul li button{
+    width: 65px;
+    height: 40PX;
+    border-radius: 5px;
+}
+.vbe{
+    padding: 15px 20px 15px 0px;
+    padding-left: 95px !important;
+    .onlyBtnBox{
+        text-align: right;
+        padding-bottom: 15px;
+    }
+    .tableBox{
+        border-radius: 5px;
+    }
+    .progressBox{
+        width: 50%;
+        .el-progress-bar__outer{
+            height: 14px !important;
+        }
+    }
+    // @include common-el-table;
+}
 </style>

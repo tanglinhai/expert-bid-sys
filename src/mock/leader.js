@@ -24,3 +24,13 @@ Mock.mock('/api/leaderBagMsg','post',{
         }
     ]
 })
+
+
+Mock.mock('./api/viewBeMsg','post',{
+    'leaderMsg|0-5':[
+        {
+            'name':'@cname',
+            'status|1':[0,1]
+        }
+    ]
+})

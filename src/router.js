@@ -80,9 +80,12 @@ var routes = [
     {
       path:'/groupLeader',
       name:'groupLeader',
-      component: () => import('./views/leader/Index.vue'),
+      redirect: '/groupLeader/Index',
+      component: () => import('./views/Home.vue'),
       children:[
-        { name: '/groupLeader/ViewBe', path: '/groupLeader/ViewBe', component: () => import('./views/leader/ViewBe.vue')}
+        { name: '/groupLeader/Index', path: '/groupLeader/Index', component: () => import('./views/leader/Index.vue')},
+        { name: '/groupLeader/ViewBe', path: '/groupLeader/ViewBe', component: () => import('./views/leader/ViewBe.vue')},
+        { name: '/groupLeader/SignIn', path: '/groupLeader/SignIn', component: () => import('./views/leader/SignIn.vue')}
       ]
     }
   ];
