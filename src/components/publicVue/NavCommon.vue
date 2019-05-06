@@ -12,7 +12,7 @@
                             trigger="hover"
                             :ref='item'
                             >
-                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference">{{item.label}}</el-button>  <!--0可点-->
+                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference"><i class="el-icon-check"></i>{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
                         <span class="navcommon_line" style="display:none"></span>
                     </template>
@@ -22,7 +22,7 @@
                             title=""
                             width="100"
                             >
-                            <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference">{{item.label}}</el-button>
+                            <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference"><i class="el-icon-close"></i>{{item.label}}</el-button>
                         </el-popover>
                         <span class="navcommon_line" style="border-left:2px solid #ccc; position:relative">
                             <i class="el-icon-arrow-down" style="position: absolute;left: -10px; bottom: -5px; color: rgb(204, 204, 204);font-size: 18px;"></i>
