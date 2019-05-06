@@ -721,6 +721,7 @@
                     let arr = this.dingdang_tableData.slice(0, -2);//去除最后两项
                     arr.forEach(e => { //循环表数据
                         this.companyname_toubiao.forEach((k, i) => {
+                            console.log(e[`value${i + 1}`]);
                             if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
                                 num++;
                             }
@@ -869,7 +870,7 @@
                 let arr = [];
                 arr = this.dingdang_tableData.slice(0, -2);
                 arr.forEach((k, i) => {
-                    console.log(k['value' + index]);
+                    // console.log(k['value' + index]);
                     if (Array.isArray(k['value' + index])) {//是数组
                         if (k['value' + index].length != 0) {
                             let num = 0;
@@ -885,6 +886,7 @@
                 this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
             },
             changeRadios(index) { // 单选法
+                // console.log(index);
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
                 arr = this.dingdang_tableData.slice(0, -2);

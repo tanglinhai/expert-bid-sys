@@ -189,165 +189,420 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-                    'zTreeData': //树形图
-                        {
-                            id: 1, pId: 0, name: "资格审查-电脑硬件配置", open: true,
-                            children: [
-                                {
-                                    id: 101, pId: 1, name: "资格审查1：内存大小", open: false,
-                                    fristTableData: {//第一个表格
-                                        question: "资格审查评审项：",
-                                        answer: "内存大小大于8G",
-                                        question1: "审查标准：",
-                                        answer1: "大于等于8G",
-                                        tableData: [{
-                                            index: 0,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 1,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf1_1',
-                                            pdf: [{
-                                                //增加字段 PDF id
-                                                id: 'pdf1_1',
-                                                pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
 
-                                        }, {
-                                            index: 1,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 2,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf2_1',
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 2,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 3,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf3_1',
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 102, pId: 1, name: "资格审查2：CPU型号", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "是否为INTEL生产",
-                                        question1: "审查标准",
-                                        answer1: "必须是INTEL生产",
-                                        tableData: [{
-                                            index: 3,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 4,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf1_2',
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 4,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 5,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf2_1',
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 5,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 6,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf3_1',
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 103, pId: 1, name: "资格审查3：分辨率是否为15英寸以上", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "分辨率是否为15英寸以上",
-                                        question1: "审查标准3",
-                                        answer1: "可达到1366*768以上即可",
-                                        tableData: [{
-                                            index: 6,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass2: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 7,
-                                            //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
-                                            relativePDF: 'pdf1_3',
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 7,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 8,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 8,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 9,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
-                                        }],
-                                    }
-                                },
+                    'companyNameList': [//(投标人)公司名
+                        {"title":"重庆网控科技发展有限公司（1） ",
+                        },
+                        {"title": "普瑞太阳能有限公司（2）",
+                        },
+
+                        {"title":"夏丰热工研究院有限公司（3）",
+
+                        },
+                    ],
+                    "dingdang_tableData":[
+
+                        {
+                           evaluationFactors: '内存大小大于8G',
+                           standardReview:'大于等于8G',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num: 1},
+                                {typeTitle: '不合格', num:0  },
+                                ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
                             ]
                         },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },           {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '是否为INTEL生产',
+                            standardReview:'必须是INTEL生产',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+
+
+
+
+
+
+
+
+
+
+
+                        {
+                            evaluationFactors: '分辨率是否为15英寸以上',//(资格审查的评审因素)
+                            standardReview:'可达到1366*768以上即可',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num: 1},
+                                {typeTitle: '不合格', num: 0 },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            pdf:[
+                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
+                            ]
+                        },
+
+                    ],
+
+                    // 'zTreeData': //树形图
+                    //     {
+                    //         id: 1, pId: 0, name: "资格审查-电脑硬件配置", open: true,
+                    //         children: [
+                    //             {
+                    //                 id: 101, pId: 1, name: "资格审查1：内存大小", open: false,
+                    //                 fristTableData: {//第一个表格
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "内存大小大于8G",
+                    //                     question1: "审查标准：",
+                    //                     answer1: "大于等于8G",
+                    //                     tableData: [{
+                    //                         index: 0,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 1,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf1_1',
+                    //                         pdf: [{
+                    //                             //增加字段 PDF id
+                    //                             id: 'pdf1_1',
+                    //                             pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //
+                    //                     }, {
+                    //                         index: 1,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 2,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf2_1',
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 2,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 3,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf3_1',
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 102, pId: 1, name: "资格审查2：CPU型号", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "是否为INTEL生产",
+                    //                     question1: "审查标准",
+                    //                     answer1: "必须是INTEL生产",
+                    //                     tableData: [{
+                    //                         index: 3,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 4,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf1_2',
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 4,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 5,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf2_1',
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 5,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 6,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf3_1',
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 103, pId: 1, name: "资格审查3：分辨率是否为15英寸以上", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "分辨率是否为15英寸以上",
+                    //                     question1: "审查标准3",
+                    //                     answer1: "可达到1366*768以上即可",
+                    //                     tableData: [{
+                    //                         index: 6,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass2: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 7,
+                    //                         //增加字段 关联的资格审查 PDF 的 id（即这个资格审查项，能在这个PDF文件里面找到）
+                    //                         relativePDF: 'pdf1_3',
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 7,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 8,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 8,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 9,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},]
+                    //                     }],
+                    //                 }
+                    //             },
+                    //         ]
+                    //     },
                     'mylist': ms,
                     vue_type: get_data(1),       //头部审查类型按钮
                 },
@@ -3298,9 +3553,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 }
                             ]
                         },
-
                     ],
-                    // "重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司","重庆网控科技发展有限公司", "重庆网控科技有限公司", "重庆网有限公司"],
+
                     'viewScheduleTitileData':{
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
