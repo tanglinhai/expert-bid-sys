@@ -16,7 +16,7 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
                 </el-col>
-                 <el-col :span="4">
+                <el-col :span="4">
                     <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
                 </el-col>
             </el-row>
