@@ -36,7 +36,7 @@
                         size="mini"
                         @click="enterFullMode"
                     >进入全屏模式</el-button> -->
-                <NavBar :msg="options" :type="type_btn"></NavBar>
+                <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
                 <div class="content">
                     <div class="div_pdf">
                         <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
@@ -401,9 +401,11 @@
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
+                methodType:''
             }
         },
         created() {
+            this.methodType=this.$route.query.methodType;
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -438,6 +440,12 @@
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
             window._locate_pdf_ = this._locate_pdf_;
+
+
+            /*this.$commonJs.getScriptFile.call(this, {
+                url: '/js/plugins/html2canvas.js',
+                download_files_key: 'html2canvas.js'
+            });*/
         },
         computed: {
             currentPdfShow() {
@@ -499,7 +507,6 @@
                 })
             },
             failuredRadio(radio, id, index, tableKey, obj, a) {//合格不合格
-                console.log(radio, id, index, tableKey, obj, a);
                 this.to_failure_entry_company_name = obj.name;
                 this.to_failure_entry_answer = a;
                 this.$axios.post('/api/isFailure_fhx', 'post', {
@@ -743,7 +750,7 @@
             },
             son_isAllFilled() {//子级全部提交：判断radio是否选中，全部选择为true，反之为false
                 let isAllF = true;
-                for (var i = 0; i < this.son_all_che.length; i++) {
+                for (let i = 0; i < this.son_all_che.length; i++) {
                     if (!this.son_all_che[i].radio) {
                         isAllF = false;
                         break;

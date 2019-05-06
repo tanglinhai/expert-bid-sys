@@ -809,12 +809,18 @@
                 if (this.slideBarIsControl) {
                     if (this._dom_c.$content.hasClass('presentation_mode_row')) {
                         var totalH = this._dom_c.$content.height();
-                        this._dom_c.$div_pdf.css('bottom', ((totalH - e.clientY + this.hDiff) / totalH) * 100 + '%');
-                        this._dom_c.$center_part_wrap.css('top', ((e.clientY - this.hDiff) / totalH) * 100 + '%');
+                        this._dom_c.$div_pdf.css('height', ((e.clientY - this.hDiff) / totalH) * 100 + '%');
+                        this._dom_c.$center_part_wrap.css({
+                            'height': ((totalH - e.clientY + this.hDiff) / totalH) * 100 + '%',
+                            'top': ((e.clientY - this.hDiff) / totalH) * 100 + '%'
+                        });
                     } else if (this._dom_c.$content.hasClass('presentation_mode_column')) {
                         var totalW = this._dom_c.$content.width();
-                        this._dom_c.$div_pdf.css('left', ((e.clientX + this.hDiff) / totalW) * 100 + '%');
-                        this._dom_c.$center_part_wrap.css('right', ((totalW - e.clientX - this.hDiff) / totalW) * 100 + '%');
+                        this._dom_c.$div_pdf.css({
+                            'width': ((totalW - e.clientX - this.hDiff) / totalW) * 100 + '%',
+                            'left': ((e.clientX + this.hDiff) / totalW) * 100 + '%'
+                        });
+                        this._dom_c.$center_part_wrap.css('width', ((e.clientX + this.hDiff) / totalW) * 100 + '%');
                     } else if (this._dom_c.$content.hasClass('showPDF_content')) {
                         this._dom_c.$div_pdf.height(
                             e.clientY - this.hDiff - parseInt(this._dom_c.$slidebar.css('margin-top')) - this._dom_c.$div_pdf.offset().top + 'px');
@@ -830,121 +836,415 @@
                     this._dom_c.$content.addClass('showPDF_content');
                 }
             },
-            initFullMode(isFirstInPresentation){
+            initFullMode(modeType, isFirstInPresentation){
+                var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
                 this._dom_c.$div_pdf.attr('style',"");
                 this._dom_c.$center_part_wrap.attr('style',"");
+                $('.my-pdf').css('width', conW+'px');
+                this._dom_c.$center_part.css('width', conW+'px');
+
+
+
+                if(modeType == 'column'){
+                    this._dom_c.$div_pdf.css({
+                        overflow: 'hidden',
+                        "z-index": 2
+                    });
+                    this._dom_c.$center_part_wrap.css({
+                        overflow: 'hidden',
+                        "z-index": 1
+                    });
+                    //this._dom_c.$slidebar.css('width', conW+'px');
+                }else{
+                    this._dom_c.$div_pdf.css({
+                        overflow: 'hidden',
+                        "z-index": 1
+                    });
+                    this._dom_c.$center_part_wrap.css({
+                        overflow: 'hidden',
+                        "z-index": 2
+                    });
+                    //this._dom_c.$slidebar.css('width', conW+'px');
+                }
+
+
+                var pdf_l;
+                var pdf_t;
+                var pdf_w;
+                var pdf_h;
+                
+                var cen_l;
+                var cen_t;
+                var cen_w;
+                var cen_h;
+
+                var pdfInput1;
+                var pdfLeftTop;
+                var pdfInput2;
+                var pdfWH;
+                var centerInput1;
+                var centerLeftTop;
+                var centerInput2;
+                var centerWH;
+                var num = 50;
+
                 if(isFirstInPresentation){
-                    var conW = this._dom_c.$content.width();
-                    $('.my-pdf').css('width', conW+'px');
-                    this._dom_c.$center_part.css('width', conW+'px');
+                    var conH = this._dom_c.$content.height();
+                    var bodyW = document.body.clientWidth;
+                    var bodyH = document.body.clientHeight;
+                    var scrollTop = $('html,body').scrollTop();
+                    
                     var pdfOffset = this._dom_c.$div_pdf.offset();
                     var part_wrapOffset = this._dom_c.$center_part_wrap.offset();
                     var pdfW = this._dom_c.$div_pdf.width();
                     var pdfH = this._dom_c.$div_pdf.height();
                     var partW = this._dom_c.$center_part_wrap.width();
                     var partH = this._dom_c.$center_part_wrap.height();
+
+
                     this._dom_c.$div_pdf.css({
                         position: 'absolute',
-                        top: pdfOffset.top+'px',
-                        bottom: document.body.clientHeight - pdfOffset.top - pdfH+'px',
-                        left: pdfOffset.left+'px',
-                        right: document.body.clientWidth - pdfOffset.left - pdfW+'px'
+                        top: (pdfOffset.top - scrollTop)/bodyH*100+'%',
+                        left: pdfOffset.left/bodyW*100+'%',
+                        width: pdfW/bodyW*100+'%',
+                        height: pdfH/bodyH*100+'%'
                     });
                     this._dom_c.$center_part_wrap.css({
                         position: 'absolute',
-                        top: part_wrapOffset.top+'px',
-                        bottom: document.body.clientHeight - part_wrapOffset.top - partH+'px',
-                        left: part_wrapOffset.left+'px',
-                        right: document.body.clientWidth - part_wrapOffset.left - partW+'px'
+                        top: (part_wrapOffset.top - scrollTop)/bodyH*100+'%',
+                        left: part_wrapOffset.left/bodyW*100+'%',
+                        width: partW/bodyW*100+'%',
+                        height: partH/bodyH*100+'%'
                     });
-                    /*var _this = this;
-                    setTimeout(function(){
-                    _this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column presentation_mode_column_animate animating');}, 1);*/
+
+
+
+                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
+                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
+                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
+                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
+                    
+                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
+                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
+                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
+                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
+
+                    if(modeType == 'column'){
+                        /**
+                         * .div_pdf {
+                                top: 30% !important;
+                                left: 52% !important;
+                                bottom: 30% !important;
+                                right: 36% !important;
+                            }
+                            .center_part_wrap {
+                                top: 30% !important;
+                                left: 36% !important;
+                                bottom: 30% !important;
+                                right: 52% !important;
+                            }
+                         */
+                        //pdf
+                        pdfInput1 = [
+                            [pdf_l,pdf_t],
+                            [90, -20],
+                            [80, pdf_t/3],
+                            [60, pdf_t],
+                            [52,30]
+                        ];
+                        pdfLeftTop = [];
+                        pdfInput2 = [
+                            [pdf_w,pdf_h],
+                            [13,30],
+                            [15,49],
+                            [18,45],
+                            [13,35]
+                        ];
+                        pdfWH = [];
+                        
+                        //center_part_wrap
+
+                        centerInput1 = [
+                            [cen_l,cen_t],
+                            [-20, -30],
+                            [cen_l*1.2, 0],
+                            [cen_l*4, 20],
+                            [36,30]
+                        ];
+                        centerLeftTop = [];
+                        centerInput2 = [
+                            [cen_w,cen_h],
+                            [4,5],
+                            [8,49],
+                            [20,40],
+                            [13,35]
+                        ];
+                        centerWH = [];
+                    }else{
+                        /*.presentation_mode_row_animate {
+                            .div_pdf {
+                                top: 30% !important;
+                                left: 40% !important;
+                                bottom: 52% !important;
+                                right: 40% !important;
+                            }
+                            .center_part_wrap {
+                                top: 52% !important;
+                                left: 40% !important;
+                                bottom: 30% !important;
+                                right: 40% !important;
+                            }
+                        }*/
+                        //pdf
+                        pdfInput1 = [
+                            [pdf_l,pdf_t],
+                            [38, 30],
+                            [80, 0],
+                            [45, -20],
+                            [40,30]
+                        ];
+                        pdfLeftTop = [];
+                        pdfInput2 = [
+                            [pdf_w,pdf_h],
+                            [40,20],
+                            [30,33],
+                            [25,28],
+                            [25,14]
+                        ];
+                        pdfWH = [];
+                        
+                        //center_part_wrap
+                        centerInput1 = [
+                            [cen_l,cen_t],
+                            [-20, -30],
+                            [cen_l*1.2, 0],
+                            [cen_l*4, 20],
+                            [40,52]
+                        ];
+                        centerLeftTop = [];
+                        centerInput2 = [
+                            [cen_w,cen_h],
+                            [40,20],
+                            [30,33],
+                            [25,28],
+                            [25,14]
+                        ];
+                        centerWH = [];
+                    }
+                }else{
+
+                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
+                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
+                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
+                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
+                    
+                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
+                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
+                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
+                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
+
+                    if(modeType == 'column'){
+                        //pdf
+                        pdfInput1 = [
+                            [pdf_l,pdf_t],
+                            [90, -20],
+                            [80, pdf_t/3],
+                            [60, pdf_t],
+                            [52,30]
+                        ];
+                        pdfLeftTop = [];
+                        pdfInput2 = [
+                            [pdf_w,pdf_h],
+                            [13,30],
+                            [15,49],
+                            [18,45],
+                            [13,35]
+                        ];
+                        pdfWH = [];
+                        
+                        //center_part_wrap
+
+                        centerInput1 = [
+                            [cen_l,cen_t],
+                            [-20, -30],
+                            [cen_l*1.2, 0],
+                            [cen_l*4, 20],
+                            [36,30]
+                        ];
+                        centerLeftTop = [];
+                        centerInput2 = [
+                            [cen_w,cen_h],
+                            [4,5],
+                            [8,49],
+                            [20,40],
+                            [13,35]
+                        ];
+                        centerWH = [];
+                    }else{
+                        //pdf
+                        pdfInput1 = [
+                            [pdf_l,pdf_t],
+                            [38, 30],
+                            [80, 0],
+                            [45, -20],
+                            [40,30]
+                        ];
+                        pdfLeftTop = [];
+                        pdfInput2 = [
+                            [pdf_w,pdf_h],
+                            [40,20],
+                            [30,33],
+                            [25,28],
+                            [25,14]
+                        ];
+                        pdfWH = [];
+                        
+                        //center_part_wrap
+                        centerInput1 = [
+                            [cen_l,cen_t],
+                            [-20, -30],
+                            [cen_l*1.2, 0],
+                            [cen_l*4, 20],
+                            [40,52]
+                        ];
+                        centerLeftTop = [];
+                        centerInput2 = [
+                            [cen_w,cen_h],
+                            [40,20],
+                            [30,33],
+                            [25,28],
+                            [25,14]
+                        ];
+                        centerWH = [];
+                    }
                 }
+                this.$commonJs.draw_bezier_curves(pdfInput1, num, pdfLeftTop);
+                this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
+                this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
+                this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
+
+
+
+
+
+                return {
+                    pdfLeftTop,
+                    pdfWH,
+                    centerLeftTop,
+                    centerWH,
+                    num
+                };
             },
             fullModeColumn() {
-                var isFirstInPresentation = this._dom_c.$content.hasClass('showPDF_content');
-                this.initFullMode(isFirstInPresentation);
-                this._dom_c.$content.addClass('fullMode');
-                this.$nextTick(function(){
-                    this._dom_c.$div_pdf.addClass('animate1');
-                    this._dom_c.$center_part_wrap.addClass('animate1');
-                    clearTimeout(window.fullModeColumn_setTimeout_value);
-                    var _this = this;
-                    window.fullModeColumn_setTimeout_value = setTimeout(function(){
-                        var transitionFlag = true;
-                        _this._dom_c.$content.removeClass('showPDF_content presentation_mode_row').addClass('presentation_mode_column presentation_mode_column_animate animating');
-                        _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function (e) {
-                            if(e.target === e.currentTarget && transitionFlag) {
-                                transitionFlag = false;
-                                var transitionFlag_wrap = true;
-                                _this._dom_c.$div_pdf.removeClass('animate1').addClass('animate2');
-                                _this._dom_c.$center_part_wrap.removeClass('animate1').addClass('animate2');
-                                _this._dom_c.$div_pdf.attr('style',"");
-                                _this._dom_c.$center_part_wrap.attr('style',"");
-                                _this._dom_c.$content.removeClass('presentation_mode_column_animate');
-                                _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                                    if(e.target === e.currentTarget && transitionFlag_wrap) {
-                                        transitionFlag_wrap = false;
-                                        //_this._dom_c.$div_pdf.removeClass('animate');
-                                        clearTimeout(window.setTimeoutValue);
-                                        window.setTimeoutValue = setTimeout(function(){
-                                            isFirstInPresentation && $('.my-pdf').css('width', 'auto');
-                                            isFirstInPresentation && _this._dom_c.$center_part.css('width', 'auto');
-                                            _this._dom_c.$content.removeClass('animating');
-                                            _this._dom_c.$div_pdf.removeClass('animate2');
-                                            _this._dom_c.$center_part_wrap.removeClass('animate2');
-                                        }, 900);
-                                    }
-                                });
+                var _this = this;
+                var isFirstInPresentation = _this._dom_c.$content.hasClass('showPDF_content');
+                var points = _this.initFullMode('column', isFirstInPresentation);
+                _this._dom_c.$content.addClass('fullMode presentation_mode_column');
+                
+                var win = window;
+                win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
+                var count = 0;
+                function render(){
+                    if(count < points.num){
+                        _this._dom_c.$div_pdf.css({
+                            top: points.pdfLeftTop[count][1]+'%',
+                            left: points.pdfLeftTop[count][0]+'%',
+                            width: points.pdfWH[count][0]+'%',
+                            height: points.pdfWH[count][1]+'%'
+                        });
+                        _this._dom_c.$center_part_wrap.css({
+                            top: points.centerLeftTop[count][1]+'%',
+                            left: points.centerLeftTop[count][0]+'%',
+                            width: points.centerWH[count][0]+'%',
+                            height: points.centerWH[count][1]+'%'
+                        });
+                        win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
+                    }else{
+                        _this._dom_c.$div_pdf.animate({
+                            top: '0',
+                            left: '50%',
+                            width: '50%',
+                            height: '100%'
+                        }, {
+                            duration: 1000,
+                            easing: 'easeInOutBack',
+                            complete: function(){
+                                $('.my-pdf').attr('style',"");
+                                _this._dom_c.$center_part.attr('style',"");
+                                _this._dom_c.$slidebar.attr('style',"");
                             }
                         });
-                    }, 10);
-                });
-
+                        _this._dom_c.$center_part_wrap.animate({
+                            top: '0',
+                            left: '0',
+                            width: '50%',
+                            height: '100%'
+                        }, {
+                            duration: 1000,
+                            easing: 'easeInOutBack',
+                            complete: function(){
+                                
+                            }
+                        });
+                    }
+                    count++;
+                }
+                win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
             },
             fullModeRow() {
+                var _this = this;
                 var isFirstInPresentation = this._dom_c.$content.hasClass('showPDF_content');
-                this.initFullMode(isFirstInPresentation);
-                this._dom_c.$content.addClass('fullMode');
-                this.$nextTick(function(){
-                    /*this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row presentation_mode_row_animate');*/
-                    //this._dom_c.$content.get(0).setAttribute('class','content');
-                    this._dom_c.$div_pdf.addClass('animate1');
-                    this._dom_c.$center_part_wrap.addClass('animate1');
-                    $('.my-pdf').css('width', document.body.clientWidth+'px');
-                    this.$nextTick(function(){
-                        var _this = this;
-                        var transitionFlag = true;
-                        this._dom_c.$content.removeClass('showPDF_content presentation_mode_column').addClass('presentation_mode_row presentation_mode_row_animate animating');
-                        this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function (e) {
-                            if(e.target === e.currentTarget && transitionFlag) {
-                                transitionFlag = false;
-                                var transitionFlag_wrap = true;
-                                _this._dom_c.$div_pdf.removeClass('animate1').addClass('animate2');
-                                _this._dom_c.$center_part_wrap.removeClass('animate1').addClass('animate2');
-                                _this._dom_c.$div_pdf.attr('style',"");
-                                _this._dom_c.$center_part_wrap.attr('style',"");
-                                _this._dom_c.$content.removeClass('presentation_mode_row_animate');
-                                _this._dom_c.$div_pdf.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend transitionend', function () {
-                                    //_this._dom_c.$div_pdf.removeClass('animate');
-                                    if(e.target === e.currentTarget && transitionFlag_wrap) {
-                                        transitionFlag_wrap = false;
-                                        //_this._dom_c.$div_pdf.removeClass('animate');
-                                        clearTimeout(window.setTimeoutValue);
-                                        window.setTimeoutValue = setTimeout(function(){
-                                            $('.my-pdf').css('width', 'auto');
-                                            isFirstInPresentation && _this._dom_c.$center_part.css('width', 'auto');
-                                            _this._dom_c.$content.removeClass('animating');
-                                            _this._dom_c.$div_pdf.removeClass('animate2');
-                                            _this._dom_c.$center_part_wrap.removeClass('animate2');
-                                        }, 900);
-                                    }
-                                });
+                var points = this.initFullMode('row', isFirstInPresentation);
+                this._dom_c.$content.addClass('fullMode presentation_mode_row');
+                var win = window;
+                win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
+                var count = 0;
+                function render(){
+                    if(count < points.num){
+                        _this._dom_c.$div_pdf.css({
+                            top: points.pdfLeftTop[count][1]+'%',
+                            left: points.pdfLeftTop[count][0]+'%',
+                            width: points.pdfWH[count][0]+'%',
+                            height: points.pdfWH[count][1]+'%'
+                        });
+                        _this._dom_c.$center_part_wrap.css({
+                            top: points.centerLeftTop[count][1]+'%',
+                            left: points.centerLeftTop[count][0]+'%',
+                            width: points.centerWH[count][0]+'%',
+                            height: points.centerWH[count][1]+'%'
+                        });
+                        win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
+                    }else{
+                        _this._dom_c.$div_pdf.animate({
+                            top: '0',
+                            left: '0',
+                            width: '100%',
+                            height: '60%'
+                        }, {
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            complete: function(){
+                                $('.my-pdf').attr('style',"");
+                                _this._dom_c.$center_part.attr('style',"");
+                                _this._dom_c.$slidebar.attr('style',"");
                             }
                         });
-                    });
-                });
+                        _this._dom_c.$center_part_wrap.animate({
+                            top: '60%',
+                            left: '0',
+                            width: '100%',
+                            height: '40%'
+                        }, {
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            complete: function(){
+                                
+                            }
+                        });
+                    }
+                    count++;
+                }
+                win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
                 
 
             },
@@ -1277,9 +1577,8 @@
                     .div_pdf {
                         position: absolute;
                         top: 0;
-                        right: 0;
-                        bottom: 0;
                         left: 50%;
+                        width: 50%;
                         display: block !important;
                         /* width: 50%;
                         height: 100%; */
@@ -1299,8 +1598,7 @@
                         position: absolute;
                         top: 0;
                         left: 0;
-                        bottom: 0;
-                        right: 50%;
+                        width: 50%;
                         z-index: 999;
                         .slideBar {
                             display: block;
@@ -1334,7 +1632,7 @@
                     }
                 }
                 
-                .presentation_mode_column_animate {
+                /* .presentation_mode_column_animate {
                     .div_pdf {
                         top: 30% !important;
                         left: 52% !important;
@@ -1347,7 +1645,7 @@
                         bottom: 30% !important;
                         right: 52% !important;
                     }
-                }
+                } */
                 
 
                 .presentation_mode_row {
@@ -1355,8 +1653,7 @@
                         position: absolute;
                         top: 0;
                         left: 0;
-                        bottom: 50%;
-                        right: 0;
+                        height: 60%;
                         display: block !important;
                         border: 0;
                         /* width: 100%;
@@ -1375,8 +1672,7 @@
                         position: absolute;
                         top: 50%;
                         left: 0;
-                        bottom: 0;
-                        right: 0;
+                        height: 40%;
                         /* width: 100%;
                         height: 40%; */
                         .slideBar {
@@ -1413,7 +1709,7 @@
                     box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
                   }
                 }
-                .presentation_mode_row_animate {
+                /* .presentation_mode_row_animate {
                     .div_pdf {
                         top: 30% !important;
                         left: 40% !important;
@@ -1426,11 +1722,11 @@
                         bottom: 30% !important;
                         right: 40% !important;
                     }
-                }
+                } */
 
 
 
-                .animating {
+                /* .animating {
                     .div_pdf {
                         overflow: hidden;
                         .my-pdf{
@@ -1448,7 +1744,7 @@
                             height: 1000px;
                         }
                     }
-                }
+                } */
             }
         }
     }

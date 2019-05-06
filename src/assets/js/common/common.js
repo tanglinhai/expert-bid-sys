@@ -451,6 +451,42 @@ export default {
         setTimeout(function () {
             context.$root.$children[0].$children[0].$children[0].$refs.calendar.beginClock();
         }, 0);
+    },
+
+    /**
+     * [draw_bezier_curves draw bezier curves]
+     * @param  {[array]} input [输入]
+     * @param  {[number]} num [数量]
+     * @param  {[array]} output [输处]
+     */
+    draw_bezier_curves(input,num, output) {  
+        var step = 1.0 / num;
+        var t =0;
+        var count = input.length;
+        for(var i=0; i<num; i++)
+        {
+            var tmp_points = [];
+            for (var j = 1; j < count; ++j)
+            {
+                for (var k = 0; k < count - j; ++k)
+                {
+                    var tmp_point = [];
+                    if (j == 1)
+                    {
+                        tmp_point[0] = input[k][0] * (1 - t) + input[k + 1][0] * t;
+                        tmp_point[1] = input[k][1] * (1 - t) + input[k + 1][1] * t;
+                        tmp_points[k] = tmp_point;
+                        continue;
+                    }
+                    tmp_point[0] = tmp_points[k][0] * (1 - t) + tmp_points[k + 1][0] * t;
+                    tmp_point[1] = tmp_points[k][1] * (1 - t) + tmp_points[k + 1][1] * t;
+                    tmp_points[k] = tmp_point;
+                }
+            }
+            t += step;  
+            output[i] = tmp_points[0];  
+        }
+        output.splice(output.length -1 , 1, input[input.length - 1]);
     }
 }
 
