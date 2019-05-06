@@ -691,7 +691,7 @@
                             text: '拼命加载中...',
                             background: 'rgba(0,0,0,.75)'
                         }),*/
-                        onload: function () {
+                        onload: function () {//secondaryToolbarButtonContainer
                             $(this.contentWindow.document.getElementById('toolbarViewerRight')).prepend(
                                 `<button 
                                     id="presentationMode_column" 
@@ -1122,10 +1122,6 @@
                 this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
                 this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
                 this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
-
-
-
-
 
                 return {
                     pdfLeftTop,
