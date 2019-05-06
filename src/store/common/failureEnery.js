@@ -24,6 +24,8 @@ export default {
         business_tijiao:true,//商务提交状态
         dingdang_tijiao_state:true,//定档提交状态
         jishu_tijiao_state:true,//技术提交状态，
+        checkProScoreDialogVisible:false,//专家个人打分表弹框
+        tijiaoDialogZHPB:false,//综合评标页面提交按钮提示确定提交弹框
 
     }
 }

@@ -10,11 +10,11 @@
                     <div class="evaluationcommon_chakan_right">
                         <p v-if="dianji==1">
                             <em @click="ChakanTk(item)">{{item.toubiaorenName}}</em>
-                            <a href="http://localhost:7000/img/download.svc" download="">招标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></a>
+                            <a href="http://localhost:7000/img/download.svc" download="">投标文件：<b>{{item.toubiaorenFenbao}}<i class="icon iconfont icon-pdf"></i></b></a>
                         </p>
                         <p v-else>
                             <b style="display:block; color: #62a1e3; margin-bottom: 10px;">{{item.toubiaorenName}}</b>
-                            <strong>招标文件：<b>{{item.toubiaorenFenbao}}</b></strong>
+                            <strong style="display:none">招标文件：<b>{{item.toubiaorenFenbao}}</b></strong>
                         </p>
                     </div>
                 </a>
@@ -120,7 +120,7 @@
 
 <style  lang="scss">
     .LayoutLeftSide{
-        margin-right:280px;
+        //margin-right:280px;
         background:white;
         .grid-content{
             background:white;

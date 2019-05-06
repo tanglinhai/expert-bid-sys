@@ -4,7 +4,7 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
+                <el-col :span="7">
                     <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
                 </el-col>
                 <el-col :span="4">
@@ -16,18 +16,17 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
                 </el-col>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
+                </el-col>
             </el-row>
             <div class="evaluationcommon cf">
                <MessageCommon :tableData3="tableData3" :dianji="0"></MessageCommon>
                 <el-row class="LayoutRightSide">
-                    <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
+                    <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                         <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
-                    </div>
-                    <div class="fr mr20">
-                        当前状态
-                        <el-tag>已完成</el-tag>
-                    </div>
-                    <div class="grid-content bg-purple fl" style="margin-left:30px;">
+                    </div> -->
+                    <div class="grid-content bg-purple fl">
                         <el-button size="small"  @click="applyAvoid">申请回避</el-button>
                         <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
                     </div>
@@ -128,6 +127,7 @@
                 biaoNum:'', //标号
                 baohao:'', //包号
                 projectWenjian:'',  //项目资料
+                TheCurrentStatus:'', //当前状态
 
                 val:'',  //四种方式传值
 
@@ -226,6 +226,7 @@
                         this.biaoNum=res.data.result.biaoNum;
                         this.baohao=res.data.result.baohao;
                         this.projectWenjian=res.data.result.projectWenjian;
+                        this.TheCurrentStatus=res.data.result.TheCurrentStatus;
                     }
                 })
             },
@@ -345,7 +346,7 @@
             position: relative;
             .LayoutRightSide{
                overflow: hidden;
-                width: 266px;
+                width: 420px;
                 background: white;
                 -webkit-border-radius: 5px;
                 -moz-border-radius: 5px;
@@ -358,13 +359,13 @@
                 height: 100%;
                 .grid-content{
                     padding:20px 0px;
-                    width:80%;
+                    width:97%;
                     .commonTitle:before{
                         margin-left:15px;
                     }
                     .el-button{
-                        width:100px;
-                        height:74px;
+                        float: right;
+                        margin-left:10px;
                     }
                 }
             }
