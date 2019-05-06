@@ -88,7 +88,7 @@ import { setTimeout } from 'timers';
             _this.$nextTick(()=>{
                 let sortsSelectHeight = ($(".backblue").parent().parent().index()+1)*60;
                 let zongHeightHalf=($("body").height()-290)/2;
-                console.log(zongHeightHalf)
+                // console.log(zongHeightHalf)
                 //div.scrollTop=div.scrollHeight;
                 if(sortsSelectHeight>=zongHeightHalf){
                     div.scrollTop=sortsSelectHeight-zongHeightHalf;
