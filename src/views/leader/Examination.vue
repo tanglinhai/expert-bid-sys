@@ -1,0 +1,100 @@
+<template>
+    <div class="exam">
+        <el-row class="onlyBtnBox">
+           <el-col :span="4">
+                <div class="grid-content bg-purple-dark overflowText">
+                    标名称：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark overflowText">
+                    标号：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark overflowText">
+                    包号：
+                </div>
+            </el-col>
+            <el-col :span="12" class="fs14 textAlignR select">
+                <div class="grid-content bg-purple">
+                    <el-dropdown>
+                        <el-button type="primary" size="small">
+                            <i class="icon iconfont icon-caozuo  mr3"></i>操作<i
+                                class="el-icon-arrow-down el-icon--right"></i>
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>废标</el-dropdown-item>
+                            <el-dropdown-item>标中质询</el-dropdown-item>
+                            <el-dropdown-item>查看投标文件</el-dropdown-item>
+                            <el-dropdown-item>查看开标一览表</el-dropdown-item>
+                            <el-dropdown-item>评审结果签字</el-dropdown-item>
+                            <el-dropdown-item>资质审查签字</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+            </el-col>
+        </el-row>
+        <el-row class="bodyBox">
+            <el-tabs v-model="editableTabsValue" type="card" @tab-click="handleTabsEdit">
+                <el-tab-pane
+                    :key="item.name"
+                    v-for="(item, index) in editableTabs"
+                    :label="item.title"
+                    :name="item.name"
+                >
+                <Exam></Exam>
+                </el-tab-pane>
+            </el-tabs>
+        </el-row>
+    </div>
+</template>
+
+
+<script>
+import Exam from '../leader/leaderChild/exam';
+export default {
+components:{
+    Exam,
+},
+data() {
+    return {
+        editableTabs:[],
+        editableTabsValue:'1',
+    }
+},
+mounted() {
+    this.init();
+    },
+methods: {
+    init(){
+        this.$axios.post('./api/tabMsg').then(res => {
+            if(res.status == 200){
+                this.editableTabs=res.data.tabTitle;
+            }
+        })
+    },
+    handleTabsEdit(targetName){
+        console.log(targetName);
+    }
+},
+}
+</script>
+
+
+<style lang="scss">
+@import '../../assets/css/common/font.scss'; 
+.exam{
+    padding: 15px 20px 15px 0px;
+    padding-left: 95px !important;
+    .onlyBtnBox{
+        padding-bottom: 15px;
+        line-height: 47px;
+    }
+    .bodyBox{
+        padding:15px;
+        border-radius: 5px;
+        background: #fff;
+    }
+}
+</style>
