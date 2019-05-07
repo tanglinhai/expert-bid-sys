@@ -405,11 +405,11 @@
                                :pingshenzhaunjiaData="pingshenzhaunjiaData"></CheckProScore>
             </el-dialog>
             <el-dialog
-            title="投标人分项得分表"
-            :visible.sync="dialogBindScore"
-            width="1000px"
+                    title="投标人分项得分表"
+                    :visible.sync="dialogBindScore"
+                    width="1000px"
             >
-            <CheckProScore></CheckProScore>
+                <CheckProScore></CheckProScore>
             </el-dialog>
             <!--计算报价得分-->
             <el-dialog
@@ -619,7 +619,7 @@
         },
         created() {
             this.methodType = this.$route.query.methodType;
-            console.log(this.methodType);
+            // console.log(this.methodType);
         },
         mounted() {
             this.init();
@@ -641,7 +641,6 @@
                         this.scoreQuotationData = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
                         this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
                         this.unlockDataCheckbox = res.data.bidMsg.eviewrItemsMsg.jiesuoData.checkedList;
-                        console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
                         this.isShowProgressPage = res.data.bidMsg.eviewrItemsMsg.isShow;
                         this.unlockDataRadio = res.data.bidMsg.eviewrItemsMsg.jiesuoData.radioList;
                         this.unlock_dialog_check = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
@@ -649,7 +648,7 @@
                         this.zhaunjiaGerenMarkData = res.data.bidMsg.eviewrItemsMsg.zhaunjiaGerenMarkData;
                         this.companyNameData = res.data.bidMsg.eviewrItemsMsg.companyNameData;
                         this.pingshenzhaunjiaData = res.data.bidMsg.eviewrItemsMsg.pingshenzhaunjiaData;
-                        this.msgBoxProgressZHPB = res.data.bidMsg.eviewrItemsMsg.tables;
+                        this.msgBoxProgressZHPB = res.data.bidMsg.eviewrItemsMsg.tables;//进度数据
                         this.tableHead = res.data.bidMsg.eviewrItemsMsg.tableData;
                         this.pingshenweiyuanData = res.data.bidMsg.eviewrItemsMsg.pingshenweiyuanData;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.pingshenhuizongTableData;
@@ -966,7 +965,7 @@
                 this.$store.state.failureEnery.checkProScoreDialogVisible = true;
             },
             reviewSummarySubmitZHPB(){//综合评标提交按钮
-               this.$store.state.failureEnery.tijiaoDialogZHPB=true;
+                this.$store.state.failureEnery.tijiaoDialogZHPB=true;
             },
             comfrimSubmitZHPB(){//综合评标提交确定按钮
                 this.submitFormLoadingZHPB=true;
