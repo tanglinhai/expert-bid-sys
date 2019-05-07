@@ -191,17 +191,25 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
 
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
+                        {
+                            "title":"重庆网控科技发展有限公司（1） ",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]
                         },
-                        {"title": "普瑞太阳能有限公司（2）",
+                        {
+                            "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
                         },
 
-                        {"title":"夏丰热工研究院有限公司（3）",
+                        {
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
 
                         },
                     ],
                     "dingdang_tableData":[
-
                         {
                            evaluationFactors: '内存大小大于8G',
                            standardReview:'大于等于8G',
@@ -211,11 +219,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num:0  },
                                 ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -226,11 +231,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -241,11 +243,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
 
                         {
@@ -257,11 +256,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -272,11 +268,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
 
                         {
@@ -288,11 +281,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -303,11 +293,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
 
                         {
@@ -319,11 +306,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -334,11 +318,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -349,11 +330,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -364,11 +342,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -379,11 +354,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },           {
                             evaluationFactors: '是否为INTEL生产',
                             standardReview:'必须是INTEL生产',
@@ -393,11 +365,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
@@ -408,23 +377,9 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            value2:'',
+                            value3:''
                         },
-
-
-
-
-
-
-
-
-
-
-
                         {
                             evaluationFactors: '分辨率是否为15英寸以上',//(资格审查的评审因素)
                             standardReview:'可达到1366*768以上即可',
@@ -434,12 +389,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {typeTitle: '不合格', num: 0 },
                             ],
                             value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
+                            value2:'',
+                            value3:''
                         },
 
                     ],

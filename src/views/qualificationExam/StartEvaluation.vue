@@ -108,6 +108,28 @@
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" >
+                                                        <template slot="header" slot-scope="scope">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style">
+                                                                <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
+                                                                <i class="icon iconfont icon-pdf"></i>
+                                                            </a>
+                                                            <el-dropdown v-else trigger="click">
+                                                              <span class="el-dropdown-link">
+                                                                <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                                {{scope.column.label}}
+                                                                <i class="icon iconfont icon-pdf"></i>
+                                                                <i class="el-icon-arrow-down el-icon--right"></i>
+                                                              </span>
+                                                              <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                                <el-dropdown-item
+                                                                        @click.native="show_pdf(pdfItem)"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
+                                                                >{{pdfItem.pdf_name}}<i
+                                                                        class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                              </el-dropdown-menu>
+                                                            </el-dropdown>
+                                                        </template>
                                                         <template slot-scope="scope">
                                                             <el-radio-group
                                                                     v-model="scope.row['value' + (index + 1)]"
@@ -119,26 +141,7 @@
                                                                 </el-radio>
                                                             </el-radio-group>
                                                             <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
-                                                            <a v-if="scope.row.pdf.length<2"
-                                                               @click="show_pdf(scope.row.pdf[0])" class="common_a_style ">
-                                                                <i class="el-icon-search fs14 mr3 ver_al_m ml10 mr5"></i>{{scope.row.name}}
-                                                                <i class="icon iconfont icon-pdf mr5"></i>
-                                                            </a>
-                                                            <el-dropdown v-else trigger="click" class="common_a_style">
-                                                                  <span class="el-dropdown-link">
-                                                                    <i class="el-icon-search fs14 mr3 ver_al_m  ml10 mr5"></i>
-                                                                    {{scope.row.name}}
-                                                                    <i class="icon iconfont icon-pdf mr5"></i>
-                                                                    <i class="el-icon-arrow-down el-icon--right"></i>
-                                                                  </span>
-                                                                <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu ml10 mr5">
-                                                                    <el-dropdown-item
-                                                                            @click.native="show_pdf(pdfItem)"
-                                                                            v-for="(pdfItem ,index) in scope.row.pdf"
-                                                                    >{{pdfItem.pdf_name}}<i
-                                                                            class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                                </el-dropdown-menu>
-                                                            </el-dropdown>
+                                                            
                                                             <div class="btn_locate iconfont icon-dingwei" style="display: inline-block"
                                                                  @click="locate_pdf(item.fristTableData, scope.row)"
                                                                  title="定位到关联投标文件说明处"
@@ -366,9 +369,9 @@
             //     $(".right_warp").hide();
             // });
             this.init();
-            setTimeout(function () {
+            /*setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
-            }, 200);
+            }, 200);*/
             this._dom_c = {
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
@@ -1115,7 +1118,7 @@
                             duration: 1000,
                             easing: 'easeInOutBack',
                             complete: function(){
-                                $('.my-pdf').attr('style',"");
+                                $('.my-pdf').css('width', 'auto');
                                 _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
@@ -1170,7 +1173,7 @@
                             duration: 1000,
                             easing: 'easeOutExpo',
                             complete: function(){
-                                $('.my-pdf').attr('style',"");
+                                $('.my-pdf').css('width', 'auto');
                                 _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
@@ -1425,9 +1428,9 @@
                                         .div_header {
                                             border-bottom: 1px solid #bfc8cd;
                                         }
-                                        #treeDemo {
+                                        /* #treeDemo {
                                             li {
-
+                                        
                                                 .node_name {
                                                     width: 102px;
                                                     overflow: hidden;
@@ -1436,7 +1439,7 @@
                                                     white-space: nowrap;
                                                 }
                                             }
-                                        }
+                                        } */
                                     }
                                     .right_warp {
                                         /*padding-left: 15px;*/
@@ -1458,16 +1461,17 @@
                                                 margin-bottom: 20px;
                                             }
                                         }
-                                        .first_table {
-                                            .el-dropdown {
+                                        .dingdang_table {
+
+                                            .el-dropdown-link {
+                                                cursor: pointer;
+                                                color: #409EFF;
+                                            }
+                                            /* .el-dropdown {
                                                 display: inline;
                                             }
                                             .el-table__header-wrapper {
                                                 display: none;
-                                            }
-                                            .el-dropdown-link {
-                                                cursor: pointer;
-                                                color: #409EFF;
                                             }
                                             .el-icon-arrow-down {
                                                 font-size: 12px;
@@ -1492,7 +1496,7 @@
                                             }
                                             .cell {
                                                 padding-right: 40px;
-                                            }
+                                            } */
                                         }
                                     }
                                     .personalAuditFormTable {
