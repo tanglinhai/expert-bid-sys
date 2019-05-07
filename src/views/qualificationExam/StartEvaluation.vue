@@ -102,25 +102,28 @@
                                                 </el-table-column>
                                                 <el-table-column
                                                         label="评审因素"
-                                                        min-width="150" fixed prop="evaluationFactors">
+                                                        width="250" fixed prop="evaluationFactors"  >
                                                 </el-table-column>
+
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" >
+                                                                     min-width="300" :key="index">
                                                         <template slot-scope="scope">
                                                             <el-radio-group
                                                                     v-model="scope.row['value' + (index + 1)]"
-                                                                    v-if="$store.state.failureEnery.business_tijiao"
-                                                                    @change="changeRadios(index + 1)">
+                                                                    v-if="$store.state.failureEnery.flag"
+                                                                    @change="changeRadios(scope.$index,index + 1,scope.row['value'+(index+1)],scope.row,item.title)">
                                                                 <el-radio :label="val.num"
                                                                           v-for="val in scope.row.radioList">
                                                                     {{val.typeTitle}}
                                                                 </el-radio>
                                                             </el-radio-group>
-                                                            <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
+                                                            <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
+                                                            <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
                                                             <a v-if="scope.row.pdf.length<2"
-                                                               @click="show_pdf(scope.row.pdf[0])" class="common_a_style ">
+                                                               @click="show_pdf(scope.row.pdf[0])"
+                                                               class="common_a_style ">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m ml10 mr5"></i>{{scope.row.name}}
                                                                 <i class="icon iconfont icon-pdf mr5"></i>
                                                             </a>
@@ -131,15 +134,18 @@
                                                                     <i class="icon iconfont icon-pdf mr5"></i>
                                                                     <i class="el-icon-arrow-down el-icon--right"></i>
                                                                   </span>
-                                                                <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu ml10 mr5">
+                                                                <el-dropdown-menu slot="dropdown"
+                                                                                  class="table_pdf_drop_menu ml10 mr5">
                                                                     <el-dropdown-item
                                                                             @click.native="show_pdf(pdfItem)"
                                                                             v-for="(pdfItem ,index) in scope.row.pdf"
                                                                     >{{pdfItem.pdf_name}}<i
-                                                                            class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                                            class="icon iconfont icon-pdf"></i>
+                                                                    </el-dropdown-item>
                                                                 </el-dropdown-menu>
                                                             </el-dropdown>
-                                                            <div class="btn_locate iconfont icon-dingwei" style="display: inline-block"
+                                                            <div class="btn_locate iconfont icon-dingwei"
+                                                                 style="display: inline-block"
                                                                  @click="locate_pdf(item.fristTableData, scope.row)"
                                                                  title="定位到关联投标文件说明处"
                                                             ></div>
@@ -147,10 +153,14 @@
                                                     </el-table-column>
                                                 </el-table-column>
                                             </el-table>
-                                            <div class="dingWeiDiv" style="text-align: center;line-height: 50px;"><span class="biaozhunTitle" ></span>审查标准：<span class="biaozhunConent"></span></div>
+                                            <div class="dingWeiDiv" style="text-align: center;line-height: 50px;"><span
+                                                    class="biaozhunTitle"></span>审查标准：<span
+                                                    class="biaozhunConent"></span></div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="positionDiv"><span class="biaozhunTitle"></span>审查标准：<span
+                                        class="biaozhunConent"></span></div>
                             </div>
                         </div>
                     </el-row>
@@ -158,11 +168,30 @@
             </div>
             <el-dialog
                     title="不合格录入"
-                    :visible.sync="$store.state.failureEnery.show"
+                    :visible.sync="failureEntryDialog"
                     width="700px"
+                    class="failureEntryDialogWarp"
             >
-                <FailureEntry @childByValue="childByValue" :company_name="to_failure_entry_company_name"
-                              :answer="to_failure_entry_answer"></FailureEntry>
+                <div class="failureEntry">
+                    <div class="failureoOject">
+                        不合格对象： <span class="red">{{to_failure_entry_company_name}}</span>
+                        <span>&nbsp;&nbsp;的&nbsp;</span> <span class=red>{{to_failure_entry_answer}}</span>
+                    </div>
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+                        <el-form-item prop="desc">
+                            <label><span class="red">*</span>不合格理由：（50汉字或者100汉字之内）：</label>
+                            <el-input type="textarea" v-model="ruleForm.desc" class="textarea" autosize></el-input>
+                        </el-form-item>
+                        <el-form-item class="textAlignC">
+                            <el-button type="primary" @click="failureEntryConfirmBtn('ruleForm')" size="small"><i
+                                    class="icon iconfont icon-baocun1 mr5"></i> 确定
+                            </el-button>
+                            <el-button @click="$store.state.failureEnery.show=false" size="small" type="primary"><i
+                                    class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
             </el-dialog>
             <el-dialog
                     title="审查提示"
@@ -195,7 +224,7 @@
             <!--全部选中提示弹框-->
             <el-dialog
                     title="全部选中提示"
-                    :visible.sync="$store.state.failureEnery.determineOperating"
+                    :visible.sync="determineOperatingDialog"
                     width="30%"
             >
                 <el-row class="textAlignC fs14" style="line-height: 30px">
@@ -252,7 +281,7 @@
                         <el-row class="fs14 table_tips mt5">
                             <el-col style="line-height: 24px">注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
                             </el-col>
-                            <el-col  style="line-height: 24px">
+                            <el-col style="line-height: 24px">
                                 2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
                             </el-col>
                         </el-row>
@@ -264,7 +293,7 @@
 </template>
 
 <script>
-    import FailureEntry from '../../components/publicVue/FailureEntry';
+
     import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
@@ -274,7 +303,6 @@
     export default {
         props: {},
         components: {
-            FailureEntry,
             SubmitPrompt,
             NavBar,
             AbandonedTender,//废标
@@ -298,22 +326,6 @@
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
-                /* ----------------------------------树形图-------------------------*/
-                // setting: {   //zTree配置
-                //     view: {
-                //         dblClickExpand: this.dblClickExpand,
-                //     },
-                //     data: {
-                //         simpleData: {//使用的数据格式
-                //             enable: true
-                //         }
-                //     },
-                //     callback: {//点击回调函数
-                //         onClick: this.zTreeOnClick
-                //     }
-                // },
-                zNodes: [],
-                /* ---------------------------------树形图end------------------------*/
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
                 tableArr: [],//table数据
@@ -339,10 +351,21 @@
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
                 methodType: '',
                 personalAuditFormDialog: false,//个人资格审查项按钮弹框
-                companyname_toubiao:[],//投标人数据
-                dingdang_tableData:[],//资格审查table数据
-                standardReviewTips:'',//
-
+                companyname_toubiao: [],//投标人数据
+                dingdang_tableData: [],//资格审查table数据
+                standardReviewTips: '',//
+                rowIndex: "",//记录点击的是那个行
+                colIndex: "",//记录点击的是那个列
+                ruleForm: {//不合格理由
+                    desc: '',
+                },
+                rules: {//不合格理由
+                    desc: [
+                        {required: true, message: '请填写申请原因', trigger: 'blur',},
+                    ]
+                },
+                failureEntryDialog: false,//不合格录入弹框
+                determineOperatingDialog: false,//点击全部选中提示弹框
             }
         },
         created() {
@@ -354,21 +377,13 @@
             }
         },
         mounted() {
-
-
+            $(".positionDiv").hide();
             $(".dingWeiDiv").hide();
-            // $("#treeDemo").on('click', '#treeDemo_1_a', function () {
-            //     $(".right_warp").show();
-            //     $(".personalAuditFormTable").hide();
-            // });
-            // $(".personalAuditFormBtn").click(function () {
-            //     $(".personalAuditFormTable").show();
-            //     $(".right_warp").hide();
-            // });
+
             this.init();
-            setTimeout(function () {
-                $("#treeDemo_1_a").addClass("curSelectedNode");
-            }, 200);
+            // setTimeout(function () {
+            //     $("#treeDemo_1_a").addClass("curSelectedNode");
+            // }, 200);
             this._dom_c = {
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
@@ -404,10 +419,10 @@
                     }
                 }
             },
-            completePercent(){
+            completePercent() {
                 let num = 0;
                 let allNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
-                this.dingdang_tableData.forEach(e => { //循环表数据
+                this.dingdang_tableData.forEach(e => {
                     this.companyname_toubiao.forEach((k, i) => {
                         if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
                             num++;
@@ -433,9 +448,7 @@
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
-                        // this.zNodes = res.data.bidMsg.eviewrItemsMsg.zTreeData;//树形图数据
-                        // this.to_submit_prompt_name = this.zNodes.name;//树形图父级的值
-                        // $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);//渲染树形图
+                        this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.flag = true;//未提交
@@ -443,53 +456,15 @@
                             this.$store.state.failureEnery.flag = false;//已提交
                             $("#hide_btn").hide();
                         }
-                        // this.zNodes.children.forEach((m, i) => {
-                        //     this.tableArr.push(m.fristTableData.tableData);
-                        //     m.fristTableData.tableData.forEach((x, s) => {
-                        //         this.radioArr.push(x)
-                        //     })
-                        // })
-
-                        // console.log( res.data.bidMsg.eviewrItemsMsg.companyNameList);
-                        this.companyname_toubiao=res.data.bidMsg.eviewrItemsMsg.companyNameList;
-                        this.dingdang_tableData=res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                        this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
+                        this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
                     }
                     this.page_loading = false;
                 })
             },
-            failuredRadio(radio, id, index, tableKey, obj, a) {//合格不合格
-                this.to_failure_entry_company_name = obj.name;
-                this.to_failure_entry_answer = a;
-                this.$axios.post('/api/isFailure_fhx', 'post', {
-                    id: id,
-                    type: radio
-                }).then(res => {
-                    if (res.status == 200) {
-                        var store_radio = null;
-                        for (var i = 0; i < tableKey.length; i++) {
-                            if (tableKey[i].id == id) {
-                                store_radio = tableKey[i];
-                                this.obj = store_radio;
-                                break;
-                            }
-                        }
-                        if (radio == '不合格') {
-                            this.$store.state.failureEnery.show = true;
-                            this.idradionoprss = id;
-                        } else if (radio == '合格') {
-                            store_radio.content = ''
-                        }
-                    }
-                })
-            },
-            childByValue: function (childValue) {       // childValue就是子组件传过来的值
-                if (this.obj.id == this.idradionoprss) {
-                    this.obj.content = childValue;
-                }
-                this.$store.state.failureEnery.show = false;
-            },
+
             allChecked() {//全选（不用区分url）
-                this.$store.state.failureEnery.determineOperating = true;
+                this.determineOperatingDialog = true;
             },
             isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
                 let isAllF = true;
@@ -518,7 +493,6 @@
                         if (res.status == 200) {
                             this.allSubmitBtnLoading = false;
                             this.options = res.data.vue_type;
-                            // this.$store.state.failureEnery.submitPrompt = true;
                         }
                     })
                 } else {
@@ -548,33 +522,6 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 }
             },
-            /*----------------- zTree ----------------------*/
-            // zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-            //     if (treeNode.children) {
-            //         this.zNodes.children.forEach((m, i) => {
-            //             this.$set(m, 'show', true)
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = false;
-            //         this.$store.state.failureEnery.parent_progress_show = true;
-            //     } else {
-            //         this.son_all_checked = treeNode.fristTableData.tableData;
-            //         this.zNodes.children.forEach((m, i) => {
-            //             if (m.id == treeNode.id) {
-            //                 this.$set(m, 'show', true)
-            //             } else {
-            //                 this.$set(m, 'show', false)
-            //             }
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = true;
-            //         this.$store.state.failureEnery.parent_progress_show = false;
-            //     }
-            //     $(".right_warp").show();
-            //     $(".personalAuditFormTable").hide();
-            // },
-            // dblClickExpand(treeId, treeNode) {
-            //     return treeNode.level > 0;
-            // },
-            /*----------------- zTree end ----------------------*/
             getIframeDocument(refStr) {
                 return this.getIframeWindow(refStr).document;
             },
@@ -681,64 +628,7 @@
 
                 this.showPDF();
             },
-            sublevelAllChecked() {
-                this.sonAllCheckedBtnLoading = true;
-                this.$axios.post('/api/allChecked_son', {
-                    // id:id
-                }).then(res => {
-                    if (res.status === 200) {
-                        this.son_all_checked.forEach((s, f) => {
-                            this.radioArr.forEach((h, j) => {
-                                if (s.id == h.id) {
-                                    this.son_all_che.push(h);
-                                    h.radio = '合格';
-                                }
-                            })
-                        });
-                        this.sonAllCheckedBtnLoading = false;
-                    }
-                });
-            },
-            son_isAllFilled() {//子级全部提交：判断radio是否选中，全部选择为true，反之为false
-                let isAllF = true;
-                for (let i = 0; i < this.son_all_che.length; i++) {
-                    if (!this.son_all_che[i].radio) {
-                        isAllF = false;
-                        break;
-                    }
-                }
-                return isAllF;
-            },
-            sublevelSubmit() {//子级全部提交
-                this.sonAllSubmitBtnLoading = true;
-                if (this.son_isAllFilled()) {
-                    this.$axios.post('/api/son_allchecked_submit', {}).then(res => {
-                        if (res.status == 200) {
-                            this.sonAllSubmitBtnLoading = false;
-                            this.$store.state.failureEnery.submitPrompt = true;
-                        } else {
-                            this.$message({
-                                message: '请选择合格/不合格',
-                                center: true,
-                                type: 'error',
-                            });
-                        }
-                    }).catch(() => {
-                        this.$message({
-                            message: '请选择合格/不合格',
-                            center: true,
-                            type: 'error',
-                        });
-                    })
-                } else {
-                    this.$message({
-                        message: '请选择合格/不合格',
-                        center: true,
-                        type: 'error',
-                    });
-                }
 
-            },
 
             slideBarMousedown(e) {
                 this.hDiff = this._dom_c.$content.hasClass('presentation_mode_row') ? e.clientY - this._dom_c.$div_pdf.height() :
@@ -788,16 +678,15 @@
                 }
             },
 
-            initFullMode(modeType, isFirstInPresentation){
+            initFullMode(modeType, isFirstInPresentation) {
                 var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
-                this._dom_c.$div_pdf.attr('style',"");
-                this._dom_c.$center_part_wrap.attr('style',"");
-                $('.my-pdf').css('width', conW+'px');
-                this._dom_c.$center_part.css('width', conW+'px');
+                this._dom_c.$div_pdf.attr('style', "");
+                this._dom_c.$center_part_wrap.attr('style', "");
+                $('.my-pdf').css('width', conW + 'px');
+                this._dom_c.$center_part.css('width', conW + 'px');
 
 
-
-                if(modeType == 'column'){
+                if (modeType == 'column') {
                     this._dom_c.$div_pdf.css({
                         overflow: 'hidden',
                         "z-index": 2
@@ -807,7 +696,7 @@
                         "z-index": 1
                     });
                     //this._dom_c.$slidebar.css('width', conW+'px');
-                }else{
+                } else {
                     this._dom_c.$div_pdf.css({
                         overflow: 'hidden',
                         "z-index": 1
@@ -824,7 +713,7 @@
                 var pdf_t;
                 var pdf_w;
                 var pdf_h;
-                
+
                 var cen_l;
                 var cen_t;
                 var cen_w;
@@ -840,12 +729,12 @@
                 var centerWH;
                 var num = 50;
 
-                if(isFirstInPresentation){
+                if (isFirstInPresentation) {
                     var conH = this._dom_c.$content.height();
                     var bodyW = document.body.clientWidth;
                     var bodyH = document.body.clientHeight;
                     var scrollTop = $('html,body').scrollTop();
-                    
+
 
                     var pdfOffset = this._dom_c.$div_pdf.offset();
                     var part_wrapOffset = this._dom_c.$center_part_wrap.offset();
@@ -857,29 +746,29 @@
 
                     this._dom_c.$div_pdf.css({
                         position: 'absolute',
-                        top: (pdfOffset.top - scrollTop)/bodyH*100+'%',
-                        left: pdfOffset.left/bodyW*100+'%',
-                        width: pdfW/bodyW*100+'%',
-                        height: pdfH/bodyH*100+'%'
+                        top: (pdfOffset.top - scrollTop) / bodyH * 100 + '%',
+                        left: pdfOffset.left / bodyW * 100 + '%',
+                        width: pdfW / bodyW * 100 + '%',
+                        height: pdfH / bodyH * 100 + '%'
                     });
                     this._dom_c.$center_part_wrap.css({
                         position: 'absolute',
-                        top: (part_wrapOffset.top - scrollTop)/bodyH*100+'%',
-                        left: part_wrapOffset.left/bodyW*100+'%',
-                        width: partW/bodyW*100+'%',
-                        height: partH/bodyH*100+'%'
+                        top: (part_wrapOffset.top - scrollTop) / bodyH * 100 + '%',
+                        left: part_wrapOffset.left / bodyW * 100 + '%',
+                        width: partW / bodyW * 100 + '%',
+                        height: partH / bodyH * 100 + '%'
                     });
                     pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
                     pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
                     pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
                     pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
-                    
+
                     cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
                     cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
                     cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
                     cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
 
-                    if(modeType == 'column'){
+                    if (modeType == 'column') {
                         /**
                          * .div_pdf {
                                 top: 30% !important;
@@ -887,7 +776,7 @@
                                 bottom: 30% !important;
                                 right: 36% !important;
                             }
-                            .center_part_wrap {
+                         .center_part_wrap {
                                 top: 30% !important;
                                 left: 36% !important;
                                 bottom: 30% !important;
@@ -896,41 +785,41 @@
                          */
                         //pdf
                         pdfInput1 = [
-                            [pdf_l,pdf_t],
+                            [pdf_l, pdf_t],
                             [90, -20],
-                            [80, pdf_t/3],
+                            [80, pdf_t / 3],
                             [60, pdf_t],
-                            [52,30]
+                            [52, 30]
                         ];
                         pdfLeftTop = [];
                         pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [13,30],
-                            [15,49],
-                            [18,45],
-                            [13,35]
+                            [pdf_w, pdf_h],
+                            [13, 30],
+                            [15, 49],
+                            [18, 45],
+                            [13, 35]
                         ];
                         pdfWH = [];
-                        
+
                         //center_part_wrap
 
                         centerInput1 = [
-                            [cen_l,cen_t],
+                            [cen_l, cen_t],
                             [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [36,30]
+                            [cen_l * 1.2, 0],
+                            [cen_l * 4, 20],
+                            [36, 30]
                         ];
                         centerLeftTop = [];
                         centerInput2 = [
-                            [cen_w,cen_h],
-                            [4,5],
-                            [8,49],
-                            [20,40],
-                            [13,35]
+                            [cen_w, cen_h],
+                            [4, 5],
+                            [8, 49],
+                            [20, 40],
+                            [13, 35]
                         ];
                         centerWH = [];
-                    }else{
+                    } else {
                         /*.presentation_mode_row_animate {
                             .div_pdf {
                                 top: 30% !important;
@@ -947,123 +836,123 @@
                         }*/
                         //pdf
                         pdfInput1 = [
-                            [pdf_l,pdf_t],
+                            [pdf_l, pdf_t],
                             [38, 30],
                             [80, 0],
                             [45, -20],
-                            [40,30]
+                            [40, 30]
                         ];
                         pdfLeftTop = [];
                         pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
+                            [pdf_w, pdf_h],
+                            [40, 20],
+                            [30, 33],
+                            [25, 28],
+                            [25, 14]
                         ];
                         pdfWH = [];
-                        
+
                         //center_part_wrap
                         centerInput1 = [
-                            [cen_l,cen_t],
+                            [cen_l, cen_t],
                             [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [40,52]
+                            [cen_l * 1.2, 0],
+                            [cen_l * 4, 20],
+                            [40, 52]
                         ];
                         centerLeftTop = [];
                         centerInput2 = [
-                            [cen_w,cen_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
+                            [cen_w, cen_h],
+                            [40, 20],
+                            [30, 33],
+                            [25, 28],
+                            [25, 14]
                         ];
                         centerWH = [];
                     }
-                }else{
+                } else {
 
                     pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
                     pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
                     pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
                     pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
-                    
+
                     cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
                     cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
                     cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
                     cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
 
-                    if(modeType == 'column'){
+                    if (modeType == 'column') {
                         //pdf
                         pdfInput1 = [
-                            [pdf_l,pdf_t],
+                            [pdf_l, pdf_t],
                             [90, -20],
-                            [80, pdf_t/3],
+                            [80, pdf_t / 3],
                             [60, pdf_t],
-                            [52,30]
+                            [52, 30]
                         ];
                         pdfLeftTop = [];
                         pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [13,30],
-                            [15,49],
-                            [18,45],
-                            [13,35]
+                            [pdf_w, pdf_h],
+                            [13, 30],
+                            [15, 49],
+                            [18, 45],
+                            [13, 35]
                         ];
                         pdfWH = [];
-                        
+
                         //center_part_wrap
 
                         centerInput1 = [
-                            [cen_l,cen_t],
+                            [cen_l, cen_t],
                             [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [36,30]
+                            [cen_l * 1.2, 0],
+                            [cen_l * 4, 20],
+                            [36, 30]
                         ];
                         centerLeftTop = [];
                         centerInput2 = [
-                            [cen_w,cen_h],
-                            [4,5],
-                            [8,49],
-                            [20,40],
-                            [13,35]
+                            [cen_w, cen_h],
+                            [4, 5],
+                            [8, 49],
+                            [20, 40],
+                            [13, 35]
                         ];
                         centerWH = [];
-                    }else{
+                    } else {
                         //pdf
                         pdfInput1 = [
-                            [pdf_l,pdf_t],
+                            [pdf_l, pdf_t],
                             [38, 30],
                             [80, 0],
                             [45, -20],
-                            [40,30]
+                            [40, 30]
                         ];
                         pdfLeftTop = [];
                         pdfInput2 = [
-                            [pdf_w,pdf_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
+                            [pdf_w, pdf_h],
+                            [40, 20],
+                            [30, 33],
+                            [25, 28],
+                            [25, 14]
                         ];
                         pdfWH = [];
-                        
+
                         //center_part_wrap
                         centerInput1 = [
-                            [cen_l,cen_t],
+                            [cen_l, cen_t],
                             [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
-                            [40,52]
+                            [cen_l * 1.2, 0],
+                            [cen_l * 4, 20],
+                            [40, 52]
                         ];
                         centerLeftTop = [];
                         centerInput2 = [
-                            [cen_w,cen_h],
-                            [40,20],
-                            [30,33],
-                            [25,28],
-                            [25,14]
+                            [cen_w, cen_h],
+                            [40, 20],
+                            [30, 33],
+                            [25, 28],
+                            [25, 14]
                         ];
                         centerWH = [];
                     }
@@ -1072,9 +961,6 @@
                 this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
                 this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
                 this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
-
-
-
 
 
                 return {
@@ -1090,26 +976,27 @@
                 var isFirstInPresentation = _this._dom_c.$content.hasClass('showPDF_content');
                 var points = _this.initFullMode('column', isFirstInPresentation);
                 _this._dom_c.$content.addClass('fullMode presentation_mode_column');
-                
+
                 var win = window;
                 win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
                 var count = 0;
-                function render(){
-                    if(count < points.num){
+
+                function render() {
+                    if (count < points.num) {
                         _this._dom_c.$div_pdf.css({
-                            top: points.pdfLeftTop[count][1]+'%',
-                            left: points.pdfLeftTop[count][0]+'%',
-                            width: points.pdfWH[count][0]+'%',
-                            height: points.pdfWH[count][1]+'%'
+                            top: points.pdfLeftTop[count][1] + '%',
+                            left: points.pdfLeftTop[count][0] + '%',
+                            width: points.pdfWH[count][0] + '%',
+                            height: points.pdfWH[count][1] + '%'
                         });
                         _this._dom_c.$center_part_wrap.css({
-                            top: points.centerLeftTop[count][1]+'%',
-                            left: points.centerLeftTop[count][0]+'%',
-                            width: points.centerWH[count][0]+'%',
-                            height: points.centerWH[count][1]+'%'
+                            top: points.centerLeftTop[count][1] + '%',
+                            left: points.centerLeftTop[count][0] + '%',
+                            width: points.centerWH[count][0] + '%',
+                            height: points.centerWH[count][1] + '%'
                         });
                         win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
-                    }else{
+                    } else {
                         _this._dom_c.$div_pdf.animate({
                             top: '0',
                             left: '50%',
@@ -1118,10 +1005,10 @@
                         }, {
                             duration: 1000,
                             easing: 'easeInOutBack',
-                            complete: function(){
-                                $('.my-pdf').attr('style',"");
-                                _this._dom_c.$center_part.attr('style',"");
-                                _this._dom_c.$slidebar.attr('style',"");
+                            complete: function () {
+                                $('.my-pdf').attr('style', "");
+                                _this._dom_c.$center_part.attr('style', "");
+                                _this._dom_c.$slidebar.attr('style', "");
                             }
                         });
                         _this._dom_c.$center_part_wrap.animate({
@@ -1132,13 +1019,14 @@
                         }, {
                             duration: 1000,
                             easing: 'easeInOutBack',
-                            complete: function(){
-                                
+                            complete: function () {
+
                             }
                         });
                     }
                     count++;
                 }
+
                 win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
             },
             fullModeRow() {
@@ -1149,22 +1037,23 @@
                 var win = window;
                 win.cancelAnimationFrame(win._requestAnimationFrame_reqestId);
                 var count = 0;
-                function render(){
-                    if(count < points.num){
+
+                function render() {
+                    if (count < points.num) {
                         _this._dom_c.$div_pdf.css({
-                            top: points.pdfLeftTop[count][1]+'%',
-                            left: points.pdfLeftTop[count][0]+'%',
-                            width: points.pdfWH[count][0]+'%',
-                            height: points.pdfWH[count][1]+'%'
+                            top: points.pdfLeftTop[count][1] + '%',
+                            left: points.pdfLeftTop[count][0] + '%',
+                            width: points.pdfWH[count][0] + '%',
+                            height: points.pdfWH[count][1] + '%'
                         });
                         _this._dom_c.$center_part_wrap.css({
-                            top: points.centerLeftTop[count][1]+'%',
-                            left: points.centerLeftTop[count][0]+'%',
-                            width: points.centerWH[count][0]+'%',
-                            height: points.centerWH[count][1]+'%'
+                            top: points.centerLeftTop[count][1] + '%',
+                            left: points.centerLeftTop[count][0] + '%',
+                            width: points.centerWH[count][0] + '%',
+                            height: points.centerWH[count][1] + '%'
                         });
                         win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
-                    }else{
+                    } else {
                         _this._dom_c.$div_pdf.animate({
                             top: '0',
                             left: '0',
@@ -1173,10 +1062,10 @@
                         }, {
                             duration: 1000,
                             easing: 'easeOutExpo',
-                            complete: function(){
-                                $('.my-pdf').attr('style',"");
-                                _this._dom_c.$center_part.attr('style',"");
-                                _this._dom_c.$slidebar.attr('style',"");
+                            complete: function () {
+                                $('.my-pdf').attr('style', "");
+                                _this._dom_c.$center_part.attr('style', "");
+                                _this._dom_c.$slidebar.attr('style', "");
                             }
                         });
                         _this._dom_c.$center_part_wrap.animate({
@@ -1187,13 +1076,14 @@
                         }, {
                             duration: 1000,
                             easing: 'easeOutExpo',
-                            complete: function(){
-                                
+                            complete: function () {
+
                             }
                         });
                     }
                     count++;
                 }
+
                 win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
             },
             closePDF() {
@@ -1205,50 +1095,75 @@
             showPDF() {
                 this._dom_c.$content.addClass('showPDF_content');
             },
-            comfrimAllChecked() {
+            comfrimAllChecked() {//确定全选
                 this.allCheckedBtnLoading = true;
-                this.$store.state.failureEnery.determineOperating = false;
+                this.determineOperatingDialog = false;
                 this.$axios.post('/api/allChecked_fhx', {
                     // id:id
                 }).then(res => {
                     if (res.status === 200) {
-                        for (let i = 0; i < this.radioArr.length; i++) {
-                            this.radioArr[i].radio = '合格';
-                        }
-                        this.allCheckedBtnLoading = false;
+                        this.dingdang_tableData.forEach((e, i) => {
+                            this.companyname_toubiao.forEach((k, j) => {
+                                e[`value${j + 1}`] = '合格';
+                            });
+                            this.allCheckedBtnLoading = false;
+                        })
                     }
                 });
             },
-            rebackAllChecked() {
-                this.$store.state.failureEnery.determineOperating = false;
+            rebackAllChecked() {//取消全选
+                this.determineOperatingDialog = false;
             },
             personalAuditForm() {
                 this.personalAuditFormDialog = true;
             },
-            changeRadios(index){
-                console.log(index);
-
+            changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
+                this.rowIndex = rowIndex;
+                this.colIndex = colIndex;
+                this.to_failure_entry_company_name = title;
+                this.to_failure_entry_answer = obj.evaluationFactors;
+                this.$axios.post('/api/isFailure_fhx', 'post', {
+                    type: val
+                }).then(res => {
+                    if (res.status == 200) {
+                        if (val == "不合格") {
+                            this.failureEntryDialog = true;
+                        }
+                    }
+                })
             },
-            handleRowClick(row, column, event){
-                $(".dingWeiDiv").show();
-                this.standardReviewTips=row.standardReview;
+            failureEntryConfirmBtn(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.$axios.post('/api/save', 'post', {
+                            data: this.$data.ruleForm.desc,
+                        }).then(res => {
+                            if (res.data.code == 200) {
+                                this.dingdang_tableData[this.rowIndex]['gradeExplain' + this.colIndex] = this.$data.ruleForm.desc;
+                                this.$data.ruleForm.desc = '';
+                                this.$message({
+                                    type: 'success',
+                                    message: '录入成功',
+                                    center: true
+                                });
+                                this.failureEntryDialog = false;
+                            }
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            handleRowClick(row, column, event) {//资格审查表点击行数据出现审查标准
+                this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
+                if (document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) === true) {//判读页面是否出现滚动条
+                    $(".positionDiv").show()
+                } else {
+                    $(".dingWeiDiv").show();
+                }
             },
-            // data() {
-            //     return {
-            //         innerHeight: 0
-            //     };
-            // },
-            // methods: {
-            //     handleResizeWindow() {
-            //         this.innerHeight = window.innerHeight;
-            //     }
-            // },
-            // mounted() {
-            //     this.innerHeight = window.innerHeight;
-            //     util.addEvent(window, 'resize', this.handleResizeWindow);
-            //
-            // },
         }
     }
 </script>
@@ -1525,17 +1440,30 @@
                                     /*padding: 0;*/
                                     /*}*/
                                     /* 用来设置当前页面element全局table 选中某行时的背景色*/
-                                    .el-table__body tr.current-row>td{
+                                    .el-table__body tr.current-row > td {
                                         background-color: #b3d8ff !important;
-                                        /* color: #f19944; */  /* 设置文字颜色，可以选择不设置 */
+                                        /* color: #f19944; */
+                                        /* 设置文字颜色，可以选择不设置 */
                                     }
                                     /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
                                     /*.el-table--enable-row-hover .el-table__body tr:hover>td {*/
-                                        /*background-color: #f19944;*/
-                                        /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
+                                    /*background-color: #f19944;*/
+                                    /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
                                     /*}*/
                                 }
-                                .dingWeiDiv{
+                                .positionDiv {
+                                    text-align: center;
+                                    line-height: 50px;
+                                    position: fixed;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px;
+                                    background: #fff6ec;
+                                    border: 1px solid #ffdcb3;
+                                    left: 0;
+                                    z-index: 999;
+                                }
+                                .dingWeiDiv {
                                     width: 100%;
                                     height: 50px;
                                     background: #fff6ec;
@@ -1628,7 +1556,6 @@
                     }
                 }
 
-                
                 /* .presentation_mode_column_animate {
 
                     .div_pdf {
@@ -1645,8 +1572,6 @@
                     }
 
                 } */
-                
-
 
                 .presentation_mode_row {
                     .div_pdf {
@@ -1724,9 +1649,6 @@
                     }
                 } */
 
-
-
-
                 /* .animating {
 
                     .div_pdf {
@@ -1749,7 +1671,21 @@
                 } */
             }
         }
+        .failureEntryDialogWarp {
+            .failureEntry {
+                .failureoOject {
+                    line-height: 38px;
+                    height: 38px;
+                    border-top: 1px dotted #ccc;
+                    border-bottom: 1px dotted #ccc;
+                }
+                .demo-ruleForm {
+                    .el-textarea__inner {
+                        min-height: 220px !important;
+                    }
+                }
+            }
+        }
     }
-
 
 </style>

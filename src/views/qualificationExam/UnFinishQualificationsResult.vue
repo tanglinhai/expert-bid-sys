@@ -40,26 +40,44 @@
                                     style="width: 100%"
                                     class="pro_table" v-if="$store.state.failureEnery.isshow">
                                 <el-table-column
-                                        prop="name"
-                                        label="评审专家"
-                                        width="120px"
-                                        align="center">
-                                </el-table-column>
-                                <el-table-column
-                                        label="资格审查项进度"
-                                        align="center">
+                                        v-for='(col) in tableHead'
+                                        :label="col.dataName"
+                                        :key="col.dataItem"
+                                     >
                                     <template slot-scope="scope">
-                                        <el-progress :percentage="scope.row.dates"></el-progress>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column
-                                        label="是否提交资格审查结果"
-                                        align="center">
-                                    <template slot-scope="scope">
-                                        <span>{{scope.row.isFinish}}</span>
+                                        <span v-if="col.type === '1' ">{{
+                                            scope.row[col.dataItem]
+                                            }}</span>
+                                        <el-progress v-else :percentage="scope.row[col.dataItem]"></el-progress>
                                     </template>
                                 </el-table-column>
                             </el-table>
+                            <!--<el-table-->
+                                    <!--:data="msgBox"-->
+                                    <!--border-->
+                                    <!--style="width: 100%"-->
+                                    <!--class="pro_table" v-if="$store.state.failureEnery.isshow">-->
+                                <!--<el-table-column-->
+                                        <!--prop="name"-->
+                                        <!--label="评审专家"-->
+                                        <!--width="120px"-->
+                                        <!--align="center">-->
+                                <!--</el-table-column>-->
+                                <!--<el-table-column-->
+                                        <!--label="资格审查项进度"-->
+                                        <!--align="center">-->
+                                    <!--<template slot-scope="scope">-->
+                                        <!--<el-progress :percentage="scope.row.dates"></el-progress>-->
+                                    <!--</template>-->
+                                <!--</el-table-column>-->
+                                <!--<el-table-column-->
+                                        <!--label="是否提交资格审查结果"-->
+                                        <!--align="center">-->
+                                    <!--<template slot-scope="scope">-->
+                                        <!--<span>{{scope.row.isFinish}}</span>-->
+                                    <!--</template>-->
+                                <!--</el-table-column>-->
+                            <!--</el-table>-->
                             <div class="unlock_table-warp fs14" v-else>
                                 <el-row style="line-height:40px;">
                                     <el-col :span="12">
@@ -278,7 +296,7 @@
             }
         },
         created() {
-            console.log(this.$route.query.methodType);
+            // console.log(this.$route.query.methodType);
             this.methodType=this.$route.query.methodType;
             this.type = this.$route.query.type;
         },
@@ -306,7 +324,8 @@
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
-                        this.msgBox = res.data.bidMsg.eviewrItemsMsg.mylist;
+                        this.msgBox = res.data.bidMsg.eviewrItemsMsg.tables;//进度条表格数据
+                        this.tableHead=res.data.bidMsg.eviewrItemsMsg.tableData;//进度条表格表头数据
                         this.unlock_table = res.data.bidMsg.eviewrItemsMsg.unlock_table_data;
                         this.unlock_table_company_name = res.data.bidMsg.eviewrItemsMsg.unlock_table_company_name;
                         this.evaluationLeader = res.data.bidMsg.eviewrItemsMsg.evaluationLeader;

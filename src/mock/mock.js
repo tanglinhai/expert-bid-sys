@@ -189,253 +189,92 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-
+                    'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
-                        },
-                        {"title": "普瑞太阳能有限公司（2）",
-                        },
+                        {"title":"重庆网控科技发展有限公司（1）"},
+                        {"title": "普瑞太阳能有限公司（2）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
 
-                        {"title":"夏丰热工研究院有限公司（3）",
-
-                        },
                     ],
                     "dingdang_tableData":[
-
                         {
-                           evaluationFactors: '内存大小大于8G',
-                           standardReview:'大于等于8G',
+                            evaluationFactors: '内存大小大于8G',
+                            standardReview:'大于等于8G',
                             type: 'radio',//单选
                             radioList: [
-                                {typeTitle: '合格', num: 1},
-                                {typeTitle: '不合格', num:0  },
-                                ],
+                                {typeTitle: '合格', num: '合格'},
+                                {typeTitle: '不合格', num:'不合格'  },
+                            ],
                             value1:'',
                             value2:'' ,
                             value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
                             pdf:[
                                 {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            ],
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
                         },
                         {
                             evaluationFactors: '是否为INTEL生产',
                             standardReview:'必须是INTEL生产',
                             type: 'radio',//单选
                             radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
                             ],
                             value1:'',
                             value2:'' ,
                             value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
                             pdf:[
                                 {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
                             ]
                         },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },           {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-                        {
-                            evaluationFactors: '是否为INTEL生产',
-                            standardReview:'必须是INTEL生产',
-                            type: 'radio',//单选
-                            radioList: [
-                                {typeTitle: '合格', num:1},
-                                {typeTitle: '不合格', num: 0 },
-                            ],
-                            value1:'',
-                            value2:'' ,
-                            value3:'' ,
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
-
-
-
-
-
-
-
-
-
-
-
                         {
                             evaluationFactors: '分辨率是否为15英寸以上',//(资格审查的评审因素)
                             standardReview:'可达到1366*768以上即可',
                             type: 'radio',//单选
                             radioList: [
-                                {typeTitle: '合格', num: 1},
-                                {typeTitle: '不合格', num: 0 },
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
                             ],
                             value1:'',
                             value2:'' ,
                             value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
                             pdf:[
                                 {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
@@ -747,150 +586,243 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-                    'zTreeData': //树形图
+                    'shenchaName':"形式审计-#707478",
+                    'companyNameList': [//(投标人)公司名
+                        {"title":"重庆网控科技发展有限公司（1）"},
+                        {"title": "普瑞太阳能有限公司（2）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                    ],
+                    "dingdang_tableData":[
                         {
-                            id: 1, pId: 0, name: "形式审计-#707478", open: true,
-                            children: [
-                                {
-                                    id: 101, pId: 1, name: "投标人名称", open: false,
-                                    fristTableData: {//第一个表格
-                                        question: "资格审查评审项：",
-                                        answer: "投标人名称",
-                                        question1: "审查标准4：",
-                                        answer1: "与营业执照、资质证书一致4444",
-                                        tableData: [{
-                                            index: 0,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 1,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 1,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 2,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 2,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 3,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 102, pId: 1, name: "资质", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "资质",
-                                        question1: "审查标准5",
-                                        answer1: "与营业执照、资质证书一致5555",
-                                        tableData: [{
-                                            index: 3,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 4,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 4,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 5,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 5,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 6,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 103, pId: 1, name: "审查项目", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "审查项目",
-                                        question1: "审查标准6",
-                                        answer1: "与营业执照、资质证书一致6666",
-                                        tableData: [{
-                                            index: 6,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass2: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 7,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 7,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 8,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 8,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 9,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    }
-                                },
+                            evaluationFactors: '投标人名称',
+                            standardReview:'与营业执照、资质证书一致',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num: '合格'},
+                                {typeTitle: '不合格', num:'不合格'  },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            pdf:[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
+                            ],
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                        },
+                        {
+                            evaluationFactors: '资质',
+                            standardReview:'与营业执照、资质证书一致',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
+                        {
+                            evaluationFactors: '审查项目',//(资格审查的评审因素)
+                            standardReview:'与营业执照、资质证书一致',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                            pdf:[
+                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
                             ]
                         },
 
+                    ],
+                    // 'zTreeData': //树形图
+                    //     {
+                    //         id: 1, pId: 0, name: "形式审计-#707478", open: true,
+                    //         children: [
+                    //             {
+                    //                 id: 101, pId: 1, name: "投标人名称", open: false,
+                    //                 fristTableData: {//第一个表格
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "投标人名称",
+                    //                     question1: "审查标准4：",
+                    //                     answer1: "与营业执照、资质证书一致4444",
+                    //                     tableData: [{
+                    //                         index: 0,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 1,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 1,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 2,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 2,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 3,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 102, pId: 1, name: "资质", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "资质",
+                    //                     question1: "审查标准5",
+                    //                     answer1: "与营业执照、资质证书一致5555",
+                    //                     tableData: [{
+                    //                         index: 3,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 4,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 4,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 5,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 5,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 6,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 103, pId: 1, name: "审查项目", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "审查项目",
+                    //                     question1: "审查标准6",
+                    //                     answer1: "与营业执照、资质证书一致6666",
+                    //                     tableData: [{
+                    //                         index: 6,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass2: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 7,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 7,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 8,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 8,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 9,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 }
+                    //             },
+                    //         ]
+                    //     },
+
                     'mylist': ms,
                     //头部审查类型按钮
+
                 },
                 msg: [  //个人形式审计表数据接口(改动)
                     {
@@ -1034,149 +966,242 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 //审查项
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
-                    'zTreeData': //树形图
+                    'shenchaName':"详细评审技术",
+                    'companyNameList': [//(投标人)公司名
+                        {"title":"重庆网控科技发展有限公司（1）"},
+                        {"title": "普瑞太阳能有限公司（2）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"夏丰热工研究院有限公司（3）"},
+                    ],
+                    "dingdang_tableData":[
                         {
-                            id: 1, pId: 0, name: "详细评审技术", open: true,
-                            children: [
-                                {
-                                    id: 101, pId: 1, name: "详细评审1", open: false,
-                                    fristTableData: {//第一个表格
-                                        question: "资格审查评审项：",
-                                        answer: "详细评审1",
-                                        question1: "审查标准7：",
-                                        answer1: "与营业执照、资质证书一致77777",
-                                        tableData: [{
-                                            index: 0,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 1,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 1,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 2,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 2,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 3,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 102, pId: 1, name: "详细评审2", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "详细评审2",
-                                        question1: "审查标准8",
-                                        answer1: "与营业执照、资质证书一致8888",
-                                        tableData: [{
-                                            index: 3,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 4,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 4,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 5,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 5,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 6,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    },
-                                },
-                                {
-                                    id: 103, pId: 1, name: "详细评审3", open: false,
-                                    fristTableData: {
-                                        question: "资格审查评审项：",
-                                        answer: "详细评审3",
-                                        question1: "审查标准9",
-                                        answer1: "与营业执照、资质证书一致999",
-                                        tableData: [{
-                                            index: 6,
-                                            people: '招标人1：',
-                                            name: '[1]重庆网控科技发展有限公司',
-                                            pass2: '1',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 7,
-                                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
-                                        }, {
-                                            index: 7,
-                                            people: '招标人2：',
-                                            name: '[2] 普瑞太阳能有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 8,
-                                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                                        }, {
-                                            index: 8,
-                                            people: '招标人3：',
-                                            name: '[3] 夏丰热工研究院有限公司',
-                                            pass2: '2',
-                                            content: '',
-                                            ra1: '合格',
-                                            ra2: '不合格',
-                                            radio: '',
-                                            id: 9,
-                                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
-                                        }],
-                                    }
-                                },
+                            evaluationFactors: '详细评审1',
+                            standardReview:'与营业执照、资质证书一致111',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num: '合格'},
+                                {typeTitle: '不合格', num:'不合格'  },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            pdf:[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
+                            ],
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                        },
+                        {
+                            evaluationFactors: '详细评审2',
+                            standardReview:'与营业执照、资质证书一致222',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                            pdf:[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
                             ]
                         },
+                        {
+                            evaluationFactors: '详细评审3',//(资格审查的评审因素)
+                            standardReview:'与营业执照、资质证书一致333',
+                            type: 'radio',//单选
+                            radioList: [
+                                {typeTitle: '合格', num:'合格'},
+                                {typeTitle: '不合格', num: '不合格' },
+                            ],
+                            value1:'',
+                            value2:'' ,
+                            value3:'' ,
+                            value4:'' ,
+                            value5:'' ,
+                            value6:'' ,
+                            value7:'' ,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
+                            gradeExplain4:'',
+                            gradeExplain5:'',
+                            gradeExplain6:'',
+                            gradeExplain7:'',
+                            pdf:[
+                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
+                            ]
+                        },
+
+                    ],
+                    // 'zTreeData': //树形图
+                    //     {
+                    //         id: 1, pId: 0, name: "详细评审技术", open: true,
+                    //         children: [
+                    //             {
+                    //                 id: 101, pId: 1, name: "详细评审1", open: false,
+                    //                 fristTableData: {//第一个表格
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "详细评审1",
+                    //                     question1: "审查标准7：",
+                    //                     answer1: "与营业执照、资质证书一致77777",
+                    //                     tableData: [{
+                    //                         index: 0,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 1,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 1,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 2,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 2,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 3,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 102, pId: 1, name: "详细评审2", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "详细评审2",
+                    //                     question1: "审查标准8",
+                    //                     answer1: "与营业执照、资质证书一致8888",
+                    //                     tableData: [{
+                    //                         index: 3,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 4,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 4,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 5,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 5,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 6,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 },
+                    //             },
+                    //             {
+                    //                 id: 103, pId: 1, name: "详细评审3", open: false,
+                    //                 fristTableData: {
+                    //                     question: "资格审查评审项：",
+                    //                     answer: "详细评审3",
+                    //                     question1: "审查标准9",
+                    //                     answer1: "与营业执照、资质证书一致999",
+                    //                     tableData: [{
+                    //                         index: 6,
+                    //                         people: '招标人1：',
+                    //                         name: '[1]重庆网控科技发展有限公司',
+                    //                         pass2: '1',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 7,
+                    //                         pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                    //                             {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                    //                             {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"},]
+                    //                     }, {
+                    //                         index: 7,
+                    //                         people: '招标人2：',
+                    //                         name: '[2] 普瑞太阳能有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 8,
+                    //                         pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                    //                     }, {
+                    //                         index: 8,
+                    //                         people: '招标人3：',
+                    //                         name: '[3] 夏丰热工研究院有限公司',
+                    //                         pass2: '2',
+                    //                         content: '',
+                    //                         ra1: '合格',
+                    //                         ra2: '不合格',
+                    //                         radio: '',
+                    //                         id: 9,
+                    //                         pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"}]
+                    //                     }],
+                    //                 }
+                    //             },
+                    //         ]
+                    //     },
                     'mylist': ms,
                     //头部审查类型按钮
+
                 },
                 msg: [  //个人形式审计表数据接口(改动)
                     {
@@ -1343,26 +1368,51 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
-                    'mylist': [
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        }
-                    ],
+                    'tables': [{//综合评标页面进度条数据
+                        'evaluationExpert': '评审专家七',
+                        'businessReviewProgress': '5',
+                        'isResultsBusinessReview': '未完成',
+                        ' technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress':'5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家五',
+                        'businessReviewProgress':  '5',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家一',
+                        'businessReviewProgress':  '50',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }],
+
+                    'tableData': [{
+                        'dataItem': 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        'dataName': '评审专家',//动态表头的名字
+                        'type': '1'//文字
+                    }, {
+                        'dataItem': 'businessReviewProgress',
+                        'dataName': '资格审查项进度',
+                        ' type': '2'//进度条
+                    }, {
+                        'dataItem': 'isResultsBusinessReview',
+                        'dataName': '是否提交资格审查结果',
+                        'type': '1'//文字
+                    },],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
                     'unlock_table_data':[
@@ -1718,26 +1768,51 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
-                    'mylist': [
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        }
-                    ],
+                    'tables': [{//综合评标页面进度条数据
+                        'evaluationExpert': '评审专家七',
+                        'businessReviewProgress': '5',
+                        'isResultsBusinessReview': '未完成',
+                        ' technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress':'5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家五',
+                        'businessReviewProgress':  '5',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家一',
+                        'businessReviewProgress':  '50',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }],
+
+                    'tableData': [{
+                        'dataItem': 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        'dataName': '评审专家',//动态表头的名字
+                        'type': '1'//文字
+                    }, {
+                        'dataItem': 'businessReviewProgress',
+                        'dataName': '符合性审查项进度',
+                        ' type': '2'//进度条
+                    }, {
+                        'dataItem': 'isResultsBusinessReview',
+                        'dataName': '是否提交符合性审查评审结果',
+                        'type': '1'//文字
+                    },],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
                     'unlock_table_data':[
@@ -1958,26 +2033,51 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     //头部审查类型按钮
 
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
-                    'mylist': [
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        },
-                        {
-                            dates: '5',
-                            isFinish: '未完成',
-                            id: Random.id(),
-                            name: Random.cname(),
-                        }
-                    ],
+                    'tables': [{//综合评标页面进度条数据
+                        'evaluationExpert': '评审专家七',
+                        'businessReviewProgress': '5',
+                        'isResultsBusinessReview': '未完成',
+                        ' technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress':'5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家五',
+                        'businessReviewProgress':  '5',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }, {
+                        'evaluationExpert': '评审专家一',
+                        'businessReviewProgress':  '50',
+                        'isResultsBusinessReview': '未完成',
+                        'technicalReviewProgress': '5',
+                        'isResultsTechnicalReview': '未完成',
+                        'serviceReviewProgress': '5',
+                        'isResultsServiceReview':"未完成",
+                        'otherReviewProgress':'5',
+                        'isResultsOtherReview':"未完成"
+                    }],
+
+                    'tableData': [{
+                        'dataItem': 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        'dataName': '评审专家',//动态表头的名字
+                        'type': '1'//文字
+                    }, {
+                        'dataItem': 'businessReviewProgress',
+                        'dataName': '详细评审（技术）进度',
+                        ' type': '2'//进度条
+                    }, {
+                        'dataItem': 'isResultsBusinessReview',
+                        'dataName': '是否提交详细评审（技术）进度结果',
+                        'type': '1'//文字
+                    },],
                     'evaluationLeader': '张三',
                     'other_explain': Random.csentence(),
                     'unlock_table_data':[
@@ -2885,7 +2985,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
         let data_msg = [];
         let dataMsg = [];
         let is_tijaio=Random.integer(0, 1);
-          return {
+        return {
             'bidMsg': {
                 id: Random.id(),
                 'name': '2019年水利运输服务招标项目',
@@ -2920,21 +3020,21 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         scoringSystem:'53',
                         score: ''
                     }],
-                     'pingbiao_yijian': dataMsg,
+                    'pingbiao_yijian': dataMsg,
                     'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
                             label:'商务'
-                            },{
-                                value: '2',
-                                label:'技术'
-                            }, {
-                                value: '3',
-                                label:'服务'
-                            },{
-                                value: '4',
-                                label:'其他'
-                            } ],
+                        },{
+                            value: '2',
+                            label:'技术'
+                        }, {
+                            value: '3',
+                            label:'服务'
+                        },{
+                            value: '4',
+                            label:'其他'
+                        } ],
                         'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
                         "tippsDialogName":'解锁申请'//评分解锁成功提示框的name
                     },
@@ -3063,7 +3163,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                                 {"title":"重庆网控科技发展有限公司（1） "},
                                 {"title":"普瑞太阳能有限公司（2） "},
                                 {"title":"夏丰热工研究院有限公司（1） "},
-                                ]
+                            ]
                         },
                         {
                             'name':'王五',
@@ -3121,8 +3221,8 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                                     'zhaunjia1':["31.00",  "36.00","39.00",]
                                 } ,
                             ]
-                           },
-                         {
+                        },
+                        {
                             'name':'评标专家一',
                             'zhaunjiadata_gs':[
                                 {
@@ -4061,32 +4161,32 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         },
                     ],
                     "dingdang_tableData":[
-                    //     {
-                    //         projectName: '第一章，商务10分',
-                    //         type: 'radio',//单选
-                    //         radioList: [
-                    //             {typeTitle: 'A 10分', num: 10},
-                    //             {typeTitle: 'B 20分', num: 20 },
-                    //             {typeTitle: 'C 30分', num: 30,}
-                    //         ],
-                    //         min: null,
-                    //         max: null,
-                    //         tit: '',
-                    //         value1:'',
-                    //         value2:'' ,
-                    //         value3: ''
-                    //     },
-                    //     {
-                    //         projectName: '第二章，商务20分',
-                    //         type: 'input',// 两步法
-                    //         radioList: [],
-                    //         min: 10,
-                    //         max: 50,
-                    //         tit: '是否是官方配置？',
-                    //         value1: '',
-                    //         value2: '',
-                    //         value3: ''
-                    //     },
+                        //     {
+                        //         projectName: '第一章，商务10分',
+                        //         type: 'radio',//单选
+                        //         radioList: [
+                        //             {typeTitle: 'A 10分', num: 10},
+                        //             {typeTitle: 'B 20分', num: 20 },
+                        //             {typeTitle: 'C 30分', num: 30,}
+                        //         ],
+                        //         min: null,
+                        //         max: null,
+                        //         tit: '',
+                        //         value1:'',
+                        //         value2:'' ,
+                        //         value3: ''
+                        //     },
+                        //     {
+                        //         projectName: '第二章，商务20分',
+                        //         type: 'input',// 两步法
+                        //         radioList: [],
+                        //         min: 10,
+                        //         max: 50,
+                        //         tit: '是否是官方配置？',
+                        //         value1: '',
+                        //         value2: '',
+                        //         value3: ''
+                        //     },
 
                         // {
                         //     projectName: '第一章、其他(1.00分-60.00分)',
@@ -5300,19 +5400,19 @@ let business_tijiao = Mock.mock('/api/business_tijiao', 'post', {
     message: '成功!',
     data:
         {
-        projectName: '总计',
-        type: 'numberTotle',
-        radioList: [ ],
-        min: null,
-        max: null,
-        tit: '',
-        value1: 23,
-        value2: 45,
-        value3: 36,
-        gradeExplain1:"",
-        gradeExplain2:"",
-        gradeExplain3:"",
-    },
+            projectName: '总计',
+            type: 'numberTotle',
+            radioList: [ ],
+            min: null,
+            max: null,
+            tit: '',
+            value1: 23,
+            value2: 45,
+            value3: 36,
+            gradeExplain1:"",
+            gradeExplain2:"",
+            gradeExplain3:"",
+        },
     // [{
     //         projectName: '第一章，商务10分',
     //             type: 'radio',//单选

@@ -708,7 +708,7 @@
             }
         },
         created() {
-            console.log(this.$route.query.methodType);
+            // console.log(this.$route.query.methodType);
             this.methodType = this.$route.query.methodType;
             this.type = this.$route.query.type;
 
@@ -721,7 +721,6 @@
                     let arr = this.dingdang_tableData.slice(0, -2);//去除最后两项
                     arr.forEach(e => { //循环表数据
                         this.companyname_toubiao.forEach((k, i) => {
-                            console.log(e[`value${i + 1}`]);
                             if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
                                 num++;
                             }
@@ -1060,7 +1059,6 @@
                         }
                     })
                 } else if (this.type == 10) {
-                    console.log(this.type);
                     this.$axios.post('/api/fuwu_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
@@ -1074,7 +1072,6 @@
                         }
                     })
                 } else if (this.type == 11) {
-                    console.log(this.type);
                     this.$axios.post('/api/qita_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
