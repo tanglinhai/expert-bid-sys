@@ -20,8 +20,10 @@
     .NavCommon{
       height:95%;
       position:absolute;
-      background: white;
       margin-top: 15px;
+      .is-horizontal{
+        display:none;
+      }
     }
     .lineAll{
         border-left:2px solid #ddd;
@@ -46,13 +48,13 @@
     border-radius:0px;
     position: relative;
     &:before{
-      // content:"";
-      // border-top: 10px solid transparent;
-      // border-bottom: 10px solid transparent;
-      // border-right: 10px solid white;
-      // position: absolute;
-      // right: -2px;
-      // top: 7px;
+      content:"";
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid #348fed;
+      position: absolute;
+      right: -17px;
+      top: 7px;
     }
     span{
         .kuai{
