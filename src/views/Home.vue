@@ -15,11 +15,55 @@
   .WrapBig{
     position: relative;
     .Router{
-      padding-left:75px;
+      padding-left:115px;
     }
     .NavCommon{
       height:95%;
       position:absolute;
+      background: white;
+      margin-top: 15px;
+    }
+    .lineAll{
+        border-left:2px solid #ddd;
+        border-image: -webkit-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
+        border-image: -moz-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
+        border-image: linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30; 
+    }
+  }
+  .el-button.is-disabled{
+    span{
+      .kuai{
+        background:#c0c4cc!important;
+      }
+    }
+  }
+  .backblue{
+    background:#348fe2!important;
+    color:white!important;
+    border:2px solid #348fe2!important;
+    margin-left:-12px;
+    width:115px;
+    border-radius:0px;
+    position: relative;
+    &:before{
+      // content:"";
+      // border-top: 10px solid transparent;
+      // border-bottom: 10px solid transparent;
+      // border-right: 10px solid white;
+      // position: absolute;
+      // right: -2px;
+      // top: 7px;
+    }
+    span{
+        .kuai{
+            background:white!important;
+        }
+    }
+    &:hover{
+        color:white!important;
+    }
+    &:visited,&:focus{
+        color:white!important; 
     }
   }
   
