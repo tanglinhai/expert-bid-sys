@@ -39,10 +39,12 @@
                 <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
                 <div class="content">
                     <div class="div_pdf">
-                        <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
-                             v-for="item in pdfItems"
-                             v-show="item.show"></pdf>
-                        <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
+                        <div class="div_pdf_wrap">
+                            <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
+                                 v-for="item in pdfItems"
+                                 v-show="item.show"></pdf>
+                            <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
+                        </div>
                     </div>
                     <!-- <el-button class="exitFullMode"
                         icon="iconfont icon-fullscreen-exit"
@@ -108,6 +110,28 @@
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" >
+                                                        <template slot="header" slot-scope="scope">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
+                                                                <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
+                                                                <i class="icon iconfont icon-pdf"></i>
+                                                            </a>
+                                                            <el-dropdown v-else trigger="click">
+                                                              <span class="el-dropdown-link" title="投标文件列表">
+                                                                <i class="el-icon-search fs14 mr3 ver_al_m"></i>
+                                                                {{scope.column.label}}
+                                                                <i class="icon iconfont icon-pdf"></i>
+                                                                <i class="el-icon-arrow-down el-icon--right"></i>
+                                                              </span>
+                                                              <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                                <el-dropdown-item
+                                                                        @click.native="show_pdf(pdfItem)"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
+                                                                >{{pdfItem.pdf_name}}<i
+                                                                        class="icon iconfont icon-pdf"></i></el-dropdown-item>
+                                                              </el-dropdown-menu>
+                                                            </el-dropdown>
+                                                        </template>
                                                         <template slot-scope="scope">
                                                             <el-radio-group
                                                                     v-model="scope.row['value' + (index + 1)]"
@@ -119,26 +143,7 @@
                                                                 </el-radio>
                                                             </el-radio-group>
                                                             <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
-                                                            <a v-if="scope.row.pdf.length<2"
-                                                               @click="show_pdf(scope.row.pdf[0])" class="common_a_style ">
-                                                                <i class="el-icon-search fs14 mr3 ver_al_m ml10 mr5"></i>{{scope.row.name}}
-                                                                <i class="icon iconfont icon-pdf mr5"></i>
-                                                            </a>
-                                                            <el-dropdown v-else trigger="click" class="common_a_style">
-                                                                  <span class="el-dropdown-link">
-                                                                    <i class="el-icon-search fs14 mr3 ver_al_m  ml10 mr5"></i>
-                                                                    {{scope.row.name}}
-                                                                    <i class="icon iconfont icon-pdf mr5"></i>
-                                                                    <i class="el-icon-arrow-down el-icon--right"></i>
-                                                                  </span>
-                                                                <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu ml10 mr5">
-                                                                    <el-dropdown-item
-                                                                            @click.native="show_pdf(pdfItem)"
-                                                                            v-for="(pdfItem ,index) in scope.row.pdf"
-                                                                    >{{pdfItem.pdf_name}}<i
-                                                                            class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                                </el-dropdown-menu>
-                                                            </el-dropdown>
+                                                            
                                                             <div class="btn_locate iconfont icon-dingwei" style="display: inline-block"
                                                                  @click="locate_pdf(item.fristTableData, scope.row)"
                                                                  title="定位到关联投标文件说明处"
@@ -366,13 +371,13 @@
             //     $(".right_warp").hide();
             // });
             this.init();
-            setTimeout(function () {
+            /*setTimeout(function () {
                 $("#treeDemo_1_a").addClass("curSelectedNode");
-            }, 200);
+            }, 200);*/
             this._dom_c = {
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
-                $my_pdf: $('.my-pdf'),
+                $div_pdf_wrap: $('.div_pdf_wrap'),
                 $center_part_wrap: $('.center_part_wrap'),
                 $center_part: $('.center_part'),
                 $content: $('.content'),
@@ -642,7 +647,7 @@
                             text: '拼命加载中...',
                             background: 'rgba(0,0,0,.75)'
                         }),*/
-                        onload: function () {
+                        onload: function () {//secondaryToolbarButtonContainer
                             $(this.contentWindow.document.getElementById('toolbarViewerRight')).prepend(
                                 `<button 
                                     id="presentationMode_column" 
@@ -789,10 +794,14 @@
             },
 
             initFullMode(modeType, isFirstInPresentation){
+                var bodyH = document.body.clientHeight;
                 var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
                 this._dom_c.$div_pdf.attr('style',"");
                 this._dom_c.$center_part_wrap.attr('style',"");
-                $('.my-pdf').css('width', conW+'px');
+                this._dom_c.$div_pdf_wrap.css({
+                    'width': conW+'px',
+                    'height': bodyH+'px',
+                });
                 this._dom_c.$center_part.css('width', conW+'px');
 
 
@@ -843,7 +852,7 @@
                 if(isFirstInPresentation){
                     var conH = this._dom_c.$content.height();
                     var bodyW = document.body.clientWidth;
-                    var bodyH = document.body.clientHeight;
+                    
                     var scrollTop = $('html,body').scrollTop();
                     
 
@@ -1073,10 +1082,6 @@
                 this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
                 this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
 
-
-
-
-
                 return {
                     pdfLeftTop,
                     pdfWH,
@@ -1119,7 +1124,10 @@
                             duration: 1000,
                             easing: 'easeInOutBack',
                             complete: function(){
-                                $('.my-pdf').attr('style',"");
+                                _this._dom_c.$div_pdf_wrap.css({
+                                    'width': 'auto',
+                                    'height': '100%',
+                                });
                                 _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
@@ -1174,7 +1182,10 @@
                             duration: 1000,
                             easing: 'easeOutExpo',
                             complete: function(){
-                                $('.my-pdf').attr('style',"");
+                                _this._dom_c.$div_pdf_wrap.css({
+                                    'width': 'auto',
+                                    'height': '100%',
+                                });
                                 _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
@@ -1343,40 +1354,42 @@
                         font-size: 15rem;
                         font-weight: 500;
                         box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
-                        /* .closePDF{
-                            display: none;
-                            background-color: #fff;
-                            position: absolute;
-                            top: -15px;
-                            right: 0;
-                            width: 30px;
-                            height: 30px;
-                            font-size: 30px;
-                            border-radius: 30px;
-                            color: #606266;
-                            cursor: pointer;
-                            z-index: 2001;
-                            &:hover{
-                                color: #e27575;
-                            }
-                        } */
-                        .my-pdf {
-                            font-size: 15px;
-                            font-weight: normal;
-                            .pdfShow {
-                                position: relative;
-                                min-height: 200px;
-                                .pdfobject {
-                                    display: block;
-                                }
-                            }
-                            .floating_div {
+                        .div_pdf_wrap {
+                            /* .closePDF{
+                                display: none;
+                                background-color: #fff;
                                 position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                z-index: 1;
+                                top: -15px;
+                                right: 0;
+                                width: 30px;
+                                height: 30px;
+                                font-size: 30px;
+                                border-radius: 30px;
+                                color: #606266;
+                                cursor: pointer;
+                                z-index: 2001;
+                                &:hover{
+                                    color: #e27575;
+                                }
+                            } */
+                            .my-pdf {
+                                font-size: 15px;
+                                font-weight: normal;
+                                .pdfShow {
+                                    position: relative;
+                                    min-height: 200px;
+                                    .pdfobject {
+                                        display: block;
+                                    }
+                                }
+                                .floating_div {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    z-index: 1;
+                                }
                             }
                         }
                     }
@@ -1429,9 +1442,9 @@
                                         .div_header {
                                             border-bottom: 1px solid #bfc8cd;
                                         }
-                                        #treeDemo {
+                                        /* #treeDemo {
                                             li {
-
+                                        
                                                 .node_name {
                                                     width: 102px;
                                                     overflow: hidden;
@@ -1440,7 +1453,7 @@
                                                     white-space: nowrap;
                                                 }
                                             }
-                                        }
+                                        } */
                                     }
                                     .right_warp {
                                         /*padding-left: 15px;*/
@@ -1462,16 +1475,20 @@
                                                 margin-bottom: 20px;
                                             }
                                         }
-                                        .first_table {
-                                            .el-dropdown {
+                                        .dingdang_table {
+                                            .el-dropdown-link {
+                                                cursor: pointer;
+                                                color: #409EFF;
+                                            }
+                                            .el-dropdown-link:hover {
+                                                color: #ba2636;
+                                                text-decoration: underline;
+                                            }
+                                            /* .el-dropdown {
                                                 display: inline;
                                             }
                                             .el-table__header-wrapper {
                                                 display: none;
-                                            }
-                                            .el-dropdown-link {
-                                                cursor: pointer;
-                                                color: #409EFF;
                                             }
                                             .el-icon-arrow-down {
                                                 font-size: 12px;
@@ -1496,7 +1513,7 @@
                                             }
                                             .cell {
                                                 padding-right: 40px;
-                                            }
+                                            } */
                                         }
                                     }
                                     .personalAuditFormTable {
@@ -1580,12 +1597,15 @@
                         height: 100%; */
                         border: 0;
                         z-index: 1000;
-                        .my-pdf {
-                            height: 100%;
-                            .pdfobject-container {
+                        .div_pdf_wrap {
+                            .my-pdf {
                                 height: 100%;
+                                .pdfobject-container {
+                                    height: 100%;
+                                }
                             }
                         }
+                        
                     }
                     /* .exitFullMode{
                         display: block;
@@ -1658,10 +1678,12 @@
                         border: 0;
                         /* width: 100%;
                         height: 60%; */
-                        .my-pdf {
-                            height: 100%;
-                            .pdfobject-container {
+                        .div_pdf_wrap {
+                            .my-pdf {
                                 height: 100%;
+                                .pdfobject-container {
+                                    height: 100%;
+                                }
                             }
                         }
                     }
@@ -1730,10 +1752,12 @@
                 /* .animating {
 
                     .div_pdf {
-                        overflow: hidden;
-                        .my-pdf {
-                            width: 1000px;
-                            height: 1000px;
+                        .div_pdf_wrap {
+                            overflow: hidden;
+                            .my-pdf {
+                                width: 1000px;
+                                height: 1000px;
+                            }
                         }
                     }
                     .center_part_wrap {

@@ -3,8 +3,8 @@
         <el-row class="onlyBtnBox">
             <el-col :span="24">
                 <div class="grid-content bg-purple-dark">
-                    <el-button size="small">评标异常情况</el-button>
-                    <el-button size="small">评标解锁</el-button>
+                   <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
+                    <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -32,12 +32,20 @@
                 </el-col>
             </el-row>
         </div>
+        <Abno ref='abDialog'></Abno>
+        <Unlock ref='unDialog'></Unlock>
     </div>
 </template>
 
 
 <script>
+import Abno from './leaderChild/Abnormal';
+import Unlock from './leaderChild/Unlock'
 export default {
+    components:{
+        Abno,
+        Unlock,
+    },
     data() {
         return {
             cardMsg:[],
