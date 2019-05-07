@@ -191,14 +191,29 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1）"},
-                        {"title": "普瑞太阳能有限公司（2）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
 
+                        {"title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
+                        {"title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                         },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
                     ],
                     "dingdang_tableData":[
                         {
@@ -216,9 +231,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
-                            pdf:[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ],
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -227,6 +239,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain6:'',
                             gradeExplain7:'',
                         },
+
                         {
                             evaluationFactors: '是否为INTEL生产',
                             standardReview:'必须是INTEL生产',
@@ -249,9 +262,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
+
                         },
                         {
                             evaluationFactors: '分辨率是否为15英寸以上',//(资格审查的评审因素)
@@ -275,10 +286,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
+
                         },
 
                     ],
@@ -588,13 +596,29 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"形式审计-#707478",
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1）"},
-                        {"title": "普瑞太阳能有限公司（2）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
+
+                        {"title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
+                        {"title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
                     ],
                     "dingdang_tableData":[
                         {
@@ -612,9 +636,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
-                            pdf:[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ],
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -645,9 +666,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
                         },
                         {
                             evaluationFactors: '审查项目',//(资格审查的评审因素)
@@ -671,10 +689,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
+
                         },
 
                     ],
@@ -968,13 +983,28 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"详细评审技术",
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1）"},
-                        {"title": "普瑞太阳能有限公司（2）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
-                        {"title":"夏丰热工研究院有限公司（3）"},
+                        {"title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
+                        {"title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
+                        {"title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        },
                     ],
                     "dingdang_tableData":[
                         {
@@ -992,9 +1022,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
-                            pdf:[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ],
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -1025,9 +1052,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
                         },
                         {
                             evaluationFactors: '详细评审3',//(资格审查的评审因素)
@@ -1051,10 +1075,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-                            pdf:[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
                         },
 
                     ],

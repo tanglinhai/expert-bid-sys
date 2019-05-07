@@ -18,9 +18,11 @@ Mock.mock('/api/leaderBagMsg','post',{
             'pName':'@cname',
             'stTime':Random.datetime(),
             'ovTime':Random.datetime(),
-            'nowStatus|1':['已推举','未推举'],
+            'nowStatus|1':['进行中','已暂停','已结束'],
             'id': '@id',
-            'btnStatus|1':[0,1]
+            'btnStatus|1':[0,1],
+            'beFlag':true,
+            'progre|1':['资格审查','符合性审查','详细评审','商务']
         }
     ]
 })
