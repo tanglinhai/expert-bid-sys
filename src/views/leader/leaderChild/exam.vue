@@ -17,44 +17,50 @@
                 </div>
             </el-col>
         </el-row>
-        <el-row class="bodyBox">
-            <el-col :span="24">
-                <div class="grid-content bg-purple-dark commonTitle" style="font-size:15px;padding:20px 0;">
-                    <span class="ml3 col409">资格审查评审项：</span>
-                    <span class="ml3  col409">内存大小大于8G</span>
-                    <span class="ml15 mr10"> /</span>
-                    <span class="ml3">审查标准：</span>
-                    <span>大于等于8G</span> 
-                </div>
-            </el-col>
+        <el-row class="bodyBox"> 
             <el-table
                 :data="tableData"
-                :show-header="false"
                 border
             >
-                <el-table-column>
-                    <template slot-scope="scope">
-                        <div>
-                            <el-col :span="20">
-                                <span>投标人：</span>
-                                <span>
-                                    <i class="el-icon-search"></i>
-                                    {{scope.row.pName}}
+                <el-table-column
+                    type="index"
+                    width="50">
+                </el-table-column>
+                <el-table-column
+                    prop="factor"
+                    label="评审因素">
+                </el-table-column>
+                 <el-table-column
+                    label="投标人">
+                    <el-table-column
+                        v-for="(item,index) in tableData" :key="index">
+                        <template slot="header" slot-scope="scope">
+                            <a v-if="item.allPdf.length <= 1" href="#" class="common_a_style overflowText">
+                                <i class="el-icon-search"></i>&nbsp;
+                                <span>{{item.pName}}</span>&nbsp;
+                                <i class="icon iconfont icon-pdf"></i>
+                            </a>
+                            <el-dropdown v-else>
+                                <span class="el-dropdown-link">
+                                    <a href="#" class="common_a_style overflowText">
+                                        <i class="el-icon-search"></i>&nbsp;
+                                        <span>{{item.pName}}</span>&nbsp;
+                                        <i class="icon iconfont icon-pdf"></i>
+                                    </a>
                                 </span>
-                            </el-col>
-                            <el-col :span="4" style="text-align:right;"><i class="btn_locate iconfont icon-dingwei"></i></el-col>
-                        </div>
-                    </template>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item  v-for="(stemp,index) in item.allPdf" :key="index">{{stemp}}</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
+                        <template slot-scope="scope">
+                            <div>
+                                <el-radio v-model="radio" label="1">合格</el-radio>
+                                <el-radio v-model="radio" label="2">不合格</el-radio>
+                            </div>
+                        </template>
+                    </el-table-column>
                 </el-table-column>
-                <el-table-column>
-                    <template slot-scope="scope">
-                        <div style="text-align:center;">
-                            <el-radio v-model="radio" label="1">合格</el-radio>
-                            <el-radio v-model="radio" label="2">不合格</el-radio>
-                        </div>
-                    </template>
-                </el-table-column>
-                <el-table-column></el-table-column>
             </el-table>
         </el-row>
     </div>
@@ -71,15 +77,16 @@ export default {
     },
     mounted() {
         this.init();
-    },
+    },    
     methods: {
         init(){
             this.$axios.post('./api/tableMsg').then(res => {
                 if(res.status == 200){
                     this.tableData=res.data.pdf;
+                    console.log(this.tableData)
                 }
             })
-        }
+        }, 
     },
 }
 </script>
@@ -95,8 +102,10 @@ export default {
         height: 14px !important;
     }
     .proBox{
-        line-height: 47px;
-        padding: 0 15xp;
+        line-height: 62px;
+    }
+    .bodyBox{
+        padding: 0 !important; 
     }
 }
 </style>

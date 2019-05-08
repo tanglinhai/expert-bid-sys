@@ -75,14 +75,9 @@ export default {
 
 
 <style lang="scss">
-.navcommon_wrap ul li button{
-    width: 65px;
-    height: 40PX;
-    border-radius: 5px;
-}
 .signIn{
     padding: 15px 20px 15px 0px;
-    padding-left: 95px !important;
+    padding-left: 131px !important;
     .onlyBtnBox{
         text-align: right;
         padding-bottom: 15px;
@@ -93,7 +88,7 @@ export default {
         border-radius: 5px;
         .rowStyle{
             margin: 24px;
-            width: 146px;
+            width: 166px;
             .el-card{
                 position: relative;
                 border-radius:10px;
@@ -121,9 +116,11 @@ export default {
                     background: #ff6600;
                     color: #fff;
                     position: absolute;
-                    top: 10px;
-                    left: 50px;
+                    top: 11px;
+                    left: 56px;
                     width: 100%;
+                    -webkit-transform: rotateZ(45deg);
+                    -ms-transform: rotate(45deg);
                     transform: rotateZ(45deg);
                     font-size: 13px;
                     padding: 4px;

@@ -81,14 +81,9 @@ export default {
 
 <style lang="scss">
 @import '../../assets/css/common/mixin.scss';
-.navcommon_wrap ul li button{
-    width: 65px;
-    height: 40PX;
-    border-radius: 5px;
-}
 .vbe{
     padding: 15px 20px 15px 0px;
-    padding-left: 95px !important;
+    padding-left: 131px !important;
     .onlyBtnBox{
         text-align: right;
         padding-bottom: 15px;

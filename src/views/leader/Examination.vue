@@ -43,7 +43,7 @@
                     :label="item.title"
                     :name="item.name"
                 >
-                <Exam></Exam>
+                    <Exam v-if="index == 0"></Exam>
                 </el-tab-pane>
             </el-tabs>
         </el-row>
@@ -52,7 +52,7 @@
 
 
 <script>
-import Exam from '../leader/leaderChild/exam';
+import Exam from '../leader/leaderChild/Exam';
 export default {
 components:{
     Exam,
@@ -60,7 +60,7 @@ components:{
 data() {
     return {
         editableTabs:[],
-        editableTabsValue:'1',
+        editableTabsValue:'1',      
     }
 },
 mounted() {
@@ -76,7 +76,7 @@ methods: {
     },
     handleTabsEdit(targetName){
         console.log(targetName);
-    }
+    },
 },
 }
 </script>
@@ -85,16 +85,18 @@ methods: {
 <style lang="scss">
 @import '../../assets/css/common/font.scss'; 
 .exam{
-    padding: 15px 20px 15px 0px;
-    padding-left: 95px !important;
+    padding: 0px 20px 15px 0px;
+    padding-left: 131px !important;
     .onlyBtnBox{
-        padding-bottom: 15px;
-        line-height: 47px;
+        line-height: 62px;
     }
     .bodyBox{
         padding:15px;
         border-radius: 5px;
         background: #fff;
+        .el-tabs__header{
+            margin: 0 !important;
+        }
     }
 }
 </style>
