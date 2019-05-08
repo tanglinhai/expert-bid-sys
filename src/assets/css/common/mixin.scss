@@ -168,6 +168,9 @@
                             writing-mode:vertical-lr;
                             letter-spacing: 5px;
                             text-align: center;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                     }
                 }
