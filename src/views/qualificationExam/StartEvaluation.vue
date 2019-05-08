@@ -145,42 +145,6 @@
                                                             </el-radio-group>
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
                                                             <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
-<!--<<<<<<< HEAD-->
-                                                            <!--<span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>-->
-                                                            <!--<span> {{scope.row['gradeExplain' + (index + 1)]}}</span>-->
-                                                            <!--<a v-if="scope.row.pdf.length<2"-->
-                                                               <!--@click="show_pdf(scope.row.pdf[0])"-->
-                                                               <!--class="common_a_style ">-->
-                                                                <!--<i class="el-icon-search fs14 mr3 ver_al_m ml10 mr5"></i>{{scope.row.name}}-->
-                                                                <!--<i class="icon iconfont icon-pdf mr5"></i>-->
-                                                            <!--</a>-->
-                                                            <!--<el-dropdown v-else trigger="click" class="common_a_style">-->
-                                                                  <!--<span class="el-dropdown-link">-->
-                                                                    <!--<i class="el-icon-search fs14 mr3 ver_al_m  ml10 mr5"></i>-->
-                                                                    <!--{{scope.row.name}}-->
-                                                                    <!--<i class="icon iconfont icon-pdf mr5"></i>-->
-                                                                    <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-                                                                  <!--</span>-->
-                                                                <!--<el-dropdown-menu slot="dropdown"-->
-                                                                                  <!--class="table_pdf_drop_menu ml10 mr5">-->
-                                                                    <!--<el-dropdown-item-->
-                                                                            <!--@click.native="show_pdf(pdfItem)"-->
-                                                                            <!--v-for="(pdfItem ,index) in scope.row.pdf"-->
-                                                                    <!--&gt;{{pdfItem.pdf_name}}<i-->
-                                                                            <!--class="icon iconfont icon-pdf"></i>-->
-                                                                    <!--</el-dropdown-item>-->
-                                                                <!--</el-dropdown-menu>-->
-                                                            <!--</el-dropdown>-->
-                                                            <!--<div class="btn_locate iconfont icon-dingwei"-->
-                                                                 <!--style="display: inline-block"-->
-<!--=======-->
-                                                            <!--<span v-else> {{   scope.row['value' + (index + 1)]}}</span>-->
-                                                            <!---->
-                                                            <!--<div class="btn_locate iconfont icon-dingwei" style="display: inline-block"-->
-<!--&gt;>>>>>> b60105b5ac7b140222e06af9a8c31b52b80ff8dd-->
-                                                                 <!--@click="locate_pdf(item.fristTableData, scope.row)"-->
-                                                                 <!--title="定位到关联投标文件说明处"-->
-                                                            <!--&gt;</div>-->
                                                         </template>
                                                     </el-table-column>
                                                 </el-table-column>
@@ -413,15 +377,6 @@
             $(".dingWeiDiv").hide();
 
             this.init();
-// <<<<<<< HEAD
-//             // setTimeout(function () {
-//             //     $("#treeDemo_1_a").addClass("curSelectedNode");
-//             // }, 200);
-// =======
-//             /*setTimeout(function () {
-//                 $("#treeDemo_1_a").addClass("curSelectedNode");
-//             }, 200);*/
-// >>>>>>> b60105b5ac7b140222e06af9a8c31b52b80ff8dd
             this._dom_c = {
                 $dom_body: $('body'),
                 $div_pdf: $('.div_pdf'),
