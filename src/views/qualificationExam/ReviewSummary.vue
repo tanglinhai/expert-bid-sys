@@ -29,7 +29,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <div class="mainContentWarp" v-loading="page_loading">
+            <div class="mainContentWarp lineAll" v-loading="page_loading">
                 <NavBar :msg="options" :methodType="methodType"></NavBar>
                 <!--1:合理低价；2：综合评标；3：最低价-->
                 <el-row class="center_part" v-if="methodType==1">
