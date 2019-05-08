@@ -185,8 +185,8 @@
                                                                      min-width="250" :key="index" v-if="type==8">
 
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -200,7 +200,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -314,8 +314,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if="type==9">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -329,7 +329,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -435,8 +435,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if="type==10">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -450,7 +450,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -558,8 +558,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if=" type==11">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -573,7 +573,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
