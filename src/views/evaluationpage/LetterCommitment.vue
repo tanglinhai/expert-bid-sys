@@ -1,7 +1,7 @@
 <template>
     <div class="LetterComon_wrap" v-loading="pageloadding">
         <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
-        <div class="Allinformation cf">
+        <div class="Allinformation lineAll cf">
             <div class="evaluationcommon letterComent cf">
                 <h5 class="h5">评标专家承诺书</h5>
                 <p class="p">为保证招标及商务谈判工作的公平、公正、科学择优，我在参与评标及商务谈判工作中承诺：</p>
