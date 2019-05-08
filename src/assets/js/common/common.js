@@ -488,8 +488,34 @@ export default {
         }
         output.splice(output.length -1 , 1, input[input.length - 1]);
     },
-
+    /**
+     * [pdf操作函数工具 公用函数：评标页面]
+     */
     pdfOperations:{
+        /**
+         * [pdf操作初始化]
+         */
+        pdf_init(){
+            this._dom_c = {
+                $dom_body: $('body'),
+                $div_pdf: $('.div_pdf'),
+                $div_pdf_wrap: $('.div_pdf_wrap'),
+                $center_part_wrap: $('.center_part_wrap'),
+                $center_part: $('.center_part'),
+                $content: $('.content'),
+                $slidebar: $('.slideBar'),
+            };
+            this._dom_c.$dom_body.mouseup(this.slideBarMouseup);
+            window.fullModeColumn = this.fullModeColumn;
+            window.fullModeRow = this.fullModeRow;
+            window.exitFullMode = this.exitFullMode;
+            window.closePDF = this.closePDF;
+            window._locate_pdf_ = this._locate_pdf_;
+            /*this.$commonJs.getScriptFile.call(this, {
+                url: '/js/plugins/html2canvas.js',
+                download_files_key: 'html2canvas.js'
+            });*/
+        },
         pdf_category_open_close($event){
             var $t = $($event.target).closest('.div_pdf_wrap');
             if($t.hasClass('close_pdf_sidebar')){
@@ -498,9 +524,15 @@ export default {
                 $t.addClass('close_pdf_sidebar');
             }
         },
+        /**
+         * [pdf iframe document]
+         */
         getIframeDocument(refStr) {
             return this.getIframeWindow(refStr).document;
         },
+        /**
+         * [pdf iframe window]
+         */
         getIframeWindow(refStr) {
             var iframe;
             if (this.$refs[refStr] != null && this.$refs[refStr].length == 1) {
@@ -510,7 +542,9 @@ export default {
             }
             return iframe.get(0).contentWindow;
         },
-        //定位到关联投标文件说明处
+        /**
+         * [pdf 定位到关联投标文件说明处]
+         */
         locate_pdf(question, bidder) {
             var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
             if (!relativePDF || relativePDF.length == 0) {
@@ -529,6 +563,9 @@ export default {
             var queryStr = question.question + question.answer;
             this.show_pdf(relativePDF, queryStr);
         },
+        /**
+         * [pdf 显示PDF]
+         */
         show_pdf(obj, queryStr) {//查看pdf
             //this.$commonJs.fullscreen();
             //pdfItems: [],//动态插入pdfcurrPdfUrl
@@ -647,6 +684,9 @@ export default {
         },
 
 
+        /**
+         * [pdf 鼠标滑条按下事件]
+         */
         slideBarMousedown(e) {
             this.hDiff = this._dom_c.$content.hasClass('presentation_mode_row') ? e.clientY - this._dom_c.$div_pdf.height() :
                 this._dom_c.$content.hasClass('presentation_mode_column') ? this._dom_c.$center_part_wrap.width() - e.clientX :
@@ -655,11 +695,17 @@ export default {
             this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
             this.currentPdfShow.append('<div class="floating_div"></div>');
         },
+        /**
+         * [pdf 鼠标滑条取消按下事件]
+         */
         slideBarMouseup() {
             this.slideBarIsControl = false;
             this._dom_c.$dom_body.unbind('mousemove.slideBarMousemove');
             this.currentPdfShow && this.currentPdfShow.find('.floating_div').remove();
         },
+        /**
+         * [pdf 鼠标滑条移动事件]
+         */
         slideBarMousemove(e) {
             e.originalEvent.preventDefault();
             e.originalEvent.cancelBable = true;
@@ -686,6 +732,9 @@ export default {
 
             }
         },
+        /**
+         * [pdf 退出全屏模式]
+         */
         exitFullMode() {
             this._dom_c.$div_pdf.attr('style', "");
             this._dom_c.$center_part_wrap.attr('style', "");
@@ -696,6 +745,9 @@ export default {
         },
 
 
+        /**
+         * [pdf 全屏模式动画初始化]
+         */
         initFullMode(modeType, isFirstInPresentation){
 
             if(!isFirstInPresentation){
@@ -855,9 +907,9 @@ export default {
 
                     centerInput1 = [
                         [cen_l, cen_t],
-                        [-20, -30],
-                        [cen_l * 1.2, 0],
-                        [cen_l * 4, 20],
+                        [-15, -35],
+                        [5, -5],
+                        [15 * 4, 15],
                         [36, 30]
                     ];
                     centerLeftTop = [];
@@ -997,11 +1049,6 @@ export default {
                 }
             }
 
-            console.log(pdfInput1);
-            console.log(pdfInput2);
-            console.log(centerInput1);
-            console.log(centerInput2);
-
             this.$commonJs.draw_bezier_curves(pdfInput1, num, pdfLeftTop);
             this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
             this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
@@ -1016,6 +1063,10 @@ export default {
                 num
             };
         },
+
+        /**
+         * [pdf 全屏列模式]
+         */
         fullModeColumn() {
             /*if(this._dom_c.$content.hasClass('presentation_mode_column')){
                 this.$message({
@@ -1085,6 +1136,12 @@ export default {
 
             win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
         },
+
+
+
+        /**
+         * [pdf 全屏行模式]
+         */
         fullModeRow() {
             /*if(this._dom_c.$content.hasClass('presentation_mode_row')){
                 this.$message({
@@ -1153,12 +1210,19 @@ export default {
 
             win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
         },
+
+        /**
+         * [pdf 关闭PDF]
+         */
         closePDF() {
             if (this._dom_c.$content.hasClass('presentation_mode_column') || this._dom_c.$content.hasClass('presentation_mode_row')) {
                 this.exitFullMode();
             }
             this._dom_c.$content.removeClass('showPDF_content');
         },
+        /**
+         * [pdf 显示PDF]
+         */
         showPDF() {
             this._dom_c.$content.addClass('showPDF_content');
         }
