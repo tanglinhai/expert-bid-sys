@@ -657,6 +657,8 @@
             /*----------------- zTree end ----------------------*/
 
 
+
+            /*----------------- pdf start ----------------------*/
             pdf_category_open_close($event){
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
@@ -700,6 +702,11 @@
             showPDF() {
                 this.$commonJs.pdfOperations.showPDF.call(this);
             },
+            /*----------------- pdf end ----------------------*/
+
+
+
+
             comfrimAllChecked() {//确定全选
                 this.allCheckedBtnLoading = true;
                 this.determineOperatingDialog = false;
