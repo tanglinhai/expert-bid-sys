@@ -3,7 +3,7 @@
     <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
     <div class="Allinformation cf" v-loading="pageLoading">
         <!--开始评标页面-->
-        <div class="evaluationcommon cf">
+        <div class="evaluationcommon lineAll cf">
             <div class="textAlignC cole02 fs20" v-if="waitTitshi">请等待其他专家推举... ...</div>
             <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
                 <h5 class="commonTitle col348fe2 oneanonter">推举评委会主人第{{LunNumber}}轮</h5>

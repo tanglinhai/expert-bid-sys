@@ -112,7 +112,6 @@ import { setTimeout } from 'timers';
         float:left;
         .el-scrollbar__wrap{
             overflow-x:hidden;
-            background:white;
             .el-scrollbar__view{
                 ul{
                     margin-bottom:10px;
@@ -124,9 +123,14 @@ import { setTimeout } from 'timers';
         }
         
         ul{
-            
+            width:133px;
             li{
-                margin-left:12px;
+                padding-left:12px;
+                background: white;
+                width: 100px;
+                &:first-child{
+                    padding-top:15px;
+                }
                 button{
                     display:block;
                     width:90px;
@@ -161,6 +165,7 @@ import { setTimeout } from 'timers';
                 }
                 
                  &:last-child{
+                    padding-bottom:10px;
                    .navcommon_line{
                        display:none;
                    }
