@@ -25,7 +25,7 @@
       }
     }
     .lineAll{
-        border-left:2px solid #ddd;
+        border-left:1px solid #ddd;
         border-image: -webkit-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
         border-image: -moz-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
         border-image: linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30; 
@@ -38,7 +38,41 @@
       }
     }
   }
-  .DoNotPoint{
+  .green{ //完成可点
+    button{   
+        border:2px solid #84bb3c;
+        color:#84bb3c;
+        &:hover {
+            border:2px solid #84bb3c;
+            color:#84bb3c;
+            background:white;
+        }
+        span{
+            .kuai{
+              background:#84bb3c;
+            }
+            
+        }
+    }
+  }
+  .blue{ //蓝色可点同时操作
+    button{   
+        border:2px solid #348fe2;
+        color:#348fe2;
+        &:hover {
+            border:2px solid #348fe2;
+            color:#348fe2;
+            background:white;
+        }
+        span{
+            .kuai{
+              background:#348fe2;
+            }
+            
+        }
+    }
+  }
+  .DoNotPoint{  //不可点
     button{
       border:2px solid #ccc;
       color:#ccc;
@@ -53,36 +87,35 @@
       }
     }
   }
-  .backblue{
-    background:#348fe2!important;
-    color:white!important;
-    border:2px solid #348fe2!important;
-    margin-left:-12px;
-    width:115px;
-    border-radius:0px;
-    position: relative;
-    &:before{
-      content:"";
-      // border-top: 10px solid transparent;
-      // border-bottom: 10px solid transparent;
-      // border-right: 10px solid #348fed;
-      background: url(../assets/img/io.png) right 0px no-repeat;
-      position: absolute;
-      right: -20px;
-      top: 7px;
-      width:10px;
-      height:23px;
-    }
-    span{
-        .kuai{
-            background:white!important;
-        }
-    }
-    &:hover{
-        color:white!important;
-    }
-    &:visited,&:focus{
-        color:white!important; 
+  .backblue{  //进行中
+    button{
+      background:#348fe2!important;
+      color:white!important;
+      border:2px solid #348fe2!important;
+      margin-left:-12px;
+      width:115px;
+      border-radius:0px;
+      position: relative;
+      &:before{
+        content:"";
+        background: url(../assets/img/io.png) right 0px no-repeat;
+        position: absolute;
+        right: -20px;
+        top: 7px;
+        width:10px;
+        height:23px;
+      }
+      span{
+          .kuai{
+              background:white!important;
+          }
+      }
+      &:hover{
+          color:white!important;
+      }
+      &:visited,&:focus{
+          color:white!important; 
+      }
     }
   }
   
@@ -160,8 +193,8 @@ export default {
   updated(){
     this.number=this.$store.state.navCommon.types
     //console.log(this.number,77777777)
-    $(".NavCommon ul li button").removeClass("backblue");
-    $(".NavCommon ul #"+this.number).find("button").addClass("backblue");
+    $(".NavCommon ul li>span").removeClass("backblue");
+    $(".NavCommon ul #"+this.number+">span").addClass("backblue");
   }
 }
 </script>

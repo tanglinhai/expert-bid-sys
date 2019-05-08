@@ -84,7 +84,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#1 button").addClass("backblue");
+                            $("#1").addClass("backblue");
                         })
                         this.pageloadding=false;
                     }

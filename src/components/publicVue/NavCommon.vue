@@ -11,6 +11,7 @@
                             :content='item.label'
                             trigger="hover"
                             :ref='item'
+                            class="green"
                             >
                             <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
@@ -138,12 +139,10 @@ import { setTimeout } from 'timers';
                     width:90px;
                     height:38px;
                     border-radius:3px;
-                    border:2px solid #84bb3c;
-                    color:#84bb3c;
+                   
                     font-size:12px;
                     &:hover {
-                        border:2px solid #84bb3c;
-                        color:#84bb3c;
+                       
                         background:white;
                     }
                     span{
@@ -157,7 +156,7 @@ import { setTimeout } from 'timers';
                         .kuai{
                             width:10px;
                             height:10px;
-                            background:#84bb3c;
+                            
                             float:left;
                             margin-right:2px;
                         }

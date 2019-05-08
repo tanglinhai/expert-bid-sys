@@ -272,7 +272,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#2 button").addClass("backblue");
+                            $("#2").addClass("backblue");
                         })
                     }
                 })
