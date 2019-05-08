@@ -2472,13 +2472,16 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
     message: '成功!',
     data: ''
 });
+
+
+//公共导航接口
 //蓝色icon是正在进行，绿色icon：完成，灰色的文本icon是可以点；
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态：
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
-function get_data(type,is_submit_type) {//type
-    // console.log(type, is_submit_type);
+function get_data(type,is_submit_type) {
+    console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2525,7 +2528,7 @@ function get_data(type,is_submit_type) {//type
     set_type();
     var a;
     a = set_type();
-
+    console.log(a);
     return [
         {
             value: '1',//
@@ -2589,6 +2592,84 @@ function get_data(type,is_submit_type) {//type
         },
     ]
 }
+//合理低价
+// 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
+//1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//提交之后的状态：
+//is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态；zong_type：是否提交的状态( 是汇总页面提交)；
+// function get_data(type,is_submit_type) {//type
+//     function set_type() {
+//         if (type == 0) {
+//             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4,]
+//         }
+//         if (type == 1) {
+//             return [1, 3, 4, 4, 4, 4, 4,]
+//         }
+//         if (type == 2) {
+//             return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,]
+//         }
+//         if (type == 3) {//符合性审查项
+//             return [1, 1, 1, is_submit_type?1:2, 4, 4, 4,]
+//         }
+//         if (type == 4) {//符合性审查项汇总
+//             return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,]
+//         }
+//         if (type == 5) {//详细
+//             return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,]
+//         }
+//         if (type == 6) {//详细汇总
+//             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+//         }
+//         if (type == 7) {//详细汇总
+//             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+//         }
+//     }
+//
+//     set_type();
+//     var a;
+//     a = set_type();
+//     // console.log(a);
+//     return [
+//         {
+//             value: '1',
+//             label: '资格审查项',
+//             type: a[0],
+//         },
+//         {
+//             value: '2',
+//             label: '资格审查项汇总',
+//             type: a[1]
+//         },
+//
+//         {
+//             value: '3',
+//             label: '符合性审查项',
+//             type: a[2]
+//         },
+//         {
+//             value: '4',
+//             label: '符合性审查项汇总',
+//             type: a[3]
+//         },
+//         {
+//             value: '5',
+//             label: '详细评审（技术）',
+//             type: a[4]
+//         },
+//         {
+//             value: '6',
+//             label: '详细评审（技术）汇总',
+//             type: a[5]
+//         },
+//         {
+//             value: '7',
+//             label: '评审汇总',
+//             type: a[6]
+//         },
+//     ]
+//
+// }
+
 
 // 资格审查全部提交接口
 let alltijiao = Mock.mock('/api/alltijiao', 'post', {

@@ -434,6 +434,7 @@
         },
         created() {
             this.methodType = this.$route.query.methodType;
+            console.log(this.type_btn);
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -443,7 +444,6 @@
         mounted() {
             $(".positionDiv").hide();
             $(".dingWeiDiv").hide();
-
             this.init();
             this._dom_c = {
                 $dom_body: $('body'),

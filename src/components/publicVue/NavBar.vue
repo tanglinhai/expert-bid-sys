@@ -42,12 +42,12 @@
         },
         methods:{
             changeView(item,methodType) {      //路由跳转传参函数
-                console.log(item,methodType);
+                // console.log(item,methodType);
                 if(item.type == 4){
                     return;
                 }
                 var i = item.value;
-                // console.log(i);
+                console.log(i);
                 if (i === '1') {
                     this.$router.push("/elect/StartEvaluation?type=1&methodType="+methodType);
                 } else if (i === '2') {
