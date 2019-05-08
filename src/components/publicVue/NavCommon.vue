@@ -12,9 +12,8 @@
                             trigger="hover"
                             :ref='item'
                             >
-                            <el-button @click="ToChangePage(item.types,number)" :disabled="0" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
+                            <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
                         </el-popover>
-                       
                         <span class="navcommon_line"></span>
                     </template>
                     <template v-else>
@@ -22,8 +21,11 @@
                             placement="right"
                             title=""
                             width="100"
+                            :content='item.label'
+                            trigger="hover"
+                            class="DoNotPoint"
                             >
-                            <el-button @click="ToChangePage(item.types,number)" :disabled="1" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>
+                            <el-button slot="reference"><i class="kuai"></i>{{item.label}}</el-button>
                             
                         </el-popover>
                         
@@ -139,6 +141,11 @@ import { setTimeout } from 'timers';
                     border:2px solid #84bb3c;
                     color:#84bb3c;
                     font-size:12px;
+                    &:hover {
+                        border:2px solid #84bb3c;
+                        color:#84bb3c;
+                        background:white;
+                    }
                     span{
                         display: block;
                         width: 80px;

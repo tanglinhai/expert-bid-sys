@@ -58,7 +58,7 @@
                         <template v-if="projectTableData.status==5">
                             <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                             <el-button size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
-                            <el-button size="small" @click="goto('/elect/StartEvaluation?typs=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
+                            <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
                         </template>
                         <template v-if="projectTableData.status==6">
                             <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>

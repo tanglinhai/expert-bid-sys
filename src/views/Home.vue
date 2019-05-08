@@ -38,6 +38,21 @@
       }
     }
   }
+  .DoNotPoint{
+    button{
+      border:2px solid #ccc;
+      color:#ccc;
+      cursor:default;
+      &:hover {
+        border:2px solid #ccc;
+        color:#ccc;
+        background:white;
+      }
+      .kuai{
+        background:#ccc;
+      }
+    }
+  }
   .backblue{
     background:#348fe2!important;
     color:white!important;
