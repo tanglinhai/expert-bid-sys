@@ -3442,9 +3442,28 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
                     'companyNameList': [//(投标人)公司名
-                        {"companyName":"重庆网控科技发展有限公司（1）" ,'laber':' 是否是官方配置？（50.00分）'},
-                        {"companyName": "普瑞太阳能有限公司（2）",'laber':' 是否是官方配置？（50.00分）'} ,
-                        {"companyName":"夏丰热工研究院有限公司（3）",'laber':' 是否是官方配置？（50.00分）'},
+                        {
+                            "companyName":"重庆网控科技发展有限公司（1）" ,
+                            'laber':' 是否是官方配置？（50.00分）',
+                            'pdfList':[
+                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
+                            ]
+                        },
+                        {
+                            "companyName": "普瑞太阳能有限公司（2）",
+                            'laber':' 是否是官方配置？（50.00分）',
+                            'pdfList':[
+                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        } ,
+                        {
+                            "companyName":"夏丰热工研究院有限公司（3）",
+                            'laber':' 是否是官方配置？（50.00分）',
+                            'pdfList':[
+                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
+                            ]
+                        },
                     ],
                     "dingdang_tableData":[//打分项
                         { "grade":'商务  商务1（50.00分）', },

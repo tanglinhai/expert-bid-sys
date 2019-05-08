@@ -490,6 +490,27 @@ export default {
     },
 
     pdfOperations:{
+        pdf_init(){
+            this._dom_c = {
+                $dom_body: $('body'),
+                $div_pdf: $('.div_pdf'),
+                $div_pdf_wrap: $('.div_pdf_wrap'),
+                $center_part_wrap: $('.center_part_wrap'),
+                $center_part: $('.center_part'),
+                $content: $('.content'),
+                $slidebar: $('.slideBar'),
+            };
+            this._dom_c.$dom_body.mouseup(this.slideBarMouseup);
+            window.fullModeColumn = this.fullModeColumn;
+            window.fullModeRow = this.fullModeRow;
+            window.exitFullMode = this.exitFullMode;
+            window.closePDF = this.closePDF;
+            window._locate_pdf_ = this._locate_pdf_;
+            /*this.$commonJs.getScriptFile.call(this, {
+                url: '/js/plugins/html2canvas.js',
+                download_files_key: 'html2canvas.js'
+            });*/
+        },
         pdf_category_open_close($event){
             var $t = $($event.target).closest('.div_pdf_wrap');
             if($t.hasClass('close_pdf_sidebar')){
@@ -996,11 +1017,6 @@ export default {
                     centerWH = [];
                 }
             }
-
-            console.log(pdfInput1);
-            console.log(pdfInput2);
-            console.log(centerInput1);
-            console.log(centerInput2);
 
             this.$commonJs.draw_bezier_curves(pdfInput1, num, pdfLeftTop);
             this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);

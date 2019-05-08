@@ -443,7 +443,6 @@
                 son_all_checked: [],//子节点全选
                 son_all_che: [],//子节点全选
                 currPdfUrl: '',//当前点击pdf的url
-                slideBarIsControl: false,//全屏模式下 控制pdf区域和操作区域的范围按钮开关
                 pdfItems: [],//动态插入pdf
                 allCheckedBtnLoading: false,//父级全选按钮loadding
                 allSubmitBtnLoading: false,//父级提交按钮loadding
@@ -490,27 +489,9 @@
 //                 $("#treeDemo_1_a").addClass("curSelectedNode");
 //             }, 200);*/
 // >>>>>>> b60105b5ac7b140222e06af9a8c31b52b80ff8dd
-            this._dom_c = {
-                $dom_body: $('body'),
-                $div_pdf: $('.div_pdf'),
-                $div_pdf_wrap: $('.div_pdf_wrap'),
-                $center_part_wrap: $('.center_part_wrap'),
-                $center_part: $('.center_part'),
-                $content: $('.content'),
-                $slidebar: $('.slideBar'),
-            };
-            this._dom_c.$dom_body.mouseup(this.slideBarMouseup);
-            window.fullModeColumn = this.fullModeColumn;
-            window.fullModeRow = this.fullModeRow;
-            window.exitFullMode = this.exitFullMode;
-            window.closePDF = this.closePDF;
-            window._locate_pdf_ = this._locate_pdf_;
+            
 
-
-            /*this.$commonJs.getScriptFile.call(this, {
-                url: '/js/plugins/html2canvas.js',
-                download_files_key: 'html2canvas.js'
-            });*/
+            this.$commonJs.pdfOperations.pdf_init.call(this);
         },
         computed: {
             currentPdfShow() {
@@ -830,590 +811,113 @@
                     }
                 }
             }
+
+
+
             .mainContentWarp {
-                position: relative;
                 background: white;
                 border-radius: 5px;
-                /* .enterFullMode{
-                    display: block;
-                    position: absolute;
-                    top: 15px;
-                    right: 15px;
-                    z-index: 1;
-                    .iconfont{
-                        font-size: 13px !important;
-                        padding-right: 2px;
-                    }
-                } */
-                .content {
-                    background-color: #000;
-                    /* .exitFullMode{
-                        display: none;
-                        position: absolute;
-                        top: 20px;
-                        left: 20px;
-                        z-index: 2;
-                        .iconfont{
-                            font-size: 13px !important;
-                            padding-right: 2px;
+                .center_part {
+                    .left_examine {
+                        background: #e4e9ec;
+                        border-radius: 10px;
+                        height: 820px;
+                        /*width:170px;*/
+                        .div_header {
+                            border-bottom: 1px solid #bfc8cd;
                         }
-                    } */
-                    .animate1 {
-                        transition: top, left, right, bottom .6s, .6s, .6s, .6s cubic-bezier(.04, .78, .16, .89);
-                    }
-                    .animate2 {
-                        transition: top, left, right, bottom .4s, .4s, .4s, .4s cubic-bezier(.54, .06, .8, .24);
-                    }
-                    .div_pdf {
-                        display: none;
-                        position: relative;
-                        border: 1px solid #c3c3c3;
-                        font-size: 15rem;
-                        font-weight: 500;
-                        box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
-                        .div_pdf_wrap {
-                            position: relative;
-                            height: 100%;
-                            /* .closePDF{
-                                display: none;
-                                background-color: #fff;
-                                position: absolute;
-                                top: -15px;
-                                right: 0;
-                                width: 30px;
-                                height: 30px;
-                                font-size: 30px;
-                                border-radius: 30px;
-                                color: #606266;
-                                cursor: pointer;
-                                z-index: 2001;
-                                &:hover{
-                                    color: #e27575;
-                                }
-                            } */
-                            .filters{
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                z-index: 1;
-                                width: 450px;
-                                height: 100%;
-                                font-size: 14px;
-                                color: hsl(0,0%,85%);
-                                float: left;
-                                background-color: #474747;
-                                .filters_wrap{
-                                    height: 100%;
-                                    overflow: auto;
-                                    border-right: 5px solid #000;
-                                    .filters_hd{
-                                        position: relative;
-                                        height: 32px;
-                                        line-height: 31px;
-                                        border-bottom: 1px solid #000;
-                                        text-align: center;
-                                        @include singleline-ellipsis;
-                                        .icon{
-                                            position: absolute;
-                                            top: 0;
-                                            right: 10px;
-                                            font-size: 16px;
-                                            cursor: pointer;
-                                            &:hover{
-                                                color: #fff;
-                                            };
-                                        }
-                                    }
-                                    .filters_bd{
-                                        position: relative;
-                                        padding-left: 20px;
-                                        .filters_kvs{
-                                            .filters_kv{
-                                                line-height: 31px;
-                                                margin: 5px auto;
-                                                .filters_k{
-                                                    width: 30%;
-                                                    float: left;
-                                                    @include singleline-ellipsis;
-                                                }
-                                                .filters_v{
-                                                    width: 70%;
-                                                    float: left;
-                                                    @include singleline-ellipsis;
-                                                    .el-select{
-                                                        width: 90%;
-                                                    }
-                                                    .point{
-                                                        margin: 5px 0;
-                                                        padding: 0 5px;
-                                                        cursor: pointer;
-                                                        @include singleline-ellipsis;
-                                                        &:hover{
-                                                            background-color: #000;
-                                                        }
-                                                        .txt{
-                                                            
-                                                        }
-                                                        .icon{
-                                                            padding-right: 3px;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .filters_tip{
-                                        display: none;
-                                        position: absolute;
-                                        top: 33px;
-                                        left: 0;
-                                        right: 5px;
-                                        bottom: 0;
-                                        padding-left: 12px;
-                                        font-size: 16px;
-                                        writing-mode:vertical-lr;
-                                        letter-spacing: 5px;
-                                        text-align: center;
-                                    }
-                                }
-                            }
-                            .my-pdf {
-                                padding-left: 450px;
-                                font-size: 15px;
-                                font-weight: normal;
-                                .pdfShow {
-                                    position: relative;
-                                    min-height: 200px;
-                                    .pdfobject {
-                                        display: block;
-                                    }
-                                }
-                                .floating_div {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    z-index: 1;
-                                }
-                            }
-                        }
-
-                        .close_pdf_sidebar{
-                            .filters{
-                                width: 43px;
-                                .filters_wrap{
+                        /* #treeDemo {
+                            li {
+                        
+                                .node_name {
+                                    width: 102px;
                                     overflow: hidden;
-                                    .filters_hd {
-                                        .tit{
-                                            display: none;
-                                        }
-                                        .icon{
-                                            transform: rotate(180deg);
-                                        }
-                                    }
-                                    .filters_bd{
-                                        .filters_kvs{
-                                            visibility: hidden;
-                                        }
-                                    }
-                                    .filters_tip{
-                                        display: block;
-                                    }
-                                } 
-                            }
-                            .my-pdf {
-                                padding-left: 43px;
-                                width: auto;
-                            }
-                        }
-                    }
-                    .center_part_wrap {
-                        background: white;
-                        font-size: 15rem;
-                        font-weight: 500;
-                        box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
-                        .slideBar {
-                            position: relative;
-                            display: none;
-                            height: 15px;
-                            line-height: 15px;
-                            margin-top: 15px;
-                            border: 1px solid #37cac1;
-                            color: #37cac1;
-                            text-align: center;
-                            cursor: n-resize;
-                            //transition: background-color, color .5s, .5s;
-                            background-color: #fff;
-                            font-size: 15px;
-                            font-weight: normal;
-                            z-index: 1;
-                            .iconfont {
-                                font-size: 14px;
-                            }
-                            &:hover {
-                                background-color: #37cac1;
-                                color: #fff;
-                            }
-                        }
-                        .center_part {
-                            font-size: 15px;
-                            font-weight: normal;
-                            height: 100%;
-                            box-sizing: border-box;
-                            overflow: hidden;
-                            .center_con_wrap {
-                                height: 100%;
-                                overflow-y: auto;
-                                .center_con {
-                                    padding: 15px;
-                                    /*padding: 15px 15px 205px 15px;*/
-                                    min-width: 850px !important;
-                                    .left_examine {
-                                        background: #e4e9ec;
-                                        border-radius: 10px;
-                                        height: 820px;
-                                        /*width:170px;*/
-                                        .div_header {
-                                            border-bottom: 1px solid #bfc8cd;
-                                        }
-                                        /* #treeDemo {
-                                            li {
-                                        
-                                                .node_name {
-                                                    width: 102px;
-                                                    overflow: hidden;
-                                                    float: right;
-                                                    text-overflow: ellipsis;
-                                                    white-space: nowrap;
-                                                }
-                                            }
-                                        } */
-                                    }
-                                    .right_warp {
-                                        /*padding-left: 15px;*/
-                                        border-radius: 5px;
-                                        .el-progress__text {
-                                            color: red;
-                                        }
-                                        .el-progress-bar__outer {
-                                            background-color: #ededed;
-                                            height: 14px !important;
-                                        }
-                                        .title_msg {
-                                            .commonTitle {
-                                                font-size: 15px !important;
-                                                margin-top: 20px;
-                                            }
-                                            .commonTitle:before {
-                                                margin-top: -1px;
-                                                margin-bottom: 20px;
-                                            }
-                                        }
-                                        .dingdang_table {
-                                            .el-dropdown-link {
-                                                cursor: pointer;
-                                                color: #409EFF;
-                                            }
-                                            .el-dropdown-link:hover {
-                                                color: #ba2636;
-                                                text-decoration: underline;
-                                            }
-                                            /* .el-dropdown {
-                                                display: inline;
-                                            }
-                                            .el-table__header-wrapper {
-                                                display: none;
-                                            }
-                                            .el-icon-arrow-down {
-                                                font-size: 12px;
-                                            }
-                                            div.cell {
-                                                position: relative;
-                                                .btn_locate {
-                                                    position: absolute;
-                                                    top: 0;
-                                                    right: 0;
-                                                    width: 30px;
-                                                    height: 24px;
-                                                    line-height: 24px;
-                                                    font-size: 16px;
-                                                    margin-right: 10px;
-                                                    text-align: center;
-                                                    cursor: pointer;
-                                                    &:hover {
-                                                        color: rgb(64, 158, 255);
-                                                    }
-                                                }
-                                            }
-                                            .cell {
-                                                padding-right: 40px;
-                                            } */
-                                        }
-                                    }
-                                    .personalAuditFormTable {
-                                        display: none;
-                                        padding-left: 15px;
-                                        border-radius: 5px;
-                                        .FormTableTitle {
-                                            margin-bottom: 10px;
-                                            span {
-                                                margin-right: 20px;
-                                            }
-                                        }
-                                        .table_tips {
-                                            line-height: 23px;
-                                            color: #606266;
-                                            border-left: 1px solid #ebeef5;
-                                            border-right: 1px solid #ebeef5;
-                                            border-bottom: 1px solid #ebeef5;
-                                            padding-top: 5px;
-                                            padding-bottom: 5px;
-                                        }
-                                    }
-
-                                    /* 用来设置当前页面element全局table的内间距 */
-                                    /*.el-table__row td{*/
-                                    /*padding: 0;*/
-                                    /*}*/
-                                    /* 用来设置当前页面element全局table 选中某行时的背景色*/
-                                    .el-table__body tr.current-row > td {
-                                        background-color: #b3d8ff !important;
-                                        /* color: #f19944; */
-                                        /* 设置文字颜色，可以选择不设置 */
-                                    }
-                                    /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
-                                    /*.el-table--enable-row-hover .el-table__body tr:hover>td {*/
-                                    /*background-color: #f19944;*/
-                                    /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
-                                    /*}*/
-                                }
-                                .positionDiv {
-                                    text-align: center;
-                                    line-height: 50px;
-                                    position: fixed;
-                                    bottom: 0;
-                                    width: 100%;
-                                    height: 50px;
-                                    background: #fff6ec;
-                                    border: 1px solid #ffdcb3;
-                                    left: 0;
-                                    z-index: 999;
-                                }
-                                .dingWeiDiv {
-                                    width: 100%;
-                                    height: 50px;
-                                    background: #fff6ec;
-                                    border: 1px solid #ffdcb3;
+                                    float: right;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
                                 }
                             }
-                        }
-                    }
-                }
-                .showPDF_content {
-                    .center_part_wrap {
-                        .slideBar {
-                            display: block;
-                        }
-                    }
-                    .div_pdf {
-                        display: block;
-                        /* .closePDF{
-                            display: block;
                         } */
                     }
-                }
-
-                .fullMode {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    z-index: 4;
-                }
-
-                .presentation_mode_column {
-                    .div_pdf {
-                        position: absolute;
-                        top: 0;
-                        left: 50%;
-                        width: 50%;
-                        display: block !important;
-                        /* width: 50%;
-                        height: 100%; */
-                        border: 0;
-                        z-index: 1000;
-                        .div_pdf_wrap {
-                            .my-pdf {
-                                height: 100%;
-                                .pdfobject-container {
-                                    height: 100%;
-                                }
+                    .right_warp {
+                        /*padding-left: 15px;*/
+                        border-radius: 5px;
+                        .el-progress__text {
+                            color: red;
+                        }
+                        .el-progress-bar__outer {
+                            background-color: #ededed;
+                            height: 14px !important;
+                        }
+                        .title_msg {
+                            .commonTitle {
+                                font-size: 15px !important;
+                                margin-top: 20px;
+                            }
+                            .commonTitle:before {
+                                margin-top: -1px;
+                                margin-bottom: 20px;
                             }
                         }
-                        
                     }
-                    /* .exitFullMode{
-                        display: block;
-                    } */
-                    .center_part_wrap {
-                        position: absolute;
-                        top: 0;
+                    .personalAuditFormTable {
+                        display: none;
+                        padding-left: 15px;
+                        border-radius: 5px;
+                        .FormTableTitle {
+                            margin-bottom: 10px;
+                            span {
+                                margin-right: 20px;
+                            }
+                        }
+                        .table_tips {
+                            line-height: 23px;
+                            color: #606266;
+                            border-left: 1px solid #ebeef5;
+                            border-right: 1px solid #ebeef5;
+                            border-bottom: 1px solid #ebeef5;
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        }
+                    }
+
+                    /* 用来设置当前页面element全局table的内间距 */
+                    /*.el-table__row td{*/
+                    /*padding: 0;*/
+                    /*}*/
+                    /* 用来设置当前页面element全局table 选中某行时的背景色*/
+                    .el-table__body tr.current-row > td {
+                        background-color: #b3d8ff !important;
+                        /* color: #f19944; */
+                        /* 设置文字颜色，可以选择不设置 */
+                    }
+                    /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
+                    /*.el-table--enable-row-hover .el-table__body tr:hover>td {*/
+                    /*background-color: #f19944;*/
+                    /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
+                    /*}*/
+                    .positionDiv {
+                        text-align: center;
+                        line-height: 50px;
+                        position: fixed;
+                        bottom: 0;
+                        width: 100%;
+                        height: 50px;
+                        background: #fff6ec;
+                        border: 1px solid #ffdcb3;
                         left: 0;
-                        width: 50%;
                         z-index: 999;
-                        .slideBar {
-                            display: block;
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            margin-top: 0;
-                            width: 15px;
-                            height: 100%;
-                            cursor: w-resize;
-                            .iconfont {
-                                position: absolute;
-                                top: 50%;
-                                margin-top: -7px;
-                                left: 0;
-                                transform: rotateZ(90deg);
-                            }
-                        }
-                        .center_part {
-                            padding: 0;
-                            margin: 0;
-                            padding-right: 17px;
-                            /* .center_con_wrap{
-                                .center_con {
-                                    height: 100%;
-                                    overflow-y: auto;
-                                    min-width: 850px !important;
-                                }
-                            } */
-                        }
+                    }
+                    .dingWeiDiv {
+                        width: 100%;
+                        height: 50px;
+                        background: #fff6ec;
+                        border: 1px solid #ffdcb3;
                     }
                 }
-
-                /* .presentation_mode_column_animate {
-
-                    .div_pdf {
-                        top: 30% !important;
-                        left: 52% !important;
-                        bottom: 30% !important;
-                        right: 36% !important;
-                    }
-                    .center_part_wrap {
-                        top: 30% !important;
-                        left: 36% !important;
-                        bottom: 30% !important;
-                        right: 52% !important;
-                    }
-
-                } */
-
-                .presentation_mode_row {
-                    .div_pdf {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 60%;
-                        display: block !important;
-                        border: 0;
-                        /* width: 100%;
-                        height: 60%; */
-                        .div_pdf_wrap {
-                            .my-pdf {
-                                height: 100%;
-                                .pdfobject-container {
-                                    height: 100%;
-                                }
-                            }
-                        }
-                    }
-                    /* .exitFullMode{
-                        display: block;
-                    } */
-                    .center_part_wrap {
-                        position: absolute;
-                        top: 50%;
-                        left: 0;
-                        height: 40%;
-                        /* width: 100%;
-                        height: 40%; */
-                        .slideBar {
-                            display: block;
-                            margin-top: 0;
-                        }
-                        .center_part {
-                            padding-top: 17px;
-                            margin-top: -17px;
-                            /* .center_con_wrap{
-                                height: 100%;
-                                overflow-y: auto;
-                                .center_con {
-                                }
-                            } */
-                        }
-                    }
-                }
-
-                #t {
-                    animation: layerize cubic-bezier(0.4, 0, 0.2, 1) 1200ms 200ms forwards;
-                    font: italic 500 15rem "Roboto", sans-serif;
-                }
-
-                @keyframes layerize {
-                    0% {
-                        opacity: 0;
-                        transform: translate(0, 0);
-                        box-shadow: none;
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translate(-0.06667em, -0.06667em);
-                        box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
-                    }
-                }
-                /* .presentation_mode_row_animate {
-                    .div_pdf {
-                        top: 30% !important;
-                        left: 40% !important;
-                        bottom: 52% !important;
-                        right: 40% !important;
-                    }
-                    .center_part_wrap {
-                        top: 52% !important;
-                        left: 40% !important;
-                        bottom: 30% !important;
-                        right: 40% !important;
-                    }
-                } */
-
-                /* .animating {
-
-                    .div_pdf {
-                        .div_pdf_wrap {
-                            overflow: hidden;
-                            .my-pdf {
-                                width: 1000px;
-                                height: 1000px;
-                            }
-                        }
-                    }
-                    .center_part_wrap {
-                        overflow: hidden;
-                        .slideBar {
-
-                        }
-                        .center_part {
-                            width: 1000px;
-                            height: 1000px;
-                        }
-                    }
-                } */
             }
+
+            @include pdf_operation;
         }
         .failureEntryDialogWarp {
             .failureEntry {
