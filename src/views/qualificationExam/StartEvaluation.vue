@@ -30,7 +30,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <div class="mainContentWarp" v-loading="page_loading">
+            <div class="mainContentWarp lineAll " v-loading="page_loading">
                 <!-- <el-button class="enterFullMode"
                         icon="iconfont icon-fullscreen"
                         size="mini"
