@@ -31,7 +31,7 @@
                 </el-col>
             </el-row>
             <!--主体-->
-            <div class="mainContentWarp" v-loading="page_loading">
+            <div class="mainContentWarp lineAll" v-loading="page_loading">
                 <NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>
 
                 <div class="content">

@@ -403,54 +403,55 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             value: '3',//
             label: '推举组长',
             types: 3,
-        },{
+         }//,{
+        //     value: '4',//
+        //     label: '评标',
+        //     types: 4,
+        //  }
+        ,{
             value: '4',//
-            label: '评标',
-            types: 4,
-         },{
-            value: '5',//
             label: '资格审查汇总',
+            types: 4,
+        },{
+            value: '5',//
+            label: '符合性审查',
             types: 5,
         },{
             value: '6',//
-            label: '符合性审查',
+            label: '符合性审查汇总',
             types: 6,
         },{
             value: '7',//
-            label: '符合性审查汇总',
+            label: '详细评审',
             types: 7,
         },{
             value: '8',//
-            label: '详细评审',
+            label: '详细评审(技术)汇总',
             types: 8,
         },{
             value: '9',//
-            label: '详细评审(技术)汇总',
+            label: '定档评议',
             types: 9,
         },{
             value: '10',//
-            label: '定档评议',
+            label: '商务',
             types: 10,
         },{
             value: '11',//
-            label: '商务',
+            label: '技术',
             types: 11,
         },{
             value: '12',//
-            label: '技术',
+            label: '服务',
             types: 12,
         },{
             value: '13',//
-            label: '服务',
+            label: '其他',
             types: 13,
         },{
             value: '14',//
-            label: '其他',
-            types: 14,
-        },{
-            value: '15',//
             label: '评审汇总',
-            types: 15,
+            types: 14,
         }]
 })
 //公共导航接口

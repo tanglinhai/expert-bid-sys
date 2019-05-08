@@ -2479,7 +2479,6 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 
 function get_data(type,is_submit_type) {//type
     // console.log(type, is_submit_type);
-
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
