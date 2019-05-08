@@ -20,7 +20,7 @@
                     <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
                 </el-col>
             </el-row>
-            <div class="evaluationcommon cf">
+            <div class="evaluationcommon lineAll cf">
                <MessageCommon :tableData3="tableData3" :dianji="1"></MessageCommon>
                 <el-row class="LayoutRightSide">
                     <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">

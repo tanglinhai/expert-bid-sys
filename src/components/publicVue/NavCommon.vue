@@ -123,11 +123,14 @@ import { setTimeout } from 'timers';
         }
         
         ul{
-            width:130px;
+            width:133px;
             li{
                 padding-left:12px;
                 background: white;
                 width: 100px;
+                &:first-child{
+                    padding-top:15px;
+                }
                 button{
                     display:block;
                     width:90px;
