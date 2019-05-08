@@ -39,7 +39,75 @@
                 <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
                 <div class="content">
                     <div class="div_pdf">
-                        <div class="div_pdf_wrap">
+                        <div class="div_pdf_wrap cf">
+                            <div class="filters">
+                                <div class="filters_wrap">
+                                    <div class="filters_hd">
+                                        <span class="tit">投标文件目录</span>
+                                        <span class="icon iconfont icon-shouqi" @click="pdf_category_open_close($event)"></span>
+                                    </div>
+                                    <div class="filters_bd">
+                                        <div class="filters_kvs">
+                                            <div class="filters_kv cf">
+                                                <div class="filters_k">审查类别：</div>
+                                                <div class="filters_v">xxxxxx</div>
+                                            </div>
+                                            <div class="filters_kv cf">
+                                                <div class="filters_k">投标人：</div>
+                                                <div class="filters_v">
+                                                    <el-select v-model="value" placeholder="请选择" size="mini">
+                                                        <el-option
+                                                            v-for="item in options"
+                                                            :key="item.value"
+                                                            :label="item.label"
+                                                            :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                            <div class="filters_kv cf">
+                                                <div class="filters_k">评审因素：</div>
+                                                <div class="filters_v">
+                                                    <el-select v-model="value" placeholder="请选择" size="mini">
+                                                        <el-option
+                                                            v-for="item in options"
+                                                            :key="item.value"
+                                                            :label="item.label"
+                                                            :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                            <div class="filters_kv cf">
+                                                <div class="filters_k">评审关联点：</div>
+                                                <div class="filters_v">
+                                                    <div class="point">
+                                                        <span class="icon iconfont icon-pdf"></span>
+                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                    </div>
+                                                    <div class="point">
+                                                        <span class="icon iconfont icon-pdf"></span>
+                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                    </div>
+                                                    <div class="point">
+                                                        <span class="icon iconfont icon-pdf"></span>
+                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                    </div>
+                                                    <div class="point">
+                                                        <span class="icon iconfont icon-pdf"></span>
+                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                    </div>
+                                                    <div class="point">
+                                                        <span class="icon iconfont icon-pdf"></span>
+                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters_tip">投标文件目录</div>
+                                </div>
+                            </div>
                             <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
                                  v-for="item in pdfItems"
                                  v-show="item.show"></pdf>
@@ -580,6 +648,16 @@
             //     return treeNode.level > 0;
             // },
             /*----------------- zTree end ----------------------*/
+
+
+            pdf_category_open_close($event){
+                var $t = $($event.target).closest('.div_pdf_wrap');
+                if($t.hasClass('close_pdf_sidebar')){
+                    $t.removeClass('close_pdf_sidebar');
+                }else{
+                    $t.addClass('close_pdf_sidebar');
+                }
+            },
             getIframeDocument(refStr) {
                 return this.getIframeWindow(refStr).document;
             },
@@ -647,12 +725,52 @@
                             text: '拼命加载中...',
                             background: 'rgba(0,0,0,.75)'
                         }),*/
-                        onload: function () {//secondaryToolbarButtonContainer
+                        onload: function () {
+
+                            $(this.contentWindow.document.getElementById('secondaryToolbarButtonContainer')).append(
+                                `<button 
+                                    id="presentationMode_column2" 
+                                    class="secondaryToolbarButton presentationMode_column" 
+                                    onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    document.getElementById('presentationMode_exit2').style.display='block';
+                                    parent.fullModeColumn()"
+                                    title="切换到列模式">
+                                    <span>列模式</span>
+                                </button>
+                                <button 
+                                    id="presentationMode_row2" 
+                                    class="secondaryToolbarButton presentationMode_row" 
+                                    onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    document.getElementById('presentationMode_exit2').style.display='block';
+                                    parent.fullModeRow()"
+                                    title="切换到行模式">
+                                    <span>行模式</span>
+                                </button>
+                                <button 
+                                    id="presentationMode_exit2" 
+                                    class="secondaryToolbarButton presentationMode_exit" 
+                                    ${_this._dom_c.$content.hasClass('presentation_mode_row') || _this._dom_c.$content.hasClass('presentation_mode_column') ? '' : 'style="display:none;"'}
+                                    onclick="parent.exitFullMode();this.style.display='none';
+                                    document.getElementById('presentationMode_exit').style.display='none';"
+                                    title="退出行/列模式">
+                                    <span>退出行/列模式</span>
+                                </button>
+                                <button 
+                                    id="closePdfDocument2" 
+                                    class="secondaryToolbarButton closePdfDocument" 
+                                    onclick="parent.closePDF();
+                                    document.getElementById('presentationMode_exit').style.display='none';
+                                    document.getElementById('presentationMode_exit2').style.display='none';"
+                                    title="关闭文档">
+                                    <span>关闭文档</span>
+                                </button>`
+                            );
                             $(this.contentWindow.document.getElementById('toolbarViewerRight')).prepend(
                                 `<button 
                                     id="presentationMode_column" 
                                     class="toolbarButton presentationMode_column hiddenLargeView" 
                                     onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    document.getElementById('presentationMode_exit2').style.display='block';
                                     parent.fullModeColumn()"
                                     title="切换到列模式">
                                     <span>列模式</span>
@@ -661,6 +779,7 @@
                                     id="presentationMode_row" 
                                     class="toolbarButton presentationMode_row hiddenLargeView" 
                                     onclick="document.getElementById('presentationMode_exit').style.display='block';
+                                    document.getElementById('presentationMode_exit2').style.display='block';
                                     parent.fullModeRow()"
                                     title="切换到行模式">
                                     <span>行模式</span>
@@ -669,14 +788,17 @@
                                     id="presentationMode_exit" 
                                     class="toolbarButton presentationMode_exit hiddenLargeView" 
                                     ${_this._dom_c.$content.hasClass('presentation_mode_row') || _this._dom_c.$content.hasClass('presentation_mode_column') ? '' : 'style="display:none;"'}
-                                    onclick="parent.exitFullMode();this.style.display='none';"
+                                    onclick="parent.exitFullMode();this.style.display='none';
+                                    document.getElementById('presentationMode_exit2').style.display='none';"
                                     title="退出行/列模式">
                                     <span>退出行/列模式</span>
                                 </button>`
                             ).append(`<button 
                                     id="closePdfDocument" 
                                     class="toolbarButton closePdfDocument hiddenLargeView" 
-                                    onclick="parent.closePDF();document.getElementById('presentationMode_exit').style.display='none';"
+                                    onclick="parent.closePDF();
+                                    document.getElementById('presentationMode_exit').style.display='none';
+                                    document.getElementById('presentationMode_exit2').style.display='none';"
                                     title="关闭文档">
                                     <span>关闭文档</span>
                                 </button>`);
@@ -794,6 +916,32 @@
             },
 
             initFullMode(modeType, isFirstInPresentation){
+
+                if(!isFirstInPresentation){
+                    
+                    if(modeType == 'column'){
+                        pdf_l = 0;
+                        pdf_t = 0;
+                        pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
+                        pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
+                        
+                        cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
+                        cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
+                        cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
+                        cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
+                    }else{
+                        pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
+                        pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
+                        pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
+                        pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
+                        
+                        cen_l = 0;
+                        cen_t = 0;
+                        cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
+                        cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
+                    }
+                }
+
                 var bodyH = document.body.clientHeight;
                 var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
                 this._dom_c.$div_pdf.attr('style',"");
@@ -802,7 +950,6 @@
                     'width': conW+'px',
                     'height': bodyH+'px',
                 });
-                this._dom_c.$center_part.css('width', conW+'px');
 
 
 
@@ -848,7 +995,6 @@
                 var centerInput2;
                 var centerWH;
                 var num = 50;
-
                 if(isFirstInPresentation){
                     var conH = this._dom_c.$content.height();
                     var bodyW = document.body.clientWidth;
@@ -864,29 +1010,31 @@
                     var partH = this._dom_c.$center_part_wrap.height();
 
 
+                    pdf_l = pdfOffset.left/bodyW*100;
+                    pdf_t = (pdfOffset.top - scrollTop)/bodyH*100;
+                    pdf_w = pdfW/bodyW*100;
+                    pdf_h = pdfH/bodyH*100;
+                    
+                    cen_l = part_wrapOffset.left/bodyW*100;
+                    cen_t = (part_wrapOffset.top - scrollTop)/bodyH*100;
+                    cen_w = partW/bodyW*100;
+                    cen_h = partH/bodyH*100;
+
                     this._dom_c.$div_pdf.css({
                         position: 'absolute',
-                        top: (pdfOffset.top - scrollTop)/bodyH*100+'%',
-                        left: pdfOffset.left/bodyW*100+'%',
-                        width: pdfW/bodyW*100+'%',
-                        height: pdfH/bodyH*100+'%'
+                        top: pdf_t+'%',
+                        left: pdf_l+'%',
+                        width: pdf_w+'%',
+                        height: pdf_h+'%'
                     });
                     this._dom_c.$center_part_wrap.css({
                         position: 'absolute',
-                        top: (part_wrapOffset.top - scrollTop)/bodyH*100+'%',
-                        left: part_wrapOffset.left/bodyW*100+'%',
-                        width: partW/bodyW*100+'%',
-                        height: partH/bodyH*100+'%'
+                        top: cen_t+'%',
+                        left: cen_l+'%',
+                        width: cen_w+'%',
+                        height: cen_h+'%'
                     });
-                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
-                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
-                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
-                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
                     
-                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
-                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
-                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
-                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
 
                     if(modeType == 'column'){
                         /**
@@ -992,42 +1140,31 @@
                     }
                 }else{
 
-                    pdf_l = parseFloat(this._dom_c.$div_pdf.get(0).style.left);
-                    pdf_t = parseFloat(this._dom_c.$div_pdf.get(0).style.top);
-                    pdf_w = parseFloat(this._dom_c.$div_pdf.get(0).style.width);
-                    pdf_h = parseFloat(this._dom_c.$div_pdf.get(0).style.height);
-                    
-                    cen_l = parseFloat(this._dom_c.$center_part_wrap.get(0).style.left);
-                    cen_t = parseFloat(this._dom_c.$center_part_wrap.get(0).style.top);
-                    cen_w = parseFloat(this._dom_c.$center_part_wrap.get(0).style.width);
-                    cen_h = parseFloat(this._dom_c.$center_part_wrap.get(0).style.height);
-
                     if(modeType == 'column'){
-                        //pdf
+                        //pdf 1
                         pdfInput1 = [
                             [pdf_l,pdf_t],
-                            [90, -20],
-                            [80, pdf_t/3],
-                            [60, pdf_t],
+                            [80, 20],
+                            [60, 50],
+                            [25, 20],
                             [52,30]
                         ];
                         pdfLeftTop = [];
                         pdfInput2 = [
                             [pdf_w,pdf_h],
-                            [13,30],
-                            [15,49],
-                            [18,45],
+                            [4,5],
+                            [8,49],
+                            [20,40],
                             [13,35]
                         ];
                         pdfWH = [];
                         
                         //center_part_wrap
-
                         centerInput1 = [
                             [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
+                            [75, 28],
+                            [35, 65],
+                            [10, 27],
                             [36,30]
                         ];
                         centerLeftTop = [];
@@ -1040,12 +1177,12 @@
                         ];
                         centerWH = [];
                     }else{
-                        //pdf
+                        //pdf 
                         pdfInput1 = [
                             [pdf_l,pdf_t],
-                            [38, 30],
-                            [80, 0],
-                            [45, -20],
+                            [-30, 15],
+                            [50, 46],
+                            [100, 23],
                             [40,30]
                         ];
                         pdfLeftTop = [];
@@ -1061,9 +1198,9 @@
                         //center_part_wrap
                         centerInput1 = [
                             [cen_l,cen_t],
-                            [-20, -30],
-                            [cen_l*1.2, 0],
-                            [cen_l*4, 20],
+                            [-70, 53],
+                            [37, 90],
+                            [90, 50],
                             [40,52]
                         ];
                         centerLeftTop = [];
@@ -1077,6 +1214,12 @@
                         centerWH = [];
                     }
                 }
+
+                console.log(pdfInput1);
+                console.log(pdfInput2);
+                console.log(centerInput1);
+                console.log(centerInput2);
+
                 this.$commonJs.draw_bezier_curves(pdfInput1, num, pdfLeftTop);
                 this.$commonJs.draw_bezier_curves(pdfInput2, num, pdfWH);
                 this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
@@ -1091,8 +1234,15 @@
                 };
             },
             fullModeColumn() {
+                /*if(this._dom_c.$content.hasClass('presentation_mode_column')){
+                    this.$message({
+                      message: '当前已经是列阅读模式!',
+                      type: 'warning'
+                    });
+                    return;
+                }*/
                 var _this = this;
-                var isFirstInPresentation = _this._dom_c.$content.hasClass('showPDF_content');
+                var isFirstInPresentation = !_this._dom_c.$content.hasClass('fullMode');
                 var points = _this.initFullMode('column', isFirstInPresentation);
                 _this._dom_c.$content.addClass('fullMode presentation_mode_column');
                 
@@ -1128,7 +1278,6 @@
                                     'width': 'auto',
                                     'height': '100%',
                                 });
-                                _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
                         });
@@ -1150,8 +1299,15 @@
                 win._requestAnimationFrame_reqestId = win.requestAnimationFrame(render);
             },
             fullModeRow() {
+                /*if(this._dom_c.$content.hasClass('presentation_mode_row')){
+                    this.$message({
+                      message: '当前已经是行阅读模式!',
+                      type: 'warning'
+                    });
+                    return;
+                }*/
                 var _this = this;
-                var isFirstInPresentation = this._dom_c.$content.hasClass('showPDF_content');
+                var isFirstInPresentation = !this._dom_c.$content.hasClass('fullMode');
                 var points = this.initFullMode('row', isFirstInPresentation);
                 this._dom_c.$content.addClass('fullMode presentation_mode_row');
                 var win = window;
@@ -1186,7 +1342,6 @@
                                     'width': 'auto',
                                     'height': '100%',
                                 });
-                                _this._dom_c.$center_part.attr('style',"");
                                 _this._dom_c.$slidebar.attr('style',"");
                             }
                         });
@@ -1265,6 +1420,7 @@
 </script>
 
 <style lang="scss">
+@import '@/assets/css/common/mixin.scss';
     .table_pdf_drop_menu {
         .icon-pdf {
             margin-left: 7px;
@@ -1355,6 +1511,8 @@
                         font-weight: 500;
                         box-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(255, 255, 255, 0.4), 0.06667em 0.06667em rgba(255, 255, 255, 0.3), 0.1em 0.1em rgba(255, 255, 255, 0.2), 0.13333em 0.13333em rgba(255, 255, 255, 0.1);
                         .div_pdf_wrap {
+                            position: relative;
+                            height: 100%;
                             /* .closePDF{
                                 display: none;
                                 background-color: #fff;
@@ -1372,7 +1530,94 @@
                                     color: #e27575;
                                 }
                             } */
+                            .filters{
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                z-index: 1;
+                                width: 450px;
+                                height: 100%;
+                                font-size: 14px;
+                                color: hsl(0,0%,85%);
+                                float: left;
+                                background-color: #474747;
+                                .filters_wrap{
+                                    height: 100%;
+                                    overflow: auto;
+                                    border-right: 5px solid #000;
+                                    .filters_hd{
+                                        position: relative;
+                                        height: 32px;
+                                        line-height: 31px;
+                                        border-bottom: 1px solid #000;
+                                        text-align: center;
+                                        @include singleline-ellipsis;
+                                        .icon{
+                                            position: absolute;
+                                            top: 0;
+                                            right: 10px;
+                                            font-size: 16px;
+                                            cursor: pointer;
+                                            &:hover{
+                                                color: #fff;
+                                            };
+                                        }
+                                    }
+                                    .filters_bd{
+                                        position: relative;
+                                        padding-left: 20px;
+                                        .filters_kvs{
+                                            .filters_kv{
+                                                line-height: 31px;
+                                                margin: 5px auto;
+                                                .filters_k{
+                                                    width: 30%;
+                                                    float: left;
+                                                    @include singleline-ellipsis;
+                                                }
+                                                .filters_v{
+                                                    width: 70%;
+                                                    float: left;
+                                                    @include singleline-ellipsis;
+                                                    .el-select{
+                                                        width: 90%;
+                                                    }
+                                                    .point{
+                                                        margin: 5px 0;
+                                                        padding: 0 5px;
+                                                        cursor: pointer;
+                                                        @include singleline-ellipsis;
+                                                        &:hover{
+                                                            background-color: #000;
+                                                        }
+                                                        .txt{
+                                                            
+                                                        }
+                                                        .icon{
+                                                            padding-right: 3px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .filters_tip{
+                                        display: none;
+                                        position: absolute;
+                                        top: 33px;
+                                        left: 0;
+                                        right: 5px;
+                                        bottom: 0;
+                                        padding-left: 12px;
+                                        font-size: 16px;
+                                        writing-mode:vertical-lr;
+                                        letter-spacing: 5px;
+                                        text-align: center;
+                                    }
+                                }
+                            }
                             .my-pdf {
+                                padding-left: 450px;
                                 font-size: 15px;
                                 font-weight: normal;
                                 .pdfShow {
@@ -1390,6 +1635,35 @@
                                     height: 100%;
                                     z-index: 1;
                                 }
+                            }
+                        }
+
+                        .close_pdf_sidebar{
+                            .filters{
+                                width: 43px;
+                                .filters_wrap{
+                                    overflow: hidden;
+                                    .filters_hd {
+                                        .tit{
+                                            display: none;
+                                        }
+                                        .icon{
+                                            transform: rotate(180deg);
+                                        }
+                                    }
+                                    .filters_bd{
+                                        .filters_kvs{
+                                            visibility: hidden;
+                                        }
+                                    }
+                                    .filters_tip{
+                                        display: block;
+                                    }
+                                } 
+                            }
+                            .my-pdf {
+                                padding-left: 43px;
+                                width: auto;
                             }
                         }
                     }
