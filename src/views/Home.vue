@@ -2,7 +2,7 @@
   <div class="home">
   	<Head :ProjectInformationsAll='ProjectInformationsAll' v-loading="CommonLeftNavsLoading"/>
     <div class="WrapBig">
-      <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number" v-loading="CommonLeftNavsLoading"></NavCommon>
+      <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"  v-loading="CommonLeftNavsLoading"></NavCommon>
       <transition :name="transitionName">
         <router-view class="Router" :key="$route.fullPath"/>
       </transition>
@@ -118,6 +118,37 @@
       }
     }
   }
+  .backblue2{  //提交的完成
+    button{
+      background:#84bb3c!important;
+      color:white!important;
+      border:2px solid #84bb3c!important;
+      margin-left:-12px;
+      width:115px;
+      border-radius:0px;
+      position: relative;
+      &:before{
+        content:"";
+        background: url(../assets/img/io.png) right 0px no-repeat;
+        position: absolute;
+        right: -20px;
+        top: 7px;
+        width:10px;
+        height:23px;
+      }
+      span{
+          .kuai{
+              background:white!important;
+          }
+      }
+      &:hover{
+          color:white!important;
+      }
+      &:visited,&:focus{
+          color:white!important; 
+      }
+    }
+  }
   
   /* .Router{
     position: absolute;
@@ -149,6 +180,7 @@ export default {
       transitionName: 'slide-right',  // 默认动态路由变化为slide-right
       navcommonsList:[],  //导航数据
       number:'',   //导航当前第几步
+      //Allzhuagntai:[], //所有状态返回
       CommonLeftNavsLoading:true,  //左侧导航添加loading 事件
       ProjectInformationsAll:'',  //头部项目信息
     }
@@ -180,8 +212,8 @@ export default {
             //id:id    //哪个用户
         }).then(res=>{
             if(res.status == 200){
-                //console.log(res.data)
-                this.navcommonsList=res.data.navsAll;
+                console.log(res.data)
+                this.navcommonsList=res.data.navsAll; 
                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;
                 this.CommonLeftNavsLoading=false;
@@ -191,10 +223,302 @@ export default {
     },
   },
   updated(){
+    //2正在进行中，1已完成 3.可点 4.不可点,5.提交已完成
+    //this.navcommonsListFun(); //导航接口
+    //console.log(this.$store.state.navCommon.types,99999)
     this.number=this.$store.state.navCommon.types
-    //console.log(this.number,77777777)
-    $(".NavCommon ul li>span").removeClass("backblue");
-    $(".NavCommon ul #"+this.number+">span").addClass("backblue");
+    console.log(this.number,this.navcommonsList,77777777)
+    if(this.$route.query.methodType==1){//合理低价
+
+    }
+    var Allzhuagntai;
+    if(this.number==1){
+      Allzhuagntai=[{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==2){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==3){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==4){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:5
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==5){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==6){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:3
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==7){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==8){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:3
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        },{
+          statusType:4
+        }]
+    }else if(this.number==9){
+      Allzhuagntai=[
+        {
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:1
+        },{
+          statusType:2
+        },{
+          statusType:4
+        },{
+          statusType:3
+        },{
+          statusType:3
+        },{
+          statusType:3
+        },{
+          statusType:3
+        }]
+    }
+    console.log(Allzhuagntai,this.navcommonsList,this.$route.query.methodType)
+    for(var i=0;i<this.navcommonsList.length;i++){
+      this.navcommonsList[i].typestaus=Allzhuagntai[i].statusType
+      //console.log(this.navcommonsList[i].typestaus)
+    }
+    //this.Allzhuagntai=Allzhuagntai;
+    //$(".NavCommon ul li>span").removeClass("backblue");
+   // $(".NavCommon ul #"+this.number+">span").addClass("backblue");
   }
 }
 </script>

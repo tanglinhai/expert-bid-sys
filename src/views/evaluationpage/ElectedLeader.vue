@@ -338,7 +338,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#3").addClass("backblue");
+                           // $("#3").addClass("backblue");
                         })
                     }
                 })
