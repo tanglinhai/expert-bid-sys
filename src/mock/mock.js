@@ -3157,7 +3157,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         'assessingResult': Random.integer(0, 1),
                         'unlockReason': Random.csentence()
                     }],
-                    "zhaunjiaGerenMarkData":  [
+                    'biddersScoreTable':[//投标人分项得分表数据
                         {
                             'evaluationFactors': '第一章、商务(10.00分)',
                             value1:'-',
@@ -3181,7 +3181,6 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             value7:'3.00',
                             value8:'3.00',
                             value9:'5.00',
-
                         },
                         {
                             'evaluationFactors': '第二章、商务2(20.00分)',
@@ -3256,10 +3255,10 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             value9:'53.00',
                         },
                     ],
-                    'companyNameData': [
+                    'biddersScoreTitleData':[
                         {
-                            'name':'张三',
-                            'companyNameList': [
+                            'name':'张三',//评审人
+                            'companyNameList': [//投标人
                                 {"title":"重庆网控科技发展有限公司（1） "},
                                 {"title":"普瑞太阳能有限公司（2） "},
                                 {"title":"夏丰热工研究院有限公司（1） "},
@@ -3281,7 +3280,131 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                                 {"title":"夏丰热工研究院有限公司（1） "},
                             ]
                         },
+                    ],//投标人
+                    "zhaunjiaGerenMarkData":  [//专家个人打分表数据
+                        {
+                            'evaluationFactors': '第一章、商务(10.00分)',
+                            value1:'-',
+                            value2:'-',
+                            value3:'-',
+                            value4:'-',
+                            value5:'-',
+                            value6:'-',
+                            value7:'-',
+                            value8:'-',
+                            value9:'-',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'10.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '第二章、商务2(20.00分)',
+                            value1:'5.00',
+                            value2:'14.00 ',
+                            value3:'7.00',
+                            value4:'10.00',
+                            value5:'17.00',
+                            value6:'13.00',
+                            value7:'8.00',
+                            value8:'9.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务2(20.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(8.00分)',
+                            value1:'64.00',
+                            value2:'80.00 ',
+                            value3:'34.00',
+                            value4:'16.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'23.00',
+                            value8:'34.00',
+                            value9:'57.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'49.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'13.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '第三章、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'12.00',
+                            value5:'18.00',
+                            value6:'15.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'14.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '专家个人打分',
+                            value1:'40.00',
+                            value2:'40.00 ',
+                            value3:'38.00',
+                            value4:'15.00',
+                            value5:'17.00',
+                            value6:'18.00',
+                            value7:'33.00',
+                            value8:'37.00',
+                            value9:'53.00',
+                        },
                     ],
+                    'companyNameData': [//评审人和投标人数据
+                        {
+                            'name':'张三',//评审人
+                            'companyNameList': [//投标人
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                        {
+                            'name':'王五',
+                            'companyNameList': [
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                        {
+                            'name':'李四',
+                            'companyNameList': [
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                    ],//评审人数据
                     'pingshenhuizongTableData': [
                         {
                             'bidderNumber': '2',
@@ -5666,7 +5789,40 @@ let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
     data: []
 });
 
+
+
+
+// let sss=Mock.mock('/api/sss','post',{
+//     code: 200,
+//     data: {
+//
+//         'as':[
+//             {
+//                 'psr':'张三',
+//                 'sss':[
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//
+//                 ],
+//             },
+//             // {
+//             //     'psr':'wangwu',
+//             //     'sss':[
+//             //         {'tbiaore ':'ssss'},
+//             //
+//             //     ]
+//             // }
+//         ]
+//     }
+//
+// });
+
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"});
 
 
 Mock.mock('/Ajax/LoginFalse', 'post', {"Status": "Erro", "Erro": "账号名或密码或验证码有误"});
+
+
+
+
