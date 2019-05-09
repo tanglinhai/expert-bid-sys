@@ -204,7 +204,7 @@
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
 
             this.baoInformations(); //头部包信息
@@ -319,6 +319,9 @@
             //     // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
             // },
 
+        },
+        updated(){
+            //$(".NavCommon ul #1>span").removeClass("backblue");
         }
     }
 </script>

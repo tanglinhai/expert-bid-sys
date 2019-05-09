@@ -397,18 +397,18 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             value: '1',//
             label: '承诺书',  //步数字段
             types: 1,  //types代表第几步对应相对应得步数
-            typestaus:4,
+            typestaus:2,
 
         },{
             value: '2',//
             label: '参加评标',
             types: 2,
-            typestaus:4,
+            typestaus:2,
         },{
             value: '3',//
             label: '推举组长',
             types: 3,
-            typestaus:4,
+            typestaus:3,
          }//,{
         //     value: '4',//
         //     label: '评标',
@@ -423,7 +423,7 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             value: '5',//
             label: '资格审查汇总',
             types: 5,
-            typestaus:4,
+            typestaus:5,
         },{
             value: '6',//
             label: '符合性审查',
