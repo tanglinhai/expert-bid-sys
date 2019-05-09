@@ -83,7 +83,7 @@ import { setTimeout } from 'timers';
                     this.$router.push("/index/ElectedLeader?types="+number);
                 }else if(types==4){
                     this.$router.push("/elect/StartEvaluation?types="+number);
-                }   
+                }
            }
         },
         updated(){

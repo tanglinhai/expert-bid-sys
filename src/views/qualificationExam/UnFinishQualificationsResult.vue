@@ -52,32 +52,6 @@
                                     </template>
                                 </el-table-column>
                             </el-table>
-                            <!--<el-table-->
-                                    <!--:data="msgBox"-->
-                                    <!--border-->
-                                    <!--style="width: 100%"-->
-                                    <!--class="pro_table" v-if="$store.state.failureEnery.isshow">-->
-                                <!--<el-table-column-->
-                                        <!--prop="name"-->
-                                        <!--label="评审专家"-->
-                                        <!--width="120px"-->
-                                        <!--align="center">-->
-                                <!--</el-table-column>-->
-                                <!--<el-table-column-->
-                                        <!--label="资格审查项进度"-->
-                                        <!--align="center">-->
-                                    <!--<template slot-scope="scope">-->
-                                        <!--<el-progress :percentage="scope.row.dates"></el-progress>-->
-                                    <!--</template>-->
-                                <!--</el-table-column>-->
-                                <!--<el-table-column-->
-                                        <!--label="是否提交资格审查结果"-->
-                                        <!--align="center">-->
-                                    <!--<template slot-scope="scope">-->
-                                        <!--<span>{{scope.row.isFinish}}</span>-->
-                                    <!--</template>-->
-                                <!--</el-table-column>-->
-                            <!--</el-table>-->
                             <div class="unlock_table-warp fs14" v-else>
                                 <el-row style="line-height:40px;">
                                     <el-col :span="12">
@@ -426,17 +400,6 @@
                         this.submit_huizong=false;
                         this.options = res.data.vue_type;
                         this.$store.state.failureEnery.tijiaoHuizong=true;
-                        // this.$message({
-                        //     message: '提交成功',
-                        //     type: 'success'
-                        // });
-                        //
-                        //
-                        // $(".hide_div").hide();
-                        // $('.qita_expalin').show();
-                        // $(".qita_expalin").text(this.form.desc);
-                        // $('.qita_expalin_input').hide()
-                        //
                     }
                 })
             },
