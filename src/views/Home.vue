@@ -182,7 +182,7 @@ export default {
         }).then(res=>{
             if(res.status == 200){
                 console.log(res.data)
-                this.navcommonsList=res.data.navsAll;
+                this.navcommonsList=res.data.navsAll; 
                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;
                 this.CommonLeftNavsLoading=false;
@@ -198,7 +198,7 @@ export default {
     this.number=this.$store.state.navCommon.types
     console.log(this.number,this.navcommonsList,77777777)
     if(this.$route.query.methodType==1){//合理低价
-      
+
     }
     var Allzhuagntai;
     if(this.number==1){

@@ -83,13 +83,13 @@ import { setTimeout } from 'timers';
                     //$(".NavCommon ul #"+types+'>span').addClass("backblue");
                 },200)
                 if(types==1){
-                    this.$router.push("/index/LetterCommitment?types="+number);
+                    this.$router.push("/index/LetterCommitment?types="+types);
                 }else if(types==2){
-                    this.$router.push("/index/AllInformation?types="+number);
+                    this.$router.push("/index/AllInformation?types="+types);
                 }else if(types==3){
-                    this.$router.push("/index/ElectedLeader?types="+number);
+                    this.$router.push("/index/ElectedLeader?types="+types);
                 }else if(types==4){
-                    this.$router.push("/elect/StartEvaluation?types="+number);
+                    this.$router.push("/elect/StartEvaluation?types="+types);
                 }   
            }
         },
