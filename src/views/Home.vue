@@ -118,6 +118,37 @@
       }
     }
   }
+  .backblue2{  //提交的完成
+    button{
+      background:#84bb3c!important;
+      color:white!important;
+      border:2px solid #84bb3c!important;
+      margin-left:-12px;
+      width:115px;
+      border-radius:0px;
+      position: relative;
+      &:before{
+        content:"";
+        background: url(../assets/img/io.png) right 0px no-repeat;
+        position: absolute;
+        right: -20px;
+        top: 7px;
+        width:10px;
+        height:23px;
+      }
+      span{
+          .kuai{
+              background:white!important;
+          }
+      }
+      &:hover{
+          color:white!important;
+      }
+      &:visited,&:focus{
+          color:white!important; 
+      }
+    }
+  }
   
   /* .Router{
     position: absolute;
@@ -192,7 +223,7 @@ export default {
     },
   },
   updated(){
-    //2正在进行中，1已完成 3.可点 4.不可点
+    //2正在进行中，1已完成 3.可点 4.不可点,5.提交已完成
     //this.navcommonsListFun(); //导航接口
     //console.log(this.$store.state.navCommon.types,99999)
     this.number=this.$store.state.navCommon.types
@@ -302,9 +333,9 @@ export default {
         },{
           statusType:1
         },{
-          statusType:2
+          statusType:1
         },{
-          statusType:3
+          statusType:5
         },{
           statusType:4
         },{

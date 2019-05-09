@@ -397,7 +397,7 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
             value: '1',//
             label: '承诺书',  //步数字段
             types: 1,  //types代表第几步对应相对应得步数
-            typestaus:2,
+            typestaus:4,
 
         },{
             value: '2',//

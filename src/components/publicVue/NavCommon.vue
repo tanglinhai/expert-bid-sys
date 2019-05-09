@@ -2,7 +2,7 @@
     <div class="navcommon_wrap">
         <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;" ref="myScrollbar">
             <ul ref="wrap" class="NavsUls">
-                <li v-for="(item,index) in navcommonsList" :key="index" id="item.types" :aid="item.typestaus">
+                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
                     <template>
                         <el-popover
                             placement="right"
@@ -11,10 +11,10 @@
                             :content='item.label'
                             trigger="hover"
                             :ref='item'
-                            :class="item.typestaus ==1 ? 'green':item.typestaus ==3 ? 'blue':item.typestaus ==2 ? 'backblue':'DoNotPoint'"
+                            :class="item.typestaus ==1 ? 'green':item.typestaus ==3 ? 'blue':item.typestaus ==2 ? 'backblue':item.typestaus==5?'backblue2':'DoNotPoint'"
                             >
                             <template v-if="item.typestaus==4">
-                                <el-button slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
+                                <el-button slot="reference"><i class="kuai el-icon-close"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                             <template v-else>
                                 <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
@@ -79,17 +79,17 @@ import { setTimeout } from 'timers';
                 // console.log(types,number, this.$store.state.navCommon.types,333)
                 // console.log(this.$store.state.navCommon.types,4444)
                 setTimeout(function(){
-                    //$(".NavCommon ul li>span").removeClass("backblue");
-                    //$(".NavCommon ul #"+types+'>span').addClass("backblue");
+                    $(".NavCommon ul li>span").removeClass("backblue");
+                    $(".NavCommon ul #"+types+'>span').addClass("backblue");
                 },200)
                 if(types==1){
-                    this.$router.push("/index/LetterCommitment?types="+types);
+                    this.$router.push("/index/LetterCommitment?types="+number);
                 }else if(types==2){
-                    this.$router.push("/index/AllInformation?types="+types);
+                    this.$router.push("/index/AllInformation?types="+number);
                 }else if(types==3){
-                    this.$router.push("/index/ElectedLeader?types="+types);
+                    this.$router.push("/index/ElectedLeader?types="+number);
                 }else if(types==4){
-                    this.$router.push("/elect/StartEvaluation?types="+types);
+                    this.$router.push("/elect/StartEvaluation?types="+number);
                 }   
            }
         },
