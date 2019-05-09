@@ -20,6 +20,9 @@ export default{
         queryStr:{
             type: String
         },
+        page:{
+            type: Number
+        },
         pdfUrl:{
             type: String
         },
@@ -45,7 +48,7 @@ export default{
         });
     },
     methods:{
-        setPdf({pdfUrl, onload, queryStr} = {}){
+        setPdf({pdfUrl, onload, queryStr, page} = {}){
             if(this.pdfUrl){
                 pdfUrl = this.pdfUrl;
             }
@@ -55,13 +58,16 @@ export default{
             if(this.queryStr){
                 queryStr = this.queryStr;
             }
+            if(this.page){
+                page = this.page;
+            }
             //var pdfUrl = this.pdfUrl// || "/documents/younojsxia.pdf";
             if(!pdfUrl){
                 return;
             }
             let pdfShow=$(this.$el).find('.pdfShow');
             let options={
-                page:1,
+                page:page || 1,
                 width: "100%",
                 height: "auto",
                 queryStr,

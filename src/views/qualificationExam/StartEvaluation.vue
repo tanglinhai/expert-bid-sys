@@ -92,6 +92,7 @@
                                                 <div class="filters_v">
                                                     <div class="point"
                                                             v-for="item in filter_points"
+                                                            @click="locate_pdf(item, companyname_toubiao.filter(item => item.title == filter_bidder)[0].pdf)"
                                                             :key="item">
                                                         <span class="txt">
                                                             <span class="icon iconfont icon-dingwei"></span>
@@ -107,6 +108,7 @@
                             </div>
                             <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload"
                                  :queryStr="item.queryStr"
+                                 :page="item.page"
                                  v-for="item in pdfItems"
                                  v-show="item.show"></pdf>
                             <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
@@ -214,7 +216,6 @@
                                                             </el-radio-group>
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
                                                             <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
-                                                            
                                                             <!-- pdf operation start -->
                                                             <a class="btn_locate common_a_style" v-if="companyname_toubiao
                                                                         .filter(item => item.title == scope.column.label)[0]
@@ -606,17 +607,17 @@
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
-                this.$commonJs.pdfOperations.getIframeDocument.call(this, refStr);
+                return this.$commonJs.pdfOperations.getIframeDocument.call(this, refStr);
             },
             getIframeWindow(refStr) {
-                this.$commonJs.pdfOperations.getIframeWindow.call(this, refStr);
+                return this.$commonJs.pdfOperations.getIframeWindow.call(this, refStr);
             },
             //定位到关联投标文件说明处
             locate_pdf(relativePoint, pdfs) {
                 this.$commonJs.pdfOperations.locate_pdf.call(this, relativePoint, pdfs);
             },
-            show_pdf(obj, queryStr) {//查看pdf
-                this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr);
+            show_pdf(obj, queryStr, page) {//查看pdf
+                this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr, page);
             },
             slideBarMousedown(e) {
                 this.$commonJs.pdfOperations.slideBarMousedown.call(this, e);

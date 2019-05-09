@@ -596,7 +596,8 @@ export default {
                 var _this = this;
                 this.pdfItems.push({
                     currPdfUrl: obj.url1,
-                    queryStr: queryStr,
+                    queryStr: queryStr || '',
+                    page: page || 1,
                     //currPdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
                     ref: "pdf_" + obj.id,
                     show: true,
