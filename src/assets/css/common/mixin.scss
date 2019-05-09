@@ -126,20 +126,18 @@
                                     line-height: 31px;
                                     margin: 15px auto;
                                     .filters_k{
-                                        width: 30%;
+                                        width: 90px;
                                         float: left;
                                         @include singleline-ellipsis;
                                     }
                                     .filters_v{
-                                        width: 70%;
+                                        width: 300px;
                                         float: left;
                                         @include singleline-ellipsis;
                                         .el-select{
                                             width: 90%;
                                         }
                                         .point{
-                                            margin: 5px 0;
-                                            padding: 0 5px;
                                             cursor: pointer;
                                             @include singleline-ellipsis;
                                             &:hover{

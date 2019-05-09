@@ -88,8 +88,10 @@
                                                     <div class="point"
                                                             v-for="item in filter_points"
                                                             :key="item">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">{{item.txt}}</span>
+                                                        <span class="txt">
+                                                            <span class="icon iconfont icon-dingwei"></span>
+                                                            {{item.name+'--P'+item.page+'--'+item.txt}}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +209,7 @@
 
                                                             <!-- pdf operation start -->
                                                             <div class="btn_locate iconfont icon-dingwei"
-                                                                 @click="locate_pdf(item.fristTableData, scope.row)"
+                                                                 @click="locate_pdf(scope.column.label)"
                                                                  title="定位到关联投标文件说明处"
                                                             ></div>
                                                             <!-- pdf operation end -->
@@ -652,8 +654,8 @@
                 this.$commonJs.pdfOperations.getIframeWindow.call(this, refStr);
             },
             //定位到关联投标文件说明处
-            locate_pdf(question, bidder) {
-                this.$commonJs.pdfOperations.locate_pdf.call(this, question, bidder);
+            locate_pdf(bidder) {
+                this.$commonJs.pdfOperations.locate_pdf.call(this, bidder);
             },
             show_pdf(obj, queryStr) {//查看pdf
                 this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr);

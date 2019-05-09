@@ -1,4 +1,4 @@
-﻿
+
 import Mock from 'mockjs';
 
 import JSON from 'JSON';
@@ -171,14 +171,17 @@ var factors_standards = [
         standard: '大于等于8G',
         relativePoints:[{
             id: 'pdf1_1',
+            name: 'pdf文件11.pdf',
             page: 1,
             txt: 'Vestibulum tincidunt malesuada tellus'
         },{
             id: 'pdf1_1',
+            name: 'pdf文件11.pdf',
             page: 3,
             txt: 'facilisis'
         },{
             id: 'pdf1_1',
+            name: 'pdf文件11.pdf',
             page: 1,
             txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
         }]
@@ -187,10 +190,12 @@ var factors_standards = [
         standard: '必须是INTEL生产',
         relativePoints:[{
             id: 'pdf1_2',
+            name: 'pdf文件12.pdf',
             page: 1,
             txt: '选视频侵权使用蝙蝠侠配乐'
         },{
             id: 'pdf1_2',
+            name: 'pdf文件12.pdf',
             page: 2,
             txt: '中的配乐作为背景音乐'
         }]
@@ -199,6 +204,7 @@ var factors_standards = [
         standard: '可达到1366*768以上即可',
         relativePoints:[{
             id: 'pdf1_3',
+            name: 'pdf文件13.pdf',
             page: 2,
             txt: '从雷达上消失。机上有1人'
         }]
@@ -215,6 +221,7 @@ var factors_standards = [
         standard: '可达到1366*768以上即可',
         relativePoints:[{
             id: 'pdf2_1',
+            name: 'pdf文件21.pdf',
             page: 2,
             txt: '王胜国给王家黔说'
         }]
@@ -223,6 +230,7 @@ var factors_standards = [
         standard: '大于等于8G',
         relativePoints:[{
             id: 'pdf3_2',
+            name: 'pdf文件32.pdf',
             page: 2,
             txt: '其中销量较高的一样的在线占卜：“免'
         }]
@@ -235,6 +243,7 @@ var factors_standards = [
         standard: '可达到1366*768以上即可',
         relativePoints:[{
             id: 'pdf3_1',
+            name: 'pdf文件31.pdf',
             page: 3,
             txt: '夏丰热工研究院有限公司。资格审查评审项：内'
         }]

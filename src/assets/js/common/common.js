@@ -510,7 +510,6 @@ export default {
             window.fullModeRow = this.fullModeRow;
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
-            window._locate_pdf_ = this._locate_pdf_;
             /*this.$commonJs.getScriptFile.call(this, {
                 url: '/js/plugins/html2canvas.js',
                 download_files_key: 'html2canvas.js'
@@ -545,9 +544,9 @@ export default {
         /**
          * [pdf 定位到关联投标文件说明处]
          */
-        locate_pdf(question, bidder) {
-            var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
-            if (!relativePDF || relativePDF.length == 0) {
+        locate_pdf(bidder) {
+            var tempArr = this.companyname_toubiao.filter(item => item.title == bidder);
+            if (!tempArr || tempArr.length == 0 || tempArr) {
                 this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
