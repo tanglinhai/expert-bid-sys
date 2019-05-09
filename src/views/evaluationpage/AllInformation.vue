@@ -27,7 +27,7 @@
                         <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
                     </div> -->
                     <div class="grid-content bg-purple fl">
-                        <el-button size="small"  @click="applyAvoid">申请回避</el-button>
+                        <el-button size="small"  @click="applyAvoid"><i style="font-size:12px; margin-right:2px;" class="el-icon-warning"></i>申请回避</el-button>
                         <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
                     </div>
                 </el-row>
