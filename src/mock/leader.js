@@ -69,9 +69,10 @@ Mock.mock('./api/tableMsg','post',{
     'pdf':[
         {   
             pName:'重庆网控科技发展有限公司',
-            'allPdf|0-4':'pdf文件' + '@natural(1-22)'
+            'allPdf|1-4':['pdf文件@natural(1,99)'],
+            factor:'内存大小大于8G',
         },
-        {pName:'普瑞太阳能有限公司'},
-        {pName:'夏丰热工研究院有限公司'}
+        {pName:'普瑞太阳能有限公司',factor:'是否为INTEL生产','allPdf|1-4':['pdf文件@natural(1,99)'],},
+        {pName:'夏丰热工研究院有限公司',factor:'分辨率是否为15英寸以上','allPdf|1-4':['pdf文件@natural(1,99)'],}
     ]
 })

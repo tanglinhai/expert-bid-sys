@@ -51,17 +51,19 @@
                                         <div class="filters_kvs">
                                             <div class="filters_kv cf">
                                                 <div class="filters_k">审查类别：</div>
-                                                <div class="filters_v">xxxxxx</div>
+                                                <div class="filters_v">{{to_submit_prompt_name}}</div>
                                             </div>
                                             <div class="filters_kv cf">
                                                 <div class="filters_k">投标人：</div>
                                                 <div class="filters_v">
-                                                    <el-select v-model="value" placeholder="请选择" size="mini">
+                                                    <el-select v-model="filter_bidder" placeholder="请选择" size="mini" @change="filter_func_bidder">
                                                         <el-option
-                                                                v-for="item in options"
-                                                                :key="item.value"
-                                                                :label="item.label"
-                                                                :value="item.value">
+
+                                                            v-for="item in companyname_toubiao"
+                                                            :key="item"
+                                                            :label="item.title"
+                                                            :value="item.title">
+
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -69,38 +71,30 @@
                                             <div class="filters_kv cf">
                                                 <div class="filters_k">评审因素：</div>
                                                 <div class="filters_v">
-                                                    <el-select v-model="value" placeholder="请选择" size="mini">
+                                                    <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor">
                                                         <el-option
-                                                                v-for="item in options"
-                                                                :key="item.value"
-                                                                :label="item.label"
-                                                                :value="item.value">
+
+                                                            v-for="item in dingdang_tableData"
+                                                            :key="item.evaluationFactors"
+                                                            :label="item.evaluationFactors"
+                                                            :value="item.evaluationFactors">
+
                                                         </el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
                                             <div class="filters_kv cf">
+                                                <div class="filters_k">审查标准：</div>
+                                                <div class="filters_v">{{filter_standard}}</div>
+                                            </div>
+                                            <div class="filters_kv cf">
                                                 <div class="filters_k">评审关联点：</div>
                                                 <div class="filters_v">
-                                                    <div class="point">
+                                                    <div class="point"
+                                                            v-for="item in filter_points"
+                                                            :key="item">
                                                         <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
-                                                    </div>
-                                                    <div class="point">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
-                                                    </div>
-                                                    <div class="point">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
-                                                    </div>
-                                                    <div class="point">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
-                                                    </div>
-                                                    <div class="point">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">标准设备采购招标文件模板.pdf--P10</span>
+                                                        <span class="txt">{{item.txt}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,6 +212,14 @@
                                                             </el-radio-group>
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
                                                             <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
+
+
+                                                            <!-- pdf operation start -->
+                                                            <div class="btn_locate iconfont icon-dingwei"
+                                                                 @click="locate_pdf(item.fristTableData, scope.row)"
+                                                                 title="定位到关联投标文件说明处"
+                                                            ></div>
+                                                            <!-- pdf operation end -->
                                                         </template>
                                                     </el-table-column>
                                                 </el-table-column>
@@ -411,8 +413,12 @@
                 bzzxLoading: true, //标中质询loading
                 son_all_checked: [],//子节点全选
                 son_all_che: [],//子节点全选
+                /* ----------------------------pdf start------------------------------- */
+                filter_bidder:'',
+                filter_factor:'',
                 currPdfUrl: '',//当前点击pdf的url
                 pdfItems: [],//动态插入pdf
+                /* ----------------------------pdf end------------------------------- */
                 allCheckedBtnLoading: false,//父级全选按钮loadding
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
@@ -438,14 +444,12 @@
         },
         created() {
             this.methodType = this.$route.query.methodType;
-            console.log(this.type_btn);
+            // console.log(this.type_btn);
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
                 this.type_btn = this.$route.query.type;
             }
-
-
         },
         mounted() {
             $(".positionDiv").hide();
@@ -454,6 +458,34 @@
             this.$commonJs.pdfOperations.pdf_init.call(this);
         },
         computed: {
+            filter_standard(){
+                for(var i=0;i<this.companyname_toubiao.length;i++){
+                    if(this.companyname_toubiao[i].title == this.filter_bidder){
+                        var fses = this.companyname_toubiao[i].factors_standards;
+                        for(var j=0;j<fses.length;j++){
+                            if(fses[j].factor == this.filter_factor){
+                                return fses[j].standard;
+                            }
+                        }
+                        break;
+                    }
+                }
+                return '';
+            },
+            filter_points() {
+                for(var i=0;i<this.companyname_toubiao.length;i++){
+                    if(this.companyname_toubiao[i].title == this.filter_bidder){
+                        var fses = this.companyname_toubiao[i].factors_standards;
+                        for(var j=0;j<fses.length;j++){
+                            if(fses[j].factor == this.filter_factor){
+                                return fses[j].relativePoints;
+                            }
+                        }
+                        break;
+                    }
+                }
+                return '';
+            },
             currentPdfShow() {
                 for (var i = 0; i < this.pdfItems.length; i++) {
                     if (this.pdfItems[i].show) {
@@ -505,6 +537,7 @@
                         }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+
                     }
                     this.page_loading = false;
                 })
@@ -535,7 +568,9 @@
 
 
             /*----------------- pdf start ----------------------*/
+
             pdf_category_open_close($event) {
+
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
@@ -633,7 +668,7 @@
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
                 this.to_failure_entry_answer = obj.evaluationFactors;
-                this.$axios.post('/api/isFailure_fhx', 'post', {
+                this.$axios.post('/api/isFailure', 'post', {
                     type: val
                 }).then(res => {
                     if (res.status == 200) {

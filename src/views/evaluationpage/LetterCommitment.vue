@@ -82,10 +82,10 @@
                     //redshow:this.redshow,    //四个按钮选中的是id
                 }).then(res=>{
                     if(res.status == 200){
-                       //console.log(res.data)
+                       console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#1 button").addClass("backblue");
+                            //$("#1").addClass("backblue");
                         })
                         this.pageloadding=false;
                     }

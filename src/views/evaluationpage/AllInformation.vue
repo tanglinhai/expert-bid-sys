@@ -272,7 +272,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#2 button").addClass("backblue");
+                            //$("#2").addClass("backblue");
                         })
                     }
                 })
@@ -319,6 +319,9 @@
             //     // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
             // },
 
+        },
+        updated(){
+            //$(".NavCommon ul #1>span").removeClass("backblue");
         }
     }
 </script>

@@ -587,6 +587,18 @@ export default {
                     iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
                 }
             } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
+                this.$axios.post('/api/getPDFCategory', {
+                    data: 'fdsklfjdlsf'
+                }).then(res => {
+
+                    console.log(res);
+
+                    if (res.data.code == 200) {
+                        alert('fjlsdjflsd');
+                    }
+                })
+
+
                 var _this = this;
                 this.pdfItems.push({
                     currPdfUrl: obj.url1,

@@ -165,10 +165,89 @@ let esta = Mock.mock('/api/esta', 'post', {
     ]
 });
 // /*----------------------审查项页面数据接口---------------------*/
+var factors_standards = [
+    [{
+        factor: '内存大小大于8G',
+        standard: '大于等于8G',
+        relativePoints:[{
+            id: 'pdf1_1',
+            page: 1,
+            txt: 'Vestibulum tincidunt malesuada tellus'
+        },{
+            id: 'pdf1_1',
+            page: 3,
+            txt: 'facilisis'
+        },{
+            id: 'pdf1_1',
+            page: 1,
+            txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
+        }]
+    },{
+        factor: '是否为INTEL生产',
+        standard: '必须是INTEL生产',
+        relativePoints:[{
+            id: 'pdf1_2',
+            page: 1,
+            txt: '选视频侵权使用蝙蝠侠配乐'
+        },{
+            id: 'pdf1_2',
+            page: 2,
+            txt: '中的配乐作为背景音乐'
+        }]
+    },{
+        factor: '分辨率是否为15英寸以上',
+        standard: '可达到1366*768以上即可',
+        relativePoints:[{
+            id: 'pdf1_3',
+            page: 2,
+            txt: '从雷达上消失。机上有1人'
+        }]
+    }],[{
+        factor: '内存大小大于8G',
+        standard: '大于等于8G',
+        relativePoints:[]
+    },{
+        factor: '是否为INTEL生产',
+        standard: '必须是INTEL生产',
+        relativePoints:[]
+    },{
+        factor: '分辨率是否为15英寸以上',
+        standard: '可达到1366*768以上即可',
+        relativePoints:[{
+            id: 'pdf2_1',
+            page: 2,
+            txt: '王胜国给王家黔说'
+        }]
+    }],[{
+        factor: '内存大小大于8G',
+        standard: '大于等于8G',
+        relativePoints:[{
+            id: 'pdf3_2',
+            page: 2,
+            txt: '其中销量较高的一样的在线占卜：“免'
+        }]
+    },{
+        factor: '是否为INTEL生产',
+        standard: '必须是INTEL生产',
+        relativePoints:[]
+    },{
+        factor: '分辨率是否为15英寸以上',
+        standard: '可达到1366*768以上即可',
+        relativePoints:[{
+            id: 'pdf3_1',
+            page: 3,
+            txt: '夏丰热工研究院有限公司。资格审查评审项：内'
+        }]
+    }]
+
+];
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
     let get_type_num=JSON.parse(options.body).type;
+
+    var bidderIds = [Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id()];
+
     if (get_type_num == 1) {
         let ms = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
@@ -192,28 +271,23 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
 
-                        {"title":"重庆网控科技发展有限公司（1）",
-                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
-                        {"title": "普瑞太阳能有限公司（2）",
-                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
+                            factors_standards:factors_standards[0]
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+                            factors_standards:factors_standards[1]
+
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         {
@@ -597,28 +671,26 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'shenchaName':"形式审计-#707478",
                     'companyNameList': [//(投标人)公司名
 
-                        {"title":"重庆网控科技发展有限公司（1）",
-                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
-                        {"title": "普瑞太阳能有限公司（2）",
-                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
+
+                            factors_standards:factors_standards[0]
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         {
@@ -983,28 +1055,26 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"详细评审技术",
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1）",
-                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人1.pdf"},
-                                {id: 'pdf1_2', pdf_name: 'pdf文件11', 'url1': "/documents/投标人11.pdf"},
-                                {id: 'pdf1_3', pdf_name: 'pdf文件111', 'url1': "/documents/投标人111.pdf"}]},
-                        {"title": "普瑞太阳能有限公司（2）",
-                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]},
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}]
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
+
+                            factors_standards:factors_standards[1]
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
                         },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件2', 'url1': "/documents/投标人2.pdf"}]
-                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         {
@@ -2427,7 +2497,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
 });
 /*---------------------审查项汇总页面接口end------------------*/
 
-// 资格审查合格不合格接口
+// 资格审查( 商务服务技术其他radio)合格不合格radio接口
 let isFailure = Mock.mock('/api/isFailure', 'post', {
     code: 200,
     message: '成功!',
@@ -2481,7 +2551,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {
-    console.log(type, is_submit_type);
+    // console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2528,7 +2598,7 @@ function get_data(type,is_submit_type) {
     set_type();
     var a;
     a = set_type();
-    console.log(a);
+    // console.log(a);
     return [
         {
             value: '1',//
@@ -3257,27 +3327,27 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     ],
                     'biddersScoreTitleData':[
                         {
-                            'name':'张三',//评审人
-                            'companyNameList': [//投标人
-                                {"title":"重庆网控科技发展有限公司（1） "},
-                                {"title":"普瑞太阳能有限公司（2） "},
-                                {"title":"夏丰热工研究院有限公司（1） "},
+                            'companyName':'重庆网控科技发展有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
+                                ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
                             ]
                         },
                         {
-                            'name':'王五',
-                            'companyNameList': [
-                                {"title":"重庆网控科技发展有限公司（1） "},
-                                {"title":"普瑞太阳能有限公司（2） "},
-                                {"title":"夏丰热工研究院有限公司（1） "},
-                            ]
-                        },
-                        {
-                            'name':'李四',
-                            'companyNameList': [
-                                {"title":"重庆网控科技发展有限公司（1） "},
-                                {"title":"普瑞太阳能有限公司（2） "},
-                                {"title":"夏丰热工研究院有限公司（1） "},
+                            'companyName':'夏丰热工研究院有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
                             ]
                         },
                     ],//投标人
@@ -3645,28 +3715,30 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'evaluationExpert': '评审专家五',//评审专家
                     'leibie':"商务",//大类别
                     'companyNameList': [//(投标人)公司名
-                        {
-                            "companyName":"重庆网控科技发展有限公司（1）" ,
+
+                        { "title":"重庆网控科技发展有限公司（1）",
                             'laber':' 是否是官方配置？（50.00分）',
-                            'pdfList':[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
+
+                            factors_standards:factors_standards[0]
                         },
-                        {
-                            "companyName": "普瑞太阳能有限公司（2）",
+                        { "title": "普瑞太阳能有限公司（2）",
                             'laber':' 是否是官方配置？（50.00分）',
-                            'pdfList':[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        } ,
-                        {
-                            "companyName":"夏丰热工研究院有限公司（3）",
-                            'laber':' 是否是官方配置？（50.00分）',
-                            'pdfList':[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
                         },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            'laber':' 是否是官方配置？（50.00分）',
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[//打分项
                         { "grade":'商务  商务1（50.00分）', },
@@ -3944,23 +4016,26 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
-                            'pdfList':[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
-                        },
-                        {"title": "普瑞太阳能有限公司（2）",
-                            'pdfList':[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            'pdfList':[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            factors_standards:factors_standards[0]
                         },
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
+                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         // /*加的数据*/
@@ -4075,7 +4150,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1:'',
                             value2:'' ,
-                            value3: ''
+                            value3: '',
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '第二章，商务20分',
@@ -4098,6 +4176,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '总计',
@@ -4108,7 +4189,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4384,23 +4468,26 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
-                            'pdfList':[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
-                        },
-                        {"title": "普瑞太阳能有限公司（2）",
-                            'pdfList':[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            'pdfList':[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            factors_standards:factors_standards[0]
                         },
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
+                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         //     {
@@ -4523,6 +4610,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1:[],
                             value2:[] ,
                             value3: [],
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '技术小计',
@@ -4534,6 +4624,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '总计',
@@ -4544,7 +4637,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4820,23 +4916,26 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
-                            'pdfList':[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
-                        },
-                        {"title": "普瑞太阳能有限公司（2）",
-                            'pdfList':[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            'pdfList':[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            factors_standards:factors_standards[0]
                         },
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
+                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         {
@@ -4854,7 +4953,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             }, {
                                 num: '15',
                                 typeTitle: '15',
-                                gradeExplain:"",
                             }, {
                                 num: "20",
                                 typeTitle: '20',
@@ -4873,7 +4971,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             },{
                                 num: '45',
                                 typeTitle: '45',
-                                gradeExplain:"",
                             }, {
                                 num: '50',
                                 typeTitle: '50',
@@ -5189,23 +5286,26 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                     'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
-                        {"title":"重庆网控科技发展有限公司（1） ",
-                            'pdfList':[
-                                {id: 'pdf3_1', pdf_name: 'pdf文件1', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件2', 'url1': "/documents/投标人3.pdf"}
-                            ]
-                        },
-                        {"title": "普瑞太阳能有限公司（2）",
-                            'pdfList':[
-                                {id: 'pdf3_3', pdf_name: 'pdf文件3', 'url1': "/documents/投标人3.pdf"},
-                            ]
-                        },
+                        { "title":"重庆网控科技发展有限公司（1）",
+                            pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
+                                {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
+                                {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                        {"title":"夏丰热工研究院有限公司（3）",
-                            'pdfList':[
-                                {id: 'pdf3_4', pdf_name: 'pdf文件4', 'url1': "/documents/投标人3.pdf"},
-                            ]
+                            factors_standards:factors_standards[0]
                         },
+                        { "title": "普瑞太阳能有限公司（2）",
+                            pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
+
+                            factors_standards:factors_standards[1]
+
+                        },
+                        { 
+                            "title":"夏丰热工研究院有限公司（3）",
+                            pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+
+                            factors_standards:factors_standards[2]
+                        }
                     ],
                     "dingdang_tableData":[
                         {

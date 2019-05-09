@@ -253,7 +253,7 @@
                 other_explain: "",//其他说明
                 individualTrialData: [],//查看个人资格审查项表弹框数据
                 companyName: [],//查看个人资格审查项表弹框投标人
-                form: {
+                form: {//其他说明
                     desc: ''
                 },
                 type: '',//导航传值类型

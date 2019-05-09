@@ -185,8 +185,8 @@
                                                                      min-width="250" :key="index" v-if="type==8">
 
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -200,7 +200,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -314,8 +314,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if="type==9">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -329,7 +329,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -435,8 +435,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if="type==10">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -450,7 +450,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -558,8 +558,8 @@
                                                                      v-for="(item,index ) in companyname_toubiao"
                                                                      min-width="250" :key="index" v-if=" type==11">
                                                         <template slot="header" slot-scope="scope">
-                                                            <a v-if="companyname_toubiao[scope.$index].pdfList.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdfList[0])" class="common_a_style" title="投标文件">
+                                                            <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -573,7 +573,7 @@
                                                               <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
                                                                 <el-dropdown-item
                                                                         @click.native="show_pdf(pdfItem)"
-                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdfList"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
                                                                 >{{pdfItem.pdf_name}}<i
                                                                         class="icon iconfont icon-pdf"></i></el-dropdown-item>
                                                               </el-dropdown-menu>
@@ -883,9 +883,7 @@
                     desc: ''
                 },
                 scoreShowsDialog: false,//编辑评分说明
-                methodType: "",
-
-
+                methodType: "",//区分那种方法
                 currPdfUrl: '',//当前点击pdf的url
                 pdfItems: [],//动态插入pdf
             }
@@ -1132,21 +1130,27 @@
                 // console.log(index);
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
-                arr = this.dingdang_tableData.slice(0, -2);
-                arr.forEach((k, i) => {
-                    if (Array.isArray(k['value' + index])) {//是数组
-                        if (k['value' + index].length != 0) {
-                            let num = 0;
-                            k['value' + index].forEach(e => {
-                                num += Number(e);
-                            });
-                            amt += num;
-                        }
-                    } else {
-                        amt += Number(k['value' + index]) != '' ? Number(k['value' + index]) : 0;//点击那个列radio,input为不空，则小计为每一行vulue1的和，反之为0
+                this.$axios.post('/api/isFailure', 'post', {
+                    type: val
+                }).then(res => {
+                    if (res.status == 200) {
+                        arr = this.dingdang_tableData.slice(0, -2);
+                        arr.forEach((k, i) => {
+                            if (Array.isArray(k['value' + index])) {//是数组
+                                if (k['value' + index].length != 0) {
+                                    let num = 0;
+                                    k['value' + index].forEach(e => {
+                                        num += Number(e);
+                                    });
+                                    amt += num;
+                                }
+                            } else {
+                                amt += Number(k['value' + index]) != '' ? Number(k['value' + index]) : 0;//点击那个列radio,input为不空，则小计为每一行vulue1的和，反之为0
+                            }
+                        });
+                        this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
                     }
-                });
-                this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
+                })
             },
             changeInputSelect(value, rowIndex, colIndex, rowList) {//步长
                 let arr = [];
