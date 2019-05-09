@@ -2,8 +2,8 @@
     <div class="navcommon_wrap">
         <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;" ref="myScrollbar">
             <ul ref="wrap" class="NavsUls">
-                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" >
-                    <template v-if="number>=item.types">
+                <li v-for="(item,index) in navcommonsList" :key="index" id="item.types" :aid="item.typestaus">
+                    <template>
                         <el-popover
                             placement="right"
                             title=""
@@ -11,13 +11,18 @@
                             :content='item.label'
                             trigger="hover"
                             :ref='item'
-                            class="green"
+                            :class="item.typestaus ==1 ? 'green':item.typestaus ==3 ? 'blue':item.typestaus ==2 ? 'backblue':'DoNotPoint'"
                             >
-                            <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
+                            <template v-if="item.typestaus==4">
+                                <el-button slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
+                            </template>
+                            <template v-else>
+                                <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="kuai"></i>{{item.label}}</el-button>  <!--0可点-->
+                            </template>
                         </el-popover>
                         <span class="navcommon_line"></span>
                     </template>
-                    <template v-else>
+                    <!-- <template v-else>
                         <el-popover
                             placement="right"
                             title=""
@@ -32,7 +37,7 @@
                         
                         <span class="navcommon_line">
                         </span>
-                    </template>
+                    </template> -->
                 </li> 
             </ul>
         </el-scrollbar>
@@ -55,7 +60,8 @@ import { setTimeout } from 'timers';
             },
             number:{
                 type:Number,
-            }
+            },
+            
         },
         components:{
 
@@ -69,12 +75,12 @@ import { setTimeout } from 'timers';
                 });
             },
            ToChangePage(types,number){   //导航点击值//types
-                console.log(types,number);
+                //console.log(types,number,555);
                 // console.log(types,number, this.$store.state.navCommon.types,333)
                 // console.log(this.$store.state.navCommon.types,4444)
                 setTimeout(function(){
-                    $(".NavCommon ul li button").removeClass("backblue");
-                    $(".NavCommon ul #"+types).find("button").addClass("backblue");
+                    //$(".NavCommon ul li>span").removeClass("backblue");
+                    //$(".NavCommon ul #"+types+'>span').addClass("backblue");
                 },200)
                 if(types==1){
                     this.$router.push("/index/LetterCommitment?types="+number);
@@ -92,7 +98,6 @@ import { setTimeout } from 'timers';
             let div = _this.$refs["myScrollbar"].$refs["wrap"];
             _this.$nextTick(()=>{
                 let sortsSelectHeight = ($(".backblue").parent().parent().index()+1)*60;
-                
                // console.log($(".backblue").parent().parent().index(),buttonHeight,lineHeight,666666)
                 let zongHeightHalf=($("body").height()-290)/2;
                 // console.log(zongHeightHalf)

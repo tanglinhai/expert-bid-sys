@@ -204,7 +204,7 @@
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
-            //this.navcommonsListFun(); //导航接口
+            this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
 
             this.baoInformations(); //头部包信息
@@ -272,7 +272,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#2").addClass("backblue");
+                            //$("#2").addClass("backblue");
                         })
                     }
                 })

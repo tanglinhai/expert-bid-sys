@@ -383,6 +383,8 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 })
 
 
+
+
 //公共导航接口
 let NavCommon=Mock.mock('/api/navcommons','post',{
     ProjectInformationsAll:{
@@ -391,18 +393,22 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
         projectWenjian:'招标文件(pdf)',
         PersonName:'张三'
     },
-    navsAll:[{
+    navsAll:[{   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
             value: '1',//
             label: '承诺书',  //步数字段
             types: 1,  //types代表第几步对应相对应得步数
+            typestaus:2,
+
         },{
             value: '2',//
             label: '参加评标',
             types: 2,
+            typestaus:4,
         },{
             value: '3',//
             label: '推举组长',
             types: 3,
+            typestaus:4,
          }//,{
         //     value: '4',//
         //     label: '评标',
@@ -410,49 +416,117 @@ let NavCommon=Mock.mock('/api/navcommons','post',{
         //  }
         ,{
             value: '4',//
-            label: '资格审查汇总',
+            label: '资格审查',
             types: 4,
+            typestaus:4,
         },{
             value: '5',//
-            label: '符合性审查',
+            label: '资格审查汇总',
             types: 5,
+            typestaus:4,
         },{
             value: '6',//
-            label: '符合性审查汇总',
+            label: '符合性审查',
             types: 6,
+            typestaus:4,
         },{
             value: '7',//
-            label: '详细评审',
+            label: '符合性审查汇总',
             types: 7,
+            typestaus:4,
         },{
             value: '8',//
-            label: '详细评审(技术)汇总',
+            label: '详细评审(技术)',
             types: 8,
+            typestaus:4,
         },{
             value: '9',//
-            label: '定档评议',
+            label: '详细评审(技术)汇总',
             types: 9,
+            typestaus:4,
         },{
             value: '10',//
             label: '商务',
             types: 10,
+            typestaus:4,
         },{
             value: '11',//
             label: '技术',
             types: 11,
+            typestaus:4,
         },{
             value: '12',//
             label: '服务',
             types: 12,
+            typestaus:4,
         },{
             value: '13',//
             label: '其他',
             types: 13,
+            typestaus:4,
         },{
             value: '14',//
             label: '评审汇总',
             types: 14,
-        }]
+            typestaus:4,
+    }],
+    navsAllSecond:[{   //合理低价导航 评审汇总：（详细评审(技术)汇总提交完成之后可点）
+        value: '1',//
+        label: '承诺书',  //步数字段
+        types: 1,  //types代表第几步对应相对应得步数
+        typestaus:2,
+
+    },{
+        value: '2',//
+        label: '参加评标',
+        types: 2,
+        typestaus:4,
+    },{
+        value: '3',//
+        label: '推举组长',
+        types: 3,
+        typestaus:4,
+     }//,{
+    //     value: '4',//
+    //     label: '评标',
+    //     types: 4,
+    //  }
+    ,{
+        value: '4',//
+        label: '资格审查',
+        types: 4,
+        typestaus:4,
+    },{
+        value: '5',//
+        label: '资格审查汇总',
+        types: 5,
+        typestaus:4,
+    },{
+        value: '6',//
+        label: '符合性审查',
+        types: 6,
+        typestaus:4,
+    },{
+        value: '7',//
+        label: '符合性审查汇总',
+        types: 7,
+        typestaus:4,
+    },{
+        value: '8',//
+        label: '详细评审(技术)',
+        types: 8,
+        typestaus:4,
+    },{
+        value: '9',//
+        label: '详细评审(技术)汇总',
+        types: 9,
+        typestaus:4,
+    },{
+        value: '10',//
+        label: '评审汇总',
+        types: 10,
+        typestaus:4,
+    }]
 })
 //公共导航接口
 
