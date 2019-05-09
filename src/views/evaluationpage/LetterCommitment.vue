@@ -56,6 +56,7 @@
             console.log(this.$route.query.types);
             console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
             this.val=this.$route.query.methodType;
+            console.log(this.val);
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
@@ -81,10 +82,10 @@
                     //redshow:this.redshow,    //四个按钮选中的是id
                 }).then(res=>{
                     if(res.status == 200){
-                       //console.log(res.data)
+                       console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#1").addClass("backblue");
+                            //$("#1").addClass("backblue");
                         })
                         this.pageloadding=false;
                     }

@@ -404,13 +404,51 @@
                                :to_submit_prompt_baohao="to_submit_prompt_baohao" :companyNameData="companyNameData"
                                :pingshenzhaunjiaData="pingshenzhaunjiaData"></CheckProScore>
             </el-dialog>
+            <!----------------------投标人分项得分表start--------------------->
             <el-dialog
                     title="投标人分项得分表"
                     :visible.sync="dialogBindScore"
-                    width="1000px"
+                    width="1800px"
             >
-                <CheckProScore></CheckProScore>
+                <div class="checkProScore">
+                    <div class="biaoba_fisrt">
+                        <el-row class="mb15">
+                            <span>分包号：{{baohao}}[第{{to_submit_prompt_baohao}}包]</span>
+                            <span class="ml20">专家组：{{biaoNum}}评委会 </span>
+                        </el-row>
+                        <el-table
+                                :data="biddersScoreTable"
+                                size="small"
+                                tooltip-effect="dark"
+                                border
+                                el-table__header-wrapper
+                        >
+                            <el-table-column
+                                    type="index"
+                                    width="50" header-align="left" fixed>
+                            </el-table-column>
+                            <el-table-column prop="evaluationFactors" header-align="left"
+                                             label="项目"
+                                             fixed width="165"></el-table-column>
+                            <el-table-column header-align="left" label="投标人">
+                                <el-table-column header-align="left" :label=item.companyName   v-for="(item,index) in  biddersScoreTitleData" :key="index">
+                                    <el-table-column :label="a.name"
+                                                     v-for="(a,i) in item.NameList"
+                                                     width="175" :key="i">
+                                        <tempalte slot-scope="scope">
+                                            <span >  {{scope.row['value' +( (i+ 1) + item.NameList.length * index)]}}  </span>
+                                        </tempalte>
+                                    </el-table-column>
+                                </el-table-column>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                    <el-row class="mab15 textAlignC mt30">
+                        <el-button type="primary" size="small" @click="rebackBiddersScoreBtn"><i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回</el-button>
+                    </el-row>
+                </div>
             </el-dialog>
+            <!----------------------投标人分项得分表end--------------------->
             <!--计算报价得分-->
             <el-dialog
                     title="计算报价得分"
@@ -592,7 +630,6 @@
                         {required: true, message: '请填写申请原因', trigger: 'blur'}
                     ]
                 },
-
                 ruleFormLockRequest: {
                     type: [],
                     desc: '',
@@ -615,6 +652,9 @@
                 tableHead: [],//综合评标页面进度条表格数据
                 isShowProgressPage: '',//0:进度条的页面，1表格的页面
                 submitFormLoadingZHPB:false,//综合评标提交按钮loding
+                dialogBindScore:false,// 专家个人打分表
+                biddersScoreTable:[],//投标人分项得分表
+                biddersScoreTitleData:[],//投标人分项得分表头数据
             }
         },
         created() {
@@ -646,6 +686,8 @@
                         this.unlock_dialog_check = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
                         this.tippsDialogName = res.data.bidMsg.eviewrItemsMsg.jiesuoData.tippsDialogName;
                         this.zhaunjiaGerenMarkData = res.data.bidMsg.eviewrItemsMsg.zhaunjiaGerenMarkData;
+                        this.biddersScoreTable=res.data.bidMsg.eviewrItemsMsg.biddersScoreTable;
+                        this.biddersScoreTitleData=res.data.bidMsg.eviewrItemsMsg.biddersScoreTitleData;
                         this.companyNameData = res.data.bidMsg.eviewrItemsMsg.companyNameData;
                         this.pingshenzhaunjiaData = res.data.bidMsg.eviewrItemsMsg.pingshenzhaunjiaData;
                         this.msgBoxProgressZHPB = res.data.bidMsg.eviewrItemsMsg.tables;//进度数据
@@ -984,8 +1026,11 @@
             rebackSubmitZHPB(){//综合评标提交取消按钮
                 this.$store.state.failureEnery.tijiaoDialogZHPB=false;
             },
-            bindScoreBtn(){
-                this.$store.state.failureEnery.checkProScoreDialogVisible = true;
+            bindScoreBtn(){//投标人分项得分按钮
+                this.dialogBindScore=true;
+            },
+            rebackBiddersScoreBtn(){//投标人分项得分表返回按钮
+                this.dialogBindScore=false;
             }
         }
     }

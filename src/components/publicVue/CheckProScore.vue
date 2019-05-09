@@ -21,14 +21,12 @@
                                  label="项目"
                                  fixed width="165"></el-table-column>
                 <el-table-column header-align="left" label="评审人">
-                    <el-table-column header-align="left" :label=item.name v-for="(item,i) in  companyNameData">
+                    <el-table-column header-align="left" :label=item.name   v-for="(item,index) in  companyNameData" :key="index">
                         <el-table-column :label="a.title"
                                          v-for="(a,i) in item.companyNameList"
-                                         width="175">
+                                         width="175" :key="i">
                             <tempalte slot-scope="scope">
-                                <span >
-                                   {{scope.row['value' + (i + 1)]}}
-                                </span>
+                                <span >  {{scope.row['value' +( (i+ 1) + item.companyNameList.length * index)]}}  </span>
                             </tempalte>
                         </el-table-column>
                     </el-table-column>
@@ -66,16 +64,19 @@
             }
         },
         data() {
-            return {}
+            return {
+
+            }
         },
         created() {
         },
         mounted() {
+
         },
         methods: {
             rebackCheckProScore(){
                 this.$store.state.failureEnery.checkProScoreDialogVisible = false;
-            }
+            },
         }
     }
 </script>

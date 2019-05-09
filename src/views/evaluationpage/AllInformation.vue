@@ -27,7 +27,7 @@
                         <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
                     </div> -->
                     <div class="grid-content bg-purple fl">
-                        <el-button size="small"  @click="applyAvoid">申请回避</el-button>
+                        <el-button size="small"  @click="applyAvoid"><i style="font-size:12px; margin-right:2px;" class="el-icon-warning"></i>申请回避</el-button>
                         <el-button size="small" type="primary"  @click="AgreeXieYi" :loading="BtnLoading">参加评标</el-button>
                     </div>
                 </el-row>
@@ -272,7 +272,7 @@
                        //console.log(res.data)
                         this.navcommonsList=res.data.navsAll;
                         this.$nextTick(function(){
-                            $("#2").addClass("backblue");
+                            //$("#2").addClass("backblue");
                         })
                     }
                 })
@@ -319,6 +319,9 @@
             //     // alert('提交后您将没有权限参与此项目，此模拟系统暂时不支持此操作！');
             // },
 
+        },
+        updated(){
+            //$(".NavCommon ul #1>span").removeClass("backblue");
         }
     }
 </script>

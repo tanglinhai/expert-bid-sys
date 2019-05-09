@@ -883,9 +883,7 @@
                     desc: ''
                 },
                 scoreShowsDialog: false,//编辑评分说明
-                methodType: "",
-
-
+                methodType: "",//区分那种方法
                 currPdfUrl: '',//当前点击pdf的url
                 pdfItems: [],//动态插入pdf
             }
@@ -1132,21 +1130,27 @@
                 // console.log(index);
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
-                arr = this.dingdang_tableData.slice(0, -2);
-                arr.forEach((k, i) => {
-                    if (Array.isArray(k['value' + index])) {//是数组
-                        if (k['value' + index].length != 0) {
-                            let num = 0;
-                            k['value' + index].forEach(e => {
-                                num += Number(e);
-                            });
-                            amt += num;
-                        }
-                    } else {
-                        amt += Number(k['value' + index]) != '' ? Number(k['value' + index]) : 0;//点击那个列radio,input为不空，则小计为每一行vulue1的和，反之为0
+                this.$axios.post('/api/isFailure', 'post', {
+                    type: val
+                }).then(res => {
+                    if (res.status == 200) {
+                        arr = this.dingdang_tableData.slice(0, -2);
+                        arr.forEach((k, i) => {
+                            if (Array.isArray(k['value' + index])) {//是数组
+                                if (k['value' + index].length != 0) {
+                                    let num = 0;
+                                    k['value' + index].forEach(e => {
+                                        num += Number(e);
+                                    });
+                                    amt += num;
+                                }
+                            } else {
+                                amt += Number(k['value' + index]) != '' ? Number(k['value' + index]) : 0;//点击那个列radio,input为不空，则小计为每一行vulue1的和，反之为0
+                            }
+                        });
+                        this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
                     }
-                });
-                this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
+                })
             },
             changeInputSelect(value, rowIndex, colIndex, rowList) {//步长
                 let arr = [];
