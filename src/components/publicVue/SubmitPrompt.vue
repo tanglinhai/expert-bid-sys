@@ -83,7 +83,7 @@
             }
         },
         mounted() {
-            console.log(this.type1);
+            // console.log(this.type1);
         },
         methods: {
             reback() {

@@ -212,7 +212,7 @@ export default {
             //id:id    //哪个用户
         }).then(res=>{
             if(res.status == 200){
-                console.log(res.data)
+                // console.log(res.data)
                 this.navcommonsList=res.data.navsAll; 
                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;
@@ -227,7 +227,7 @@ export default {
     //this.navcommonsListFun(); //导航接口
     //console.log(this.$store.state.navCommon.types,99999)
     this.number=this.$store.state.navCommon.types
-    console.log(this.number,this.navcommonsList,77777777)
+    // console.log(this.number,this.navcommonsList,77777777)
     if(this.$route.query.methodType==1){//合理低价
 
     }
@@ -511,7 +511,7 @@ export default {
           statusType:3
         }]
     }
-    console.log(Allzhuagntai,this.navcommonsList,this.$route.query.methodType)
+    // console.log(Allzhuagntai,this.navcommonsList,this.$route.query.methodType)
     for(var i=0;i<this.navcommonsList.length;i++){
       this.navcommonsList[i].typestaus=Allzhuagntai[i].statusType
       //console.log(this.navcommonsList[i].typestaus)

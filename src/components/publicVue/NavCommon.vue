@@ -101,6 +101,7 @@ import { setTimeout } from 'timers';
                 }else if(types==3){
                     this.$router.push("/index/ElectedLeader?types="+types);
                 }else if(types==4){
+
                     this.$router.push("/elect/StartEvaluation?types="+types);
                 }   
            }

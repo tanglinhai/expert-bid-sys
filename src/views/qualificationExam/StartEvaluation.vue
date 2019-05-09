@@ -44,7 +44,8 @@
                                 <div class="filters_wrap">
                                     <div class="filters_hd">
                                         <span class="tit">投标文件目录</span>
-                                        <span class="icon iconfont icon-shouqi" @click="pdf_category_open_close($event)"></span>
+                                        <span class="icon iconfont icon-shouqi"
+                                              @click="pdf_category_open_close($event)"></span>
                                     </div>
                                     <div class="filters_bd">
                                         <div class="filters_kvs">
@@ -57,10 +58,12 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_bidder" placeholder="请选择" size="mini" @change="filter_func_bidder">
                                                         <el-option
+
                                                             v-for="item in companyname_toubiao"
                                                             :key="item"
                                                             :label="item.title"
                                                             :value="item.title">
+
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -70,10 +73,12 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor">
                                                         <el-option
+
                                                             v-for="item in dingdang_tableData"
                                                             :key="item.evaluationFactors"
                                                             :label="item.evaluationFactors"
                                                             :value="item.evaluationFactors">
+
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -100,7 +105,8 @@
                                     <div class="filters_tip">投标文件目录</div>
                                 </div>
                             </div>
-                            <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
+                            <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload"
+                                 :queryStr="item.queryStr"
                                  v-for="item in pdfItems"
                                  v-show="item.show"></pdf>
                             <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
@@ -164,16 +170,17 @@
                                                 </el-table-column>
                                                 <el-table-column
                                                         label="评审因素"
-                                                        width="250" fixed prop="evaluationFactors"  >
+                                                        width="250" fixed prop="evaluationFactors">
                                                 </el-table-column>
 
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" >
+                                                                     min-width="250" :key="index">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
-                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])" class="common_a_style" title="投标文件">
+                                                               @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])"
+                                                               class="common_a_style" title="投标文件">
                                                                 <i class="el-icon-search fs14 mr3 ver_al_m"></i>{{scope.column.label}}
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                             </a>
@@ -184,12 +191,15 @@
                                                                 <i class="icon iconfont icon-pdf"></i>
                                                                 <i class="el-icon-arrow-down el-icon--right"></i>
                                                               </span>
-                                                              <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
-                                                                <el-dropdown-item
-                                                                    @click.native="show_pdf(pdfItem)"
-                                                                    v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
-                                                                >{{pdfItem.pdf_name}}<i class="icon iconfont icon-pdf"></i></el-dropdown-item>
-                                                              </el-dropdown-menu>
+                                                                <el-dropdown-menu slot="dropdown"
+                                                                                  class="table_pdf_drop_menu">
+                                                                    <el-dropdown-item
+                                                                            @click.native="show_pdf(pdfItem)"
+                                                                            v-for="(pdfItem ,index) in companyname_toubiao[scope.$index].pdf"
+                                                                    >{{pdfItem.pdf_name}}<i
+                                                                            class="icon iconfont icon-pdf"></i>
+                                                                    </el-dropdown-item>
+                                                                </el-dropdown-menu>
                                                             </el-dropdown>
                                                         </template>
                                                         <template slot-scope="scope">
@@ -421,7 +431,7 @@
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
-                tableArr: [],//table数据
+
                 radioArr: [],//所有table的radio
                 type_btn: '',//导航传值类型
                 to_submit_prompt_name: "",//传给全部提交弹框的值
@@ -466,6 +476,7 @@
         },
         created() {
             this.methodType = this.$route.query.methodType;
+            // console.log(this.type_btn);
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -475,17 +486,7 @@
         mounted() {
             $(".positionDiv").hide();
             $(".dingWeiDiv").hide();
-
             this.init();
-// <<<<<<< HEAD
-//             // setTimeout(function () {
-//             //     $("#treeDemo_1_a").addClass("curSelectedNode");
-//             // }, 200);
-// =======
-//             /*setTimeout(function () {
-//                 $("#treeDemo_1_a").addClass("curSelectedNode");
-//             }, 200);*/
-// >>>>>>> b60105b5ac7b140222e06af9a8c31b52b80ff8dd
             this.$commonJs.pdfOperations.pdf_init.call(this);
         },
         computed: {
@@ -529,7 +530,7 @@
                     }
                 }
             },
-            completePercent() {
+            completePercent() {//进度条
                 let num = 0;
                 let allNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
                 this.dingdang_tableData.forEach(e => {
@@ -573,43 +574,6 @@
                     this.page_loading = false;
                 })
             },
-
-            allChecked() {//全选（不用区分url）
-                this.determineOperatingDialog = true;
-            },
-            isAllFilled() {//判断radio是否选中，全部选择为true，反之为false
-                let isAllF = true;
-                for (let i = 0; i < this.radioArr.length; i++) {
-                    if (!this.radioArr[i].radio) {
-                        isAllF = false;
-                        break;
-                    }
-                }
-                return isAllF;
-            },
-            allSubmit() {//父级提交
-                this.allSubmitBtnLoading = true;
-                this.$store.state.failureEnery.submitPrompt = true;
-                let url;
-                if (this.isAllFilled()) {
-                    if (this.type_btn == 3) {
-                        url = '/api/alltijiao_fhx';
-                    } else if (this.type_btn == 1) {
-                        url = '/api/alltijiao';
-                    }
-                    else if (this.type_btn == 5) {
-                        url = '/api/alltijiao_xxjs';
-                    }
-                    this.$axios.post(url, {type: parseInt(this.type_btn) + 1}).then(res => {
-                        if (res.status == 200) {
-                            this.allSubmitBtnLoading = false;
-                            this.options = res.data.vue_type;
-                        }
-                    })
-                } else {
-                    this.allSubmitBtnLoading = false;
-                }
-            },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
                     this.dialogAbandonedTender = true;
@@ -633,47 +597,12 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 }
             },
-            /*----------------- zTree ----------------------*/
-            // zTreeOnClick(event, treeId, treeNode) { //treeNode是这个节点的json数据
-            //     if (treeNode.children) {
-            //         this.zNodes.children.forEach((m, i) => {
-            //             this.$set(m, 'show', true)
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = false;
-            //         this.$store.state.failureEnery.parent_progress_show = true;
-            //     } else {
-            //         this.son_all_checked = treeNode.fristTableData.tableData;
-            //         this.zNodes.children.forEach((m, i) => {
-            //             if (m.id == treeNode.id) {
-            //                 this.$set(m, 'show', true)
-            //             } else {
-            //                 this.$set(m, 'show', false)
-            //             }
-            //         });
-            //         this.$store.state.failureEnery.start_sublevel_show = true;
-            //         this.$store.state.failureEnery.parent_progress_show = false;
-            //     }
-            //     $(".right_warp").show();
-            //     $(".personalAuditFormTable").hide();
-            // },
-            // dblClickExpand(treeId, treeNode) {
-            //     return treeNode.level > 0;
-            // },
-            /*----------------- zTree end ----------------------*/
-
 
 
             /*----------------- pdf start ----------------------*/
 
+            pdf_category_open_close($event) {
 
-            filter_func_bidder(item){
-                console.log(item);
-            },
-            filter_func_factor(item){
-                console.log(item);
-            },
-
-            pdf_category_open_close($event){
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
@@ -701,7 +630,7 @@
             exitFullMode() {
                 this.$commonJs.pdfOperations.exitFullMode.call(this);
             },
-            initFullMode(modeType, isFirstInPresentation){
+            initFullMode(modeType, isFirstInPresentation) {
                 return this.$commonJs.pdfOperations.initFullMode.call(this, modeType, isFirstInPresentation);
             },
             fullModeColumn() {
@@ -720,7 +649,36 @@
 
 
 
-
+            allChecked() {//全选（不用区分url）
+                this.determineOperatingDialog = true;
+            },
+            allSubmit() {//父级提交
+                this.allSubmitBtnLoading = true;
+                this.$store.state.failureEnery.submitPrompt = true;
+                let url;
+                if (this.type_btn == 3) {
+                    url = '/api/alltijiao_fhx';
+                } else if (this.type_btn == 1) {
+                    url = '/api/alltijiao';
+                }
+                else if (this.type_btn == 5) {
+                    url = '/api/alltijiao_xxjs';
+                }
+                this.$axios.post(url, {type: parseInt(this.type_btn) + 1,}).then(res => {
+                    if (res.status == 200) {
+                        this.allSubmitBtnLoading = false;
+                        this.options = res.data.vue_type;
+                    } else {
+                        this.allSubmitBtnLoading = false;
+                    }
+                })
+            },
+            rebackAllChecked() {//取消全选
+                this.determineOperatingDialog = false;
+            },
+            personalAuditForm() {
+                this.personalAuditFormDialog = true;
+            },
             comfrimAllChecked() {//确定全选
                 this.allCheckedBtnLoading = true;
                 this.determineOperatingDialog = false;
@@ -737,18 +695,12 @@
                     }
                 });
             },
-            rebackAllChecked() {//取消全选
-                this.determineOperatingDialog = false;
-            },
-            personalAuditForm() {
-                this.personalAuditFormDialog = true;
-            },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
                 this.rowIndex = rowIndex;
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
                 this.to_failure_entry_answer = obj.evaluationFactors;
-                this.$axios.post('/api/isFailure_fhx', 'post', {
+                this.$axios.post('/api/isFailure', 'post', {
                     type: val
                 }).then(res => {
                     if (res.status == 200) {
@@ -795,7 +747,8 @@
 </script>
 
 <style lang="scss">
-@import '@/assets/css/common/mixin.scss';
+    @import '@/assets/css/common/mixin.scss';
+
     .table_pdf_drop_menu {
         .icon-pdf {
             margin-left: 7px;
@@ -818,7 +771,6 @@
         margin-left: 5px;
         line-height: 1;
     }
-
     .pingbiao_warp {
         overflow: hidden;
         padding-top: 15px;
@@ -844,36 +796,11 @@
                     }
                 }
             }
-
-
-
             .mainContentWarp {
                 background: white;
                 border-radius: 5px;
                 .center_part {
-                    .left_examine {
-                        background: #e4e9ec;
-                        border-radius: 10px;
-                        height: 820px;
-                        /*width:170px;*/
-                        .div_header {
-                            border-bottom: 1px solid #bfc8cd;
-                        }
-                        /* #treeDemo {
-                            li {
-                        
-                                .node_name {
-                                    width: 102px;
-                                    overflow: hidden;
-                                    float: right;
-                                    text-overflow: ellipsis;
-                                    white-space: nowrap;
-                                }
-                            }
-                        } */
-                    }
                     .right_warp {
-                        /*padding-left: 15px;*/
                         border-radius: 5px;
                         .el-progress__text {
                             color: red;
@@ -913,22 +840,9 @@
                             padding-bottom: 5px;
                         }
                     }
-
-                    /* 用来设置当前页面element全局table的内间距 */
-                    /*.el-table__row td{*/
-                    /*padding: 0;*/
-                    /*}*/
-                    /* 用来设置当前页面element全局table 选中某行时的背景色*/
                     .el-table__body tr.current-row > td {
                         background-color: #b3d8ff !important;
-                        /* color: #f19944; */
-                        /* 设置文字颜色，可以选择不设置 */
                     }
-                    /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
-                    /*.el-table--enable-row-hover .el-table__body tr:hover>td {*/
-                    /*background-color: #f19944;*/
-                    /*!* color: #f19944; *! !* 设置文字颜色，可以选择不设置 *!*/
-                    /*}*/
                     .positionDiv {
                         text-align: center;
                         line-height: 50px;
