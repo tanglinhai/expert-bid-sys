@@ -232,7 +232,9 @@ export default {
             is_submit_type:parseFloat(this.$route.query.is_submit_type)    //是否提交
         }).then(res=>{
             if(res.status == 200){
+
                 console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
+
                 this.navcommonsList=res.data.navsAll; 
                this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;

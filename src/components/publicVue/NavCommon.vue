@@ -89,10 +89,11 @@ import { setTimeout } from 'timers';
                     this.$router.push("/index/LetterCommitment?types="+types+"&currentpage="+this.currentpage);
                 }else if(types==2){  //参加评标
                    // $(".NavCommon ul #1>span").removeClass("backblue");
+
                     this.$router.push("/index/AllInformation?types="+types+"&currentpage="+this.currentpage);
                 }else if(types==3){   //推举组长
                     this.$router.push("/index/ElectedLeader?types="+types+"&currentpage="+this.currentpage);
-                }  
+                } 
            }
         },
         updated(){

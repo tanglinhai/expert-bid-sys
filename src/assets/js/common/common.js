@@ -510,7 +510,6 @@ export default {
             window.fullModeRow = this.fullModeRow;
             window.exitFullMode = this.exitFullMode;
             window.closePDF = this.closePDF;
-            window._locate_pdf_ = this._locate_pdf_;
             /*this.$commonJs.getScriptFile.call(this, {
                 url: '/js/plugins/html2canvas.js',
                 download_files_key: 'html2canvas.js'
@@ -545,28 +544,32 @@ export default {
         /**
          * [pdf 定位到关联投标文件说明处]
          */
-        locate_pdf(question, bidder) {
-            var relativePDF = bidder.pdf.filter(item => item.id == bidder.relativePDF);
-            if (!relativePDF || relativePDF.length == 0) {
+        locate_pdf(relativePoint, pdfs) {
+            /*if (relativePoints.length == 0) {
                 this.$confirm('该项在投标文件中没有关联！, 是否要打开投标文件?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.show_pdf(bidder.pdf[0]);
+                    this.show_pdf(tempArr[0].pdf[0]);
                 }).catch(() => {
 
                 });
                 return;
+            }*/
+            var pdf;
+            for(var i=0;i<pdfs.length;i++){
+                if(pdfs[i].id == relativePoint.id){
+                    pdf = pdfs[i];
+                    break;
+                }
             }
-            relativePDF = relativePDF[0];
-            var queryStr = question.question + question.answer;
-            this.show_pdf(relativePDF, queryStr);
+            this.show_pdf(pdf, relativePoint.txt, relativePoint.page);
         },
         /**
          * [pdf 显示PDF]
          */
-        show_pdf(obj, queryStr) {//查看pdf
+        show_pdf(obj, queryStr, page) {//查看pdf
             //this.$commonJs.fullscreen();
             //pdfItems: [],//动态插入pdfcurrPdfUrl
             var currPDF;
@@ -581,28 +584,20 @@ export default {
                 if (this._dom_c.$content.hasClass('presentation_mode_row') || this._dom_c.$content.hasClass('presentation_mode_column')) {
                     this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
                 }
+                var iframeWindow = this.getIframeWindow(currPDF.ref);
+                if(page){
+                    iframeWindow.PDFViewerApplication.pdfViewer.currentPageNumber = page;
+                }
                 if (queryStr) {
-                    var iframeWindow = this.getIframeWindow(currPDF.ref);
                     iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
                     iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
                 }
             } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
-                this.$axios.post('/api/getPDFCategory', {
-                    data: 'fdsklfjdlsf'
-                }).then(res => {
-
-                    console.log(res);
-
-                    if (res.data.code == 200) {
-                        alert('fjlsdjflsd');
-                    }
-                })
-
-
                 var _this = this;
                 this.pdfItems.push({
                     currPdfUrl: obj.url1,
-                    queryStr: queryStr,
+                    queryStr: queryStr || '',
+                    page: page || 1,
                     //currPdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
                     ref: "pdf_" + obj.id,
                     show: true,

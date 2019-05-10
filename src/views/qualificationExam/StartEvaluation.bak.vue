@@ -406,6 +406,7 @@
         },
         created() {
             this.methodType=this.$route.query.methodType;
+            console.log(this.$route.query.type);
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
@@ -413,6 +414,7 @@
             }
         },
         mounted() {
+
             $("#treeDemo").on('click', '#treeDemo_1_a', function () {
                 $(".right_warp").show();
                 $(".personalAuditFormTable").hide();

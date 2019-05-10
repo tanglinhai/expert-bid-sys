@@ -1,5 +1,4 @@
-﻿
-import Mock from 'mockjs';
+﻿import Mock from 'mockjs';
 
 import JSON from 'JSON';
 
@@ -165,82 +164,108 @@ let esta = Mock.mock('/api/esta', 'post', {
     ]
 });
 // /*----------------------审查项页面数据接口---------------------*/
-var factors_standards = [
-    [{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[{
-            id: 'pdf1_1',
-            page: 1,
-            txt: 'Vestibulum tincidunt malesuada tellus'
-        },{
-            id: 'pdf1_1',
-            page: 3,
-            txt: 'facilisis'
-        },{
-            id: 'pdf1_1',
-            page: 1,
-            txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
-        }]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[{
-            id: 'pdf1_2',
-            page: 1,
-            txt: '选视频侵权使用蝙蝠侠配乐'
-        },{
-            id: 'pdf1_2',
-            page: 2,
-            txt: '中的配乐作为背景音乐'
-        }]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf1_3',
-            page: 2,
-            txt: '从雷达上消失。机上有1人'
-        }]
-    }],[{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf2_1',
-            page: 2,
-            txt: '王胜国给王家黔说'
-        }]
-    }],[{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[{
-            id: 'pdf3_2',
-            page: 2,
-            txt: '其中销量较高的一样的在线占卜：“免'
-        }]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf3_1',
-            page: 3,
-            txt: '夏丰热工研究院有限公司。资格审查评审项：内'
-        }]
-    }]
+/**
+ * [factors_standards description]
+ * @param  {[type]} type [type:10 资格11符合12详细评审，1定档评议2，商务，3技术4服务5其他]
+ * @return {[type]}      [description]
+ */
+function factors_standards(type){
 
-];
+    var factor1s = [null, '商务 商务1（50.00分）', '第一章，商务10分', '第一章，技术(14.00)分', '第一章、服务1(50.00分)', '第一章、其他(1.00分-60.00分)', null, null, null, null,
+                    '内存大小大于8G',        '投标人名称', '详细评审1'
+    ];
+    var factor2s = [null, '商务 商务1（50.00分）', '第二章，商务20分', '第二章，技术(24.00)分', '第二章、服务1(25.00分)', '第二章、其他(2.00分-33.00分)', null, null, null, null,
+                    '是否为INTEL生产',       '资质', '详细评审2'
+    ];
+    var factor3s = [null, '商务 商务1（50.00分）', '第三章，商务30分', '第三章，技术(24.00)分', '第三章、服务1(25.00分)', '第三章、其他(2.00分-33.00分)', null, null, null, null,
+                    '分辨率是否为15英寸以上', '审查项目', '详细评审3'
+    ];
+    return [
+        [{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 1,
+                txt: 'Vestibulum tincidunt malesuada tellus'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 3,
+                txt: 'facilisis'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 1,
+                txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 1,
+                txt: '选视频侵权使用蝙蝠侠配乐'
+            },{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 2,
+                txt: '中的配乐作为背景音乐'
+            }]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf1_3',
+                name: 'pdf文件13.pdf',
+                page: 2,
+                txt: '从雷达上消失。机上有1人'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf2_1',
+                name: 'pdf文件21.pdf',
+                page: 2,
+                txt: '王胜国给王家黔说'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf3_2',
+                name: 'pdf文件32.pdf',
+                page: 2,
+                txt: '其中销量较高的一样的在线占卜：“免'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf3_1',
+                name: 'pdf文件31.pdf',
+                page: 3,
+                txt: '夏丰热工研究院有限公司。资格审查评审项：内'
+            }]
+        }]
+
+    ];
+}
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
@@ -275,18 +300,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(10)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(10)[1]
 
                         },
                         { 
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(10)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -676,12 +701,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(11)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(11)[1]
 
                         },
                         { 
@@ -689,7 +714,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(11)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -1060,12 +1085,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(12)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(12)[1]
 
                         },
                         { 
@@ -1073,7 +1098,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(12)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -2497,7 +2522,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
 });
 /*---------------------审查项汇总页面接口end------------------*/
 
-// 资格审查合格不合格接口
+// 资格审查( 商务服务技术其他radio)合格不合格radio接口
 let isFailure = Mock.mock('/api/isFailure', 'post', {
     code: 200,
     message: '成功!',
@@ -2542,12 +2567,15 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
     message: '成功!',
     data: ''
 });
+
+
+//公共导航接口
 //蓝色icon是正在进行，绿色icon：完成，灰色的文本icon是可以点；
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态：
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
-function get_data(type,is_submit_type) {//type
+function get_data(type,is_submit_type) {
     // console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
@@ -2595,7 +2623,7 @@ function get_data(type,is_submit_type) {//type
     set_type();
     var a;
     a = set_type();
-
+    // console.log(a);
     return [
         {
             value: '1',//
@@ -2659,6 +2687,84 @@ function get_data(type,is_submit_type) {//type
         },
     ]
 }
+//合理低价
+// 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
+//1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//提交之后的状态：
+//is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态；zong_type：是否提交的状态( 是汇总页面提交)；
+// function get_data(type,is_submit_type) {//type
+//     function set_type() {
+//         if (type == 0) {
+//             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4,]
+//         }
+//         if (type == 1) {
+//             return [1, 3, 4, 4, 4, 4, 4,]
+//         }
+//         if (type == 2) {
+//             return [1, 1, is_submit_type?1:2, 3, 4, 4, 4,]
+//         }
+//         if (type == 3) {//符合性审查项
+//             return [1, 1, 1, is_submit_type?1:2, 4, 4, 4,]
+//         }
+//         if (type == 4) {//符合性审查项汇总
+//             return [1, 1, 1, 1, is_submit_type?1:2, 3, 4,]
+//         }
+//         if (type == 5) {//详细
+//             return [1, 1, 1, 1, 1, is_submit_type?1:2, 3,]
+//         }
+//         if (type == 6) {//详细汇总
+//             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+//         }
+//         if (type == 7) {//详细汇总
+//             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
+//         }
+//     }
+//
+//     set_type();
+//     var a;
+//     a = set_type();
+//     // console.log(a);
+//     return [
+//         {
+//             value: '1',
+//             label: '资格审查项',
+//             type: a[0],
+//         },
+//         {
+//             value: '2',
+//             label: '资格审查项汇总',
+//             type: a[1]
+//         },
+//
+//         {
+//             value: '3',
+//             label: '符合性审查项',
+//             type: a[2]
+//         },
+//         {
+//             value: '4',
+//             label: '符合性审查项汇总',
+//             type: a[3]
+//         },
+//         {
+//             value: '5',
+//             label: '详细评审（技术）',
+//             type: a[4]
+//         },
+//         {
+//             value: '6',
+//             label: '详细评审（技术）汇总',
+//             type: a[5]
+//         },
+//         {
+//             value: '7',
+//             label: '评审汇总',
+//             type: a[6]
+//         },
+//     ]
+//
+// }
+
 
 // 资格审查全部提交接口
 let alltijiao = Mock.mock('/api/alltijiao', 'post', {
@@ -3146,7 +3252,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         'assessingResult': Random.integer(0, 1),
                         'unlockReason': Random.csentence()
                     }],
-                    "zhaunjiaGerenMarkData":  [
+                    'biddersScoreTable':[//投标人分项得分表数据
                         {
                             'evaluationFactors': '第一章、商务(10.00分)',
                             value1:'-',
@@ -3170,7 +3276,6 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             value7:'3.00',
                             value8:'3.00',
                             value9:'5.00',
-
                         },
                         {
                             'evaluationFactors': '第二章、商务2(20.00分)',
@@ -3245,10 +3350,134 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             value9:'53.00',
                         },
                     ],
-                    'companyNameData': [
+                    'biddersScoreTitleData':[
                         {
-                            'name':'张三',
-                            'companyNameList': [
+                            'companyName':'重庆网控科技发展有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
+                                ]
+                        },
+                        {
+                            'companyName':'普瑞太阳能有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
+                            ]
+                        },
+                        {
+                            'companyName':'夏丰热工研究院有限公司(1)',//投标人
+                            'NameList':[//评审人
+                                {  'name':'张三', },
+                                {  'name':'王五', },
+                                {  'name':'李四', }
+                            ]
+                        },
+                    ],//投标人
+                    "zhaunjiaGerenMarkData":  [//专家个人打分表数据
+                        {
+                            'evaluationFactors': '第一章、商务(10.00分)',
+                            value1:'-',
+                            value2:'-',
+                            value3:'-',
+                            value4:'-',
+                            value5:'-',
+                            value6:'-',
+                            value7:'-',
+                            value8:'-',
+                            value9:'-',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'10.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '第二章、商务2(20.00分)',
+                            value1:'5.00',
+                            value2:'14.00 ',
+                            value3:'7.00',
+                            value4:'10.00',
+                            value5:'17.00',
+                            value6:'13.00',
+                            value7:'8.00',
+                            value8:'9.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务2(20.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(8.00分)',
+                            value1:'64.00',
+                            value2:'80.00 ',
+                            value3:'34.00',
+                            value4:'16.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'23.00',
+                            value8:'34.00',
+                            value9:'57.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'49.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'13.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '第三章、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'12.00',
+                            value5:'18.00',
+                            value6:'15.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'14.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '专家个人打分',
+                            value1:'40.00',
+                            value2:'40.00 ',
+                            value3:'38.00',
+                            value4:'15.00',
+                            value5:'17.00',
+                            value6:'18.00',
+                            value7:'33.00',
+                            value8:'37.00',
+                            value9:'53.00',
+                        },
+                    ],
+                    'companyNameData': [//评审人和投标人数据
+                        {
+                            'name':'张三',//评审人
+                            'companyNameList': [//投标人
                                 {"title":"重庆网控科技发展有限公司（1） "},
                                 {"title":"普瑞太阳能有限公司（2） "},
                                 {"title":"夏丰热工研究院有限公司（1） "},
@@ -3270,7 +3499,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                                 {"title":"夏丰热工研究院有限公司（1） "},
                             ]
                         },
-                    ],
+                    ],//评审人数据
                     'pingshenhuizongTableData': [
                         {
                             'bidderNumber': '2',
@@ -3518,13 +3747,13 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(1)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             'laber':' 是否是官方配置？（50.00分）',
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(1)[1]
 
                         },
                         { 
@@ -3533,7 +3762,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(1)[2]
                         }
                     ],
                     "dingdang_tableData":[//打分项
@@ -3817,12 +4046,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(2)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(2)[1]
 
                         },
                         { 
@@ -3830,7 +4059,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(2)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -3946,7 +4175,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1:'',
                             value2:'' ,
-                            value3: ''
+                            value3: '',
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '第二章，商务20分',
@@ -3969,6 +4201,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '总计',
@@ -3979,7 +4214,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4260,12 +4498,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(3)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(3)[1]
 
                         },
                         { 
@@ -4273,7 +4511,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(3)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -4397,6 +4635,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1:[],
                             value2:[] ,
                             value3: [],
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '技术小计',
@@ -4408,6 +4649,9 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value1: 0,
                             value2:0,
                             value3:0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                         {
                             projectName: '总计',
@@ -4418,7 +4662,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '',
                             value1: 0,
                             value2: 0,
-                            value3: 0
+                            value3: 0,
+                            gradeExplain1:'',
+                            gradeExplain2:'',
+                            gradeExplain3:'',
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4699,12 +4946,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(4)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(4)[1]
 
                         },
                         { 
@@ -4712,7 +4959,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(4)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -4731,7 +4978,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             }, {
                                 num: '15',
                                 typeTitle: '15',
-                                gradeExplain:"",
                             }, {
                                 num: "20",
                                 typeTitle: '20',
@@ -4750,7 +4996,6 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             },{
                                 num: '45',
                                 typeTitle: '45',
-                                gradeExplain:"",
                             }, {
                                 num: '50',
                                 typeTitle: '50',
@@ -5071,12 +5316,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(5)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(5)[1]
 
                         },
                         { 
@@ -5084,7 +5329,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(5)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -5669,7 +5914,40 @@ let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
     data: []
 });
 
+
+
+
+// let sss=Mock.mock('/api/sss','post',{
+//     code: 200,
+//     data: {
+//
+//         'as':[
+//             {
+//                 'psr':'张三',
+//                 'sss':[
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//                     {'tbiaore ':'重庆','ssss|1':['3','4','120']},
+//
+//                 ],
+//             },
+//             // {
+//             //     'psr':'wangwu',
+//             //     'sss':[
+//             //         {'tbiaore ':'ssss'},
+//             //
+//             //     ]
+//             // }
+//         ]
+//     }
+//
+// });
+
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"});
 
 
 Mock.mock('/Ajax/LoginFalse', 'post', {"Status": "Erro", "Erro": "账号名或密码或验证码有误"});
+
+
+
+
