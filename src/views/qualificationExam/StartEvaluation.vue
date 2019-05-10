@@ -58,12 +58,10 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_bidder" placeholder="请选择" size="mini" @change="filter_func_bidder">
                                                         <el-option
-
                                                             v-for="item in companyname_toubiao"
                                                             :key="item"
                                                             :label="item.title"
                                                             :value="item.title">
-
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -73,12 +71,10 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor">
                                                         <el-option
-
                                                             v-for="item in dingdang_tableData"
                                                             :key="item.evaluationFactors"
                                                             :label="item.evaluationFactors"
                                                             :value="item.evaluationFactors">
-
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -313,8 +309,7 @@
                     width="1300px"
             >
                 <!--点击个人形式审计表按钮显示-->
-                <el-row class="personalAuditFormTable"
-                >
+                <el-row class="personalAuditFormTable">
                     <div class="FormTableTitle cf fs14 mb10">
                         <div class="fl">
                             <span>分包号：{{grzgTitleData.bagName}}</span>
@@ -365,8 +360,8 @@
 
 <script>
 
-    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
-    import NavBar from '../../components/publicVue/NavBar';
+    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';//审查提示
+    import NavBar from '../../components/publicVue/NavBar';// 导航
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     import JSON from 'JSON';
@@ -399,7 +394,6 @@
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
-
                 radioArr: [],//所有table的radio
                 type_btn: '',//导航传值类型
                 to_submit_prompt_name: "",//传给全部提交弹框的值
@@ -423,7 +417,7 @@
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
-                methodType: '',
+                methodType: '',//区分那种方法
                 personalAuditFormDialog: false,//个人资格审查项按钮弹框
                 companyname_toubiao: [],//投标人数据
                 dingdang_tableData: [],//资格审查table数据
@@ -515,7 +509,7 @@
             jsonParse(obj) {
                 return JSON.parse(obj);
             },
-            init() {   //初始化 table的数据
+            init() {
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                     if (res.status === 200) {
@@ -537,7 +531,6 @@
                         }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
-
                     }
                     this.page_loading = false;
                 })
@@ -570,7 +563,6 @@
             /*----------------- pdf start ----------------------*/
 
             pdf_category_open_close($event) {
-
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
@@ -616,7 +608,7 @@
             /*----------------- pdf end ----------------------*/
 
 
-
+          /*-------------资格审查start-------------------------*/
             allChecked() {//全选（不用区分url）
                 this.determineOperatingDialog = true;
             },
@@ -710,6 +702,7 @@
                     $(".dingWeiDiv").show();
                 }
             },
+            /*-------------资格审查end-------------------------*/
         }
     }
 </script>

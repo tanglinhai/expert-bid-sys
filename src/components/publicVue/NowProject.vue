@@ -64,201 +64,201 @@
             </el-collapse-item>
         </el-collapse>
         <!--文件列表弹框-->
-        <el-dialog
-                class="doc_list_dialog"
-                title="文件列表"
-                :visible.sync="docListDialogVisible"
-                width="1300px"
-        >
-            <el-row>
-                <el-col>
-                    <div class="grid-content bg-purple-dark  ">
-                        <h5 class="commonTitle col348fe2">基本信息</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <div class="fist_section_text">
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">项目业务编号：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.proBusinessNum}}</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">开标地点：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidOpeningPlace}}</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">售标起始时间：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.sellStartTime}}</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">开标时间：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidOpeningTime}}</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">售标结束时间：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.sellEndTime}}</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">评标地点：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.evaluationBidPlace}}</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">获取标书方式：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.getBidType}}</div>
-                    </el-col>
+        <!--<el-dialog-->
+                <!--class="doc_list_dialog"-->
+                <!--title="文件列表"-->
+                <!--:visible.sync="docListDialogVisible"-->
+                <!--width="1300px"-->
+        <!--&gt;-->
+            <!--<el-row>-->
+                <!--<el-col>-->
+                    <!--<div class="grid-content bg-purple-dark  ">-->
+                        <!--<h5 class="commonTitle col348fe2">基本信息</h5>-->
+                    <!--</div>-->
+                <!--</el-col>-->
+            <!--</el-row>-->
+            <!--<div class="fist_section_text">-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">项目业务编号：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.proBusinessNum}}</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">开标地点：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.bidOpeningPlace}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">售标起始时间：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.sellStartTime}}</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">开标时间：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.bidOpeningTime}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">售标结束时间：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.sellEndTime}}</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">评标地点：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.evaluationBidPlace}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">获取标书方式：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.getBidType}}</div>-->
+                    <!--</el-col>-->
 
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">评标时间：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{every_msg.evaluationBidTime}}</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">支付方式：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">
-                            <el-checkbox v-model="checked1" disabled class="checkedS">网上支付</el-checkbox>
-                            <el-checkbox v-model="checked2" disabled class="checkedS">现金支付</el-checkbox>
-                            <el-checkbox v-model="checked3" disabled class="checkedS">电汇</el-checkbox>
-                        </div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">上传方式：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">
-                            <el-radio disabled v-model="radio1" label="禁用" class="radioS">线上</el-radio>
-                            <el-radio disabled v-model="radio1" label="禁用2" class="radioS">线下</el-radio>
-                            <el-radio disabled v-model="radio1" label="禁用3" class="radioS">辅助开评标</el-radio>
-                        </div>
-                    </el-col>
-                </el-row>
-            </div>
-            <el-row>
-                <el-col>
-                    <div class="grid-content bg-purple-dark  ">
-                        <h5 class="commonTitle col348fe2">关联标包</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <div class="second_section_text">
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">包名称：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bagName}}</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">图纸押金：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.drawingDeposit}}元</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">邮寄费：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.postage}}元</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">投标保证金：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.tenderBond}}元</div>
-                    </el-col>
-                </el-row>
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">标书费：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.tenderFree}}元</div>
-                    </el-col>
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">评标时间：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{every_msg.evaluationBidTime}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">支付方式：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">-->
+                            <!--<el-checkbox v-model="checked1" disabled class="checkedS">网上支付</el-checkbox>-->
+                            <!--<el-checkbox v-model="checked2" disabled class="checkedS">现金支付</el-checkbox>-->
+                            <!--<el-checkbox v-model="checked3" disabled class="checkedS">电汇</el-checkbox>-->
+                        <!--</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">上传方式：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">-->
+                            <!--<el-radio disabled v-model="radio1" label="禁用" class="radioS">线上</el-radio>-->
+                            <!--<el-radio disabled v-model="radio1" label="禁用2" class="radioS">线下</el-radio>-->
+                            <!--<el-radio disabled v-model="radio1" label="禁用3" class="radioS">辅助开评标</el-radio>-->
+                        <!--</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+            <!--</div>-->
+            <!--<el-row>-->
+                <!--<el-col>-->
+                    <!--<div class="grid-content bg-purple-dark  ">-->
+                        <!--<h5 class="commonTitle col348fe2">关联标包</h5>-->
+                    <!--</div>-->
+                <!--</el-col>-->
+            <!--</el-row>-->
+            <!--<div class="second_section_text">-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">包名称：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.bagName}}</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">图纸押金：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.drawingDeposit}}元</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">邮寄费：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.postage}}元</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">投标保证金：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.tenderBond}}元</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">标书费：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.tenderFree}}元</div>-->
+                    <!--</el-col>-->
 
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">招标代理服务费：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.bidAgencyServiceFee}}</div>
-                    </el-col>
-                </el-row>
-            </div>
-            <el-row>
-                <el-col>
-                    <div class="grid-content bg-purple-dark  ">
-                        <h5 class="commonTitle col348fe2">招标文件</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <div class="third_section_text">
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">预览文件：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.previewFile}}</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">招标文件附件：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.tenderDocuments}}</div>
-                    </el-col>
-                </el-row>
-            </div>
-            <el-row>
-                <el-col>
-                    <div class="grid-content bg-purple-dark  ">
-                        <h5 class="commonTitle col348fe2">澄清或变更文件</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <div class="four_section_text">
-                <el-row class="information">
-                    <el-col :span="6">
-                        <div class="overflowText textAlignR">附件文件：</div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div class="overflowText">{{every_msg.attachement}}</div>
-                    </el-col>
-                </el-row>
-            </div>
-            <el-row class="five_section_text">
-                <el-col>
-                    <div class="grid-content bg-purple-dark  ">
-                        <h5 class="commonTitle col348fe2">招标文件内容</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <Pdf class="pdf" ref="pdf_doc" style="height: 500px"></Pdf>
-        </el-dialog>
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">招标代理服务费：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.bidAgencyServiceFee}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+            <!--</div>-->
+            <!--<el-row>-->
+                <!--<el-col>-->
+                    <!--<div class="grid-content bg-purple-dark  ">-->
+                        <!--<h5 class="commonTitle col348fe2">招标文件</h5>-->
+                    <!--</div>-->
+                <!--</el-col>-->
+            <!--</el-row>-->
+            <!--<div class="third_section_text">-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">预览文件：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.previewFile}}</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">招标文件附件：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.tenderDocuments}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+            <!--</div>-->
+            <!--<el-row>-->
+                <!--<el-col>-->
+                    <!--<div class="grid-content bg-purple-dark  ">-->
+                        <!--<h5 class="commonTitle col348fe2">澄清或变更文件</h5>-->
+                    <!--</div>-->
+                <!--</el-col>-->
+            <!--</el-row>-->
+            <!--<div class="four_section_text">-->
+                <!--<el-row class="information">-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText textAlignR">附件文件：</div>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="6">-->
+                        <!--<div class="overflowText">{{every_msg.attachement}}</div>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
+            <!--</div>-->
+            <!--<el-row class="five_section_text">-->
+                <!--<el-col>-->
+                    <!--<div class="grid-content bg-purple-dark  ">-->
+                        <!--<h5 class="commonTitle col348fe2">招标文件内容</h5>-->
+                    <!--</div>-->
+                <!--</el-col>-->
+            <!--</el-row>-->
+            <!--<Pdf class="pdf" ref="pdf_doc" style="height: 500px"></Pdf>-->
+        <!--</el-dialog>-->
         <!--文件列表弹框-->
     </div>
 </template>
@@ -272,7 +272,7 @@
         },
         data() {
             return {
-                docListDialogVisible: false,//文件列表弹框
+                // docListDialogVisible: false,//文件列表弹框
                 checked1: '',
                 checked2: '',
                 checked3: '',
@@ -280,7 +280,6 @@
                 every_msg: [],
             }
         },
-        // 父组件传过来的值
         props: {
             projectBag: {
                 type: Array
@@ -306,24 +305,24 @@
             beginPingbiao(val){
                 this.$router.push(`/index/LetterCommitment?methodType=${val}`);
             },
-            bidding_doc_btn(obj) {//招标相关文件
-                console.log(obj.pdf_url);
-                this.docListDialogVisible = true;
-                if (obj.paymentType[0] == 0) {
-                    this.checked1 = true;
-                }
-                if (obj.paymentType[1] == 1) {
-                    this.checked2 = true;
-                }
-                if (obj.paymentType[2] == 2) {
-                    this.checked3 = true;
-                }
-                this.every_msg = obj;
-                setTimeout(() => {
-                    this.$refs.pdf_doc.setPdf({pdfUrl: obj.pdf_url});
-                    this.radio1 = $(".radioS")[obj.uploadWay].children[0].children[1].value;
-                }, 1000)
-            },
+            // bidding_doc_btn(obj) {//招标相关文件
+            //     console.log(obj.pdf_url);
+            //     this.docListDialogVisible = true;
+            //     if (obj.paymentType[0] == 0) {
+            //         this.checked1 = true;
+            //     }
+            //     if (obj.paymentType[1] == 1) {
+            //         this.checked2 = true;
+            //     }
+            //     if (obj.paymentType[2] == 2) {
+            //         this.checked3 = true;
+            //     }
+            //     this.every_msg = obj;
+            //     setTimeout(() => {
+            //         this.$refs.pdf_doc.setPdf({pdfUrl: obj.pdf_url});
+            //         this.radio1 = $(".radioS")[obj.uploadWay].children[0].children[1].value;
+            //     }, 1000)
+            // },
          }
     }
 </script>
@@ -443,7 +442,6 @@
                         }
                     }
                 }
-
             }
         }
         @media screen and (max-width: 1660px) {
