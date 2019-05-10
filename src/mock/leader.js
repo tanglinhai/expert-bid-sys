@@ -67,20 +67,40 @@ Mock.mock('./api/tabMsg','post',{
 
 Mock.mock('./api/tableMsg','post',{
     'pdf':[
-        {   
-            pName:'重庆网控科技发展有限公司',
-            'allPdf|1-4':['pdf文件@natural(1,99)'],
-            factor:'内存大小大于8G'
-        },
-        {pName:'普瑞太阳能有限公司',factor:'是否为INTEL生产','allPdf|1-4':['pdf文件@natural(1,99)']},
-        {pName:'夏丰热工研究院有限公司',factor:'分辨率是否为15英寸以上','allPdf|1-4':['pdf文件@natural(1,99)']}
+            {   
+                pName:'重庆网控科技发展有限公司',
+                'allPdf|1-4':['pdf文件@natural(1,99)'],
+                factor:'内存大小大于8G',
+                'qualified':[
+                    {statu:'合格',unStatu:'合格'},
+                    {statu:'不合格',unStatu:'不合格'},
+                ]
+            },
+            {
+                pName:'普瑞太阳能有限公司',
+                factor:'是否为INTEL生产',
+                'allPdf|1-4':['pdf文件@natural(1,99)'],
+                'qualified':[
+                    {statu:'合格',unStatu:'合格'},
+                    {statu:'不合格',unStatu:'不合格'},
+                ]
+            },
+            {
+                pName:'夏丰热工研究院有限公司',
+                factor:'分辨率是否为15英寸以上',
+                'allPdf|1-4':['pdf文件@natural(1,99)'],
+                'qualified':[
+                    {statu:'合格',unStatu:'合格'},
+                    {statu:'不合格',unStatu:'不合格'},
+                ]
+            }
     ]
 })
 
 Mock.mock('./api/pqeatMsg','post',{
     'pdf':[
         {pName:'重庆网控科技发展有限公司',factor:'资格审查1','allPdf|1':['✔','✖'], stau:'1'},
-        {pName:'普瑞太阳能有限公司',factor:'资格审查2','allPdf|1':['✔','✖'],stau:'2'},
+        {pName:'普瑞太阳能有限公司',factor:'资格审查2','allPdf|1':['✖','✔'],stau:'2'},
         {pName:'夏丰热工研究院有限公司',factor:'资格审查3','allPdf|1':['✔','✖'],stau:'3'}
     ]
 })

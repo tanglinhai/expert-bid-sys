@@ -32,8 +32,7 @@
                 </el-table-column>
                  <el-table-column
                     label="投标人">
-                    <el-table-column
-                        v-for="(item,index) in tableData" :key="index">
+                    <el-table-column v-for="(item,index) in tableData" :key="index">
                         <template slot="header" slot-scope="scope">
                             <a v-if="item.allPdf.length <= 1" href="#" class="common_a_style overflowText">
                                 <i class="el-icon-search"></i>&nbsp;
@@ -57,8 +56,9 @@
                         <template slot-scope="scope">
                             <div>
                                 <el-col :span="20">
-                                    <el-radio v-model="radio" label="1">合格</el-radio>
-                                    <el-radio v-model="radio" label="2">不合格</el-radio>
+                                    <el-radio-group v-model="item.qualified">
+                                        <el-radio v-for="(val,ind) in item.qualified" :label="val.statu" :key="val.statu"  @change="getCurren(val)">{{val.unStatu}}</el-radio>
+                                    </el-radio-group>
                                 </el-col>
                                 <el-col :span="4" style="text-align:right;">
                                     <i class="iconfont icon-dingwei"></i>
@@ -82,7 +82,7 @@ export default {
     },
     data() {
         return {
-            radio: '',
+            radioStatu:[],
             tableData:[],
         }
     },
@@ -94,10 +94,13 @@ export default {
             this.$axios.post('./api/tableMsg').then(res => {
                 if(res.status == 200){
                     this.tableData=res.data.pdf;
-                    // console.log(this.tableData)
+                    console.log(this.tableData)
                 }
             })
         }, 
+        getCurren(val){
+            console.log(val, '0-0-0-0-0-0')
+        }
     },
 }
 </script>
