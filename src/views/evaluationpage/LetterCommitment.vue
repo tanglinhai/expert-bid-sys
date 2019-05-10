@@ -53,8 +53,8 @@
             }
         },
         created() {
-            console.log(this.$route.query.types);
-            console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
+            //console.log(this.$route.query.types);
+            //console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
             this.val=this.$route.query.methodType;
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
@@ -99,7 +99,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/AllInformation?types=2&methodType='+this.val,
+                            path: '/index/AllInformation?is_submit_type=0&currentpage=2&methodType='+this.val,
                         })
                     }
                 })

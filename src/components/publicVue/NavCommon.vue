@@ -14,19 +14,19 @@
                             :class="item.typestaus ==1 ? 'green':item.typestaus ==3 ? 'blue':item.typestaus ==2 ? 'backblue':item.typestaus==5?'backblue2':'DoNotPoint'"
                             >
                             <template v-if="item.typestaus==1">
-                                <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="iconfont icon-wancheng"></i>{{item.label}}</el-button>  <!--0可点-->
+                                <el-button @click="ToChangePage(item.types)" slot="reference"><i class="iconfont icon-wancheng"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                             <template v-else-if="item.typestaus==2">
-                                <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="iconfont icon-jinhangzhong"></i>{{item.label}}</el-button>  <!--0可点-->
+                                <el-button @click="ToChangePage(item.types)" slot="reference"><i class="iconfont icon-jinhangzhong"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                             <template v-else-if="item.typestaus==3">
-                                <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="iconfont icon-tbd-project-task-number"></i>{{item.label}}</el-button>  <!--0可点-->
+                                <el-button @click="ToChangePage(item.types)" slot="reference"><i class="iconfont icon-tbd-project-task-number"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                             <template v-else-if="item.typestaus==4">
                                 <el-button slot="reference"><i class="iconfont icon-jinyong"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                             <template v-else>
-                                <el-button @click="ToChangePage(item.types,number)" slot="reference"><i class="iconfont icon-wancheng"></i>{{item.label}}</el-button>  <!--0可点-->
+                                <el-button @click="ToChangePage(item.types)" slot="reference"><i class="iconfont icon-wancheng"></i>{{item.label}}</el-button>  <!--0可点-->
                             </template>
                         </el-popover>
                         <span class="navcommon_line"></span>
@@ -67,7 +67,7 @@ import { setTimeout } from 'timers';
             navcommonsList:{
                 type:Array,
             },
-            number:{
+            currentpage:{    //导航走到哪一步了
                 type:Number,
             },
             
@@ -83,26 +83,16 @@ import { setTimeout } from 'timers';
                     path: url
                 });
             },
-           ToChangePage(types,number){   //导航点击值//types
-
-                //console.log(types,number,555);
-                // console.log(types,number, this.$store.state.navCommon.types,333)
-                // console.log(this.$store.state.navCommon.types,4444)
-                // setTimeout(function(){
-                //     $(".NavCommon ul li>span").removeClass("backblue");
-                //     $(".NavCommon ul #"+types+'>span').addClass("backblue");
-                // },200)
-                if(types==1){
-                    this.$router.push("/index/LetterCommitment?types="+types);
-                }else if(types==2){
+           ToChangePage(types){   //导航点击值//types
+                //console.log(this.currentpage)
+                if(types==1){  //承诺书
+                    this.$router.push("/index/LetterCommitment?types="+types+"&currentpage="+this.currentpage);
+                }else if(types==2){  //参加评标
                    // $(".NavCommon ul #1>span").removeClass("backblue");
-                    this.$router.push("/index/AllInformation?types="+types);
-                     
-                }else if(types==3){
-                    this.$router.push("/index/ElectedLeader?types="+types);
-                }else if(types==4){
-                    this.$router.push("/elect/StartEvaluation?types="+types);
-                }   
+                    this.$router.push("/index/AllInformation?types="+types+"&currentpage="+this.currentpage);
+                }else if(types==3){   //推举组长
+                    this.$router.push("/index/ElectedLeader?types="+types+"&currentpage="+this.currentpage);
+                }  
            }
         },
         updated(){

@@ -1,6 +1,6 @@
 <template>
+    <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
     <div class="Allinforation_wrap">
-        <!-- <NavCommon class="NavCommon" :navcommonsList="navcommonsList" :number="number"></NavCommon> -->
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <el-row class="fs14 bid_msg mb15">
@@ -33,28 +33,7 @@
                 </el-row>
             </div>
 
-        <!--申请回避弹框-->
-        <!-- <el-dialog
-                class="mar"
-                title="申请回避"
-                :visible.sync="dialogApplyAvoid"
-                width="700px"
-            >
-                <div class="ApplyAvoid">
-                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm"  class="demo-ruleForm">
-                        <el-form-item  prop="desc" class="textAlignL">
-                            <label><span  class="cole02">*</span>回避原因：</label>
-                            <el-input type="textarea" v-model="ruleForm.desc" class="textarea"></el-input>
-                        </el-form-item>
-                        <el-form-item class="text-center">
-                            <el-button type="primary" @click="submitForm('ruleForm')" size="small" > <i class="icon iconfont icon-baocun1 mr5"  ></i> 确定</el-button>
-                            <el-button @click="dialogApplyAvoid=false" size="small" type="primary"> <i class="icon iconfont icon-fanhuishouye1 mr5"  ></i>返回</el-button>
-                        </el-form-item>
-                    </el-form>
-                </div>
-        </el-dialog> -->
-        <!--申请回避弹框-->
-
+        
         <!--多头表格-->
         <!-- <template>
             <el-table
@@ -87,17 +66,18 @@
 
         </div>
     </div>
+
 </template>
 
 <script>
     
-    // import NavCommon from '../../components/publicVue/NavCommon.vue';
+    //import NavCommon from '../../components/publicVue/NavCommon.vue';
     import MessageCommon from '../../components/publicVue/MessageCommon.vue'
     export default {
         name: 'index',
         props: {},
         components: {
-            // NavCommon
+            //NavCommon,
             MessageCommon
         },
         data(){
@@ -204,7 +184,7 @@
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
-            //this.navcommonsListFun(); //导航接口
+            this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
 
             this.baoInformations(); //头部包信息
@@ -286,7 +266,7 @@
                     if(res.status == 200){
                         this.BtnLoading=false,
                         this.$router.push({
-                            path: '/index/ElectedLeader?types=3&methodType='+this.val,
+                            path: '/index/ElectedLeader?is_submit_type=0&currentpage=3&methodType='+this.val,
                         })
                         
                     }
