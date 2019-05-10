@@ -383,150 +383,121 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 })
 
 
+//1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//提交之后的状态：
+//is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
 
-
-//公共导航接口
-let NavCommon=Mock.mock('/api/navcommons','post',{
-    ProjectInformationsAll:{
-        projectName:'单信封-0305-1',
-        projectNumber:'0635-1909qwerN1133',
-        projectWenjian:'招标文件(pdf)',
-        PersonName:'张三'
-    },
-    navsAll:[{   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
+function get_data(currentPage,is_submit_type) {//type
+    // console.log(type, is_submit_type);
+    function set_type() {
+        if (currentPage == 1) {
+            return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4]
+        }
+        if (currentPage == 2) {//资格审查
+            return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
+        }
+        if (currentPage == 3) {//资格审查汇总
+            return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
+        }
+       
+    }
+    //set_type();
+    var a;
+    a = set_type();
+    return [
+        {   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
             value: '1',//
             label: '承诺书',  //步数字段
             types: 1,  //types代表第几步对应相对应得步数
-            typestaus:2,
+            typestaus:a[0],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 
         },{
             value: '2',//
             label: '参加评标',
             types: 2,
-            typestaus:2,
+            typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
         },{
             value: '3',//
             label: '推举组长',
             types: 3,
-            typestaus:3,
-         }//,{
-        //     value: '4',//
-        //     label: '评标',
-        //     types: 4,
-        //  }
-        ,{
+            typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+        },{
             value: '4',//
             label: '资格审查',
             types: 4,
-            typestaus:4,
+            typestaus:a[3],
         },{
             value: '5',//
             label: '资格审查汇总',
             types: 5,
-            typestaus:5,
+            typestaus:a[4],
         },{
             value: '6',//
             label: '符合性审查',
             types: 6,
-            typestaus:4,
+            typestaus:a[5],
         },{
             value: '7',//
             label: '符合性审查汇总',
             types: 7,
-            typestaus:4,
+            typestaus:a[6],
         },{
             value: '8',//
             label: '详细评审(技术)',
             types: 8,
-            typestaus:4,
+            typestaus:a[7],
         },{
             value: '9',//
             label: '详细评审(技术)汇总',
             types: 9,
-            typestaus:4,
+            typestaus:a[8],
         },{
             value: '10',//
             label: '商务',
             types: 10,
-            typestaus:4,
+            typestaus:a[9],
         },{
             value: '11',//
             label: '技术',
             types: 11,
-            typestaus:4,
+            typestaus:a[10],
         },{
             value: '12',//
             label: '服务',
             types: 12,
-            typestaus:4,
+            typestaus:a[11],
         },{
             value: '13',//
             label: '其他',
             types: 13,
-            typestaus:4,
+            typestaus:a[12],
         },{
             value: '14',//
             label: '评审汇总',
             types: 14,
-            typestaus:4,
-    }],
-    navsAllSecond:[{   //合理低价导航 评审汇总：（详细评审(技术)汇总提交完成之后可点）
-        value: '1',//
-        label: '承诺书',  //步数字段
-        types: 1,  //types代表第几步对应相对应得步数
-        typestaus:2,
+            typestaus:a[13],
+        }
+        
+    ]
+}
 
-    },{
-        value: '2',//
-        label: '参加评标',
-        types: 2,
-        typestaus:4,
-    },{
-        value: '3',//
-        label: '推举组长',
-        types: 3,
-        typestaus:4,
-     }//,{
-    //     value: '4',//
-    //     label: '评标',
-    //     types: 4,
-    //  }
-    ,{
-        value: '4',//
-        label: '资格审查',
-        types: 4,
-        typestaus:4,
-    },{
-        value: '5',//
-        label: '资格审查汇总',
-        types: 5,
-        typestaus:4,
-    },{
-        value: '6',//
-        label: '符合性审查',
-        types: 6,
-        typestaus:4,
-    },{
-        value: '7',//
-        label: '符合性审查汇总',
-        types: 7,
-        typestaus:4,
-    },{
-        value: '8',//
-        label: '详细评审(技术)',
-        types: 8,
-        typestaus:4,
-    },{
-        value: '9',//
-        label: '详细评审(技术)汇总',
-        types: 9,
-        typestaus:4,
-    },{
-        value: '10',//
-        label: '评审汇总',
-        types: 10,
-        typestaus:4,
-    }]
+//公共导航接口
+Mock.mock('/api/navcommons','post',(options) =>{
+    let CommonsData;
+    let currentpage=JSON.parse(options.body).currentpage;
+    let is_submit_type=JSON.parse(options.body).is_submit_type;
+    console.log(currentpage,is_submit_type,888888);
+    CommonsData={
+        ProjectInformationsAll:{
+            projectName:'单信封-0305-1',
+            projectNumber:'0635-1909qwerN1133',
+            projectWenjian:'招标文件(pdf)',
+            PersonName:'张三'
+        },
+        navsAll:get_data(currentpage,is_submit_type),
+    };
+    return CommonsData;
+        
 })
 //公共导航接口
 
