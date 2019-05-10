@@ -381,10 +381,15 @@
                             <el-col style="line-height: 24px">注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
                             </el-col>
                             <el-col style="line-height: 24px">
-                                2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
+                                &nbsp;   &nbsp;  &nbsp;  &nbsp;2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
                             </el-col>
                         </el-row>
                     </template>
+                        <ul v-for="(item,index) in grzgscFailureData" >
+                            <li  style="line-height: 22px">
+                                {{item.zhaunjia}}对{{item.gongsi}}在’{{item.pingshenyinsu}}‘中排除的理由：{{item.reason}}
+                            </li>
+                        </ul>
                 </el-row>
             </el-dialog>
         </div>
@@ -415,6 +420,7 @@
                 msgBox: [],//个人形式审计表table数据
                 grcsMsgBoxTitle: [],//个人形式审计表table的公司名以及内部数据数据
                 grzgTitleData: {},//个人形式审计表按钮切换table表头数据
+                grzgscFailureData:[],//个人形式审计表不合格数据
                 idradionoprss: '',//table不合格的id
                 operationType: [],
                 /* -------头部包信息-----*/
@@ -553,6 +559,7 @@
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
+                        this.grzgscFailureData=res.data.bidMsg.grzgscFailureData;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
@@ -671,6 +678,7 @@
             },
             personalAuditForm() {
                 this.personalAuditFormDialog = true;
+                console.log(this.dingdang_tableData);
             },
             comfrimAllChecked() {//确定全选
                 this.allCheckedBtnLoading = true;
@@ -689,6 +697,7 @@
                 });
             },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
+                console.log(rowIndex, colIndex, val, obj, title);
                 this.rowIndex = rowIndex;
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
@@ -727,6 +736,7 @@
                 });
             },
             handleRowClick(row, column, event) {//资格审查表点击行数据出现审查标准
+                // console.log(row, column, event);
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
                 if (document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) === true) {//判读页面是否出现滚动条

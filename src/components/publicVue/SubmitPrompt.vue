@@ -90,7 +90,6 @@
                 this.$store.state.failureEnery.submitPrompt = false;
             },
             comfrim() {//确定提交
-
                 this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
                     if (res.status == '200') {
                         if (this.pro_num != 100.0) {
@@ -98,6 +97,7 @@
                         } else {
                             this.$store.state.failureEnery.tijiao100 = true;
                             this.goGrdoupRecor();//倒计时开始
+
                         }
                     }
                 })
