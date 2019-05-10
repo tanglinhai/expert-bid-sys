@@ -56,8 +56,8 @@
                         <template slot-scope="scope">
                             <div>
                                 <el-col :span="20">
-                                    <el-radio-group v-model="item.qualified">
-                                        <el-radio v-for="(val,ind) in item.qualified" :label="val.statu" :key="val.statu"  @change="getCurren(val)">{{val.unStatu}}</el-radio>
+                                    <el-radio-group v-model="radioStatu[scope.$index]">
+                                        <el-radio v-for="(val,ind) in scope.row.qualified" :label="val.statu" :key="val.statu" @change="getCurren(val)">{{val.unStatu}}</el-radio>
                                     </el-radio-group>
                                 </el-col>
                                 <el-col :span="4" style="text-align:right;">
