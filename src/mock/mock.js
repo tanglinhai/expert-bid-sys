@@ -1,5 +1,4 @@
-﻿
-import Mock from 'mockjs';
+﻿import Mock from 'mockjs';
 
 import JSON from 'JSON';
 
@@ -165,82 +164,108 @@ let esta = Mock.mock('/api/esta', 'post', {
     ]
 });
 // /*----------------------审查项页面数据接口---------------------*/
-var factors_standards = [
-    [{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[{
-            id: 'pdf1_1',
-            page: 1,
-            txt: 'Vestibulum tincidunt malesuada tellus'
-        },{
-            id: 'pdf1_1',
-            page: 3,
-            txt: 'facilisis'
-        },{
-            id: 'pdf1_1',
-            page: 1,
-            txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
-        }]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[{
-            id: 'pdf1_2',
-            page: 1,
-            txt: '选视频侵权使用蝙蝠侠配乐'
-        },{
-            id: 'pdf1_2',
-            page: 2,
-            txt: '中的配乐作为背景音乐'
-        }]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf1_3',
-            page: 2,
-            txt: '从雷达上消失。机上有1人'
-        }]
-    }],[{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf2_1',
-            page: 2,
-            txt: '王胜国给王家黔说'
-        }]
-    }],[{
-        factor: '内存大小大于8G',
-        standard: '大于等于8G',
-        relativePoints:[{
-            id: 'pdf3_2',
-            page: 2,
-            txt: '其中销量较高的一样的在线占卜：“免'
-        }]
-    },{
-        factor: '是否为INTEL生产',
-        standard: '必须是INTEL生产',
-        relativePoints:[]
-    },{
-        factor: '分辨率是否为15英寸以上',
-        standard: '可达到1366*768以上即可',
-        relativePoints:[{
-            id: 'pdf3_1',
-            page: 3,
-            txt: '夏丰热工研究院有限公司。资格审查评审项：内'
-        }]
-    }]
+/**
+ * [factors_standards description]
+ * @param  {[type]} type [type:10 资格11符合12详细评审，1定档评议2，商务，3技术4服务5其他]
+ * @return {[type]}      [description]
+ */
+function factors_standards(type){
 
-];
+    var factor1s = [null, '商务 商务1（50.00分）', '第一章，商务10分', '第一章，技术(14.00)分', '第一章、服务1(50.00分)', '第一章、其他(1.00分-60.00分)', null, null, null, null,
+                    '内存大小大于8G',        '投标人名称', '详细评审1'
+    ];
+    var factor2s = [null, '商务 商务1（50.00分）', '第二章，商务20分', '第二章，技术(24.00)分', '第二章、服务1(25.00分)', '第二章、其他(2.00分-33.00分)', null, null, null, null,
+                    '是否为INTEL生产',       '资质', '详细评审2'
+    ];
+    var factor3s = [null, '商务 商务1（50.00分）', '第三章，商务30分', '第三章，技术(24.00)分', '第三章、服务1(25.00分)', '第三章、其他(2.00分-33.00分)', null, null, null, null,
+                    '分辨率是否为15英寸以上', '审查项目', '详细评审3'
+    ];
+    return [
+        [{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 1,
+                txt: 'Vestibulum tincidunt malesuada tellus'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 3,
+                txt: 'facilisis'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 1,
+                txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 1,
+                txt: '选视频侵权使用蝙蝠侠配乐'
+            },{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 2,
+                txt: '中的配乐作为背景音乐'
+            }]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf1_3',
+                name: 'pdf文件13.pdf',
+                page: 2,
+                txt: '从雷达上消失。机上有1人'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf2_1',
+                name: 'pdf文件21.pdf',
+                page: 2,
+                txt: '王胜国给王家黔说'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf3_2',
+                name: 'pdf文件32.pdf',
+                page: 2,
+                txt: '其中销量较高的一样的在线占卜：“免'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf3_1',
+                name: 'pdf文件31.pdf',
+                page: 3,
+                txt: '夏丰热工研究院有限公司。资格审查评审项：内'
+            }]
+        }]
+
+    ];
+}
 Mock.mock('/api/table_msg', 'post', (options) => {
     let return_val;
     var submit_type= Random.integer(0, 1);
@@ -275,18 +300,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(10)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(10)[1]
 
                         },
                         { 
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(10)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -676,12 +701,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(11)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(11)[1]
 
                         },
                         { 
@@ -689,7 +714,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(11)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -1060,12 +1085,12 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(12)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(12)[1]
 
                         },
                         { 
@@ -1073,7 +1098,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(12)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -3722,13 +3747,13 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(1)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             'laber':' 是否是官方配置？（50.00分）',
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(1)[1]
 
                         },
                         { 
@@ -3737,7 +3762,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(1)[2]
                         }
                     ],
                     "dingdang_tableData":[//打分项
@@ -4021,12 +4046,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(2)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(2)[1]
 
                         },
                         { 
@@ -4034,7 +4059,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(2)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -4473,12 +4498,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(3)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(3)[1]
 
                         },
                         { 
@@ -4486,7 +4511,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(3)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -4921,12 +4946,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(4)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(4)[1]
 
                         },
                         { 
@@ -4934,7 +4959,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(4)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -5291,12 +5316,12 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
 
-                            factors_standards:factors_standards[0]
+                            factors_standards:factors_standards(5)[0]
                         },
                         { "title": "普瑞太阳能有限公司（2）",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
 
-                            factors_standards:factors_standards[1]
+                            factors_standards:factors_standards(5)[1]
 
                         },
                         { 
@@ -5304,7 +5329,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
 
-                            factors_standards:factors_standards[2]
+                            factors_standards:factors_standards(5)[2]
                         }
                     ],
                     "dingdang_tableData":[

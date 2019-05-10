@@ -88,9 +88,12 @@
                                                 <div class="filters_v">
                                                     <div class="point"
                                                             v-for="item in filter_points"
+                                                            @click="locate_pdf(item, companyname_toubiao.filter(item => item.title == filter_bidder)[0].pdf)"
                                                             :key="item">
-                                                        <span class="icon iconfont icon-pdf"></span>
-                                                        <span class="txt">{{item.txt}}</span>
+                                                        <span class="txt">
+                                                            <span class="icon iconfont icon-dingwei"></span>
+                                                            {{item.name+'--P'+item.page+'--'+item.txt}}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,6 +104,7 @@
                             </div>
                             <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload"
                                  :queryStr="item.queryStr"
+                                 :page="item.page"
                                  v-for="item in pdfItems"
                                  v-show="item.show"></pdf>
                             <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
@@ -208,13 +212,42 @@
                                                             </el-radio-group>
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
                                                             <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
-
-
                                                             <!-- pdf operation start -->
-                                                            <div class="btn_locate iconfont icon-dingwei"
-                                                                 @click="locate_pdf(item.fristTableData, scope.row)"
-                                                                 title="定位到关联投标文件说明处"
-                                                            ></div>
+                                                            <a class="btn_locate common_a_style" v-if="companyname_toubiao
+                                                                        .filter(item => item.title == scope.column.label)[0]
+                                                                        .factors_standards.filter(item => item.factor == scope.row.evaluationFactors)[0]
+                                                                        .relativePoints.length==1"
+                                                               @click="locate_pdf(companyname_toubiao
+                                                                        .filter(item => item.title == scope.column.label)[0]
+                                                                        .factors_standards.filter(item => item.factor == scope.row.evaluationFactors)[0]
+                                                                        .relativePoints[0],
+                                                                        companyname_toubiao.filter(item => item.title == scope.column.label)[0].pdf
+                                                                        )" title="定位到关联投标文件说明处">
+                                                                <i class="icon iconfont icon-dingwei"></i>
+                                                            </a>
+                                                            <el-dropdown class="btn_locate" v-else-if="companyname_toubiao
+                                                                        .filter(item => item.title == scope.column.label)[0]
+                                                                        .factors_standards.filter(item => item.factor == scope.row.evaluationFactors)[0]
+                                                                        .relativePoints.length>1" trigger="click">
+                                                              <span class="el-dropdown-link" title="定位到关联投标文件说明处">
+                                                                <i class="icon iconfont icon-dingwei"></i>
+                                                                <i class="el-icon-arrow-down el-icon--right"></i>
+                                                              </span>
+                                                              <el-dropdown-menu slot="dropdown" class="table_pdf_drop_menu">
+                                                                <el-dropdown-item
+                                                                        @click.native="locate_pdf(pdfItem,
+                                                                        companyname_toubiao.filter(item => item.title == scope.column.label)[0].pdf)"
+                                                                        v-for="(pdfItem ,index) in companyname_toubiao
+                                                                        .filter(item => item.title == scope.column.label)[0]
+                                                                        .factors_standards.filter(item => item.factor == scope.row.evaluationFactors)[0]
+                                                                        .relativePoints"
+                                                                >
+                                                                    <i class="icon iconfont icon-dingwei"></i>
+                                                                    {{pdfItem.name+'--P'+pdfItem.page+'--'+pdfItem.txt}}
+                                                                    <i class="icon iconfont icon-pdf"></i>
+                                                                </el-dropdown-item>
+                                                              </el-dropdown-menu>
+                                                            </el-dropdown>
                                                             <!-- pdf operation end -->
                                                         </template>
                                                     </el-table-column>
@@ -566,17 +599,17 @@
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
-                this.$commonJs.pdfOperations.getIframeDocument.call(this, refStr);
+                return this.$commonJs.pdfOperations.getIframeDocument.call(this, refStr);
             },
             getIframeWindow(refStr) {
-                this.$commonJs.pdfOperations.getIframeWindow.call(this, refStr);
+                return this.$commonJs.pdfOperations.getIframeWindow.call(this, refStr);
             },
             //定位到关联投标文件说明处
-            locate_pdf(question, bidder) {
-                this.$commonJs.pdfOperations.locate_pdf.call(this, question, bidder);
+            locate_pdf(relativePoint, pdfs) {
+                this.$commonJs.pdfOperations.locate_pdf.call(this, relativePoint, pdfs);
             },
-            show_pdf(obj, queryStr) {//查看pdf
-                this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr);
+            show_pdf(obj, queryStr, page) {//查看pdf
+                this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr, page);
             },
             slideBarMousedown(e) {
                 this.$commonJs.pdfOperations.slideBarMousedown.call(this, e);

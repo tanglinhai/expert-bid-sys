@@ -126,20 +126,18 @@
                                     line-height: 31px;
                                     margin: 15px auto;
                                     .filters_k{
-                                        width: 30%;
+                                        width: 90px;
                                         float: left;
                                         @include singleline-ellipsis;
                                     }
                                     .filters_v{
-                                        width: 70%;
+                                        width: 300px;
                                         float: left;
                                         @include singleline-ellipsis;
                                         .el-select{
                                             width: 90%;
                                         }
                                         .point{
-                                            margin: 5px 0;
-                                            padding: 0 5px;
                                             cursor: pointer;
                                             @include singleline-ellipsis;
                                             &:hover{
@@ -280,7 +278,7 @@
                             }
                             .el-table__header-wrapper {
                                 display: none;
-                            }
+                            } */
                             .el-icon-arrow-down {
                                 font-size: 12px;
                             }
@@ -290,7 +288,7 @@
                                     position: absolute;
                                     top: 0;
                                     right: 0;
-                                    width: 30px;
+                                    //width: 30px;
                                     height: 24px;
                                     line-height: 24px;
                                     font-size: 16px;
@@ -304,7 +302,7 @@
                             }
                             .cell {
                                 padding-right: 40px;
-                            } */
+                            }
                         }
                     }
                 }
