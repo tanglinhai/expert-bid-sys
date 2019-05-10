@@ -52,7 +52,7 @@
 
 
 <script>
-// import Exam from '../leader/leaderChild/Exam';
+import Exam from '../leader/leaderChild/Exam';
 export default {
 components:{
     Exam,
