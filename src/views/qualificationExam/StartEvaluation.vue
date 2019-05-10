@@ -58,12 +58,10 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_bidder" placeholder="请选择" size="mini" @change="filter_func_bidder">
                                                         <el-option
-
                                                             v-for="item in companyname_toubiao"
                                                             :key="item"
                                                             :label="item.title"
                                                             :value="item.title">
-
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -73,12 +71,10 @@
                                                 <div class="filters_v">
                                                     <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor">
                                                         <el-option
-
                                                             v-for="item in dingdang_tableData"
                                                             :key="item.evaluationFactors"
                                                             :label="item.evaluationFactors"
                                                             :value="item.evaluationFactors">
-
                                                         </el-option>
                                                     </el-select>
                                                 </div>
@@ -346,8 +342,7 @@
                     width="1300px"
             >
                 <!--点击个人形式审计表按钮显示-->
-                <el-row class="personalAuditFormTable"
-                >
+                <el-row class="personalAuditFormTable">
                     <div class="FormTableTitle cf fs14 mb10">
                         <div class="fl">
                             <span>分包号：{{grzgTitleData.bagName}}</span>
@@ -386,10 +381,15 @@
                             <el-col style="line-height: 24px">注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。
                             </el-col>
                             <el-col style="line-height: 24px">
-                                2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
+                                &nbsp;   &nbsp;  &nbsp;  &nbsp;2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。
                             </el-col>
                         </el-row>
                     </template>
+                        <ul v-for="(item,index) in grzgscFailureData" >
+                            <li  style="line-height: 22px">
+                                {{item.zhaunjia}}对{{item.gongsi}}在’{{item.pingshenyinsu}}‘中排除的理由：{{item.reason}}
+                            </li>
+                        </ul>
                 </el-row>
             </el-dialog>
         </div>
@@ -398,8 +398,8 @@
 
 <script>
 
-    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';
-    import NavBar from '../../components/publicVue/NavBar';
+    import SubmitPrompt from '../../components/publicVue/SubmitPrompt';//审查提示
+    import NavBar from '../../components/publicVue/NavBar';// 导航
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     import JSON from 'JSON';
@@ -420,6 +420,7 @@
                 msgBox: [],//个人形式审计表table数据
                 grcsMsgBoxTitle: [],//个人形式审计表table的公司名以及内部数据数据
                 grzgTitleData: {},//个人形式审计表按钮切换table表头数据
+                grzgscFailureData:[],//个人形式审计表不合格数据
                 idradionoprss: '',//table不合格的id
                 operationType: [],
                 /* -------头部包信息-----*/
@@ -432,7 +433,6 @@
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
-
                 radioArr: [],//所有table的radio
                 type_btn: '',//导航传值类型
                 to_submit_prompt_name: "",//传给全部提交弹框的值
@@ -456,7 +456,7 @@
                 allSubmitBtnLoading: false,//父级提交按钮loadding
                 sonAllSubmitBtnLoading: false,//子级提交按钮loadding
                 sonAllCheckedBtnLoading: false,//父级提交按钮loadding
-                methodType: '',
+                methodType: '',//区分那种方法
                 personalAuditFormDialog: false,//个人资格审查项按钮弹框
                 companyname_toubiao: [],//投标人数据
                 dingdang_tableData: [],//资格审查table数据
@@ -548,7 +548,7 @@
             jsonParse(obj) {
                 return JSON.parse(obj);
             },
-            init() {   //初始化 table的数据
+            init() {
                 this.page_loading = true;
                 this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                     if (res.status === 200) {
@@ -559,6 +559,7 @@
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
+                        this.grzgscFailureData=res.data.bidMsg.grzgscFailureData;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
@@ -570,7 +571,6 @@
                         }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
-
                     }
                     this.page_loading = false;
                 })
@@ -603,7 +603,6 @@
             /*----------------- pdf start ----------------------*/
 
             pdf_category_open_close($event) {
-
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
             getIframeDocument(refStr) {
@@ -649,7 +648,7 @@
             /*----------------- pdf end ----------------------*/
 
 
-
+          /*-------------资格审查start-------------------------*/
             allChecked() {//全选（不用区分url）
                 this.determineOperatingDialog = true;
             },
@@ -679,6 +678,7 @@
             },
             personalAuditForm() {
                 this.personalAuditFormDialog = true;
+                console.log(this.dingdang_tableData);
             },
             comfrimAllChecked() {//确定全选
                 this.allCheckedBtnLoading = true;
@@ -697,6 +697,7 @@
                 });
             },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
+                console.log(rowIndex, colIndex, val, obj, title);
                 this.rowIndex = rowIndex;
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
@@ -735,6 +736,7 @@
                 });
             },
             handleRowClick(row, column, event) {//资格审查表点击行数据出现审查标准
+                // console.log(row, column, event);
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
                 if (document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) === true) {//判读页面是否出现滚动条
@@ -743,6 +745,7 @@
                     $(".dingWeiDiv").show();
                 }
             },
+            /*-------------资格审查end-------------------------*/
         }
     }
 </script>

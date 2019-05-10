@@ -53,7 +53,6 @@
         props: {},
         components: {
             NowProject,
-
         },
         data() {
             return {
@@ -73,17 +72,13 @@
             $(".CommonProject").hide();
         },
         methods: {
-            // 初始子组件数据获取
             childMsg() {
                 this.pageLoading = true;
                 this.$axios.post('/api/bagMsg').then(res => {
                     if (res.status === 200) {
-                        // console.log(res.data);
                         this.pageLoading = false;
                         this.btn_search_loading = false;
                         this.projectBagMsg = res.data.projectBagMsg;
-                        console.log(res.data.projectBagMsg);
-                        // this.$store.state.failureEnery.methodNum=val;
                         if (this.projectBagMsg.length == 0) {
                             $('.pageBox').hide();
                             $(".search_warp ").hide();

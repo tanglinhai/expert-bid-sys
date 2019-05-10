@@ -267,10 +267,11 @@ function factors_standards(type){
     ];
 }
 Mock.mock('/api/table_msg', 'post', (options) => {
+    console.log(options);
     let return_val;
     var submit_type= Random.integer(0, 1);
     let get_type_num=JSON.parse(options.body).type;
-
+    console.log(get_type_num);
     var bidderIds = [Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id()];
 
     if (get_type_num == 1) {
@@ -669,7 +670,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
                     'professorName':'张三'
-                }
+                },
+               'grzgscFailureData':[{
+                    'zhaunjia':'评审专家五',
+                    'gongsi':'北京科技信息股份有限公司',
+                    'pingshenyinsu':'资格审查项2',
+                    'reason':' 不符合审查标准'
+               },{
+                   'zhaunjia':'评审专家五',
+                   'gongsi':'闪电果业发展股份有限公司',
+                   'pingshenyinsu':'资格审查项1',
+                   'reason':'不符合审查标准'
+               }]
             }
         }
     } else if (get_type_num == 3) {
@@ -1053,7 +1065,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
                     'professorName':'张三'
-                }
+                },
+                'grzgscFailureData':[{
+                    'zhaunjia':'评审专家五',
+                    'gongsi':'北京科技信息股份有限公司',
+                    'pingshenyinsu':'资格审查项2',
+                    'reason':' 不符合审查标准'
+                },{
+                    'zhaunjia':'评审专家五',
+                    'gongsi':'闪电果业发展股份有限公司',
+                    'pingshenyinsu':'资格审查项1',
+                    'reason':'不符合审查标准'
+                }]
             }
         }
 
@@ -1439,7 +1462,18 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6)
                     +'['+'第-包'+']',//分包号
                     'professorName':'张三'
-                }
+                },
+                'grzgscFailureData':[{
+                    'zhaunjia':'评审专家五',
+                    'gongsi':'北京科技信息股份有限公司',
+                    'pingshenyinsu':'资格审查项2',
+                    'reason':' 不符合审查标准'
+                },{
+                    'zhaunjia':'评审专家五',
+                    'gongsi':'闪电果业发展股份有限公司',
+                    'pingshenyinsu':'资格审查项1',
+                    'reason':'不符合审查标准'
+                }]
             }
         }
     }
@@ -3716,8 +3750,9 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 /*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     let return_val;
-    var submit_type= 1;
+    // var submit_type= 1;
     let get_type_num=JSON.parse(options.body).type;
+    var submit_type= Random.integer(0, 1);//0:未提交,1: 提交
     if (get_type_num == 7) {
         let msg = [];
         msg.push(

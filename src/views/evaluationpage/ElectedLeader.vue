@@ -347,7 +347,7 @@
             AgreeXieYi(){  //推举组长
             console.log("1")
                 this.$router.push({
-                    path: '/index/WheelPushing?types=3&methodType='+this.val,
+                    path: '/index/WheelPushing?is_submit_type=0&currentpage=3&methodType='+this.val,
                 })
                 
             },
