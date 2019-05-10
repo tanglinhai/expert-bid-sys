@@ -308,7 +308,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             factors_standards:factors_standards(10)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -721,7 +721,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             factors_standards:factors_standards(11)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -1116,7 +1116,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             factors_standards:factors_standards(12)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -3163,7 +3163,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         otherReviewProgress:'5',
                         isResultsOtherReview:"未完成"
                     }],
-
+                    'biddersScoreTitleData':[],
                     tableData: [{
                         dataItem: 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
                         dataName: '评审专家',//动态表头的名字
@@ -3750,9 +3750,9 @@ let son_allchecked_submit=Mock.mock('/api/son_allchecked_submit', 'post', {
 /*----------------------定档商务技术服务其他-----------------*/
 Mock.mock('/api/BusinessOther', 'post', (options) => {
     let return_val;
-    // var submit_type= 1;
+    var submit_type= 1;
     let get_type_num=JSON.parse(options.body).type;
-    var submit_type= Random.integer(0, 1);//0:未提交,1: 提交
+    var submit_type= Random.integer(0, 1);//0:未提交,1:
     if (get_type_num == 7) {
         let msg = [];
         msg.push(
@@ -3791,7 +3791,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             factors_standards:factors_standards(1)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             'laber':' 是否是官方配置？（50.00分）',
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
@@ -4089,7 +4089,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             factors_standards:factors_standards(2)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -4541,7 +4541,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             factors_standards:factors_standards(3)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -4989,7 +4989,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             factors_standards:factors_standards(4)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
@@ -5359,7 +5359,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             factors_standards:factors_standards(5)[1]
 
                         },
-                        { 
+                        {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],

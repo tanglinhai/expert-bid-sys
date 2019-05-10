@@ -659,7 +659,7 @@
         },
         created() {
             this.methodType = this.$route.query.methodType;
-            // console.log(this.methodType);
+            console.log(this.$route.query.type);
         },
         mounted() {
             this.init();
@@ -674,6 +674,7 @@
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
+                        console.log(res.data);
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];
