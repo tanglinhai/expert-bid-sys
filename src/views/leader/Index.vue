@@ -236,8 +236,7 @@ export default {
             padding-right: 15px;
             border-left: 1px solid #d9e0e7;
             border-right: 1px solid #d9e0e7;
-            height: 70px;
-            line-height: 70px;
+            line-height: 68px;
             .stempBox{
                 border: 1px solid #409EFF;
                 border-radius: 20px;
