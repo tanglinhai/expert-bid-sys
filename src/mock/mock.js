@@ -2915,6 +2915,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     //头部审查类型按钮
                     'viewType':get_data(70,is_tijaio),
                     'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
+                    'tijiao':'',
                     'bidEvaluation': msg,
                     'review_summary': data_msg,
                     'sort_data': dataMsg,//排序
@@ -3214,6 +3215,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
         let data_msg = [];
         let dataMsg = [];
         let is_tijaio=Random.integer(0, 1);
+        let tijaio=Random.integer(0, 1);
         return {
             'bidMsg': {
                 id: Random.id(),
@@ -3224,6 +3226,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     //头部审查类型按钮
                     'viewType':get_data(70,is_tijaio),
                     'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
+                    'tijiao':tijaio,//综合评标评审汇总页面是否提交
                     'bidEvaluation': [{//计算报价得分
                         toubiaoPrice: '31,000,00',
                         name: '夏丰热工研究院有限公司',

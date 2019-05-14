@@ -139,16 +139,24 @@
                     <div v-if="isShowProgressPage!=0">
                         <el-col :span="24" class="mb15">
                             <div class="fr">
-                               <span class="hide_span">
+                               <span class="hide_span"  v-if="this.$store.state.failureEnery.is_pingshen_show">
+                                  <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
+                                    </el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
+                                    <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
+                                </span>
+                                <span v-else>
                                     <el-button size="small" plain @click="scoreQuotation" class="ml10">报价计算得分</el-button>
                                     <el-button size="small" @click="biddingAdvice" plain class="ml10">评标意见</el-button>
                                     <el-button size="small" plain @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">提交</el-button>
+                                    <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
+                                    </el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
+                                    <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
                                 </span>
-                                <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
-                                <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
-                                </el-button>
-                                <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
-                                <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
+
                             </div>
                         </el-col>
                         <el-col :span="24">
@@ -510,7 +518,7 @@
                 <div class="biddingAdvice">
                     <el-form ref="formBiddingAdvice" :model="formBiddingAdvice" class="demo-ruleForm">
                         <el-form-item>
-                            <el-input type="textarea" v-model="formBiddingAdvice.desc"></el-input>
+                            <el-input type="textarea" v-model="formBiddingAdvice.desc"  ref="input_desc"></el-input>
                         </el-form-item>
                         <el-form-item class="textAlignC">
                             <el-button type="primary" @click="saveBiddingAdvice(formBiddingAdvice)" size="small"
@@ -655,6 +663,7 @@
                 dialogBindScore:false,// 专家个人打分表
                 biddersScoreTable:[],//投标人分项得分表
                 biddersScoreTitleData:[],//投标人分项得分表头数据
+
             }
         },
         created() {
@@ -674,7 +683,7 @@
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
-                        console.log(res.data);
+                        // console.log(res.data);
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];
@@ -698,10 +707,23 @@
                         this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
                         this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                         this.$store.state.failureEnery.isshow = false;
-                        if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
-                            this.$store.state.failureEnery.isshow = true;
-                        } else {
-                            this.$store.state.failureEnery.isshow = false;
+                        if(this.$route.query.methodType==1){
+                            // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
+                            if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
+                                this.$store.state.failureEnery.is_pingshen_show = false;
+                            } else {
+                                this.$store.state.failureEnery.is_pingshen_show = true;
+                                this.is_disabled = true;
+                                this.ruleForm.desc='2';
+                            }
+                        }else if(this.$route.query.methodType==2){
+                            // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);//0：提交前那个页面显示，1:提交前的页面
+                            // console.log(res.data.bidMsg.eviewrItemsMsg.tijiao);
+                                if(res.data.bidMsg.eviewrItemsMsg.tijiao==1){ //1,提交之前的，0，提交之前的
+                                    this.$store.state.failureEnery.is_pingshen_show=true;
+                                }else{
+                                    this.$store.state.failureEnery.is_pingshen_show=false;
+                                }
                         }
                     }
                     this.page_loading = false;
@@ -775,7 +797,6 @@
                     }
                 });
             },
-            /*------------------------合理低价评审汇总end-----------------*/
             /*-----------排序弹框----------*/
             sort_btn() {//排序
                 this.$store.state.failureEnery.sort = true;
@@ -826,6 +847,9 @@
                 })
             },
             /*------------------------------排序弹框end-----------------------------------------*/
+
+
+            /*------------------------合理低价评审汇总end-----------------*/
             /*-------------------------------报价计算弹框---------------------------------------*/
             radio_is_valid(radio, id, tableKey, index, msg_box) {//报价审核是否有效
                 // radio:radio选中的状态：1：有效、2：无效, id：当选选中id, tableKey当选选中行数据, index：下标, msg_box：当前的table表数据
@@ -1020,7 +1044,9 @@
                         this.goGrdoupRecor();//倒计时开始
                         this.submitFormLoadingZHPB = false;
                         this.$store.state.failureEnery.tijiaoDialogZHPB=false;
-                        $(".hide_span").hide();
+                        // $(".hide_span").hide();
+                        this.$store.state.failureEnery.is_pingshen_show=false;
+
                     }
                 });
             },
