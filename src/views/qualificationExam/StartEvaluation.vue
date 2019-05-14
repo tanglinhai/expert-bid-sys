@@ -387,7 +387,7 @@
                     </template>
                         <ul v-for="(item,index) in grzgscFailureData" >
                             <li  style="line-height: 22px">
-                                {{item.zhaunjia}}对{{item.gongsi}}在’{{item.pingshenyinsu}}‘中排除的理由：{{item.reason}}
+                                {{item.zhaunjia}}对{{item.gongsi}}在&nbsp;“&nbsp;{{item.pingshenyinsu}}&nbsp;”&nbsp;中排除的理由：{{item.reason}}
                             </li>
                         </ul>
                 </el-row>
@@ -697,7 +697,7 @@
                 });
             },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
-                console.log(rowIndex, colIndex, val, obj, title);
+                // console.log(rowIndex, colIndex, val, obj, title);
                 this.rowIndex = rowIndex;
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
