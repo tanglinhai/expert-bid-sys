@@ -1,11 +1,11 @@
 <template>
-    <div class="examClild">
+    <div class="examClild" v-loading="loadExam">
         <el-row class="proBox">
             <el-col :span="8">
                 <div class="grid-content bg-purple-dark">
                     <el-col :span="3.5" style="color:red;font-size:15px;">我的进度：</el-col>
                     <el-col :span="10">
-                        <el-progress :percentage="setPro" ref="elProgress"></el-progress>
+                        <el-progress :stroke-width="12" :text-inside="true" :percentage="setPro" ref="elProgress"></el-progress>
                     </el-col>  
                 </div>
             </el-col>
@@ -22,6 +22,7 @@
                 :data="tableData"
                 border
                 ref="tableRef"
+                @row-click="rowClick"
             >
                 <el-table-column
                     type="index"
@@ -55,36 +56,65 @@
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope">
-                            <div>
+                            <div v-if="scopeTemp"> 
                                 <el-col :span="20">
                                     <el-radio-group v-model="radioStatu[index +'-'+ scope.$index]">
-                                        <el-radio v-for="(val,subIndex) in scope.row.qualified" :label="val.statu" :key="subIndex" @change="getCurren(val.statu,scope.row)">{{val.unStatu}}</el-radio>
+                                        <el-radio v-for="(val,subIndex) in scope.row.qualified" :label="val.statu" :key="subIndex" @change="getCurren(val.statu,scope.row,item.pName)">{{val.unStatu}}</el-radio>
                                     </el-radio-group>
                                 </el-col>
                                 <el-col :span="4" style="text-align:right;">
                                     <i class="iconfont icon-dingwei"></i>
                                 </el-col>
                             </div>
+                            <div v-else>
+                                <span class="setColor" v-for="(value,key) in radioStatu[index +'-'+ scope.$index]">{{value}}</span>
+                            </div>
                         </template>
                     </el-table-column>
                 </el-table-column>
             </el-table>
+            <el-col :span="24" v-show="isShow">
+                <div class="grid-content bg-purple-dark footTitBox">
+                    审查标准：{{standard}}
+                </div>
+            </el-col>
         </el-row>
         <Pqeat ref="pqeat"></Pqeat>
         <el-dialog
-            title="提示"
+            title="审查提示"
             :visible.sync="dialogVisible"
             width="700px"
             :before-close="handleClose"
             @open="handleOpen">
-        <div class="diaLogBody">
-            <p>您的资格审查-电脑硬件配置工作工作已进行 <font >[ {{gress}} ]</font>, 请确认您已经完成本包 <font>[ 1 ]</font>的资格审查-电脑硬件配置工作工作!</p>
-            <p>确认后您将不能再更改资格审查-电脑硬件配置工作结果！</p>
-        </div>
-        <span slot="footer">
-            <el-button size="small" @click="dialogVisible = false">取 消</el-button>
-            <el-button size="small" type="primary" @click="confSubmit">确 定</el-button>
-        </span>
+            <div class="diaLogBody">
+                <p>您的资格审查-电脑硬件配置工作工作已进行 <font >[ {{gress}} ]</font>, 请确认您已经完成本包 <font>[ 1 ]</font>的资格审查-电脑硬件配置工作工作!</p>
+                <p>确认后您将不能再更改资格审查-电脑硬件配置工作结果！</p>
+            </div>
+            <span slot="footer">
+                <el-button size="small" @click="dialogVisible = false">取 消</el-button>
+                <el-button size="small" type="primary" @click="confSubmit">确 定</el-button>
+            </span>
+        </el-dialog>
+        <el-dialog
+            title="不合格录入"
+            :visible.sync="unQualified"
+            width="700px"
+            :before-close="handleClose"
+            @open="handleOpen">
+            <div class="diaLogBody textSty">
+                <p>不合格对象：  <font >{{uncomp}}</font> 的 <font>{{unReason}}</font></p>
+                <p><font>*&nbsp;</font>不合格理由：（50汉字或者100汉字之内）：</p>
+                <el-input
+                    type="textarea"
+                    :rows="12"
+                    placeholder="请填写申请原因"
+                    v-model="textarea3">
+                </el-input>
+            </div>
+            <span slot="footer">
+                <el-button size="small" @click="unQualified = false">取 消</el-button>
+                <el-button size="small" type="primary" @click="unQualified = false">确 定</el-button>
+            </span>
         </el-dialog>
     </div>
 </template>
@@ -98,19 +128,30 @@ export default {
     },
     data() {
         return {
+            loadExam:true,
             radioStatu:{},
             tableData:[],
             dialogVisible:false,
             gress:'',
+            unQualified:false,
+            uncomp:'',
+            unReason:'',
+            textarea3:'',
+            standard:'',
+            isShow:false,
+            scopeTemp:true,
+            list:[],
         }
     },
     mounted() {
         this.init();
+        console.log(this.loName);
     },    
     methods: {
         init(){
             this.$axios.post('./api/tableMsg').then(res => {
                 if(res.status == 200){
+                    this.loadExam=false;
                     this.tableData=res.data.pdf;
                     var length=this.tableData.length;
                     for(let i = 0; i < length;i++){
@@ -121,8 +162,13 @@ export default {
                 }
             })
         }, 
-        getCurren(val){
-            console.log(val)
+        getCurren(val,row,pn){
+            console.log(val,row,pn)
+            if(val == '不合格'){
+                this.unQualified = true;
+                this.uncomp = pn;
+                this.unReason = row.factor;
+            }
         },
         checkedAll(){
             this.$confirm('您确定要执行此操作！', '全部选中提示', {
@@ -159,6 +205,12 @@ export default {
         },
         confSubmit(){
             console.log(this.$refs.tableRef);
+            this.scopeTemp =  this.dialogVisible = false;
+        },
+        rowClick(rowMs){
+            console.log(rowMs);
+            this.isShow=true;
+            this.standard=rowMs.factor;
         }
     },
     computed: {
@@ -166,7 +218,7 @@ export default {
             let checkLength = 0;
             let length = 0;
             for(var i in this.radioStatu){
-                if(this.radioStatu[i] == '合格'){
+                if(this.radioStatu[i] == '合格' || this.radioStatu[i] == '不合格'){
                     checkLength++;
                 }
                 length++;
@@ -195,9 +247,15 @@ export default {
     }
     .proBox{
         line-height: 62px; 
+        .el-progress-bar__innerText{
+            padding-bottom: 1px;
+        }
     }
     .bodyBox{
-        padding: 0 !important; 
+        padding: 0 !important;
+        .setColor{
+            color: #f00;
+        } 
     }
     .diaLogBody,.el-dialog__footer{
         text-align: center;
@@ -209,6 +267,21 @@ export default {
                 color:#f00;
             }
         }
+    }
+    .textSty{
+        text-align: left;
+        p{
+            border-top: 1px dotted  #ccc;
+            line-height: 38px; 
+        }
+    }
+    .footTitBox{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background: #fff6ec;
+        border: 1px solid #ffdcb3;
     }
     @include common-el-table;
 }
