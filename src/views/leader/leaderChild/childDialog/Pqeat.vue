@@ -52,7 +52,9 @@
             </el-row>
             <el-row class="comnBox">
                 <p>注：1、凡资格审查项中任何一条未通过评审要求的投标人，即界定为无效投标人。</p>
-                <p>2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。</p>    
+                <p style="text-indent:26px;">2、评标委员会各成员在表格相应位置中记录各投标人是否符合要求，符合要求打"√",不符合要求打"×",结论为"合格",或"不合格"'。</p>
+                <p style="text-indent:26px;">评审专家五对北京科技信息股份有限公司在’资格审查项2‘中排除的理由： 不符合审查标准</p>
+                <p style="text-indent:26px;">评审专家五对闪电果业发展股份有限公司在’资格审查项1‘中排除的理由：不符合审查标准</p>    
             </el-row>
         </el-dialog>
     </div>
@@ -107,7 +109,7 @@ export default {
 .pqeat{
     .comnBox{
         p{
-            margin: 15px 0;
+            margin: 15px 0 15px 15px;
         }
     }
     @include common-el-table;

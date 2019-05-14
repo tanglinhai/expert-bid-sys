@@ -43,7 +43,8 @@
                     :label="item.title"
                     :name="item.name"
                 >
-                    <Exam v-if="index == 0"></Exam>
+                    <Exam v-if="item.name === '1'"></Exam>
+                    <Qsummary v-if="item.name === '2'"></Qsummary>
                 </el-tab-pane>
             </el-tabs>
         </el-row>
@@ -53,9 +54,11 @@
 
 <script>
 import Exam from '../leader/leaderChild/Exam';
+import Qsummary from '../leader/leaderChild/Qsummary';
 export default {
 components:{
     Exam,
+    Qsummary
 },
 data() {
     return {
