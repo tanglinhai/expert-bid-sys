@@ -1,6 +1,6 @@
 <template>
     <div class="seeOwnTable">
-        <el-row>
+        <el-row class="titBox">
             <el-col :span="3">
                 <div class="grid-content bg-purple-dark">
                     分包号：第6包
@@ -95,10 +95,8 @@ export default {
 
 <style lang="scss">
 .seeOwnTable{
-    .comnBox{
-        p{
-            margin: 15px 0 15px 15px;
-        }
+    .titBox{
+        line-height:40px;
     }
 }
 </style>
