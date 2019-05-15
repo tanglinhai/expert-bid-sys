@@ -1096,6 +1096,12 @@ export default {
                         width: points.pdfWH[count][0] + '%',
                         height: points.pdfWH[count][1] + '%'
                     });
+                    console.log(` 
+                            0 0 transparent, 
+                            ${points.num/points.pdfLeftTop[count][1]/10}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.4),
+                            ${points.num/points.pdfLeftTop[count][1]/20}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.3),
+                            ${points.num/points.pdfLeftTop[count][1]/30}em ${points.num/points.pdfLeftTop[count][0]/30}em rgba(255, 255, 255, 0.2),
+                            ${points.num/points.pdfLeftTop[count][1]/40}em ${points.num/points.pdfLeftTop[count][0]/40}em rgba(255, 255, 255, 0.1)`);
                     _this._dom_c.$center_part_wrap.css({
                         top: points.centerLeftTop[count][1] + '%',
                         left: points.centerLeftTop[count][0] + '%',
