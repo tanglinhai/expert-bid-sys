@@ -109,7 +109,8 @@
                             <!--<p>综合评标进度条</p>-->
                             <el-row :span="24" class="mb15">
                                 <div class="fr">
-                                    <el-button size="small" plain  @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                    <el-button size="small" plain  @click="reviewLockRequest" class="ml10">
+                                    <i  class="icon iconfont  icon-jiesuo1 mr3" ></i>评分解锁</el-button>
                                 </div>
                             </el-row>
                             <el-row>
@@ -140,21 +141,32 @@
                         <el-col :span="24" class="mb15">
                             <div class="fr">
                                <span class="hide_span"  v-if="this.$store.state.failureEnery.is_pingshen_show">
-                                  <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
-                                    <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
+                                  <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10">查看评分解锁记录
                                     </el-button>
-                                    <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
-                                    <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" type='primary'>查看专家个人打分表</el-button>
+                                    <el-button size="small" @click="bindScoreBtn" type='primary'>投标人分项得分表</el-button>
                                 </span>
                                 <span v-else>
-                                    <el-button size="small" plain @click="scoreQuotation" class="ml10">报价计算得分</el-button>
-                                    <el-button size="small" @click="biddingAdvice" plain class="ml10">评标意见</el-button>
-                                    <el-button size="small" plain @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">提交</el-button>
-                                    <el-button size="small" plain @click="reviewLockRequest" class="ml10">评分解锁</el-button>
-                                    <el-button size="small" @click="checkUnlockRecord" plain class="ml10">查看评分解锁记录
+                                    <el-button size="small" type='primary' @click="scoreQuotation" class="ml10">
+                                       <i class=" icon iconfont icon-cz-dftj mr3"></i>报价计算得分
                                     </el-button>
-                                    <el-button size="small" @click="checkProScoreBtn" plain>查看专家个人打分表</el-button>
-                                    <el-button size="small" @click="bindScoreBtn" plain>投标人分项得分表</el-button>
+                                    <el-button size="small" @click="biddingAdvice" type='primary' class="ml10">
+                                        <i class=" icon iconfont  icon-yijian mr3"></i>评标意见
+                                    </el-button>
+                                    <el-button size="small" type='primary' @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">
+                                       <i class=" icon iconfont  icon-tijiao2  mr3"></i>提交
+                                    </el-button>
+                                    <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">
+                                        <i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10">
+                                        <i class=" icon iconfont    icon-chakanjilu mr3" ></i>查看评分解锁记录
+                                    </el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" type='primary'>
+                                        <i class=" icon iconfont  icon-dafen  mr3"></i>查看专家个人打分表
+                                     </el-button>
+                                    <el-button size="small" @click="bindScoreBtn" type='primary'>
+                                         <i class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
                                 </span>
 
                             </div>

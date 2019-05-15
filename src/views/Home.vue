@@ -222,9 +222,12 @@ export default {
        if (this.$route.query.currentpage == undefined) {
           this.$route.query.currentpage=1;   //进行到哪一步
         }
-        if(this.$route.query.is_submit_type == undefined){
-          this.$route.query.is_submit_type=0;  //是否提交
-        }
+        // if(this.$route.query.is_submit_type == undefined){
+        //   this.$route.query.is_submit_type=0;  //是否提交
+        // }
+        let arr = [0, 1];
+        let is_submit_type = arr[Math.floor(Math.random()*arr.length)];
+        //console.log(is_submit_type,8884444);
         if(this.$route.query.types == undefined){
           this.$route.query.types=0;  //点击是哪一步
         }
