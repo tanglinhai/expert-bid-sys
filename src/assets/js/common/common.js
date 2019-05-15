@@ -786,13 +786,7 @@ export default {
             var conW = this._dom_c.$content.removeClass('presentation_mode_column presentation_mode_row').width();
             this._dom_c.$div_pdf.attr('style',"");
             this._dom_c.$center_part_wrap.attr('style',"");
-            this._dom_c.$div_pdf_wrap.css({
-                'width': conW+'px',
-                'height': bodyH+'px',
-            });
-
-
-
+            
 
             if (modeType == 'column') {
                 this._dom_c.$div_pdf.css({
@@ -895,17 +889,17 @@ export default {
                     //pdf
                     pdfInput1 = [
                         [pdf_l, pdf_t],
-                        [90, -20],
-                        [80, pdf_t / 3],
-                        [60, pdf_t],
+                        [-20, -35],
+                        [100, 0],
+                        [110, 40],
                         [52, 30]
                     ];
                     pdfLeftTop = [];
                     pdfInput2 = [
                         [pdf_w, pdf_h],
-                        [13, 30],
-                        [15, 49],
-                        [18, 45],
+                        [4, 5],
+                        [20, 49],
+                        [6, 16],
                         [13, 35]
                     ];
                     pdfWH = [];
@@ -914,17 +908,17 @@ export default {
 
                     centerInput1 = [
                         [cen_l, cen_t],
-                        [-15, -35],
-                        [5, -5],
-                        [15 * 4, 15],
+                        [-25, -35],
+                        [70, 0],
+                        [100, 40],
                         [36, 30]
                     ];
                     centerLeftTop = [];
                     centerInput2 = [
                         [cen_w, cen_h],
                         [4, 5],
-                        [8, 49],
-                        [20, 40],
+                        [20, 49],
+                        [6, 16],
                         [13, 35]
                     ];
                     centerWH = [];
@@ -946,9 +940,9 @@ export default {
                     //pdf
                     pdfInput1 = [
                         [pdf_l, pdf_t],
-                        [38, 30],
-                        [80, 0],
-                        [45, -20],
+                        [38, 40],
+                        [120, 0],
+                        [20, -20],
                         [40, 30]
                     ];
                     pdfLeftTop = [];
@@ -964,9 +958,9 @@ export default {
                     //center_part_wrap
                     centerInput1 = [
                         [cen_l, cen_t],
-                        [-20, -30],
-                        [cen_l * 1.2, 0],
-                        [cen_l * 4, 20],
+                        [38, 80],
+                        [120, 35],
+                        [20, 10],
                         [40, 52]
                     ];
                     centerLeftTop = [];
@@ -985,7 +979,7 @@ export default {
                     //pdf 1
                     pdfInput1 = [
                         [pdf_l,pdf_t],
-                        [80, 20],
+                        [100, 20],
                         [60, 50],
                         [25, 20],
                         [52,30]
@@ -1003,7 +997,7 @@ export default {
                     //center_part_wrap
                     centerInput1 = [
                         [cen_l,cen_t],
-                        [75, 28],
+                        [90, 28],
                         [35, 65],
                         [10, 27],
                         [36,30]
@@ -1061,7 +1055,10 @@ export default {
             this.$commonJs.draw_bezier_curves(centerInput1, num, centerLeftTop);
             this.$commonJs.draw_bezier_curves(centerInput2, num, centerWH);
 
-
+            this._dom_c.$div_pdf_wrap.css({
+                'width': conW+'px',
+                'height': bodyH+'px',
+            });
             return {
                 pdfLeftTop,
                 pdfWH,
@@ -1099,6 +1096,12 @@ export default {
                         width: points.pdfWH[count][0] + '%',
                         height: points.pdfWH[count][1] + '%'
                     });
+                    console.log(` 
+                            0 0 transparent, 
+                            ${points.num/points.pdfLeftTop[count][1]/10}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.4),
+                            ${points.num/points.pdfLeftTop[count][1]/20}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.3),
+                            ${points.num/points.pdfLeftTop[count][1]/30}em ${points.num/points.pdfLeftTop[count][0]/30}em rgba(255, 255, 255, 0.2),
+                            ${points.num/points.pdfLeftTop[count][1]/40}em ${points.num/points.pdfLeftTop[count][0]/40}em rgba(255, 255, 255, 0.1)`);
                     _this._dom_c.$center_part_wrap.css({
                         top: points.centerLeftTop[count][1] + '%',
                         left: points.centerLeftTop[count][0] + '%',
@@ -1114,7 +1117,7 @@ export default {
                         height: '100%'
                     }, {
                         duration: 1000,
-                        easing: 'easeInOutBack',
+                        easing: 'easeOutExpo',
 
                         complete: function(){
                             _this._dom_c.$div_pdf_wrap.css({
@@ -1132,7 +1135,7 @@ export default {
                         height: '100%'
                     }, {
                         duration: 1000,
-                        easing: 'easeInOutBack',
+                        easing: 'easeOutExpo',
                         complete: function () {
 
                         }

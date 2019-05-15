@@ -2,6 +2,9 @@
 const path = require('path');
 //process.env.NODE_ENV = 'production';
 const debug = process.env.NODE_ENV !== 'production';
+const optimizeCss = require('optimize-css-assets-webpack-plugin')
+const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
 

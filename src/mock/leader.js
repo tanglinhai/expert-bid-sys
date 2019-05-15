@@ -69,6 +69,7 @@ Mock.mock('./api/tableMsg','post',{
     'pdf':[
             {   
                 pName:'重庆网控科技发展有限公司',
+                id:Random.id(),
                 'allPdf|1-4':['pdf文件@natural(1,99)'],
                 factor:'内存大小大于8G',
                 'qualified':[
@@ -78,6 +79,7 @@ Mock.mock('./api/tableMsg','post',{
             },
             {
                 pName:'普瑞太阳能有限公司',
+                id:Random.id(),
                 factor:'是否为INTEL生产',
                 'allPdf|1-4':['pdf文件@natural(1,99)'],
                 'qualified':[
@@ -87,6 +89,7 @@ Mock.mock('./api/tableMsg','post',{
             },
             {
                 pName:'夏丰热工研究院有限公司',
+                id:Random.id(),
                 factor:'分辨率是否为15英寸以上',
                 'allPdf|1-4':['pdf文件@natural(1,99)'],
                 'qualified':[
@@ -99,8 +102,41 @@ Mock.mock('./api/tableMsg','post',{
 
 Mock.mock('./api/pqeatMsg','post',{
     'pdf':[
-        {pName:'重庆网控科技发展有限公司',factor:'资格审查1','allPdf|1':['✔','✖'], stau:'1'},
-        {pName:'普瑞太阳能有限公司',factor:'资格审查2','allPdf|1':['✖','✔'],stau:'2'},
-        {pName:'夏丰热工研究院有限公司',factor:'资格审查3','allPdf|1':['✔','✖'],stau:'3'}
+        {
+            pName:'重庆网控科技发展有限公司',
+            factor:'资格审查1',
+            'allPdf|1':['✔','✖'],
+            reason:'√(5√0×)', 
+            stau:'1',
+            'allOwn':[
+                {name:'王五',statu:'✖'},
+                {name:'赵六',statu:'✔'},
+                {name:'葛七',statu:'✖'},
+            ]
+        },
+        {
+            pName:'普瑞太阳能有限公司',
+            factor:'资格审查2',
+            'allPdf|1':['✖','✔'],
+            reason:'√(5√0×)',
+            stau:'2',
+            'allOwn':[
+                {name:'张三',statu:'✔'},
+                {name:'赵六',statu:'✔'},
+                {name:'葛七',statu:'✖'},
+            ]
+        },
+        {
+            pName:'夏丰热工研究院有限公司',
+            factor:'资格审查3',
+            'allPdf|1':['✔','✖'],
+            reason:'√(5√0×)',
+            stau:'3',
+            'allOwn':[
+                {name:'张三',statu:'✔'},
+                {name:'李四',statu:'✔'},
+                {name:'葛七',statu:'✖'},
+            ]
+        }
     ]
 })
