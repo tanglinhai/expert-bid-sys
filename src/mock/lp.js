@@ -387,17 +387,41 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 //提交之后的状态：
 //is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
 
-function get_data(currentPage,is_submit_type) {//type
+function get_data(currentPage,is_submit_type,types) {//type
     // console.log(type, is_submit_type);
     function set_type() {
         if (currentPage == 1) {
-            return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4]
+            if(types==1){
+                return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4].splice(types,1,5)
+            }else{
+                return [is_submit_type?1:2,4,4,4,4,4,4,4,4,4,4,4,4,4]
+            }
         }
         if (currentPage == 2) {//资格审查
-            return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
+            if(types==1){
+                var num=[1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(types-1,1,5);
+                num.splice(currentPage-1,1,3);
+                return num;
+            }else{
+                return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
+            }
         }
         if (currentPage == 3) {//资格审查汇总
-            return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
+            if(types==1){
+                var num=[1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(types-1,1,5);
+                num.splice(currentPage-1,1,3);
+                return num;
+            }else if(types==2){
+                var num=[1,1,is_submit_type?1:2, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(types-1,1,5);
+                num.splice(currentPage-1,1,3);
+                return num;
+            }else{
+                return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
+            }
+            
         }
        
     }
@@ -486,6 +510,7 @@ Mock.mock('/api/navcommons','post',(options) =>{
     let CommonsData;
     let currentpage=JSON.parse(options.body).currentpage;
     let is_submit_type=JSON.parse(options.body).is_submit_type;
+    let types=JSON.parse(options.body).types;
     console.log(currentpage,is_submit_type,888888);
     CommonsData={
         ProjectInformationsAll:{
@@ -494,7 +519,7 @@ Mock.mock('/api/navcommons','post',(options) =>{
             projectWenjian:'招标文件(pdf)',
             PersonName:'张三'
         },
-        navsAll:get_data(currentpage,is_submit_type),
+        navsAll:get_data(currentpage,is_submit_type,types),
     };
     return CommonsData;
         
