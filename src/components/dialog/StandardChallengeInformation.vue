@@ -108,7 +108,6 @@
         <el-button class="sureBtns" @click="sureBtns()" type="primary" size="small">确定</el-button>
         <div class="djsTime">[<span id="sec">{{count}}</span>]秒后自动关闭</div>
       </div>
-
     </div>
 </template>
 

@@ -807,14 +807,14 @@
                                                                             ({{scope.row.min}}.00-{{scope.row.max}}.00)
                                                                         </div>
                                                                         <div class="cf">
-                                                                               <el-input
-                                                                                       v-model.trim="scope.row['value' + (index + 1)]"
-                                                                                       size="small" placeholder="请输入内容"
-                                                                                       @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
-                                                                                       @keydown.enter.native="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
-                                                                                       style="width: 150px"
-                                                                                       class="fl"
-                                                                                       clearable></el-input>
+                                                                           <el-input
+                                                                                   v-model.trim="scope.row['value' + (index + 1)]"
+                                                                                   size="small" placeholder="请输入内容"
+                                                                                   @blur="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                                   @keydown.enter.native="changes(scope.row['value' + (index + 1)],scope.$index,index + 1,scope.row)"
+                                                                                   style="width: 150px"
+                                                                                   class="fl"
+                                                                                   clearable></el-input>
                                                                             <div class="fl"
                                                                                  style=" line-height: 30px;margin-left: 5px">分
                                                                             </div>

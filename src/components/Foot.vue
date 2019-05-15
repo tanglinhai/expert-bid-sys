@@ -34,6 +34,7 @@ export default {
     a {
 		    color: #a4a4a4;
 		}
+
 		.c_fnl {
 		    color: #e8e8e8;
 		    margin: 0 10px;
