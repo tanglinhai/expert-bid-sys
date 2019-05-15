@@ -140,3 +140,11 @@ Mock.mock('./api/pqeatMsg','post',{
         }
     ]
 })
+
+Mock.mock('./api/proData','post',{
+    data:[
+        {name:'评标专家7',pro:5,statu:'未完成'},
+        {name:'评标专家2',pro:50,statu:'未完成'},
+        {name:'评标专家17',pro:100,statu:'完成'},
+    ]
+})
