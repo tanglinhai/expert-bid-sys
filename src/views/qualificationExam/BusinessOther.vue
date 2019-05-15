@@ -146,31 +146,38 @@
                                             <div class="grid-content bg-purple btnBox" style="text-align:right;">
                                                 <span id="hide_btn"
                                                       :class="$store.state.failureEnery.business_tijiao==false ?'hide_div':'nohide_div'">
-                                                    <el-button size="small" plain
-                                                               @click="checkUnfinishedItems">查看未完成项
+                                                    <el-button size="small"
+                                                               @click="checkUnfinishedItems" type="primary" plain>
+                                                           <i class=" icon iconfont icon-weiwancheng " ></i> 查看未完成项
                                                     </el-button>
-                                                    <el-button size="small" plain @click="saveBtn"
-                                                               class="ml10">保存</el-button>
+                                                    <el-button size="small"  @click="saveBtn" type="primary"
+                                                               class="ml10">
+                                                        <i  class="icon iconfont icon-baocun " ></i>保存
+                                                        </el-button>
 
-                                                    <el-button size="small" plain @click="submitBusiness"
+                                                    <el-button size="small"  @click="submitBusiness" type="primary"
                                                                class="submit_business" v-if="type==8">
+                                                         <i  class=" icon iconfont icon-shangwu " ></i>
                                                         提交商务
                                                     </el-button>
-                                                    <el-button size="small" plain @click="submitJishu"
+                                                    <el-button size="small"  @click="submitJishu" type="primary"
                                                                class="submit_business" v-if="type==9">
+                                                        <i class=" icon iconfont icon-tijiao1 mr3"></i>
                                                         提交技术
                                                     </el-button>
-                                                    <el-button size="small" plain @click="submitServe"
+                                                    <el-button size="small"  @click="submitServe" type="primary"
                                                                class="submit_business" v-if="type==10">
+                                                          <i  class="icon iconfont icon-baocun " ></i>
                                                         提交服务
                                                     </el-button>
-                                                     <el-button size="small" plain @click="submitOther"
+                                                     <el-button size="small"  @click="submitOther" type="primary"
                                                                 class="submit_business" v-if="type==11">
+                                                         <i  class="icon iconfont icon-baocun " ></i>
                                                         提交其他
                                                     </el-button>
                                                 </span>
-                                                <el-button size="small" plain
-                                                           @click="checkSchedule" class="ml10">查看定档表
+                                                <el-button size="small"
+                                                           @click="checkSchedule" class="ml10" type="primary" plain> <i class="mr3 icon iconfont icon-chakan1"></i>查看定档表
                                                 </el-button>
                                             </div>
                                         </el-col>
@@ -990,7 +997,7 @@
                         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
                     </el-form-item>
                     <el-form-item class="mb15 textAlignC mt30 el-row" style="margin-left: -50px">
-                        <el-button type="primary" @click="saveFormScoreShows('ruleForm')" size="small">保存</el-button>
+                        <el-button type="primary" @click="saveFormScoreShows('ruleForm')" size="small"><i class=" icon iconfont icon-baocun mr3"></i>保存</el-button>
                         <el-button @click="rebackFormScoreShows('ruleForm')" size="small" type="primary">返回</el-button>
                     </el-form-item>
                 </el-form>

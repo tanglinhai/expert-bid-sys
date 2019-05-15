@@ -61,14 +61,16 @@
                                     </el-col>
                                     <el-col :span="12" class="mb10">
                                         <div class="grid-content bg-purple btnBox" style="text-align:right;">
-                                        <span class="hide_div"><el-button size="small" plain
-                                                                          @click="submit" :loading="submit_huizong">提交</el-button>
-                                            <el-button size="small" plain
-                                                       @click="individualTrial">查看个人资格审查项表</el-button></span>
-                                            <el-button size="small" plain @click="checkUnlockRecord" class="ml10">
+                                        <span class="hide_div"><el-button size="small" type="primary"
+                                                                          @click="submit" :loading="submit_huizong"><i class=" icon iconfont icon-tijiao2 mr3"></i>提交</el-button>
+                                            <el-button size="small" type="primary" plain
+                                                       @click="individualTrial"> <i class="icon iconfont icon-zigeshenchazhuti mr3"></i>查看个人资格审查项表</el-button></span>
+                                            <el-button size="small" type="primary" plain @click="checkUnlockRecord" class="ml10">
+                                                <i class=" icon iconfont icon-chakanjilu mr3"></i>
                                                 查看资格审查项解锁记录
                                             </el-button>
-                                            <el-button size="small" plain @click="quaUnlockApplication">资格审查项解锁
+                                            <el-button size="small" type="primary" plain  @click="quaUnlockApplication">
+                                                <i class=" icon iconfont icon-jiesuo1 mr3"></i>资格审查项解锁
                                             </el-button>
                                         </div>
                                     </el-col>

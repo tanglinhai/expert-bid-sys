@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <div class="grid-content bg-purple zeroBox">
                     <img src="../../assets/img/no_data_icon.png" alt="">
-                    <el-button class="btnBg" @click="refreshBtn">刷新</el-button>
+                    <el-button class="btnBg" @click="refreshBtn"   >  <i  class="icon iconfont icon-fresh  mr3 fs14" ></i>刷新</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -338,7 +338,7 @@
             .btnBg  {
                 position: absolute;
                 top: 150px;
-                right: 254px;
+                right: 235px;
             }
             img{
                 display: inline-block;
