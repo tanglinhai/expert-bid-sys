@@ -399,9 +399,8 @@ function get_data(currentPage,is_submit_type,types) {//type
         }
         if (currentPage == 2) {//资格审查
             if(types==1){
-                var num=[1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5);
-                num.splice(currentPage-1,1,3);
+                var num=[5,4, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(currentPage-1,1,is_submit_type?1:3);
                 return num;
             }else{
                 return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
@@ -409,14 +408,12 @@ function get_data(currentPage,is_submit_type,types) {//type
         }
         if (currentPage == 3) {//资格审查汇总
             if(types==1){
-                var num=[1,1,is_submit_type?1:2, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5);
-                num.splice(currentPage-1,1,3);
+                var num=[1,5,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(currentPage-1,1,is_submit_type?1:3);
                 return num;
             }else if(types==2){
-                var num=[1,1,is_submit_type?1:2, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5);
-                num.splice(currentPage-1,1,3);
+                var num=[1,5,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+                num.splice(currentPage-1,1,is_submit_type?1:3);
                 return num;
             }else{
                 return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
