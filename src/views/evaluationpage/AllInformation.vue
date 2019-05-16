@@ -184,7 +184,7 @@
         mounted(){
             
             this.AllInformation(); //专家个人信息,投标人信息接口
-            this.navcommonsListFun(); //导航接口
+            //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
 
             this.baoInformations(); //头部包信息
