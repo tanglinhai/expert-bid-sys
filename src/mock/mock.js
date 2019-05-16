@@ -2722,7 +2722,7 @@ function get_data(type,is_submit_type) {
     ]
 }
 //合理低价
-// 通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
+//通过：绿色，正在进行：橘色；可点：灰色；不可点：白色
 //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 //提交之后的状态：
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态；zong_type：是否提交的状态( 是汇总页面提交)；
@@ -2753,7 +2753,7 @@ function get_data(type,is_submit_type) {
 //             return [1, 1, 1, 1, 1, 1, is_submit_type?1:2,]
 //         }
 //     }
-//
+
 //     set_type();
 //     var a;
 //     a = set_type();
@@ -2769,7 +2769,7 @@ function get_data(type,is_submit_type) {
 //             label: '资格审查项汇总',
 //             type: a[1]
 //         },
-//
+
 //         {
 //             value: '3',
 //             label: '符合性审查项',
@@ -2796,7 +2796,7 @@ function get_data(type,is_submit_type) {
 //             type: a[6]
 //         },
 //     ]
-//
+
 // }
 
 
@@ -5980,6 +5980,154 @@ let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
 //     }
 //
 // });
+
+
+
+
+//lp导航
+//1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//提交之后的状态：
+//is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
+
+// function get_data(currentPage,is_submit_type,types) {//type
+//     // console.log(type, is_submit_type);
+//     function set_type() {
+//         if (currentPage == 1) {
+//             if(types==1){
+//                 return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4].splice(types,1,5)
+//             }else{
+//                 return [is_submit_type?1:2,4,4,4,4,4,4,4,4,4,4,4,4,4]
+//             }
+//         }
+//         if (currentPage == 2) {//资格审查
+//             if(types==1){
+//                 var num=[1,4, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+//                 num.splice(types-1,1,5)
+//                 num.splice(currentPage-1,1,is_submit_type?1:3);
+//                 return num;
+//             }else{
+//                 return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
+//             }
+//         }
+//         if (currentPage == 3) {//资格审查汇总
+//             if(types==1){
+//                 var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+//                 num.splice(types-1,1,5);
+//                 num.splice(currentPage-1,1,is_submit_type?1:3);
+//                 return num;
+//             }else if(types==2){
+//                 var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+//                 num.splice(types-1,1,5);
+//                 num.splice(currentPage-1,1,is_submit_type?1:3);
+//                 return num;
+//             }else{
+//                 return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
+//             }
+            
+//         }
+       
+//     }
+//     //set_type();
+//     var a;
+//     a = set_type();
+//     return [
+//         {   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
+//             value: '1',//
+//             label: '承诺书',  //步数字段
+//             types: 1,  //types代表第几步对应相对应得步数
+//             typestaus:a[0],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+
+//         },{
+//             value: '2',//
+//             label: '参加评标',
+//             types: 2,
+//             typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//         },{
+//             value: '3',//
+//             label: '推举组长',
+//             types: 3,
+//             typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//         },{
+//             value: '4',//
+//             label: '资格审查',
+//             types: 4,
+//             typestaus:a[3],
+//         },{
+//             value: '5',//
+//             label: '资格审查汇总',
+//             types: 5,
+//             typestaus:a[4],
+//         },{
+//             value: '6',//
+//             label: '符合性审查',
+//             types: 6,
+//             typestaus:a[5],
+//         },{
+//             value: '7',//
+//             label: '符合性审查汇总',
+//             types: 7,
+//             typestaus:a[6],
+//         },{
+//             value: '8',//
+//             label: '详细评审(技术)',
+//             types: 8,
+//             typestaus:a[7],
+//         },{
+//             value: '9',//
+//             label: '详细评审(技术)汇总',
+//             types: 9,
+//             typestaus:a[8],
+//         },{
+//             value: '10',//
+//             label: '商务',
+//             types: 10,
+//             typestaus:a[9],
+//         },{
+//             value: '11',//
+//             label: '技术',
+//             types: 11,
+//             typestaus:a[10],
+//         },{
+//             value: '12',//
+//             label: '服务',
+//             types: 12,
+//             typestaus:a[11],
+//         },{
+//             value: '13',//
+//             label: '其他',
+//             types: 13,
+//             typestaus:a[12],
+//         },{
+//             value: '14',//
+//             label: '评审汇总',
+//             types: 14,
+//             typestaus:a[13],
+//         }
+        
+//     ]
+// }
+
+// //公共导航接口
+// Mock.mock('/api/navcommons','post',(options) =>{
+//     let CommonsData;
+//     let currentpage=JSON.parse(options.body).currentpage;
+//     let is_submit_type=JSON.parse(options.body).is_submit_type;
+//     let types=JSON.parse(options.body).types;
+//     console.log(currentpage,is_submit_type,888888);
+//     CommonsData={
+//         ProjectInformationsAll:{
+//             projectName:'单信封-0305-1',
+//             projectNumber:'0635-1909qwerN1133',
+//             projectWenjian:'招标文件(pdf)',
+//             PersonName:'张三'
+//         },
+//         navsAll:get_data(currentpage,is_submit_type,types),
+//     };
+//     return CommonsData;
+        
+// })
+//lp导航
+//公共导航接口
 
 Mock.mock('/Ajax/Login', 'post', {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"});
 
