@@ -1,17 +1,14 @@
-body {
+.loginPage {
   -webkit-perspective: 800px;
           perspective: 800px;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   font-family: 'Gudea', sans-serif;
-  background: #EA5C54;
   position: relatvie;
 }
-body ::-webkit-input-placeholder {
-  color: #4E546D;
-}
-body .authent {
+
+.loginPage .authent {
   /* box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
   display: none;
   background: #35394a;
@@ -38,26 +35,26 @@ body .authent {
   height: 70px;
   opacity: 0;
 }
-body .authent p {
+.loginPage .authent p {
   text-align: center;
   color: white;
 }
-body .success {
+.loginPage .success {
   display: none;
   color: #d5d8e2;
 }
-body .success p {
+.loginPage .success p {
   font-size: 14px;
 }
-body p {
+.loginPage p {
   color: #D3D7F7;
   font-size: 10px;
   text-align: left;
 }
-body .testtwo {
+.loginPage .testtwo {
   right: 20% !important;
 }
-body .test {
+.loginPage .test {
   box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
   pointer-events: none;
   top: 52px !important;
@@ -70,7 +67,7 @@ body .test {
   -webkit-filter: blur(1px);
           filter: blur(1px);
 }
-body .login 
+.loginPage .login 
 {
   box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
   opacity: 1;
@@ -112,7 +109,7 @@ body .login
 }
 
 /* -------------------------------------------bg1 start------------------------------------------- */
-body .bg1 .login, body .bg1 .authent{
+.loginPage .bg1 .login, .loginPage .bg1 .authent{
   background: rgba(0, 255, 255, .7);
   /* Old browsers */
   /* FF3.6+ */
@@ -127,7 +124,7 @@ body .bg1 .login, body .bg1 .authent{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(0, 255, 255, .7)', endColorstr='rgb(0, 0, 0)',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
 }
-body .bg1 .login_bg .bg{
+.loginPage .bg1 .login_bg .bg{
   background-image: url(../img/bg/bg1.jpg);
 }
 /* -------------------------------------------bg1 end------------------------------------------- */
@@ -136,7 +133,7 @@ body .bg1 .login_bg .bg{
 
 
 /* -------------------------------------------bg2 start------------------------------------------- */
-body .bg2 .login, body .bg2 .authent{
+.loginPage .bg2 .login, .loginPage .bg2 .authent{
   background: rgba(24, 100, 235, .7);
   /* Old browsers */
   /* FF3.6+ */
@@ -151,12 +148,12 @@ body .bg2 .login, body .bg2 .authent{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(24, 100, 235, .7)', endColorstr='rgb(5,27,66)',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
 }
-body .bg2 .login_bg .bg{
+.loginPage .bg2 .login_bg .bg{
   background-image: url(../img/bg/bg2.jpg);
 }
 
 /* -------------------------------------------bg3 start------------------------------------------- */
-body .bg3 .login, body .bg3 .authent{
+.loginPage .bg3 .login, .loginPage .bg3 .authent{
   background: rgba(94,199,244, .7);
   /* Old browsers */
   /* FF3.6+ */
@@ -171,7 +168,7 @@ body .bg3 .login, body .bg3 .authent{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(94,199,244, .7)', endColorstr='rgb(91,39,176)',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
 }
-body .bg3 .login_bg .bg{
+.loginPage .bg3 .login_bg .bg{
   background-image: url(../img/bg/bg3.jpg);
 }
 /* -------------------------------------------bg3 end------------------------------------------- */
@@ -179,7 +176,7 @@ body .bg3 .login_bg .bg{
 
 
 /* -------------------------------------------bg4 start------------------------------------------- */
-body .bg4 .login, body .bg4 .authent{
+.loginPage .bg4 .login, .loginPage .bg4 .authent{
   background: rgba(45,144,229, .7);
   /* Old browsers */
   /* FF3.6+ */
@@ -194,14 +191,14 @@ body .bg4 .login, body .bg4 .authent{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(45,144,229, .7)', endColorstr='rgb(57,58,60)',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
 }
-body .bg4 .login_bg .bg{
+.loginPage .bg4 .login_bg .bg{
   background-image: url(../img/bg/bg4.jpg);
 }
 /* -------------------------------------------bg4 end------------------------------------------- */
 
 
 /* -------------------------------------------bg5 start------------------------------------------- */
-body .bg5 .login, body .bg5 .authent{
+.loginPage .bg5 .login, .loginPage .bg5 .authent{
   background: rgba(45,144,229, .7);
   /* Old browsers */
   /* FF3.6+ */
@@ -216,7 +213,7 @@ body .bg5 .login, body .bg5 .authent{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(45,144,229, .7)', endColorstr='rgb(57,58,60)',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
 }
-body .bg5 .login_bg .bg{
+.loginPage .bg5 .login_bg .bg{
   background-image: url(../img/bg/bg5.jpg);
 }
 /* -------------------------------------------bg5 end------------------------------------------- */
@@ -225,41 +222,41 @@ body .bg5 .login_bg .bg{
 
 
 
-body .login .validation {
+.loginPage .login .validation {
   position: absolute;
   z-index: 1;
   right: 10px;
   top: 14px;
   opacity: 0;
 }
-body .login .disclaimer {
+.loginPage .login .disclaimer {
   position: absolute;
   bottom: 20px;
   left: 35px;
   width: 250px;
 }
-body .login_title {
+.loginPage .login_title {
   color: #D3D7F7;
   height: 50px;
   text-align: left;
   font-size: 16px;
 }
-body .login_fields {
+.loginPage .login_fields {
   height: 208px;
   position: absolute;
   left: 0;
 }
-body .login_fields .icon {
+.loginPage .login_fields .icon {
   position: absolute;
   z-index: 1;
   left: 36px;
   top: 8px;
   opacity: .5;
 }
-body .login_fields input[type='password'],body .login_fields input[type='text'] {
+.loginPage .login_fields input[type='password'],.loginPage .login_fields input[type='text'] {
   color: #61BFFF !important;
 }
-body .login_fields input[type='text'], body .login_fields input[type='password'] {
+.loginPage .login_fields input[type='text'], .loginPage .login_fields input[type='password'] {
   color: #afb1be;
   width: 190px;
   margin-top: -2px;
@@ -274,10 +271,10 @@ body .login_fields input[type='text'], body .login_fields input[type='password']
   font-family: 'Gudea', sans-serif;
   box-shadow: none;
 }
-body .login_fields__user, body .login_fields__password {
+.loginPage .login_fields__user, .loginPage .login_fields__password {
   position: relative;
 }
-body .login_fields__submit {
+.loginPage .login_fields__submit {
   position: relative;
   top: 17px;
   left: 0;
@@ -285,16 +282,16 @@ body .login_fields__submit {
   right: 0;
   margin: auto;
 }
-body .login_fields__submit .forgot {
+.loginPage .login_fields__submit .forgot {
   float: right;
   font-size: 10px;
   margin-top: 11px;
   text-decoration: underline;
 }
-body .login_fields__submit .forgot a {
+.loginPage .login_fields__submit .forgot a {
   color: #606479;
 }
-body .login_fields__submit input {
+.loginPage .login_fields__submit input {
   border-radius: 50px;
   background: transparent;
   padding: 10px 50px;
@@ -307,11 +304,11 @@ body .login_fields__submit input {
   -webkit-transition-duration: .2s;
           transition-duration: .2s;
 }
-body .login_fields__submit input:focus {
+.loginPage .login_fields__submit input:focus {
   box-shadow: none;
   outline: none;
 }
-body .login_fields__submit input:hover {
+.loginPage .login_fields__submit input:hover {
   color: white;
   background: #4FA1D9;
   cursor: pointer;
@@ -322,47 +319,59 @@ body .login_fields__submit input:hover {
 }
 
 /* Color Schemes */
-.love {
+.loginPage .love {
   position: absolute;
   right: 20px;
   bottom: 0px;
   font-size: 11px;
   font-weight: normal;
 }
-.love p {
+.loginPage .love p {
   color: white;
   font-weight: normal;
   font-family: 'Open Sans', sans-serif;
 }
-.love a {
+.loginPage .love a {
   color: white;
   font-weight: 700;
   text-decoration: none;
 }
-.love img {
+.loginPage .love img {
   position: relative;
   top: 3px;
   margin: 0px 4px;
   width: 10px;
 }
 
-.brand {
+.loginPage .brand {
   position: absolute;
   left: 20px;
   bottom: 14px;
 }
-.brand img {
+.loginPage .brand img {
   width: 30px;
 }
 
+.loginPage .J_codeimg {
+    width: 85px;
+    height: 36px;
+    padding: 3px;
+    z-index: 0;
+    color:#FFF;
+}
 
 
+.loginPage input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {  
 
-
-
-
-
-
+    -webkit-text-fill-color: #ededed !important;  
+    -webkit-box-shadow: 0 0 0px 1000px transparent  inset !important;  
+    background-color:transparent;  
+    background-image: none;  
+     transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间  
+}  
+.loginPage input {  
+     background-color:transparent;  
+}
 
 
 
@@ -380,53 +389,24 @@ body .login_fields__submit input:hover {
 *
 *
 */
+.loginPage input::-webkit-input-placeholder {
+  color: #CECFD2;
+}
+.loginPage input:-moz-placeholder {
+   color: #CECFD2; opacity:1; 
+}
+.loginPage input::-moz-placeholder {
+   color: #CECFD2;opacity:1;
+}
+.loginPage input:-ms-input-placeholder{
+   color: #CECFD2;opacity:1;
+}
+.loginPage input::-webkit-input-placeholder{
+   color: #CECFD2;opacity:1;
+}  
 
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #CECFD2; opacity:1; 
-}
 
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #CECFD2;opacity:1;
-}
-
-input:-ms-input-placeholder{
-    color: #CECFD2;opacity:1;
-}
-
-input::-webkit-input-placeholder{
-    color: #CECFD2;opacity:1;
-}
-html, body { 
-  padding: 0; 
-  margin: auto;
-   font-size: 16px; 
-  background-repeat: no-repeat; 
-  background-position: left top; 
-  /*background-color: #242645; */
-  background-color: #fff;
-  color: #fff; 
-  font-family: 'Source Sans Pro'; 
-  background-size: 100%; }
-
-h1 {
-  font-size: 2.8em;
-  font-weight: 700;
-  letter-spacing: -1px;
-  margin: 0.6rem 0; 
-}
-h1 > span {font-weight: 300; }
-h2 {
-  font-size: 1.15em;
-  font-weight: 300;
-  margin: 0.3rem 0; 
-}
-main {
-  width: 95%;
-  max-width: 1000px;
-  margin: 4em auto;
-  opacity: 0; 
-}
-main.loaded {transition: opacity .25s linear;opacity: 1; }
+/* main.loaded {transition: opacity .25s linear;opacity: 1; }
 main header {width: 100%; }
 main header > div {width: 50%; }
 main header > .left, main header > .right {height: 100%; }
@@ -450,13 +430,5 @@ main .loaders .loader {
   height: 200px;
   align-items: center;
   justify-content: center;
-}
-.J_codeimg
-{
-        width: 85px;
-    height: 36px;
-    padding: 3px;
-    z-index: 0;
-    color:#FFF;
-}
+} */
 

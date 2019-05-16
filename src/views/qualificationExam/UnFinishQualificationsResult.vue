@@ -2,13 +2,7 @@
     <div class="huizong_warp">
         <div class="unFinishQualificationsResult">
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
-                </el-col>
-                <el-col :span="4">
+                <el-col :span="12">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
                 <el-col :span="12" class="fs14 textAlignR select">
@@ -24,6 +18,7 @@
                                 <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                                 <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
                                 <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                                <el-dropdown-item command="g">调整评标基准价</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
@@ -212,6 +207,14 @@
                     </el-row>
                 </el-dialog>
             </el-dialog>
+             <!--调整评标价弹框-->
+            <el-dialog
+                title="投标人最新报价列表"
+                :visible.sync="ChangedialogVisible"
+            >
+                <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
+            </el-dialog>
+            <!--调整评标价弹框-->
         </div>
     </div>
 </template>
@@ -224,6 +227,7 @@
     import NavBar from '../../components/publicVue/NavBar';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
 
     export default {
         name: "unFinishQualificationsResult",
@@ -233,6 +237,7 @@
             IndividualTrial,
             NavBar,
             AbandonedTender,   //废标  
+            ChangePrice,//调整评标基准价
             StandardChallengeInformation,
             // DetermineOperating
         },
@@ -268,7 +273,11 @@
                 unlock_table_company_name: [],//汇总页面table（评审因素汇总）
                 submit_huizong:false,//汇总页面提交
                 count: '5',   //汇总页面提交成功弹框倒计时5秒
-                methodType:''
+                methodType:'',
+
+                ChangedialogVisible:false,  //调整评标价弹框
+                TkOneloading:true,
+                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
             }
         },
         created() {
@@ -320,6 +329,9 @@
                     this.page_loading = false;
                 })
             },
+            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
+                this.ChangedialogVisible = val;
+            },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
                     this.dialogAbandonedTender = true;
@@ -341,6 +353,21 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                }else if (val === 'g') {//调整评标基准价
+                    //调整评标价点击事件
+                    this.ChangedialogVisible = true;
+                    this.TkOneloading=true;
+                    //console.log(row.id)
+                    //调整评标价点击弹框传值到子页面
+                    this.$axios.post('/api/NewChangePrice',{
+                        //id:row.id,   //点击得id
+                    }).then(res=>{
+                        if(res.status == 200){
+                            //console.log(res.data,99999)
+                        this.ChangePriceTk=res.data.msgBox;
+                        this.TkOneloading=false;
+                        }
+                    })
                 }
             },
             checkUnlockRecord() {

@@ -4,21 +4,18 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
+                <el-col :span="7">
+                    <div class="grid-content bg-purple"><span>标包名称：</span><span>{{name}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
+                    <div class="grid-content bg-purple-light"><span>标包号：</span><span>{{biaoNum}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
+                    <div class="grid-content bg-purple"><span>招标文件：</span><span><a href="http://localhost:7000/img/download.svc" download=""><b>{{projectWenjian}}<i class="icon iconfont icon-pdf"></i></b></a></span></div>
                 </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
-                </el-col>
-                <el-col :span="4">
+                <!-- <el-col :span="4">
                     <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
-                </el-col>
+                </el-col> -->
             </el-row>
             <div class="evaluationcommon lineAll cf">
                <MessageCommon :tableData3="tableData3" :dianji="1"></MessageCommon>
@@ -42,20 +39,20 @@
                         <template v-if="projectTableData.status==0" >
                             <el-button size="small" type="primary" @click="AgreeXieYi"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                         </template>
-                        <template v-if="projectTableData.status==3">
+                        <!-- <template v-if="projectTableData.status==3">
                             <el-button   size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-message"></i>查看</el-button>
-                        </template>
-                        <template v-if="projectTableData.status==1">
+                        </template> -->
+                        <!-- <template v-if="projectTableData.status==1">
                             <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                             <el-button size="small" type="primary" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
-                        </template>
+                        </template> -->
                         <template v-if="projectTableData.status==2">
                             <el-button  size="small" type="primary" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button  size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
                         </template>
-                        <template v-if="projectTableData.status==5">
+                        <!-- <template v-if="projectTableData.status==5">
                             <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
                             <el-button size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
                             <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
@@ -63,7 +60,7 @@
                         <template v-if="projectTableData.status==6">
                             <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
                             <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
-                        </template>
+                        </template> -->
                     </div>
                 </el-row>
             </div>
@@ -169,14 +166,7 @@
                 </div> -->
                 <!--表格-->
             
-            <!--调整评标价弹框-->
-            <el-dialog
-                title="投标人最新报价列表"
-                :visible.sync="ChangedialogVisible"
-            >
-                <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
-            </el-dialog>
-            <!--调整评标价弹框-->
+            
             
         </div>
     </div>
@@ -184,12 +174,12 @@
 
 <script>
     import MessageCommon from '../../components/publicVue/MessageCommon.vue'
-    import ChangePrice from '../../components/publicVue/ChangePrice.vue';
+    
     export default {
         name: 'index',
         props: {},
         components: {
-            ChangePrice,
+            //ChangePrice,
             MessageCommon
             // NavCommon
         },
@@ -197,7 +187,6 @@
             return {
               
                 //dianji:'',   0不可点 1可点击
-                TkOneloading:true,
                 pageLoading:true,  //loading
 
                 
@@ -208,8 +197,8 @@
                 leader:'',  //推举主任情况组长
                 baohao:'',  //推举主任情况包号
 
-                ChangedialogVisible:false,  //调整评标价弹框
-                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+                
+                
 
                 tBrMsgLoading:false,  //投标人信息列表loading效果
                 
@@ -310,39 +299,21 @@
                     }
                 })
             },
-          
 
-            //调整评标价点击事件
-            adjustedValuation(row){
-                this.ChangedialogVisible = true;
-                this.TkOneloading=true;
-                console.log(row.id)
-                //调整评标价点击弹框传值到子页面
-                this.$axios.post('/api/NewChangePrice',{
-                    id:row.id,   //点击得id
-                }).then(res=>{
-                    if(res.status == 200){
-                        //console.log(res.data,99999)
-                       this.ChangePriceTk=res.data.msgBox;
-                       this.TkOneloading=false;
-                    }
-                })
-            },
-
-             navcommonsListFun(){
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       //console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                           // $("#3").addClass("backblue");
-                        })
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            //console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                // $("#3").addClass("backblue");
+            //             })
+            //         }
+            //     })
+            // },
 
             AgreeXieYi(){  //推举组长
             console.log("1")
@@ -369,9 +340,7 @@
             },
             
 
-            sonToFather(val){  //子集得返回点击关闭事件传值
-                this.ChangedialogVisible = val;
-            },
+            
 
         }
     }
