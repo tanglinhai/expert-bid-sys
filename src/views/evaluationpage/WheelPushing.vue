@@ -198,7 +198,7 @@
                         console.log(this.caozuoAlls.length,this.caozuoAlls,this.NumberRounddatas.length,7777)
                         if(this.caozuoAlls.length==this.NumberRounddatas.length){
                             this.$router.push({
-                                path: '/elect/StartEvaluation?types=5&methodType='+this.val,
+                                path: '/elect/ElectedLeader?is_submit_type=1&currentpage=3&methodType='+this.val,
                             })
                         }
                         

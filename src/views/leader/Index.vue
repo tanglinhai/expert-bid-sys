@@ -3,7 +3,7 @@
         <el-row class="headerBox">
             <el-col :span="12">
                 <div class="grid-content bg-purple-dark">
-                    <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目</h5>
+                    <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>我的评审项目</h5>
                 </div>
             </el-col>
             <el-col :span="12" class="textSty">
@@ -69,9 +69,10 @@
                                     <el-button size="small">暂停评标</el-button>
                                 </div>
                                 <div v-else>
-                                    <el-button type="primary" size="small" @click="goto('/groupLeader/ViewBe')">查看评标</el-button>
+                                    <el-button type="primary" size="small">我要评标</el-button>
+                                    <el-button type="primary" size="small" @click="goto">查看评标</el-button> 
                                     <el-button size="small" class="btnBg" @click="stopBe(stemp)" v-text=" stemp.btnStatus == 0 ? '暂停评标' : '恢复评标' "></el-button>
-                                    <el-button size="small">结束评标</el-button>
+                                    <!-- <el-button size="small">结束评标</el-button> -->
                                 </div>
                             </div>
                         </el-col>
@@ -107,6 +108,7 @@ export default {
             activeNames:0,
             bodyLoading:false,
             currentPage: 1,
+            randomParams:Math.floor(Math.random()*3),
         }
     },
     mounted() {
@@ -114,10 +116,21 @@ export default {
         this.init();
     },
     methods: {
-        goto(url){//开始评标
-            this.$router.push({
-                path: url
-            });
+        goto(){//开始评标
+            // if(this.randomParams == 0){
+            //     this.$router.push('/groupLeader/SignIn');
+            // }
+            switch(this.randomParams){
+                case 0:
+                    this.$router.push('/groupLeader/SignIn');
+                    break;
+                case 1:
+                    this.$router.push('/groupLeader/Examination');
+                    break;
+                case 2:
+                    this.$router.push('/groupLeader/ViewBe');
+                    break;
+            }
         },
         init(){
             this.bodyLoading=true;

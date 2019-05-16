@@ -1,90 +1,94 @@
 <template>
   <div class='loginPage'>
-    <div class="login_hd">
-      <img class="logo" src="@/assets/img/logo.png">
-    </div>
-    <div class="login_bg">
-      <div class="bg"></div>
-    </div>
-    <div class="login_fd">© 2016 All Rights Reserved.中招联合信息股份有限公司</div>
-  	<div class='authent'>
-      <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
-        <div class="loader-inner ball-clip-rotate-multiple">
-          <div></div>
-          <div></div>
-          <div></div>
+    <div class='loginPageWrap'>
+      <div class="login_hd">
+        <img class="logo" src="@/assets/img/logo.png">
+      </div>
+      <div class="login_bg">
+        <div class="bg"></div>
+      </div>
+      <div class="login_fd">© 2016 All Rights Reserved.中招联合信息股份有限公司</div>
+    	<div class='authent'>
+        <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+          <div class="loader-inner ball-clip-rotate-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <p>认证中...</p>
+    	</div>
+
+
+      
+      <div class='login'>
+        <div class='login_title'>
+            <span>评标专家登录</span>
+        </div>
+        <div class='login_fields'>
+            <div class='login_fields__user'>
+              <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/user_icon_copy.png'/></div>
+              <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="leader" />
+              <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
+            </div>
+            <div class='login_fields__password'>
+              <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/lock_icon_copy.png'/></div>
+              <input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+              <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
+            </div>
+            <div class='login_fields__password'>
+              <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/key.png'/></div>
+              <input name="code" placeholder='验证码' maxlength="4" type='text' autocomplete="off">
+              <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+                <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+              </div>
+            </div>
+            <div class='login_fields__submit'>
+              <input type='button' value='登录'>
+            </div>
+        </div>
+        <div class='success'></div>
+        <div class='disclaimer'>
+            <p>欢迎登陆专家评标系统</p>
         </div>
       </div>
-      <p>认证中...</p>
-  	</div>
 
-
-    
-    <div class='login'>
-      <div class='login_title'>
-          <span>评标专家登录</span>
-      </div>
-      <div class='login_fields'>
-          <div class='login_fields__user'>
-            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/user_icon_copy.png'/></div>
-            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy" />
-            <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
-          </div>
-          <div class='login_fields__password'>
-            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/lock_icon_copy.png'/></div>
-            <input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
-            <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
-          </div>
-          <div class='login_fields__password'>
-            <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/key.png'/></div>
-            <input name="code" placeholder='验证码' maxlength="4" type='text' autocomplete="off">
-            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
-              <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-            </div>
-          </div>
-          <div class='login_fields__submit'>
-            <input type='button' value='登录'>
-          </div>
-      </div>
-      <div class='success'></div>
-      <div class='disclaimer'>
-          <p>欢迎登陆专家评标系统</p>
-      </div>
+      <div class="OverWindows"></div>
     </div>
-
-    <div class="OverWindows"></div>
   </div>
 </template>
 <style lang="scss">
 @import '../assets/css/common/mixin.scss';
 .loginPage{
-  display: none;
-  width: 1200px;
-  margin: auto;
-  .login_hd{
-    height: 100px;
-    background: url(../assets/img/header-bg-tel.png) right 15px no-repeat;
-    @include clearfix;
-    .logo{
-      position: absolute;
-      top: 16px;
-    }
-  }
-  .login_bg{
+  .loginPageWrap{
+    display: none;
     width: 1200px;
     margin: auto;
-    .bg{
-      width: 1920px;
-      height: 583px;
-      margin-left: -360px;
+    .login_hd{
+      height: 100px;
+      background: url(../assets/img/header-bg-tel.png) right 15px no-repeat;
+      @include clearfix;
+      .logo{
+        position: absolute;
+        top: 16px;
+      }
     }
-  }
-  .login_fd{
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-    height: 120px;
-    line-height: 120px;
+    .login_bg{
+      width: 1200px;
+      margin: auto;
+      .bg{
+        width: 1920px;
+        height: 583px;
+        margin-left: -360px;
+      }
+    }
+    .login_fd{
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      height: 120px;
+      line-height: 120px;
+    }
   }
 }
 </style>
@@ -105,7 +109,9 @@ export default {
   components: {
     
   },
-  created(){
+
+
+  mounted(){
     this.$commonJs.getCssFile.call(this, {
         url: '/js/plugins/jQueryLogin/layui/css/layui.all.css',
         download_files_key: '/js/plugins/jQueryLogin/layui/css/layui.all.css'
@@ -128,7 +134,7 @@ export default {
         download_files_key: '/js/plugins/jQueryLogin/layui/layui.all.js',
         callback: this.init
     });
-
+    $('.loginPageWrap').addClass('bg'+(Math.floor(Math.random() * 5 + 1)));
   },
   methods: {
     ErroAlert(e) {
@@ -208,7 +214,7 @@ export default {
       if(this.jsDownCount < 2){
         return;
       }
-      $('.loginPage').show();
+      $('.loginPageWrap').show();
       this.Code();
       
       $(document).keypress(function(e) {
@@ -282,12 +288,17 @@ export default {
                   var JsonData = { login: login, pwd: pwd, code: code };
                   //此处做为ajax内部判断
                   var url = "";
-                  if (JsonData.login == _this.truelogin && JsonData.pwd == _this.truepwd && JsonData.code.toUpperCase() == _this.CodeVal.toUpperCase()) {
+                  /*if (JsonData.login == _this.truelogin && JsonData.pwd == _this.truepwd && JsonData.code.toUpperCase() == _this.CodeVal.toUpperCase()) {
                       url = "/Ajax/Login";
                   } else {
                       url = "/Ajax/LoginFalse";
-                  }
+                  }*/
 
+                  if (JsonData.login == 'leader') {
+                      url = "/Ajax/LoginLeader";
+                  } else {
+                      url = "/Ajax/LoginExpert";
+                  }
                   _this.$axios.post(url, JsonData).then(res => {
                     $('.authent').show().animate({ right: 90 }, {
                         easing: 'easeOutQuint',
@@ -301,8 +312,20 @@ export default {
                               $('.login div').fadeOut(100);
                               $('.success').fadeIn(1000);
                               $('.success').html(res.data.Text);
-                              //跳转操作
-
+                              //添加路由leaderRoutes,expertRoutes, default as vueRouter
+                              window.sessionStorage.setItem('user', JSON.stringify(res.data));
+                              //console.log(_this);
+                              if(res.data.roles.indexOf('leader') > -1){
+                                //vueRouter.addRoutes(leaderRoutes);
+                                _this.$router.push({
+                                  path: '/groupLeader'
+                                });
+                              }else if(res.data.roles.indexOf('expert') > -1){
+                                //vueRouter.addRoutes(expertRoutes);
+                                _this.$router.push({
+                                  path: '/index'
+                                });
+                              }
                           } else {
                               if (res.data.Status == "Erro") {
                                   switch (res.data.Erro) {
@@ -338,11 +361,6 @@ export default {
       })
     }
 
-  },
-
-  mounted(){
-
-    $('.loginPage').addClass('bg'+(Math.floor(Math.random() * 5 + 1)));
   }
 }
 </script>
