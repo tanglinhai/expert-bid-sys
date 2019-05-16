@@ -23,7 +23,7 @@
 
   	<el-menu :default-active="activeIndex2" class="menu-ri" mode="horizontal" @select="handleSelect">
 		  <el-menu-item index="1">
-		  	<a href="javascript:void(0);" @click="environmentTestDialogVisible=true"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
+		  	<a href="javascript:void(0);" @click="huanjin"><i class="iconfont icon-huanjingjianceyi"></i>环境检测</a>
 		  </el-menu-item>
 		  <el-submenu index="2" popper-class="head-submenu" style="display:none">
 		    <template slot="title">
@@ -60,6 +60,7 @@
 		title="您还没有安装必备的组件，请先下载环境检测工具安装系统必备组件"
 		:visible.sync="environmentTestDialogVisible"
 		width="32%"
+		:before-close="handleClosehuanjin"
 		center
 		>
 			<el-row :gutter="20" class="environmentFirst">
@@ -116,6 +117,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   name: 'head',
   props: {
@@ -140,7 +142,10 @@ export default {
 		    "roles": []
 		  }
     };
-  },
+	},
+	// watch:{
+	// 	data:'huanjin' // 值可以为methods的方法名
+	// },
   methods: {
     handleSelect(key, keyPath) {
       // console.log(key, keyPath);
@@ -170,16 +175,25 @@ export default {
 					this.ElevatedSituationLoading=false;
 				}
 			})
-		}
+		},
+		huanjin(){  //环境监测事件
+			console.log("222")
+			$(".head").css({"zIndex":"9999"})
+			this.environmentTestDialogVisible=true;
+		},
+		handleClosehuanjin(done){  //环境监测关闭弹框
+			$(".head").css({"zIndex":"0"})
+			this.environmentTestDialogVisible=false;
+		},
   },
   mounted(){
-  	this.user = JSON.parse(window.sessionStorage.user);
+		this.user = JSON.parse(window.sessionStorage.user);
   }
 }
 </script>
 <style lang="scss">
 .v-modal{
-	top:61px;
+	// top:61px;
 }
 .environmentDialog{
 	top:61px;
@@ -269,6 +283,7 @@ export default {
 .head{
 	padding: 0 15px;
 	background-color: #fff;
+	position: relative;
   .logo{
 		float: left;
 		margin-top: 7px;

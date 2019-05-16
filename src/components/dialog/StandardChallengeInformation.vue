@@ -205,9 +205,9 @@
             this.$refs[formName].validate((valid) => {
               if (valid) {
                 //alert('submit!');
-                console.log(this.ruleForm,9999);
+                console.log(this.ruleForm.type,9999);
                 for(let i = 0;i<this.ruleForm.type.length;i++){
-                  //console.log(this.ruleForm.type[i])
+                  console.log(this.ruleForm.type[i])
                   this.tableData.push({
                     'bidder':this.ruleForm.type[i],
                     'inquiryConten':this.ruleForm.desc,
