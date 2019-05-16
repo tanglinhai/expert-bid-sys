@@ -27,7 +27,7 @@
       <div class='login_fields'>
           <div class='login_fields__user'>
             <div class='icon'><img alt="" src='/js/plugins/jQueryLogin/img/user_icon_copy.png'/></div>
-            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy" />
+            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="leader" />
             <div class='validation'><img alt="" src='/js/plugins/jQueryLogin/img/tick.png'/></div>
           </div>
           <div class='login_fields__password'>
@@ -105,7 +105,9 @@ export default {
   components: {
     
   },
-  created(){
+
+
+  mounted(){
     this.$commonJs.getCssFile.call(this, {
         url: '/js/plugins/jQueryLogin/layui/css/layui.all.css',
         download_files_key: '/js/plugins/jQueryLogin/layui/css/layui.all.css'
@@ -128,7 +130,7 @@ export default {
         download_files_key: '/js/plugins/jQueryLogin/layui/layui.all.js',
         callback: this.init
     });
-
+    $('.loginPage').addClass('bg'+(Math.floor(Math.random() * 5 + 1)));
   },
   methods: {
     ErroAlert(e) {
@@ -282,12 +284,17 @@ export default {
                   var JsonData = { login: login, pwd: pwd, code: code };
                   //此处做为ajax内部判断
                   var url = "";
-                  if (JsonData.login == _this.truelogin && JsonData.pwd == _this.truepwd && JsonData.code.toUpperCase() == _this.CodeVal.toUpperCase()) {
+                  /*if (JsonData.login == _this.truelogin && JsonData.pwd == _this.truepwd && JsonData.code.toUpperCase() == _this.CodeVal.toUpperCase()) {
                       url = "/Ajax/Login";
                   } else {
                       url = "/Ajax/LoginFalse";
-                  }
+                  }*/
 
+                  if (JsonData.login == 'leader') {
+                      url = "/Ajax/LoginLeader";
+                  } else {
+                      url = "/Ajax/LoginExpert";
+                  }
                   _this.$axios.post(url, JsonData).then(res => {
                     $('.authent').show().animate({ right: 90 }, {
                         easing: 'easeOutQuint',
@@ -301,8 +308,21 @@ export default {
                               $('.login div').fadeOut(100);
                               $('.success').fadeIn(1000);
                               $('.success').html(res.data.Text);
-                              //跳转操作
-
+                              //添加路由leaderRoutes,expertRoutes, default as vueRouter
+                              
+                              window.sessionStorage.setItem('user', JSON.stringify(res.data));
+                              //console.log(_this);
+                              if(res.data.roles.indexOf('leader') > -1){
+                                //vueRouter.addRoutes(leaderRoutes);
+                                _this.$router.push({
+                                  path: '/groupLeader'
+                                });
+                              }else if(res.data.roles.indexOf('expert') > -1){
+                                //vueRouter.addRoutes(expertRoutes);
+                                _this.$router.push({
+                                  path: '/index'
+                                });
+                              }
                           } else {
                               if (res.data.Status == "Erro") {
                                   switch (res.data.Erro) {
@@ -338,11 +358,6 @@ export default {
       })
     }
 
-  },
-
-  mounted(){
-
-    $('.loginPage').addClass('bg'+(Math.floor(Math.random() * 5 + 1)));
   }
 }
 </script>
