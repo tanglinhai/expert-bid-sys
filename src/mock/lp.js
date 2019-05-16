@@ -529,5 +529,18 @@ Mock.mock('/api/navcommons','post',(options) =>{
 })
 //公共导航接口
 
-Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
+Mock.mock('/Ajax/LoginLeader', 'post', { 
+    "Status": "ok", 
+    "Text": "登陆成功<br /><br />欢迎回来",
+    "id": Random.id(),
+    "name": Random.cname(),
+    "roles": ['leader']
+})
+Mock.mock('/Ajax/LoginExpert', 'post', { 
+    "Status": "ok", 
+    "Text": "登陆成功<br /><br />欢迎回来",
+    "id": Random.id(),
+    "name": Random.cname(),
+    "roles": ['expert']
+})
 Mock.mock('/Ajax/LoginFalse', 'post', { "Status": "Erro", "Erro": "账号名或密码或验证码有误" })

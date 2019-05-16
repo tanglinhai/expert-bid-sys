@@ -12,6 +12,7 @@
 </template>
 <style lang="scss">
 .home{
+  background-color: #d9e0e7;
   .WrapBig{
     position: relative;
     .Router{
