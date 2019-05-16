@@ -387,7 +387,7 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 //提交之后的状态：
 //is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
 
-/*function get_data(currentPage,is_submit_type,types) {//type
+function get_data(currentPage,is_submit_type,types) {//type
     // console.log(type, is_submit_type);
     function set_type() {
         if (currentPage == 1) {
@@ -523,7 +523,7 @@ Mock.mock('/api/navcommons','post',(options) =>{
     };
     return CommonsData;
         
-})*/
+})
 //公共导航接口
 
 Mock.mock('/Ajax/Login', 'post', { "Status": "ok", "Text": "登陆成功<br /><br />欢迎回来" })
