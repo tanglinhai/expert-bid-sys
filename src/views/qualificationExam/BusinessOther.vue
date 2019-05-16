@@ -126,12 +126,16 @@
                                                 <el-col style="width: 278px">
                                                     <el-progress :percentage="completePercent"
                                                                  v-if="type==8"></el-progress>
+                                                    <span style="position: absolute; left: 300px; top: 0px;" v-if="type==8" >{{num_business}}/{{allNumBusiness}}</span>
                                                     <el-progress :percentage="completePercent"
                                                                  v-if="type==9"></el-progress>
+                                                     <span style="position: absolute; left: 300px; top: 0px;"  v-if="type==9" >{{num_jishu}}/{{allNumJishu}}</span>
                                                     <el-progress :percentage="completePercent"
                                                                  v-if="type==10"></el-progress>
+                                                    <span style="position: absolute; left: 300px; top: 0px;"  v-if="type==10">{{num_serve}}/{{allNumServe}}</span>
                                                     <el-progress :percentage="completePercent"
                                                                  v-if="type==11"></el-progress>
+                                                    <span style="position: absolute; left: 300px; top: 0px;" v-if="type==11" >{{num_other}}/{{allNumOther}}</span>
                                                 </el-col>
                                             </el-row>
                                         </el-col>
@@ -1155,7 +1159,16 @@
                 pdfItems: [],//动态插入pdf
                 /* ----------------------------pdf end------------------------------- */
                 is_submit: '',
-                count:5
+                count:5,
+                num_business:0,
+                num_jishu:0,
+                num_serve:0,
+                num_other:0,
+                allNumBusiness:0,
+                allNumJishu:0,
+                allNumServe:0,
+                allNumOther:0,
+
             }
         },
         created() {
@@ -1217,6 +1230,8 @@
                             }
                         });
                     });
+                    this.num_business=num;
+                    this.allNumBusiness=allNum;
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
                 } else if (this.type == 9) {
                     let num = 0;
@@ -1230,6 +1245,9 @@
                             }
                         })
                     });
+                    console.log(num, allNum);
+                    this.num_jishu=num;
+                    this.allNumJishu=allNum;
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
                 } else if (this.type == 10) {
                     let num = 0;
@@ -1243,6 +1261,8 @@
                             }
                         })
                     });
+                    this.num_serve=num;
+                    this.allNumServe=allNum;
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
                 } else if (this.type == 11) {
                     let num = 0;
@@ -1256,6 +1276,8 @@
                             }
                         })
                     });
+                    this.num_other=num;
+                    this.allNumOther=allNum;
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
                 }
             },
@@ -1704,16 +1726,21 @@
     .el-progress__text {
         font-size: 14px;
         color: #606266;
-        display: inline-block;
+        /*display: inline-block;*/
         vertical-align: middle;
         margin-left: 5px;
         line-height: 1;
+        display: none;
+    }
+    .el-checkbox+.el-checkbox {
+        margin-left: 10px;
     }
 
     .dingdang_warp {
         overflow: hidden;
         padding-top: 15px;
         background: #ededed;
+        min-height: 800px;
         .business_other {
             background-color: #ededed;
             padding: 0px 0% 15px 0%;

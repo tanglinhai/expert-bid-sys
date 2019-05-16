@@ -128,6 +128,7 @@
                                                     <el-col style="width: 278px">
                                                         <el-progress :percentage="completePercent"></el-progress>
                                                     </el-col>
+                                                    <el-col style="width: 100px;position: absolute; left: 304px;">{{num_pro}}/{{allNumPro}}</el-col>
                                                 </el-row>
                                             </el-col>
                                             <el-col :span="12" class="textAlignR cf">
@@ -247,13 +248,10 @@
                                                     </el-table-column>
                                                 </el-table-column>
                                             </el-table>
-                                            <div class="dingWeiDiv" style="text-align: center;line-height: 50px;"><span
-                                                    class="biaozhunTitle"></span>审查标准：<span
-                                                    class="biaozhunConent"></span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="positionDiv"><span class="biaozhunTitle"></span>审查标准：<span
+                                <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
                                         class="biaozhunConent"></span></div>
                             </div>
                         </div>
@@ -333,7 +331,7 @@
             <el-dialog
                     :title="personalAuditFormBtn"
                     :visible.sync="personalAuditFormDialog"
-                    width="1300px"
+                    width="1500px"
             >
                 <!--点击个人形式审计表按钮显示-->
                 <el-row class="personalAuditFormTable">
@@ -353,6 +351,7 @@
                                 border
                                 class="changePriceTable"
                                 el-table__header-wrapper
+
                         >
                             <el-table-column prop="number" label="序号" header-align="left"
                                              align="left" fixed width="50"></el-table-column>
@@ -362,7 +361,7 @@
                             <el-table-column header-align="left" label="投标人">
                                 <el-table-column :label="item.companyName"
                                                  v-for="(item,index ) in grcsMsgBoxTitle"
-                                                 width="165">
+                                                 width="200">
                                     <tempalte slot-scope="scope">
                                         <span v-for="(amt,idx ) in  item.zhaunjiadata_gs">
                                             <span>{{amt.zhaunjia1[scope.$index]}}</span>
@@ -466,7 +465,9 @@
                     ]
                 },
                 failureEntryDialog: false,//不合格录入弹框
-                determineOperatingDialog: false,//点击全部选中提示弹框
+                determineOperatingDialog: false,//点击全部选中提示弹框\
+                num_pro:0,
+                allNumPro:0
             }
         },
         created() {
@@ -480,7 +481,6 @@
         },
         mounted() {
             $(".positionDiv").hide();
-            $(".dingWeiDiv").hide();
             this.init();
             this.$commonJs.pdfOperations.pdf_init.call(this);
         },
@@ -535,6 +535,8 @@
                         }
                     });
                 });
+                this.num_pro=num;
+                this.allNumPro=allNum;
                 return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
             }
         },
@@ -611,6 +613,7 @@
             },
             show_pdf(obj, queryStr, page) {//查看pdf
                 this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr, page);
+                $(".positionDiv").hide();
             },
             slideBarMousedown(e) {
                 this.$commonJs.pdfOperations.slideBarMousedown.call(this, e);
@@ -735,12 +738,11 @@
                 // console.log(row, column, event);
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
-                if (document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) === true) {//判读页面是否出现滚动条
-                    $(".positionDiv").show()
-                } else {
-                    $(".dingWeiDiv").show();
-                }
+                $(".positionDiv").show();
             },
+            closePositionDiv(){
+                $(".positionDiv").hide();
+            }
             /*-------------资格审查end-------------------------*/
         }
     }
@@ -766,15 +768,17 @@
     .el-progress__text {
         font-size: 14px;
         color: #606266;
-        display: inline-block;
+        /*display: inline-block;*/
         vertical-align: middle;
         margin-left: 5px;
         line-height: 1;
+        display: none;
     }
     .pingbiao_warp {
         overflow: hidden;
         padding-top: 15px;
         background: #ededed;
+        min-height: 800px;
         .complianceReviewItem {
             background-color: #ededed;
             padding: 0px 0% 15px 0%;
@@ -854,12 +858,6 @@
                         border: 1px solid #ffdcb3;
                         left: 0;
                         z-index: 999;
-                    }
-                    .dingWeiDiv {
-                        width: 100%;
-                        height: 50px;
-                        background: #fff6ec;
-                        border: 1px solid #ffdcb3;
                     }
                 }
             }

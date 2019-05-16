@@ -378,6 +378,7 @@
     overflow:hidden; 
     padding-top:15px; 
     background:#ededed;
+    min-height: 800px;
     .Allinformation {
         background-color: #ededed;
         padding:0px 0% 15px 0%;

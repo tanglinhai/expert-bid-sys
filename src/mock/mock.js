@@ -297,19 +297,19 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
 
-                        { "title":"重庆网控科技发展有限公司（1）",
+                        { "title":"（1）重庆网控科技发展有限公司",
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
                             factors_standards:factors_standards(10)[0]
                         },
-                        { "title": "普瑞太阳能有限公司（2）",
+                        { "title": "（2）普瑞太阳能有限公司",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
                             factors_standards:factors_standards(10)[1]
 
                         },
                         {
-                            "title":"夏丰热工研究院有限公司（3）",
+                            "title":"（3）夏丰热工研究院有限公司",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
                             factors_standards:factors_standards(10)[2]
@@ -573,7 +573,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                 ],
                 'companyNameData': [
                     {
-                        'companyName':'重庆网控科技发展有限公司',
+                        'companyName':'（1）重庆网控科技发展有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["√",  "√","√",'合格']
@@ -582,7 +582,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（2）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'合格']
@@ -590,7 +590,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（3）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "×",'合格']
@@ -598,7 +598,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（4）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -606,7 +606,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（5）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -614,7 +614,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（6）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -622,7 +622,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（7）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -630,7 +630,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（8）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -638,21 +638,21 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         ]
                     },
                     {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（9）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
                         ]
                     },      {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（10）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
                             } ,
                         ]
                     },      {
-                        'companyName':'夏丰热工研究院有限公司',
+                        'companyName':'（11）夏丰热工研究院有限公司',
                         'zhaunjiadata_gs':[
                             {
                                 'zhaunjia1':["×", "√", "√",'不合格']
@@ -1584,7 +1584,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                     ],
                     'unlock_table_company_name': [
                         {
-                            'companyName':'重庆网控科技发展有限公司',
+                            'companyName':'（1）重庆网控科技发展有限公司',
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjia1':["√(5√0×)",  "√(5√0×)","√(5√0×)",'合格']
@@ -1592,7 +1592,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                         {
-                            'companyName':'普瑞太阳能有限公司',
+                            'companyName':'（2）普瑞太阳能有限公司',
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格']
@@ -1600,7 +1600,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                         {
-                            'companyName':'夏丰热工研究院有限公司',
+                            'companyName':'（3）夏丰热工研究院有限公司',
                             'zhaunjiadata_gs':[
                                 {
                                     'zhaunjia1':["√(5√0×)", "√(5√0×)", "√(5√0×)",'合格'],

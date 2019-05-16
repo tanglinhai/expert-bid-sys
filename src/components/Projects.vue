@@ -4,7 +4,7 @@
         <div class="main">
             <el-row class="pro_msg_warp cf">
                 <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                    <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>专家评审/ 我的评审项目</h5>
+                    <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>我的评审项目</h5>
                 </div>
                 <div class="fl search_warp textAlignR ">
                     <el-input
@@ -31,7 +31,7 @@
                                 <div class="grid-content bg-purple zeroBox">
                                     <img src="../assets/img/no_data_icon.png" alt="">
                                     <el-button class="btnBg" @click="refreshBtn"   >  <i  class="icon iconfont icon-fresh  mr3 fs14" ></i>刷新</el-button>
-                                    <p class="countdown_prompt">{{count}}秒后自动刷新！</p>
+                                    <p class="countdown_prompt">&nbsp;{{count}}&nbsp;秒后自动刷新！</p>
                                 </div>
                             </el-col>
                         </el-row>
@@ -219,6 +219,7 @@
         background-color: #ededed;
         padding: 15px 20px 15px 20px;
         padding-left:20px!important;
+        min-height: 800px;
         .main {
             background: white;
             border-radius: 5px;
