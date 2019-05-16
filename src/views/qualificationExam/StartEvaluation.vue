@@ -21,10 +21,11 @@
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item command="a">废标</el-dropdown-item>
                                 <el-dropdown-item command="b">标中质询</el-dropdown-item>
-                                <el-dropdown-item command="c">查看投标文件</el-dropdown-item>
+                                <el-dropdown-item command="c">查看招标文件</el-dropdown-item>
                                 <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                                 <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
                                 <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                                <el-dropdown-item command="g">调整评标基准价</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
@@ -596,6 +597,8 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                } else if (val === 'g') {//调整评标基准价
+                    
                 }
             },
 
