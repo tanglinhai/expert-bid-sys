@@ -147,7 +147,7 @@ export default {
 		logout(){
 			//TODO ajax 调用后台退出接口，成功之后remove本地
 			window.sessionStorage.removeItem('user');
-			this.goto('/');
+			window.location.href = '/';
 		},
 	//查看推举情况按钮事件
 	LookTuiju(){
