@@ -1,8 +1,23 @@
 <template>
     <div class="vbe">  
         <el-row class="onlyBtnBox">
-            <el-col :span="24">
+            <el-col :span="6">
                 <div class="grid-content bg-purple-dark">
+                    标包名称：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark">
+                    标包号：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark">
+                    项目资料：
+                </div>
+            </el-col>
+            <el-col :span="10">
+                <div class="grid-content bg-purple-dark" style="text-align:right;">
                     <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
                     <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
                 </div>
@@ -82,11 +97,10 @@ export default {
 <style lang="scss">
 @import '../../assets/css/common/mixin.scss';
 .vbe{
-    padding: 15px 20px 15px 0px;
+    padding: 0px 20px 15px 0px;
     padding-left: 131px !important;
     .onlyBtnBox{
-        text-align: right;
-        padding-bottom: 15px;
+        line-height: 62px;
     }
     .tableBox{
         border-radius: 5px;
