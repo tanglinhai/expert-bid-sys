@@ -41,11 +41,11 @@
 		  	<a href="http://www.365trade.com.cn/ggtz/index.jhtml" target="_blank"><i class="iconfont icon-xitonggonggao"></i>系统公告</a>
 		  </el-menu-item>
 		 <el-menu-item class="NavsInformations">
-		  	<p>评标专家：</p>
+		  	<p>{{user.roles.indexOf('leader') > -1 ? '项目经理' : '评标专家'}}：</p>
 		  </el-menu-item>
 		  <el-submenu index="5" popper-class="head-submenu">
 		    <template slot="title">
-		    	<img src=""/>{{ProjectInformationsAll.PersonName}}
+		    	<img src=""/>{{user.name}}
 		    </template>
 		    <!--<el-menu-item index="5-2" @click="goto('/user/logo')"><i class="iconfont icon-gerenziliao" ></i>个人资料</el-menu-item>-->
 		    <!--<el-menu-item index="5-3" @click="goto('/user/pass')"><i class="iconfont icon-xiugaimima"></i>修改密码</el-menu-item>-->
@@ -127,12 +127,18 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-	  environmentTestDialogVisible: false,  //环境检测弹框默认展开
-	  show3: false,  //导航默认隐藏
+		  environmentTestDialogVisible: false,  //环境检测弹框默认展开
+		  show3: false,  //导航默认隐藏
 
-	  ElevatedSituationLoading:false, //推举情况弹框loading
-	  dialogSelectionDirector:false,  //推举情况弹框默认隐藏
-	  CheckReferralsList:[],  //推举主任情况弹框数据
+		  ElevatedSituationLoading:false, //推举情况弹框loading
+		  dialogSelectionDirector:false,  //推举情况弹框默认隐藏
+		  CheckReferralsList:[],  //推举主任情况弹框数据
+
+		  user:{
+		  	"id": '',
+		    "name": '',
+		    "roles": []
+		  }
     };
   },
   methods: {
@@ -149,23 +155,25 @@ export default {
 			window.sessionStorage.removeItem('user');
 			window.location.href = '/';
 		},
-	//查看推举情况按钮事件
-	LookTuiju(){
-		this.dialogSelectionDirector=true;
-		this.ElevatedSituationLoading=true;
-		this.$axios.post('/api/CheckReferralsTuiju',{
-				//id:id,
-		}).then(res=>{
-			if(res.status==200){
-				//console.log(res.data,88888) 
-				this.leader=res.data.leader;
-				this.baohao=res.data.baohao;
-				this.CheckReferralsList = res.data.CheckReferralsList;
-				this.ElevatedSituationLoading=false;
-			}
-		})
-	},
-
+		//查看推举情况按钮事件
+		LookTuiju(){
+			this.dialogSelectionDirector=true;
+			this.ElevatedSituationLoading=true;
+			this.$axios.post('/api/CheckReferralsTuiju',{
+					//id:id,
+			}).then(res=>{
+				if(res.status==200){
+					//console.log(res.data,88888) 
+					this.leader=res.data.leader;
+					this.baohao=res.data.baohao;
+					this.CheckReferralsList = res.data.CheckReferralsList;
+					this.ElevatedSituationLoading=false;
+				}
+			})
+		}
+  },
+  mounted(){
+  	this.user = JSON.parse(window.sessionStorage.user);
   }
 }
 </script>
