@@ -239,11 +239,10 @@ export default {
             types:parseFloat(this.$route.query.types)    //点击是哪一步
         }).then(res=>{
             if(res.status == 200){
-
                 console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
 
                 this.navcommonsList=res.data.navsAll; 
-               this.ProjectInformationsAll=res.data.ProjectInformationsAll;
+                this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                 this.pageloadding=false;
                 this.CommonLeftNavsLoading=false;
             }

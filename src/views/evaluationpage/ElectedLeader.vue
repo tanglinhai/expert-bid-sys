@@ -4,21 +4,18 @@
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
+                <el-col :span="7">
+                    <div class="grid-content bg-purple"><span>标包名称：</span><span>{{name}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
+                    <div class="grid-content bg-purple-light"><span>标包号：</span><span>{{biaoNum}}</span></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
+                    <div class="grid-content bg-purple"><span>招标文件：</span><span><a href="http://localhost:7000/img/download.svc" download=""><b>{{projectWenjian}}<i class="icon iconfont icon-pdf"></i></b></a></span></div>
                 </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>项目资料：</span><span>{{projectWenjian}}</span></div>
-                </el-col>
-                <el-col :span="4">
+                <!-- <el-col :span="4">
                     <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
-                </el-col>
+                </el-col> -->
             </el-row>
             <div class="evaluationcommon lineAll cf">
                <MessageCommon :tableData3="tableData3" :dianji="1"></MessageCommon>
@@ -329,20 +326,20 @@
                 })
             },
 
-             navcommonsListFun(){
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       //console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                           // $("#3").addClass("backblue");
-                        })
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            //console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                // $("#3").addClass("backblue");
+            //             })
+            //         }
+            //     })
+            // },
 
             AgreeXieYi(){  //推举组长
             console.log("1")

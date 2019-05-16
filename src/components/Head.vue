@@ -120,7 +120,7 @@ export default {
   name: 'head',
   props: {
 	  ProjectInformationsAll:{
-		type:Array,
+			type:Array,
 	  }
   },
   data() {
