@@ -3,17 +3,17 @@
         <el-row class="onlyBtnBox">
            <el-col :span="4">
                 <div class="grid-content bg-purple-dark overflowText">
-                    标名称：
+                    标名称：2019年水利运输服务招标项目
                 </div>
             </el-col>
             <el-col :span="4">
                 <div class="grid-content bg-purple-dark overflowText">
-                    标号：
+                    标号：0635—1909qwerN1197
                 </div>
             </el-col>
             <el-col :span="4">
                 <div class="grid-content bg-purple-dark overflowText">
-                    包号：
+                    包号：0635—1909qwerN1197/1
                 </div>
             </el-col>
             <el-col :span="12" class="fs14 textAlignR select">
@@ -43,8 +43,8 @@
                     :label="item.title"
                     :name="item.name"
                 >
-                    <Exam v-if="item.name === '1'"></Exam>
-                    <Qsummary v-if="item.name === '2'"></Qsummary>
+                    <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam>
+                    <Qsummary v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
                 </el-tab-pane>
             </el-tabs>
         </el-row>

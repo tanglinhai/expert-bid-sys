@@ -84,6 +84,7 @@ export default {
             const { columns, data } = param;
             const sums = [];
             columns.forEach((column, index) => {
+                console.log(column,index,'-0-0-0-0-0-0-0-0')
                 if (index === 0) {
                     sums[index] = '结论';
                     return;
@@ -95,8 +96,7 @@ export default {
                     sums[index] = '不合格';
                 }else if(index === 4){
                     sums[index] = '合格';
-                }
-                
+                } 
             })
             return sums;
         }
