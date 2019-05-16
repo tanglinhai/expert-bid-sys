@@ -1,7 +1,22 @@
 <template>
     <div class="signIn">
         <el-row class="onlyBtnBox">
-            <el-col :span="24">
+            <el-col :span="6">
+                <div class="grid-content bg-purple-dark">
+                    标包名称：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark">
+                    标包号：
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-dark">
+                    项目资料：
+                </div>
+            </el-col>
+            <el-col :span="10" style="text-align:right;">
                 <div class="grid-content bg-purple-dark">
                    <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
                     <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
@@ -57,6 +72,7 @@ export default {
         };
     },
     mounted() {
+        $(".NavCommon").show();
         this.init();
     },
     methods: {
@@ -76,11 +92,10 @@ export default {
 
 <style lang="scss">
 .signIn{
-    padding: 15px 20px 15px 0px;
+    padding: 0px 20px 15px 0px;
     padding-left: 131px !important;
     .onlyBtnBox{
-        text-align: right;
-        padding-bottom: 15px;
+        line-height: 62px;
     }
     .contentBody{
         background: #fff;

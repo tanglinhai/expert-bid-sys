@@ -67,6 +67,7 @@ data() {
     }
 },
 mounted() {
+    $(".NavCommon").show();
     this.init();
     },
 methods: {
