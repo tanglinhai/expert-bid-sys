@@ -387,6 +387,15 @@
                         </ul>
                 </el-row>
             </el-dialog>
+
+            <!--调整评标价弹框-->
+            <el-dialog
+                title="投标人最新报价列表"
+                :visible.sync="ChangedialogVisible"
+            >
+                <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
+            </el-dialog>
+            <!--调整评标价弹框-->
         </div>
     </div>
 </template>
@@ -397,6 +406,7 @@
     import NavBar from '../../components/publicVue/NavBar';// 导航
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
     import JSON from 'JSON';
 
     export default {
@@ -405,6 +415,7 @@
             SubmitPrompt,
             NavBar,
             AbandonedTender,//废标
+            ChangePrice,//调整评标基准价
             StandardChallengeInformation,
             pdf: () => import('../../components/publicVue/Pdf')
         },
@@ -468,6 +479,10 @@
                 },
                 failureEntryDialog: false,//不合格录入弹框
                 determineOperatingDialog: false,//点击全部选中提示弹框
+
+                ChangedialogVisible:false,  //调整评标价弹框
+                TkOneloading:true,
+                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
             }
         },
         created() {
@@ -592,8 +607,24 @@
                 } else if (val === 'f') {//点击修改密码
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'g') {//调整评标基准价
-                    
+                    //调整评标价点击事件
+                    this.ChangedialogVisible = true;
+                    this.TkOneloading=true;
+                    //console.log(row.id)
+                    //调整评标价点击弹框传值到子页面
+                    this.$axios.post('/api/NewChangePrice',{
+                        //id:row.id,   //点击得id
+                    }).then(res=>{
+                        if(res.status == 200){
+                            //console.log(res.data,99999)
+                        this.ChangePriceTk=res.data.msgBox;
+                        this.TkOneloading=false;
+                        }
+                    })
                 }
+            },
+            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
+                this.ChangedialogVisible = val;
             },
 
 

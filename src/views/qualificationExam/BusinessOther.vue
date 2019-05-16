@@ -19,6 +19,7 @@
                                 <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                                 <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
                                 <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                                <el-dropdown-item command="g">调整评标基准价</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
@@ -1100,6 +1101,14 @@
                     <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
                 </el-row>
             </el-dialog>
+            <!--调整评标价弹框-->
+            <el-dialog
+                title="投标人最新报价列表"
+                :visible.sync="ChangedialogVisible"
+            >
+                <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
+            </el-dialog>
+            <!--调整评标价弹框-->
         </div>
     </div>
 </template>
@@ -1110,6 +1119,7 @@
     import ViewUnfinishedItems from '../../components/publicVue/ViewUnfinishedItems';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
 
     export default {
         name: "business-other",
@@ -1118,6 +1128,7 @@
             ViewSchedule,
             ViewUnfinishedItems,
             AbandonedTender,//废标
+            ChangePrice,//调整评标基准价
             StandardChallengeInformation,
             pdf: () => import('../../components/publicVue/Pdf')
         },
@@ -1155,7 +1166,11 @@
                 pdfItems: [],//动态插入pdf
                 /* ----------------------------pdf end------------------------------- */
                 is_submit: '',
-                count:5
+                count:5,
+
+                ChangedialogVisible:false,  //调整评标价弹框
+                TkOneloading:true,
+                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
             }
         },
         created() {
@@ -1352,6 +1367,47 @@
                     }
                     this.page_loading = false;
                 })
+            },
+            handleCommand(val) {//弹框群
+                if (val === 'a') {//人员信息
+                    this.dialogAbandonedTender = true;
+                } else if (val === 'b') {//交通费标准
+                    this.dialogStandardChallengeInformation = true;
+                    this.bzzxLoading = true;
+                    this.$axios.post('/api/StandardChallengeList', {}).then(res => {
+                        if (res.status == 200) {
+                            this.cities = res.data.cityOptions;
+                            this.tableDataTwo = res.data.standList;
+                            this.bzzxLoading = false;
+                        }
+                    })
+                } else if (val === 'c') {//报销汇总表
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                } else if (val === 'd') {//报销汇总表-财政
+                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                } else if (val === 'e') {//报销情况查询-财政
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                } else if (val === 'f') {//点击修改密码
+                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+                } else if (val === 'g') {//调整评标基准价
+                    //调整评标价点击事件
+                    this.ChangedialogVisible = true;
+                    this.TkOneloading=true;
+                    //console.log(row.id)
+                    //调整评标价点击弹框传值到子页面
+                    this.$axios.post('/api/NewChangePrice',{
+                        //id:row.id,   //点击得id
+                    }).then(res=>{
+                        if(res.status == 200){
+                            //console.log(res.data,99999)
+                        this.ChangePriceTk=res.data.msgBox;
+                        this.TkOneloading=false;
+                        }
+                    })
+                }
+            },
+            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
+                this.ChangedialogVisible = val;
             },
             checkPdf(column, event) {
             },
