@@ -368,6 +368,7 @@ let leaderAll=Mock.mock('/api/leaderAllList','post',{
 let agreeBtn=Mock.mock('/api/agreeBtn','post',{
     code: 200,
     data: [1234]
+
 })
 //协议书的同意按钮接口
 
@@ -397,7 +398,7 @@ function get_data(currentPage,is_submit_type,types) {//type
                 return [is_submit_type?1:2,4,4,4,4,4,4,4,4,4,4,4,4,4]
             }
         }
-        if (currentPage == 2) {//资格审查
+        if (currentPage == 2) {
             if(types==1){
                 var num=[1,4, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
                 num.splice(types-1,1,5)
@@ -407,7 +408,7 @@ function get_data(currentPage,is_submit_type,types) {//type
                 return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
             }
         }
-        if (currentPage == 3) {//资格审查汇总
+        if (currentPage == 3) {
             if(types==1){
                 var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
                 num.splice(types-1,1,5);
@@ -423,6 +424,8 @@ function get_data(currentPage,is_submit_type,types) {//type
             }
             
         }
+
+
        
     }
     //set_type();
@@ -432,7 +435,7 @@ function get_data(currentPage,is_submit_type,types) {//type
         {   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
             value: '1',//
             label: '承诺书',  //步数字段
-            types: 1,  //types代表第几步对应相对应得步数
+            types: 1,  //types 代表第几步对应相对应得步数
             typestaus:a[0],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
 
         },{

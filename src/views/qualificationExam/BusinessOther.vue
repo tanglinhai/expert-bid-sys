@@ -3,13 +3,7 @@
         <div class="business_other">
             <!--头部-->
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
-                </el-col>
-                <el-col :span="4">
+                <el-col :span="12">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
                 <el-col :span="12" class="fs14 textAlignR select">
@@ -1160,7 +1154,8 @@
                 currPdfUrl: '',//当前点击pdf的url
                 pdfItems: [],//动态插入pdf
                 /* ----------------------------pdf end------------------------------- */
-                is_submit: ''
+                is_submit: '',
+                count:5
             }
         },
         created() {

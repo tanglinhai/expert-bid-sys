@@ -2,13 +2,7 @@
     <div class="pingbiao_warp">
         <div class="complianceReviewItem">
             <el-row class="fs14 bid_msg mb15">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>标名称：</span><span>{{name}}</span></div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-light"><span>标号：</span><span>{{biaoNum}}</span></div>
-                </el-col>
-                <el-col :span="4">
+                <el-col :span="12">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
                 <el-col :span="12" class="fs14 textAlignR select">
@@ -667,8 +661,10 @@
                 else if (this.type_btn == 5) {
                     url = '/api/alltijiao_xxjs';
                 }
-                this.$axios.post(url, {type: parseInt(this.type_btn) + 1,}).then(res => {
+                this.$axios.post(url, {type: parseInt(this.type_btn) + 1, }).then(res => {
                     if (res.status == 200) {
+
+                        // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
                         this.allSubmitBtnLoading = false;
                         this.options = res.data.vue_type;
                     } else {

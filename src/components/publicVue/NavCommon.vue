@@ -76,6 +76,7 @@ import { setTimeout } from 'timers';
 
         },
         mounted(){
+
         },
         methods: {
             goto(url){ //路由
