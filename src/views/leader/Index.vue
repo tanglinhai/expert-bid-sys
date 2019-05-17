@@ -69,10 +69,9 @@
                                     <el-button size="small">暂停评标</el-button>
                                 </div>
                                 <div v-else>
-                                    <el-button type="primary" size="small">我要评标</el-button>
+                                    <el-button type="primary" size="small" @click="imbeView">我要评标</el-button>
                                     <el-button type="primary" size="small" @click="goto">查看评标</el-button> 
                                     <el-button size="small" class="btnBg" @click="stopBe(stemp)" v-text=" stemp.btnStatus == 0 ? '暂停评标' : '恢复评标' "></el-button>
-                                    <!-- <el-button size="small">结束评标</el-button> -->
                                 </div>
                             </div>
                         </el-col>
@@ -116,16 +115,16 @@ export default {
         this.init();
     },
     methods: {
+        imbeView(){
+            this.$router.push('/groupLeader/Examination?be=makeBe');
+        },
         goto(){//开始评标
-            // if(this.randomParams == 0){
-            //     this.$router.push('/groupLeader/SignIn');
-            // }
             switch(this.randomParams){
                 case 0:
                     this.$router.push('/groupLeader/SignIn');
                     break;
                 case 1:
-                    this.$router.push('/groupLeader/Examination');
+                    this.$router.push('/groupLeader/Examination?be=see');
                     break;
                 case 2:
                     this.$router.push('/groupLeader/ViewBe');
@@ -136,7 +135,7 @@ export default {
             this.bodyLoading=true;
             this.$axios.post('/api/leaderBagMsg').then(res => {
                 if(res.status == 200){
-                    console.log(res);
+                    // console.log(res);
                     this.bodyLoading=false;
                     this.projectTitleData = res.data.bagTitleMsg;
                     this.projectConData = res.data.bagConMsg;

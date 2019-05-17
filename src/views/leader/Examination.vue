@@ -1,5 +1,5 @@
 <template>
-    <div class="exam">
+    <div class="exam beSty">
         <el-row class="onlyBtnBox">
            <el-col :span="4">
                 <div class="grid-content bg-purple-dark overflowText">
@@ -24,11 +24,8 @@
                                 class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>废标</el-dropdown-item>
                             <el-dropdown-item>标中质询</el-dropdown-item>
-                            <el-dropdown-item>查看投标文件</el-dropdown-item>
                             <el-dropdown-item>查看开标一览表</el-dropdown-item>
-                            <el-dropdown-item>评审结果签字</el-dropdown-item>
                             <el-dropdown-item>资质审查签字</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -67,19 +64,26 @@ data() {
     }
 },
 mounted() {
-    $(".NavCommon").show();
     this.init();
     },
 methods: {
     init(){
+        let routeParams=this.$route.query.be;
         this.$axios.post('./api/tabMsg').then(res => {
-            if(res.status == 200){
+            if(res.status == 200 && routeParams == 'see'){
+                $(".NavCommon").show();
                 this.editableTabs=res.data.tabTitle;
-            }
+            }else if(res.status == 200 && routeParams == 'makeBe'){
+                $(".NavCommon").hide();
+                $(".exam").removeClass('beSty');
+                $(".exam").removeClass('Router');
+                this.editableTabs = res.data.tabTitle;
+                this.editableTabs.length = 2;
+            } 
         })
     },
     handleTabsEdit(targetName){
-        console.log(targetName);
+        // console.log(targetName);
     },
 },
 }
@@ -88,9 +92,11 @@ methods: {
 
 <style lang="scss">
 @import '../../assets/css/common/font.scss'; 
-.exam{
+.beSty{
     padding: 0px 20px 15px 0px;
     padding-left: 131px !important;
+}
+.exam{
     .onlyBtnBox{
         line-height: 62px;
     }

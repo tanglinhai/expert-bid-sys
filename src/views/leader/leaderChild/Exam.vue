@@ -145,7 +145,7 @@ export default {
     },
     mounted() {
         this.init();
-        console.log(this.loName);
+        // console.log(this.loName);
     },    
     methods: {
         init(){
@@ -163,7 +163,7 @@ export default {
             })
         }, 
         getCurren(val,row,pn){
-            console.log(val,row,pn)
+            // console.log(val,row,pn)
             if(val == '不合格'){
                 this.unQualified = true;
                 this.uncomp = pn;

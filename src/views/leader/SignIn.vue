@@ -18,12 +18,21 @@
             </el-col>
             <el-col :span="10" style="text-align:right;">
                 <div class="grid-content bg-purple-dark">
+                    <el-button size="small">结束评标</el-button>
                    <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
                     <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
                 </div>
             </el-col>
         </el-row>
         <div class="contentBody">
+            <el-row>
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-dark" style="text-align:right;line-height:30px;padding-right:15px;">
+                        <span style="color:#409EFF;padding-right:15px;">已签到：{{signin}}人</span>
+                        <span>未签到：{{cardMsg.length - signin}}人</span>
+                    </div>
+                </el-col>
+            </el-row>
             <el-row>
                 <el-col :span="2" v-for="(item, index) in cardMsg" :key="index" class="rowStyle">
                     <el-card :body-style="{ padding: '0px'}" :class="{statusMod:item.diff == '组长' && item.status == 0 ? setMod=true : setMod=false}">
@@ -32,13 +41,13 @@
                         </div>
                         <div class="textBox">
                             <h4>{{item.name}}</h4>
-                            <h4>{{item.telNum}}</h4>
+                            <h6>{{item.telNum}}</h6>
                         </div>
                         <div style="text-align:center;padding-top:15px;">
-                            <el-tag size="small" v-if="item.status == 0">已签到</el-tag>
-                            <el-tag size="small" type="info" v-else>未签到</el-tag>
-                            <el-tag size="small" type="warning" v-if="item.votes > 0">{{item.votes}}票</el-tag>
-                            <el-tag size="small" type="info" v-else>{{item.votes}}票</el-tag>
+                            <el-tag size="mini" v-if="item.status == 0">已签到</el-tag>
+                            <el-tag size="mini" type="info" v-else>未签到</el-tag>
+                            <el-tag size="mini" type="warning" v-if="item.votes > 0">{{item.votes}}票</el-tag>
+                            <el-tag size="mini" type="info" v-else>{{item.votes}}票</el-tag>
                         </div>
                         <div v-if="item.diff == '组长'" class="diff">
                             <span>{{item.diff}}</span>
@@ -79,10 +88,22 @@ export default {
         init(){
             this.$axios.post('./api/cardMsg').then(res => {
                 if(res.status == 200){
-                    console.log(res);
                     this.cardMsg=res.data.allCard;
+                    this.cardMsg.sort((a,b) => {
+                        let aSt = a.status;
+                        let bSt = b.status;
+                        return aSt - bSt;
+                    })
                 }
             })
+        }
+    },
+    computed: {
+        signin(){
+            var isSignin=this.cardMsg.filter(item => {
+                return item.status == 0;
+            })
+            return isSignin.length;
         }
     },
 }
@@ -102,15 +123,15 @@ export default {
         padding: 15px;
         border-radius: 5px;
         .rowStyle{
-            margin: 24px;
-            width: 166px;
+            margin: 8px;
+            width: 127px;
             .el-card{
                 position: relative;
                 border-radius:10px;
                 border: 1px solid #d9e0e7;
                 .headPortraitBox{
-                    width: 80px;
-                    height: 80px;
+                    width: 55px;
+                    height: 55px;
                     border-radius: 50%;
                     margin: 0 auto;
                     margin-top: 15px;
@@ -125,20 +146,23 @@ export default {
                     h4{
                         margin: 15px 0;
                     }
+                    h6{
+                        font-size: 12px;
+                    }
                 }
                 .diff{
                     text-align: center;
                     background: #ff6600;
                     color: #fff;
                     position: absolute;
-                    top: 11px;
-                    left: 56px;
+                    top: 9px;
+                    left: 44px;
                     width: 100%;
                     -webkit-transform: rotateZ(45deg);
                     -ms-transform: rotate(45deg);
                     transform: rotateZ(45deg);
-                    font-size: 13px;
-                    padding: 4px;
+                    font-size: 12px;
+                    padding: 2px;
                 }
             }
         }

@@ -18,6 +18,7 @@
             </el-col>
             <el-col :span="10">
                 <div class="grid-content bg-purple-dark" style="text-align:right;">
+                    <el-button size="small">结束评标</el-button>
                     <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
                     <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
                 </div>
@@ -83,7 +84,7 @@ export default {
             this.tableLoad=true;
             this.$axios.post('./api/viewBeMsg').then(res => {
                 if(res.status == 200){
-                   console.log(res);
+                //    console.log(res);
                    this.tableLoad=false;
                    this.tableData=res.data.leaderMsg;
                 }
