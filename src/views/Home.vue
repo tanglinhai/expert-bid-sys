@@ -39,9 +39,17 @@
       }
     }
   }
+  //一级导航的完成绿色
+  .firstGreen{
+    color:#84bb3c!important;
+  }
+  .firstBule{
+    color:#348fe2!important;
+  }
+  //一级导航的完成绿色
   .green{ //完成可点
     button{   
-        border:2px solid #84bb3c;
+        //border:2px solid #84bb3c;
         color:#84bb3c;
         &:hover {
             border:2px solid #84bb3c;
@@ -57,19 +65,15 @@
     }
   }
   .blue{ //蓝色可点同时操作
-    button{   
-        border:2px solid #348fe2;
-        color:#348fe2;
+    i{
+      background:#348fe2!important;
+    }
+    button{ 
+        color:#348fe2!important;
         &:hover {
             border:2px solid #348fe2;
             color:#348fe2;
             background:white;
-        }
-        span{
-            .kuai{
-              background:#348fe2;
-            }
-            
         }
     }
   }

@@ -35,9 +35,9 @@
             </ul>-->
             <ul class="NavsUls">
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
-                    <h5 class="Firstnav"><i class="iconfont icon-wancheng"></i><span>{{item.label}}</span><em class="el-icon-arrow-down"></em></h5>
+                    <h5 class="Firstnav firstGreen"><i class="iconfont icon-wancheng"></i><span>{{item.label}}</span><em class="el-icon-arrow-down"></em></h5>
                     <ol class="Secondnav" v-for="(item2,index2) in item.children" :key="index2">
-                        <li>
+                        <li class="blue">
                             <i></i>
                             <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
                                 <el-button>{{item2.label}}</el-button>
