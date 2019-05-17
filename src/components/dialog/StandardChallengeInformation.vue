@@ -59,17 +59,22 @@
             <el-button @click="cancel('ruleForm')" size="small">取消</el-button>
           </el-col>
         </el-row>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm MinHeight">
           <el-form-item label="选择投标人：" prop="type">
-            <el-checkbox-group v-model="ruleForm.type">
-              <!-- <el-checkbox label="重庆网控科技发展有限公司" name="type"></el-checkbox>
-              <el-checkbox label="普瑞太阳能有限公司" name="type"></el-checkbox>
-              <el-checkbox label="夏丰热工研究院有限公司" name="type"></el-checkbox> -->
+            <!-- <el-checkbox-group v-model="ruleForm.type">
               <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-            </el-checkbox-group>
+            </el-checkbox-group> -->
+            <el-select v-model="ruleForm.type" multiple placeholder="请选择" style="width:100%;">
+              <el-option
+                v-for="city in cities"
+                :key="city"
+                :label="city"
+                :value="city">
+              </el-option>
+            </el-select>
           </el-form-item>
-          <el-form-item label="质询内容：" prop="desc">
-            <el-input type="textarea"  autosize  v-model="ruleForm.desc" ></el-input>
+          <el-form-item label="质询内容：" prop="desc" class="MinHeightMore">
+            <el-input type="textarea"  autosize  v-model="ruleForm.desc"></el-input>
           </el-form-item>
           <!-- <el-form-item label="上传文件:" :label-width="ruleFormLabelWidth" class="clearfix mt15">
             <el-input v-model="model.nameFiles" class="mr10 fl " style="width: 300px" size="small "></el-input>
@@ -216,7 +221,7 @@
                  console.log(this.tableData,8888);
                  
                 }
-                //this.$refs[formName].resetFields();   //初始化表单的值
+                this.$refs[formName].resetFields();   //提交之后初始化表单的值
                 this.ruleForm.date1="";   //初始化时间得值
                 $('.form_div').hide();//新增表单隐藏
                 $(".tishiWrap").show();//倒计时内容开始展示
@@ -278,6 +283,16 @@
         display: inline-block;
         padding:0px 3px;
       }
+    }
+  }
+  .MinHeight{
+    .MinHeightMore{
+      .el-textarea__inner{
+        min-height:40px!important;
+      }
+    }
+    .el-input__inner{
+      min-height:40px!important;
     }
   }
 }
