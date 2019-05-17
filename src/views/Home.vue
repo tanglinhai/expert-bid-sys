@@ -16,10 +16,10 @@
   .WrapBig{
     position: relative;
     .Router{
-      padding-left:115px;
+      padding-left:200px;
     }
     .NavCommon{
-      height:95%;
+      height:100%;
       position:absolute;
       .is-horizontal{
         display:none;
