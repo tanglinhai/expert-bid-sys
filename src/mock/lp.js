@@ -434,76 +434,98 @@ function get_data(currentPage,is_submit_type,types) {//type
     return [
         {   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
             value: '1',//
-            label: '承诺书',  //步数字段
+            label: '签到',  //步数字段
             types: 1,  //types 代表第几步对应相对应得步数
             typestaus:a[0],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
-
+            children:[{
+                value: '1-1',//
+                label: '承诺书',  //步数字段
+                types: 1-1,  //types 代表第几步对应相对应得步数
+                typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            },{
+                value: '1-2',//
+                label: '参加评标',  //步数字段
+                types: 1-2,  //types 代表第几步对应相对应得步数
+                typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            }]
         },{
             value: '2',//
-            label: '参加评标',
+            label: '推举组长',
             types: 2,
-            typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            typestaus:a[3],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
         },{
             value: '3',//
-            label: '推举组长',
+            label: '评标',
             types: 3,
-            typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
-        },{
-            value: '4',//
-            label: '资格审查',
-            types: 4,
-            typestaus:a[3],
-        },{
-            value: '5',//
-            label: '资格审查汇总',
-            types: 5,
-            typestaus:a[4],
-        },{
-            value: '6',//
-            label: '符合性审查',
-            types: 6,
-            typestaus:a[5],
-        },{
-            value: '7',//
-            label: '符合性审查汇总',
-            types: 7,
-            typestaus:a[6],
-        },{
-            value: '8',//
-            label: '详细评审(技术)',
-            types: 8,
-            typestaus:a[7],
-        },{
-            value: '9',//
-            label: '详细评审(技术)汇总',
-            types: 9,
-            typestaus:a[8],
-        },{
-            value: '10',//
-            label: '商务',
-            types: 10,
-            typestaus:a[9],
-        },{
-            value: '11',//
-            label: '技术',
-            types: 11,
-            typestaus:a[10],
-        },{
-            value: '12',//
-            label: '服务',
-            types: 12,
-            typestaus:a[11],
-        },{
-            value: '13',//
-            label: '其他',
-            types: 13,
-            typestaus:a[12],
-        },{
-            value: '14',//
-            label: '评审汇总',
-            types: 14,
-            typestaus:a[13],
-        }
+            typestaus:a[4],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            children:[{
+                value: '3-1',//
+                label: '资格审查',  //步数字段
+                types: 3-1,  //types 代表第几步对应相对应得步数
+                typestaus:a[5],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            },{
+                value: '3-2',//
+                label: '资格审查汇总',  //步数字段
+                types: 3-2,  //types 代表第几步对应相对应得步数
+                typestaus:a[6],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+            }]
+         }
+         //,{
+        //     value: '4',//
+        //     label: '资格审查',
+        //     types: 4,
+        //     typestaus:a[3],
+        // },{
+        //     value: '5',//
+        //     label: '资格审查汇总',
+        //     types: 5,
+        //     typestaus:a[4],
+        // },{
+        //     value: '6',//
+        //     label: '符合性审查',
+        //     types: 6,
+        //     typestaus:a[5],
+        // },{
+        //     value: '7',//
+        //     label: '符合性审查汇总',
+        //     types: 7,
+        //     typestaus:a[6],
+        // },{
+        //     value: '8',//
+        //     label: '详细评审(技术)',
+        //     types: 8,
+        //     typestaus:a[7],
+        // },{
+        //     value: '9',//
+        //     label: '详细评审(技术)汇总',
+        //     types: 9,
+        //     typestaus:a[8],
+        // },{
+        //     value: '10',//
+        //     label: '商务',
+        //     types: 10,
+        //     typestaus:a[9],
+        // },{
+        //     value: '11',//
+        //     label: '技术',
+        //     types: 11,
+        //     typestaus:a[10],
+        // },{
+        //     value: '12',//
+        //     label: '服务',
+        //     types: 12,
+        //     typestaus:a[11],
+        // },{
+        //     value: '13',//
+        //     label: '其他',
+        //     types: 13,
+        //     typestaus:a[12],
+        // },{
+        //     value: '14',//
+        //     label: '评审汇总',
+        //     types: 14,
+        //     typestaus:a[13],
+        // }
         
     ]
 }
