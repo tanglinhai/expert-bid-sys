@@ -23,7 +23,7 @@
                 <el-row :gutter="20" class="mt20" style="overflow:hidden; width:100%;">
                     <el-col :span="12" :offset="6">
                         <div class="grid-content bg-purple mar mt20">
-                            <el-button type="primary" @click="AgreeXieYi" :loading="BtnLoading">同意</el-button>
+                            <el-button v-show="BtnsShowOrHide" type="primary" @click="AgreeXieYi" :loading="BtnLoading">同意</el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -61,7 +61,13 @@
                 this.$store.state.navCommon.types=1;
             } else {
                 this.$store.state.navCommon.types=this.$route.query.types;
+            };
+            if( this.$route.query.currentpage<=1||this.$route.query.currentpage==undefined){  //判断确定按钮是否显示
+                this.BtnsShowOrHide=true;
+            }else{
+                this.BtnsShowOrHide=false;
             }
+            
         },
         mounted(){
             //this.navcommonsListFun(); //导航接口
