@@ -34,15 +34,29 @@
                 </li> 
             </ul>-->
             <ul class="NavsUls">
-                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
-                    <h5 class="Firstnav firstGreen"><i class="iconfont icon-wancheng"></i><span>{{item.label}}</span><em class="el-icon-arrow-down"></em></h5>
+                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types">
+                    <h5 :class="item.typestaus==1?'Firstnav firstGreen':item.typestaus==2?'Firstnav firstBlue':'Firstnav firstblack'" :aid="item.typestaus">
+                        <i :class="item.typestaus==1?'el-icon-success':item.typestaus==2?'el-icon-edit':'iconfont icon-jinyong'"></i>
+                        <span>{{item.label}}</span>
+                        <em class="el-icon-arrow-down"></em>
+                    </h5>
                     <ol class="Secondnav" v-for="(item2,index2) in item.children" :key="index2">
-                        <li class="blue">
-                            <i></i>
-                            <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
-                                <el-button>{{item2.label}}</el-button>
-                            </el-tooltip>
-                        </li>
+                        <template v-if="item2.typestaus==1||item2.typestaus==2">
+                            <li @click="ToChangePage(item.types)" :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
+                                <i></i>
+                                <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
+                                    <el-button>{{item2.label}}</el-button>
+                                </el-tooltip>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
+                                <i></i>
+                                <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
+                                    <el-button>{{item2.label}}</el-button>
+                                </el-tooltip>
+                            </li>
+                        </template>
                     </ol>
                 </li>
                 <!-- <li>
@@ -128,7 +142,20 @@ import { setTimeout } from 'timers';
                     div.scrollTop=sortsSelectHeight-zongHeightHalf;
                 }else{
                 }
+            });
+
+            $(".Firstnav").click(function(){    //导航点击
+                if($(this).parent().find("ol").is(':hidden')){
+                    $(this).find("em").removeClass("el-icon-arrow-up");
+                    $(this).find("em").addClass("el-icon-arrow-down");
+                    $(this).parent().find("ol").show();
+                }else{
+                    $(this).find("em").removeClass("el-icon-arrow-down");
+                    $(this).find("em").addClass("el-icon-arrow-up");
+                    $(this).parent().find("ol").hide();
+                }
             })
+
         }
         
     }
@@ -168,6 +195,26 @@ import { setTimeout } from 'timers';
                         font-size:24px;
                         float:left;
                         margin-left:-14px;
+                    }
+                    .icon-jinyong{
+                        background: #ccc;
+                        color: white;
+                        border-radius: 75%;
+                        font-size: 16px;
+                        height: 26px;
+                        width: 26px;
+                        text-align: center;
+                        line-height: 27px;
+                    }
+                    .el-icon-edit{
+                        width: 26px;
+                        border-radius: 50%;
+                        height: 26px;
+                        background: #348fe2;
+                        color: white;
+                        font-size: 16px;
+                        line-height: 26px;
+                        text-align: center;
                     }
                     span{
                         font-size:14px;

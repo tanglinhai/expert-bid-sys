@@ -43,53 +43,63 @@
   .firstGreen{
     color:#84bb3c!important;
   }
-  .firstBule{
+  //一级导航灰色
+  .firstblack{
+    color:#ccc!important;
+  }
+  //一级导航的进行中蓝色
+  .firstBlue{
     color:#348fe2!important;
   }
-  //一级导航的完成绿色
-  .green{ //完成可点
+
+  .green{ //二级完成可点
+    i{
+      background:#84bb3c!important;
+    }
     button{   
         //border:2px solid #84bb3c;
-        color:#84bb3c;
+        color:#84bb3c!important;
         &:hover {
-            border:2px solid #84bb3c;
+            //border:2px solid #84bb3c;
             color:#84bb3c;
-            background:white;
+            //background:white;
         }
-        span{
-            .kuai{
-              background:#84bb3c;
-            }
-            
-        }
+        // span{
+        //     .kuai{
+        //       background:#84bb3c;
+        //     }
+        // }
     }
   }
-  .blue{ //蓝色可点同时操作
+  .blue{ ////二级蓝色可点进行中
     i{
       background:#348fe2!important;
     }
     button{ 
         color:#348fe2!important;
         &:hover {
-            border:2px solid #348fe2;
+            //border:2px solid #348fe2;
             color:#348fe2;
-            background:white;
+            //background:white;
         }
     }
   }
-  .DoNotPoint{  //不可点
+  .DoNotPoint{  //二级灰色不可点
+    i{
+      background:#ccc!important;
+    }
     button{
-      border:2px solid #ccc;
-      color:#ccc;
+      //border:2px solid #ccc;
+      color:#ccc!important;
       cursor:default;
-      &:hover {
-        border:2px solid #ccc;
-        color:#ccc;
-        background:white;
-      }
-      .kuai{
-        background:#ccc;
-      }
+      // &:hover {
+      //   border:2px solid #ccc;
+      //   color:#ccc;
+      //   background:white;
+      // }
+      // .kuai{
+      //   background:#ccc;
+      // }
     }
   }
   .backblue{  //进行中

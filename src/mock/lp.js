@@ -393,9 +393,9 @@ function get_data(currentPage,is_submit_type,types) {//type
     function set_type() {
         if (currentPage == 1) {
             if(types==1){
-                return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4].splice(types,1,5)
+                return [2,4,4,4,4,4,4]
             }else{
-                return [is_submit_type?1:2,4,4,4,4,4,4,4,4,4,4,4,4,4]
+                return [2,2,4,4,4,4,4]
             }
         }
         if (currentPage == 2) {
@@ -405,7 +405,7 @@ function get_data(currentPage,is_submit_type,types) {//type
                 num.splice(currentPage-1,1,is_submit_type?1:3);
                 return num;
             }else{
-                return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
+                return [2,1, 2, 4, 4, 4, 4]
             }
         }
         if (currentPage == 3) {
@@ -420,7 +420,7 @@ function get_data(currentPage,is_submit_type,types) {//type
                 num.splice(currentPage-1,1,is_submit_type?1:3);
                 return num;
             }else{
-                return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
+                return [1,1,1,2,4,4,4]
             }
             
         }
