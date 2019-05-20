@@ -35,14 +35,19 @@
             </ul>-->
             <ul class="NavsUls">
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types">
-                    <h5 :class="item.typestaus==1?'Firstnav firstGreen':item.typestaus==2?'Firstnav firstBlue':'Firstnav firstblack'" :aid="item.typestaus">
+                    <h5 @click="ToChangePage(item.types)" :id="item.types" :class="['Firstnav navClick',item.typestaus==1?'firstGreen':item.typestaus==2?'firstBlue':'firstblack']" :aid="item.typestaus">
                         <i :class="item.typestaus==1?'el-icon-success':item.typestaus==2?'el-icon-edit':'iconfont icon-jinyong'"></i>
                         <span>{{item.label}}</span>
+                        <template v-if="item.children !== undefined && item.children.length >0 ">
                         <em class="el-icon-arrow-down"></em>
+                        </template>
+                        <template v-else>
+                            <em style="display:none" class="el-icon-arrow-down"></em>
+                        </template>
                     </h5>
                     <ol class="Secondnav" v-for="(item2,index2) in item.children" :key="index2">
                         <template v-if="item2.typestaus==1||item2.typestaus==2">
-                            <li @click="ToChangePage(item.types)" :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
+                            <li @click="ToChangePage(item2.types)" :id="item2.types" :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
                                 <i></i>
                                 <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
                                     <el-button>{{item2.label}}</el-button>
@@ -117,14 +122,18 @@ import { setTimeout } from 'timers';
                 });
             },
            ToChangePage(types){   //导航点击值//types
-                //console.log(this.currentpage)
-                if(types==1){  //承诺书
+                console.log(this.currentpage,types,666666)
+                $(".Secondnav li").removeClass("LiActives");
+                $(".NavsUls>li").removeClass("LiActives");
+                $("#"+types).addClass("LiActives");
+                if(types=="1-1"){  //承诺书
                     this.$router.push("/index/LetterCommitment?types="+types+"&currentpage="+this.currentpage);
-                }else if(types==2){  //参加评标
+                    
+                }else if(types=="1-2"){  //参加评标
                    // $(".NavCommon ul #1>span").removeClass("backblue");
 
                     this.$router.push("/index/AllInformation?types="+types+"&currentpage="+this.currentpage);
-                }else if(types==3){   //推举组长
+                }else if(types==2){   //推举组长
                     this.$router.push("/index/ElectedLeader?types="+types+"&currentpage="+this.currentpage);
                 } 
            }
@@ -144,7 +153,8 @@ import { setTimeout } from 'timers';
                 }
             });
 
-            $(".Firstnav").click(function(){    //导航点击
+            $(".navClick").click(function(){    //导航点击带二级导航
+                //console.log("1111")
                 if($(this).parent().find("ol").is(':hidden')){
                     $(this).find("em").removeClass("el-icon-arrow-up");
                     $(this).find("em").addClass("el-icon-arrow-down");
@@ -178,7 +188,6 @@ import { setTimeout } from 'timers';
         
         .NavsUls{
             margin-left:24px;
-            margin-right:10px;
             margin-bottom:10px;
             border-left:1px solid #e3e3e3;
             padding-top:20px;
@@ -195,6 +204,7 @@ import { setTimeout } from 'timers';
                         font-size:24px;
                         float:left;
                         margin-left:-14px;
+                        margin-top: 6px;
                     }
                     .icon-jinyong{
                         background: #ccc;
@@ -224,6 +234,7 @@ import { setTimeout } from 'timers';
                         float: right;
                         font-size:24px;
                         line-height:40px;
+                        margin-right:5px;
                     }
                 }
                 .Secondnav{

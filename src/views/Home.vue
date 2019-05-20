@@ -39,6 +39,24 @@
       }
     }
   }
+
+  //导航选中样式
+  .LiActives{
+      background:#f3f3f3;
+      position: relative;
+      &:before{
+          content:"";
+          background: url(../assets/img/io.png) right 0px no-repeat;
+          position: absolute;
+          right: 0px;
+          top: 9px;
+          width:10px;
+          height:23px;
+      }
+      button{
+          background:#f3f3f3;
+      }
+  }
   //一级导航的完成绿色
   .firstGreen{
     color:#84bb3c!important;
@@ -56,19 +74,11 @@
     i{
       background:#84bb3c!important;
     }
-    button{   
-        //border:2px solid #84bb3c;
+    button{  
         color:#84bb3c!important;
         &:hover {
-            //border:2px solid #84bb3c;
             color:#84bb3c;
-            //background:white;
         }
-        // span{
-        //     .kuai{
-        //       background:#84bb3c;
-        //     }
-        // }
     }
   }
   .blue{ ////二级蓝色可点进行中
@@ -78,9 +88,7 @@
     button{ 
         color:#348fe2!important;
         &:hover {
-            //border:2px solid #348fe2;
             color:#348fe2;
-            //background:white;
         }
     }
   }
@@ -89,17 +97,8 @@
       background:#ccc!important;
     }
     button{
-      //border:2px solid #ccc;
       color:#ccc!important;
       cursor:default;
-      // &:hover {
-      //   border:2px solid #ccc;
-      //   color:#ccc;
-      //   background:white;
-      // }
-      // .kuai{
-      //   background:#ccc;
-      // }
     }
   }
   .backblue{  //进行中
@@ -208,16 +207,15 @@ export default {
   watch: {
     '$route.path': function (newVal, oldVal) {
       if (newVal === '/index/LetterCommitment') {
-        console.log('页面1');
+        //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
-        
       }
       if (newVal === '/index/AllInformation') {
-        console.log('页面2');
+        //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
       }
       if (newVal === '/index/ElectedLeader') {
-        console.log('页面3');
+        //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
       }
     }
@@ -254,7 +252,7 @@ export default {
             types:parseFloat(this.$route.query.types)    //点击是哪一步
         }).then(res=>{
             if(res.status == 200){
-                console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
+                //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
 
                 this.navcommonsList=res.data.navsAll; 
                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
