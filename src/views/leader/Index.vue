@@ -116,7 +116,8 @@ export default {
     },
     methods: {
         imbeView(){
-            this.$router.push('/groupLeader/Examination?be=makeBe');
+            window.localStorage.setItem('sub','0');
+            this.$router.push('/groupLeader/Examination');
         },
         goto(){//开始评标
             switch(this.randomParams){
@@ -124,7 +125,8 @@ export default {
                     this.$router.push('/groupLeader/SignIn');
                     break;
                 case 1:
-                    this.$router.push('/groupLeader/Examination?be=see');
+                    window.localStorage.setItem('sub','1');
+                    this.$router.push('/groupLeader/Examination');
                     break;
                 case 2:
                     this.$router.push('/groupLeader/ViewBe');
