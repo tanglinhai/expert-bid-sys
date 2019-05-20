@@ -701,6 +701,11 @@ export default {
             this.slideBarIsControl = true;
             this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
             this.currentPdfShow.append('<div class="floating_div"></div>');
+
+            this._dom_c.$div_pdf_wrap.css({
+                'width': this._dom_c.$content.width()+'px',
+                'height': document.body.clientHeight+'px',
+            });
         },
         /**
          * [pdf 鼠标滑条取消按下事件]
@@ -709,6 +714,10 @@ export default {
             this.slideBarIsControl = false;
             this._dom_c.$dom_body.unbind('mousemove.slideBarMousemove');
             this.currentPdfShow && this.currentPdfShow.find('.floating_div').remove();
+                this._dom_c.$div_pdf_wrap.css({
+                    'width': 'auto',
+                    'height': '100%',
+                });
         },
         /**
          * [pdf 鼠标滑条移动事件]

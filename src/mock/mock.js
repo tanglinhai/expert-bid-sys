@@ -180,7 +180,99 @@ function factors_standards(type){
     var factor3s = [null, '商务 商务1（50.00分）', '第三章，商务30分', '第三章，技术(24.00)分', '第三章、服务1(25.00分)', '第三章、其他(2.00分-33.00分)', null, null, null, null,
                     '分辨率是否为15英寸以上', '审查项目', '详细评审3'
     ];
+    /*
+    192.168.153.23调试数据，别要删除
+     */
     return [
+        [{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 11659,
+                txt: 'Vestibulum tincidunt malesuada tellus'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 11660,
+                txt: 'facilisis'
+            },{
+                id: 'pdf1_1',
+                name: 'pdf文件11.pdf',
+                page: 11658,
+                txt: 'Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 1,
+                txt: '选视频侵权使用蝙蝠侠配乐'
+            },{
+                id: 'pdf1_2',
+                name: 'pdf文件12.pdf',
+                page: 1,
+                txt: '中的配乐作为背景音乐'
+            }]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf1_3',
+                name: 'pdf文件13.pdf',
+                page: 1,
+                txt: '从雷达上消失。机上有1人'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf2_1',
+                name: 'pdf文件21.pdf',
+                page: 11057,
+                txt: '王胜国给王家黔说'
+            }]
+        }],[{
+            factor: factor1s[type],
+            standard: '大于等于8G',
+            relativePoints:[{
+                id: 'pdf3_2',
+                name: 'pdf文件32.pdf',
+                page: 2,
+                txt: '其中销量较高的一样的在线占卜：“免'
+            }]
+        },{
+            factor: factor2s[type],
+            standard: '必须是INTEL生产',
+            relativePoints:[]
+        },{
+            factor: factor3s[type],
+            standard: '可达到1366*768以上即可',
+            relativePoints:[{
+                id: 'pdf3_1',
+                name: 'pdf文件31.pdf',
+                page: 3,
+                txt: '夏丰热工研究院有限公司。资格审查评审项：内'
+            }]
+        }]
+
+    ];
+
+    /*
+    本地调试数据，别要删除
+     */
+    /*[
         [{
             factor: factor1s[type],
             standard: '大于等于8G',
@@ -265,6 +357,8 @@ function factors_standards(type){
         }]
 
     ];
+
+     */
 }
 Mock.mock('/api/table_msg', 'post', (options) => {
     console.log(options);
