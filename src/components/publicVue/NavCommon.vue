@@ -1,5 +1,5 @@
 <template>
-    <div class="navcommon_wrap">
+    <div class="navcommon_wrap" v-show="$store.state.navIsShow">
         <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;" ref="myScrollbar">
             <!--<ul ref="wrap" class="NavsUls" style="display:none">
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
