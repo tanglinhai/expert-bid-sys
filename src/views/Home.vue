@@ -25,12 +25,7 @@
         display:none;
       }
     }
-    .lineAll{
-        border-left:1px solid #ddd;
-        border-image: -webkit-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
-        border-image: -moz-linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30;
-        border-image: linear-gradient(#f1f8fe,#348fed,#f1f8fe) 30 30; 
-    }
+   
   }
   .el-button.is-disabled{
     span{
