@@ -131,7 +131,7 @@ vueRouter.beforeEach((to, from, next) => {
       store.dispatch('generateRoutes', { roles }).then(() => { // 生成可访问的路由表
         vueRouter.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
         next(to.path == '/' && roles.indexOf('leader') > -1 ? '/groupLeader' : 
-            to.path == '/' && roles.indexOf('expert') > -1 ? '/index' : to.path); // hack方法 确保addRoutes已完成
+            to.path == '/' && roles.indexOf('expert') > -1 ? '/index' : to.fullPath); // hack方法 确保addRoutes已完成
       })
     } else {
       if (to.matched.length === 0) {
