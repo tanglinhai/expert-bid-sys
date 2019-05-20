@@ -43,7 +43,7 @@
                         </h5>
                     </template>
                     <template v-else>
-                       <h5 @click="ToChangePage(item.types)" :id="item.types" :class="['Firstnav',item.typestaus==1?'firstGreen':item.typestaus==2?'firstBlue':'firstblack']" :aid="item.typestaus">
+                        <h5 @click="ToChangePage(item.types)" :id="item.types" :class="['Firstnav',item.typestaus==1?'firstGreen':item.typestaus==2?'firstBlue':'firstblack']" :aid="item.typestaus">
                             <i :class="item.typestaus==1?'el-icon-success':item.typestaus==2?'el-icon-edit':'iconfont icon-jinyong'"></i>
                             <span>{{item.label}}</span>
                             <em style="display:none" class="el-icon-arrow-down"></em>
@@ -68,27 +68,6 @@
                         </template>
                     </ol>
                 </li>
-                <!-- <li>
-                    <h5 class="Firstnav"><i class="iconfont icon-wancheng"></i><span>推举组长</span></h5>
-                </li>
-                <li>
-                    <h5 class="Firstnav"><i class="iconfont icon-wancheng"></i><span>评标</span><em class="el-icon-arrow-down"></em></h5>
-                    <ol class="Secondnav">
-                        <li>
-                            <i></i>
-                            <el-tooltip class="item"  effect="light" content="Left Top 提示文字" placement="left-start">
-                                <el-button>资格审查</el-button>
-                            </el-tooltip>
-                        </li>
-                        <li>
-                            <i></i>
-                            <el-tooltip class="item" effect="light" content="Left Top 提示文字" placement="left-start">
-                                <el-button>资格审查汇总</el-button>
-                            </el-tooltip>
-                        </li>
-                    </ol>
-                </li> -->
-                
             </ul>
         </el-scrollbar>
     </div>
@@ -165,7 +144,6 @@ import { setTimeout } from 'timers';
                 }
             });
         }
-        
     }
 </script>
 
@@ -189,6 +167,7 @@ import { setTimeout } from 'timers';
             margin-bottom:10px;
             border-left:1px solid #e3e3e3;
             padding-top:20px;
+            min-height:600px;
             >li{
                 width: 100%;
                 margin-bottom: 20px;
@@ -238,9 +217,22 @@ import { setTimeout } from 'timers';
                 }
                 .Secondnav{
                     color:#c0c4d5;
+                    position: relative;
+                    &:nth-child(3){
+                        &:before{
+                            content:"";
+                            background: url(../../assets/img/BgSanjiao.png) center bottom no-repeat;
+                            position: absolute;
+                            left: -26px;
+                            bottom: 12px;
+                            width:59px;
+                            height:40px;
+                        }
+                    }
                     li{
                         height:40px;
                         line-height:40px;
+                        
                         i{
                             width:10px; 
                             height:10px; 
