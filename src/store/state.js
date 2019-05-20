@@ -2,7 +2,8 @@
 const state = {
     roles: [],
     routers: constantRouterMap,
-    addRouters: []
+    addRouters: [],
+    navIsShow:true,
 };
   
 export default state
