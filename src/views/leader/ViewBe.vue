@@ -99,7 +99,7 @@ export default {
 @import '../../assets/css/common/mixin.scss';
 .vbe{
     padding: 0px 20px 15px 0px;
-    padding-left: 131px !important;
+    padding-left: 220px !important;
     .onlyBtnBox{
         line-height: 62px;
     }

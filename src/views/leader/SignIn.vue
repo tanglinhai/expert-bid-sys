@@ -47,7 +47,7 @@
                             <el-tag size="mini" v-if="item.status == 0">已签到</el-tag>
                             <el-tag size="mini" type="info" v-else>未签到</el-tag>
                             <el-tag size="mini" type="warning" v-if="item.votes > 0">{{item.votes}}票</el-tag>
-                            <el-tag size="mini" type="info" v-else>{{item.votes}}票</el-tag>
+                            <el-tag size="mini" type="info" v-else>0票</el-tag>
                         </div>
                         <div v-if="item.diff == '组长'" class="diff">
                             <span>{{item.diff}}</span>
@@ -114,7 +114,7 @@ export default {
 <style lang="scss">
 .signIn{
     padding: 0px 20px 15px 0px;
-    padding-left: 131px !important;
+    padding-left:220px !important;
     .onlyBtnBox{
         line-height: 62px;
     }
@@ -124,7 +124,7 @@ export default {
         border-radius: 5px;
         .rowStyle{
             margin: 8px;
-            width: 127px;
+            width: 120px;
             .el-card{
                 position: relative;
                 border-radius:10px;

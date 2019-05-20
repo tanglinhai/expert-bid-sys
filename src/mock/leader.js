@@ -51,16 +51,16 @@ Mock.mock('./api/cardMsg','post',{
 
 Mock.mock('./api/tabMsg','post',{
     'tabTitle':[
-        {title: '资格审查', name: '1'},
+        // {title: '资格审查', name: '1'},
         {title: '资格审查汇总', name: '2'},
-        {title: '符合性审查', name: '3'},
+        // {title: '符合性审查', name: '3'},
         {title: '符合性审查汇总', name: '4'},
-        {title: '详细评审(技术)', name: '5'},
+        // {title: '详细评审(技术)', name: '5'},
         {title: '详细评审(技术)汇总', name: '6'},
-        {title: '商务', name: '7'},
-        {title: '技术', name: '8'},
-        {title: '服务', name: '9'},
-        {title: '其他', name: '10'},
+        // {title: '商务', name: '7'},
+        // {title: '技术', name: '8'},
+        // {title: '服务', name: '9'},
+        // {title: '其他', name: '10'},
         {title: '评审汇总', name: '11'},        
     ]
 })

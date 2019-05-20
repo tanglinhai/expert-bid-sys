@@ -1,5 +1,5 @@
 <template>
-    <div class="exam beSty">
+    <div :class="{'exam':true,'beSty':getParams == '1'}">
         <el-row class="onlyBtnBox">
            <el-col :span="7">
                 <div class="grid-content bg-purple-dark overflowText">
@@ -40,8 +40,9 @@
                     :label="item.title"
                     :name="item.name"
                 >
-                    <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam>
+                    <!-- <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam> -->
                     <Qsummary v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
+                    <Review v-if="item.name === '11'"></Review>
                 </el-tab-pane>
             </el-tabs>
         </el-row>
@@ -52,16 +53,19 @@
 <script>
 import Exam from '../leader/leaderChild/Exam';
 import Qsummary from '../leader/leaderChild/Qsummary';
+import Review from '../leader/leaderChild/Reviewsummary'
 import { setTimeout } from 'timers';
 export default {
 components:{
     Exam,
-    Qsummary
+    Qsummary,
+    Review
 },
 data() {
     return {
+        getParams:window.localStorage.getItem('sub'),
         editableTabs:[],
-        editableTabsValue:'1',      
+        editableTabsValue:'2',      
     }
 },
 mounted() {
@@ -69,21 +73,20 @@ mounted() {
 },
 methods: {
     init(){
-        var sub = window.localStorage.getItem('sub');
-        console.log(sub,'9-9-9-9-9-9-9-9'); 
         this.$axios.post('./api/tabMsg').then(res => {
-            if(res.status == 200 && sub == '1'){
-                $(".NavCommon").show();
+            if(res.status == 200 && this.getParams == '1'){
+                // this.$store.state.navIsShow = true;
+                $('.NavCommon').show();
                 this.editableTabs=res.data.tabTitle;
-            }else if(res.status == 200 && sub == '0'){
-                setTimeout(()=> {
-                    $(".NavCommon").hide();
-                    $(".exam").removeClass('beSty');
-                    $(".exam").removeClass('Router');
-                    this.editableTabs = res.data.tabTitle;
-                    this.editableTabs.length = 2;
-                },3000);
-            } 
+            }else if(res.status == 200 && this.getParams == '0'){
+                // this.$store.state.navIsShow = false;
+                $('.NavCommon').hide();
+                $('.exam').css('padding','0 20px');
+                $('.exam').removeClass('beSty');
+                $('.exam').removeClass('Router');
+                this.editableTabs = res.data.tabTitle;
+                this.editableTabs.length = 2;
+            };
         })
     },
     handleTabsEdit(targetName){
@@ -98,7 +101,7 @@ methods: {
 @import '../../assets/css/common/font.scss'; 
 .beSty{
     padding: 0px 20px 15px 0px;
-    padding-left: 131px !important;
+    padding-left: 220px !important;
 }
 .exam{
     .onlyBtnBox{
