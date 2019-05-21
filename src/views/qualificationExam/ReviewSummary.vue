@@ -59,11 +59,11 @@
                                             :data="tableData"
                                             border
                                             style="width:100%">
-                                        <el-table-column
-                                                width="120px"
-                                                prop="num"
-                                                label="投标序号">
-                                        </el-table-column>
+                                        <!--<el-table-column-->
+                                        <!--width="50px"-->
+                                        <!--prop="num"-->
+                                        <!--label="投标序号">-->
+                                        <!--</el-table-column>-->
                                         <el-table-column
                                                 prop="name"
                                                 label="投标人">
@@ -102,12 +102,12 @@
                     <div v-if="isShowProgressPage==0">
                         <el-col :span="24" >
                             <!--<p>综合评标进度条</p>-->
-                            <el-row :span="24" class="mb15">
-                                <div class="fr">
-                                    <el-button size="small" plain  @click="reviewLockRequest" class="ml10">
-                                    <i  class="icon iconfont  icon-jiesuo1 mr3" ></i>评分解锁</el-button>
-                                </div>
-                            </el-row>
+                            <!--<el-row :span="24" class="mb15">-->
+                            <!--<div class="fr">-->
+                            <!--<el-button size="small" plain  @click="reviewLockRequest" class="ml10">-->
+                            <!--<i  class="icon iconfont  icon-jiesuo1 mr3" ></i>评分解锁</el-button>-->
+                            <!--</div>-->
+                            <!--</el-row>-->
                             <el-row>
                                 <el-col :span="24">
                                     <el-table
@@ -136,11 +136,11 @@
                         <el-col :span="24" class="mb15">
                             <div class="fr">
                                <span class="hide_span"  v-if="this.$store.state.failureEnery.is_pingshen_show">
-                                  <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">评分解锁</el-button>
-                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10">查看评分解锁记录
+                                  <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10"><i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10"> <i class=" icon iconfont    icon-chakanjilu mr3" ></i>查看评分解锁记录
                                     </el-button>
-                                    <el-button size="small" @click="checkProScoreBtn" type='primary'>查看专家个人打分表</el-button>
-                                    <el-button size="small" @click="bindScoreBtn" type='primary'>投标人分项得分表</el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" type='primary'> <i class=" icon iconfont  icon-dafen  mr3"></i>查看专家个人打分表</el-button>
+                                    <el-button size="small" @click="bindScoreBtn" type='primary'> <i class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
                                 </span>
                                 <span v-else>
                                     <el-button size="small" type='primary' @click="scoreQuotation" class="ml10">
@@ -152,8 +152,8 @@
                                     <el-button size="small" type='primary' @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">
                                        <i class=" icon iconfont  icon-tijiao2  mr3"></i>提交
                                     </el-button>
-                                    <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">
-                                        <i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>
+                                    <!--<el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">-->
+                                    <!--<i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>-->
                                     <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10">
                                         <i class=" icon iconfont    icon-chakanjilu mr3" ></i>查看评分解锁记录
                                     </el-button>
@@ -163,7 +163,6 @@
                                     <el-button size="small" @click="bindScoreBtn" type='primary'>
                                          <i class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
                                 </span>
-
                             </div>
                         </el-col>
                         <el-col :span="24">
@@ -178,9 +177,9 @@
                                 >
                                     <el-table-column prop="bidder" label="投标人" fixed>
                                     </el-table-column>
-                                    <el-table-column prop="bidderNumber"
-                                                     label="投标序号"
-                                                     fixed></el-table-column>
+                                    <!--<el-table-column prop="bidderNumber"-->
+                                                     <!--label="投标序号"-->
+                                                     <!--fixed></el-table-column>-->
                                     <el-table-column label="评标委员会">
                                         <el-table-column :label="item.name"
                                                          v-for="(item,index ) in pingshenweiyuanData"
@@ -348,8 +347,9 @@
                     title="评分解锁申请"
                     :visible.sync="dialogFormVisible"
                     width="700px"
+                    class="reviewLockRequest"
             >
-                <div class="reviewLockRequest">
+                <div >
                     <el-form :model="ruleFormLockRequest" :rules="ruleFormLockRequestRule" ref="ruleFormLockRequest"
                              label-width="120px" class="demo-ruleForm">
                         <el-form-item label="提出专家：" prop="type">
@@ -522,10 +522,10 @@
                     width="700px"
                     class="biddingAdvice"
             >
-                <div class="biddingAdvice">
+                <div >
                     <el-form ref="formBiddingAdvice" :model="formBiddingAdvice" class="demo-ruleForm">
                         <el-form-item>
-                            <el-input type="textarea" v-model="formBiddingAdvice.desc"  ref="input_desc"></el-input>
+                            <el-input type="textarea" v-model="formBiddingAdvice.desc"  ref="input_desc" ></el-input>
                         </el-form-item>
                         <el-form-item class="textAlignC">
                             <el-button type="primary" @click="saveBiddingAdvice(formBiddingAdvice)" size="small"
@@ -544,9 +544,9 @@
             <el-dialog
                     title="解锁申请记录"
                     :visible.sync="$store.state.failureEnery.unlock_record"
-                    width="700px"
+                    width="1300px"
             >
-                <ViewUnlockRecord :msg="unlock_dialog_check"></ViewUnlockRecord>
+                <ViewUnlockRecord :msg="unlock_dialog_check" :title_mg="title_mg"></ViewUnlockRecord>
             </el-dialog>
             <!--解锁申请记录-->
 
@@ -564,10 +564,10 @@
                 </el-row>
             </el-dialog>
 
-             <!--调整评标价弹框-->
+            <!--调整评标价弹框-->
             <el-dialog
-                title="投标人最新报价列表"
-                :visible.sync="ChangedialogVisible"
+                    title="投标人最新报价列表"
+                    :visible.sync="ChangedialogVisible"
             >
                 <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
             </el-dialog>
@@ -668,6 +668,7 @@
                 },
                 saveBiddingAdviceLoading: false,//评标意见弹框保存lodding
                 unlock_dialog_check: [],//评分解锁记录
+                title_mg:"",//评分解锁记录表头信息
                 zhaunjiaGerenMarkData: [],//专家个人打分表
                 to_submit_prompt_baohao: "",//专家个人打分表分包号第几包
                 companyNameData: [],
@@ -685,12 +686,20 @@
                 ChangedialogVisible:false,  //调整评标价弹框
                 TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
-
+                type:''
             }
         },
         created() {
-            this.methodType = this.$route.query.methodType;
-            console.log(this.$route.query.type);
+            if (this.$route.query.type == undefined) {
+                this.methodType = 2;
+            } else {
+                this.methodType = this.$route.query.methodType;
+            }
+            if (this.$route.query.type == undefined) {
+                this.type =70;
+            } else {
+                this.type = this.$route.query.type;
+            }
         },
         mounted() {
             this.init();
@@ -700,8 +709,8 @@
             init() {   //初始化 table的数据
                 this.page_loading = true;
                 this.$axios.post('/api/pingshen_huizong', {
-                    type: this.$route.query.type,
-                    methodType: this.$route.query.methodType
+                    type: this.type,
+                    methodType: this.methodType
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
@@ -716,6 +725,7 @@
                         this.isShowProgressPage = res.data.bidMsg.eviewrItemsMsg.isShow;
                         this.unlockDataRadio = res.data.bidMsg.eviewrItemsMsg.jiesuoData.radioList;
                         this.unlock_dialog_check = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
+                        this.title_mg = res.data.bidMsg.eviewrItemsMsg.title_mg;
                         this.tippsDialogName = res.data.bidMsg.eviewrItemsMsg.jiesuoData.tippsDialogName;
                         this.zhaunjiaGerenMarkData = res.data.bidMsg.eviewrItemsMsg.zhaunjiaGerenMarkData;
                         this.biddersScoreTable=res.data.bidMsg.eviewrItemsMsg.biddersScoreTable;
@@ -729,7 +739,7 @@
                         this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
                         this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                         this.$store.state.failureEnery.isshow = false;
-                        if(this.$route.query.methodType==1){
+                        if(this.methodType==1){
                             // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
                             if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
                                 this.$store.state.failureEnery.is_pingshen_show = false;
@@ -738,14 +748,14 @@
                                 this.is_disabled = true;
                                 this.ruleForm.desc='2';
                             }
-                        }else if(this.$route.query.methodType==2){
+                        }else if(this.methodType==2){
                             // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);//0：提交前那个页面显示，1:提交前的页面
                             // console.log(res.data.bidMsg.eviewrItemsMsg.tijiao);
-                                if(res.data.bidMsg.eviewrItemsMsg.tijiao==1){ //1,提交之前的，0，提交之前的
-                                    this.$store.state.failureEnery.is_pingshen_show=true;
-                                }else{
-                                    this.$store.state.failureEnery.is_pingshen_show=false;
-                                }
+                            if(res.data.bidMsg.eviewrItemsMsg.tijiao==1){ //1,提交之前的，0，提交之前的
+                                this.$store.state.failureEnery.is_pingshen_show=true;
+                            }else{
+                                this.$store.state.failureEnery.is_pingshen_show=false;
+                            }
                         }
                     }
                     this.page_loading = false;
@@ -783,8 +793,8 @@
                     }).then(res=>{
                         if(res.status == 200){
                             //console.log(res.data,99999)
-                        this.ChangePriceTk=res.data.msgBox;
-                        this.TkOneloading=false;
+                            this.ChangePriceTk=res.data.msgBox;
+                            this.TkOneloading=false;
                         }
                     })
                 }
@@ -1085,7 +1095,7 @@
                         this.submitFormLoadingZHPB = false;
                         this.$store.state.failureEnery.tijiaoDialogZHPB=false;
                         // $(".hide_span").hide();
-                        this.$store.state.failureEnery.is_pingshen_show=false;
+                        this.$store.state.failureEnery.is_pingshen_show=true;
 
                     }
                 });
@@ -1190,10 +1200,11 @@
                     background: none;
                 }
             }
-            .biddingAdvice {
-                .el-textarea__inner {
-                    min-height: 150px !important;
-                }
+
+        }
+        .biddingAdvice,.reviewLockRequest {
+            .el-textarea__inner {
+                min-height: 150px !important;
             }
         }
     }

@@ -315,19 +315,19 @@
             </el-dialog>
             <!--标中质询弹框-->
             <!--全部选中提示弹框-->
-            <el-dialog
-                    title="全部选中提示"
-                    :visible.sync="determineOperatingDialog"
-                    width="30%"
-            >
-                <el-row class="textAlignC fs14" style="line-height: 30px">
-                    您确定要执行此操作！
-                </el-row>
-                <el-row class="textAlignC pt20">
-                    <el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>
-                    <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
-                </el-row>
-            </el-dialog>
+            <!--<el-dialog-->
+                    <!--title="全部选中提示"-->
+                    <!--:visible.sync="determineOperatingDialog"-->
+                    <!--width="30%"-->
+            <!--&gt;-->
+                <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                    <!--您确定要执行此操作！-->
+                <!--</el-row>-->
+                <!--<el-row class="textAlignC pt20">-->
+                    <!--<el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>-->
+                    <!--<el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>-->
+                <!--</el-row>-->
+            <!--</el-dialog>-->
             <!--点击个人形式审计表按钮弹框-->
             <el-dialog
                     :title="personalAuditFormBtn"
@@ -477,7 +477,7 @@
                     ]
                 },
                 failureEntryDialog: false,//不合格录入弹框
-                determineOperatingDialog: false,//点击全部选中提示弹框\
+                // determineOperatingDialog: false,//点击全部选中提示弹框\
                 num_pro:0,
                 allNumPro:0,
                 ChangedialogVisible:false,  //调整评标价弹框
@@ -486,13 +486,22 @@
             }
         },
         created() {
-            this.methodType = this.$route.query.methodType;
+            // this.methodType = this.$route.query.methodType;
             // console.log(this.type_btn);
+            // this.methodType = this.$route.query.methodType;
+
+
+            if (this.$route.query.type == undefined) {
+                this.methodType = 1;
+            } else {
+                this.methodType = this.$route.query.methodType;
+            }
             if (this.$route.query.type == undefined) {
                 this.type_btn = 1;
             } else {
                 this.type_btn = this.$route.query.type;
             }
+
         },
         mounted() {
             $(".positionDiv").hide();
@@ -679,8 +688,45 @@
 
 
           /*-------------资格审查start-------------------------*/
+            // allChecked() {//全选（不用区分url）
+            //     this.determineOperatingDialog = true;
+            // },
+
+
             allChecked() {//全选（不用区分url）
-                this.determineOperatingDialog = true;
+                // this.determineOperatingDialog = true;
+
+                let _this=this;
+                _this.$confirm('您确定要执行此操作?', '全部选中提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    // this.$message({
+                    //     type: 'success',
+                    //     message: '删除成功!'
+                    // });
+
+                    _this.allCheckedBtnLoading = true;
+                    // _this.determineOperatingDialog = false;
+                    _this.$axios.post('/api/allChecked_fhx', {
+                        // id:id
+                    }).then(res => {
+                        if (res.status === 200) {
+                            _this.dingdang_tableData.forEach((e, i) => {
+                                _this.companyname_toubiao.forEach((k, j) => {
+                                    e[`value${j + 1}`] = '合格';
+                                });
+                                _this.allCheckedBtnLoading = false;
+                            })
+                        }
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消全部选中'
+                    });
+                });
             },
             allSubmit() {//父级提交
                 this.allSubmitBtnLoading = true;
@@ -705,29 +751,29 @@
                     }
                 })
             },
-            rebackAllChecked() {//取消全选
-                this.determineOperatingDialog = false;
-            },
+            // rebackAllChecked() {//取消全选
+            //     this.determineOperatingDialog = false;
+            // },
             personalAuditForm() {
                 this.personalAuditFormDialog = true;
                 console.log(this.dingdang_tableData);
             },
-            comfrimAllChecked() {//确定全选
-                this.allCheckedBtnLoading = true;
-                this.determineOperatingDialog = false;
-                this.$axios.post('/api/allChecked_fhx', {
-                    // id:id
-                }).then(res => {
-                    if (res.status === 200) {
-                        this.dingdang_tableData.forEach((e, i) => {
-                            this.companyname_toubiao.forEach((k, j) => {
-                                e[`value${j + 1}`] = '合格';
-                            });
-                            this.allCheckedBtnLoading = false;
-                        })
-                    }
-                });
-            },
+            // comfrimAllChecked() {//确定全选
+            //     this.allCheckedBtnLoading = true;
+            //     this.determineOperatingDialog = false;
+            //     this.$axios.post('/api/allChecked_fhx', {
+            //         // id:id
+            //     }).then(res => {
+            //         if (res.status === 200) {
+            //             this.dingdang_tableData.forEach((e, i) => {
+            //                 this.companyname_toubiao.forEach((k, j) => {
+            //                     e[`value${j + 1}`] = '合格';
+            //                 });
+            //                 this.allCheckedBtnLoading = false;
+            //             })
+            //         }
+            //     });
+            // },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
                 // console.log(rowIndex, colIndex, val, obj, title);
                 this.rowIndex = rowIndex;

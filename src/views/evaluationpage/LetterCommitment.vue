@@ -55,7 +55,12 @@
         created() {
             //console.log(this.$route.query.types);
             //console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
-            this.val=this.$route.query.methodType;
+
+            if (this.$route.query.type == undefined) {
+                this.val= 1;
+            } else {
+                this.val=this.$route.query.methodType;
+            }
             console.log(this.val);
             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;

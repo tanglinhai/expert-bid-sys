@@ -149,10 +149,10 @@
                                                                @click="checkUnfinishedItems" type="primary" plain>
                                                            <i class=" icon iconfont icon-weiwancheng " ></i> 查看未完成项
                                                     </el-button>
-                                                    <el-button size="small"  @click="saveBtn" type="primary"
-                                                               class="ml10">
-                                                        <i  class="icon iconfont icon-baocun " ></i>保存
-                                                        </el-button>
+                                                    <!--<el-button size="small"  @click="saveBtn" type="primary"-->
+                                                               <!--class="ml10">-->
+                                                        <!--<i  class="icon iconfont icon-baocun " ></i>保存-->
+                                                        <!--</el-button>-->
 
                                                     <el-button size="small"  @click="submitBusiness" type="primary"
                                                                class="submit_business" v-if="type==8">
@@ -175,9 +175,9 @@
                                                         提交其他
                                                     </el-button>
                                                 </span>
-                                                <el-button size="small"
-                                                           @click="checkSchedule" class="ml10" type="primary" plain> <i class="mr3 icon iconfont icon-chakan1"></i>查看定档表
-                                                </el-button>
+                                                <!--<el-button size="small"-->
+                                                           <!--@click="checkSchedule" class="ml10" type="primary" plain> <i class="mr3 icon iconfont icon-chakan1"></i>查看定档表-->
+                                                <!--</el-button>-->
                                             </div>
                                         </el-col>
                                         <!--table-->
@@ -971,14 +971,14 @@
                     </el-row>
                 </div>
             </div>
-            <el-dialog
-                    title="查看定档评议表 "
-                    :visible.sync="$store.state.failureEnery.viewSchedule"
-                    width="80%"
-            >
-                <ViewSchedule :msgBox="gradeData" :msg="committeeGudges"
-                              :title_data="viewScheduleTitileData"></ViewSchedule>
-            </el-dialog>
+            <!--<el-dialog-->
+                    <!--title="查看定档评议表 "-->
+                    <!--:visible.sync="$store.state.failureEnery.viewSchedule"-->
+                    <!--width="80%"-->
+            <!--&gt;-->
+                <!--<ViewSchedule :msgBox="gradeData" :msg="committeeGudges"-->
+                              <!--:title_data="viewScheduleTitileData"></ViewSchedule>-->
+            <!--</el-dialog>-->
             <el-dialog
                     title="未完成打分项 "
                     :visible.sync="$store.state.failureEnery.ViewUnfinishedItems"
@@ -990,6 +990,7 @@
                     title="评分说明编辑 "
                     :visible.sync="scoreShowsDialog "
                     width="700px"
+                    class="scoreShows"
             >
                 <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item label=" 评分说明： " prop="desc">
@@ -1119,7 +1120,7 @@
 
 <script>
     import NavBar from '../../components/publicVue/NavBar';
-    import ViewSchedule from '../../components/publicVue/ViewSchedule';
+    // import ViewSchedule from '../../components/publicVue/ViewSchedule';
     import ViewUnfinishedItems from '../../components/publicVue/ViewUnfinishedItems';
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
@@ -1129,7 +1130,7 @@
         name: "business-other",
         components: {
             NavBar,
-            ViewSchedule,
+            // ViewSchedule,
             ViewUnfinishedItems,
             AbandonedTender,//废标
             ChangePrice,//调整评标基准价
@@ -1145,9 +1146,9 @@
                 dingdang_tableData: [],//定档评议table
                 evaluationExpert: "",// 专家
                 leibie: '',//定档table类别
-                gradeData: [],//查看定档评议表
-                viewScheduleTitileData: [],//查看定档评议表头数据
-                committeeGudges: [],//评委委员会
+               // gradeData: [],//查看定档评议表
+                //viewScheduleTitileData: [],//查看定档评议表头数据
+                //committeeGudges: [],//评委委员会
                 viewUnfinishedData: [],//查看未完成项弹框数据
                 checkedArr: [],//选中的复选框数量
                 allRaioNum: '',// 定档table中所有的复选框数量
@@ -1186,9 +1187,18 @@
         },
         created() {
             // console.log(this.$route.query.methodType);
-            this.methodType = this.$route.query.methodType;
-            this.type = this.$route.query.type;
-
+            // this.methodType = this.$route.query.methodType;
+            // this.type = this.$route.query.type;
+            if (this.$route.query.type == undefined) {
+                this.methodType = 1;
+            } else {
+                this.methodType = this.$route.query.methodType;
+            }
+            if (this.$route.query.type == undefined) {
+                this.type = 8;
+            } else {
+                this.type = this.$route.query.type;
+            }
         },
         computed: {
             /*filter_standard(){
@@ -1368,9 +1378,9 @@
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.gongzuo_name;
-                        this.gradeData = res.data.bidMsg.eviewrItemsMsg.msgBox;//定档弹框数据
-                        this.viewScheduleTitileData = res.data.bidMsg.eviewrItemsMsg.viewScheduleTitileData;//定档弹框数据
-                        this.committeeGudges = res.data.bidMsg.eviewrItemsMsg.committeeGudges;//定档弹框数据
+                       // this.gradeData = res.data.bidMsg.eviewrItemsMsg.msgBox;//定档弹框数据
+                        //this.viewScheduleTitileData = res.data.bidMsg.eviewrItemsMsg.viewScheduleTitileData;//定档弹框数据
+                        //this.committeeGudges = res.data.bidMsg.eviewrItemsMsg.committeeGudges;//定档弹框数据
                         this.viewUnfinishedData = res.data.bidMsg.eviewrItemsMsg.viewUnfinishedData;//查看未完成项弹框数据
                         this.evaluationExpert = res.data.bidMsg.eviewrItemsMsg.evaluationExpert;
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
@@ -1431,38 +1441,38 @@
             },
             checkPdf(column, event) {
             },
-            checkSchedule() {//查看定档表
-                this.$store.state.failureEnery.viewSchedule = true;
-            },
+            // checkSchedule() {//查看定档表
+            //     this.$store.state.failureEnery.viewSchedule = true;
+            // },
             checkUnfinishedItems() {//查看未完成项
                 this.$store.state.failureEnery.ViewUnfinishedItems = true;
             },
-            saveBtn() {//保存（传递radio选中的值）
-                let url;
-                if (this.type == 8) {
-                    url = '/api/business_save';
-                }
-                else if (this.type == 9) {
-                    url = '/api/jishu_save';
-                }
-                else if (this.type == 10) {
-                    url = '/api/fuwu_save';
-                }
-                else if (this.type == 11) {
-                    url = '/api/qita_save';
-                }
-                this.$axios.post(url, {
-                    type: parseInt(this.type)
-                }).then(res => {
-                    if (res.status == 200) {
-                        this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                        this.$message({
-                            message: '保存成功！',
-                            type: 'success',
-                        });
-                    }
-                })
-            },
+            // saveBtn() {//保存（传递radio选中的值）
+            //     let url;
+            //     if (this.type == 8) {
+            //         url = '/api/business_save';
+            //     }
+            //     else if (this.type == 9) {
+            //         url = '/api/jishu_save';
+            //     }
+            //     else if (this.type == 10) {
+            //         url = '/api/fuwu_save';
+            //     }
+            //     else if (this.type == 11) {
+            //         url = '/api/qita_save';
+            //     }
+            //     this.$axios.post(url, {
+            //         type: parseInt(this.type)
+            //     }).then(res => {
+            //         if (res.status == 200) {
+            //             this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
+            //             this.$message({
+            //                 message: '保存成功！',
+            //                 type: 'success',
+            //             });
+            //         }
+            //     })
+            // },
             submitBusiness() {//商务提交
                 this.$store.state.failureEnery.submitPrompt = true;
 
@@ -1859,6 +1869,11 @@
 
             .mainContentWarp .content .div_pdf .div_pdf_wrap .my-pdf {
                 padding-left: 0;
+            }
+        }
+        .scoreShows{
+            .el-textarea__inner {
+                min-height: 150px !important;
             }
         }
     }

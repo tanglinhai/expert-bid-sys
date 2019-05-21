@@ -66,9 +66,11 @@
                                                 <i class=" icon iconfont icon-chakanjilu mr3"></i>
                                                 查看资格审查项解锁记录
                                             </el-button>
-                                            <el-button size="small" type="primary" plain  @click="quaUnlockApplication">
-                                                <i class=" icon iconfont icon-jiesuo1 mr3"></i>资格审查项解锁
-                                            </el-button>
+                                            <span class="show_div" style="display: none;margin-left: 10px">
+                                                <el-button size="small" type="primary" plain  @click="quaUnlockApplication">
+                                                    <i class=" icon iconfont icon-jiesuo1 mr3"></i>资格审查项解锁
+                                                </el-button>
+                                            </span>
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -131,9 +133,9 @@
             <el-dialog
                     title="解锁申请记录"
                     :visible.sync="$store.state.failureEnery.unlock_record"
-                    width="700px"
+                    width="1300px"
             >
-                <ViewUnlockRecord :msg="look_unlock_dialog"></ViewUnlockRecord>
+                <ViewUnlockRecord :msg="look_unlock_dialog" :title_mg="title_mg"></ViewUnlockRecord>
             </el-dialog>
             <el-dialog
                     title="资格审查项汇总解锁申请"
@@ -259,6 +261,7 @@
                 evaluationLeader: "",//评标委员会组长
                 unlock_table: [],//所有专家都是100%的时候显示的table
                 look_unlock_dialog: [],//解锁申请记录
+                title_mg:"",//解锁申请记录弹框里的头部信息
                 other_explain: "",//其他说明
                 individualTrialData: [],//查看个人资格审查项表弹框数据
                 companyName: [],//查看个人资格审查项表弹框投标人
@@ -276,7 +279,6 @@
                 submit_huizong:false,//汇总页面提交
                 count: '5',   //汇总页面提交成功弹框倒计时5秒
                 methodType:'',
-
                 ChangedialogVisible:false,  //调整评标价弹框
                 TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
@@ -284,8 +286,18 @@
         },
         created() {
             // console.log(this.$route.query.methodType);
-            this.methodType=this.$route.query.methodType;
-            this.type = this.$route.query.type;
+
+            if (this.$route.query.methodType == undefined) {
+                this.methodType = 1;
+            } else {
+                this.methodType=this.$route.query.methodType;
+            }
+           // this.type = this.$route.query.type;
+            if (this.$route.query.type == undefined) {
+                this.type = 2;
+            } else {
+                this.type = this.$route.query.type;
+            }
         },
         mounted() {
             if(this.type==2){
@@ -296,7 +308,7 @@
                 this.huizongSubmitTips='详细评审（技术）汇总';
             }
            this.init();
-
+            $(".show_div").hide();
         },
         computed: {},
         methods: {
@@ -318,6 +330,7 @@
                         this.evaluationLeader = res.data.bidMsg.eviewrItemsMsg.evaluationLeader;
                         this.other_explain = res.data.bidMsg.eviewrItemsMsg.other_explain;
                         this.look_unlock_dialog = res.data.bidMsg.eviewrItemsMsg.unlock_dialog_check;
+                        this.title_mg= res.data.bidMsg.eviewrItemsMsg.title_mg;
                         this.individualTrialData = res.data.bidMsg.eviewrItemsMsg.msgBox;//个人初审活动表
                         this.grcs_titile_data = res.data.bidMsg.eviewrItemsMsg.grcs_titile_data;
                         this.companyName = res.data.bidMsg.eviewrItemsMsg.companyNameData;
@@ -437,6 +450,7 @@
             huizongSubmitSucceed(){
                 this.$store.state.failureEnery.tijiaoHuizong=false;
                 $(".hide_div").hide();
+                $(".show_div").show();
                 $('.qita_expalin').show();
                 $(".qita_expalin").text(this.form.desc);
                 $('.qita_expalin_input').hide()

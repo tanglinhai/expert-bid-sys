@@ -134,7 +134,12 @@
             //console.log(this.$route.query.type,999)
             this.$store.state.navCommon.types=this.$route.query.types;
             console.log(this.$store.state.navCommon.types,7)
-            this.val=this.$route.query.methodType;
+           // this.val=this.$route.query.methodType;
+            if (this.$route.query.type == undefined) {
+                this.val= 1;
+            } else {
+                this.val=this.$route.query.methodType;
+            }
         },
         mounted(){
             

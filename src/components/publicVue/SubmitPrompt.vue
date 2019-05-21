@@ -89,20 +89,43 @@
             reback() {
                 this.$store.state.failureEnery.submitPrompt = false;
             },
+        //     comfrim() {//确定提交
+        //         this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
+        //             if (res.status == '200') {
+        //                 if (this.pro_num != 100.0) {
+        //                     this.$store.state.failureEnery.tijiaoNot100 = true;
+        //                 } else {
+        //                     this.$store.state.failureEnery.tijiao100 = true;
+        //                     this.goGrdoupRecor();//倒计时开始
+        //
+        //                 }
+        //             }
+        //         })
+        //
+        // },
             comfrim() {//确定提交
                 this.$axios.post('/api/all_submit_confirm').then(res => { //审查项接口
                     if (res.status == '200') {
                         if (this.pro_num != 100.0) {
-                            this.$store.state.failureEnery.tijiaoNot100 = true;
-                        } else {
-                            this.$store.state.failureEnery.tijiao100 = true;
-                            this.goGrdoupRecor();//倒计时开始
+                            // this.$store.state.failureEnery.tijiaoNot100 = true;
+                            this.$message({
+                                message:this.name+'评审还未完成，不能提交 '+this.name+'评审数据！',
+                                type: 'warning'
+                            });
+                            this.$store.state.failureEnery.submitPrompt=false;
 
+                        } else {
+                            // this.$store.state.failureEnery.tijiao100 = true;
+                            // this.goGrdoupRecor();//倒计时开始
+                            this.$message({
+                                message: this.name+'评审成功！',
+                                type: 'success'
+                            });
+                            this.$store.state.failureEnery.submitPrompt=false;
                         }
                     }
                 })
-
-        },
+            },
         tijiaoNot100Comfrim() {//未完成100%确定
             this.$store.state.failureEnery.tijiaoNot100 = false;
         },

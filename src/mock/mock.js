@@ -1608,16 +1608,26 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
+                    'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',//解锁记录弹框里面的头部信息
                     'unlock_dialog_check':[{
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult':"同意",
                         'unlockReason': Random.csentence()
-                    }],
+                    },
+                        {
+                            'applicantPeole': Random.cname(),
+                            'applicantTime': Random.datetime(),
+                            'unlockObject': Random.cname(),
+                            'applicantReason': '格式',
+                            'assessingOfficer': Random.cname(),
+                            'assessingResult':"同意",
+                            'unlockReason': Random.csentence()
+                        },
+                    ],
                     'msgBox': msg,
                     'companyNameData': [
                         {
@@ -2273,16 +2283,26 @@ Mock.mock('/api/table_data', 'post', (options) => {
                             ]
                         },
                     ],
+                    'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                     'unlock_dialog_check':[ {
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult':"同意",
                         'unlockReason': Random.csentence()
-                    }],
+                    },{
+
+                        'applicantPeole': Random.cname(),
+                        'applicantTime': Random.datetime(),
+                        'unlockObject': Random.cname(),
+                        'applicantReason': '投标函格式',
+                        'assessingOfficer': Random.cname(),
+                        'assessingResult':"同意",
+                        'unlockReason': Random.csentence()
+                    }
+                   ],
                     'msgBox': msg,
                     'companyNameData': [
                         {
@@ -2893,7 +2913,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
             data_msg.push({//评审汇总table
                 'id': Random.id(),
                 'num': Random.integer(1, 7),
-                'name': "重庆网控科技发展有限公司",
+                'name': "（1）重庆网控科技发展有限公司",
                 'tender_offer': '10000.0000',
                 'total': '10000.0000',
                 'ranking': Random.integer(1, 7),
@@ -2940,23 +2960,23 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
                         "tippsDialogName":'解锁申请'//评分解锁成功提示框的name
                     },
+                    'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                     'unlock_dialog_check':[ {
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult': "同意",
                         'unlockReason': Random.csentence()
                     },{
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
+
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult': "同意",
                         'unlockReason': Random.csentence()
                     }],
                     "zhaunjiaGerenMarkData":  [
@@ -3086,22 +3106,22 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     ],
                     'pingshenhuizongTableData': [
                         {
-                            'bidderNumber': '2',
-                            'bidder': '夏丰热工研究院有限公司',
+                            // 'bidderNumber': '2',
+                            'bidder': '(2)夏丰热工研究院有限公司',
                             "pricePoints":'21.00',
                             'finalScore':'12.00',
                             "ranking":'3'
                         },
                         {
-                            'bidderNumber': '3',
-                            'bidder': '普瑞太阳能有限公司',
+                            // 'bidderNumber': '3',
+                            'bidder': '(3)普瑞太阳能有限公司',
                             "pricePoints":'49.00',
                             'finalScore':'10.00',
                             "ranking":'2'
                         },
                         {
-                            'bidderNumber': '1',
-                            'bidder': '阿里巴巴',
+                            // 'bidderNumber': '1',
+                            'bidder': '(1)阿里巴巴',
                             "pricePoints":'29.00',
                             'finalScore':'10.00',
                             "ranking":'1'
@@ -3270,23 +3290,22 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
                         "tippsDialogName":'解锁申请'//评分解锁成功提示框的name
                     },
+                    'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                     'unlock_dialog_check':[ {
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult':"同意",
                         'unlockReason': Random.csentence()
                     },{
-                        'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
-                        'applicantPeole': Random.cname(),
+                         'applicantPeole': Random.cname(),
                         'applicantTime': Random.datetime(),
                         'unlockObject': Random.cname(),
                         'applicantReason': '投标函格式',
                         'assessingOfficer': Random.cname(),
-                        'assessingResult': Random.integer(0, 1),
+                        'assessingResult':"同意",
                         'unlockReason': Random.csentence()
                     }],
                     'biddersScoreTable':[//投标人分项得分表数据
@@ -3539,22 +3558,22 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     ],//评审人数据
                     'pingshenhuizongTableData': [
                         {
-                            'bidderNumber': '2',
-                            'bidder': '夏丰热工研究院有限公司',
+                            // 'bidderNumber': '2',
+                            'bidder': '(2)夏丰热工研究院有限公司',
                             "pricePoints":'21.00',
                             'finalScore':'12.00',
                             "ranking":'3'
                         },
                         {
-                            'bidderNumber': '3',
-                            'bidder': '普瑞太阳能有限公司',
+                            // 'bidderNumber': '3',
+                            'bidder': '(3)普瑞太阳能有限公司',
                             "pricePoints":'49.00',
                             'finalScore':'10.00',
                             "ranking":'2'
                         },
                         {
-                            'bidderNumber': '1',
-                            'bidder': '阿里巴巴',
+                            // 'bidderNumber': '1',
+                            'bidder': '(1)阿里巴巴',
                             "pricePoints":'29.00',
                             'finalScore':'10.00',
                             "ranking":'1'
