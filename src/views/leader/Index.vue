@@ -41,7 +41,7 @@
                             </div>
                         </el-col>
                     </template>
-                    <el-row class="contentBox" v-for="(stemp,index) in projectConData" :key="index" >
+                    <el-row class="contentBox" v-for="(stemp,subIndex) in item.bagConMsg" :key="subIndex" >
                         <el-col :span="3">
                             <div class="grid-content bg-purple-dark overflowText">
                                 当前标包：<span class="stempBox">{{stemp.bag}}</span>
@@ -69,10 +69,17 @@
                                     <el-button size="small">暂停评标</el-button>
                                 </div>
                                 <div v-else>
-                                    <el-button type="primary" size="small" @click="imbeView">我要评标</el-button>
+                                    <el-button type="primary" size="small" @click="imbeView(item,stemp)">我要评标</el-button>
                                     <el-button type="primary" size="small" @click="goto">查看评标</el-button> 
                                     <el-button size="small" class="btnBg" @click="stopBe(stemp)" v-text=" stemp.btnStatus == 0 ? '暂停评标' : '恢复评标' "></el-button>
                                 </div>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row class="loadBox">
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark">
+                                <el-button type="text" size="small" :loading="item.loadMore" :icon="item.loadMore == false ? 'el-icon-caret-bottom' : ''" @click="loadMoreBag(item)">加载更多</el-button>
                             </div>
                         </el-col>
                     </el-row>
@@ -103,11 +110,10 @@ export default {
             search_value:'',
             search_loading:false,
             projectTitleData:[],
-            projectConData:[],
             activeNames:0,
             bodyLoading:false,
             currentPage: 1,
-            randomParams:Math.floor(Math.random()*3),
+            randomParams:Math.floor(Math.random()*2),
         }
     },
     mounted() {
@@ -115,22 +121,17 @@ export default {
         this.init();
     },
     methods: {
-        imbeView(){
+        imbeView(val,stemp){
             window.localStorage.setItem('sub','0');
             this.$router.push('/groupLeader/Examination');
         },
-        goto(){//开始评标
+        goto(){
             switch(this.randomParams){
                 case 0:
-                    this.$router.push('/groupLeader/SignIn');
-                    break;
+                    return this.$router.push('/groupLeader/SignIn');
                 case 1:
                     window.localStorage.setItem('sub','1');
-                    this.$router.push('/groupLeader/Examination');
-                    break;
-                case 2:
-                    this.$router.push('/groupLeader/ViewBe');
-                    break;
+                    return this.$router.push('/groupLeader/Examination');
             }
         },
         init(){
@@ -140,7 +141,6 @@ export default {
                     // console.log(res);
                     this.bodyLoading=false;
                     this.projectTitleData = res.data.bagTitleMsg;
-                    this.projectConData = res.data.bagConMsg;
                 }
             })
         },
@@ -161,7 +161,6 @@ export default {
                         this.search_loading=false;
                         this.bodyLoading=false;
                         this.projectTitleData = res.data.bagTitleMsg;
-                        this.projectConData = res.data.bagConMsg;
                         this.seach_value="";
                     }
                 })
@@ -180,6 +179,16 @@ export default {
         // 暂停评标
         stopBe(data){
           data.btnStatus == 0 ? data.btnStatus = 1 : data.btnStatus = 0; 
+        },
+        loadMoreBag(val){
+            val.loadMore = true;
+            this.$axios.post('/api/leaderBagMsg').then(res => {
+                if(res.status == 200){
+                    val.loadMore = false;
+                    this.projectTitleData = res.data.bagTitleMsg;
+                    this.projectConData = res.data.bagConMsg;
+                }
+            })
         }
     },
 }
@@ -243,6 +252,17 @@ export default {
         }
         .textIndent{
             text-indent: 15px;
+        }
+        .loadBox{
+            border-bottom: 1px solid #d9e0e7;
+            border-left: 1px solid #d9e0e7;
+            border-right: 1px solid #d9e0e7;
+            line-height: 40px;
+            text-align: center;
+            &:hover{
+                background: #f9fafc;
+                cursor: pointer;
+            }
         }
         .contentBox{
             border-bottom: 1px solid #d9e0e7;

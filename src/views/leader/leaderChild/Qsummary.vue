@@ -1,6 +1,6 @@
 <template>
     <div class="qSummary">
-        <div>
+        <div v-if="isHide == 0" v-loading="tabLoad">
             <el-row class="proBox">
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark">
@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :span="20">
                     <div class="grid-content bg-purple-dark" style="text-align:right;">
-                        <el-button size="small" v-show="isShow" @click="submit">提交</el-button>
+                        <!-- <el-button size="small" v-show="isShow" @click="submit">提交</el-button> -->
                         <el-button size="small" v-show="isShow" @click="dialogVisible = true">查看个人资格审查项表</el-button>
                         <el-button size="small" @click="viewUrDialog = true">查看资格审查项解锁记录</el-button>
                         <el-button size="small" @click="uaDialog = true">资格审查项解锁</el-button>
@@ -95,7 +95,7 @@
                 </span>
             </el-dialog>
         </div>
-        <div class="proTaBox" v-show="false">
+        <div class="proTaBox" v-if="isHide == 1" v-loading="proLoad">
             <el-table
                 :data="proTabData"
                 style="width: 100%"
@@ -129,6 +129,9 @@ import SeeOwn from './childDialog/SeeOwnTable';
 import ViewUr from './childDialog/ViewUnlockRecords';
 import Unlock from './childDialog/UnlockApplication';
 export default {
+    props:{
+        overOrUn:Number,
+    },
     components:{
         SeeOwn,
         ViewUr,
@@ -142,8 +145,13 @@ export default {
             dialogVisible:false,
             viewUrDialog:false,
             uaDialog:false,
+            tabLoad:true,
             //------------
             proTabData:[],
+            proLoad:true,
+
+            //--------
+            isHide:'',
 
         }
     },
@@ -154,12 +162,14 @@ export default {
         init(){
             this.$axios.post('./api/pqeatMsg').then(res => {
                 if(res.status == 200){
+                    this.tabLoad = false;
                     this.tableData=res.data.pdf;
                     // console.log(this.tableData)
                 }
             })
             this.$axios.post('./api/proData').then(res => {
                 if(res.status == 200){
+                    this.proLoad = false;
                     this.proTabData = res.data.data;
                 }
             })
@@ -188,6 +198,12 @@ export default {
             this.isShow = false;
         }
     },
+    watch:{
+        overOrUn(val){
+            // console.log(val);
+            this.isHide = val;
+        }
+    }
 }
 </script>
 

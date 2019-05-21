@@ -9,20 +9,21 @@ Mock.mock('/api/leaderBagMsg','post',{
     'bagTitleMsg|1-3':[
         {
             'title':'辅助-招标投标法-最低评标价【二次公告】',
-            'num':'0635-1918WQE3'
-        }
-    ],
-    'bagConMsg|1-5':[
-        {
-            'bag':'第' + '@natural(12, 28)' + '包',
-            'pName':'@cname',
-            'stTime':Random.datetime(),
-            'ovTime':Random.datetime(),
-            'nowStatus|1':['进行中','已暂停','已结束'],
-            'id': '@id',
-            'btnStatus|1':[0,1],
-            'beFlag':true,
-            'progre|1':['资格审查','符合性审查','详细评审','商务']
+            'num':'0635-1918WQE3',
+            'loadMore':false,
+            'bagConMsg|1-5':[
+                {
+                    'bag':'第' + '@natural(12, 28)' + '包',
+                    'pName':'@cname',
+                    'stTime':Random.datetime(),
+                    'ovTime':Random.datetime(),
+                    'nowStatus|1':['进行中','已暂停','已结束'],
+                    'id': '@id',
+                    'btnStatus|1':[0,1],
+                    'beFlag':true,
+                    'progre|1':['资格审查','符合性审查','详细评审','商务']
+                }
+            ]
         }
     ]
 })
@@ -146,5 +147,19 @@ Mock.mock('./api/proData','post',{
         {name:'评标专家7',pro:5,statu:'未完成'},
         {name:'评标专家2',pro:50,statu:'未完成'},
         {name:'评标专家17',pro:100,statu:'完成'},
+    ]
+})
+
+Mock.mock('./api/pshz','post',{
+    data:[
+        {name:'评审专家一',sgress:'5',yons:'未完成',jgress:'13',yonj:'未完成',fgress:'3',yonf:'未完成',qgress:'8',yonq:'未完成'},
+        {name:'评审专家二',sgress:'5',yons:'未完成',jgress:'18',yonj:'未完成',fgress:'3',yonf:'未完成',qgress:'50',yonq:'未完成'},
+        {name:'评审专家九',sgress:'13',yons:'未完成',jgress:'13',yonj:'未完成',fgress:'20',yonf:'未完成',qgress:'8',yonq:'未完成'},
+    ]
+})
+
+Mock.mock('./api/ppycjl','post',{
+    'data|1-5':[
+        {'ycqk':'错误代码@natural(1,99)','cljg|1':['异常已解决','异常未解决'],'clcs':'@id','jlr':'@cname','jd':'@cname','yy':'未知','bz':'真是场景请勿...','sqr':'@cname','scjd':'第@natural(1,5)阶段','sqrq':'@datetime','zt|1':['正常','异常'],'sqyy':'未知错误'},
     ]
 })

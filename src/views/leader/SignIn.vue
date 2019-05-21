@@ -1,24 +1,24 @@
 <template>
     <div class="signIn">
         <el-row class="onlyBtnBox">
+            <el-col :span="8">
+                <div class="grid-content bg-purple-dark">
+                    标包名称：2019年水利运输服务招标项目
+                </div>
+            </el-col>
             <el-col :span="6">
                 <div class="grid-content bg-purple-dark">
-                    标包名称：
+                    标包号：0635—1909qwerN1197
                 </div>
             </el-col>
             <el-col :span="4">
                 <div class="grid-content bg-purple-dark">
-                    标包号：
+                    项目资料：pdf文件
                 </div>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="6" style="text-align:right;">
                 <div class="grid-content bg-purple-dark">
-                    项目资料：
-                </div>
-            </el-col>
-            <el-col :span="10" style="text-align:right;">
-                <div class="grid-content bg-purple-dark">
-                    <el-button size="small">结束评标</el-button>
+                    <el-button size="small" @click="overBe = '导出结果'" v-text="overBe"></el-button>
                    <el-button size="small" @click="$refs.abDialog.dialogVisible = true">评标异常情况</el-button>
                     <el-button size="small" @click="$refs.unDialog.dialogVisible = true">评标解锁</el-button>
                 </div>
@@ -72,6 +72,7 @@ export default {
     },
     data() {
         return {
+            overBe:'结束评标',
             cardMsg:[],
             setRowMar:true,
             setMod:false,

@@ -41,7 +41,7 @@
                     :name="item.name"
                 >
                     <!-- <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam> -->
-                    <Qsummary v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
+                    <Qsummary :overOrUn="unOver" v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
                     <Review v-if="item.name === '11'"></Review>
                 </el-tab-pane>
             </el-tabs>
@@ -54,7 +54,6 @@
 import Exam from '../leader/leaderChild/Exam';
 import Qsummary from '../leader/leaderChild/Qsummary';
 import Review from '../leader/leaderChild/Reviewsummary'
-import { setTimeout } from 'timers';
 export default {
 components:{
     Exam,
@@ -65,7 +64,8 @@ data() {
     return {
         getParams:window.localStorage.getItem('sub'),
         editableTabs:[],
-        editableTabsValue:'2',      
+        editableTabsValue:'2',
+        unOver:0,      
     }
 },
 mounted() {
@@ -90,7 +90,12 @@ methods: {
         })
     },
     handleTabsEdit(targetName){
-        // console.log(targetName);
+        switch(this.getParams){
+            case '0':
+                return this.unOver = 0;
+            case '1':
+                return this.unOver = Math.floor(Math.random()*2);
+        }
     },
 },
 }
