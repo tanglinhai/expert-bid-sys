@@ -115,7 +115,7 @@ import { setTimeout } from 'timers';
                     path: url
                 });
             },
-           ToChangePage(types){   //导航点击值//types
+           ToChangePage(types){   //导航点击值//types(添加选中class)
                 //console.log(this.currentpage,types,666666)
                 $(".Secondnav li").removeClass("LiActives");
                 $(".NavsUls>li").removeClass("LiActives");
