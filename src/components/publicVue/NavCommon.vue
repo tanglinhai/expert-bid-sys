@@ -1,5 +1,5 @@
 <template>
-    <div class="navcommon_wrap">
+    <div class="navcommon_wrap" v-show="$store.state.navIsShow">
         <el-scrollbar style="width:100%;overflow-x:hidden;height:100%;" ref="myScrollbar">
             <!--<ul ref="wrap" class="NavsUls" style="display:none">
                 <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
@@ -34,38 +34,40 @@
                 </li> 
             </ul>-->
             <ul class="NavsUls">
-                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types" :aid="item.typestaus">
-                    <h5 class="Firstnav firstGreen"><i class="iconfont icon-wancheng"></i><span>{{item.label}}</span><em class="el-icon-arrow-down"></em></h5>
+                <li v-for="(item,index) in navcommonsList" :key="index" :id="item.types">
+                    <template v-if="item.children !== undefined && item.children.length >0 ">
+                        <h5 :id="item.types" :class="['Firstnav',item.typestaus==1?'firstGreen':item.typestaus==2?'firstBlue':'firstblack']" :aid="item.typestaus">
+                            <i :class="item.typestaus==1?'el-icon-success':item.typestaus==2?'el-icon-edit':'iconfont icon-jinyong'"></i>
+                            <span>{{item.label}}</span>
+                            <em class="el-icon-arrow-down"></em>
+                        </h5>
+                    </template>
+                    <template v-else>
+                        <h5 @click="ToChangePage(item.types)" :id="item.types" :class="['Firstnav',item.typestaus==1?'firstGreen':item.typestaus==2?'firstBlue':'firstblack']" :aid="item.typestaus">
+                            <i :class="item.typestaus==1?'el-icon-success':item.typestaus==2?'el-icon-edit':'iconfont icon-jinyong'"></i>
+                            <span>{{item.label}}</span>
+                            <em style="display:none" class="el-icon-arrow-down"></em>
+                        </h5> 
+                    </template>
                     <ol class="Secondnav" v-for="(item2,index2) in item.children" :key="index2">
-                        <li class="blue">
-                            <i></i>
-                            <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
-                                <el-button>{{item2.label}}</el-button>
-                            </el-tooltip>
-                        </li>
+                        <template v-if="item2.typestaus==1||item2.typestaus==2">
+                            <li @click="ToChangePage(item2.types)" :id="item2.types" :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
+                                <i></i>
+                                <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
+                                    <el-button>{{item2.label}}</el-button>
+                                </el-tooltip>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li :aid="item2.typestaus" :class="item2.typestaus==1?'green':item2.typestaus==2?'blue':'DoNotPoint'">
+                                <i></i>
+                                <el-tooltip class="item" effect="light" :content="item2.label" placement="left-start">
+                                    <el-button>{{item2.label}}</el-button>
+                                </el-tooltip>
+                            </li>
+                        </template>
                     </ol>
                 </li>
-                <!-- <li>
-                    <h5 class="Firstnav"><i class="iconfont icon-wancheng"></i><span>推举组长</span></h5>
-                </li>
-                <li>
-                    <h5 class="Firstnav"><i class="iconfont icon-wancheng"></i><span>评标</span><em class="el-icon-arrow-down"></em></h5>
-                    <ol class="Secondnav">
-                        <li>
-                            <i></i>
-                            <el-tooltip class="item"  effect="light" content="Left Top 提示文字" placement="left-start">
-                                <el-button>资格审查</el-button>
-                            </el-tooltip>
-                        </li>
-                        <li>
-                            <i></i>
-                            <el-tooltip class="item" effect="light" content="Left Top 提示文字" placement="left-start">
-                                <el-button>资格审查汇总</el-button>
-                            </el-tooltip>
-                        </li>
-                    </ol>
-                </li> -->
-                
             </ul>
         </el-scrollbar>
     </div>
@@ -94,7 +96,18 @@ import { setTimeout } from 'timers';
 
         },
         mounted(){
-
+            $(document).on('click','.Firstnav',function(){    //导航点击带二级导航
+                //console.log("1111")
+                if($(this).parent().find("ol").is(':hidden')){
+                    $(this).find("em").removeClass("el-icon-arrow-up");
+                    $(this).find("em").addClass("el-icon-arrow-down");
+                    $(this).parent().find("ol").show();
+                }else{
+                    $(this).find("em").removeClass("el-icon-arrow-down");
+                    $(this).find("em").addClass("el-icon-arrow-up");
+                    $(this).parent().find("ol").hide();
+                }
+            })
         },
         methods: {
             goto(url){ //路由
@@ -102,15 +115,16 @@ import { setTimeout } from 'timers';
                     path: url
                 });
             },
-           ToChangePage(types){   //导航点击值//types
-                //console.log(this.currentpage)
-                if(types==1){  //承诺书
+           ToChangePage(types){   //导航点击值//types(添加选中class)
+                //console.log(this.currentpage,types,666666)
+                $(".Secondnav li").removeClass("LiActives");
+                $(".NavsUls>li").removeClass("LiActives");
+                $("#"+types).addClass("LiActives");
+                if(types=="1-1"){  //承诺书
                     this.$router.push("/index/LetterCommitment?types="+types+"&currentpage="+this.currentpage);
-                }else if(types==2){  //参加评标
-                   // $(".NavCommon ul #1>span").removeClass("backblue");
-
+                }else if(types=="1-2"){  //参加评标
                     this.$router.push("/index/AllInformation?types="+types+"&currentpage="+this.currentpage);
-                }else if(types==3){   //推举组长
+                }else if(types==2){   //推举组长
                     this.$router.push("/index/ElectedLeader?types="+types+"&currentpage="+this.currentpage);
                 } 
            }
@@ -128,9 +142,8 @@ import { setTimeout } from 'timers';
                     div.scrollTop=sortsSelectHeight-zongHeightHalf;
                 }else{
                 }
-            })
+            });
         }
-        
     }
 </script>
 
@@ -151,12 +164,13 @@ import { setTimeout } from 'timers';
         
         .NavsUls{
             margin-left:24px;
-            margin-right:10px;
             margin-bottom:10px;
             border-left:1px solid #e3e3e3;
             padding-top:20px;
+            min-height:600px;
             >li{
                 width: 100%;
+                margin-bottom: 20px;
                 .Firstnav{
                     height:40px;
                     width:100%;
@@ -168,6 +182,27 @@ import { setTimeout } from 'timers';
                         font-size:24px;
                         float:left;
                         margin-left:-14px;
+                        margin-top: 6px;
+                    }
+                    .icon-jinyong{
+                        background: #ccc;
+                        color: white;
+                        border-radius: 75%;
+                        font-size: 14px;
+                        height: 26px;
+                        width: 26px;
+                        text-align: center;
+                        line-height: 27px;
+                    }
+                    .el-icon-edit{
+                        width: 26px;
+                        border-radius: 50%;
+                        height: 26px;
+                        background: #348fe2;
+                        color: white;
+                        font-size: 14px;
+                        line-height: 26px;
+                        text-align: center;
                     }
                     span{
                         font-size:14px;
@@ -177,20 +212,34 @@ import { setTimeout } from 'timers';
                         float: right;
                         font-size:24px;
                         line-height:40px;
+                        margin-right:5px;
                     }
                 }
                 .Secondnav{
                     color:#c0c4d5;
+                    position: relative;
+                    &:nth-child(3){
+                        &:before{
+                            content:"";
+                            background: url(../../assets/img/BgSanjiao.png) center bottom no-repeat;
+                            position: absolute;
+                            left: -26px;
+                            bottom: 12px;
+                            width:59px;
+                            height:40px;
+                        }
+                    }
                     li{
                         height:40px;
                         line-height:40px;
+                        
                         i{
-                            width:12px; 
-                            height:12px; 
+                            width:10px; 
+                            height:10px; 
                             border-radius:50%; 
                             background:#ccc;
                             float:left;
-                            margin-left:-7px;
+                            margin-left:-6px;
                             margin-top:14px;
                         }
                         button{

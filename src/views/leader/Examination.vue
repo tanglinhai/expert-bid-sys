@@ -1,22 +1,22 @@
 <template>
-    <div class="exam beSty">
+    <div :class="{'exam':true,'beSty':getParams == '1'}">
         <el-row class="onlyBtnBox">
-           <el-col :span="4">
+           <el-col :span="7">
                 <div class="grid-content bg-purple-dark overflowText">
                     标名称：2019年水利运输服务招标项目
                 </div>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="7">
                 <div class="grid-content bg-purple-dark overflowText">
                     标号：0635—1909qwerN1197
                 </div>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="7">
                 <div class="grid-content bg-purple-dark overflowText">
                     包号：0635—1909qwerN1197/1
                 </div>
             </el-col>
-            <el-col :span="12" class="fs14 textAlignR select">
+            <el-col :span="3" class="fs14 textAlignR select">
                 <div class="grid-content bg-purple">
                     <el-dropdown>
                         <el-button type="primary" size="small">
@@ -40,8 +40,9 @@
                     :label="item.title"
                     :name="item.name"
                 >
-                    <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam>
-                    <Qsummary v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
+                    <!-- <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam> -->
+                    <Qsummary :overOrUn="unOver" v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
+                    <Review v-if="item.name === '11'"></Review>
                 </el-tab-pane>
             </el-tabs>
         </el-row>
@@ -52,38 +53,49 @@
 <script>
 import Exam from '../leader/leaderChild/Exam';
 import Qsummary from '../leader/leaderChild/Qsummary';
+import Review from '../leader/leaderChild/Reviewsummary'
 export default {
 components:{
     Exam,
-    Qsummary
+    Qsummary,
+    Review
 },
 data() {
     return {
+        getParams:window.localStorage.getItem('sub'),
         editableTabs:[],
-        editableTabsValue:'1',      
+        editableTabsValue:'2',
+        unOver:0,      
     }
 },
 mounted() {
     this.init();
-    },
+},
 methods: {
     init(){
-        let routeParams=this.$route.query.be;
         this.$axios.post('./api/tabMsg').then(res => {
-            if(res.status == 200 && routeParams == 'see'){
-                $(".NavCommon").show();
+            if(res.status == 200 && this.getParams == '1'){
+                // this.$store.state.navIsShow = true;
+                $('.NavCommon').show();
                 this.editableTabs=res.data.tabTitle;
-            }else if(res.status == 200 && routeParams == 'makeBe'){
-                $(".NavCommon").hide();
-                $(".exam").removeClass('beSty');
-                $(".exam").removeClass('Router');
+            }else if(res.status == 200 && this.getParams == '0'){
+                // this.$store.state.navIsShow = false;
+                $('.NavCommon').hide();
+                $('.exam').css('padding','0 20px');
+                $('.exam').removeClass('beSty');
+                $('.exam').removeClass('Router');
                 this.editableTabs = res.data.tabTitle;
                 this.editableTabs.length = 2;
-            } 
+            };
         })
     },
     handleTabsEdit(targetName){
-        // console.log(targetName);
+        switch(this.getParams){
+            case '0':
+                return this.unOver = 0;
+            case '1':
+                return this.unOver = Math.floor(Math.random()*2);
+        }
     },
 },
 }
@@ -94,7 +106,7 @@ methods: {
 @import '../../assets/css/common/font.scss'; 
 .beSty{
     padding: 0px 20px 15px 0px;
-    padding-left: 131px !important;
+    padding-left: 220px !important;
 }
 .exam{
     .onlyBtnBox{

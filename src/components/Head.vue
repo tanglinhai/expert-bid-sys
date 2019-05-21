@@ -284,6 +284,7 @@ export default {
 	padding: 0 15px;
 	background-color: #fff;
 	position: relative;
+	border-bottom: 1px solid #e8e9ed;
   .logo{
 		float: left;
 		margin-top: 7px;

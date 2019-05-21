@@ -3,7 +3,7 @@
         <el-dialog
             title="tishi"
             :visible.sync="dialogVisible"
-            width="700px"
+            width="800px"
             :before-close="handleClose"
             center>
             <div slot="title" class="header-title">
@@ -18,76 +18,38 @@
                 </el-row>
             </div>
             <el-row class="bodyBox">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        异常情况：
-                    </div>
-                </el-col>
-                <el-col :span="8">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        错误代码003
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        处理结果：
-                    </div>
-                </el-col>
-                <el-col :span="8">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        异常已解决
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        处理措施：
-                    </div>
-                </el-col>
-                <el-col :span="8">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        23232323
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        记录人：
-                    </div>
-                </el-col>
-                <el-col :span="8">
-                    <div class="grid-content bg-purple-dark overflowText">
-                       1212121
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        监督：
-                    </div>
-                </el-col>
-                <el-col :span="20">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        sss
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        原因：
-                    </div>
-                </el-col>
-                <el-col :span="20">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        异常已解决
-                    </div>
-                </el-col>
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark overflowText textRight">
-                        备注：
-                    </div>
-                </el-col>
-                <el-col :span="20">
-                    <div class="grid-content bg-purple-dark overflowText">
-                        真实场景请勿。。。
-                    </div>
-                </el-col>
+                <el-table
+                    :data="tableData"
+                    style="width: 100%">
+                    <el-table-column
+                        prop="ycqk"
+                        label="异常情况">
+                    </el-table-column>
+                    <el-table-column
+                        prop="cljg"
+                        label="处理结果" >
+                    </el-table-column>
+                    <el-table-column
+                        prop="clcs"
+                        label="处理措施">
+                    </el-table-column>
+                    <el-table-column
+                        prop="jlr"
+                        label="记录人">
+                    </el-table-column>
+                    <el-table-column
+                        prop="jd"
+                        label="监督">
+                    </el-table-column>
+                    <el-table-column
+                        prop="yy"
+                        label="原因">
+                    </el-table-column>
+                    <el-table-column
+                        prop="bz"
+                        label="备注">
+                    </el-table-column>
+                </el-table>
             </el-row>
             <span slot="footer">
                 <el-button size="small" @click="dialogVisible = false">取 消</el-button>
@@ -102,20 +64,28 @@
 export default {
     data() {
         return {
+            tableData:[],
             dialogVisible:false,
         }
     },
     mounted() {
-        
+        this.init()
     },
     methods: {
-        
+        init(){
+            this.$axios.post('./api/ppycjl').then(res => {
+                if(res.status == 200){
+                    this.tableData = res.data.data;
+                }
+            })
+        }
     },
 }
 </script>
 
 
 <style lang="scss">
+@import '../../../assets/css/common/common.scss';
 .abnormal{
     .el-dialog__headerbtn{
         top:10px;
@@ -127,5 +97,6 @@ export default {
             text-align: right;
         }
     }
+    @include common-el-table;
 }
 </style>

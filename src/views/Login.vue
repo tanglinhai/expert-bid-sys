@@ -315,17 +315,19 @@ export default {
                               //添加路由leaderRoutes,expertRoutes, default as vueRouter
                               window.sessionStorage.setItem('user', JSON.stringify(res.data));
                               //console.log(_this);
-                              if(res.data.roles.indexOf('leader') > -1){
-                                //vueRouter.addRoutes(leaderRoutes);
-                                _this.$router.push({
-                                  path: '/groupLeader'
-                                });
-                              }else if(res.data.roles.indexOf('expert') > -1){
-                                //vueRouter.addRoutes(expertRoutes);
-                                _this.$router.push({
-                                  path: '/index'
-                                });
-                              }
+                              setTimeout(function(){
+                                if(res.data.roles.indexOf('leader') > -1){
+                                  //vueRouter.addRoutes(leaderRoutes);
+                                  _this.$router.push({
+                                    path: '/groupLeader'
+                                  });
+                                }else if(res.data.roles.indexOf('expert') > -1){
+                                  //vueRouter.addRoutes(expertRoutes);
+                                  _this.$router.push({
+                                    path: '/index'
+                                  });
+                                }
+                              }, 500);
                           } else {
                               if (res.data.Status == "Erro") {
                                   switch (res.data.Erro) {

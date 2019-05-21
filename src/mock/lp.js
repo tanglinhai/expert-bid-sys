@@ -392,36 +392,25 @@ function get_data(currentPage,is_submit_type,types) {//type
     // console.log(type, is_submit_type);
     function set_type() {
         if (currentPage == 1) {
-            if(types==1){
-                return [is_submit_type?1:2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,4].splice(types,1,5)
-            }else{
-                return [is_submit_type?1:2,4,4,4,4,4,4,4,4,4,4,4,4,4]
-            }
+            return [2,2,4,4,4,4,4]
         }
         if (currentPage == 2) {
-            if(types==1){
-                var num=[1,4, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5)
-                num.splice(currentPage-1,1,is_submit_type?1:3);
-                return num;
-            }else{
-                return [1,is_submit_type?1:2, 4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4]
-            }
+            return [2,1, 2, 4, 4, 4, 4]
         }
         if (currentPage == 3) {
-            if(types==1){
-                var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5);
-                num.splice(currentPage-1,1,is_submit_type?1:3);
-                return num;
-            }else if(types==2){
-                var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
-                num.splice(types-1,1,5);
-                num.splice(currentPage-1,1,is_submit_type?1:3);
-                return num;
-            }else{
-                return [1, 1, is_submit_type?1:2, 4, 4, 4, 4,4, 4, 4, 4, 4,4,4]
-            }
+            // if(types==1){
+            //     var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+            //     num.splice(types-1,1,5);
+            //     num.splice(currentPage-1,1,is_submit_type?1:3);
+            //     return num;
+            // }else if(types==2){
+            //     var num=[1,1,4, 4, 4, 4, 4, 4,4, 4, 4, 4, 4,4];
+            //     num.splice(types-1,1,5);
+            //     num.splice(currentPage-1,1,is_submit_type?1:3);
+            //     return num;
+            //}else{
+                return [1,1,1,2,4,4,4]
+            //}
             
         }
 
@@ -440,12 +429,12 @@ function get_data(currentPage,is_submit_type,types) {//type
             children:[{
                 value: '1-1',//
                 label: '承诺书',  //步数字段
-                types: 1-1,  //types 代表第几步对应相对应得步数
+                types: "1-1",  //types 代表第几步对应相对应得步数
                 typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
             },{
                 value: '1-2',//
                 label: '参加评标',  //步数字段
-                types: 1-2,  //types 代表第几步对应相对应得步数
+                types: "1-2",  //types 代表第几步对应相对应得步数
                 typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
             }]
         },{

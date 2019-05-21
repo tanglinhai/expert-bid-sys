@@ -3,7 +3,7 @@
     <el-dialog
       title="tishi"
       :visible.sync="dialogVisible"
-      width="700px"
+      width="800px"
       :before-close="handleClose"
       center
     >
@@ -15,39 +15,33 @@
         </el-row>
       </div>
       <el-row class="bodyBox">
-        <el-col :span="4">
-          <div class="grid-content bg-purple-dark overflowText textRight">申请人：</div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-dark overflowText">张三李四五</div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple-dark overflowText textRight">审查阶段：</div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-dark overflowText">三十三点三三三</div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple-dark overflowText textRight">申请日期：</div>
-        </el-col>
-         <el-col :span="8">
-          <div class="grid-content bg-purple-dark overflowText textLeft">19860506</div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple-dark overflowText textRight">状态：</div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-dark overflowText">正常</div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple-dark overflowText textRight">申请原因：</div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-dark overflowText">未知</div>
-        </el-col>
+          <el-table
+              :data="tableData"
+              style="width: 100%">
+              <el-table-column
+                  prop="sqr"
+                  label="申请人">
+              </el-table-column>
+              <el-table-column
+                  prop="scjd"
+                  label="审查阶段" >
+              </el-table-column>
+              <el-table-column
+                  prop="sqrq"
+                  label="申请日期">
+              </el-table-column>
+              <el-table-column
+                  prop="zt"
+                  label="状态">
+              </el-table-column>
+              <el-table-column
+                  prop="sqyy"
+                  label="申请原因">
+              </el-table-column>
+          </el-table>
       </el-row>
       <span slot="footer">
-        <el-button size="small" @click="dialogVisible = false">查 看</el-button> 
+        <el-button size="small" @click="dialogVisible = false">返 回</el-button> 
       </span>
     </el-dialog>
   </div>
@@ -58,16 +52,28 @@
 export default {
   data() {
     return {
+        tableData:[],
         dialogVisible:false,
     };
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init(){
+        this.$axios.post('./api/ppycjl').then(res => {
+            if(res.status == 200){
+                this.tableData = res.data.data;
+            }
+        })
+    }
+  }
 };
 </script>
 
 
 <style lang="scss">
+@import '../../../assets/css/common/common.scss';
 .unlock{
     .bodyBox{
         line-height:40px;
@@ -75,5 +81,6 @@ export default {
             text-align: right;
         }
     }
+    @include common-el-table;
 }
 </style>
