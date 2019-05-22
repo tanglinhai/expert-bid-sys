@@ -227,34 +227,46 @@ export default {
   },
   methods:{
     navcommonsListFun(){
-       if (this.$route.query.currentpage == undefined) {
-          this.$route.query.currentpage=1;   //进行到哪一步
-        }
-        // if(this.$route.query.is_submit_type == undefined){
-        //   this.$route.query.is_submit_type=0;  //是否提交
-        // }
-        let arr = [0, 1];
-        let is_submit_type = arr[Math.floor(Math.random()*arr.length)];
-        //console.log(is_submit_type,8884444);
-        if(this.$route.query.types == undefined){
-          this.$route.query.types=0;  //点击是哪一步
-        }
-        this.pageloadding=true;
-        this.CommonLeftNavsLoading=true;
-        this.$axios.post('/api/navcommons',{
-            currentpage:parseFloat(this.$route.query.currentpage),  //进行到哪一步
-            is_submit_type:parseFloat(this.$route.query.is_submit_type),    //是否提交
-            types:parseFloat(this.$route.query.types)    //点击是哪一步
-        }).then(res=>{
-            if(res.status == 200){
-                //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
-
-                this.navcommonsList=res.data.navsAll; 
-                this.ProjectInformationsAll=res.data.ProjectInformationsAll;
-                this.pageloadding=false;
-                this.CommonLeftNavsLoading=false;
-            }
-        })
+        var leaderOrExpert = eval('(' + window.sessionStorage.getItem('user') + ')');
+        // console.log(leaderOrExpert);
+        if(leaderOrExpert.roles[0] == 'expert'){
+         if (this.$route.query.currentpage == undefined) {
+           this.$route.query.currentpage=1;   //进行到哪一步
+         }
+         // if(this.$route.query.is_submit_type == undefined){
+         //   this.$route.query.is_submit_type=0;  //是否提交
+         // }
+         let arr = [0, 1];
+         let is_submit_type = arr[Math.floor(Math.random()*arr.length)];
+         //console.log(is_submit_type,8884444);
+         if(this.$route.query.types == undefined){
+           this.$route.query.types=0;  //点击是哪一步
+         }
+         this.pageloadding=true;
+         this.CommonLeftNavsLoading=true;
+         this.$axios.post('/api/navcommons',{
+             currentpage:parseFloat(this.$route.query.currentpage),  //进行到哪一步
+             is_submit_type:parseFloat(this.$route.query.is_submit_type),    //是否提交
+             types:parseFloat(this.$route.query.types)    //点击是哪一步
+         }).then(res=>{
+             if(res.status == 200){
+                 //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
+ 
+                 this.navcommonsList=res.data.navsAll; 
+                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
+                 this.pageloadding=false;
+                 this.CommonLeftNavsLoading=false;
+             }
+         })
+       }else if(leaderOrExpert.roles[0] == 'leader'){
+         this.$axios.post('./api/navMesgList').then(res => {
+           if(res.status == 200){
+            //  console.log(res)
+            this.CommonLeftNavsLoading=false;
+            this.navcommonsList=res.data;
+           }
+         })
+       }
     },
   },
   updated(){

@@ -65,10 +65,12 @@
                         <el-col :span="5">
                             <div class="grid-content bg-purple-dark">
                                 <div v-if="stemp.beFlag">
+                                    <el-button size="small" @click="beConfig(stemp.beFlag)">评标配置</el-button>
                                     <el-button class="btnBg" size="small" @click="stemp.beFlag = !stemp.beFlag">开始评标</el-button>
                                     <el-button size="small">暂停评标</el-button>
                                 </div>
                                 <div v-else>
+                                    <el-button size="small" @click="beConfig(stemp.beFlag)">评标配置</el-button>
                                     <el-button type="primary" size="small" @click="imbeView(item,stemp)">我要评标</el-button>
                                     <el-button type="primary" size="small" @click="goto">查看评标</el-button> 
                                     <el-button size="small" class="btnBg" @click="stopBe(stemp)" v-text=" stemp.btnStatus == 0 ? '暂停评标' : '恢复评标' "></el-button>
@@ -179,6 +181,9 @@ export default {
         // 暂停评标
         stopBe(data){
           data.btnStatus == 0 ? data.btnStatus = 1 : data.btnStatus = 0; 
+        },
+        beConfig(val){
+            console.log(val);
         },
         loadMoreBag(val){
             val.loadMore = true;
