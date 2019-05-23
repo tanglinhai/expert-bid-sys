@@ -47,10 +47,6 @@
                                         </el-button>
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
                                         </el-button>
-                                        <el-button type="primary" size="small" @click="pingbiaoAdvice">
-                                            <i class=" icon iconfont  icon-yijian mr3"></i>评标意见
-                                        </el-button>
-
                                     </el-col>
                                     <el-col :span="12" class="textAlignR mian_btns" v-else>
                                         <el-button @click="submited_goback" type="primary" size="small"
@@ -86,17 +82,17 @@
                                         </el-table-column>
                                     </el-table>
                                 </el-row>
-                                <!--<el-row class="mt15">-->
-                                <!--<el-col :span="18">-->
-                                <!--<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"-->
-                                <!--class="demo-ruleForm">-->
-                                <!--<el-form-item label="评标意见 (2000字之内)：" prop="desc">-->
-                                <!--<el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"-->
-                                <!--:disabled="is_disabled"></el-input>-->
-                                <!--</el-form-item>-->
-                                <!--</el-form>-->
-                                <!--</el-col>-->
-                                <!--</el-row>-->
+                                <el-row class="mt15">
+                                    <el-col :span="18">
+                                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"
+                                                 class="demo-ruleForm">
+                                            <el-form-item label="评标意见 (2000字之内)：" prop="desc">
+                                                <el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"
+                                                          :disabled="is_disabled"></el-input>
+                                            </el-form-item>
+                                        </el-form>
+                                    </el-col>
+                                </el-row>
                             </div>
                         </template>
                     </el-col>
@@ -104,7 +100,7 @@
                 <!--综合评标-->
                 <el-row class="center_part" v-if="methodType==2">
                     <div v-if="isShowProgressPage==0">
-                        <el-col :span="24">
+                        <el-col :span="24" >
                             <!--<p>综合评标进度条</p>-->
                             <!--<el-row :span="24" class="mb15">-->
                             <!--<div class="fr">-->
@@ -139,16 +135,12 @@
                     <div v-if="isShowProgressPage!=0">
                         <el-col :span="24" class="mb15">
                             <div class="fr">
-                               <span class="hide_span" v-if="this.$store.state.failureEnery.is_pingshen_show">
-                                  <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10"><i
-                                          class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>
-                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10"> <i
-                                            class=" icon iconfont    icon-chakanjilu mr3"></i>查看评分解锁记录
+                               <span class="hide_span"  v-if="this.$store.state.failureEnery.is_pingshen_show">
+                                  <el-button size="small" type='primary' @click="reviewLockRequest" class="ml10"><i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>
+                                    <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10"> <i class=" icon iconfont    icon-chakanjilu mr3" ></i>查看评分解锁记录
                                     </el-button>
-                                    <el-button size="small" @click="checkProScoreBtn" type='primary'> <i
-                                            class=" icon iconfont  icon-dafen  mr3"></i>查看专家个人打分表</el-button>
-                                    <el-button size="small" @click="bindScoreBtn" type='primary'> <i
-                                            class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
+                                    <el-button size="small" @click="checkProScoreBtn" type='primary'> <i class=" icon iconfont  icon-dafen  mr3"></i>查看专家个人打分表</el-button>
+                                    <el-button size="small" @click="bindScoreBtn" type='primary'> <i class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
                                 </span>
                                 <span v-else>
                                     <el-button size="small" type='primary' @click="scoreQuotation" class="ml10">
@@ -157,23 +149,19 @@
                                     <el-button size="small" @click="biddingAdvice" type='primary' class="ml10">
                                         <i class=" icon iconfont  icon-yijian mr3"></i>评标意见
                                     </el-button>
-                                    <el-button size="small" type='primary' @click="reviewSummarySubmitZHPB" class="ml10"
-                                               :loading="submitFormLoadingZHPB">
+                                    <el-button size="small" type='primary' @click="reviewSummarySubmitZHPB" class="ml10" :loading="submitFormLoadingZHPB">
                                        <i class=" icon iconfont  icon-tijiao2  mr3"></i>提交
                                     </el-button>
-                                     <el-button type="primary" size="small" class="sort_btn" @click="zhpb_sort_btn">排序
-                                        </el-button>
                                     <!--<el-button size="small" type='primary' @click="reviewLockRequest" class="ml10">-->
                                     <!--<i class=" icon iconfont   icon-jiesuo1  mr3"></i>评分解锁</el-button>-->
                                     <el-button size="small" @click="checkUnlockRecord" type='primary' class="ml10">
-                                        <i class=" icon iconfont    icon-chakanjilu mr3"></i>查看评分解锁记录
+                                        <i class=" icon iconfont    icon-chakanjilu mr3" ></i>查看评分解锁记录
                                     </el-button>
                                     <el-button size="small" @click="checkProScoreBtn" type='primary'>
                                         <i class=" icon iconfont  icon-dafen  mr3"></i>查看专家个人打分表
                                      </el-button>
                                     <el-button size="small" @click="bindScoreBtn" type='primary'>
                                          <i class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
-
                                 </span>
                             </div>
                         </el-col>
@@ -190,8 +178,8 @@
                                     <el-table-column prop="bidder" label="投标人" fixed>
                                     </el-table-column>
                                     <!--<el-table-column prop="bidderNumber"-->
-                                    <!--label="投标序号"-->
-                                    <!--fixed></el-table-column>-->
+                                                     <!--label="投标序号"-->
+                                                     <!--fixed></el-table-column>-->
                                     <el-table-column label="评标委员会">
                                         <el-table-column :label="item.name"
                                                          v-for="(item,index ) in pingshenweiyuanData"
@@ -361,7 +349,7 @@
                     width="700px"
                     class="reviewLockRequest"
             >
-                <div>
+                <div >
                     <el-form :model="ruleFormLockRequest" :rules="ruleFormLockRequestRule" ref="ruleFormLockRequest"
                              label-width="120px" class="demo-ruleForm">
                         <el-form-item label="提出专家：" prop="type">
@@ -394,34 +382,34 @@
                 </div>
             </el-dialog>
 
-            <!--<el-dialog-->
-            <!--width="700px"-->
-            <!--title="提示"-->
-            <!--:visible.sync="tipsDialog"-->
-            <!--append-to-body>-->
-            <!--<el-row style="margin:10px auto;">-->
-            <!--<el-row style="  border:1px solid #ccc;">-->
-            <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
-            <!--<div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">-->
-            <!--<img src="../../assets/img/xiaolian.png" alt=""-->
-            <!--style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">-->
-            <!--</div>-->
-            <!--</el-row>-->
-            <!--<el-row>-->
-            <!--<p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">-->
-            <!--{{tippsDialogName}}成功！</p>-->
-            <!--</el-row>-->
-            <!--</el-row>-->
-            <!--<el-row>-->
-            <!--<div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span-->
-            <!--id="sec">{{count}}</span>]秒后自动关闭-->
-            <!--</div>-->
-            <!--</el-row>-->
-            <!--<el-row class="textAlignC pt20">-->
-            <!--<el-button size="small" type="primary" @click="tipsDialogComfrim">确认</el-button>-->
-            <!--</el-row>-->
-            <!--</el-row>-->
-            <!--</el-dialog>-->
+            <el-dialog
+                    width="700px"
+                    title="提示"
+                    :visible.sync="tipsDialog"
+                    append-to-body>
+                <el-row style="margin:10px auto;">
+                    <el-row style="  border:1px solid #ccc;">
+                        <el-row class="textAlignC fs14" style="line-height: 30px">
+                            <div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">
+                                <img src="../../assets/img/xiaolian.png" alt=""
+                                     style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">
+                            </div>
+                        </el-row>
+                        <el-row>
+                            <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">
+                                {{tippsDialogName}}成功！</p>
+                        </el-row>
+                    </el-row>
+                    <el-row>
+                        <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span
+                                id="sec">{{count}}</span>]秒后自动关闭
+                        </div>
+                    </el-row>
+                    <el-row class="textAlignC pt20">
+                        <el-button size="small" type="primary" @click="tipsDialogComfrim">确认</el-button>
+                    </el-row>
+                </el-row>
+            </el-dialog>
             <el-dialog
                     title="查看专家个人打分表"
                     :visible.sync=" $store.state.failureEnery.checkProScoreDialogVisible"
@@ -458,13 +446,12 @@
                                              label="项目"
                                              fixed width="165"></el-table-column>
                             <el-table-column header-align="left" label="投标人">
-                                <el-table-column header-align="left" :label=item.companyName
-                                                 v-for="(item,index) in  biddersScoreTitleData" :key="index">
+                                <el-table-column header-align="left" :label=item.companyName   v-for="(item,index) in  biddersScoreTitleData" :key="index">
                                     <el-table-column :label="a.name"
                                                      v-for="(a,i) in item.NameList"
                                                      width="175" :key="i">
                                         <tempalte slot-scope="scope">
-                                            <span>  {{scope.row['value' +( (i+ 1) + item.NameList.length * index)]}}  </span>
+                                            <span >  {{scope.row['value' +( (i+ 1) + item.NameList.length * index)]}}  </span>
                                         </tempalte>
                                     </el-table-column>
                                 </el-table-column>
@@ -472,9 +459,7 @@
                         </el-table>
                     </div>
                     <el-row class="mab15 textAlignC mt30">
-                        <el-button type="primary" size="small" @click="rebackBiddersScoreBtn"><i
-                                class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
-                        </el-button>
+                        <el-button type="primary" size="small" @click="rebackBiddersScoreBtn"><i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回</el-button>
                     </el-row>
                 </div>
             </el-dialog>
@@ -505,17 +490,16 @@
                             <el-table-column prop="expertConfirmScore" header-align="left" label="专家确认得分" width="220px">
                                 <template slot-scope="scope">
                                     <el-row class="cf">
-                                        <el-input size="small" v-model="scope.row.score" class="fl"
-                                                  style="width:169px"  clearable @input.native="inputChange(scope.row.score,scope.$index)"
-                                                  @keyup.enter.native.prevent="inputChange(scope.row.score,scope.$index)"></el-input>
+                                        <el-input size="small" :value="scope.row.score" class="fl"
+                                                  style="width:169px"></el-input>
                                         <div class="red fl textAlignC mt5" style="width:25px;">&nbsp;*</div>
                                     </el-row>
                                 </template>
                             </el-table-column>
                         </el-table>
-                        <!--<el-row class="red lin-height35">-->
-                        <!--提示：报价得分、计算基准价由系统根据招标文件中设定的计算方法自动生成。-->
-                        <!--</el-row>-->
+                        <el-row class="red lin-height35">
+                            提示：报价得分、计算基准价由系统根据招标文件中设定的计算方法自动生成。
+                        </el-row>
                         <el-row class="textAlignC mt30">
                             <el-button @click="acceptanceSystemScor" size="small" type="primary"><i
                                     class="icon iconfont icon-fanhuishouye1 mr5"></i>接受系统计算得分
@@ -530,48 +514,32 @@
                     </el-row>
                 </div>
             </el-dialog>
-            <!--合理低价评标意见-->
-            <el-dialog
-                    title="评标意见"
-                    :visible.sync="hldj_dialog_biddingAdvice"
-                    width="700px"
-                    class="hldj_biddingAdvice"
-            >
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="评标意见:" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm.desc" :disabled="is_disabled"></el-input>
-                    </el-form-item>
-                    <el-form-item class="textAlignC hldj_btns">
-                        <el-button type="primary" @click="submitForm('ruleForm')" size="small"
-                                   :loading="hldj_bc_loading">保存
-                        </el-button>
-                        <el-button @click="rebackForm" size="small">返回</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-dialog>
-            <!--合理低价评标意见-->
 
-            <!--综合评标意见-->
+            <!--评标意见-->
             <el-dialog
                     title="评标意见"
                     :visible.sync="dialogBiddingAdvice"
                     width="700px"
-                    class="zhpbBiddingAdviceBialog"
+                    class="biddingAdvice"
             >
-                <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="评标意见：" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm2.desc"></el-input>
-                    </el-form-item>
-                    <el-form-item class="textAlignC hldj_btns">
-                        <el-button type="primary" @click="saveBiddingAdvice('ruleForm2')" size="small"
-                                   :loading="saveBiddingAdviceLoading"> 保存
-                        </el-button>
-                        <el-button @click="rebackBiddingAdvice" size="small">返回</el-button>
-                    </el-form-item>
-                </el-form>
+                <div >
+                    <el-form ref="formBiddingAdvice" :model="formBiddingAdvice" class="demo-ruleForm">
+                        <el-form-item>
+                            <el-input type="textarea" v-model="formBiddingAdvice.desc"  ref="input_desc" ></el-input>
+                        </el-form-item>
+                        <el-form-item class="textAlignC">
+                            <el-button type="primary" @click="saveBiddingAdvice(formBiddingAdvice)" size="small"
+                                       :loading="saveBiddingAdviceLoading"><i
+                                    class="icon iconfont icon-baocun1 mr5"></i>保存
+                            </el-button>
+                            <el-button @click="rebackBiddingAdvice" size="small"><i
+                                    class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
             </el-dialog>
-            <!--综合评标意见-->
-
+            <!--评标意见-->
             <!--解锁申请记录-->
             <el-dialog
                     title="解锁申请记录"
@@ -582,19 +550,19 @@
             </el-dialog>
             <!--解锁申请记录-->
 
-            <!--<el-dialog-->
-            <!--title="全部选中提示"-->
-            <!--:visible.sync="$store.state.failureEnery.tijiaoDialogZHPB"-->
-            <!--width="30%"-->
-            <!--&gt;-->
-            <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
-            <!--您确定进行评分汇总操作吗？-->
-            <!--</el-row>-->
-            <!--<el-row class="textAlignC pt20">-->
-            <!--<el-button size="small" type="primary" @click="comfrimSubmitZHPB">确认</el-button>-->
-            <!--<el-button size="small" type="primary" @click="rebackSubmitZHPB">取消</el-button>-->
-            <!--</el-row>-->
-            <!--</el-dialog>-->
+            <el-dialog
+                    title="全部选中提示"
+                    :visible.sync="$store.state.failureEnery.tijiaoDialogZHPB"
+                    width="30%"
+            >
+                <el-row class="textAlignC fs14" style="line-height: 30px">
+                    您确定进行评分汇总操作吗？
+                </el-row>
+                <el-row class="textAlignC pt20">
+                    <el-button size="small" type="primary" @click="comfrimSubmitZHPB">确认</el-button>
+                    <el-button size="small" type="primary" @click="rebackSubmitZHPB">取消</el-button>
+                </el-row>
+            </el-dialog>
 
             <!--调整评标价弹框-->
             <el-dialog
@@ -647,15 +615,6 @@
                         {min: 1, max: 2000, message: '长度在 1 到 2000 个字符', trigger: 'blur'}
                     ]
                 },
-                ruleForm2: {
-                    desc: ''
-                },
-                rules2: {
-                    desc: [
-                        {required: true, message: '请填写评标意见!', trigger: 'blur'},
-                        {min: 1, max: 2000, message: '长度在 1到 2000 个字符', trigger: 'blur'}
-                    ]
-                },
                 msg_data: [],//评审报价(子组件)
                 /*-----------------排序----------*/
                 msg_box: [],//排序数据(子组件)
@@ -702,18 +661,14 @@
                     desc: '',
                     resource: '1',
                 },
-                //  tipsDialog: false,//解锁保存提示弹框状态
-                hldj_dialog_biddingAdvice: false,//合理低价评标意见
+                tipsDialog: false,//解锁保存提示弹框状态
                 dialogBiddingAdvice: false,//评标意见弹框状态
                 formBiddingAdvice: {//评标意见
                     desc: ""
                 },
-                hldj_form_biddingAdvice: {
-                    hldj_desc: ""
-                },
-                saveBiddingAdviceLoading: false,//综合评标评标意见弹框保存lodding
+                saveBiddingAdviceLoading: false,//评标意见弹框保存lodding
                 unlock_dialog_check: [],//评分解锁记录
-                title_mg: "",//评分解锁记录表头信息
+                title_mg:"",//评分解锁记录表头信息
                 zhaunjiaGerenMarkData: [],//专家个人打分表
                 to_submit_prompt_baohao: "",//专家个人打分表分包号第几包
                 companyNameData: [],
@@ -723,15 +678,15 @@
                 msgBoxProgressZHPB: [],//综合评标页面进度条数据
                 tableHead: [],//综合评标页面进度条表格数据
                 isShowProgressPage: '',//0:进度条的页面，1表格的页面
-                submitFormLoadingZHPB: false,//综合评标提交按钮loding
-                dialogBindScore: false,// 专家个人打分表
-                biddersScoreTable: [],//投标人分项得分表
-                biddersScoreTitleData: [],//投标人分项得分表头数据
-                hldj_bc_loading: false,
-                ChangedialogVisible: false,  //调整评标价弹框
-                TkOneloading: true,
-                ChangePriceTk: [],  //投标人最新报价列表弹框里面表格得数据
-                type: '',
+                submitFormLoadingZHPB:false,//综合评标提交按钮loding
+                dialogBindScore:false,// 专家个人打分表
+                biddersScoreTable:[],//投标人分项得分表
+                biddersScoreTitleData:[],//投标人分项得分表头数据
+
+                ChangedialogVisible:false,  //调整评标价弹框
+                TkOneloading:true,
+                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+                type:''
             }
         },
         created() {
@@ -741,7 +696,7 @@
                 this.methodType = this.$route.query.methodType;
             }
             if (this.$route.query.type == undefined) {
-                this.type = 70;
+                this.type =70;
             } else {
                 this.type = this.$route.query.type;
             }
@@ -773,8 +728,8 @@
                         this.title_mg = res.data.bidMsg.eviewrItemsMsg.title_mg;
                         this.tippsDialogName = res.data.bidMsg.eviewrItemsMsg.jiesuoData.tippsDialogName;
                         this.zhaunjiaGerenMarkData = res.data.bidMsg.eviewrItemsMsg.zhaunjiaGerenMarkData;
-                        this.biddersScoreTable = res.data.bidMsg.eviewrItemsMsg.biddersScoreTable;
-                        this.biddersScoreTitleData = res.data.bidMsg.eviewrItemsMsg.biddersScoreTitleData;
+                        this.biddersScoreTable=res.data.bidMsg.eviewrItemsMsg.biddersScoreTable;
+                        this.biddersScoreTitleData=res.data.bidMsg.eviewrItemsMsg.biddersScoreTitleData;
                         this.companyNameData = res.data.bidMsg.eviewrItemsMsg.companyNameData;
                         this.pingshenzhaunjiaData = res.data.bidMsg.eviewrItemsMsg.pingshenzhaunjiaData;
                         this.msgBoxProgressZHPB = res.data.bidMsg.eviewrItemsMsg.tables;//进度数据
@@ -782,25 +737,24 @@
                         this.pingshenweiyuanData = res.data.bidMsg.eviewrItemsMsg.pingshenweiyuanData;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.pingshenhuizongTableData;
                         this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
-                        console.log(res.data.bidMsg.eviewrItemsMsg.sort_data);
                         this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                         this.$store.state.failureEnery.isshow = false;
-                        if (this.methodType == 1) {
+                        if(this.methodType==1){
                             // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
                             if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
                                 this.$store.state.failureEnery.is_pingshen_show = false;
                             } else {
                                 this.$store.state.failureEnery.is_pingshen_show = true;
-                                // this.is_disabled = true;
-                                this.ruleForm.desc = '2';
+                                this.is_disabled = true;
+                                this.ruleForm.desc='2';
                             }
-                        } else if (this.methodType == 2) {
+                        }else if(this.methodType==2){
                             // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);//0：提交前那个页面显示，1:提交前的页面
                             // console.log(res.data.bidMsg.eviewrItemsMsg.tijiao);
-                            if (res.data.bidMsg.eviewrItemsMsg.tijiao == 1) { //1,提交之前的，0，提交之前的
-                                this.$store.state.failureEnery.is_pingshen_show = true;
-                            } else {
-                                this.$store.state.failureEnery.is_pingshen_show = false;
+                            if(res.data.bidMsg.eviewrItemsMsg.tijiao==1){ //1,提交之前的，0，提交之前的
+                                this.$store.state.failureEnery.is_pingshen_show=true;
+                            }else{
+                                this.$store.state.failureEnery.is_pingshen_show=false;
                             }
                         }
                     }
@@ -828,67 +782,60 @@
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-                } else if (val === 'g') {//调整评标基准价
+                }else if (val === 'g') {//调整评标基准价
                     //调整评标价点击事件
                     this.ChangedialogVisible = true;
-                    this.TkOneloading = true;
+                    this.TkOneloading=true;
                     //console.log(row.id)
                     //调整评标价点击弹框传值到子页面
-                    this.$axios.post('/api/NewChangePrice', {
+                    this.$axios.post('/api/NewChangePrice',{
                         //id:row.id,   //点击得id
-                    }).then(res => {
-                        if (res.status == 200) {
+                    }).then(res=>{
+                        if(res.status == 200){
                             //console.log(res.data,99999)
-                            this.ChangePriceTk = res.data.msgBox;
-                            this.TkOneloading = false;
+                            this.ChangePriceTk=res.data.msgBox;
+                            this.TkOneloading=false;
                         }
                     })
                 }
             },
-            sonToFather(val) {  //调整评标基准价子集得返回点击关闭事件传值
+            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
             },
             /*------------------------合理低价评审汇总-----------------*/
             submit_btn(formName) {//提交
-                // this.$refs[formName].validate((valid) => {
-                //     if (valid) {
-                this.myloading = true;
-                this.$axios.post('/api/pshz_tijiao', 'post', {
-                    type: this.$route.query.type,
-                    data: this.ruleForm.desc
-                }).then(res => {
-                    if (res.status == 200) {
-                        this.options = res.data.vue_type;
-                        this.msg_data.forEach((m, i) => {
-                            if (m.radio == 1) {
-                                this.a.push(m.radio)
-                            }
-                        });
-                        if (this.a.length != 0 && this.ruleForm.desc != '') {
-                            // alert('有效选中');
-                            this.$message({
-                                message: '提交成功！',
-                                type: 'success'
-                            });
-                            this.$store.state.failureEnery.is_pingshen_show = true;
-                            this.is_disabled = true;
-                            this.myloading = false;
-                        } else {
-                            this.$alert('请先点击页面【报价审核页面】按钮，设置投标人是否有效，评标意见不能为空！', '提示', {
-                                confirmButtonText: '确定',
-                                callback: action => {
-                                    this.myloading = false;
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.myloading = true;
+                        this.$axios.post('/api/pshz_tijiao', {
+                            type: this.$route.query.type,
+                            data: this.ruleForm.desc
+                        }).then(res => {
+                            if (res.status == 200) {
+                                this.options = res.data.vue_type;
+                                this.msg_data.forEach((m, i) => {
+                                    if (m.radio == 1) {
+                                        this.a.push(m.radio)
+                                    }
+                                });
+                                if (this.a.length != 0) {
+                                    // alert('有效选中');
+                                    this.$message({
+                                        message: '提交成功！',
+                                        type: 'success'
+                                    });
+                                    this.$store.state.failureEnery.is_pingshen_show = true;
+                                    this.is_disabled = true;
+                                    //this.mydataloading = false;
+                                } else {
+                                    this.$store.state.failureEnery.success_warning = true;
                                 }
-                            });
-                        }
+                            }
+                        })
                     } else {
                         return false;
                     }
-                })
-                // } else {
-                //     return false;
-                // }
-                // });
+                });
             },
             submited_goback() {//掉接口
                 this.myloading_back = true;
@@ -902,9 +849,6 @@
             },
             /*-----------排序弹框----------*/
             sort_btn() {//排序
-                this.$store.state.failureEnery.sort = true;
-            },
-            zhpb_sort_btn() {
                 this.$store.state.failureEnery.sort = true;
             },
             bidEvaluation_btn() {//报价评审
@@ -951,40 +895,6 @@
                         });
                     }
                 })
-            },
-            pingbiaoAdvice() {
-                this.hldj_dialog_biddingAdvice = true;
-            },
-            rebackForm() {
-                this.hldj_dialog_biddingAdvice = false;
-            },
-            submitForm(formName) {
-                console.log(this.ruleForm.desc);
-                this.hldj_bc_loading = true;
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.$axios.post('/api/hldjSaveBiddingAdvice', 'post', {
-                            data: this.$data.ruleForm
-                        }).then(res => {
-                            if (res.data.code == 200) {
-                                this.$message({
-                                    message: '保存完成！',
-                                    type: 'success'
-                                });
-                                this.hldj_bc_loading = false;
-                                this.hldj_dialog_biddingAdvice = false;
-                                // this.ruleForm.desc='';
-                                this.is_disabled = true;
-                            }
-                        });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
             },
             /*------------------------------排序弹框end-----------------------------------------*/
 
@@ -1070,9 +980,8 @@
                     }
                 }
                 if (isNotFilled) {
-                    this.$message('专家确认得分不能为空！');
+                    this.$message('请先填写计算得分或者接受系统计算得分！');
                 } else {
-                    console.log(this.scoreQuotationData);
                     this.$axios.post('/api/score_quotation_tijiao', {data: this.scoreQuotationData}).then(res => {
                         if (res.status == 200) {
                             this.$message({
@@ -1089,56 +998,7 @@
             },
             acceptanceSystemScor() {//接受系统计算得分
                 for (let i = 0; i < this.scoreQuotationData.length; i++) {
-                    console.log(this.scoreQuotationData);
                     this.scoreQuotationData[i].score = this.scoreQuotationData[i].scoringSystem;
-                    if (this.scoreQuotationData[i].score > this.scoreQuotationData[i].scoringSystem) {
-                        alert(1)
-
-                    }
-                }
-            },
-            inputChange(value,index){
-                let reg = /^[0-9]{1,3}(\.[0-9]{1,3})?$/;
-                if (reg.test(Number(value))) {
-                    if(value > 100){
-                        this.$confirm('输入分值不能超过100.00分!', '提示', {
-                            confirmButtonText: '确定',
-                            showCancelButton: false,
-                            closeOnClickModal: false,
-                            closeOnPressEscape: false,
-                            showClose: false,
-                            type: 'warning'
-                        }).then(() => {
-                            this.scoreQuotationData[index].score = value.substring(0,2);
-                        });
-                    }else {
-                        if(value.includes('.')){
-                            let len = value.split('.')[1].length;
-                            if(len > 2){
-                                this.$confirm('只能输入两位小数', '提示', {
-                                    confirmButtonText: '确定',
-                                    showCancelButton: false,
-                                    closeOnClickModal: false,
-                                    closeOnPressEscape: false,
-                                    showClose: false,
-                                    type: 'warning'
-                                }).then(() => {
-                                    this.scoreQuotationData[index].score = `${value.split('.')[0]}.${value.split('.')[1].substring(0,2)}`;
-                                });
-                            }
-                        }
-                    }
-                }else {
-                    this.$confirm('只能输入英文半角数字及英文半角小数点', '提示', {
-                        confirmButtonText: '确定',
-                        showCancelButton: false,
-                        closeOnClickModal: false,
-                        closeOnPressEscape: false,
-                        showClose: false,
-                        type: 'warning'
-                    }).then(() => {
-                        this.scoreQuotationData[index].score = '';
-                    });
                 }
             },
 
@@ -1153,12 +1013,8 @@
                             data: JSON.stringify(this.$data.ruleForm)
                         }).then(res => {
                             if (res.data.code == 200) {
-                                //  this.tipsDialog = true;
-                                //this.goGrdoupRecor();//倒计时开始
-                                this.$message({
-                                    type: 'success',
-                                    message: '解锁成功!'
-                                });
+                                this.tipsDialog = true;
+                                this.goGrdoupRecor();//倒计时开始
                                 this.submitFormLockRequestLoading = false;
                             }
                         });
@@ -1173,76 +1029,48 @@
             rebackLockRequest() {
                 this.dialogFormVisible = true;
             },
-            // tipsDialogComfrim() {//评分解锁成功提示框的确定按钮
-            //     this.tipsDialog = false;
-            // },
+            tipsDialogComfrim() {//评分解锁成功提示框的确定按钮
+                this.tipsDialog = false;
+            },
             //倒计时
-            // goGrdoupRecor() {
-            //     let TIME_COUNT = 5;
-            //     if (!this.timer) {
-            //         this.count = TIME_COUNT;
-            //         this.show = false;
-            //         this.timer = setInterval(() => {
-            //             if (this.count > 0 && this.count <= TIME_COUNT) {
-            //                 this.count--;
-            //             } else {
-            //                 this.show = true;
-            //                 clearInterval(this.timer);
-            //                 this.timer = null;
-            //                 this.tipsDialog = false;
-            //             }
-            //         }, 1000)
-            //     }
-            // },
+            goGrdoupRecor() {
+                let TIME_COUNT = 5;
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.show = false;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.show = true;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                            this.tipsDialog = false;
+                        }
+                    }, 1000)
+                }
+            },
             /*--------------------评分解锁弹框end-------------------*/
 
             /*--------------------评标意见弹框-------------------*/
             biddingAdvice() {
                 this.dialogBiddingAdvice = true;
             },
-            // saveBiddingAdvice(formName) {//综合评标评标意见弹框保存按钮
-            //     this.saveBiddingAdviceLoading = true;
-            //     this.$axios.post('/api/saveBiddingAdvice', 'post', {
-            //         data: this.formBiddingAdvice.desc
-            //     }).then(res => {
-            //         if (res.data.code == 200) {
-            //             this.$message({
-            //                 message: '保存完成！',
-            //                 type: 'success'
-            //             });
-            //             this.saveBiddingAdviceLoading = false;
-            //             this.dialogBiddingAdvice = false;
-            //         }
-            //     });
-            // },
-
-
-            saveBiddingAdvice(formName) {//综合评标评标意见弹框保存按钮
-                console.log(this.ruleForm.desc);
+            saveBiddingAdvice(formName) {//评标意见弹框保存按钮
                 this.saveBiddingAdviceLoading = true;
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.$axios.post('/api/saveBiddingAdvice', 'post', {
-                            data: this.$data.ruleForm2
-                        }).then(res => {
-                            if (res.data.code == 200) {
-                                this.$message({
-                                    message: '保存完成！',
-                                    type: 'success'
-                                });
-                                this.saveBiddingAdviceLoading = true;
-                                this.dialogBiddingAdvice = false;
-                                // this.ruleForm.desc='';
-                                this.is_disabled = true;
-                            }
+                this.$axios.post('/api/saveBiddingAdvice', 'post', {
+                    data: this.formBiddingAdvice.desc
+                }).then(res => {
+                    if (res.data.code == 200) {
+                        this.$message({
+                            message: '保存完成！',
+                            type: 'success'
                         });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
+                        this.saveBiddingAdviceLoading = false;
+                        this.dialogBiddingAdvice = false;
                     }
                 });
             },
-
             rebackBiddingAdvice() {//评标意见弹框返回按钮
                 this.dialogBiddingAdvice = false;
             },
@@ -1253,60 +1081,33 @@
             checkProScoreBtn() {
                 this.$store.state.failureEnery.checkProScoreDialogVisible = true;
             },
+            reviewSummarySubmitZHPB(){//综合评标提交按钮
+                this.$store.state.failureEnery.tijiaoDialogZHPB=true;
+            },
+            comfrimSubmitZHPB(){//综合评标提交确定按钮
+                this.submitFormLoadingZHPB=true;
+                this.$axios.post('/api/submitBtnZHPB', 'post', {
+                    data: ''
+                }).then(res => {
+                    if (res.data.code == 200) {
+                        this.tipsDialog = true;
+                        this.goGrdoupRecor();//倒计时开始
+                        this.submitFormLoadingZHPB = false;
+                        this.$store.state.failureEnery.tijiaoDialogZHPB=false;
+                        // $(".hide_span").hide();
+                        this.$store.state.failureEnery.is_pingshen_show=true;
 
-            reviewSummarySubmitZHPB() {//综合评标提交按钮
-                this.$confirm('您确定进行评分汇总操作吗?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    this.submitFormLoadingZHPB = true;
-                    this.$axios.post('/api/submitBtnZHPB', 'post', {
-                        data: ''
-                    }).then(res => {
-                        if (res.data.code == 200) {
-                            this.submitFormLoadingZHPB = false;
-                            this.$store.state.failureEnery.is_pingshen_show = true;
-                            this.$message({
-                                type: 'success',
-                                message: '评分汇总提交成功!'
-                            });
-                        }
-                    });
-
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消评分汇总提交'
-                    });
+                    }
                 });
             },
-            // reviewSummarySubmitZHPB(){//综合评标提交按钮
-            //     this.$store.state.failureEnery.tijiaoDialogZHPB=true;
-            // },
-            // comfrimSubmitZHPB(){//综合评标提交确定按钮
-            //     this.submitFormLoadingZHPB=true;
-            //     this.$axios.post('/api/submitBtnZHPB', 'post', {
-            //         data: ''
-            //     }).then(res => {
-            //         if (res.data.code == 200) {
-            //             this.tipsDialog = true;
-            //             this.goGrdoupRecor();//倒计时开始
-            //             this.submitFormLoadingZHPB = false;
-            //             this.$store.state.failureEnery.tijiaoDialogZHPB=false;
-            //             this.$store.state.failureEnery.is_pingshen_show=true;
-            //
-            //         }
-            //     });
-            // },
-            // rebackSubmitZHPB(){//综合评标提交取消按钮
-            //     this.$store.state.failureEnery.tijiaoDialogZHPB=false;
-            // },
-            bindScoreBtn() {//投标人分项得分按钮
-                this.dialogBindScore = true;
+            rebackSubmitZHPB(){//综合评标提交取消按钮
+                this.$store.state.failureEnery.tijiaoDialogZHPB=false;
             },
-            rebackBiddersScoreBtn() {//投标人分项得分表返回按钮
-                this.dialogBindScore = false;
+            bindScoreBtn(){//投标人分项得分按钮
+                this.dialogBindScore=true;
+            },
+            rebackBiddersScoreBtn(){//投标人分项得分表返回按钮
+                this.dialogBindScore=false;
             }
         }
     }
@@ -1317,7 +1118,7 @@
         overflow: hidden;
         padding-top: 15px;
         background: #ededed;
-        min-height: 800px;
+        min-height:800px;
         .unFinishQualificationsResult {
             background-color: #ededed;
             padding: 0px 0% 15px 0%;
@@ -1399,17 +1200,11 @@
                     background: none;
                 }
             }
+
         }
-        .zhpbBiddingAdviceBialog, .reviewLockRequest, .hldj_biddingAdvice {
+        .biddingAdvice,.reviewLockRequest {
             .el-textarea__inner {
                 min-height: 150px !important;
-            }
-        }
-        .hldj_biddingAdvice, .zhpbBiddingAdviceBialog {
-            .hldj_btns {
-                .el-form-item__content {
-                    margin-left: 0px !important;
-                }
             }
         }
     }

@@ -674,6 +674,7 @@
             },
             fullModeColumn() {
                 this.$commonJs.pdfOperations.fullModeColumn.call(this);
+                $(".positionDiv").hide();
             },
             fullModeRow() {
                 this.$commonJs.pdfOperations.fullModeRow.call(this);
@@ -742,7 +743,6 @@
                 }
                 this.$axios.post(url, {type: parseInt(this.type_btn) + 1, }).then(res => {
                     if (res.status == 200) {
-
                         // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
                         this.allSubmitBtnLoading = false;
                         this.options = res.data.vue_type;
@@ -818,6 +818,8 @@
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
                 $(".positionDiv").show();
+                // console.log($('.div_pdf').height());
+
             },
             closePositionDiv(){
                 $(".positionDiv").hide();

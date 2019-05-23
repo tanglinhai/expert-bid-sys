@@ -3036,7 +3036,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
 
                     //没有用
 
-                    'pingbiao_yijian': dataMsg,
+                    //'pingbiao_yijian': dataMsg,
                     'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
@@ -3330,6 +3330,13 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
         let dataMsg = [];
         let is_tijaio=Random.integer(0, 1);
         let tijaio=Random.integer(0, 1);
+        for (let i = 0; i < Random.integer(3,8); i++) {
+            dataMsg.push({//排序
+                'company_name': Random.csentence(1, 10),
+                'id': Random.id(),
+                'ranking': Random.integer(1, 7),
+            });
+        }
         return {
             'bidMsg': {
                 id: Random.id(),
@@ -3366,7 +3373,8 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         scoringSystem:'53',
                         score: ''
                     }],
-                    'pingbiao_yijian': dataMsg,
+                   // 'pingbiao_yijian': dataMsg,
+                    'sort_data': dataMsg,//排序
                     'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
@@ -6057,7 +6065,12 @@ let saveBiddingAdvice = Mock.mock('/api/saveBiddingAdvice', 'post', {
     message: '保存成功!',
     data: []
 });
-
+//合理低价评标意见弹框保存接口
+let hldjSaveBiddingAdvice = Mock.mock('/api/hldjSaveBiddingAdvice', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 //综合评标表格提交按钮接口
 let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
     code: 200,

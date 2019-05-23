@@ -141,7 +141,7 @@
                                             </el-row>
                                         </el-col>
 
-                                        <el-col :span="12" class="mb15">
+                                        <el-col :span="12" >
                                             <div class="grid-content bg-purple btnBox" style="text-align:right;">
                                                 <span id="hide_btn"
                                                       :class="$store.state.failureEnery.business_tijiao==false ?'hide_div':'nohide_div'">
@@ -182,7 +182,7 @@
                                         </el-col>
                                         <!--table-->
                                     </el-row>
-                                    <el-row class="table_warp">
+                                    <el-row class="table_warp mt15">
                                         <template>
                                             <!------------------------------------定档评议table-------------------------------->
                                             <el-table
@@ -195,7 +195,7 @@
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" v-if="type==8">
+                                                                     min-width="400" :key="index" v-if="type==8"    >
 
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
@@ -230,13 +230,15 @@
                                                                     <el-radio-group
                                                                             v-model="scope.row['value' + (index + 1)]"
                                                                             v-if="$store.state.failureEnery.business_tijiao"
-                                                                            @change="changeRadios(index + 1)">
+                                                                            @change="changeRadios(index + 1,scope.row['value' + (index + 1)])" class="radio_div">
                                                                         <el-radio :label="val.num"
                                                                                   v-for="val in scope.row.radioList">
                                                                             {{val.typeTitle}}
                                                                         </el-radio>
                                                                     </el-radio-group>
+
                                                                     <span v-else> {{   scope.row['value' + (index + 1)]}}</span>
+                                                                     {{scope.row['value' + (index + 1)]}}
                                                                 </span>
                                                                 <span v-else>10</span>
                                                             </div>
@@ -393,7 +395,7 @@
                                                     </el-table-column>
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" v-if="type==9">
+                                                                     min-width="400" :key="index" v-if="type==9">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
                                                                @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])"
@@ -577,7 +579,7 @@
                                                     <!--两步法-->
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" v-if="type==10">
+                                                                     min-width="400" :key="index" v-if="type==10">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
                                                                @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])"
@@ -762,7 +764,7 @@
                                                     <!--其他-->
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="250" :key="index" v-if=" type==11">
+                                                                     min-width="400" :key="index" v-if=" type==11">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
                                                                @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])"
@@ -1029,47 +1031,47 @@
                         <el-button size="small" type="primary" @click="reback">取消</el-button>
                     </el-row>
 
-                    <el-dialog
-                            width="30%"
-                            title="提示"
-                            :visible.sync="$store.state.failureEnery.tijiaoNot100"
-                            append-to-body>
-                        <el-row class="textAlignC fs14" style="line-height: 30px">
-                            {{to_submit_prompt_name}}评审还未完成，不能提交 {{to_submit_prompt_name}}评审数据！
-                        </el-row>
-                        <el-row class="textAlignC pt20">
-                            <el-button size="small" type="primary" @click="tijiaoNot100Comfrim">确认</el-button>
-                        </el-row>
-                    </el-dialog>
+                    <!--<el-dialog-->
+                            <!--width="30%"-->
+                            <!--title="提示"-->
+                            <!--:visible.sync="$store.state.failureEnery.tijiaoNot100"-->
+                            <!--append-to-body>-->
+                        <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                            <!--{{to_submit_prompt_name}}评审还未完成，不能提交 {{to_submit_prompt_name}}评审数据！-->
+                        <!--</el-row>-->
+                        <!--<el-row class="textAlignC pt20">-->
+                            <!--<el-button size="small" type="primary" @click="tijiaoNot100Comfrim">确认</el-button>-->
+                        <!--</el-row>-->
+                    <!--</el-dialog>-->
 
-                    <el-dialog
-                            width="700px"
-                            title="提示"
-                            :visible.sync="$store.state.failureEnery.tijiao100"
-                            append-to-body>
-                        <el-row style="margin:10px auto;">
-                            <el-row style="  border:1px solid #ccc;">
-                                <el-row class="textAlignC fs14" style="line-height: 30px">
-                                    <div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">
-                                        <img src="../../assets/img/xiaolian.png" alt=""
-                                             style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">
-                                    </div>
-                                </el-row>
-                                <el-row>
-                                    <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">
-                                        {{name}}评审成功！</p>
-                                </el-row>
-                            </el-row>
-                            <el-row>
-                                <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span
-                                        id="sec">{{count}}</span>]秒后自动关闭
-                                </div>
-                            </el-row>
-                            <el-row class="textAlignC pt20">
-                                <el-button size="small" type="primary" @click="tijiao100Comfrim">确认</el-button>
-                            </el-row>
-                        </el-row>
-                    </el-dialog>
+                    <!--<el-dialog-->
+                            <!--width="700px"-->
+                            <!--title="提示"-->
+                            <!--:visible.sync="$store.state.failureEnery.tijiao100"-->
+                            <!--append-to-body>-->
+                        <!--<el-row style="margin:10px auto;">-->
+                            <!--<el-row style="  border:1px solid #ccc;">-->
+                                <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                                    <!--<div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">-->
+                                        <!--<img src="../../assets/img/xiaolian.png" alt=""-->
+                                             <!--style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">-->
+                                    <!--</div>-->
+                                <!--</el-row>-->
+                                <!--<el-row>-->
+                                    <!--<p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">-->
+                                        <!--{{name}}评审成功！</p>-->
+                                <!--</el-row>-->
+                            <!--</el-row>-->
+                            <!--<el-row>-->
+                                <!--<div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span-->
+                                        <!--id="sec">{{count}}</span>]秒后自动关闭-->
+                                <!--</div>-->
+                            <!--</el-row>-->
+                            <!--<el-row class="textAlignC pt20">-->
+                                <!--<el-button size="small" type="primary" @click="tijiao100Comfrim">确认</el-button>-->
+                            <!--</el-row>-->
+                        <!--</el-row>-->
+                    <!--</el-dialog>-->
                 </div>
             </el-dialog>
             <!--废标弹框-->
@@ -1171,7 +1173,7 @@
                 pdfItems: [],//动态插入pdf
                 /* ----------------------------pdf end------------------------------- */
                 is_submit: '',
-                count:5,
+                //count:5,
                 num_business:0,
                 num_jishu:0,
                 num_serve:0,
@@ -1183,6 +1185,7 @@
                 ChangedialogVisible:false,  //调整评标价弹框
                 TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+                val:""
             }
         },
         created() {
@@ -1268,7 +1271,7 @@
                             }
                         })
                     });
-                    console.log(num, allNum);
+                    // console.log(num, allNum);
                     this.num_jishu=num;
                     this.allNumJishu=allNum;
                     return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
@@ -1386,7 +1389,7 @@
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
                         this.allRaioNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
-                        console.log(res.data.bidMsg.type);
+                        // console.log(res.data.bidMsg.type);
                         this.is_submit = res.data.bidMsg.type;
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.business_tijiao = true;//未提交
@@ -1519,8 +1522,10 @@
                 });
                 this.dingdang_tableData[this.dingdang_tableData.length - 2]['value' + index] = amt;
             },
-            changeRadios(index) { // 单选法
-                // console.log(index);
+            changeRadios(index,val) { // 单选法
+                // this.$store.state.failureEnery.business_tijiao=false;
+                console.log(index,val);
+                this.val=val;
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
                 this.$axios.post('/api/isFailure', 'post', {
@@ -1676,12 +1681,21 @@
                     this.$axios.post('/api/business_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
+                                //this.$store.state.failureEnery.tijiaoNot100 = true;
+                                this.$message({
+                                    message:this.to_submit_prompt_name+'评审还未完成，不能提交 '+this.to_submit_prompt_name+'评审数据！',
+                                    type: 'warning'
+                                });
                             } else {
                                 this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
+                                //this.$store.state.failureEnery.tijiao100 = true;
+                               // this.$store.state.failureEnery.business_tijiao = false;
+                               // this.goGrdoupRecor();//倒计时开始
+                                this.$message({
+                                    message: this.name+'评审成功！',
+                                    type: 'success'
+                                });
+                                this.$store.state.failureEnery.submitPrompt=false;
                             }
                         }
                     })
@@ -1689,12 +1703,21 @@
                     this.$axios.post('/api/jishu_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
+                                this.$message({
+                                    message:this.to_submit_prompt_name+'评审还未完成，不能提交 '+this.to_submit_prompt_name+'评审数据！',
+                                    type: 'warning'
+                                });
+                               // this.$store.state.failureEnery.submitPrompt=false;
                             } else {
                                 this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
+                                // this.$store.state.failureEnery.tijiao100 = true;
+                                // this.$store.state.failureEnery.business_tijiao = false;
+                                // this.goGrdoupRecor();//倒计时开始
+                                this.$message({
+                                    message: this.name+'评审成功！',
+                                    type: 'success'
+                                });
+                                this.$store.state.failureEnery.submitPrompt=false;
                             }
                         }
                     })
@@ -1702,12 +1725,21 @@
                     this.$axios.post('/api/fuwu_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
+                                // this.$store.state.failureEnery.tijiaoNot100 = true;
+                                this.$message({
+                                    message:this.to_submit_prompt_name+'评审还未完成，不能提交 '+this.to_submit_prompt_name+'评审数据！',
+                                    type: 'warning'
+                                });
                             } else {
                                 this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
+                                // this.$store.state.failureEnery.tijiao100 = true;
+                                // this.$store.state.failureEnery.business_tijiao = false;
+                                // this.goGrdoupRecor();//倒计时开始
+                                this.$message({
+                                    message: this.name+'评审成功！',
+                                    type: 'success'
+                                });
+                                this.$store.state.failureEnery.submitPrompt=false;
                             }
                         }
                     })
@@ -1715,12 +1747,21 @@
                     this.$axios.post('/api/qita_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                         if (res.status == '200') {
                             if (this.completePercent != 100.0) {
-                                this.$store.state.failureEnery.tijiaoNot100 = true;
+                                // this.$store.state.failureEnery.tijiaoNot100 = true;
+                                this.$message({
+                                    message:this.to_submit_prompt_name+'评审还未完成，不能提交 '+this.to_submit_prompt_name+'评审数据！',
+                                    type: 'warning'
+                                });
                             } else {
                                 this.$set(this.dingdang_tableData, this.dingdang_tableData.length - 1, res.data.data);
-                                this.$store.state.failureEnery.tijiao100 = true;
-                                this.$store.state.failureEnery.business_tijiao = false;
-                                this.goGrdoupRecor();//倒计时开始
+                                // this.$store.state.failureEnery.tijiao100 = true;
+                                // this.$store.state.failureEnery.business_tijiao = false;
+                                // this.goGrdoupRecor();//倒计时开始
+                                this.$message({
+                                    message: this.name+'评审成功！',
+                                    type: 'success'
+                                });
+                                this.$store.state.failureEnery.submitPrompt=false;
                             }
                         }
                     })
@@ -1740,23 +1781,23 @@
                 this.$store.state.failureEnery.flag = false;
                 $("#hide_btn").hide();
             },
-            goGrdoupRecor() {//倒计时
-                const TIME_COUNT = 5;
-                if (!this.timer) {
-                    this.count = TIME_COUNT;
-                    this.show = false;
-                    this.timer = setInterval(() => {
-                        if (this.count > 0 && this.count <= TIME_COUNT) {
-                            this.count--;
-                        } else {
-                            this.show = true;
-                            clearInterval(this.timer);
-                            this.timer = null;
-                            this.$store.state.failureEnery.tijiao100 = false;
-                        }
-                    }, 1000)
-                }
-            },
+            // goGrdoupRecor() {//倒计时
+            //     const TIME_COUNT = 5;
+            //     if (!this.timer) {
+            //         this.count = TIME_COUNT;
+            //         this.show = false;
+            //         this.timer = setInterval(() => {
+            //             if (this.count > 0 && this.count <= TIME_COUNT) {
+            //                 this.count--;
+            //             } else {
+            //                 this.show = true;
+            //                 clearInterval(this.timer);
+            //                 this.timer = null;
+            //                 this.$store.state.failureEnery.tijiao100 = false;
+            //             }
+            //         }, 1000)
+            //     }
+            // },
             comfrimAllChecked() {
                 this.allCheckedBtnLoading = true;
                 this.$store.state.failureEnery.determineOperating = false;
@@ -1877,4 +1918,5 @@
             }
         }
     }
+
 </style>

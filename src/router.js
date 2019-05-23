@@ -89,6 +89,7 @@ export const asyncRouterMap = [
       { name: '/elect/UnFinishQualificationsResult', path: '/elect/UnFinishQualificationsResult', meta: { role: 'expert' }, component: () => import('./views/qualificationExam/UnFinishQualificationsResult.vue') },
         // 详细评审（技术）汇总页面
        { name: '/elect/ReviewSummary', path: '/elect/ReviewSummary', meta: { role: 'expert' }, component: () => import('./views/qualificationExam/ReviewSummary.vue') },
+       { name: '/elect/ReviewSummary_1', path: '/elect/ReviewSummary_1', meta: { role: 'expert' }, component: () => import('./views/qualificationExam/ReviewSummary_1.vue') },
         //商务技术服务定档其他
        { name: '/elect/BusinessOther', path: '/elect/BusinessOther', meta: { role: 'expert' }, component: () => import('./views/qualificationExam/BusinessOther.vue') },
     ]

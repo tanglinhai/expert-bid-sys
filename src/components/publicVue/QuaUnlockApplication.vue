@@ -8,7 +8,7 @@
                     <el-checkbox label="王五" name="type"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-form-item label="申请原因：" prop="desc">
+            <el-form-item label="申请原因：" prop="desc" class="applicationReason">
                 <el-input type="textarea" v-model="ruleForm.desc"></el-input>
             </el-form-item>
             <el-form-item>
@@ -59,7 +59,7 @@
                                 this.mydataloading=false;
                                 this.$message({
                                     type: 'success',
-                                    message: '保存成功',
+                                    message: '解锁成功',
                                     center: true
                                 });
                             }
@@ -82,8 +82,11 @@
 <style lang="scss">
 
     .changePassword {
-        .insolvProWrap {
-        }
+     .applicationReason{
+         .el-textarea__inner {
+             min-height: 150px !important;
+         }
+     }
     }
 </style>
 

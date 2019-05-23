@@ -173,44 +173,44 @@
 
             </el-dialog>
             <!--标中质询弹框-->
-            <el-dialog
-                    title="汇总提交提示"
-                    :visible.sync="$store.state.failureEnery.huizongSubmit"
-                    width="30%"
-            >
-                <el-row class="textAlignC fs14" style="line-height: 30px">
-                    您确定进行{{huizongSubmitTips }}操作吗？
-                </el-row>
-                <el-row class="textAlignC pt20">
-                    <el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>
-                    <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
-                </el-row>
-                <el-dialog
-                        width="30%"
-                        title="消息提示"
-                        :visible.sync="$store.state.failureEnery.tijiaoHuizong"
-                        append-to-body>
-                    <el-row style="margin:10px auto;">
-                        <el-row style="  border:1px solid #ccc;">
-                            <el-row class="textAlignC fs14" style="line-height: 30px">
-                                <div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">
-                                    <img src="../../assets/img/xiaolian.png" alt=""
-                                         style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">
-                                </div>
-                            </el-row>
-                            <el-row>
-                                <p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">  {{huizongSubmitTips }}提交成功！</p>
-                            </el-row>
-                        </el-row>
-                        <el-row>
-                            <div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span id="sec">{{count}}</span>]秒后自动关闭</div>
-                        </el-row>
-                        <el-row class="textAlignC pt20">
-                            <el-button size="small" type="primary" @click="huizongSubmitSucceed">确认</el-button>
-                        </el-row>
-                    </el-row>
-                </el-dialog>
-            </el-dialog>
+            <!--<el-dialog-->
+                    <!--title="汇总提交提示"-->
+                    <!--:visible.sync="$store.state.failureEnery.huizongSubmit"-->
+                    <!--width="30%"-->
+            <!--&gt;-->
+                <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                    <!--您确定进行{{huizongSubmitTips }}操作吗？-->
+                <!--</el-row>-->
+                <!--<el-row class="textAlignC pt20">-->
+                    <!--<el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>-->
+                    <!--<el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>-->
+                <!--</el-row>-->
+                <!--<el-dialog-->
+                        <!--width="30%"-->
+                        <!--title="消息提示"-->
+                        <!--:visible.sync="$store.state.failureEnery.tijiaoHuizong"-->
+                        <!--append-to-body>-->
+                    <!--<el-row style="margin:10px auto;">-->
+                        <!--<el-row style="  border:1px solid #ccc;">-->
+                            <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                                <!--<div class="xiaolian" style="width:100%; background:#ebeff3; height:76px;">-->
+                                    <!--<img src="../../assets/img/xiaolian.png" alt=""-->
+                                         <!--style="display: block;  height:80px;  margin:0px auto; vertical-align: middle;">-->
+                                <!--</div>-->
+                            <!--</el-row>-->
+                            <!--<el-row>-->
+                                <!--<p class="tishi_wenzi" style="text-align: center;color:#000000;line-height:40px;">  {{huizongSubmitTips }}提交成功！</p>-->
+                            <!--</el-row>-->
+                        <!--</el-row>-->
+                        <!--<el-row>-->
+                            <!--<div class="djsTime" style="text-align: center; color:#000000; line-height:40px;">[<span id="sec">{{count}}</span>]秒后自动关闭</div>-->
+                        <!--</el-row>-->
+                        <!--<el-row class="textAlignC pt20">-->
+                            <!--<el-button size="small" type="primary" @click="huizongSubmitSucceed">确认</el-button>-->
+                        <!--</el-row>-->
+                    <!--</el-row>-->
+                <!--</el-dialog>-->
+            <!--</el-dialog>-->
              <!--调整评标价弹框-->
             <el-dialog
                 title="投标人最新报价列表"
@@ -392,72 +392,86 @@
                 this.$store.state.failureEnery.qualificationUnlock = true;
             },
             submit() {//审查汇总
-                this.$store.state.failureEnery.huizongSubmit = true;
-                // this.submit_huizong=true;
-                // let url;
-                // if (this.type == 4) {
-                //     url = '/api/tijiao_fhx';
-                // } else if (this.type == 2) {
-                //     url = '/api/tijiao';
-                // }
-                // else if (this.type == 6) {
-                //     url = '/api/tijiao_xxjs';
-                // }
-                // this.$axios.post(url, {
-                //     data: this.form.desc,
-                //     type: parseInt(this.type) + 1
-                // }).then(res => {
-                //     if (res.status == 200) {
-                //         this.submit_huizong=false;
-                //         this.options = res.data.vue_type;
-                //         this.$message({
-                //             message: '提交成功',
-                //             type: 'success'
-                //         });
-                //         $(".hide_div").hide();
-                //         $('.qita_expalin').show();
-                //         $(".qita_expalin").text(this.form.desc);
-                //         $('.qita_expalin_input').hide()
-                //     }
-                // })
+                //this.$store.state.failureEnery.huizongSubmit = true;
+                this.$confirm(' 您确定进行'+this.huizongSubmitTips+'操作吗？', '汇总提交提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.submit_huizong=true;
+                 //   this.$store.state.failureEnery.huizongSubmit = false;
+                    let url;
+                    if (this.type == 4) {
+                        url = '/api/tijiao_fhx';
+                    } else if (this.type == 2) {
+                        url = '/api/tijiao';
+                    }
+                    else if (this.type == 6) {
+                        url = '/api/tijiao_xxjs';
+                    }
+                    this.$axios.post(url, {
+                        data: this.form.desc,
+                        type: parseInt(this.type) + 1
+                    }).then(res => {
+                        if (res.status == 200) {
+                            this.submit_huizong=false;
+                            this.options = res.data.vue_type;
+                            // this.$store.state.failureEnery.tijiaoHuizong=true;
+                            this.$message({
+                                type: 'success',
+                                message: this.huizongSubmitTips +'提交成功！'
+                            });
+                            $(".hide_div").hide();
+                            $(".show_div").show();
+                            $('.qita_expalin').show();
+                            $(".qita_expalin").text(this.form.desc);
+                            $('.qita_expalin_input').hide()
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消'+this.huizongSubmitTips+ '提交!'
+                    });
+                });
             },
             individualTrial() {//查看个人资格审查项表
                 this.$store.state.failureEnery.individualTrial = true;
             },
-            comfrimAllChecked(){
-                this.submit_huizong=true;
-                this.$store.state.failureEnery.huizongSubmit = false;
-                let url;
-                if (this.type == 4) {
-                    url = '/api/tijiao_fhx';
-                } else if (this.type == 2) {
-                    url = '/api/tijiao';
-                }
-                else if (this.type == 6) {
-                    url = '/api/tijiao_xxjs';
-                }
-                this.$axios.post(url, {
-                    data: this.form.desc,
-                    type: parseInt(this.type) + 1
-                }).then(res => {
-                    if (res.status == 200) {
-                        this.submit_huizong=false;
-                        this.options = res.data.vue_type;
-                        this.$store.state.failureEnery.tijiaoHuizong=true;
-                    }
-                })
-            },
-            huizongSubmitSucceed(){
-                this.$store.state.failureEnery.tijiaoHuizong=false;
-                $(".hide_div").hide();
-                $(".show_div").show();
-                $('.qita_expalin').show();
-                $(".qita_expalin").text(this.form.desc);
-                $('.qita_expalin_input').hide()
-            },
-            rebackAllChecked(){
-                this.$store.state.failureEnery.huizongSubmit = false;
-            },
+            // comfrimAllChecked(){
+            //     this.submit_huizong=true;
+            //     this.$store.state.failureEnery.huizongSubmit = false;
+            //     let url;
+            //     if (this.type == 4) {
+            //         url = '/api/tijiao_fhx';
+            //     } else if (this.type == 2) {
+            //         url = '/api/tijiao';
+            //     }
+            //     else if (this.type == 6) {
+            //         url = '/api/tijiao_xxjs';
+            //     }
+            //     this.$axios.post(url, {
+            //         data: this.form.desc,
+            //         type: parseInt(this.type) + 1
+            //     }).then(res => {
+            //         if (res.status == 200) {
+            //             this.submit_huizong=false;
+            //             this.options = res.data.vue_type;
+            //             this.$store.state.failureEnery.tijiaoHuizong=true;
+            //         }
+            //     })
+            // },
+            // huizongSubmitSucceed(){
+            //     this.$store.state.failureEnery.tijiaoHuizong=false;
+            //     $(".hide_div").hide();
+            //     $(".show_div").show();
+            //     $('.qita_expalin').show();
+            //     $(".qita_expalin").text(this.form.desc);
+            //     $('.qita_expalin_input').hide()
+            // },
+            // rebackAllChecked(){
+            //     this.$store.state.failureEnery.huizongSubmit = false;
+            // },
         },
     }
 </script>
