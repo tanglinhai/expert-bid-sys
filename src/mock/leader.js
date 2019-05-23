@@ -163,3 +163,55 @@ Mock.mock('./api/ppycjl','post',{
         {'ycqk':'错误代码@natural(1,99)','cljg|1':['异常已解决','异常未解决'],'clcs':'@id','jlr':'@cname','jd':'@cname','yy':'未知','bz':'真是场景请勿...','sqr':'@cname','scjd':'第@natural(1,5)阶段','sqrq':'@datetime','zt|1':['正常','异常'],'sqyy':'未知错误'},
     ]
 })
+
+Mock.mock('./api/navMesgList','post',[
+    {
+        label:'签到',
+        types: 1,  
+        typestaus:2,  
+    },
+    {
+        label:'资格审查汇总',
+        types: 1,  
+        'typestaus|1':[Math.floor(Math.random()*2+1),'4'],  
+    },
+    {
+        label:'符合性审查汇总',
+        types: 1,  
+        'typestaus|1':[Math.floor(Math.random()*2+1),'4'],  
+    },
+    {
+        label:'详细评审(技术)汇总',
+        types: 1,  
+        'typestaus|1':[Math.floor(Math.random()*2+1),'4'],   
+    },
+    {
+        label:'评审汇总',
+        types: 1,  
+        'typestaus|1':[Math.floor(Math.random()*2+1),'4'],   
+    },
+    {
+        label:'打印报表',
+        types: 1,  
+        'typestaus|1':[Math.floor(Math.random()*2+1),'4'],   
+    },
+])
+
+Mock.mock('./api/inquiry','post',{
+    'data|1-5':[
+        {
+            cont:'@id',
+            twTime:'@datetime',
+            hfTime:'@datetime',
+            name:'@cname'
+        }
+    ]
+})
+
+Mock.mock('./api/category','post',{
+    'data':[
+        {name:'资格审查',type:'资格审查',vsbag:'所有分包',scys:'资格审查项@natural(1,28)',sexy:'不可偏离项'},
+        {name:'其他审查',type:'资格审查',vsbag:'部分分包',scys:'资格审查项@natural(1,28)',sexy:'可偏离项'},
+        {name:'响应性评审',type:'其他审查',vsbag:'',scys:'资格审查项@natural(1,28)',sexy:'不可偏离项'},
+    ]
+})

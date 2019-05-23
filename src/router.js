@@ -94,6 +94,16 @@ export const asyncRouterMap = [
        { name: '/elect/BusinessOther', path: '/elect/BusinessOther', meta: { role: 'expert' }, component: () => import('./views/qualificationExam/BusinessOther.vue') },
     ]
   },
+  //临时使用-------------------------------------------------
+  {
+    path: '/SignaturePage',
+    name: 'SignaturePage',
+    meta: {
+      role: 'leader'
+    },
+    component: () => import('./views/SignaturePage.vue')  //签字
+  },
+  //---------------------------------------------------------
   {
     path:'/groupLeader',
     name:'groupLeader',
@@ -106,6 +116,7 @@ export const asyncRouterMap = [
       { name: '/groupLeader/Index', path: '/groupLeader/Index', meta: { role: 'leader' }, component: () => import('./views/leader/Index.vue')},
       { name: '/groupLeader/SignIn', path: '/groupLeader/SignIn', meta: { role: 'leader' }, component: () => import('./views/leader/SignIn.vue')},
       { name: '/groupLeader/Examination', path: '/groupLeader/Examination', meta: { role: 'leader' }, component: () => import('./views/leader/Examination.vue')},
+      { name: '/groupLeader/BeConfiguration', path: '/groupLeader/BeConfiguration', meta: { role: 'leader' }, component: () => import('./views/leader/BeConfiguration.vue')},
     ]
   }
 ];

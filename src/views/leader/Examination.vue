@@ -18,15 +18,16 @@
             </el-col>
             <el-col :span="3" class="fs14 textAlignR select">
                 <div class="grid-content bg-purple">
-                    <el-dropdown>
+                    <el-dropdown  @command="handleCommand">
                         <el-button type="primary" size="small">
                             <i class="icon iconfont icon-caozuo  mr3"></i>操作<i
                                 class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>标中质询</el-dropdown-item>
-                            <el-dropdown-item>查看开标一览表</el-dropdown-item>
-                            <el-dropdown-item>资质审查签字</el-dropdown-item>
+                            <el-dropdown-item command="0">查看标中质询</el-dropdown-item>
+                            <el-dropdown-item command="1">查看开标一览表</el-dropdown-item>
+                            <el-dropdown-item command="2">资质审查签字</el-dropdown-item>
+                            <el-dropdown-item command="3">评审结果签字</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -46,6 +47,7 @@
                 </el-tab-pane>
             </el-tabs>
         </el-row>
+        <Inpuiry ref="inpStatu"></Inpuiry>
     </div>
 </template>
 
@@ -53,12 +55,14 @@
 <script>
 import Exam from '../leader/leaderChild/Exam';
 import Qsummary from '../leader/leaderChild/Qsummary';
-import Review from '../leader/leaderChild/Reviewsummary'
+import Review from '../leader/leaderChild/Reviewsummary';
+import Inpuiry from '../leader/leaderChild/Inquiry';
 export default {
 components:{
     Exam,
     Qsummary,
-    Review
+    Review,
+    Inpuiry,
 },
 data() {
     return {
@@ -97,6 +101,18 @@ methods: {
                 return this.unOver = Math.floor(Math.random()*2);
         }
     },
+    handleCommand(command){
+        // console.log(this.$refs.inpStatu);
+        switch(command){
+            case '0':
+                return this.$refs.inpStatu.dialogVisible = true;
+            case '1':
+                return window.open('http://localhost:7000/img/receipt.pdf');
+            case '2':
+            case '3':
+                return window.open('http://localhost:7000/SignaturePage');
+        }
+    }
 },
 }
 </script>
