@@ -207,3 +207,11 @@ Mock.mock('./api/inquiry','post',{
         }
     ]
 })
+
+Mock.mock('./api/category','post',{
+    'data':[
+        {name:'资格审查',type:'资格审查',vsbag:'所有分包',scys:'资格审查项@natural(1,28)',sexy:'不可偏离项'},
+        {name:'其他审查',type:'资格审查',vsbag:'部分分包',scys:'资格审查项@natural(1,28)',sexy:'可偏离项'},
+        {name:'响应性评审',type:'其他审查',vsbag:'',scys:'资格审查项@natural(1,28)',sexy:'不可偏离项'},
+    ]
+})
