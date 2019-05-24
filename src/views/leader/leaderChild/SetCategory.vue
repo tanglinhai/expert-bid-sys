@@ -39,8 +39,8 @@
                     label="操作">
                     <template slot-scope="scope">
                         <div>   
-                            <el-button size="small">修改</el-button>
-                            <el-button size="small">删除</el-button>
+                            <el-button size="small" @click="$refs.addcate.dialogVisible=true">修改</el-button>
+                            <el-button size="small" @click="delet">删除</el-button>
                        </div>
                     </template>
                 </el-table-column>
@@ -58,7 +58,7 @@
 
 <script>
 import Addcate from './childDialog/Addcate';
-import Sort from './childDialog/sort';
+import Sort from './childDialog/Sort';
 export default {
     components:{
         Addcate,
@@ -81,6 +81,17 @@ export default {
                     this.tableData=res.data.data;
                 } 
             })
+        },
+        delet(){
+            this.$confirm('初步审查项有与此类别的关联数据，请先删除初步审查项的相关数据！', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                return -1;
+            }).catch(() => {
+                return -1;
+            });
         }
     },
 }
