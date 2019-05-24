@@ -195,8 +195,7 @@
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="400" :key="index" v-if="type==8"    >
-
+                                                                     min-width="400" :key="index" v-if="type==8">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
                                                                @click="show_pdf(companyname_toubiao[scope.$index].pdf[0])"
@@ -1185,7 +1184,7 @@
                 ChangedialogVisible:false,  //调整评标价弹框
                 TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
-                val:""
+
             }
         },
         created() {
@@ -1388,6 +1387,7 @@
                         this.evaluationExpert = res.data.bidMsg.eviewrItemsMsg.evaluationExpert;
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                        console.log(this.dingdang_tableData);
                         this.allRaioNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
                         // console.log(res.data.bidMsg.type);
                         this.is_submit = res.data.bidMsg.type;
@@ -1525,7 +1525,6 @@
             changeRadios(index,val) { // 单选法
                 // this.$store.state.failureEnery.business_tijiao=false;
                 console.log(index,val);
-                this.val=val;
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
                 this.$axios.post('/api/isFailure', 'post', {
@@ -1533,6 +1532,7 @@
                 }).then(res => {
                     if (res.status == 200) {
                         arr = this.dingdang_tableData.slice(0, -2);
+                        console.log(arr);
                         arr.forEach((k, i) => {
                             if (Array.isArray(k['value' + index])) {//是数组
                                 if (k['value' + index].length != 0) {
