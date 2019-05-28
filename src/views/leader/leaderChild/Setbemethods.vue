@@ -29,7 +29,7 @@
             <el-col :span="14">
                 <div class="grid-content bg-purple-dark rightText">
                     <el-button type="primary" size="small" @click="downExcel">下载excel导入模板</el-button>
-                    <el-button type="primary" size="small" @click="$refs.modify.dialogVisible = true">增加</el-button>
+                    <el-button type="primary" size="small" @click="add">增加</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -61,7 +61,7 @@
                     <template slot-scope="scope">
                         <div>
                             <el-button size="small" @click="$refs.uploadDia.dialogVisible = true">Excel导入</el-button>
-                            <el-button size="small" @click="$refs.modify.dialogVisible = true">修改</el-button>
+                            <el-button size="small" @click="modify">修改</el-button>
                             <el-button size="small" @click="doremove">删除</el-button>
                             <el-button size="small">编辑评分细则</el-button>
                         </div>
@@ -94,7 +94,7 @@
             </el-col>
         </el-row>
         <Upload ref="uploadDia"></Upload>
-        <Modify ref="modify"></Modify>
+        <Modify ref="modify" :addOrMod="aom"></Modify>
     </div>
 </template>
 
@@ -113,6 +113,7 @@ export default {
             loading:true,
             radio:'',
             currentPage4: 4,
+            aom:'',
         }
     },
     mounted() {
@@ -146,6 +147,14 @@ export default {
             }).catch(() => {
                 return -1;
             });
+        },
+        modify(){
+            this.aom = 1;
+            this.$refs.modify.dialogVisible = true;
+        },
+        add(){
+            this.aom = 0;
+            this.$refs.modify.dialogVisible = true;
         }
     },
 }
@@ -156,7 +165,7 @@ export default {
 .sbm{
     .titBox{
         line-height: 40px;
-        border-top: 1px solid #ebeef5;
+        border-bottom: 1px solid #ebeef5;
         .rightText{
             text-align: right;
         }
