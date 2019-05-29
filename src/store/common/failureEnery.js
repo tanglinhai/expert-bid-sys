@@ -16,10 +16,10 @@ export default {
         ViewUnfinishedItems:false,//查看未完成项
         ScoreShows:false,//评分说明编辑
         determineOperating:false,//评标页面全部选中的时候提示弹框
-        huizongSubmit:false,//汇总提交提交的时候提示弹框
+        // huizongSubmit:false,//汇总提交提交的时候提示弹框
         tijiaoNot100:false,//资格审查全部提交的时候提示弹框（资格审查未完成不能提交）
         tijiao100:false,
-        tijiaoHuizong:false,//汇总提交成功的消息弹框
+        // tijiaoHuizong:false,//汇总提交成功的消息弹框
         business_tijiao:true,//商务提交状态
         dingdang_tijiao_state:true,//定档提交状态
         jishu_tijiao_state:true,//技术提交状态，

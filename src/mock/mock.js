@@ -3036,7 +3036,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
 
                     //没有用
 
-                    'pingbiao_yijian': dataMsg,
+                    //'pingbiao_yijian': dataMsg,
                     'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
@@ -3330,6 +3330,13 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
         let dataMsg = [];
         let is_tijaio=Random.integer(0, 1);
         let tijaio=Random.integer(0, 1);
+        for (let i = 0; i < Random.integer(3,8); i++) {
+            dataMsg.push({//排序
+                'company_name': Random.csentence(1, 10),
+                'id': Random.id(),
+                'ranking': Random.integer(1, 7),
+            });
+        }
         return {
             'bidMsg': {
                 id: Random.id(),
@@ -3366,7 +3373,8 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                         scoringSystem:'53',
                         score: ''
                     }],
-                    'pingbiao_yijian': dataMsg,
+                   // 'pingbiao_yijian': dataMsg,
+                    'sort_data': dataMsg,//排序
                     'jiesuoData':{//评分解锁
                         'radioList': [{
                             value: '1',
@@ -4250,7 +4258,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         //         num: '15',
                         //         typeTitle: '15',
                         //         gradeExplain:"",
-                        //
+                        //rowIndex: 0
                         //     }, {
                         //         num: "20",
                         //         typeTitle: '20',
@@ -4330,6 +4338,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 0
                         },
                         {
                             projectName: '第二章，商务20分',
@@ -4340,7 +4352,11 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             tit: '是否是官方配置？',
                             value1: '',
                             value2: '',
-                            value3: ''
+                            value3: '',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 1
                         },
                         {
                             projectName: '商务小计',
@@ -4355,6 +4371,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 2
                         },
                         {
                             projectName: '总计',
@@ -4369,6 +4389,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 3
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -4666,111 +4690,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         }
                     ],
                     "dingdang_tableData":[
-                        //     {
-                        //         projectName: '第一章，商务10分',
-                        //         type: 'radio',//单选
-                        //         radioList: [
-                        //             {typeTitle: 'A 10分', num: 10},
-                        //             {typeTitle: 'B 20分', num: 20 },
-                        //             {typeTitle: 'C 30分', num: 30,}
-                        //         ],
-                        //         min: null,
-                        //         max: null,
-                        //         tit: '',
-                        //         value1:'',
-                        //         value2:'' ,
-                        //         value3: ''
-                        //     },
-                        //     {
-                        //         projectName: '第二章，商务20分',
-                        //         type: 'input',// 两步法
-                        //         radioList: [],
-                        //         min: 10,
-                        //         max: 50,
-                        //         tit: '是否是官方配置？',
-                        //         value1: '',
-                        //         value2: '',
-                        //         value3: ''
-                        //     },
 
-                        // {
-                        //     projectName: '第一章、其他(1.00分-60.00分)',
-                        //     type: 'inputLabour',// 两步法
-                        //     radioList: [],
-                        //     min: 1,
-                        //     max: 60,
-                        //     tit: '是否是官方配置？',
-                        //     value1: '',
-                        //     value2: '',
-                        //     value3: ''
-                        // },
-
-                        // {
-                        //     projectName: '第一章、服务1(50.00分)',
-                        //     type: 'inputSelect',// 两步法
-                        //     radioList: [{
-                        //         num: '0',
-                        //         typeTitle: '0',
-                        //         gradeExplain:'',
-                        //
-                        //     }, {
-                        //         num: '5',
-                        //         typeTitle: '5',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '10',
-                        //         typeTitle: '10',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '15',
-                        //         typeTitle: '15',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: "20",
-                        //         typeTitle: '20',
-                        //         gradeExplain:"" ,
-                        //
-                        //     },{
-                        //         num: '25',
-                        //         typeTitle: '25',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '30',
-                        //         typeTitle: '30',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '35',
-                        //         typeTitle: '35',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '40',
-                        //         typeTitle: '40',
-                        //         gradeExplain:"",
-                        //
-                        //     },{
-                        //         num: '45',
-                        //         typeTitle: '45',
-                        //         gradeExplain:"",
-                        //
-                        //     }, {
-                        //         num: '50',
-                        //         typeTitle: '50',
-                        //         gradeExplain:"",
-                        //     },
-                        //     ],
-                        //     min: 10,
-                        //     max: 50,
-                        //     tit: '是否是官方配置？',
-                        //     value1: '',
-                        //     value2: '',
-                        //     value3: '',//有多少个投标人就有多少个value(index+1)
-                        // },
                         {
                             projectName: '第一章，技术(14.00)分',
                             type: 'checkbox',//单选
@@ -4789,6 +4709,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 0
                         },
                         {
                             projectName: '技术小计',
@@ -4803,6 +4727,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 1
                         },
                         {
                             projectName: '总计',
@@ -4817,6 +4745,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 2
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -5161,6 +5093,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 0
                         },
                         {
                             projectName: '服务小计',
@@ -5175,6 +5111,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,//控制radio，是不是显示状态
+                            rowIndex: 1
                         },
                         {
                             projectName: '总计',
@@ -5189,6 +5129,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 2
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -5496,7 +5440,11 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value3: '',
                             gradeExplain1:"",
                             gradeExplain2:"",
-                            gradeExplain3:""
+                            gradeExplain3:"",
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 0
                         },
                         {
                             projectName: '其他小计',
@@ -5511,6 +5459,10 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             gradeExplain1:"",
                             gradeExplain2:"",
                             gradeExplain3:"",
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 1
                         },
                         {
                             projectName: '总计',
@@ -5524,7 +5476,11 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             value3: 0,
                             gradeExplain1:"",
                             gradeExplain2:"",
-                            gradeExplain3:""
+                            gradeExplain3:"",
+                            bool1:true,
+                            bool2:true,
+                            bool3:true,
+                            rowIndex: 2//相当于id
                         },
                     ],
                     'msgBox': msg,//查看定档评议弹框表投标人数据
@@ -6057,7 +6013,12 @@ let saveBiddingAdvice = Mock.mock('/api/saveBiddingAdvice', 'post', {
     message: '保存成功!',
     data: []
 });
-
+//合理低价评标意见弹框保存接口
+let hldjSaveBiddingAdvice = Mock.mock('/api/hldjSaveBiddingAdvice', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 //综合评标表格提交按钮接口
 let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
     code: 200,

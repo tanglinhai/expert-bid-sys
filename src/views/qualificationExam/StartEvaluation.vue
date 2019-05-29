@@ -252,9 +252,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
-                                        class="biaozhunConent"></span></div>
+                                <!--<div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span-->
+                                        <!--class="biaozhunConent"></span></div>-->
                             </div>
+                            <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
+                                    class="biaozhunConent"></span></div>
                         </div>
                     </el-row>
                 </div>
@@ -507,6 +509,11 @@
             $(".positionDiv").hide();
             this.init();
             this.$commonJs.pdfOperations.pdf_init.call(this);
+            if($('.presentation_mode_column .div_pdf').height()!=undefined){
+                $(".center_con_wrap").css("position",'relative');
+                $(".positionDiv").css("position",'absolute');
+                $(".positionDiv").css("css",'100% )');
+            }
         },
         computed: {
             filter_standard(){
@@ -655,7 +662,9 @@
             },
             show_pdf(obj, queryStr, page) {//查看pdf
                 this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr, page);
-                $(".positionDiv").hide();
+                $(".center_con_wrap").css("position",'relative');
+                $(".positionDiv").css("position",'absolute');
+                $(".positionDiv").css("css",'100%');
             },
             slideBarMousedown(e) {
                 this.$commonJs.pdfOperations.slideBarMousedown.call(this, e);
@@ -674,9 +683,13 @@
             },
             fullModeColumn() {
                 this.$commonJs.pdfOperations.fullModeColumn.call(this);
+                $(".center_con_wrap").css("position",'relative');
+                $(".positionDiv").css("position",'absolute');
+                $(".positionDiv").css("css",'100%');
             },
             fullModeRow() {
                 this.$commonJs.pdfOperations.fullModeRow.call(this);
+
             },
             closePDF() {
                 this.$commonJs.pdfOperations.closePDF.call(this);
@@ -742,7 +755,6 @@
                 }
                 this.$axios.post(url, {type: parseInt(this.type_btn) + 1, }).then(res => {
                     if (res.status == 200) {
-
                         // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
                         this.allSubmitBtnLoading = false;
                         this.options = res.data.vue_type;
@@ -813,11 +825,15 @@
                     }
                 });
             },
-            handleRowClick(row, column, event) {//资格审查表点击行数据出现审查标准
-                // console.log(row, column, event);
+            handleRowClick: function (row, column, event) {//资格审查表点击行数据出现审查标准
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
                 $(".positionDiv").show();
+                if($('.presentation_mode_column .div_pdf').height()!=undefined){
+                    $(".center_con_wrap").css("position",'relative');
+                    $(".positionDiv").css("position",'absolute');
+                    $(".positionDiv").css("css",'100%');
+                }
             },
             closePositionDiv(){
                 $(".positionDiv").hide();

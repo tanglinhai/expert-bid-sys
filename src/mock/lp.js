@@ -525,7 +525,7 @@ Mock.mock('/api/navcommons','post',(options) =>{
     let currentpage=JSON.parse(options.body).currentpage;
     let is_submit_type=JSON.parse(options.body).is_submit_type;
     let types=JSON.parse(options.body).types;
-    console.log(currentpage,is_submit_type,888888);
+    // console.log(currentpage,is_submit_type,888888);
     CommonsData={
         ProjectInformationsAll:{
             projectName:'单信封-0305-1',
