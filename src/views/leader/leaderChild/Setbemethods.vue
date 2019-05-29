@@ -1,5 +1,5 @@
 <template>
-    <div class="sbm">
+    <div class="sbm" v-if="isShow">
         <el-row class="titBox">
             <el-col :span="6">
                 <div class="grid-content bg-purple-dark rightText">
@@ -63,7 +63,7 @@
                             <el-button size="small" @click="$refs.uploadDia.dialogVisible = true">Excel导入</el-button>
                             <el-button size="small" @click="modify">修改</el-button>
                             <el-button size="small" @click="doremove">删除</el-button>
-                            <el-button size="small">编辑评分细则</el-button>
+                            <el-button size="small" @click="isShow = false">编辑评分细则</el-button>
                         </div>
                     </template> 
                 </el-table-column>
@@ -96,15 +96,20 @@
         <Upload ref="uploadDia"></Upload>
         <Modify ref="modify" :addOrMod="aom"></Modify>
     </div>
+    <div class="sbmEdit" v-else>
+        <Editrul></Editrul>
+    </div>
 </template>
 
 <script>
 import Upload from './childDialog/Uploaddialog';
 import Modify from './childDialog/Modify';
+import Editrul from './childDialog/Editrules';
 export default {
     components:{
         Upload,
-        Modify
+        Modify,
+        Editrul
     },
     data() {
         return {
@@ -114,6 +119,7 @@ export default {
             radio:'',
             currentPage4: 4,
             aom:'',
+            isShow:true,
         }
     },
     mounted() {
@@ -162,6 +168,7 @@ export default {
 
 <style lang="scss">
 @import '../../../assets/css/common/mixin.scss';
+@import '../../../assets/css/common/orangebtn.scss';
 .sbm{
     .titBox{
         line-height: 40px;
@@ -180,6 +187,9 @@ export default {
         font-size: 12px;
         padding-top: 15px;
     }
+    @include common-el-table;
+}
+.sbmEdit{
     @include common-el-table;
 }
 </style>
