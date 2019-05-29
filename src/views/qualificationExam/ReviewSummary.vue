@@ -897,6 +897,10 @@
                         this.myloading_back = false;
                         this.$store.state.failureEnery.is_pingshen_show = false;
                         this.is_disabled = false;
+                        this.$message({
+                            message: '回退成功！',
+                            type: 'success'
+                        });
                     }
                 });
             },
