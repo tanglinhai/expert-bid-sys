@@ -384,7 +384,7 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 })
 
 
-//1; 通过,2:正在进行:3：未完成可点4：未完成不可点
+//1; 通过,2:正在进行:4：未完成不可点
 //提交之后的状态：
 //is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
 

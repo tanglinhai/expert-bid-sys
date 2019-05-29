@@ -182,6 +182,7 @@
 import Head from '@/components/Head.vue'
 import Foot from '@/components/Foot.vue'
 import NavCommon from '@/components/publicVue/NavCommon.vue'
+import { setTimeout } from 'timers';
 export default {
   name: 'home',
   data() {
@@ -190,7 +191,7 @@ export default {
       navcommonsList:[],  //导航数据
       currentpage:'',  //导航到哪一步了
       //Allzhuagntai:[], //所有状态返回
-      CommonLeftNavsLoading:true,  //左侧导航添加loading 事件
+      //CommonLeftNavsLoading:true,  //左侧导航添加loading 事件
       ProjectInformationsAll:'',  //头部项目信息
     }
   },
@@ -224,6 +225,11 @@ export default {
   },
   mounted(){
     this.navcommonsListFun(); //导航接口
+    // let _this=this;
+    // setInterval(function(){
+    //     _this.navcommonsListFun(); //定时器导航接口
+    //     console.log("哈哈哈哈")
+    // },5000)
   },
   methods:{
     navcommonsListFun(){
@@ -239,8 +245,8 @@ export default {
         if(this.$route.query.types == undefined){
           this.$route.query.types=0;  //点击是哪一步
         }
-        this.pageloadding=true;
-        this.CommonLeftNavsLoading=true;
+        //this.pageloadding=true;
+        //this.CommonLeftNavsLoading=true;
         this.$axios.post('/api/navcommons',{
             currentpage:parseFloat(this.$route.query.currentpage),  //进行到哪一步
             is_submit_type:parseFloat(this.$route.query.is_submit_type),    //是否提交
@@ -251,8 +257,8 @@ export default {
 
                 this.navcommonsList=res.data.navsAll; 
                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
-                this.pageloadding=false;
-                this.CommonLeftNavsLoading=false;
+                //this.pageloadding=false;
+                //this.CommonLeftNavsLoading=false;
             }
         })
     },
