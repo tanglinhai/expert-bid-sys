@@ -22,11 +22,11 @@
                 border>
                 <el-table-column label="类别">
                     <template slot-scope="scope">
-                        <!-- <div>   
+                        <div>   
                             <el-input size="small" placeholder="请输入内容">
                                 <i slot="suffix" class="el-input__icon iconfont icon-bianji2"></i>
                             </el-input>
-                        </div> -->
+                        </div>
                         <div>
                             {{scope.row.name}}
                         </div>
@@ -51,7 +51,7 @@
                 <el-table-column label="评分因素">
                     <template slot-scope="scope">
                         <div>   
-                           sss
+                           {{spanArr + ' '}}
                         </div>
                     </template>
                 </el-table-column>
@@ -62,7 +62,7 @@
                 <el-table-column  label="操作">
                     <template slot-scope="scope">
                         <div>
-                            <el-button type="primary" plain size="small" @click="add(scope,scope.$index)">新增打分项</el-button>
+                            <el-button type="primary" plain size="small" @click="add(scope.row,scope.$index)">新增打分项</el-button>
                             <el-button size="small">删除</el-button>
                         </div>
                     </template>
@@ -123,7 +123,7 @@ export default {
             }
         },
         add(val,index){
-            this.tableData.push({name:'商务',id:1});
+            this.tableData.splice(index,0,val);
         },
     },
 }
