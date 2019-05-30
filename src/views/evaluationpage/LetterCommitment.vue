@@ -48,6 +48,7 @@
             //number:'',   //导航当前第几步
               pageloadding:false,  //进入页面loading展示
               BtnLoading:false,  //同意按钮loadding
+              BtnsShowOrHide:true,
               
               val:'',  //四种方式传值
             }
@@ -67,11 +68,11 @@
             } else {
                 this.$store.state.navCommon.types=this.$route.query.types;
             };
-            if( this.$route.query.currentpage<=1||this.$route.query.currentpage==undefined){  //判断确定按钮是否显示
-                this.BtnsShowOrHide=true;
-            }else{
-                this.BtnsShowOrHide=false;
-            }
+            // if( this.$route.query.currentpage<=1||this.$route.query.currentpage==undefined){  //判断确定按钮是否显示
+            //     this.BtnsShowOrHide=true;
+            // }else{
+            //     this.BtnsShowOrHide=false;
+            // }
             
         },
         mounted(){
@@ -113,6 +114,7 @@
                         this.$router.push({
                             path: '/index/AllInformation?is_submit_type=0&currentpage=2&methodType='+this.val,
                         })
+                        //history.go(0)
                     }
                 })
             },

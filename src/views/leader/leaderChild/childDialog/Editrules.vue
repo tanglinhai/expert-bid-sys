@@ -114,7 +114,8 @@ export default {
         },
         objectSpanMethod({ row, column, rowIndex, columnIndex }){ 
             if (columnIndex === 0 || columnIndex === 4) {
-                let _row = this.spanArr[rowIndex];
+                let _row = this.spanArr[4];
+                console.log(_row,8888888)
                 let _col = _row > 0 ? 1 : 0;
                 return {
                     rowspan: _row,
