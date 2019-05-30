@@ -389,10 +389,15 @@ let evaluationBidBtn=Mock.mock('/api/evaluationBidBtn','post',{
 //is_submit_type: 是否提交的状态；currentPage：当前进行到哪一步；
 
 function get_data(currentPage,is_submit_type,types) {//type
-    // console.log(type, is_submit_type);
+    console.log(currentPage, is_submit_type,66666666);
     function set_type() {
         if (currentPage == 1) {
-            return [2,2,4,4,4,4,4]
+            if(is_submit_type==0||is_submit_type==null){
+                return [2,2,4,4,4,4,4]
+            }else{
+                return [2,1,4,4,4,4,4]
+            }
+            
         }
         if (currentPage == 2) {
             return [2,1, 2, 4, 4, 4, 4]
