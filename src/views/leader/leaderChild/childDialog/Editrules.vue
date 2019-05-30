@@ -22,11 +22,11 @@
                 border>
                 <el-table-column label="类别">
                     <template slot-scope="scope">
-                        <div>   
+                        <!-- <div>   
                             <el-input size="small" placeholder="请输入内容">
                                 <i slot="suffix" class="el-input__icon iconfont icon-bianji2"></i>
                             </el-input>
-                        </div>
+                        </div> -->
                         <div>
                             {{scope.row.name}}
                         </div>
@@ -62,7 +62,7 @@
                 <el-table-column  label="操作">
                     <template slot-scope="scope">
                         <div>
-                            <el-button type="primary" plain size="small" @click="add(scope.row,scope.$index)">新增打分项</el-button>
+                            <el-button type="primary" plain size="small" @click="add(scope,scope.$index)">新增打分项</el-button>
                             <el-button size="small">删除</el-button>
                         </div>
                     </template>
@@ -76,23 +76,30 @@
 export default {
     data() {
         return {
-            tableData:[
-                {name:'商务',id:1},
-            ],
+            tableData:[],
             input5:'',
             select:'',
             spanArr:[],
+            pos:0,
         }
     },
     mounted() {
-        
+        this.init();        
     },
     methods: {
+        init(){
+            this.$axios.post('./api/pfxz').then(res => {
+                if(res.status == 200){
+                    this.tableData = res.data.data;
+                    this.getSpanArr(this.tableData);
+                }
+            })
+        },
         getSpanArr(data) {　
             for (var i = 0; i < data.length; i++) {
                 if (i === 0) {
                     this.spanArr.push(1);
-                    this.pos = 0
+                    this.pos = 0;
                 }else {
                     // 判断当前元素与上一个元素是否相同
                     if(data[i].id === data[i - 1].id) {
@@ -103,21 +110,20 @@ export default {
                         this.pos = i;
                     }
                 }
-          }
+            }
         },
-        objectSpanMethod({ row, column, rowIndex, columnIndex }){
-            if (columnIndex === 0) {
-                const _row = this.spanArr[rowIndex];
-                const _col = _row > 0 ? 1 : 0;
+        objectSpanMethod({ row, column, rowIndex, columnIndex }){ 
+            if (columnIndex === 0 || columnIndex === 4) {
+                let _row = this.spanArr[rowIndex];
+                let _col = _row > 0 ? 1 : 0;
                 return {
                     rowspan: _row,
-                     colspan: _col
+                    colspan: _col
                 }
             }
         },
         add(val,index){
             this.tableData.push({name:'商务',id:1});
-            this.getSpanArr(this.tableData);
         },
     },
 }

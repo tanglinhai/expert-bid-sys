@@ -230,3 +230,10 @@ Mock.mock('./api/methods','post',{
         {type:'评分标准',coverBag:'0635-190@natural(1,9)N12C6/@natural(1,28)'}
     ]
 })
+
+Mock.mock('./api/pfxz','post',{
+    'data':[
+        {name:'商务',id:1},
+        {name:'商务',id:1},
+    ]
+})
