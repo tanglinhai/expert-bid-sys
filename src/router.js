@@ -117,6 +117,7 @@ export const asyncRouterMap = [
       { name: '/groupLeader/SignIn', path: '/groupLeader/SignIn', meta: { role: 'leader' }, component: () => import('./views/leader/SignIn.vue')},
       { name: '/groupLeader/Examination', path: '/groupLeader/Examination', meta: { role: 'leader' }, component: () => import('./views/leader/Examination.vue')},
       { name: '/groupLeader/BeConfiguration', path: '/groupLeader/BeConfiguration', meta: { role: 'leader' }, component: () => import('./views/leader/BeConfiguration.vue')},
+      { name: '/groupLeader/Newaddproject', path: '/groupLeader/Newaddproject', meta: { role: 'leader' }, component: () => import('./views/leader/Newaddproject.vue')},
     ]
   }
 ];

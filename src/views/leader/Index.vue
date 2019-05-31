@@ -8,6 +8,7 @@
             </el-col>
             <el-col :span="12" class="textSty">
                 <div class="grid-content bg-purple-dark">
+                    <el-button size="small" class="btnBg" style="margin:0 10px;" @click="newadd">新增项目</el-button>
                     <el-input
                         placeholder="项目名称关键字进行检索"
                         v-model="search_value"
@@ -123,6 +124,9 @@ export default {
         this.init();
     },
     methods: {
+        newadd(){
+            this.$router.push('/groupLeader/Newaddproject');
+        },
         imbeView(val,stemp){
             window.localStorage.setItem('sub','0');
             this.$router.push('/groupLeader/Examination');
