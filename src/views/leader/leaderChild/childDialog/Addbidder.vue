@@ -13,7 +13,7 @@
                 </el-col>
                 <el-col :span="10">
                     <div class="grid-content bg-purple-dark">
-                        <el-input size="small"></el-input>
+                        <el-input size="small" v-model="bidForm.name"></el-input>
                     </div>
                 </el-col>
             </el-row>
@@ -25,7 +25,7 @@
                 </el-col>
                 <el-col :span="10">
                     <div class="grid-content bg-purple-dark">
-                        <el-input size="small"></el-input>
+                        <el-input size="small" v-model="bidForm.tbbj"></el-input>
                     </div>
                 </el-col>
             </el-row>
@@ -53,7 +53,7 @@
             </el-row>
             <span slot="footer">
                 <el-button @click="dialogVisible = false" size="small">取 消</el-button>
-                <el-button type="primary" size="small" @click="dialogVisible = false">保存</el-button>
+                <el-button type="primary" size="small" @click="save">保存</el-button>
             </span>
         </el-dialog>
     </div>
@@ -65,6 +65,10 @@ export default {
         return {
             dialogVisible:false,
             fileList:[],
+            bidForm:{
+                name:'',
+                tbbj:'',
+            }
         }
     },
     mounted() {
@@ -82,6 +86,11 @@ export default {
         },
         beforeRemove(file, fileList) {
             return this.$confirm(`确定移除 ${ file.name }？`);
+        },
+        save(){
+            // console.log(this.bidForm);
+            this.$emit('addBid',this.bidForm);
+            this.dialogVisible = false;
         }
     },
 }

@@ -7,84 +7,46 @@
                 </div>
             </el-col>
         </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    招标项目编号：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-input size="small"></el-input>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    招标项目名称：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-input size="small"></el-input>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    项目性质：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-input size="small"></el-input>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    适用法律：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-select v-model="region" placeholder="请选择活动区域" size="small">
-                        <el-option label="招标投标法" value="zbtbf"></el-option>
-                        <el-option label="政府采购法" value="zfcgf"></el-option>
-                        <el-option label="其他（非依法必招）" value="qt"></el-option>
-                    </el-select>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    采购方式：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-input size="small"></el-input>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="titBox">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark rightText">
-                    项目分类：
-                </div>
-            </el-col>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio" label="1">工程</el-radio>
-                    <el-radio v-model="radio" label="2">货物</el-radio>
-                    <el-radio v-model="radio" label="3">服务</el-radio>
-                </div>
-            </el-col>
-        </el-row>
+        <el-row style="padding:15px 0;">
+            <el-form :model="form" ref="ruleForm" size="small" label-width="200px">
+                <el-form-item label=" 招标项目编号：" prop="proNum">
+                    <el-col :span="5">
+                        <el-input size="small" v-model="form.proNum"></el-input>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label=" 招标项目名称：" prop="name">
+                    <el-col :span="5">
+                        <el-input size="small" v-model="form.name"></el-input>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label=" 项目性质：" prop="proXz">
+                    <el-col :span="5">
+                        <el-input size="small" v-model="form.proXz"></el-input>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label=" 适用法律：" prop="region">
+                    <el-col :span="5">
+                        <el-select v-model="form.region" placeholder="请选择活动区域" size="small">
+                            <el-option label="招标投标法" value="zbtbf"></el-option>
+                            <el-option label="政府采购法" value="zfcgf"></el-option>
+                            <el-option label="其他（非依法必招）" value="qt"></el-option>
+                        </el-select>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label=" 采购方式：" prop="type">
+                    <el-col :span="5">
+                        <el-input size="small" v-model="form.type"></el-input>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label=" 项目分类：" prop="radio">
+                    <el-col :span="5">
+                        <el-radio v-model="form.radio" label="1">工程</el-radio>
+                        <el-radio v-model="form.radio" label="2">货物</el-radio>
+                        <el-radio v-model="form.radio" label="3">服务</el-radio>
+                    </el-col>
+                </el-form-item>
+            </el-form>
+        </el-row>         
         <el-row class="bottomLine">
             <el-col :span="4">
                 <div class="grid-content bg-purple-dark">
@@ -106,18 +68,18 @@
                 style="width: 100%"
                 border>
                 <el-table-column type="index"  width="50"></el-table-column>
-                <el-table-column label="包编号"></el-table-column>
-                <el-table-column label="包名称"></el-table-column>
-                <el-table-column label="包描述"></el-table-column>
-                <el-table-column label="序号"></el-table-column>
-                <el-table-column label="投标报价类型">
-                    <template slot-scope="scope">
+                <el-table-column prop="proNum" label="包编号"></el-table-column>
+                <el-table-column prop="name" label="包名称"></el-table-column>
+                <el-table-column prop="desc" label="包描述"></el-table-column>
+                <el-table-column prop="sum" label="序号"></el-table-column>
+                <el-table-column prop="radio" label="投标报价类型">
+                    <!-- <template slot-scope="scope">
                         <div>
                             <el-radio v-model="tabRadio" label="1">单价</el-radio>
                             <el-radio v-model="tabRadio" label="2">总价</el-radio>
                             <el-radio v-model="tabRadio" label="3">折扣率</el-radio>
                         </div>
-                    </template>
+                    </template> -->
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
@@ -176,8 +138,8 @@
                 style="width: 100%"
                 border>
                 <el-table-column type="index"  width="50"></el-table-column>
-                <el-table-column label="投标人名称"></el-table-column>
-                <el-table-column label="投标报价"></el-table-column>
+                <el-table-column prop="name" label="投标人名称"></el-table-column>
+                <el-table-column prop="tbbj" label="投标报价"></el-table-column>
                 <el-table-column label="投标文件附件"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
@@ -205,32 +167,32 @@
         </el-row>
         <el-row style="padding-top:10px;">
             <el-table
-                :data="tableData1"
+                :data="tableData2"
                 v-loading="loading"
                 style="width: 100%"
                 border>
                 <el-table-column type="index"  width="50"></el-table-column>
-                <el-table-column label="评审人员姓名"></el-table-column>
-                <el-table-column label="联系电话"></el-table-column>
-                <el-table-column label="证件号"></el-table-column>
-                <el-table-column label="工作单位"></el-table-column>
-                <el-table-column label="人员类别">
-                    <template slot-scope="scope">
+                <el-table-column prop="name" label="评审人员姓名"></el-table-column>
+                <el-table-column prop="phoneNum" label="联系电话"></el-table-column>
+                <el-table-column prop="id" label="证件号"></el-table-column>
+                <el-table-column prop="address" label="工作单位"></el-table-column>
+                <el-table-column prop="radio" label="人员类别">
+                    <!-- <template slot-scope="scope">
                         <div>
                             <el-radio v-model="tabRadio1" label="1">评审专家</el-radio>
                             <el-radio v-model="tabRadio1" label="2">采购人代表</el-radio>
                             <el-radio v-model="tabRadio1" label="3">监标人</el-radio>
                         </div>
-                    </template>
+                    </template> -->
                 </el-table-column>
-                <el-table-column label="专家类别">
-                    <template slot-scope="scope">
+                <el-table-column prop="radio1" label="专家类别">
+                    <!-- <template slot-scope="scope">
                         <div>
                             <el-radio v-model="tabRadio2" label="1">上午</el-radio>
                             <el-radio v-model="tabRadio2" label="2">技术</el-radio>
                             <el-radio v-model="tabRadio2" label="3">法律</el-radio>
                         </div>
-                    </template>
+                    </template> -->
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
@@ -248,9 +210,9 @@
                 </div>
             </el-col>
         </el-row>
-        <Addbag ref="addbag"></Addbag>
-        <Addbidder ref="addbidder"></Addbidder>
-        <Addexpert ref="addexpert"></Addexpert>
+        <Addbag ref="addbag" v-on:addMsg = "listenChild"></Addbag>
+        <Addbidder ref="addbidder" v-on:addBid = 'listenBid'></Addbidder>
+        <Addexpert ref="addexpert" v-on:addExpert = 'listenExp'></Addexpert>
     </div>
 </template>
 
@@ -266,14 +228,21 @@ export default {
     },
     data() {
         return {
-            region:'zbtbf',
-            radio:'',
+            form:{
+                proNum:'',
+                name:'',
+                proXz:'',
+                region:'zbtbf',
+                type:'',
+                radio:'1',
+            },
             tableData:[],
             tabRadio:'',
             fileList:[],
             tableData1:[],
             tabRadio1:'',
-            tabRadio2:''
+            tabRadio2:'',
+            tableData2:[],
         }
     },
     mounted() {
@@ -291,6 +260,16 @@ export default {
         },
         beforeRemove(file, fileList) {
             return this.$confirm(`确定移除 ${ file.name }？`);
+        },
+        listenChild(data){
+            // console.log(data,'54444444444444');
+            this.tableData.push(data);
+        },
+        listenBid(data){
+            this.tableData1.push(data);
+        },
+        listenExp(data){
+            this.tableData2.push(data);
         }
     },
 }

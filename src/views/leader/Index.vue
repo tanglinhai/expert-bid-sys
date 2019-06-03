@@ -187,7 +187,8 @@ export default {
           data.btnStatus == 0 ? data.btnStatus = 1 : data.btnStatus = 0; 
         },
         beConfig(val){
-            console.log(val);
+            // console.log(val);
+            this.$router.push('/groupLeader/BeConfiguration');
         },
         loadMoreBag(val){
             val.loadMore = true;
