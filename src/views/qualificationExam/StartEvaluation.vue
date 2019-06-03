@@ -122,7 +122,7 @@
                                         <el-row class="progress_div"
                                                 v-if="$store.state.failureEnery.parent_progress_show">
                                             <el-col :span="12">
-                                                <el-row class="red">
+                                                <el-row class="red" >
                                                     <el-col style="width: 70px;font-size: 14px;">
                                                         <div>我的进度：</div>
                                                     </el-col>
@@ -753,15 +753,22 @@
                 else if (this.type_btn == 5) {
                     url = '/api/alltijiao_xxjs';
                 }
-                this.$axios.post(url, {type: parseInt(this.type_btn) + 1, }).then(res => {
-                    if (res.status == 200) {
-                        // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
-                        this.allSubmitBtnLoading = false;
-                        this.options = res.data.vue_type;
-                    } else {
-                        this.allSubmitBtnLoading = false;
-                    }
-                })
+                let _this=this;
+
+                setTimeout(function () {
+                    _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1, }).then(res => {
+                        console.log(parseInt(_this.type_btn) + 1);
+                        if (res.status == 200) {
+                            // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
+                            _this.allSubmitBtnLoading = false;
+                            _this.options = res.data.vue_type;
+                            console.log(_this.options);
+                        } else {
+                            _this.allSubmitBtnLoading = false;
+                        }
+                    })
+                },2000)
+
             },
             // rebackAllChecked() {//取消全选
             //     this.determineOperatingDialog = false;

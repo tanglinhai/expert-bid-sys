@@ -2724,7 +2724,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {
-    // console.log(type, is_submit_type);
+    console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2771,7 +2771,7 @@ function get_data(type,is_submit_type) {
     set_type();
     var a;
     a = set_type();
-    // console.log(a);
+    console.log(a);
     return [
         {
             value: '1',//

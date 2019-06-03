@@ -122,6 +122,8 @@
                                 type: 'success'
                             });
                             this.$store.state.failureEnery.submitPrompt=false;
+                            this.$store.state.failureEnery.flag = false;//false：已经提交，true:未提交
+                            $("#hide_btn").hide()
                         }
                     }
                 })
