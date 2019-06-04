@@ -252,8 +252,14 @@ Mock.mock('./api/pfxz','post',{
               name: "商务",
               rate:[
                   {name:1111},
-                  {name:2222}
+                //   {name:2222}
               ], //评分因素,
+              firstMeth:[
+                  {value:''},
+              ],
+              secondMeth:[
+                {value:''}
+                ],
               radio:'',
               ischecked: false
             },
@@ -279,6 +285,12 @@ Mock.mock('./api/pfxz','post',{
                 rate: [
                     {name:'22222222'}
                 ], //评分因素
+                firstMeth:[
+                    {value:''},
+                ],
+                secondMeth:[
+                    {value:''}
+                ],
                 ischecked: false
               }
             ]
