@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import { constants } from 'crypto';
 export default {
     data() {
         return {
@@ -70,8 +69,8 @@ export default {
         save(){
             // console.log(this.bagForm);
             this.$emit('addMsg',this.bagForm);
+            this.bagForm = '';
             this.dialogVisible = false;
-            this.bagForm = null;
         }
     },
 }

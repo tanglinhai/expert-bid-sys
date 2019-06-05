@@ -259,6 +259,18 @@ export default {
   i{
     cursor: pointer;
   }
+  .icon-guanbi{
+    &:hover{
+      color:#f00;
+    }
+  }
+  .icon-guanlian,
+  .icon-bianji,
+  .icon-xiugai{
+    &:hover{
+      color:#409eff;
+    }
+  }
   .titBox {
     border-bottom: 1px solid #409eff;
     line-height: 40px;
