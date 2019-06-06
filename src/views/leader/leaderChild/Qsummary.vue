@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :span="20">
                     <div class="grid-content bg-purple-dark" style="text-align:right;">
-                        <!-- <el-button size="small" v-show="isShow" @click="submit">提交</el-button> -->
+                        <el-button size="small" v-show="isSubmit == 0" @click="submit">提交</el-button>
                         <el-button size="small" v-show="isShow" @click="dialogVisible = true">查看个人资格审查项表</el-button>
                         <el-button size="small" @click="viewUrDialog = true">查看资格审查项解锁记录</el-button>
                         <el-button size="small" @click="uaDialog = true">资格审查项解锁</el-button>
@@ -152,6 +152,8 @@ export default {
 
             //--------
             isHide:'',
+            //--------
+            isSubmit:window.localStorage.getItem('sub'),
 
         }
     },
