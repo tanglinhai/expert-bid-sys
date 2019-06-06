@@ -21,7 +21,11 @@ Mock.mock('/api/leaderBagMsg','post',{
                     'id': '@id',
                     'btnStatus|1':[0,1],
                     'beFlag':true,
-                    'progre|1':['资格审查','符合性审查','详细评审','商务']
+                    'progre|1':['资格审查','符合性审查','详细评审','商务'],
+                    'name':'MTHYS-8S09',
+                    'proNum':'@bag',
+                    'desc':'xxxx',
+                    'sum':'@natural(12, 28)',
                 }
             ]
         }
