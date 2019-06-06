@@ -27,7 +27,7 @@
                     </el-form-item>
                     <el-form-item label=" 适用法律：" prop="region">
                         <el-col :span="5">
-                            <el-select v-model="form.region" placeholder="请选择活动区域" size="small">
+                            <el-select v-model="form.region" placeholder="请选择活动区域" size="small" @change="changeSelect">
                                 <el-option label="招标投标法" value="zbtbf"></el-option>
                                 <el-option label="政府采购法" value="zfcgf"></el-option>
                                 <el-option label="其他（非依法必招）" value="qt"></el-option>
@@ -36,7 +36,14 @@
                     </el-form-item>
                     <el-form-item label=" 采购方式：" prop="type">
                         <el-col :span="5">
-                            <el-input size="small" v-model="form.type"></el-input>
+                            <el-select v-model="form.region1=form.options[0].value" placeholder="请选择活动区域" size="small">
+                                <el-option
+                                    v-for="item in form.options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-col>
                     </el-form-item>
                     <el-form-item label=" 项目分类：" prop="radio">
@@ -209,8 +216,8 @@
         </div>
         <el-row class="bottomLine">
             <el-col :span="24">
-                <div class="grid-content bg-purple-dark">
-                    <el-button size="small" class="btnBg">保存</el-button>
+                <div class="grid-content bg-purple-dark" style="text-align:center;">
+                    <el-button size="big" class="btnBg">保存</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -237,8 +244,13 @@ export default {
                 name:'',
                 proXz:'',
                 region:'zbtbf',
+                region1:'',
                 type:'',
                 radio:'1',
+                options:[
+                    {label:'公开招标',value:'gkzb'},
+                    {label:'邀请招标',value:'yqzb'},
+                ]
             },
             tableData:[],
             tabRadio:'',
@@ -255,7 +267,7 @@ export default {
         $(".NavCommon").hide();
         this.state = this.$route.query.statu;
         this.modi = this.$route.query.modi;
-        // console.log(this.$store.state.curreentBagMsg);
+        console.log(this.form.region);
         if(this.modi)this.tableData.push(this.$store.state.curreentBagMsg);
     },
     methods: {
@@ -280,6 +292,30 @@ export default {
         },
         listenExp(data){
             this.tableData2.push(data);
+        },
+        changeSelect(val){
+            if(val === 'zbtbf'){
+                this.form.options=[
+                    {label:'公开招标',value:'gkzb'},
+                    {label:'邀请招标',value:'yqzb'},
+                ]
+            }else if(val === 'zfcgf'){
+                this.form.options.push(
+                    {label:'竞争性谈判',value:'jzxtp'},
+                    {label:'询价',value:'xj'},
+                    {label:'单一来源',value:'dyly'},
+                    {label:'竞争性磋商',value:'jzxcs'},
+
+                )
+            }else if(val === 'qt'){
+                this.form.options=[
+                    {label:'公开招标',value:'gkzb'},
+                    {label:'邀请招标',value:'yqzb'},
+                    {label:'直接采购',value:'zjcg'},
+                    {label:'谈判采购',value:'tpcg'},
+                    {label:'询价',value:'xj'},
+                ]
+            }
         }
     },
 }
