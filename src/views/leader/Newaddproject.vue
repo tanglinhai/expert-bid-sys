@@ -83,17 +83,15 @@
                     <el-table-column prop="radio" label="投标报价类型">
                         <template slot-scope="scope">
                             <div>
-                                <el-radio v-model="tabRadio" label="1">单价</el-radio>
-                                <el-radio v-model="tabRadio" label="2">总价</el-radio>
-                                <el-radio v-model="tabRadio" label="3">折扣率</el-radio>
+                                {{scope.row.radio}}
                             </div>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <div>
-                                <el-button size="small">编辑</el-button>
-                                <el-button size="small">删除</el-button>
+                                <el-button size="small" @click="$refs.addbag.dialogVisible=true">编辑</el-button>
+                                <el-button size="small" @click="removeCurren(scope.$index,tableData)">删除</el-button>
                             </div>
                         </template>
                     </el-table-column>
@@ -286,6 +284,16 @@ export default {
         listenChild(data){
             // console.log(data,'54444444444444');
             this.tableData.push(data);
+            this.tableData.forEach((val,index) => {
+                switch(val.radio){
+                    case '1':
+                        return val.radio ='工程';
+                    case '2':
+                        return val.radio ='货物';
+                    case '3':
+                        return val.radio ='服务';
+                }
+            })
         },
         listenBid(data){
             this.tableData1.push(data);
@@ -316,6 +324,9 @@ export default {
                     {label:'询价',value:'xj'},
                 ]
             }
+        },
+        removeCurren(index,row){
+            row.splice(index,1);
         }
     },
 }

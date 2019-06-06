@@ -26,6 +26,7 @@ Mock.mock('/api/leaderBagMsg','post',{
                     'proNum':'@bag',
                     'desc':'xxxx',
                     'sum':'@natural(12, 28)',
+                    'radio|1':['单价','总价','折扣率']
                 }
             ]
         }
