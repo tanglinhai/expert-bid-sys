@@ -326,7 +326,22 @@ export default {
             }
         },
         removeCurren(index,row){
-            row.splice(index,1);
+            this.$confirm('确定要删除此条分包吗?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                row.splice(index,1);
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
         }
     },
 }
