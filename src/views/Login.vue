@@ -99,8 +99,6 @@ export default {
     return {
       jsDownCount: 0,
       CodeVal: 0,
-      truelogin: "kbcxy",
-      truepwd: "mcwjs",
 
       canGetCookie: 0, //是否支持存储Cookie 0 不支持 1 支持
       ajaxmockjax: 1, //是否启用虚拟Ajax的请求响 0 不启用  1 启用
@@ -249,7 +247,7 @@ export default {
       var open = 0;
       var _this = this;
       layui.use('layer', function() {
-          var msgalert = '默认账号:' + _this.truelogin + '<br/> 默认密码:' + _this.truepwd;
+          var msgalert = '专家账号:expert<br/> 项目经理账号:leader<br/> 默认密码:随便填写';
           var index = layer.alert(msgalert, { icon: 6, time: 4000, offset: 't', closeBtn: 0, title: '友情提示', btn: [], anim: 2, shade: 0 });
           layer.style(index, {
               color: '#777'

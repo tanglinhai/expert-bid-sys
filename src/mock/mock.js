@@ -240,7 +240,7 @@ function factors_standards(type){
             relativePoints:[{
                 id: 'pdf2_1',
                 name: 'pdf文件21.pdf',
-                page: 11057,
+                page: 1495,
                 txt: '王胜国给王家黔说'
             }]
         }],[{
@@ -405,7 +405,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         {
                             "title":"（3）夏丰热工研究院有限公司",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
                             factors_standards:factors_standards(10)[2]
                         }
                     ],
@@ -818,7 +819,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(11)[2]
                         }
@@ -1213,7 +1215,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(12)[2]
                         }
@@ -3919,7 +3922,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             "title":"夏丰热工研究院有限公司（3）",
                             'laber':' 是否是官方配置？（50.00分）',
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(1)[2]
                         }
@@ -4216,7 +4220,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(2)[2]
                         }
@@ -4684,7 +4689,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(3)[2]
                         }
@@ -5040,7 +5046,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(4)[2]
                         }
@@ -5422,7 +5429,8 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                         {
                             "title":"夏丰热工研究院有限公司（3）",
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
-                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"}],
+                                {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(5)[2]
                         }
