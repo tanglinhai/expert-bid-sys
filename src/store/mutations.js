@@ -3,13 +3,10 @@
 function isExist(srcMap, route){
 	for(var i=0;i<srcMap.length;i++){
   	var r = srcMap[i];
-  		console.log(r.name, '===============aaaaaaaaaaaa=================', route.name);
   	if(r.name == route.name){
-  		console.log(r.name+'===============11111111=================');
   		srcMap[i] = route;
   		return true;
   	}else if(r.children && r.children.length > 0){
-  		console.log(r.name+'===============222222222=================');
   		return isExist(r.children, route);
   	}else {
   		return false;
