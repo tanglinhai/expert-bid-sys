@@ -20,11 +20,6 @@
                             <el-input size="small" v-model="form.name"></el-input>
                         </el-col>
                     </el-form-item>
-                    <el-form-item label=" 项目性质：" prop="proXz">
-                        <el-col :span="5">
-                            <el-input size="small" v-model="form.proXz"></el-input>
-                        </el-col>
-                    </el-form-item>
                     <el-form-item label=" 适用法律：" prop="region">
                         <el-col :span="5">
                             <el-select v-model="form.region" placeholder="请选择活动区域" size="small" @change="changeSelect">
@@ -79,7 +74,6 @@
                     <el-table-column prop="proNum" label="包编号"></el-table-column>
                     <el-table-column prop="name" label="包名称"></el-table-column>
                     <el-table-column prop="desc" label="包描述"></el-table-column>
-                    <el-table-column prop="sum" label="序号"></el-table-column>
                     <el-table-column prop="radio" label="投标报价类型">
                         <template slot-scope="scope">
                             <div>
@@ -102,7 +96,59 @@
             <el-row class="bottomLine">
                 <el-col :span="24">
                     <div class="grid-content bg-purple-dark">
-                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>附件</h5>
+                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>招标公告</h5>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="titBox">
+                <el-col :span="4">
+                    <div class="grid-content bg-purple-dark">
+                        <el-upload
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-preview="handlePreview"
+                            :on-remove="handleRemove"
+                            :before-remove="beforeRemove"
+                            multiple
+                            :limit="3"
+                            :on-exceed="handleExceed"
+                            :file-list="fileList">
+                            <el-button size="small" type="primary">点击上传</el-button>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                        </el-upload>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="bottomLine">
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-dark">
+                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>招标文件</h5>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="titBox">
+                <el-col :span="4">
+                    <div class="grid-content bg-purple-dark">
+                        <el-upload
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-preview="handlePreview"
+                            :on-remove="handleRemove"
+                            :before-remove="beforeRemove"
+                            multiple
+                            :limit="3"
+                            :on-exceed="handleExceed"
+                            :file-list="fileList">
+                            <el-button size="small" type="primary">点击上传</el-button>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                        </el-upload>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="bottomLine">
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-dark">
+                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>其他附件</h5>
                     </div>
                 </el-col>
             </el-row>
@@ -129,7 +175,7 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark">
                         <h5 class="commonTitle col348fe2">
-                            <i class="icon iconfont icon-zhuanjiazhuye mr3"></i>投标人/供应商信息
+                            <i class="icon iconfont icon-zhuanjiazhuye mr3"></i>供应商信息
                         </h5>
                     </div>
                 </el-col>
@@ -163,7 +209,7 @@
                 <el-col :span="6">
                     <div class="grid-content bg-purple-dark">
                         <h5 class="commonTitle col348fe2">
-                            <i class="icon iconfont icon-zhuanjiazhuye mr3"></i>评委会/开标一览表信息/专家组信息
+                            <i class="icon iconfont icon-zhuanjiazhuye mr3"></i>评委会信息
                         </h5>
                     </div>
                 </el-col>
@@ -240,7 +286,6 @@ export default {
             form:{
                 proNum:'',
                 name:'',
-                proXz:'',
                 region:'zbtbf',
                 region1:'',
                 type:'',
@@ -287,11 +332,11 @@ export default {
             this.tableData.forEach((val,index) => {
                 switch(val.radio){
                     case '1':
-                        return val.radio ='工程';
+                        return val.radio ='单价';
                     case '2':
-                        return val.radio ='货物';
+                        return val.radio ='总价';
                     case '3':
-                        return val.radio ='服务';
+                        return val.radio ='折扣率';
                 }
             })
         },
@@ -313,7 +358,6 @@ export default {
                     {label:'询价',value:'xj'},
                     {label:'单一来源',value:'dyly'},
                     {label:'竞争性磋商',value:'jzxcs'},
-
                 )
             }else if(val === 'qt'){
                 this.form.options=[

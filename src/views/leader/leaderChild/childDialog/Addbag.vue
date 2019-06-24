@@ -26,16 +26,11 @@
                             </el-input>
                         </el-col>
                     </el-form-item>
-                    <el-form-item label=" 序号：" prop="sum">
-                        <el-col :span="14">
-                            <el-input v-model="bagForm.sum"></el-input>
-                        </el-col>
-                    </el-form-item>
                     <el-form-item label="投标报价类型：" prop="radio">
                         <el-col :span="14">
-                            <el-radio v-model="bagForm.radio" label="1">工程</el-radio>
-                            <el-radio v-model="bagForm.radio" label="2">货物</el-radio>
-                            <el-radio v-model="bagForm.radio" label="3">服务</el-radio>
+                            <el-radio v-model="bagForm.radio" label="1">单价</el-radio>
+                            <el-radio v-model="bagForm.radio" label="2">总价</el-radio>
+                            <el-radio v-model="bagForm.radio" label="3">折扣率</el-radio>
                         </el-col>
                     </el-form-item>
                 </el-form>
@@ -57,7 +52,6 @@ export default {
                 proNum:'',
                 name:'',
                 desc:'',
-                sum:'',
                 radio:'',
             }
         }
