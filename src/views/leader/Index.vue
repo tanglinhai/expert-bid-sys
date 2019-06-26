@@ -41,6 +41,11 @@
                                 业务编号：{{item.num}}
                             </div>
                         </el-col>
+                        <el-col :span="8">
+                            <div class="grid-content bg-purple-dark" style="text-align:right;">
+                                <el-button size="small" @click.stop="newadd">编辑</el-button>
+                            </div>
+                        </el-col>
                     </template>
                     <el-row class="contentBox" v-for="(stemp,subIndex) in item.bagConMsg" :key="subIndex" >
                         <el-col :span="3">

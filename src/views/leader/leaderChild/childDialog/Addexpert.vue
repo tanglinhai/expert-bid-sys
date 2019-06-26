@@ -66,7 +66,7 @@
             <el-row class="titBox">
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark rightText">
-                        人员类别：
+                        专家类别：
                     </div>
                 </el-col>
                 <el-col :span="16">
