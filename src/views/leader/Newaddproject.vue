@@ -60,6 +60,7 @@
                 </el-col>
                 <el-col :span="20">
                     <div class="grid-content bg-purple-dark" style="text-align:right;">
+                        <el-button size="small">导 入</el-button>
                         <el-button size="small" class="btnBg" @click="$refs.addbag.dialogVisible=true">添加分包信息</el-button>
                     </div>
                 </el-col>
@@ -74,7 +75,7 @@
                     <el-table-column prop="proNum" label="包编号"></el-table-column>
                     <el-table-column prop="name" label="包名称"></el-table-column>
                     <el-table-column prop="desc" label="包描述"></el-table-column>
-                    <el-table-column prop="radio" label="投标报价类型">
+                    <el-table-column label="投标报价类型">
                         <template slot-scope="scope">
                             <div>
                                 {{scope.row.radio}}
@@ -109,6 +110,7 @@
                             :on-preview="handlePreview"
                             :on-remove="handleRemove"
                             :before-remove="beforeRemove"
+                            :before-upload="beforeAvatarUpload"
                             multiple
                             :limit="3"
                             :on-exceed="handleExceed"
@@ -360,6 +362,11 @@ export default {
                     message: '已取消删除'
                 });          
             });
+        },
+        beforeAvatarUpload(file){
+            const isPDF = file.type === 'application/pdf';
+            if (!isPDF)this.$message.error('上传的文件只能是 PDF 格式!');
+            return isPDF;
         }
     },
 }
