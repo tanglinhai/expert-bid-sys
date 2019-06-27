@@ -279,6 +279,7 @@
 /* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 .pdfViewer {
   height: 100%;
+  overflow: auto;
 }
 /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 .pdfViewer .canvasWrapper {
@@ -317,7 +318,6 @@
   margin-left: 3.5px;
   margin-right: 3.5px;
   text-align: center;
-
 }
 
 .pdfViewer.scrollHorizontal, .spread {
@@ -349,7 +349,6 @@
   margin-left: -3.5px;
   margin-right: -3.5px;
 }
-
 /* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 .spread .page {
   position: relative !important;
@@ -391,8 +390,6 @@
   margin-right: 0;
 }
 
-
-
 .pdfPresentationMode .pdfViewer .page,
 .pdfPresentationMode .pdfViewer .spread {
   display: block;
@@ -400,8 +397,6 @@
   position: relative !important;
   top: auto !important;
   left: auto !important;
-  /*left: 50% !important;
-  transform: translateX(-50%) !important; */
   /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 }
 
@@ -648,7 +643,7 @@ html[dir='rtl'] #sidebarContent {
 }
 
 #viewerContainer {
-  overflow: auto;
+  /* overflow: auto; */
   -webkit-overflow-scrolling: touch;
   position: absolute;
   top: 32px;
@@ -2073,7 +2068,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   background-color: rgba(255,255,255, .6);
   color: black;
 }
-
 /* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 #viewerLoading{
   position: absolute;
@@ -2109,7 +2103,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   margin: auto;
 }
 /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
-
 
 .grab-to-pan-grab {
   cursor: url("images/grab.cur"), move !important;
