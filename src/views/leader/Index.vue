@@ -33,17 +33,12 @@
                         </span>
                         <el-col :span="8">
                             <div class="grid-content bg-purple-dark overflowText textIndent">
-                                {{item.title}}
+                                {{item.title}} <el-button type="text" @click.stop="newadd">编辑</el-button>
                             </div>
                         </el-col>
                         <el-col :span="6">
                             <div class="grid-content bg-purple-dark overflowText textIndent">
                                 业务编号：{{item.num}}
-                            </div>
-                        </el-col>
-                        <el-col :span="8">
-                            <div class="grid-content bg-purple-dark" style="text-align:right;">
-                                <el-button size="small" @click.stop="newadd">编辑</el-button>
                             </div>
                         </el-col>
                     </template>
@@ -127,6 +122,7 @@ export default {
     },
     mounted() {
         $(".NavCommon").hide();
+        $(".CommonProject").hide();
         this.init();
     },
     methods: {
