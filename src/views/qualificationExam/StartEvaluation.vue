@@ -207,7 +207,20 @@
                                                                 </el-radio>
                                                             </el-radio-group>
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
-                                                            <span> {{scope.row['gradeExplain' + (index + 1)]}}</span>
+                                                            <!--<span> {{scope.row['gradeExplain' + (index + 1)]}}</span>-->
+                                                            <!--不合格理由-->
+                                                            <span class="ml10"  v-if="scope.row['gradeExplain' + (index + 1)]!=''">
+                                                                <el-popover
+                                                                        placement="top-start"
+                                                                        title="不合格理由"
+                                                                        width="200"
+                                                                        trigger="hover"
+                                                                        content="" >
+                                                                        <span style="width: 200px;word-wrap: break-word">{{scope.row['gradeExplain' + (index + 1)]}}</span>
+                                                                        <i class="icon iconfont icon-jujueliyou mr5" slot="reference"></i>
+                                                                   </el-popover>
+                                                            </span>
+                                                            <span v-else></span>
                                                             <!-- pdf operation start -->
                                                             <a class="btn_locate common_a_style" v-if="companyname_toubiao
                                                                         .filter(item => item.title == scope.column.label)[0]
@@ -250,13 +263,11 @@
                                                 </el-table-column>
                                             </el-table>
                                         </div>
+                                        <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
+                                                class="biaozhunConent"></span></div>
                                     </div>
                                 </div>
-                                <!--<div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span-->
-                                        <!--class="biaozhunConent"></span></div>-->
                             </div>
-                            <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
-                                    class="biaozhunConent"></span></div>
                         </div>
                     </el-row>
                 </div>
@@ -509,11 +520,6 @@
             $(".positionDiv").hide();
             this.init();
             this.$commonJs.pdfOperations.pdf_init.call(this);
-            if($('.presentation_mode_column .div_pdf').height()!=undefined){
-                $(".center_con_wrap").css("position",'relative');
-                $(".positionDiv").css("position",'absolute');
-                $(".positionDiv").css("css",'100% )');
-            }
         },
         computed: {
             filter_standard(){
@@ -662,9 +668,6 @@
             },
             show_pdf(obj, queryStr, page) {//查看pdf
                 this.$commonJs.pdfOperations.show_pdf.call(this, obj, queryStr, page);
-                $(".center_con_wrap").css("position",'relative');
-                $(".positionDiv").css("position",'absolute');
-                $(".positionDiv").css("css",'100%');
             },
             slideBarMousedown(e) {
                 this.$commonJs.pdfOperations.slideBarMousedown.call(this, e);
@@ -683,9 +686,6 @@
             },
             fullModeColumn() {
                 this.$commonJs.pdfOperations.fullModeColumn.call(this);
-                $(".center_con_wrap").css("position",'relative');
-                $(".positionDiv").css("position",'absolute');
-                $(".positionDiv").css("css",'100%');
             },
             fullModeRow() {
                 this.$commonJs.pdfOperations.fullModeRow.call(this);
@@ -719,7 +719,6 @@
                     //     type: 'success',
                     //     message: '删除成功!'
                     // });
-
                     _this.allCheckedBtnLoading = true;
                     // _this.determineOperatingDialog = false;
                     _this.$axios.post('/api/allChecked_fhx', {
@@ -836,11 +835,6 @@
                 this.standardReviewTips = row.standardReview;
                 $(".biaozhunConent").text(row.standardReview);
                 $(".positionDiv").show();
-                if($('.presentation_mode_column .div_pdf').height()!=undefined){
-                    $(".center_con_wrap").css("position",'relative');
-                    $(".positionDiv").css("position",'absolute');
-                    $(".positionDiv").css("css",'100%');
-                }
             },
             closePositionDiv(){
                 $(".positionDiv").hide();
@@ -950,20 +944,17 @@
                         background-color: #b3d8ff !important;
                     }
                     .positionDiv {
-                        text-align: center;
+                        text-align: left;
                         line-height: 50px;
-                        position: fixed;
-                        bottom: 0;
-                        width: 100%;
+                        padding-left: 10px;
                         height: 50px;
-                        background: #fff6ec;
-                        border: 1px solid #ffdcb3;
-                        left: 0;
+                        background: #eca44f;
+                        border: 1px solid #cd7b1a ;
                         z-index: 999;
+                        font-size: 16px;
                     }
                 }
             }
-
             @include pdf_operation;
         }
         .failureEntryDialogWarp {
