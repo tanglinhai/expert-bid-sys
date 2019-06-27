@@ -100,8 +100,10 @@
                             </div> -->
                             <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload"
                                  :queryStr="item.queryStr"
+                                 :searchInCurrPage="item.searchInCurrPage"
                                  :page="item.page"
                                  v-for="item in pdfItems"
+                                 :key="item"
                                  v-show="item.show"></pdf>
                             <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                         </div>

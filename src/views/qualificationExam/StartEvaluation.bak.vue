@@ -39,8 +39,12 @@
                 <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
                 <div class="content">
                     <div class="div_pdf">
-                        <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" :onload="item.onload" :queryStr="item.queryStr"
+                        <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" 
+                            :onload="item.onload" 
+                            :queryStr="item.queryStr"
+                             :searchInCurrPage="item.searchInCurrPage" 
                              v-for="item in pdfItems"
+                             :key="item"
                              v-show="item.show"></pdf>
                         <!-- <div class="closePDF iconfont icon-guanbi1" @click="closePDF"></div> -->
                     </div>

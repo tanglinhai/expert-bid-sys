@@ -33,7 +33,7 @@
                         </span>
                         <el-col :span="8">
                             <div class="grid-content bg-purple-dark overflowText textIndent">
-                                {{item.title}}
+                                {{item.title}} <el-button type="text" @click.stop="newadd">编辑</el-button>
                             </div>
                         </el-col>
                         <el-col :span="6">
@@ -66,6 +66,7 @@
                         <el-col :span="5">
                             <div class="grid-content bg-purple-dark">
                                 <div v-if="stemp.beFlag">
+                                    <el-button size="small" @click="chModi(stemp,subIndex)">编辑</el-button>
                                     <el-button size="small" @click="beConfig(stemp.beFlag)">评标配置</el-button>
                                     <el-button class="btnBg" size="small" @click="stemp.beFlag = !stemp.beFlag">开始评标</el-button>
                                     <el-button size="small">暂停评标</el-button>
@@ -121,11 +122,29 @@ export default {
     },
     mounted() {
         $(".NavCommon").hide();
+        $(".CommonProject").hide();
         this.init();
     },
     methods: {
         newadd(){
-            this.$router.push('/groupLeader/Newaddproject');
+            // this.$router.push('/groupLeader/Newaddproject');
+            this.$router.push({
+                path:'/groupLeader/Newaddproject',
+                query:{
+                    statu:'newAdd',
+                }
+            })
+        },
+        chModi(val,index){
+            // console.log(val,index);
+            this.$store.state.curreentBagMsg = val;
+            this.$router.push({
+                path:'/groupLeader/Newaddproject',
+                query:{
+                    statu:'newAdd',
+                    modi:'bagMsg'
+                }
+            })
         },
         imbeView(val,stemp){
             window.localStorage.setItem('sub','0');
@@ -137,7 +156,8 @@ export default {
                     return this.$router.push('/groupLeader/SignIn');
                 case 1:
                     window.localStorage.setItem('sub','1');
-                    return this.$router.push('/groupLeader/Examination');
+                    this.$router.push('/groupLeader/Examination');
+                    return;
             }
         },
         init(){
@@ -187,7 +207,8 @@ export default {
           data.btnStatus == 0 ? data.btnStatus = 1 : data.btnStatus = 0; 
         },
         beConfig(val){
-            console.log(val);
+            // console.log(val);
+            this.$router.push('/groupLeader/BeConfiguration');
         },
         loadMoreBag(val){
             val.loadMore = true;

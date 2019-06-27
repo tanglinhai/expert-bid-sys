@@ -4,7 +4,7 @@
 			<img src="/img/logo_zzlh.png"/>
   	</div>
   	<el-menu :default-active="activeIndex" class="menu-le" mode="horizontal" @select="handleSelect">
-		  <el-menu-item index="1" @click="goto('/index/projects')">首页</el-menu-item>
+		  <el-menu-item index="1" @click="goto()">首页</el-menu-item>
 		  <!--<el-menu-item index="2" @click="goto('/index/projects')">评审项目</el-menu-item>-->
 	</el-menu>
 	<el-menu class="menu-le topNavs">
@@ -150,9 +150,10 @@ export default {
     handleSelect(key, keyPath) {
       // console.log(key, keyPath);
     },
-    goto(url){
+    goto(url){//
+    	var user = JSON.parse(window.sessionStorage.getItem('user'));
     	this.$router.push({
-    		path: url
+    		path: user.roles.indexOf('expert') > -1 ? '/index/projects' : '/groupLeader/Index'
     	});
 		},
 		logout(){

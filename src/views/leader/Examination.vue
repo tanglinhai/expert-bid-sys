@@ -26,8 +26,8 @@
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="0">查看标中质询</el-dropdown-item>
                             <el-dropdown-item command="1">查看开标一览表</el-dropdown-item>
-                            <el-dropdown-item command="2">资质审查签字</el-dropdown-item>
-                            <el-dropdown-item command="3">评审结果签字</el-dropdown-item>
+                            <el-dropdown-item command="2">资格审查签字</el-dropdown-item>
+                            <el-dropdown-item command="3">查看结果签字</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>

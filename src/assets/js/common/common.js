@@ -585,18 +585,42 @@ export default {
                     this.getIframeDocument(currPDF.ref).getElementById('presentationMode_exit').style.display = 'block';
                 }
                 var iframeWindow = this.getIframeWindow(currPDF.ref);
-                if(page){
+                /*if(page){
                     iframeWindow.PDFViewerApplication.pdfViewer.currentPageNumber = page;
-                }
+                }*/
+
                 if (queryStr) {
+                    iframeWindow.PDFViewerApplication.findController.executeCommand('find', {
+                        query: queryStr,
+                        phraseSearch: true,
+                        caseSensitive: false,
+                        entireWord: false,
+                        highlightAll: true,
+                        findPrevious: true,
+                        searchInCurrPage: true,
+                        page: page
+                    });
+                    /*var viewer = $(iframeWindow.document).find('#viewer');
+                    var currPageDom = viewer.children('[data-page-number="'+iframeWindow.PDFViewerApplication.pdfViewer.currentPageNumber+'"]').find('.textLayer');
+
+                    queryStr = queryStr.replace(/()/g, '(<[^<|\/]*>|<\/[^<]*>)?');
+                    var reg = new RegExp(queryStr);
+
+                    var html = currPageDom.html();
+                    var result = reg.exec(html);
+                    var html = html.substring(0, html.indexOf(result[0])+result[0].length);
+                    var count = (html.match(/<[^<|\/]*>/mg) ? html.match(/<[^<|\/]*>/mg).length : 0) - 1;
+                    var spanDom = currPageDom.children().eq(count);
+                    iframeWindow.document.getElementById('viewerContainer').scrollTop = iframeWindow.document.getElementById('viewerContainer').scrollTop+spanDom.offset().top - 50;
                     iframeWindow.PDFViewerApplication.findBar.findField.value = queryStr;
-                    iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');
+                    iframeWindow.PDFViewerApplication.findBar.dispatchEvent('');*/
                 }
             } else {// not exist <pdf :pdfUrl="item.currPdfUrl" :ref="item.ref" v-for="item in pdfItems" v-show="item.show"></pdf>
                 var _this = this;
                 this.pdfItems.push({
                     currPdfUrl: obj.url1,
                     queryStr: queryStr || '',
+                    searchInCurrPage: true,
                     page: page || 1,
                     //currPdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
                     ref: "pdf_" + obj.id,
@@ -694,7 +718,7 @@ export default {
         /**
          * [pdf 鼠标滑条按下事件]
          */
-        slideBarMousedown(e) {
+        slideBarMousedown(e) {//
             this.hDiff = this._dom_c.$content.hasClass('presentation_mode_row') ? e.clientY - this._dom_c.$div_pdf.height() :
                 this._dom_c.$content.hasClass('presentation_mode_column') ? this._dom_c.$center_part_wrap.width() - e.clientX :
                     e.clientY - this._dom_c.$slidebar.offset().top;
@@ -702,10 +726,18 @@ export default {
             this._dom_c.$dom_body.bind('mousemove.slideBarMousemove', this.slideBarMousemove);
             this.currentPdfShow.append('<div class="floating_div"></div>');
 
+            /*var iframe = this._dom_c.$div_pdf_wrap.find('iframe').get(0).contentWindow;
+            var viewer = $(iframe.document).find('#viewer');
+            viewer.children().hide();
+            var currPageDom = viewer.children('[data-page-number="'+iframe.PDFViewerApplication.pdfViewer.currentPageNumber+'"]');
+            currPageDom.show();
+            currPageDom.prev().show();
+            currPageDom.next().show();*/
+
             this._dom_c.$div_pdf_wrap.css({
                 'width': this._dom_c.$content.width()+'px',
                 'height': document.body.clientHeight+'px',
-            });
+            })
         },
         /**
          * [pdf 鼠标滑条取消按下事件]
@@ -713,11 +745,13 @@ export default {
         slideBarMouseup() {
             this.slideBarIsControl = false;
             this._dom_c.$dom_body.unbind('mousemove.slideBarMousemove');
-            this.currentPdfShow && this.currentPdfShow.find('.floating_div').remove();
+            if(this.currentPdfShow){
+                this.currentPdfShow.find('.floating_div').remove();
                 this._dom_c.$div_pdf_wrap.css({
                     'width': 'auto',
                     'height': '100%',
                 });
+            }
         },
         /**
          * [pdf 鼠标滑条移动事件]
@@ -1105,12 +1139,12 @@ export default {
                         width: points.pdfWH[count][0] + '%',
                         height: points.pdfWH[count][1] + '%'
                     });
-                    console.log(` 
+                    /*console.log(` 
                             0 0 transparent, 
                             ${points.num/points.pdfLeftTop[count][1]/10}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.4),
                             ${points.num/points.pdfLeftTop[count][1]/20}em ${points.num/points.pdfLeftTop[count][0]/10}em rgba(255, 255, 255, 0.3),
                             ${points.num/points.pdfLeftTop[count][1]/30}em ${points.num/points.pdfLeftTop[count][0]/30}em rgba(255, 255, 255, 0.2),
-                            ${points.num/points.pdfLeftTop[count][1]/40}em ${points.num/points.pdfLeftTop[count][0]/40}em rgba(255, 255, 255, 0.1)`);
+                            ${points.num/points.pdfLeftTop[count][1]/40}em ${points.num/points.pdfLeftTop[count][0]/40}em rgba(255, 255, 255, 0.1)`);*/
                     _this._dom_c.$center_part_wrap.css({
                         top: points.centerLeftTop[count][1] + '%',
                         left: points.centerLeftTop[count][0] + '%',

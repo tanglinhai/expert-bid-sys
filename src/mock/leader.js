@@ -21,7 +21,12 @@ Mock.mock('/api/leaderBagMsg','post',{
                     'id': '@id',
                     'btnStatus|1':[0,1],
                     'beFlag':true,
-                    'progre|1':['资格审查','符合性审查','详细评审','商务']
+                    'progre|1':['资格审查','符合性审查','详细评审','商务'],
+                    'name':'MTHYS-8S09',
+                    'proNum':'@bag',
+                    'desc':'xxxx',
+                    'sum':'@natural(12, 28)',
+                    'radio|1':['单价','总价','折扣率']
                 }
             ]
         }
@@ -232,12 +237,68 @@ Mock.mock('./api/methods','post',{
 })
 
 Mock.mock('./api/pfxz','post',{
-    'data':[
-        {name:'商务',id:1},
-        {name:'商务',id:1},
-        // {name:'id',id:2},
-        // {name:'card',id:3},
-        // {name:'card',id:3},
-        // {name:'商务',id:3},
-    ]
+    data: [
+        {
+          kind: {
+            value: "",
+            name: "商务"
+          }, //类别
+          project: [
+            {
+              value: "", //项目
+              select:'',
+              option:[
+                    {name:'单选'},
+                    {name:'多选'},
+                    {name:'步长'},
+                    {name:'两步法'},
+                    {name:'人工'},
+                ],
+              name: "商务",
+              rate:[
+                  {name:1111},
+                //   {name:2222}
+              ], //评分因素,
+              firstMeth:[
+                  {value:''},
+              ],
+              secondMeth:[
+                {value:''}
+                ],
+              radio:'',
+              ischecked: false
+            },
+          ]
+        },
+        {
+            kind: {
+              value: "",
+              name: "技术"
+            }, //类别
+            project: [
+              {
+                value: "", //项目
+                select:'',
+                option:[
+                    {name:'单选'},
+                    {name:'多选'},
+                    {name:'步长'},
+                    {name:'两步法'},
+                    {name:'人工'},
+                ],
+                name: "技术",
+                rate: [
+                    {name:'22222222'}
+                ], //评分因素
+                firstMeth:[
+                    {value:''},
+                ],
+                secondMeth:[
+                    {value:''}
+                ],
+                ischecked: false
+              }
+            ]
+          }
+      ]
 })

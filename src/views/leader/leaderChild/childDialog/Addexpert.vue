@@ -13,7 +13,7 @@
                 </el-col>
                 <el-col :span="10">
                     <div class="grid-content bg-purple-dark">
-                        <el-input size="small"></el-input>
+                        <el-input size="small" v-model="expertForm.name"></el-input>
                     </div>
                 </el-col>
             </el-row>
@@ -25,7 +25,7 @@
                 </el-col>
                 <el-col :span="10">
                     <div class="grid-content bg-purple-dark">
-                        <el-input size="small"></el-input>
+                        <el-input size="small" v-model="expertForm.phoneNum"></el-input>
                     </div>
                 </el-col>
             </el-row>
@@ -36,7 +36,7 @@
                     </div>
                 </el-col>
                 <el-col :span="10">
-                    <el-input size="small"></el-input>
+                    <el-input size="small"  v-model="expertForm.id"></el-input>
                 </el-col>
             </el-row>
             <el-row class="titBox">
@@ -46,7 +46,7 @@
                     </div>
                 </el-col>
                 <el-col :span="10">
-                    <el-input size="small"></el-input>
+                    <el-input size="small"  v-model="expertForm.address"></el-input>
                 </el-col>
             </el-row>
             <el-row class="titBox">
@@ -57,29 +57,29 @@
                 </el-col>
                 <el-col :span="16">
                     <div class="grid-content bg-purple-dark">
-                        <el-radio v-model="radio" label="1">评审专家</el-radio>
-                        <el-radio v-model="radio" label="2">采购人代表</el-radio>
-                        <el-radio v-model="radio" label="3">监标人</el-radio>
+                        <el-radio v-model="expertForm.radio" label="1">评审专家</el-radio>
+                        <el-radio v-model="expertForm.radio" label="2">采购人代表</el-radio>
+                        <el-radio v-model="expertForm.radio" label="3">监标人</el-radio>
                     </div>
                 </el-col>
             </el-row>
             <el-row class="titBox">
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark rightText">
-                        人员类别：
+                        专家类别：
                     </div>
                 </el-col>
                 <el-col :span="16">
                     <div class="grid-content bg-purple-dark">
-                        <el-radio v-model="radio1" label="1">商务</el-radio>
-                        <el-radio v-model="radio1" label="2">技术</el-radio>
-                        <el-radio v-model="radio1" label="3">法律</el-radio>
+                        <el-radio v-model="expertForm.radio1" label="1">商务</el-radio>
+                        <el-radio v-model="expertForm.radio1" label="2">技术</el-radio>
+                        <el-radio v-model="expertForm.radio1" label="3">法律</el-radio>
                     </div>
                 </el-col>
             </el-row>
             <span slot="footer">
                 <el-button @click="dialogVisible = false" size="small">取 消</el-button>
-                <el-button type="primary" size="small" @click="dialogVisible = false">保存</el-button>
+                <el-button type="primary" size="small" @click="save">保存</el-button>
             </span>
         </el-dialog>
     </div>
@@ -90,16 +90,25 @@ export default {
     data() {
         return {
             dialogVisible:false,
-            radio:'',
-            radio1:'',
             fileList:[],
+            expertForm:{
+                name:"",
+                phoneNum:"",
+                id:"",
+                address:"",
+                radio:"",
+                radio1:"",
+            }
         }
     },
     mounted() {
         
     },
     methods: {
-        
+        save(){
+            this.$emit('addExpert',this.expertForm);
+            this.dialogVisible = false;
+        }
     },
 }
 </script>

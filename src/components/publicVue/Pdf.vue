@@ -20,6 +20,9 @@ export default{
         queryStr:{
             type: String
         },
+        searchInCurrPage:{
+            type: Boolean
+        },
         page:{
             type: Number
         },
@@ -48,12 +51,15 @@ export default{
         });
     },
     methods:{
-        setPdf({pdfUrl, onload, queryStr, page} = {}){
+        setPdf({pdfUrl, onload, queryStr, page, searchInCurrPage} = {}){
             if(this.pdfUrl){
                 pdfUrl = this.pdfUrl;
             }
             if(this.onload){
                 onload = this.onload;
+            }
+            if(this.searchInCurrPage){
+                searchInCurrPage = this.searchInCurrPage;
             }
             if(this.queryStr){
                 queryStr = this.queryStr;
@@ -70,16 +76,19 @@ export default{
                 page:page || 1,
                 width: "100%",
                 height: "auto",
-                queryStr,
                 PDFJS_URL: '/js/plugins/pdfjs-2.0.943/web/viewer.html',
                 forcePDFJS: true,
                 onload: onload,
                 pdfOpenParams: {
                     toolbar:0,
-                    view:'FitH'
+                    view:'FitH',
+                    search: queryStr,
+                    searchInCurrPage: searchInCurrPage,
+                    disableautofetch:true
                  },
                 // fallbackLink: "<p>在线浏览PDF，您的浏览器需要安装adobe pdf阅读器,<a href='https://get.adobe.com/cn/reader/download/?installer=Reader_DC_2019.008.20071_Chinese_Simp_for__Windows&os=Windows%2010&browser_type=KHTML&browser_dist=Chrome&d=McAfee_Security_Scan_Plus_Chrome_Browser&dualoffer=false&mdualoffer=false&cr=false&stype=7752'>点击我安装adobePdf</a>,<br/>不安装，直接下载PDF文件使用本地阅读器浏览<a href='"+pdfUrl+"'>下载PDF文件</a></p>"
             };
+
             return PDFObject.embed(pdfUrl, pdfShow, options);
                 
                 /*pdfShow.find('.pdfobject').get(0).onreadystatechange = function(e){
