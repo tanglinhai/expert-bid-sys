@@ -19,7 +19,7 @@ Mock.mock('/api/leaderBagMsg','post',{
                     'ovTime':Random.datetime(),
                     'nowStatus|1':['进行中','已暂停','已结束'],
                     'id': '@id',
-                    'btnStatus|1':[0,1],
+                    'btnStatus':0,
                     'beFlag':true,
                     'progre|1':['资格审查','符合性审查','详细评审','商务'],
                     'name':'MTHYS-8S09',
