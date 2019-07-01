@@ -42,6 +42,7 @@
                     :name="item.name"
                 >
                     <!-- <Exam v-if="item.name === '1' || item.name === '3' || item.name === '5'"></Exam> -->
+                    <Exam v-if="item.name === '1' && getParams === '0'"></Exam>
                     <Qsummary :overOrUn="unOver" v-if="item.name === '2' || item.name === '4' || item.name === '6'"></Qsummary>
                     <Review v-if="item.name === '11'"></Review>
                 </el-tab-pane>

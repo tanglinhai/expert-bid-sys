@@ -57,7 +57,7 @@ Mock.mock('./api/cardMsg','post',{
 
 Mock.mock('./api/tabMsg','post',{
     'tabTitle':[
-        // {title: '资格审查', name: '1'},
+        {title: '资格审查', name: '1'},
         {title: '资格审查汇总', name: '2'},
         // {title: '符合性审查', name: '3'},
         {title: '符合性审查汇总', name: '4'},
