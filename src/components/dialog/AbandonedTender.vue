@@ -49,6 +49,7 @@
                         message: '废标成功',
                         type: 'warning'
                       });
+                      this.$data.ruleForm.desc="";
                     }
                 });
               }).catch(() => {
