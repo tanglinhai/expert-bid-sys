@@ -280,6 +280,7 @@
 .pdfViewer {
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 .pdfViewer .canvasWrapper {
@@ -388,6 +389,7 @@
 .pdfPresentationMode .pdfViewer {
   margin-left: 0;
   margin-right: 0;
+  overflow: hidden;
 }
 
 .pdfPresentationMode .pdfViewer .page,
@@ -407,21 +409,21 @@
 }
 
 .pdfPresentationMode:-ms-fullscreen .pdfViewer .page {
-   margin-bottom: 100% !important; 
+  margin-bottom: 100% !important;
 }
 
 .pdfPresentationMode:-webkit-full-screen .pdfViewer .page {
-   margin-bottom: 100%; 
+  margin-bottom: 100%;
   border: 0;
 }
 
 .pdfPresentationMode:-moz-full-screen .pdfViewer .page {
-   margin-bottom: 100%; 
+  margin-bottom: 100%;
   border: 0;
 }
 
 .pdfPresentationMode:fullscreen .pdfViewer .page {
-   margin-bottom: 100%; 
+  margin-bottom: 100%;
   border: 0;
 }
 
