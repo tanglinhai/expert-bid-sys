@@ -1,7 +1,7 @@
 <template>
     <div class="pingbiao_warp">
         <div class="complianceReviewItem">
-            <el-row class="fs14 bid_msg mb15">
+            <!-- <el-row class="fs14 bid_msg mb15">
                 <el-col :span="12">
                     <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
                 </el-col>
@@ -24,7 +24,10 @@
                         </el-dropdown>
                     </div>
                 </el-col>
-            </el-row>
+            </el-row> -->
+            <!--标题公共组件-->
+            <TitleCommon></TitleCommon>
+            <!--标题公共组件-->
             <div class="mainContentWarp lineAll " v-loading="page_loading">
                 <!-- <el-button class="enterFullMode"
                         icon="iconfont icon-fullscreen"
@@ -299,24 +302,24 @@
                               :baohao="to_submit_prompt_baohao"></SubmitPrompt>
             </el-dialog>
             <!--废标弹框-->
-            <el-dialog
+            <!-- <el-dialog
                     title="废标"
                     :visible.sync="dialogAbandonedTender"
                     width="700px"
             >
                 <AbandonedTender @sonToFather="dialogAbandonedTender=false"></AbandonedTender>
-            </el-dialog>
+            </el-dialog> -->
             <!--废标弹框-->
 
             <!--标中质询弹框-->
-            <el-dialog
+            <!-- <el-dialog
                     title="标中质询信息列表"
                     :visible.sync="dialogStandardChallengeInformation"
                     width="900px"
             >
                 <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo"
                                               :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
-            </el-dialog>
+            </el-dialog> -->
             <!--标中质询弹框-->
             <!--全部选中提示弹框-->
             <!--<el-dialog-->
@@ -392,34 +395,35 @@
             </el-dialog>
 
             <!--调整评标价弹框-->
-            <el-dialog
+            <!-- <el-dialog
                 title="投标人最新报价列表"
                 :visible.sync="ChangedialogVisible"
             >
                 <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
-            </el-dialog>
+            </el-dialog> -->
             <!--调整评标价弹框-->
         </div>
     </div>
 </template>
 
 <script>
-
+    import TitleCommon from '../../components/publicVue/TitleCommon';  //标题组件
     import SubmitPrompt from '../../components/publicVue/SubmitPrompt';//审查提示
     import NavBar from '../../components/publicVue/NavBar';// 导航
-    import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
-    import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
-    import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
+    // import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
+    // import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
+    // import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
     import JSON from 'JSON';
 
     export default {
         props: {},
         components: {
+            TitleCommon, //标题组件
             SubmitPrompt,
             NavBar,
-            AbandonedTender,//废标
-            ChangePrice,//调整评标基准价
-            StandardChallengeInformation,
+            // AbandonedTender,//废标
+            // ChangePrice,//调整评标基准价
+            // StandardChallengeInformation,
             pdf: () => import('../../components/publicVue/Pdf')
         },
         data() {
@@ -448,10 +452,10 @@
                 to_submit_prompt_baohao: "",//传给全部提交弹框的值
                 to_failure_entry_company_name: "",//传给不合格弹框的弹框的公司名
                 to_failure_entry_answer: "",//传给不合格弹框的弹框的问题
-                dialogAbandonedTender: false, //废标
-                dialogStandardChallengeInformation: false,//标中质询信息表
-                cities: [],
-                tableDataTwo: [],
+                // dialogAbandonedTender: false, //废标
+                // dialogStandardChallengeInformation: false,//标中质询信息表
+                // cities: [],
+                // tableDataTwo: [],
                 bzzxLoading: true, //标中质询loading
                 son_all_checked: [],//子节点全选
                 son_all_che: [],//子节点全选
@@ -484,9 +488,9 @@
                 // determineOperatingDialog: false,//点击全部选中提示弹框\
                 num_pro:0,
                 allNumPro:0,
-                ChangedialogVisible:false,  //调整评标价弹框
-                TkOneloading:true,
-                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+                // ChangedialogVisible:false,  //调整评标价弹框
+                // TkOneloading:true,
+                // ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
             }
         },
         created() {
@@ -604,47 +608,48 @@
                     this.page_loading = false;
                 })
             },
-            handleCommand(val) {//弹框群
-                if (val === 'a') {//人员信息
-                    this.dialogAbandonedTender = true;
-                } else if (val === 'b') {//交通费标准
-                    this.dialogStandardChallengeInformation = true;
-                    this.bzzxLoading = true;
-                    this.$axios.post('/api/StandardChallengeList', {}).then(res => {
-                        if (res.status == 200) {
-                            this.cities = res.data.cityOptions;
-                            this.tableDataTwo = res.data.standList;
-                            this.bzzxLoading = false;
-                        }
-                    })
-                } else if (val === 'c') {//报销汇总表
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-                } else if (val === 'd') {//报销汇总表-财政
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-                } else if (val === 'e') {//报销情况查询-财政
-                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-                } else if (val === 'f') {//点击修改密码
-                    window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-                } else if (val === 'g') {//调整评标基准价
-                    //调整评标价点击事件
-                    this.ChangedialogVisible = true;
-                    this.TkOneloading=true;
-                    //console.log(row.id)
-                    //调整评标价点击弹框传值到子页面
-                    this.$axios.post('/api/NewChangePrice',{
-                        //id:row.id,   //点击得id
-                    }).then(res=>{
-                        if(res.status == 200){
-                            //console.log(res.data,99999)
-                        this.ChangePriceTk=res.data.msgBox;
-                        this.TkOneloading=false;
-                        }
-                    })
-                }
-            },
-            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
-                this.ChangedialogVisible = val;
-            },
+            // handleCommand(val) {//弹框群
+            //     if (val === 'a') {//人员信息
+            //         this.dialogAbandonedTender = true;
+            //     } else if (val === 'b') {//交通费标准
+            //         this.dialogStandardChallengeInformation = true;
+            //         this.bzzxLoading = true;
+            //         this.$axios.post('/api/StandardChallengeList', {}).then(res => {
+            //             if (res.status == 200) {
+            //                 this.cities = res.data.cityOptions;
+            //                 this.tableDataTwo = res.data.standList;
+            //                 this.bzzxLoading = false;
+            //             }
+            //         })
+            //     } else if (val === 'c') {//报销汇总表
+            //         window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+            //     } else if (val === 'd') {//报销汇总表-财政
+            //         window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+            //     } else if (val === 'e') {//报销情况查询-财政
+            //         window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+            //     } else if (val === 'f') {//点击修改密码
+            //         window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
+            //     } else if (val === 'g') {//调整评标基准价
+            //         //调整评标价点击事件
+            //         this.ChangedialogVisible = true;
+            //         this.TkOneloading=true;
+            //         //console.log(row.id)
+            //         //调整评标价点击弹框传值到子页面
+            //         this.$axios.post('/api/NewChangePrice',{
+            //             //id:row.id,   //点击得id
+            //         }).then(res=>{
+            //             if(res.status == 200){
+            //                 //console.log(res.data,99999)
+            //             this.ChangePriceTk=res.data.msgBox;
+            //             this.TkOneloading=false;
+            //             }
+            //         })
+            //     }
+            // },
+            // sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
+            //     this.ChangedialogVisible = val;
+            //     console.log("1111111111111")
+            // },
 
 
             /*----------------- pdf start ----------------------*/
@@ -890,20 +895,20 @@
             float: left;
             margin-left: 1%;
             margin-right: 1%;
-            .bid_msg {
-                line-height: 32px;
-                .select {
-                    .el-dropdown {
-                        vertical-align: top;
-                    }
-                    .el-dropdown + .el-dropdown {
-                        margin-left: 15px;
-                    }
-                    .el-icon-arrow-down {
-                        font-size: 12px;
-                    }
-                }
-            }
+            // .bid_msg {
+            //     line-height: 32px;
+            //     .select {
+            //         .el-dropdown {
+            //             vertical-align: top;
+            //         }
+            //         .el-dropdown + .el-dropdown {
+            //             margin-left: 15px;
+            //         }
+            //         .el-icon-arrow-down {
+            //             font-size: 12px;
+            //         }
+            //     }
+            // }
             .mainContentWarp {
                 background: white;
                 border-radius: 5px;

@@ -613,8 +613,12 @@
   .ChangePrice {
     .changePriceTable {
     }
+    
   }
   .priceAdjustment {
+    .el-radio{
+      margin-right:0px;
+    }
     .form_warp{
       position: relative;
     .scroll_warp {

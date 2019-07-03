@@ -1,55 +1,57 @@
 <template>
     <div class="nap">
         <div v-if="state === 'newAdd'">
-            <el-row class="bottomLine">
-                <el-col :span="24">
-                    <div class="grid-content bg-purple-dark">
-                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>项目信息</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row style="padding:15px 0;">
-                <el-form :model="form" ref="ruleForm" size="small" label-width="200px">
-                    <el-form-item label=" 招标项目编号：" prop="proNum">
-                        <el-col :span="5">
-                            <el-input size="small" v-model="form.proNum"></el-input>
-                        </el-col>
-                    </el-form-item>
-                    <el-form-item label=" 招标项目名称：" prop="name">
-                        <el-col :span="5">
-                            <el-input size="small" v-model="form.name"></el-input>
-                        </el-col>
-                    </el-form-item>
-                    <el-form-item label=" 适用法律：" prop="region">
-                        <el-col :span="5">
-                            <el-select v-model="form.region" placeholder="请选择活动区域" size="small" @change="changeSelect">
-                                <el-option label="招标投标法" value="zbtbf"></el-option>
-                                <el-option label="政府采购法" value="zfcgf"></el-option>
-                                <el-option label="其他（非依法必招）" value="qt"></el-option>
-                            </el-select>
-                        </el-col>
-                    </el-form-item>
-                    <el-form-item label=" 采购方式：" prop="type">
-                        <el-col :span="5">
-                            <el-select v-model="form.region1=form.options[0].value" placeholder="请选择活动区域" size="small">
-                                <el-option
-                                    v-for="item in form.options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-col>
-                    </el-form-item>
-                    <el-form-item label=" 项目分类：" prop="radio">
-                        <el-col :span="5">
-                            <el-radio v-model="form.radio" label="1">工程</el-radio>
-                            <el-radio v-model="form.radio" label="2">货物</el-radio>
-                            <el-radio v-model="form.radio" label="3">服务</el-radio>
-                        </el-col>
-                    </el-form-item>
-                </el-form>
-            </el-row>         
+            <div v-if="append === 'newPro'">
+                <el-row class="bottomLine">
+                    <el-col :span="24">
+                        <div class="grid-content bg-purple-dark">
+                            <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>项目信息</h5>
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row style="padding:15px 0;">
+                    <el-form :model="form" ref="ruleForm" size="small" label-width="200px">
+                        <el-form-item label=" 招标项目编号：" prop="proNum">
+                            <el-col :span="5">
+                                <el-input size="small" v-model="form.proNum"></el-input>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label=" 招标项目名称：" prop="name">
+                            <el-col :span="5">
+                                <el-input size="small" v-model="form.name"></el-input>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label=" 适用法律：" prop="region">
+                            <el-col :span="5">
+                                <el-select v-model="form.region" placeholder="请选择活动区域" size="small" @change="changeSelect">
+                                    <el-option label="招标投标法" value="zbtbf"></el-option>
+                                    <el-option label="政府采购法" value="zfcgf"></el-option>
+                                    <el-option label="其他（非依法必招）" value="qt"></el-option>
+                                </el-select>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label=" 采购方式：" prop="type">
+                            <el-col :span="5">
+                                <el-select v-model="form.region1=form.options[0].value" placeholder="请选择活动区域" size="small">
+                                    <el-option
+                                        v-for="item in form.options"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label=" 项目分类：" prop="radio">
+                            <el-col :span="5">
+                                <el-radio v-model="form.radio" label="1">工程</el-radio>
+                                <el-radio v-model="form.radio" label="2">货物</el-radio>
+                                <el-radio v-model="form.radio" label="3">服务</el-radio>
+                            </el-col>
+                        </el-form-item>
+                    </el-form>
+                </el-row>         
+            </div>
             <el-row class="bottomLine">
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark">
@@ -58,8 +60,9 @@
                         </h5>
                     </div>
                 </el-col>
-                <el-col :span="20">
+                <el-col :span="20" v-if="append === 'newPro'">
                     <div class="grid-content bg-purple-dark" style="text-align:right;">
+                        <el-button size="small">导 入</el-button>
                         <el-button size="small" class="btnBg" @click="$refs.addbag.dialogVisible=true">添加分包信息</el-button>
                     </div>
                 </el-col>
@@ -74,14 +77,14 @@
                     <el-table-column prop="proNum" label="包编号"></el-table-column>
                     <el-table-column prop="name" label="包名称"></el-table-column>
                     <el-table-column prop="desc" label="包描述"></el-table-column>
-                    <el-table-column prop="radio" label="投标报价类型">
+                    <el-table-column label="投标报价类型">
                         <template slot-scope="scope">
                             <div>
                                 {{scope.row.radio}}
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作">
+                    <el-table-column v-if="append === 'newPro'" label="操作">
                         <template slot-scope="scope">
                             <div>
                                 <el-button size="small" @click="$refs.addbag.dialogVisible=true">编辑</el-button>
@@ -93,32 +96,6 @@
             </el-row>
         </div>
         <div v-if="state === 'newAdd' && modi === 'bagMsg'">
-            <el-row class="bottomLine">
-                <el-col :span="24">
-                    <div class="grid-content bg-purple-dark">
-                        <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>招标公告</h5>
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row class="titBox">
-                <el-col :span="4">
-                    <div class="grid-content bg-purple-dark">
-                        <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            multiple
-                            :limit="3"
-                            :on-exceed="handleExceed"
-                            :file-list="fileList">
-                            <el-button size="small" type="primary">点击上传</el-button>
-                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                        </el-upload>
-                    </div>
-                </el-col>
-            </el-row>
             <el-row class="bottomLine">
                 <el-col :span="24">
                     <div class="grid-content bg-purple-dark">
@@ -135,6 +112,7 @@
                             :on-preview="handlePreview"
                             :on-remove="handleRemove"
                             :before-remove="beforeRemove"
+                            :before-upload="beforeAvatarUpload"
                             multiple
                             :limit="3"
                             :on-exceed="handleExceed"
@@ -194,7 +172,7 @@
                     <el-table-column type="index"  width="50"></el-table-column>
                     <el-table-column prop="name" label="投标人名称"></el-table-column>
                     <el-table-column prop="tbbj" label="投标报价"></el-table-column>
-                    <el-table-column label="投标文件附件"></el-table-column>
+                    <el-table-column label="投标文件"></el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <div>
@@ -302,6 +280,7 @@ export default {
             tabRadio1:'',
             tabRadio2:'',
             tableData2:[],
+            append:'',
             state:'',
             modi:''
         }
@@ -310,6 +289,7 @@ export default {
         $(".NavCommon").hide();
         this.state = this.$route.query.statu;
         this.modi = this.$route.query.modi;
+        this.append = this.$route.query.append;
         console.log(this.form.region);
         if(this.modi)this.tableData.push(this.$store.state.curreentBagMsg);
     },
@@ -386,6 +366,11 @@ export default {
                     message: '已取消删除'
                 });          
             });
+        },
+        beforeAvatarUpload(file){
+            const isPDF = file.type === 'application/pdf';
+            if (!isPDF)this.$message.error('上传的文件只能是 PDF 格式!');
+            return isPDF;
         }
     },
 }
