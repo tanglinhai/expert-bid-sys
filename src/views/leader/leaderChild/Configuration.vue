@@ -6,7 +6,7 @@
                     <span>评标配置</span>
                 </div>
             </el-col>
-            <el-col :span="20" style="text-align:right;">
+            <el-col :span="20" style="text-align:right;" v-if="beFlag">
                 <div class="grid-content bg-purple-dark">
                     <el-button type="primary" size="small">确认</el-button>
                 </div>
@@ -20,7 +20,7 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">评标委员会</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">评标委员会</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -32,7 +32,7 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">评标委员会</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">评标委员会</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -95,7 +95,7 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">评标委员会组长</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">评标委员会组长</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -107,8 +107,8 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">全数通过</el-radio>
-                    <el-radio v-model="radio1" label="3">简单多数</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">全数通过</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">简单多数</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -120,8 +120,8 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio2" label="on">启用</el-radio>
-                    <el-radio v-model="radio2" label="off">不启用</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio2" label="on">启用</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio2" label="off">不启用</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -148,8 +148,8 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">不允许</el-radio>
-                    <el-radio v-model="radio1" label="3">允许</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">不允许</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">允许</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -161,8 +161,8 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">不允许</el-radio>
-                    <el-radio v-model="radio1" label="3">允许</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">不允许</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">允许</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -174,8 +174,8 @@
             </el-col>
             <el-col :span="18">
                 <div class="grid-content bg-purple-dark">
-                    <el-radio v-model="radio1" label="3">不显示</el-radio>
-                    <el-radio v-model="radio1" label="3">显示</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">不显示</el-radio>
+                    <el-radio :disabled="!beFlag" v-model="radio1" label="3">显示</el-radio>
                 </div>
             </el-col>
         </el-row>
@@ -187,7 +187,8 @@ export default {
     data() {
         return {
             radio1:'',
-            radio2:'off'
+            radio2:'off',
+            beFlag:eval(window.localStorage.getItem('beFlag')),
         }
     },
     mounted() {

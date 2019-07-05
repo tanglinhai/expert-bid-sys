@@ -6,7 +6,7 @@
                     <span>审查项列表</span>
                 </div>
             </el-col>
-            <el-col :span="20" style="text-align:right;">
+            <el-col :span="20" style="text-align:right;" v-if="beFlag">
                 <div class="grid-content bg-purple-dark">
                     <el-button type="primary" size="small" @click="$refs.setExam.dialogVisible=true">增加</el-button>
                     <el-button type="primary" size="small" @click="delet">全部删除</el-button>
@@ -41,7 +41,8 @@
                     label="关联的分包">
                 </el-table-column>
                 <el-table-column
-                    label="操作">
+                    label="操作"
+                    v-if="beFlag">
                     <template slot-scope="scope">
                         <div>   
                             <el-button size="small" @click="$refs.setExam.dialogVisible=true">修改</el-button>
@@ -68,6 +69,7 @@ export default {
         return {
             tableData:[],
             loading:true,
+            beFlag:eval(window.localStorage.getItem('beFlag')),
         }
     },
     mounted() {

@@ -139,6 +139,7 @@ export default {
         },
         chModi(val,index){
             // console.log(val,index);
+            window.localStorage.setItem('beFlag',val.beFlag);
             this.$store.state.curreentBagMsg = val;
             this.$router.push({
                 path:'/groupLeader/Newaddproject',
@@ -209,7 +210,8 @@ export default {
           data.btnStatus == 0 ? data.btnStatus = 1 : data.btnStatus = 0; 
         },
         beConfig(val){
-            // console.log(val);
+            // console.log(val,'+++++++++++++++++++++++++++');
+            window.localStorage.setItem('beFlag',val);
             this.$router.push('/groupLeader/BeConfiguration');
         },
         loadMoreBag(val){
