@@ -6,7 +6,7 @@
                     <span>初审类别设置</span>
                 </div>
             </el-col>
-            <el-col :span="20" style="text-align:right;">
+            <el-col :span="20" style="text-align:right;" v-if="beFlag">
                 <div class="grid-content bg-purple-dark">
                     <el-button type="primary" size="small" @click="$refs.addcate.dialogVisible=true">添加</el-button>
                     <el-button type="primary" size="small" @click="$refs.sort.dialogVisible=true">排序</el-button>
@@ -36,7 +36,8 @@
                     label="关联的分包">
                 </el-table-column>
                 <el-table-column
-                    label="操作">
+                    label="操作" 
+                    v-if="beFlag">
                     <template slot-scope="scope">
                         <div>   
                             <el-button size="small" @click="$refs.addcate.dialogVisible=true">修改</el-button>
@@ -59,6 +60,7 @@
 <script>
 import Addcate from './childDialog/Addcate';
 import Sort from './childDialog/Sort';
+import { constants } from 'crypto';
 export default {
     components:{
         Addcate,
@@ -68,10 +70,12 @@ export default {
         return {
             tableData:[],
             loading:true,
+            beFlag:eval(window.localStorage.getItem('beFlag')),
         }
     },
     mounted() {
         this.init();
+        // console.log(typeof this.beFlag,';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
     },
     methods: {
         init(){
