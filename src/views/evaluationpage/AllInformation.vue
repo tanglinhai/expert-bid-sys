@@ -3,7 +3,7 @@
     <div class="Allinforation_wrap">
         <div class="Allinformation cf" v-loading="pageLoading">
             <!--开始评标页面-->
-            <el-row class="fs14 bid_msg mb15">
+            <!-- <el-row class="fs14 bid_msg mb15">
                 <el-col :span="7">
                     <div class="grid-content bg-purple"><span>标包名称：</span><span>{{name}}</span></div>
                 </el-col>
@@ -13,10 +13,10 @@
                 <el-col :span="4">
                     <div class="grid-content bg-purple"><span>招标文件：</span><span><a href="http://localhost:7000/img/download.svc" download=""><b>{{projectWenjian}}<i class="icon iconfont icon-pdf"></i></b></a></span></div>
                 </el-col>
-                <!-- <el-col :span="4">
-                    <div class="grid-content bg-purple"><span>当前状态：</span><span>{{TheCurrentStatus}}</span></div>
-                </el-col> -->
-            </el-row>
+            </el-row> -->
+            <!--标题公共组件-->
+            <TitleCommon></TitleCommon>
+            <!--标题公共组件-->
             <div class="evaluationcommon lineAll cf">
                <MessageCommon :tableData3="tableData3" :dianji="0"></MessageCommon>
                 <el-row class="LayoutRightSide">
@@ -69,13 +69,15 @@
 <script>
     
     //import NavCommon from '../../components/publicVue/NavCommon.vue';
-    import MessageCommon from '../../components/publicVue/MessageCommon.vue'
+    import MessageCommon from '../../components/publicVue/MessageCommon.vue';
+    import TitleCommon from '../../components/publicVue/TitleCommon';  //标题组件
     export default {
         name: 'index',
         props: {},
         components: {
             //NavCommon,
-            MessageCommon
+            MessageCommon,
+            TitleCommon, //标题组件
         },
         data(){
             return {
@@ -100,11 +102,11 @@
 
                 BtnLoading:false,  //参加评标loading
 
-                name:'',  //标名称
-                biaoNum:'', //标号
-                baohao:'', //包号
-                projectWenjian:'',  //项目资料
-                TheCurrentStatus:'', //当前状态
+                // name:'',  //标名称
+                // biaoNum:'', //标号
+                // baohao:'', //包号 
+                // projectWenjian:'',  //项目资料
+                // TheCurrentStatus:'', //当前状态
 
                 val:'',  //四种方式传值
 
@@ -191,7 +193,7 @@
             //this.navcommonsListFun(); //导航接口
             $(".NavCommon").show();
 
-            this.baoInformations(); //头部包信息
+            //this.baoInformations(); //头部包信息
         },
         methods:{
             goto(url){//开始评标
@@ -200,20 +202,20 @@
                  });
             },
 
-            baoInformations(){   //头部包信息
-                this.$axios.post('/api/baoInformations','post',{
+            // baoInformations(){   //头部包信息
+            //     this.$axios.post('/api/baoInformations','post',{
 
-                }).then(res=>{
-                   // console.log(res,88888)
-                    if(res.status == 200){
-                        this.name=res.data.result.name;
-                        this.biaoNum=res.data.result.biaoNum;
-                        this.baohao=res.data.result.baohao;
-                        this.projectWenjian=res.data.result.projectWenjian;
-                        this.TheCurrentStatus=res.data.result.TheCurrentStatus;
-                    }
-                })
-            },
+            //     }).then(res=>{
+            //        // console.log(res,88888)
+            //         if(res.status == 200){
+            //             this.name=res.data.result.name;
+            //             this.biaoNum=res.data.result.biaoNum;
+            //             this.baohao=res.data.result.baohao;
+            //             this.projectWenjian=res.data.result.projectWenjian;
+            //             this.TheCurrentStatus=res.data.result.TheCurrentStatus;
+            //         }
+            //     })
+            // },
 
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
