@@ -121,6 +121,7 @@
                                 message: this.name+'评审成功！',
                                 type: 'success'
                             });
+                            // this.$store.state.failureEnery.tijiaoNot100 = true;
                             this.$store.state.failureEnery.submitPrompt=false;
                             this.$store.state.failureEnery.flag = false;//false：已经提交，true:未提交
                             $("#hide_btn").hide()

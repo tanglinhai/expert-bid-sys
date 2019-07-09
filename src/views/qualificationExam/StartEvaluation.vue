@@ -64,7 +64,7 @@
                                             <div class="filters_kv cf">
                                                 <div class="filters_k">评审因素：</div>
                                                 <div class="filters_v">
-                                                    <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor">
+                                                    <el-select v-model="filter_factor" placeholder="请选择" size="mini" @change="filter_func_factor" >
                                                         <el-option
                                                             v-for="item in dingdang_tableData"
                                                             :key="item.evaluationFactors"
@@ -123,7 +123,7 @@
                                     <div class="right_warp">
                                         <el-row class="progress_div"
                                                 v-if="$store.state.failureEnery.parent_progress_show">
-                                            <el-col :span="12">
+                                            <el-col :span="10">
                                                 <el-row class="red" >
                                                     <el-col style="width: 70px;font-size: 14px;">
                                                         <div>我的进度：</div>
@@ -134,21 +134,42 @@
                                                     <el-col style="width: 100px;position: absolute; left: 304px;">{{num_pro}}/{{allNumPro}}</el-col>
                                                 </el-row>
                                             </el-col>
-                                            <el-col :span="12" class="textAlignR cf">
-                                                <span id="hide_btn"
+                                            <el-col :span="14" class="textAlignR cf">
+                                                <el-select v-model="value1" multiple placeholder="请选择投标人" size="small"  @remove-tag='removeTag' @visible-change="changeValueChoose($event,AREACODE)" >
+                                                    <el-option
+                                                            v-for="item in options_select_choose"
+                                                            :key="item.value"
+                                                            :label="item.label"
+                                                            :value="item.value"
+                                                            >
+                                                    </el-option>
+                                                </el-select>
+                                                <span class="fs14 col606266 ml10">每页
+                                                    <el-select v-model="value" clearable placeholder="请选择投标人个数" size="small" class="bidder_select"  @change="changeValue" @clear="clearSelect" >
+                                                        <el-option
+                                                                v-for="item in options_select"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value"
+                                                               >
+                                                        </el-option>
+                                                    </el-select>
+                                                    家投标人
+                                                </span>
+                                                <span id="hide_btn" class="ml10"
                                                       :class="$store.state.failureEnery.flag==false ?'hide_div':'nohide_div'">
-                                                    <el-button @click="allChecked" plain size="mini"
+                                                    <el-button @click="allChecked" plain size="small"
                                                                type="primary"
                                                                :loading="allCheckedBtnLoading"><i
                                                             class="icon iconfont icon-ic_qualified  mr3"></i>全部合格
                                                     </el-button>
-                                                    <el-button size="mini" type="primary" @click="allSubmit"
+                                                    <el-button size="small" type="primary" @click="allSubmit"
                                                                :loading="allSubmitBtnLoading"><i
                                                             class="icon iconfont icon-tijiao  mr3"></i>全部提交
                                                     </el-button>
-                                                        </span>
-                                                <el-button type="primary" size="mini" @click="personalAuditForm"
-                                                           class="ml10">
+                                                </span>
+                                                <el-button type="primary" size="small" @click="personalAuditForm"
+                                                           class="ml10 zigeshenchazhuti_btn">
                                                     <i class="icon iconfont icon-zigeshenchazhuti"></i>
                                                     {{personalAuditFormBtn}}
                                                 </el-button>
@@ -168,7 +189,6 @@
                                                         label="评审因素"
                                                         width="250" fixed prop="evaluationFactors">
                                                 </el-table-column>
-
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
@@ -211,7 +231,7 @@
                                                             <span class="red" v-else> {{scope.row['value' + (index + 1)]=="合格"?"合格":"不合格"}}</span>
                                                             <!--<span> {{scope.row['gradeExplain' + (index + 1)]}}</span>-->
                                                             <!--不合格理由-->
-                                                            <span class="ml10"  v-if="scope.row['gradeExplain' + (index + 1)]!=''">
+                                                            <span class="ml10 reason_span"  v-if="scope.row['gradeExplain' + (index + 1)]!=''&&scope.row['value' + (index + 1)]=='不合格'">
                                                                 <el-popover
                                                                         placement="top-start"
                                                                         title="不合格理由"
@@ -266,7 +286,31 @@
                                             </el-table>
                                         </div>
                                         <div class="positionDiv" @click="closePositionDiv"><span class="biaozhunTitle"></span>审查标准：<span
-                                                class="biaozhunConent"></span></div>
+                                                class="biaozhunConent"></span>
+                                        </div>
+                                        <!--分页-->
+                                        <div class="pageBox">
+                                            <!--<el-pagination-->
+                                                    <!--:hide-on-single-page="value_page"-->
+                                                    <!--@size-change="handleSizeChange"-->
+                                                    <!--@current-change="handleCurrentChange"-->
+                                                    <!--:current-page="currentPage"-->
+                                                    <!--:page-sizes="[1, 2, 3, 4]"-->
+                                                    <!--:page-size="100"-->
+                                                    <!--layout="total, sizes, prev, pager, next, jumper"-->
+                                                    <!--:total="400">-->
+                                            <!--</el-pagination>-->
+                                            <el-pagination
+                                                    @size-change="handleSizeChange"
+                                                    @current-change="handleCurrentChange"
+                                                    :current-page.sync="currentPage1"
+                                                    :page-size="100"
+                                                    layout="total, prev, pager, next"
+                                                    :total="1000">
+                                            </el-pagination>
+                                            <!--page-size	每页显示条目个数，支持 .sync 修饰符-->
+                                            <!--page-sizes	每页显示个数选择器的选项设置	number[]	—	[10, 20, 30, 40, 50, 100]-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -291,11 +335,11 @@
                             <el-input type="textarea" v-model="ruleForm.desc" class="textarea" autosize></el-input>
                         </el-form-item>
                         <el-form-item class="textAlignC">
-                            <el-button type="primary" @click="failureEntryConfirmBtn('ruleForm')" size="small"><i
-                                    class="icon iconfont icon-baocun1 mr5"></i> 确定
+                            <el-button type="primary" @click="failureEntryConfirmBtn('ruleForm')" size="small">
+                                <i class="icon iconfont icon-baocun1 mr5"></i> 确定
                             </el-button>
-                            <el-button @click="$store.state.failureEnery.show=false" size="small" type="primary"><i
-                                    class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                            <el-button @click="$store.state.failureEnery.show=false" size="small" type="primary">
+                                <i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
                             </el-button>
                         </el-form-item>
                     </el-form>
@@ -367,7 +411,6 @@
                                 border
                                 class="changePriceTable"
                                 el-table__header-wrapper
-
                         >
                             <el-table-column prop="number" label="序号" header-align="left"
                                              align="left" fixed width="50"></el-table-column>
@@ -440,7 +483,7 @@
                 msgBox: [],//个人形式审计表table数据
                 grcsMsgBoxTitle: [],//个人形式审计表table的公司名以及内部数据数据
                 grzgTitleData: {},//个人形式审计表按钮切换table表头数据
-                grzgscFailureData:[],//个人形式审计表不合格数据
+                grzgscFailureData: [],//个人形式审计表不合格数据
                 idradionoprss: '',//table不合格的id
                 operationType: [],
                 /* -------头部包信息-----*/
@@ -467,8 +510,8 @@
                 son_all_checked: [],//子节点全选
                 son_all_che: [],//子节点全选
                 /* ----------------------------pdf start------------------------------- */
-                filter_bidder:'',
-                filter_factor:'',
+                filter_bidder: '',
+                filter_factor: '',
                 currPdfUrl: '',//当前点击pdf的url
                 pdfItems: [],//动态插入pdf
                 /* ----------------------------pdf end------------------------------- */
@@ -493,19 +536,116 @@
                 },
                 failureEntryDialog: false,//不合格录入弹框
                 // determineOperatingDialog: false,//点击全部选中提示弹框\
-                num_pro:0,
-                allNumPro:0,
-                ChangedialogVisible:false,  //调整评标价弹框
-                TkOneloading:true,
-                ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+                num_pro: 0,
+                allNumPro: 0,
+                ChangedialogVisible: false,  //调整评标价弹框
+                TkOneloading: true,
+                ChangePriceTk: [],  //投标人最新报价列表弹框里面表格得数据
+                options_select: [{//通过下拉菜单的投标人个数展示投标人
+                    value: '1',
+                    label: '1'
+                }, {
+                    value: '2',
+                    label: '2'
+                }, {
+                    value: '3',
+                    label: '3'
+                }, {
+                    value: '4',
+                    label: '4'
+                }, {
+                    value: '5',
+                    label: '5'
+                }, {
+                    value: '6',
+                    label: '6'
+                }, {
+                    value: '7',
+                    label: '7'
+                }, {
+                    value: '8',
+                    label: '8'
+                }, {
+                    value: '9',
+                    label: '9'
+                }, {
+                    value: '10',
+                    label: '10'
+                }, {
+                    value: '11',
+                    label: '11'
+                }, {
+                    value: '12',
+                    label: '12'
+                }, {
+                    value: '13',
+                    label: '13'
+                }, {
+                    value: '14',
+                    label: '14'
+                }, {
+                    value: '15',
+                    label: '15'
+                }],
+                value: '',//下拉菜单的投标人个数
+                options_select_choose: [{//通过下拉菜单的多选展示投标人
+                    value: '1',
+                    label: '重庆网控科技发展有限公司'
+                }, {
+                    value: '2',
+                    label: '普瑞太阳能有限公司 '
+                }, {
+                    value: '3',
+                    label: '夏丰热工研究院有限公司'
+                },{
+                    value: '4',
+                    label: '上海科技信息股份有限公司'
+                },{
+                    value: '5',
+                    label: '益达天热产物有限公司'
+                },{
+                    value: '6',
+                    label: '白云电力试验研究所'
+                },{
+                    value: '7',
+                    label: '上海科技信息股份有限公司'
+                },{
+                    value: '8',
+                    label: '大连跃胜贸易有限公司'
+                },{
+                    value: '9',
+                    label: '跃胜贸易有限公司'
+                },{
+
+                    value: '10',
+                    label: '招管通测试一'
+                },
+                {
+                    value: '11',
+                    label: '招管通测试二'
+               },{
+                    value: '12',
+                    label: '北京麦德森医疗器械有限公司'
+                }, {
+                    value: '13',
+                    label: '闪电果业发展股份有限公司'
+                }, {
+                    value: '14',
+                    label: '中招国际招标有限公司'
+                }, {
+                    value: '15',
+                    label: '上海盛泰广告有限责任公司'
+                 },
+                ],
+                value1: [],//通过下拉菜单的多选展示投标人多选数组
+                arrayFind: [],
+
             }
         },
         created() {
             // this.methodType = this.$route.query.methodType;
             // console.log(this.type_btn);
             // this.methodType = this.$route.query.methodType;
-
-
             if (this.$route.query.type == undefined) {
                 this.methodType = 1;
             } else {
@@ -516,20 +656,25 @@
             } else {
                 this.type_btn = this.$route.query.type;
             }
-
         },
         mounted() {
             $(".positionDiv").hide();
             this.init();
+
             this.$commonJs.pdfOperations.pdf_init.call(this);
+            let a = $(".el-pagination__total").text();
+            console.log(a);
+
+            let num = parseInt(a.substring(1).substring(1));
+            $(".el-pagination__total").text("共"+num+"页")
         },
         computed: {
-            filter_standard(){
-                for(var i=0;i<this.companyname_toubiao.length;i++){
-                    if(this.companyname_toubiao[i].title == this.filter_bidder){
+            filter_standard() {
+                for (var i = 0; i < this.companyname_toubiao.length; i++) {
+                    if (this.companyname_toubiao[i].title == this.filter_bidder) {
                         var fses = this.companyname_toubiao[i].factors_standards;
-                        for(var j=0;j<fses.length;j++){
-                            if(fses[j].factor == this.filter_factor){
+                        for (var j = 0; j < fses.length; j++) {
+                            if (fses[j].factor == this.filter_factor) {
                                 return fses[j].standard;
                             }
                         }
@@ -539,11 +684,11 @@
                 return '';
             },
             filter_points() {
-                for(var i=0;i<this.companyname_toubiao.length;i++){
-                    if(this.companyname_toubiao[i].title == this.filter_bidder){
+                for (var i = 0; i < this.companyname_toubiao.length; i++) {
+                    if (this.companyname_toubiao[i].title == this.filter_bidder) {
                         var fses = this.companyname_toubiao[i].factors_standards;
-                        for(var j=0;j<fses.length;j++){
-                            if(fses[j].factor == this.filter_factor){
+                        for (var j = 0; j < fses.length; j++) {
+                            if (fses[j].factor == this.filter_factor) {
                                 return fses[j].relativePoints;
                             }
                         }
@@ -569,13 +714,13 @@
                 let allNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
                 this.dingdang_tableData.forEach(e => {
                     this.companyname_toubiao.forEach((k, i) => {
-                        if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
+                          if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
                             num++;
                         }
                     });
                 });
-                this.num_pro=num;
-                this.allNumPro=allNum;
+                this.num_pro = num;
+                this.allNumPro = allNum;
                 return num === 0 ? 0 : ((num / allNum).toFixed(3) * 100).toFixed(1);
             }
         },
@@ -594,7 +739,7 @@
                         this.msgBox = res.data.bidMsg.msg;//个人形式审计表table数据
                         this.grcsMsgBoxTitle = res.data.bidMsg.companyNameData;//个人形式审计表table数据
                         this.grzgTitleData = res.data.bidMsg.grcs_titile_data;
-                        this.grzgscFailureData=res.data.bidMsg.grzgscFailureData;
+                        this.grzgscFailureData = res.data.bidMsg.grzgscFailureData;
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
@@ -606,6 +751,7 @@
                         }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                        console.log(this.companyname_toubiao.length,'333');
                     }
                     this.page_loading = false;
                 })
@@ -634,21 +780,21 @@
                 } else if (val === 'g') {//调整评标基准价
                     //调整评标价点击事件
                     this.ChangedialogVisible = true;
-                    this.TkOneloading=true;
+                    this.TkOneloading = true;
                     //console.log(row.id)
                     //调整评标价点击弹框传值到子页面
-                    this.$axios.post('/api/NewChangePrice',{
+                    this.$axios.post('/api/NewChangePrice', {
                         //id:row.id,   //点击得id
-                    }).then(res=>{
-                        if(res.status == 200){
+                    }).then(res => {
+                        if (res.status == 200) {
                             //console.log(res.data,99999)
-                        this.ChangePriceTk=res.data.msgBox;
-                        this.TkOneloading=false;
+                            this.ChangePriceTk = res.data.msgBox;
+                            this.TkOneloading = false;
                         }
                     })
                 }
             },
-            sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
+            sonToFather(val) {  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
             },
 
@@ -688,10 +834,11 @@
             },
             fullModeColumn() {
                 this.$commonJs.pdfOperations.fullModeColumn.call(this);
+                $('.zigeshenchazhuti_btn').css("marginTop","10px");
+
             },
             fullModeRow() {
                 this.$commonJs.pdfOperations.fullModeRow.call(this);
-
             },
             closePDF() {
                 this.$commonJs.pdfOperations.closePDF.call(this);
@@ -702,7 +849,7 @@
             /*----------------- pdf end ----------------------*/
 
 
-          /*-------------资格审查start-------------------------*/
+            /*-------------资格审查start-------------------------*/
             // allChecked() {//全选（不用区分url）
             //     this.determineOperatingDialog = true;
             // },
@@ -711,7 +858,7 @@
             allChecked() {//全选（不用区分url）
                 // this.determineOperatingDialog = true;
 
-                let _this=this;
+                let _this = this;
                 _this.$confirm('您确定要执行此操作?', '全部选中提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -754,10 +901,10 @@
                 else if (this.type_btn == 5) {
                     url = '/api/alltijiao_xxjs';
                 }
-                let _this=this;
+                let _this = this;
 
                 setTimeout(function () {
-                    _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1, }).then(res => {
+                    _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1,}).then(res => {
                         console.log(parseInt(_this.type_btn) + 1);
                         if (res.status == 200) {
                             // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
@@ -768,7 +915,7 @@
                             _this.allSubmitBtnLoading = false;
                         }
                     })
-                },2000)
+                }, 2000)
 
             },
             // rebackAllChecked() {//取消全选
@@ -776,7 +923,6 @@
             // },
             personalAuditForm() {
                 this.personalAuditFormDialog = true;
-                console.log(this.dingdang_tableData);
             },
             // comfrimAllChecked() {//确定全选
             //     this.allCheckedBtnLoading = true;
@@ -795,7 +941,6 @@
             //     });
             // },
             changeRadios(rowIndex, colIndex, val, obj, title) {//scope.$index是哪一行  index+1是哪一列, obj:这一条数据， title:投标人，val:点击的是合格还是不合格（0:不合格，1合格）
-                // console.log(rowIndex, colIndex, val, obj, title);
                 this.rowIndex = rowIndex;
                 this.colIndex = colIndex;
                 this.to_failure_entry_company_name = title;
@@ -838,10 +983,79 @@
                 $(".biaozhunConent").text(row.standardReview);
                 $(".positionDiv").show();
             },
-            closePositionDiv(){
+            closePositionDiv() {
                 $(".positionDiv").hide();
-            }
-            /*-------------资格审查end-------------------------*/
+            },
+            changeValue() {//切换页面选择投标人数量
+                if(this.value!=''||this.value!=undefined||this.value!=null){
+                    this.page_loading = true;
+                    this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                        if (res.status === 200) {
+                            this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                            this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList.slice(0, Number(this.value));
+                        }
+                        this.page_loading = false;
+                    })
+                }else{
+                    this.init();
+                }
+
+            },
+            clearSelect(){//当下拉框的投标人为空时，显示全部数据（多选的时候也是一样）
+                this.init();
+            },
+            changeValueChoose(callback, vc) {//只有回调参数为false时才触发 ctx.getAreaListDataSearch(vc,1)这个函数;
+                console.log(this.value1);
+
+                if (!callback) {
+                    if(this.value1.length!=0){
+                        this.arrayFind = this.value1;
+                        this.page_loading = true;
+                        this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                            if (res.status === 200) {
+                                let arr = [];
+                                this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                                this.value1.forEach((k, j) => {
+                                    let amt = Number(k);
+                                    arr.push(res.data.bidMsg.eviewrItemsMsg.companyNameList[amt - 1])
+                                });
+                                this.companyname_toubiao = arr;
+                            }
+                            this.page_loading = false;
+                        })
+                    }else{
+                        this.init();
+                    }
+                }
+            },
+            removeTag() {//多选下拉的删除操作
+                console.log(this.value1);
+                if(this.value1.length==0){
+                  this.init();
+                }else{
+                    this.page_loading = true;
+                    this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                        if (res.status === 200) {
+                            let arr = [];
+                            this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
+                            this.value1.forEach((k, j) => {
+                                let amt = Number(k);
+                                arr.push(res.data.bidMsg.eviewrItemsMsg.companyNameList[amt - 1]);
+                            });
+                            this.companyname_toubiao = arr;
+                        }
+                        this.page_loading = false;
+                    })
+                }
+            },
+            handleSizeChange(val) {
+                // console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                this.pageLoading = true;
+                this.init();
+            },
+                /*-------------资格审查end-------------------------*/
         }
     }
 </script>
@@ -862,7 +1076,9 @@
     /*.nohide_div {*/
     /*display: block;*/
     /*}*/
-
+    .reason_span:hover{
+      cursor: pointer!important;
+    }
     .el-progress__text {
         font-size: 14px;
         color: #606266;
@@ -921,6 +1137,11 @@
                                 margin-bottom: 20px;
                             }
                         }
+                        .bidder_select{
+                            .el-input__inner{
+                                width: 200px!important;
+                            }
+                        }
                     }
                     .personalAuditFormTable {
                         display: none;
@@ -950,10 +1171,12 @@
                         line-height: 50px;
                         padding-left: 10px;
                         height: 50px;
-                        background: #eca44f;
-                        border: 1px solid #cd7b1a ;
+                        /*background: #eca44f;*/
+                        /*border: 1px solid #cd7b1a ;*/
                         z-index: 999;
                         font-size: 16px;
+                        background: #67C23A;
+                        color: #fff;
                     }
                 }
             }
@@ -975,5 +1198,8 @@
             }
         }
     }
-
+    .pageBox {
+        text-align: right;
+        padding: 15px;
+    }
 </style>

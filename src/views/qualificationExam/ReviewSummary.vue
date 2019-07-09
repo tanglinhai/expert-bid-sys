@@ -145,6 +145,9 @@
                                             class=" icon iconfont  icon-cz-dftj  mr3"></i>投标人分项得分表</el-button>
                                 </span>
                                 <span v-else>
+                                    <el-button size="small" type='primary' @click="modifyFinalScore" class="ml10" v-if="modifyFinalScoreBtn_isShow==true">
+                                       <i class=" icon iconfont icon-cz-dftj mr3"></i>修改最终得分
+                                    </el-button>
                                     <el-button size="small" type='primary' @click="scoreQuotation" class="ml10">
                                        <i class=" icon iconfont icon-cz-dftj mr3"></i>报价计算得分
                                     </el-button>
@@ -192,6 +195,9 @@
                                             </tempalte>
                                         </el-table-column>
                                     </el-table-column>
+                                    <el-table-column prop="creditScoring"
+                                                     label="信用得分"
+                                                     fixed="right"></el-table-column>
                                     <el-table-column prop="pricePoints"
                                                      label="报价分"
                                                      fixed="right"></el-table-column>
@@ -202,18 +208,17 @@
                                                      label="名次"
                                                      fixed="right"></el-table-column>
                                 </el-table>
+                                <el-row class="mt15">
+                                    <el-col :span="18">
+                                        <el-form :model="ruleFormZH" :rules="rulesZH" ref="ruleFormZH" label-width="100px" >
+                                            <el-form-item label="评标意见：" prop="descZH">
+                                                <el-input type="textarea" v-model="ruleFormZH.descZH " :disabled="is_disabledZH"></el-input>
+                                            </el-form-item>
+                                        </el-form>
+                                    </el-col>
+                                </el-row>
                             </template>
                         </el-col>
-
-                        <el-row class="mt15">
-                            <el-col :span="18">
-                                <el-form :model="ruleFormZH" :rules="rulesZH" ref="ruleFormZH" label-width="100px" >
-                                    <el-form-item label="评标意见：" prop="descZH">
-                                        <el-input type="textarea" v-model="ruleForm.descZH "></el-input>
-                                    </el-form-item>
-                                </el-form>
-                             </el-col>
-                        </el-row>
                     </div>
                 </el-row>
                 <!--最低价-->
@@ -251,19 +256,44 @@
                     </div>
                 </div>
             </el-dialog>
-            <!----------------------报价计算--------------------->
+            <!----------------------合理低价(报价评审)报价计算--------------------->
             <el-dialog
-                    title="报价计算"
+                    title="报价评审"
                     :visible.sync="$store.state.failureEnery.bidEvaluation"
                     width="1000px"
             >
                 <div class="BidEvaluation">
                     <div class="warp cf">
+                         <el-row>
+                                 <el-col :span="12">
+                                     <div class=" pro_msg_div textAlignL mb10">
+                                         <h5 class="commonTitle col348fe2" >评标基准价</h5>
+                                     </div>
+                                 </el-col>
+                         </el-row>
+                        <el-row class="pl15 lin-height35 fs14">
+                            <el-col ><span>系统计算评分基准价：</span><span >{{scoringBasePrice_hldj}}</span></el-col>
+                            <el-col >
+                                <div>最终评分基准价：
+                                    <el-input v-model="finalGradeBasePrice_hldj" placeholder=""  style="width: 150px"  size="small" class="mr10"></el-input>
+                                    <el-button type="primary" size="small" @click="BasePricefinalComfrimBtn_hldj">确定</el-button>
+                                </div>
+                            </el-col>
+                            <el-col>需先进行评标基准价确认，完成确认后可计算报价得分。</el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <div class="pro_msg_div textAlignL mb20 mt10">
+                                    <h5 class="commonTitle col348fe2" >报价计算</h5>
+                                </div>
+                            </el-col>
+                        </el-row>
                         <template>
                             <el-table
                                     :data="msg_data"
                                     style="width: 100%"
                                     border
+                                    height="300"
                             >
                                 <el-table-column
                                         prop="bid_name"
@@ -305,7 +335,7 @@
                     </div>
                     <div class="textAlignC pt20">
                         <el-button size="small" @click="bidEvaluation_submit" type="primary"
-                                   :loading="bidEvaluation_submit_loading"><i
+                                   :loading="bidEvaluation_submit_loading" :disabled='isBtnDisabled_hldj!=true'><i
                                 class="icon iconfont icon-baocun1 mr5"></i>提交
                         </el-button>
                         <el-button size="small" @click="bidEvaluation_reback" type="primary"><i
@@ -451,20 +481,46 @@
                 </div>
             </el-dialog>
             <!----------------------投标人分项得分表end--------------------->
-            <!--计算报价得分-->
+            <!--综合评标计算报价得分-->
             <el-dialog
                     title="计算报价得分"
                     :visible.sync="dialogScoring"
                     width="900px"
+
             >
                 <div class="Scoring">
                     <el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <div class=" pro_msg_div textAlignL mb10">
+                                    <h5 class="commonTitle col348fe2" >评标基准价</h5>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <el-row class="pl15 lin-height35 fs14">
+                            <el-col ><span>系统计算评分基准价：</span><span >{{scoringBasePrice_zhpb}}</span></el-col>
+                            <el-col >
+                                <div>最终评分基准价：
+                                    <el-input v-model="finalGradeBasePrice_zhpb" placeholder=""  style="width: 150px"  size="small" class="mr10"></el-input>
+                                    <el-button type="primary" size="small" @click="BasePricefinalComfrimBtn_zhpb">确定</el-button>
+                                </div>
+                            </el-col>
+                            <el-col>需先进行评标基准价确认，完成确认后可计算报价得分。</el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <div class="pro_msg_div textAlignL mb20 mt10">
+                                    <h5 class="commonTitle col348fe2" >报价计算</h5>
+                                </div>
+                            </el-col>
+                        </el-row>
                         <el-table
                                 ref="multipleTable"
                                 :data="scoreQuotationData"
                                 size="small"
                                 tooltip-effect="dark"
                                 border
+                                height="250"
                                 class="changePriceTable"
                                 el-table__header-wrapper>
                             <el-table-column prop="name" header-align="left" label="投标人名称"
@@ -489,10 +545,10 @@
                         <!--提示：报价得分、计算基准价由系统根据招标文件中设定的计算方法自动生成。-->
                         <!--</el-row>-->
                         <el-row class="textAlignC mt30">
-                            <el-button @click="acceptanceSystemScor" size="small" type="primary"><i
+                            <el-button @click="acceptanceSystemScor" size="small" type="primary" :disabled="isBtnDisabled_zhpb!=true"><i
                                     class="icon iconfont icon-fanhuishouye1 mr5"></i>接受系统计算得分
                             </el-button>
-                            <el-button @click="sumbitScoring" size="small" type="primary"><i
+                            <el-button @click="sumbitScoring" size="small" type="primary" :disabled="isBtnDisabled_zhpb!=true"><i
                                     class="icon iconfont icon-tijiao mr5"></i>提交
                             </el-button>
                             <el-button @click="rebackScoring" size="small" type="primary"><i
@@ -576,6 +632,45 @@
                 <ChangePrice v-loading="TkOneloading" @sonToFather="sonToFather" :msgBox="ChangePriceTk"></ChangePrice>
             </el-dialog>
             <!--调整评标价弹框-->
+            <!--修改最终得分弹框-->
+            <el-dialog
+                    title="修改最终得分"
+                    :visible.sync="modifyFinalScoreDialog"
+                    width="900px" >
+                <el-table
+                        ref="multipleTable"
+                        :data="modifyFinalScoreData"
+                        size="small"
+                        tooltip-effect="dark"
+                        border
+                        el-table__header-wrapper>
+                    <el-table-column prop="name" header-align="left" label="投标人名称"
+                                     width="250px"></el-table-column>
+                    <!--<el-table-column prop="tenderNumber" header-align="left" label="投标序号"></el-table-column>-->
+                    <el-table-column prop="systemCountFinalScore" header-align="left" label="系统计算最终得分"></el-table-column>
+                    <!--<el-table-column prop="finalScore" header-align="left" label="最终得分"></el-table-column>-->
+                    <el-table-column prop="finalScoreIpt" header-align="left" label="最终得分">
+                        <template slot-scope="scope">
+                            <el-row class="cf">
+                                <el-input size="small" v-model="scope.row.finalScore" class="fl"
+                                          style="width:169px"  clearable
+                                          @input.native="inputChangeFinalScore(scope.row.finalScore,scope.$index)"
+                                          @keyup.enter.native.prevent="inputChangeFinalScore(scope.row.finalScore,scope.$index)"></el-input>
+                                <div class="red fl textAlignC mt5" style="width:25px;">&nbsp;*</div>
+                            </el-row>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-row class="textAlignC mt30">
+                    <el-button @click="sumbitModifyFinalScoreBtn" size="small" type="primary" ><i
+                            class="icon iconfont icon-tijiao mr5"></i>提交
+                    </el-button>
+                    <el-button @click="rebackModifyFinalScoreBtn" size="small" type="primary"><i
+                            class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
+                    </el-button>
+                </el-row>
+            </el-dialog>
+            <!--修改最终得分弹框end-->
         </div>
     </div>
 </template>
@@ -628,7 +723,7 @@
                         {min: 1, max: 2000, message: '长度在 1到 2000 个字符', trigger: 'blur'}
                     ]
                 },
-                msg_data: [],//评审报价(子组件)
+                msg_data: [],//合理低价评审报价(子组件)
                 /*-----------------排序----------*/
                 msg_box: [],//排序数据(子组件)
                 i: '',//排序记录下标
@@ -645,6 +740,7 @@
                 tableDataTwo: [],
                 bzzxLoading: true, //标中质询loading
                 is_disabled: false,
+                is_disabledZH:false,
                 myloading: false,//评审汇总提交loading
                 myloading_back: false,//返回评审汇总loading
                 myloading_sort: false,// 排序提交返回loading
@@ -712,7 +808,16 @@
                         {required: true, message: '评标意见不能为空!', trigger: 'blur'},
                         {min: 1, max: 2000, message: '长度在 1 到 2000 个字符', trigger: 'blur'}
                     ],
-                }
+                },
+                finalGradeBasePrice_hldj:"",//合理低价的最终评分基准价
+                scoringBasePrice_hldj:0,//合理低价的系统计算评分基准价
+                finalGradeBasePrice_zhpb:"",//综合评标的最终评分基准价
+                scoringBasePrice_zhpb:0,//综合评标的系统计算评分基准价
+                isBtnDisabled_hldj:false,//合理低价的报价评审的提交按钮是否禁用
+                isBtnDisabled_zhpb:false,//综合评标的报价评审的提交按钮以及接受系统计算得分是否禁用
+                modifyFinalScoreDialog:false,//修改最终得分弹框状态
+                modifyFinalScoreData:[],//修改最终得分弹框table数据
+                modifyFinalScoreBtn_isShow:false,//修改最终得分是否展示
             }
         },
         created() {
@@ -740,13 +845,16 @@
                 }).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
-                        // console.log(res.data);
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.scoreQuotationData = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
                         this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
+                        this.scoringBasePrice_hldj=res.data.bidMsg.eviewrItemsMsg.scoringBasePrice;//合理低价的系统计算评分基准价
+                        this.scoringBasePrice_zhpb=res.data.bidMsg.eviewrItemsMsg.scoringBasePrice;//综合评标的系统计算评分基准价
+                        this.finalGradeBasePrice_hldj=res.data.bidMsg.eviewrItemsMsg.scoringBasePrice;//默认合理低价的系统计算评分基准价（可手动修改,手动修改点击确认后，报价计算的表格刷新，基准价，偏离率β获取数据显示）
+                        this.finalGradeBasePrice_zhpb=res.data.bidMsg.eviewrItemsMsg.scoringBasePrice;//默认合理低价的系统计算评分基准价（可手动修改,手动修改点击确认后，报价计算的表格刷新，基准价，偏离率β获取数据显示）
                         this.unlockDataCheckbox = res.data.bidMsg.eviewrItemsMsg.jiesuoData.checkedList;
                         this.isShowProgressPage = res.data.bidMsg.eviewrItemsMsg.isShow;
                         this.unlockDataRadio = res.data.bidMsg.eviewrItemsMsg.jiesuoData.radioList;
@@ -763,30 +871,29 @@
                         this.pingshenweiyuanData = res.data.bidMsg.eviewrItemsMsg.pingshenweiyuanData;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.pingshenhuizongTableData;
                         this.msg_box = res.data.bidMsg.eviewrItemsMsg.sort_data;//排序
-                        console.log(res.data.bidMsg.eviewrItemsMsg.sort_data);
                         this.tableData = res.data.bidMsg.eviewrItemsMsg.review_summary;
                         this.$store.state.failureEnery.isshow = false;
                         if (this.methodType == 1) {
-                            // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);
                             if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
                                 this.$store.state.failureEnery.is_pingshen_show = false;
                             } else {
                                 this.$store.state.failureEnery.is_pingshen_show = true;
-                                // this.is_disabled = true;
+                                this.is_disabled = true;
                                 this.ruleForm.desc = '2';
                             }
                         } else if (this.methodType == 2) {
-                            // console.log(res.data.bidMsg.eviewrItemsMsg.isShow);//0：提交前那个页面显示，1:提交前的页面
-                            // console.log(res.data.bidMsg.eviewrItemsMsg.tijiao);
-                            if (res.data.bidMsg.eviewrItemsMsg.tijiao == 1) { //1,提交之前的，0，提交之前的
+                            if (res.data.bidMsg.eviewrItemsMsg.tijiao == 1) { //0,提交之后的，1，提交之前的
                                 this.$store.state.failureEnery.is_pingshen_show = true;
+                                this.ruleFormZH.descZH = '2';
+                                this.is_disabledZH=true;
                             } else {
                                 this.$store.state.failureEnery.is_pingshen_show = false;
                             }
                         }
                     }
                     this.page_loading = false;
-                })
+                });
+                this.modifyFinalScoreInit();
             },
             handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
@@ -813,13 +920,11 @@
                     //调整评标价点击事件
                     this.ChangedialogVisible = true;
                     this.TkOneloading = true;
-                    //console.log(row.id)
                     //调整评标价点击弹框传值到子页面
                     this.$axios.post('/api/NewChangePrice', {
                         //id:row.id,   //点击得id
                     }).then(res => {
                         if (res.status == 200) {
-                            //console.log(res.data,99999)
                             this.ChangePriceTk = res.data.msgBox;
                             this.TkOneloading = false;
                         }
@@ -846,7 +951,6 @@
                             }
                         });
                         if (this.a.length != 0 && this.ruleForm.desc != '') {
-                            // alert('有效选中');
                             this.$message({
                                 message: '提交成功！',
                                 type: 'success'
@@ -892,7 +996,7 @@
             zhpb_sort_btn() {
                 this.$store.state.failureEnery.sort = true;
             },
-            bidEvaluation_btn() {//报价评审
+            bidEvaluation_btn() {//合理低价报价评审
                 this.$store.state.failureEnery.bidEvaluation = true;
             },
             reback() {
@@ -971,11 +1075,28 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
+            BasePricefinalComfrimBtn_hldj(){//最终评分基准价确定按钮：最终评分基准价默认是系统计算评分基准价的值只有点击确定的时候下面表格的基准价和偏离率才有值）
+                this.isBtnDisabled_hldj=true;
+                this.$axios.post('/api/basePricefinalComfrimBtnData_hldj',{
+                   basePricefinal:this.scoringBasePrice_hldj,
+                }).then(res => {
+                    this.msg_data=res.data.bidMsg.msgBox;
+               });
+            },
             /*------------------------------排序弹框end-----------------------------------------*/
 
 
             /*------------------------合理低价评审汇总end-----------------*/
             /*-------------------------------报价计算弹框---------------------------------------*/
+
+            BasePricefinalComfrimBtn_zhpb(){
+                this.isBtnDisabled_zhpb=true;
+                this.$axios.post('/api/basePricefinalComfrimBtnData_zhpb',{
+                    basePricefinal:this.scoringBasePrice_zhpb,
+                }).then(res => {
+                    this.scoreQuotationData=res.data.bidMsg.bidEvaluation;
+                });
+            },
             radio_is_valid(radio, id, tableKey, index, msg_box) {//报价审核是否有效
                 // radio:radio选中的状态：1：有效、2：无效, id：当选选中id, tableKey当选选中行数据, index：下标, msg_box：当前的table表数据
                 this.$axios.post('/api/radio_is_valid', {
@@ -1057,7 +1178,7 @@
                 if (isNotFilled) {
                     this.$message('专家确认得分不能为空！');
                 } else {
-                    console.log(this.scoreQuotationData);
+                    // console.log(this.scoreQuotationData);
                     this.$axios.post('/api/score_quotation_tijiao', {data: this.scoreQuotationData}).then(res => {
                         if (res.status == 200) {
                             this.$message({
@@ -1065,9 +1186,64 @@
                                 type: 'success'
                             });
                             this.dialogScoring = false;
+                            this.baojiadefenSubmitData_zhpb();
+                            this.modifyFinalScoreBtn_isShow=true;
                         }
                     })
                 }
+            },
+            modifyFinalScore(){//修改最终得分
+                this.modifyFinalScoreDialog=true;
+            },
+            modifyFinalScoreInit(){
+                this.$axios.post('/api/modifyFinalScoreData').then(res => {
+                    if (res.status == 200) {
+                        this.modifyFinalScoreData=res.data.bidMsg.bidEvaluation;
+                    }
+                })
+            },
+            sumbitModifyFinalScoreBtn(){//提交修改最终得分
+                let isNotFilled = false;
+                for (let i = 0; i < this.modifyFinalScoreData.length; i++) {
+                    if (!$.trim(this.modifyFinalScoreData[i].finalScore)) {
+                        isNotFilled = true;
+                        break;
+                    }
+                }
+                if (isNotFilled) {
+                    this.$message('最终得分不能为空！');
+                } else {
+                    this.$axios.post('/api/modifyFinalScoreSubmit', {data: this.modifyFinalScoreData}).then(res => {
+                        if (res.status == 200) {
+                            this.$message({
+                                message: '修改最终得分保存完成！',
+                                type: 'success'
+                            });
+                            this.modifyFinalScoreDialog=false;
+                            this.finalScoreSubmitPingshenhuizongData_zhpb();
+                        }
+                    })
+                }
+            },
+            finalScoreSubmitPingshenhuizongData_zhpb(){//综合评标的报价计算得分提交完成之后评审汇总table数据刷新接口
+                this.$axios.post('/api/modifyFinal_pingshenhuizongData', ).then(res => {
+                    if (res.status == 200) {
+                        this.msgBox = res.data.bidMsg.pingshenhuizongTableData;
+                        // this.msgBox = res.data.pingshenhuizongTableData;
+                        this.pingshenweiyuanData = res.data.bidMsg.pingshenweiyuanData;
+                    }
+                })
+            },
+            baojiadefenSubmitData_zhpb(){//综合评标的报价计算得分提交完成之后评审汇总table数据刷新接口
+                this.$axios.post('/api/baojiadefenSubmitData_zhpb', ).then(res => {
+                    if (res.status == 200) {
+                        this.pingshenweiyuanData = res.data.pingshenweiyuanData;
+                        this.msgBox = res.data.pingshenhuizongTableData;
+                    }
+                })
+            },
+            rebackModifyFinalScoreBtn(){//返回修改最终得分
+                this.modifyFinalScoreDialog=false;
             },
             rebackScoring() {//接受系统计算得分返回按钮
                 this.dialogScoring = false;
@@ -1076,13 +1252,57 @@
                 for (let i = 0; i < this.scoreQuotationData.length; i++) {
                     console.log(this.scoreQuotationData);
                     this.scoreQuotationData[i].score = this.scoreQuotationData[i].scoringSystem;
-                    if (this.scoreQuotationData[i].score > this.scoreQuotationData[i].scoringSystem) {
-                        alert(1)
-
-                    }
+                    // if (this.scoreQuotationData[i].score > this.scoreQuotationData[i].scoringSystem) {
+                    //     alert(1)
+                    //
+                    // }
                 }
             },
-            inputChange(value,index){
+            inputChangeFinalScore(value,index){
+                let reg = /^[0-9]{1,3}(\.[0-9]{1,3})?$/;
+                if (reg.test(Number(value))) {
+                    if(value > 100){
+                        this.$confirm('输入分值不能超过100.00分!', '提示', {
+                            confirmButtonText: '确定',
+                            showCancelButton: false,
+                            closeOnClickModal: false,
+                            closeOnPressEscape: false,
+                            showClose: false,
+                            type: 'warning'
+                        }).then(() => {
+                            this.modifyFinalScoreData[index].finalScore = value.substring(0,2);
+                        });
+                    }else {
+                        if(value.includes('.')){
+                            let len = value.split('.')[1].length;
+                            if(len > 2){
+                                this.$confirm('只能输入两位小数', '提示', {
+                                    confirmButtonText: '确定',
+                                    showCancelButton: false,
+                                    closeOnClickModal: false,
+                                    closeOnPressEscape: false,
+                                    showClose: false,
+                                    type: 'warning'
+                                }).then(() => {
+                                    this.modifyFinalScoreData[index].finalScore = `${value.split('.')[0]}.${value.split('.')[1].substring(0,2)}`;
+                                });
+                            }
+                        }
+                    }
+                }else {
+                    this.$confirm('只能输入英文半角数字及英文半角小数点', '提示', {
+                        confirmButtonText: '确定',
+                        showCancelButton: false,
+                        closeOnClickModal: false,
+                        closeOnPressEscape: false,
+                        showClose: false,
+                        type: 'warning'
+                    }).then(() => {
+                        this.modifyFinalScoreData[index].finalScore = '';
+                    });
+                }
+            },
+            inputChange(value,index){//专家确认得分校验（专家确认得分手动修改并提交之后，评审汇总表的数据会重新调取一次）
                 let reg = /^[0-9]{1,3}(\.[0-9]{1,3})?$/;
                 if (reg.test(Number(value))) {
                     if(value > 100){
@@ -1238,30 +1458,37 @@
             checkProScoreBtn() {
                 this.$store.state.failureEnery.checkProScoreDialogVisible = true;
             },
-
             reviewSummarySubmitZHPB() {//综合评标提交按钮
                 this.$confirm('您确定进行评分汇总操作吗?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert('1');
-                    this.submitFormLoadingZHPB = true;
-                    this.$axios.post('/api/submitBtnZHPB', 'post', {
-                        data: ''
-                    }).then(res => {
-                        if (res.data.code == 200) {
-                            this.submitFormLoadingZHPB = false;
-                            this.$store.state.failureEnery.is_pingshen_show = true;
-                            this.$message({
-                                type: 'success',
-                                message: '评分汇总提交成功!'
-                            });
-                        }
-                    });
-
+                    if(this.ruleFormZH.descZH=="" ){
+                        this.$alert('汇总提示前，请先填写评标意见！', '提示', {
+                            confirmButtonText: '确定',
+                            // callback: action => {
+                            //     this.myloading = false;
+                            // }
+                        });
+                    }else{
+                        this.submitFormLoadingZHPB = true;
+                        this.$axios.post('/api/submitBtnZHPB', 'post', {
+                            data: ''
+                        }).then(res => {
+                            if (res.data.code == 200) {
+                                this.submitFormLoadingZHPB = false;
+                                this.$store.state.failureEnery.is_pingshen_show = true;
+                                this.$message({
+                                    type: 'success',
+                                    message: '评分汇总提交成功!'
+                                });
+                                this.is_disabledZH = true;
+                            }
+                        });
+                    }
                 }).catch(() => {
-                    alert('2')
+
                     this.$message({
                         type: 'info',
                         message: '已取消评分汇总提交'
@@ -1307,7 +1534,7 @@
         min-height: 800px;
         .unFinishQualificationsResult {
             background-color: #ededed;
-            padding: 0px 0% 15px 0%;
+            padding: 0 0 15px 0;
             width: 98%;
             float: left;
             margin-left: 1%;
@@ -1395,7 +1622,7 @@
         .hldj_biddingAdvice, .zhpbBiddingAdviceBialog {
             .hldj_btns {
                 .el-form-item__content {
-                    margin-left: 0px !important;
+                    margin-left: 0 !important;
                 }
             }
         }

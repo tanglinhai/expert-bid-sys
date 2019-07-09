@@ -361,11 +361,11 @@ function factors_standards(type){
      */
 }
 Mock.mock('/api/table_msg', 'post', (options) => {
-    console.log(options);
+    // console.log(options);
     let return_val;
     var submit_type= Random.integer(0, 1);
     let get_type_num=JSON.parse(options.body).type;
-    console.log(get_type_num);
+    // console.log(get_type_num);
     var bidderIds = [Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id()];
 
     if (get_type_num == 1) {
@@ -390,7 +390,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
-
                         { "title":"（1）重庆网控科技发展有限公司",
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
@@ -407,6 +406,92 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             pdf: [{id: 'pdf3_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
                                 {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（4）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（5）益达天热产物有限公司",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                       {
+                            "title":"（6）白云电力试验研究所",
+                                pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                                factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（7）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（8）大连跃胜贸易有限公司",
+                            pdf: [{id: 'pdf8_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（9）跃胜贸易有限公司",
+                            pdf: [{id: 'pdf9_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（10）招管通测试一",
+                            pdf: [{id: 'pdf10_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（11）招管通测试二",
+                            pdf: [{id: 'pdf11_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（12）北京麦德森医疗器械有限公司",
+                            pdf: [{id: 'pdf12_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+                        {
+                            "title":"（13）闪电果业发展股份有限公司",
+                            pdf: [{id: 'pdf13_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+
+                        {
+                            "title":"（14）中招国际招标有限公司",
+                            pdf: [{id: 'pdf14_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(10)[2]
+                        },
+
+                        {
+                            "title":"（15）上海盛泰广告有限责任公司",
+                            pdf: [{id: 'pdf15_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
                             factors_standards:factors_standards(10)[2]
                         }
                     ],
@@ -426,6 +511,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -433,6 +526,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
 
                         {
@@ -450,6 +551,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -457,7 +566,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
                         {
                             evaluationFactors: '分辨率是否为15英寸以上',//(资格审查的评审因素)
@@ -474,6 +590,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -481,7 +605,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
-
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
 
                     ],
@@ -779,7 +910,8 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                }]
             }
         }
-    } else if (get_type_num == 3) {
+    }
+    else if (get_type_num == 3) {
         let ms = [];
         for (var i = 0; i < Random.integer(1, 5); i++) {
             ms.push({
@@ -823,6 +955,92 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（4）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（5）益达天热产物有限公司",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（6）白云电力试验研究所",
+                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（7）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（8）大连跃胜贸易有限公司",
+                            pdf: [{id: 'pdf8_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（9）跃胜贸易有限公司",
+                            pdf: [{id: 'pdf9_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（10）招管通测试一",
+                            pdf: [{id: 'pdf10_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（11）招管通测试二",
+                            pdf: [{id: 'pdf11_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（12）北京麦德森医疗器械有限公司",
+                            pdf: [{id: 'pdf12_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+                        {
+                            "title":"（13）闪电果业发展股份有限公司",
+                            pdf: [{id: 'pdf13_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+
+                        {
+                            "title":"（14）中招国际招标有限公司",
+                            pdf: [{id: 'pdf14_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
+                        },
+
+                        {
+                            "title":"（15）上海盛泰广告有限责任公司",
+                            pdf: [{id: 'pdf15_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(11)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -841,6 +1059,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -848,6 +1074,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
                         {
                             evaluationFactors: '资质',
@@ -864,6 +1098,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -871,6 +1113,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
                         {
                             evaluationFactors: '审查项目',//(资格审查的评审因素)
@@ -887,6 +1137,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -894,6 +1152,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
 
                         },
 
@@ -1219,6 +1485,92 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                                 {id: 'pdf3_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
 
                             factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（4）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf4_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf4_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（5）益达天热产物有限公司",
+                            pdf: [{id: 'pdf5_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf5_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（6）白云电力试验研究所",
+                            pdf: [{id: 'pdf6_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf6_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[0]
+                        },
+                        {
+                            "title":"（7）上海科技信息股份有限公司",
+                            pdf: [{id: 'pdf7_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf7_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（8）大连跃胜贸易有限公司",
+                            pdf: [{id: 'pdf8_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf8_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（9）跃胜贸易有限公司",
+                            pdf: [{id: 'pdf9_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf9_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（10）招管通测试一",
+                            pdf: [{id: 'pdf10_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf10_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（11）招管通测试二",
+                            pdf: [{id: 'pdf11_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf11_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（12）北京麦德森医疗器械有限公司",
+                            pdf: [{id: 'pdf12_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf12_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+                        {
+                            "title":"（13）闪电果业发展股份有限公司",
+                            pdf: [{id: 'pdf13_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf13_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+
+                        {
+                            "title":"（14）中招国际招标有限公司",
+                            pdf: [{id: 'pdf14_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf14_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
+                        },
+
+                        {
+                            "title":"（15）上海盛泰广告有限责任公司",
+                            pdf: [{id: 'pdf15_1', pdf_name: 'pdf文件31', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_2', pdf_name: 'pdf文件32', 'url1': "/documents/投标人3.pdf"},
+                                {id: 'pdf15_3', pdf_name: 'pdf文件33', 'url1': "/documents/投标人4.pdf"}],
+                            factors_standards:factors_standards(12)[2]
                         }
                     ],
                     "dingdang_tableData":[
@@ -1237,6 +1589,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -1244,6 +1604,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
                         {
                             evaluationFactors: '详细评审2',
@@ -1260,6 +1628,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -1267,6 +1643,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
                         {
                             evaluationFactors: '详细评审3',//(资格审查的评审因素)
@@ -1283,6 +1667,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             value5:'' ,
                             value6:'' ,
                             value7:'' ,
+                            value8:'',
+                            value9:'' ,
+                            value10:'' ,
+                            value11:'' ,
+                            value12:'' ,
+                            value13:'' ,
+                            value14:'' ,
+                            value15:'' ,
                             gradeExplain1:'',
                             gradeExplain2:'',
                             gradeExplain3:'',
@@ -1290,6 +1682,14 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain5:'',
                             gradeExplain6:'',
                             gradeExplain7:'',
+                            gradeExplain8:'',
+                            gradeExplain9:'',
+                            gradeExplain10:'',
+                            gradeExplain11:'',
+                            gradeExplain12:'',
+                            gradeExplain13:'',
+                            gradeExplain14:'',
+                            gradeExplain15:'',
                         },
 
                     ],
@@ -2727,7 +3127,7 @@ let allChecked_xxjs = Mock.mock('/api/allChecked_xxjs', 'post', {
 //is_submit_type: 是否提交的状态( 不是汇总页面提交)；type：菜单传的状态(按钮状态)；zong_type：是否提交的状态( 是汇总页面提交)；
 
 function get_data(type,is_submit_type) {
-    console.log(type, is_submit_type);
+    // console.log(type, is_submit_type);
     function set_type() {
         if (type == 0) {
             return [is_submit_type?1:2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, ]
@@ -2774,7 +3174,7 @@ function get_data(type,is_submit_type) {
     set_type();
     var a;
     a = set_type();
-    console.log(a);
+    // console.log(a);
     return [
         {
             value: '1',//
@@ -2988,6 +3388,210 @@ let tijiao_xxjs = Mock.mock('/api/tijiao_xxjs', 'post', {
     vue_type: get_data(6),
 });
 
+// 资格审查项汇总页面table接口合理低价
+Mock.mock('/api/basePricefinalComfrimBtnData_hldj', 'post', (options) => {
+    let msg = [];
+    for (let i = 0; i < Random.integer(3,8); i++) {
+        msg.push({//报价评审弹框报价计算table
+            'id': Random.id(),
+            'bid_name': "重庆网控科技发展有限公司",
+            'tender_offer': Random.integer(100, 9999),
+            'bid_price': Random.integer(100, 9999),
+            'base_rice': Random.integer(100, 9999),
+            'bias_ratio': Random.integer(0, 100),
+            'radio': 2,
+        });
+    }
+    return {
+        'bidMsg': {
+            'msgBox': msg,
+        }
+    }
+});
+// 资格审查项汇总页面table接口综合评标
+Mock.mock('/api/basePricefinalComfrimBtnData_zhpb', 'post', (options) => {
+    return {
+        'bidMsg': {
+            'bidEvaluation': [{//计算报价得分
+                toubiaoPrice: '31,000,00',
+                name: '（1）夏丰热工研究院有限公司',
+                evaluationBid: '31,000,00',
+                standardPrice:Random.integer(0, 10000),
+                beitaValue:Random.integer(0, 1),
+                scoringSystem:Random.integer(0, 100),
+                score:""
+            },{
+                toubiaoPrice: '33,000,00 ',
+                name: '（2）普瑞太阳能有限公司',
+                evaluationBid: '28,000,00',
+                standardPrice:Random.integer(0, 10000),
+                beitaValue:Random.integer(0, 1),
+                scoringSystem:Random.integer(0, 100),
+                score:""
+            }, {
+                toubiaoPrice: '30,000,00',
+                name: '（3）夏风热工研究有限公司',
+                evaluationBid: '30,000,00',
+                standardPrice:Random.integer(0, 10000),
+                beitaValue:Random.integer(0, 1),
+                scoringSystem:Random.integer(0, 100),
+                score:""
+            }],
+        }
+    }
+});
+
+//综合评标的报价计算得分提交完成之后评审汇总table数据刷新接口
+Mock.mock('/api/baojiadefenSubmitData_zhpb', 'post', (options) => {
+    return {
+            'pingshenhuizongTableData': [
+                {
+                    // 'bidderNumber': '2',
+                    'bidder': '(2)夏丰热工研究院有限公司',
+                    "pricePoints": '21.00',
+                    'finalScore': '12.00',
+                    "ranking": '1',
+                    'creditScoring': '9.50',
+                },
+                {
+                    // 'bidderNumber': '3',
+                    'bidder': '(3)普瑞太阳能有限公司',
+                    "pricePoints": '49.00',
+                    'finalScore': '10.00',
+                    "ranking": '2',
+                    'creditScoring': '7.00'
+                },
+                {
+                    // 'bidderNumber': '1',
+                    'bidder': '(1)阿里巴巴',
+                    "pricePoints": '29.00',
+                    'finalScore': '10.00',
+                    "ranking": '3',
+                    'creditScoring': '8.00'
+                },
+            ],
+            'pingshenweiyuanData': [
+                {
+                    'name': '评标专家七',
+                    'zhaunjiadata_gs': [
+                        {
+                            'zhaunjia1': ["33.00", "31.00", "38.00",]
+                        },
+                    ]
+                },
+                {
+                    'name': '评标专家五',
+                    'zhaunjiadata_gs': [
+                        {
+                            'zhaunjia1': ["31.00", "36.00", "39.00",]
+                        },
+                    ]
+                },
+                {
+                    'name': '评标专家一',
+                    'zhaunjiadata_gs': [
+                        {
+                            'zhaunjia1': ["32.00", "31.00", "38.00",]
+                        },
+                    ]
+                },
+            ],
+        }
+});
+
+//综合评标修改最终得分接口
+Mock.mock('/api/modifyFinalScoreData', 'post', (options) => {
+    return {
+        'bidMsg': {
+            'bidEvaluation': [{
+                name: '（2）照管通一',
+                finalScore: '68.98',
+                // tenderNumber:'2',
+                systemCountFinalScore:"68.98"
+            },{
+                name: '（4）照管通二',
+                finalScore: '67.57',
+                // tenderNumber:'4',
+                systemCountFinalScore:"67.57"
+            },{
+                name: '（1）照管通三',
+                finalScore: '65.63',
+                // tenderNumber:'1',
+                systemCountFinalScore:"65.63"
+            },],
+        }
+    }
+});
+
+//综合评标修改最终得分提交接口
+let modifyFinalScoreSubmit= Mock.mock('/api/modifyFinalScoreSubmit', 'post', {
+    status: 200,
+    message: '成功!',
+    data: '',
+});
+
+
+
+//综合评标修改最终得分提交完评审汇总数据改变的接口
+Mock.mock('/api/modifyFinal_pingshenhuizongData', 'post', (options) => {
+    return {
+        'bidMsg': {
+            'pingshenhuizongTableData': [
+                {
+                    // 'bidderNumber': '2',
+                    'bidder': '(2)夏丰热工研究院有限公司',
+                    "pricePoints":'21.00',
+                    'finalScore':'72.00',
+                    "ranking":'3',
+                    'creditScoring':'9.50',
+                },
+                {
+                    // 'bidderNumber': '3',
+                    'bidder': '(3)普瑞太阳能有限公司',
+                    "pricePoints":'49.00',
+                    'finalScore':'60.00',
+                    "ranking":'2',
+                    'creditScoring':'7.00'
+                },
+                {
+                    // 'bidderNumber': '1',
+                    'bidder': '(1)阿里巴巴',
+                    "pricePoints":'29.00',
+                    'finalScore':'10.00',
+                    "ranking":'1',
+                    'creditScoring':'8.00'
+                },
+            ],
+            'pingshenweiyuanData': [
+                {
+                    'name':'评标专家七',
+                    'zhaunjiadata_gs':[
+                        {
+                            'zhaunjia1':["33.00",  "31.00","38.00",]
+                        } ,
+                    ]
+                },
+                {
+                    'name':'评标专家五',
+                    'zhaunjiadata_gs':[
+                        {
+                            'zhaunjia1':["31.00",  "36.00","39.00",]
+                        } ,
+                    ]
+                },
+                {
+                    'name':'评标专家一',
+                    'zhaunjiadata_gs':[
+                        {
+                            'zhaunjia1':["32.00",  "31.00","38.00",]
+                        } ,
+                    ]
+                },
+            ],
+        }
+    }
+});
+
 // 资格审查项汇总页面table接口
 Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     let get_type_num=JSON.parse(options.body).type;
@@ -3003,9 +3607,12 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                 'bid_name': "重庆网控科技发展有限公司",
                 'tender_offer': Random.integer(100, 9999),
                 'bid_price': Random.integer(100, 9999),
-                'base_rice': Random.integer(100, 9999),
-                'bias_ratio': Random.integer(0, 100),
+                // 'base_rice': Random.integer(100, 9999),
+                // 'bias_ratio': Random.integer(0, 100),
+                'base_rice':'',
+                'bias_ratio':"",
                 'radio': 2,
+
             });
             data_msg.push({//评审汇总table
                 'id': Random.id(),
@@ -3034,6 +3641,7 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
                     'tijiao':'',
                     'bidEvaluation': msg,
+                    'scoringBasePrice':1000,//合理低价的系统计算评分基准价(报价评审弹框)
                     'review_summary': data_msg,
                     'sort_data': dataMsg,//排序
 
@@ -3207,21 +3815,24 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             'bidder': '(2)夏丰热工研究院有限公司',
                             "pricePoints":'21.00',
                             'finalScore':'12.00',
-                            "ranking":'3'
+                            "ranking":'3',
+                            'creditScoring':'9.50',
                         },
                         {
                             // 'bidderNumber': '3',
                             'bidder': '(3)普瑞太阳能有限公司',
                             "pricePoints":'49.00',
                             'finalScore':'10.00',
-                            "ranking":'2'
+                            "ranking":'2',
+                            'creditScoring':'7.00'
                         },
                         {
                             // 'bidderNumber': '1',
                             'bidder': '(1)阿里巴巴',
                             "pricePoints":'29.00',
                             'finalScore':'10.00',
-                            "ranking":'1'
+                            "ranking":'1',
+                            'creditScoring':'8.00'
                         },
                     ],
                     'pingshenweiyuanData': [
@@ -3351,29 +3962,39 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                     'viewType':get_data(70,is_tijaio),
                     'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
                     'tijiao':tijaio,//综合评标评审汇总页面是否提交
+                    'scoringBasePrice':1000,//综合评标的系统计算评分基准价(报价评审弹框)
                     'bidEvaluation': [{//计算报价得分
                         toubiaoPrice: '31,000,00',
-                        name: '夏丰热工研究院有限公司',
+                        name: '（1）夏丰热工研究院有限公司',
                         evaluationBid: '31,000,00',
-                        standardPrice:'30,000,00',
-                        beitaValue:'-10.00',
-                        scoringSystem:'52.2',
+                        // standardPrice:'30,000,00',
+                        // beitaValue:'-10.00',
+                        // scoringSystem:'52.2',
+                        standardPrice:'',
+                        beitaValue:'',
+                        scoringSystem:'',
                         score: ''
                     },{
-                        toubiaoPrice: '28,000,00 ',
-                        name: '普瑞太阳能有限公司',
+                        toubiaoPrice: '33,000,00 ',
+                        name: '（2）普瑞太阳能有限公司',
                         evaluationBid: '28,000,00',
-                        standardPrice:'30,000,00',
-                        beitaValue:'-20.00',
-                        scoringSystem:'45.2',
+                        // standardPrice:'30,000,00',
+                        // beitaValue:'-20.00',
+                        // scoringSystem:'45.2',
+                        standardPrice:'',
+                        beitaValue:'',
+                        scoringSystem:'',
                         score: ''
                     }, {
                         toubiaoPrice: '30,000,00',
-                        name: '夏风热工研究有限公司',
+                        name: '（3）夏风热工研究有限公司',
                         evaluationBid: '30,000,00',
-                        standardPrice:'30,000,00',
-                        beitaValue:'-0.00',
-                        scoringSystem:'53',
+                        // standardPrice:'30,000,00',
+                        // beitaValue:'-0.00',
+                        // scoringSystem:'53',
+                        standardPrice:'',
+                        beitaValue:'',
+                        scoringSystem:'',
                         score: ''
                     }],
                    // 'pingbiao_yijian': dataMsg,
@@ -3667,21 +4288,24 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             'bidder': '(2)夏丰热工研究院有限公司',
                             "pricePoints":'21.00',
                             'finalScore':'12.00',
-                            "ranking":'3'
+                            "ranking":'3',
+                            'creditScoring':'9.50',
                         },
                         {
                             // 'bidderNumber': '3',
                             'bidder': '(3)普瑞太阳能有限公司',
                             "pricePoints":'49.00',
                             'finalScore':'10.00',
-                            "ranking":'2'
+                            "ranking":'2',
+                            'creditScoring':'7.00'
                         },
                         {
                             // 'bidderNumber': '1',
                             'bidder': '(1)阿里巴巴',
                             "pricePoints":'29.00',
                             'finalScore':'10.00',
-                            "ranking":'1'
+                            "ranking":'1',
+                            'creditScoring':'8.00'
                         },
                     ],
                     'pingshenweiyuanData': [
@@ -3792,6 +4416,9 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
 
     }
 });
+
+
+
 
 
 //评审汇总页面报价分计算弹框提交接口
