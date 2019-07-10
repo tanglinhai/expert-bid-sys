@@ -4411,7 +4411,347 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
             }
         }
     }else if(get_type_num==70&& methodType==3){//最低价
+        let msg = [];
+        let data_msg = [];
+        let dataMsg = [];
+        let is_tijaio=Random.integer(0, 1);
+        for (let i = 0; i < Random.integer(3,8); i++) {
+            msg.push({//报价评审弹框报价计算table
+                'id': Random.id(),
+                'bid_name': "重庆网控科技发展有限公司",
+                'tender_offer': Random.integer(100, 9999),
+                'bid_price': Random.integer(100, 9999),
+                // 'base_rice': Random.integer(100, 9999),
+                // 'bias_ratio': Random.integer(0, 100),
+                'base_rice':'',
+                'bias_ratio':"",
+                'radio': 2,
 
+            });
+            data_msg.push({//评审汇总table
+                'id': Random.id(),
+                'num': Random.integer(1, 7),
+                'name': "（1）重庆网控科技发展有限公司",
+                'tender_offer': '10000.0000',
+                'total': '10000.0000',
+                'ranking': Random.integer(1, 7),
+            });
+            dataMsg.push({//排序
+                'company_name': Random.csentence(1, 10),
+                'id': Random.id(),
+                'ranking': Random.integer(1, 7),
+            });
+        }
+        return {
+            'bidMsg': {
+                id: Random.id(),
+                'name': '2019年水利运输服务招标项目',
+                'biaoNum': '0635—1909qwerN1197',
+                'baohao': '0635—1909qwerN1197/1',
+                //审查项
+                'eviewrItemsMsg': {
+                    //头部审查类型按钮
+                    'viewType':get_data(70,is_tijaio),
+                    'isShow':is_tijaio,//0：提交前那个页面显示，1:提交的页面
+                    'tijiao':'',
+                    'bidEvaluation': msg,
+                    'scoringBasePrice':1000,//合理低价的系统计算评分基准价(报价评审弹框)
+                    'review_summary': data_msg,
+                    'sort_data': dataMsg,//排序
+
+                    //没有用
+
+                    //'pingbiao_yijian': dataMsg,
+                    'jiesuoData':{//评分解锁
+                        'radioList': [{
+                            value: '1',
+                            label:'商务'
+                        },{
+                            value: '2',
+                            label:'技术'
+                        }, {
+                            value: '3',
+                            label:'服务'
+                        },{
+                            value: '4',
+                            label:'其他'
+                        } ],
+                        'checkedList': ['评审专家七', '评审专家五', '评审专家一'],
+                        "tippsDialogName":'解锁申请'//评分解锁成功提示框的name
+                    },
+                    'title_mg': ' 0635-1809 NB15/7评委会的初审类解锁申请',
+                    'unlock_dialog_check':[ {
+                        'applicantPeole': Random.cname(),
+                        'applicantTime': Random.datetime(),
+                        'unlockObject': Random.cname(),
+                        'applicantReason': '投标函格式',
+                        'assessingOfficer': Random.cname(),
+                        'assessingResult': "同意",
+                        'unlockReason': Random.csentence()
+                    },{
+
+                        'applicantPeole': Random.cname(),
+                        'applicantTime': Random.datetime(),
+                        'unlockObject': Random.cname(),
+                        'applicantReason': '投标函格式',
+                        'assessingOfficer': Random.cname(),
+                        'assessingResult': "同意",
+                        'unlockReason': Random.csentence()
+                    }],
+                    "zhaunjiaGerenMarkData":  [
+                        {
+                            'evaluationFactors': '第一章、商务(10.00分)',
+                            value1:'-',
+                            value2:'-',
+                            value3:'-',
+                            value4:'-',
+                            value5:'-',
+                            value6:'-',
+                            value7:'-',
+                            value8:'-',
+                            value9:'-',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'10.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+
+                        },
+                        {
+                            'evaluationFactors': '第二章、商务2(20.00分)',
+                            value1:'5.00',
+                            value2:'14.00 ',
+                            value3:'7.00',
+                            value4:'10.00',
+                            value5:'17.00',
+                            value6:'13.00',
+                            value7:'8.00',
+                            value8:'9.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务2(20.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(8.00分)',
+                            value1:'64.00',
+                            value2:'80.00 ',
+                            value3:'34.00',
+                            value4:'16.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'23.00',
+                            value8:'34.00',
+                            value9:'57.00',
+                        },
+                        {
+                            'evaluationFactors': '一、商务1(10.00分)(1)A(3.00分)  (2)B(4.00分) (3)C(5.00分)(4)D(10.00分) ',
+                            value1:'49.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'10.00',
+                            value5:'13.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '第三章、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'12.00',
+                            value5:'18.00',
+                            value6:'15.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '一、技术1(10.00分)',
+                            value1:'4.00',
+                            value2:'10.00 ',
+                            value3:'3.00',
+                            value4:'14.00',
+                            value5:'18.00',
+                            value6:'10.00',
+                            value7:'3.00',
+                            value8:'3.00',
+                            value9:'5.00',
+                        },
+                        {
+                            'evaluationFactors': '专家个人打分',
+                            value1:'40.00',
+                            value2:'40.00 ',
+                            value3:'38.00',
+                            value4:'15.00',
+                            value5:'17.00',
+                            value6:'18.00',
+                            value7:'33.00',
+                            value8:'37.00',
+                            value9:'53.00',
+                        },
+                    ],
+                    'companyNameData': [
+                        {
+                            'name':'张三',
+                            'companyNameList': [
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                        {
+                            'name':'王五',
+                            'companyNameList': [
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                        {
+                            'name':'李四',
+                            'companyNameList': [
+                                {"title":"重庆网控科技发展有限公司（1） "},
+                                {"title":"普瑞太阳能有限公司（2） "},
+                                {"title":"夏丰热工研究院有限公司（1） "},
+                            ]
+                        },
+                    ],
+                    'pingshenhuizongTableData': [
+                        {
+                            // 'bidderNumber': '2',
+                            'bidder': '(2)夏丰热工研究院有限公司',
+                            "pricePoints":'21.00',
+                            'finalScore':'12.00',
+                            "ranking":'3',
+                            'creditScoring':'9.50',
+                        },
+                        {
+                            // 'bidderNumber': '3',
+                            'bidder': '(3)普瑞太阳能有限公司',
+                            "pricePoints":'49.00',
+                            'finalScore':'10.00',
+                            "ranking":'2',
+                            'creditScoring':'7.00'
+                        },
+                        {
+                            // 'bidderNumber': '1',
+                            'bidder': '(1)阿里巴巴',
+                            "pricePoints":'29.00',
+                            'finalScore':'10.00',
+                            "ranking":'1',
+                            'creditScoring':'8.00'
+                        },
+                    ],
+                    'pingshenweiyuanData': [
+                        {
+                            'name':'评标专家七',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["33.00",  "31.00","38.00",]
+                                } ,
+                            ]
+                        },
+                        {
+                            'name':'评标专家五',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["31.00",  "36.00","39.00",]
+                                } ,
+                            ]
+                        },
+                        {
+                            'name':'评标专家一',
+                            'zhaunjiadata_gs':[
+                                {
+                                    'zhaunjia1':["32.00",  "31.00","38.00",]
+                                } ,
+                            ]
+                        },
+                    ],
+                    tables: [{//综合评标页面进度条数据
+                        evaluationExpert: '评审专家七',
+                        businessReviewProgress: '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress:'5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家五',
+                        businessReviewProgress:  '5',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }, {
+                        evaluationExpert: '评审专家一',
+                        businessReviewProgress:  '50',
+                        isResultsBusinessReview: '未完成',
+                        technicalReviewProgress: '5',
+                        isResultsTechnicalReview: '未完成',
+                        serviceReviewProgress: '5',
+                        isResultsServiceReview:"未完成",
+                        otherReviewProgress:'5',
+                        isResultsOtherReview:"未完成"
+                    }],
+                    'biddersScoreTitleData':[],
+                    tableData: [{
+                        dataItem: 'evaluationExpert',//评审专家（动态表头的名字绑定数据）
+                        dataName: '评审专家',//动态表头的名字
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'businessReviewProgress',
+                        dataName: '商务评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsBusinessReview',
+                        dataName: '是否提交商务评审结果',
+                        type: '1'//文字
+                    }, {
+                        dataItem: 'technicalReviewProgress',
+                        dataName: '技术评审进度',
+                        type: '2'//进度条
+                    }, {
+                        dataItem: 'isResultsTechnicalReview',
+                        dataName: '是否提交技术评审结果',
+                        type: '1'//文字
+
+                    }, {
+                        dataItem: 'serviceReviewProgress',
+                        dataName: '服务评审进度',
+                        type: '2'//进度条
+
+                    },{
+                        dataItem: 'isResultsServiceReview',
+                        dataName: '是否提交服务评审结果',
+                        type: '1'//文字
+
+                    },{
+                        dataItem: 'otherReviewProgress',
+                        dataName: '其他评审进度',
+                        type: '2'//进度条
+
+                    },{
+                        dataItem: 'isResultsOtherReview',
+                        dataName: '其他评审评审结果',
+                        type: '1'//文字
+                    }]
+                    //没有用
+                },
+            }
+        }
 
 
     }

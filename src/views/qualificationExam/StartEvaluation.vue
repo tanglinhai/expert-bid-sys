@@ -658,7 +658,8 @@
             // this.methodType = this.$route.query.methodType;
             // console.log(this.type_btn);
             // this.methodType = this.$route.query.methodType;
-            if (this.$route.query.type == undefined) {
+            console.log(this.$route.query);
+            if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
                 this.methodType = this.$route.query.methodType;
@@ -672,13 +673,12 @@
         mounted() {
             $(".positionDiv").hide();
             this.init();
-
             this.$commonJs.pdfOperations.pdf_init.call(this);
-            let a = $(".el-pagination__total").text();
-            console.log(a);
+            // let a = $(".el-pagination__total").text();
+            // console.log(a);
 
-            let num = parseInt(a.substring(1).substring(1));
-            $(".el-pagination__total").text("共"+num+"页")
+            // let num = parseInt(a.substring(1).substring(1));
+            // $(".el-pagination__total").text("共"+num+"页")
         },
         computed: {
             filter_standard() {

@@ -285,7 +285,7 @@
             }
         },
         created() {
-            // console.log(this.$route.query.methodType);
+            console.log(this.$route.query);
 
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;

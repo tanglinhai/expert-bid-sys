@@ -1283,7 +1283,8 @@
             }
         },
         created() {
-            if (this.$route.query.type == undefined) {
+            console.log(this.$route.query);
+            if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
                 this.methodType = this.$route.query.methodType;
@@ -1476,7 +1477,7 @@
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
                         this.allRaioNum = this.dingdang_tableData.length * this.companyname_toubiao.length;
                         this.is_submit = res.data.bidMsg.type;
-                        console.log(res.data.bidMsg.type);
+                        // console.log(res.data.bidMsg.type);
                         if (res.data.bidMsg.type === 0) {
                             this.$store.state.failureEnery.business_tijiao = true;//未提交
                         } else {

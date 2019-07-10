@@ -97,11 +97,6 @@
                         </template>
                     </el-col>
                 </el-row>
-
-
-
-
-
                 <!--综合评标-->
                 <el-row class="center_part" v-if="methodType==2">
                     <div v-if="isShowProgressPage==0">
@@ -222,7 +217,74 @@
                     </div>
                 </el-row>
                 <!--最低价-->
-                <!--<el-row class="center_part" v-if="methodType==3"></el-row>-->
+                <el-row class="center_part" v-if="methodType==3">
+                    <!--最低价没有进度条的页面-->
+                    <el-col :span="24">
+                        <template>
+                            <div class="unlock_table-warp fs14">
+                                <el-row>
+                                    <el-col :span="12">
+                                        <div class="grid-content bg-purple-dark  pro_msg_div textAlignL mb20">
+                                            <h5 class="commonTitle col348fe2" style="margin-top: 7px">评审汇总</h5>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="12" class="textAlignR btns"
+                                            v-if="!this.$store.state.failureEnery.is_pingshen_show">
+                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')"
+                                                   :loading="myloading"> 提交
+                                        </el-button>
+                                        <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
+                                        </el-button>
+                                        <!--<el-button type="primary" size="small" @click="pingbiaoAdvice">-->
+                                        <!--<i class=" icon iconfont  icon-yijian mr3"></i>评标意见-->
+                                        <!--</el-button>-->
+
+                                    </el-col>
+                                    <el-col :span="12" class="textAlignR mian_btns" v-else>
+                                        <el-button @click="submited_goback" type="primary" size="small"
+                                                   :loading="myloading_back">返回
+                                        </el-button>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-table
+                                            :data="tableData"
+                                            border
+                                            style="width:100%">
+                                        <el-table-column
+                                                prop="name"
+                                                label="投标人">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="tender_offer"
+                                                label="投标报价(人民币)">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="total"
+                                                label="评标价(人名币)">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="ranking"
+                                                label="排名">
+                                        </el-table-column>
+                                    </el-table>
+                                </el-row>
+
+                                <el-row class="mt15">
+                                    <el-col :span="18">
+                                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="200px"
+                                                 class="demo-ruleForm">
+                                            <el-form-item label="评标意见 (2000字之内)：" prop="desc">
+                                                <el-input type="textarea" v-model="ruleForm.desc" ref="textarea_input"
+                                                          :disabled="is_disabled"></el-input>
+                                            </el-form-item>
+                                        </el-form>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                        </template>
+                    </el-col>
+                </el-row>
             </div>
             <!----------------------投标人排序调整--------------------->
             <el-dialog
@@ -821,8 +883,9 @@
             }
         },
         created() {
-            if (this.$route.query.type == undefined) {
-                this.methodType = 2;
+            console.log(this.$route.query.methodType,5,this.$route.query.type);
+            if (this.$route.query.methodType == undefined) {
+                this.methodType = 1;
             } else {
                 this.methodType = this.$route.query.methodType;
             }
@@ -833,6 +896,7 @@
             }
         },
         mounted() {
+
             this.init();
         },
         computed: {},
@@ -844,6 +908,7 @@
                     methodType: this.methodType
                 }).then(res => {
                     if (res.status === 200) {
+                        // console.log(res.data)
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
@@ -888,6 +953,14 @@
                                 this.is_disabledZH=true;
                             } else {
                                 this.$store.state.failureEnery.is_pingshen_show = false;
+                            }
+                        }else if(this.methodType == 3){
+                            if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//0：提交前那个页面显示，1:提交前的页面
+                                this.$store.state.failureEnery.is_pingshen_show = false;
+                            } else {
+                                this.$store.state.failureEnery.is_pingshen_show = true;
+                                this.is_disabled = true;
+                                this.ruleForm.desc = '2';
                             }
                         }
                     }
