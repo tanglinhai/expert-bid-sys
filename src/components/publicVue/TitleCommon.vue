@@ -22,7 +22,7 @@
                         <el-dropdown-item command="c">查看招标文件</el-dropdown-item>
                         <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                         <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
-                        <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                        <el-dropdown-item command="f">资格审查签字</el-dropdown-item>
                         <el-dropdown-item command="g">调整评标基准价</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
