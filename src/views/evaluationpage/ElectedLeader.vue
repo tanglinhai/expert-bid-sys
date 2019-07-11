@@ -225,8 +225,9 @@
                 this.$store.state.navCommon.types=this.$route.query.types;
                 console.log(this.$store.state.navCommon.types,6)
             }
+            console.log(this.$route.query, '000');
             //this.val=this.$route.query.methodType;
-            if (this.$route.query.type == undefined) {
+            if (this.$route.query.methodType == undefined) {
                 this.val= 1;
             } else {
                 this.val=this.$route.query.methodType;

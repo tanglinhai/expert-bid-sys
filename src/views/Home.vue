@@ -205,7 +205,7 @@ export default {
       if (newVal === '/index/LetterCommitment') {
         //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
-        console.log("9999")
+        // console.log("9999")
       }
       if (newVal === '/index/AllInformation') {
         //console.log(this.$route.query.types,666);

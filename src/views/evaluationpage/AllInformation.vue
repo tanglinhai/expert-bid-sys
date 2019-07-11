@@ -174,18 +174,16 @@
             }
         },
         created() {
-            // console.log(this.$route.query.types,999)
+            console.log(this.$route.query,999)
             //this.number=this.$route.query.types
             this.$store.state.navCommon.types=this.$route.query.types;
              console.log(this.$route.query.methodType,5)
             //this.val=this.$route.query.methodType;
-            if (this.$route.query.type == undefined) {
+            if (this.$route.query.methodType == undefined) {
                 this.val= 1;
             } else {
                 this.val=this.$route.query.methodType;
             }
-
-
         },
         mounted(){
             

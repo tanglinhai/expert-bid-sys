@@ -72,7 +72,7 @@
                                         <el-col style="width:20%" class="btns_div">
                                             <el-col :span="11" class="begin_bidding" style="text-align: right">
                                                 <el-button size="small" class="btnBg"     @click="beginPingbiao(item.methodType)" >
-                                                    <i  class="icon iconfont icon-kaishi mr3"></i>开始评标
+                                                    <i  class="icon iconfont icon-kaishi mr3"></i>开始评标{{item.methodType}}
                                                 </el-button>
                                             </el-col>
                                         </el-col>
@@ -137,6 +137,7 @@
                 this.childMsg();
             },
             beginPingbiao(val){
+                console.log(val);
                 this.$router.push(`/index/LetterCommitment?methodType=${val}`);
             },
             childMsg() {
