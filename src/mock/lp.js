@@ -524,6 +524,17 @@ function get_data(currentPage,is_submit_type,types) {//type
     ]
 }
 
+//头部项目信息接口
+Mock.mock('/api/getProjectInformation','get',{
+    ProjectInformationsAll:{
+        projectName:'单信封-0305-1',
+        projectNumber:'0635-1909qwerN1133',
+        projectWenjian:'招标文件(pdf)',
+        PersonName:'张三'
+    },
+});
+//头部项目信息接口
+
 //公共导航接口
 Mock.mock('/api/navcommons','post',(options) =>{
     let CommonsData;
@@ -532,12 +543,12 @@ Mock.mock('/api/navcommons','post',(options) =>{
     let types=JSON.parse(options.body).types;
     // console.log(currentpage,is_submit_type,888888);
     CommonsData={
-        ProjectInformationsAll:{
-            projectName:'单信封-0305-1',
-            projectNumber:'0635-1909qwerN1133',
-            projectWenjian:'招标文件(pdf)',
-            PersonName:'张三'
-        },
+        // ProjectInformationsAll:{
+        //     projectName:'单信封-0305-1',
+        //     projectNumber:'0635-1909qwerN1133',
+        //     projectWenjian:'招标文件(pdf)',
+        //     PersonName:'张三'
+        // },
         navsAll:get_data(currentpage,is_submit_type,types),
     };
     return CommonsData;
