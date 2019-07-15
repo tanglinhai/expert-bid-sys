@@ -86,27 +86,27 @@
                  });
             },
 
-            navcommonsListFun(){
-                this.pageloadding=true;
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                            //$("#1").addClass("backblue");
-                        })
-                        this.pageloadding=false;
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.pageloadding=true;
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                 //$("#1").addClass("backblue");
+            //             })
+            //             this.pageloadding=false;
+            //         }
+            //     })
+            // },
 
             AgreeXieYi(){  //同意按钮
                 this.BtnLoading=true,
                 this.$axios.post('/api/agreeBtn','post',{
-
+                    //projectId:id,
                 }).then(res=>{
                     if(res.status == 200){
                         this.BtnLoading=false,

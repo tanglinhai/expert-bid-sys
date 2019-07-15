@@ -237,8 +237,18 @@ export default {
     //     _this.navcommonsListFun(); //定时器导航接口
     //     console.log("哈哈哈哈")
     // },5000)
+    this.getProjectInformation();
   },
   methods:{
+    //头部项目信息接口
+    getProjectInformation(){
+      this.$axios.get('/api/getProjectInformation',{
+        projectId:1,
+      }).then(res=>{
+        console.log(res,888888888)
+        this.ProjectInformationsAll=res.data.ProjectInformationsAll;
+      })
+    },
     navcommonsListFun(){
         var leaderOrExpert = eval('(' + window.sessionStorage.getItem('user') + ')');
         // console.log(leaderOrExpert);
@@ -265,7 +275,6 @@ export default {
              if(res.status == 200){
                  //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
                  this.navcommonsList=res.data.navsAll; 
-                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                  this.pageloadding=false;
                  this.CommonLeftNavsLoading=false;
              }
