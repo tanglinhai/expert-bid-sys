@@ -25,7 +25,7 @@
                 </el-col>
             </el-row>
             <div class="mainContentWarp lineAll" v-loading="page_loading">
-                <NavBar :msg="options" :methodType="methodType"></NavBar>
+                <!--<NavBar :msg="options" :methodType="methodType"></NavBar>-->
                 <!--1:合理低价；2：综合评标；3：最低价-->
                 <el-row class="center_part" v-if="methodType==1">
                     <!--合理低价没有进度条的页面-->
@@ -230,7 +230,7 @@
                                     </el-col>
                                     <el-col :span="12" class="textAlignR btns"
                                             v-if="!this.$store.state.failureEnery.is_pingshen_show">
-                                        <el-button type="primary" size="small" @click="submit_btn('ruleForm')"
+                                        <el-button type="primary" size="small" @click="submit_btn_zdj('ruleForm')"
                                                    :loading="myloading"> 提交
                                         </el-button>
                                         <el-button type="primary" size="small" class="sort_btn" @click="sort_btn">排序
@@ -439,13 +439,13 @@
                                               :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
             </el-dialog>
             <!--标中质询弹框-->
-            <el-dialog
-                    title="审查提示"
-                    :visible.sync="$store.state.failureEnery.submitPrompt"
-                    width="700px">
+            <!--<el-dialog-->
+                    <!--title="审查提示"-->
+                    <!--:visible.sync="$store.state.failureEnery.submitPrompt"-->
+                    <!--width="700px">-->
 
-                <SubmitPrompt></SubmitPrompt>
-            </el-dialog>
+                <!--<SubmitPrompt></SubmitPrompt>-->
+            <!--</el-dialog>-->
             <el-dialog
                     title="评分解锁申请"
                     :visible.sync="dialogFormVisible"
@@ -889,14 +889,13 @@
             } else {
                 this.methodType = this.$route.query.methodType;
             }
-            if (this.$route.query.type == undefined) {
-                this.type = 70;
+            if (this.$route.query.currentpage == undefined) {
+                this.type = 14;
             } else {
-                this.type = this.$route.query.type;
+                this.type = this.$route.query.currentpage;
             }
         },
         mounted() {
-
             this.init();
         },
         computed: {},
@@ -904,8 +903,9 @@
             init() {   //初始化 table的数据
                 this.page_loading = true;
                 this.$axios.post('/api/pingshen_huizong', {
-                    type: this.type,
-                    methodType: this.methodType
+                    currentPage: this.type,
+                    methodType: this.methodType ,
+                    is_submit_type: this.$route.query.is_submit_type
                 }).then(res => {
                     if (res.status === 200) {
                         // console.log(res.data)
@@ -913,7 +913,7 @@
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];
-                        this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                        // this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.scoreQuotationData = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;
                         this.msg_data = res.data.bidMsg.eviewrItemsMsg.bidEvaluation;//报价计算
                         this.scoringBasePrice_hldj=res.data.bidMsg.eviewrItemsMsg.scoringBasePrice;//合理低价的系统计算评分基准价
@@ -1007,6 +1007,40 @@
             sonToFather(val) {  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
             },
+            submit_btn_zdj(formName){
+                this.myloading = true;
+                this.$axios.post('/api/pshz_tijiao_zdj', 'post', {
+                    type: this.$route.query.type,
+                    data: this.ruleForm.desc
+                }).then(res => {
+                    if (res.status == 200) {
+                        // this.options = res.data.vue_type;
+                        if (this.ruleForm.desc != '') {
+                            this.$message({
+                                message: '提交成功！',
+                                type: 'success'
+                            });
+                            this.$store.state.failureEnery.is_pingshen_show = true;
+                            this.is_disabled = true;
+                            this.myloading = false;
+                            window.location.href="/elect/ReviewSummary?methodType="+this.methodType+"&currentpage="+ this.type +'&is_submit_type=1';
+                        } else {
+                            this.$alert('评标意见不能为空！', '提示', {
+                                confirmButtonText: '确定',
+                                callback: action => {
+                                    this.myloading = false;
+                                }
+                            });
+                        }
+                    } else {
+                        return false;
+                    }
+                })
+                // } else {
+                //     return false;
+                // }
+                // });
+            },
             /*------------------------合理低价评审汇总-----------------*/
             submit_btn(formName) {//提交
                 // this.$refs[formName].validate((valid) => {
@@ -1017,7 +1051,7 @@
                     data: this.ruleForm.desc
                 }).then(res => {
                     if (res.status == 200) {
-                        this.options = res.data.vue_type;
+                        // this.options = res.data.vue_type;
                         this.msg_data.forEach((m, i) => {
                             if (m.radio == 1) {
                                 this.a.push(m.radio)
@@ -1031,6 +1065,7 @@
                             this.$store.state.failureEnery.is_pingshen_show = true;
                             this.is_disabled = true;
                             this.myloading = false;
+                            window.location.href="/elect/ReviewSummary?methodType="+this.methodType+"&currentpage="+ this.type +'&is_submit_type=1';
                         } else {
                             this.$alert('请先点击页面【报价审核页面】按钮，设置投标人是否有效，且评标意见不能为空！', '提示', {
                                 confirmButtonText: '确定',
@@ -1557,11 +1592,11 @@
                                     message: '评分汇总提交成功!'
                                 });
                                 this.is_disabledZH = true;
+                                window.location.href="/elect/ReviewSummary?methodType="+this.methodType+"&currentpage="+ this.type +'&is_submit_type=1';
                             }
                         });
                     }
                 }).catch(() => {
-
                     this.$message({
                         type: 'info',
                         message: '已取消评分汇总提交'

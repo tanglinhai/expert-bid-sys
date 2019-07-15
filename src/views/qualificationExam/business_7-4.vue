@@ -128,21 +128,21 @@
                                                 </el-col>
                                                 <el-col style="width: 278px">
                                                     <el-progress :percentage="completePercent"
-                                                                 v-if="type==8"></el-progress>
+                                                                 v-if="type==14"></el-progress>
                                                     <span style="position: absolute; left: 300px; top: 0px;"
-                                                          v-if="type==8">{{num_business}}/{{allNumBusiness}}</span>
+                                                          v-if="type==14">{{num_business}}/{{allNumBusiness}}</span>
                                                     <el-progress :percentage="completePercent"
-                                                                 v-if="type==9"></el-progress>
+                                                                 v-if="type==14"></el-progress>
                                                     <span style="position: absolute; left: 300px; top: 0px;"
-                                                          v-if="type==9">{{num_jishu}}/{{allNumJishu}}</span>
+                                                          v-if="type==14">{{num_jishu}}/{{allNumJishu}}</span>
                                                     <el-progress :percentage="completePercent"
-                                                                 v-if="type==10"></el-progress>
+                                                                 v-if="type==14"></el-progress>
                                                     <span style="position: absolute; left: 300px; top: 0px;"
-                                                          v-if="type==10">{{num_serve}}/{{allNumServe}}</span>
+                                                          v-if="type==14">{{num_serve}}/{{allNumServe}}</span>
                                                     <el-progress :percentage="completePercent"
-                                                                 v-if="type==11"></el-progress>
+                                                                 v-if="type==14"></el-progress>
                                                     <span style="position: absolute; left: 300px; top: 0px;"
-                                                          v-if="type==11">{{num_other}}/{{allNumOther}}</span>
+                                                          v-if="type==14">{{num_other}}/{{allNumOther}}</span>
                                                 </el-col>
                                             </el-row>
                                         </el-col>
@@ -156,22 +156,22 @@
                                                            <i class=" icon iconfont icon-weiwancheng "></i> 查看未完成项
                                                     </el-button>
                                                        <el-button size="small" @click="submitBusiness" type="primary"
-                                                                  class="submit_business" v-if="type==8">
+                                                                  class="submit_business" v-if="type==14">
                                                          <i class=" icon iconfont icon-shangwu "></i>
                                                         提交商务
                                                     </el-button>
                                                     <el-button size="small" @click="submitJishu" type="primary"
-                                                               class="submit_business" v-if="type==9">
+                                                               class="submit_business" v-if="type==14">
                                                         <i class=" icon iconfont icon-tijiao1 mr3"></i>
                                                         提交技术
                                                     </el-button>
                                                     <el-button size="small" @click="submitServe" type="primary"
-                                                               class="submit_business" v-if="type==10">
+                                                               class="submit_business" v-if="type==14">
                                                           <i class="icon iconfont icon-baocun "></i>
                                                         提交服务
                                                     </el-button>
                                                      <el-button size="small" @click="submitOther" type="primary"
-                                                                class="submit_business" v-if="type==11">
+                                                                class="submit_business" v-if="type==14">
                                                          <i class="icon iconfont icon-baocun "></i>
                                                         提交其他
                                                     </el-button>
@@ -197,7 +197,7 @@
                                                 <el-table-column label="投标人">
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="400" :key="index" v-if="type==8"
+                                                                     min-width="400" :key="index" v-if="type==14"
                                                                      :column-key="index + 1" >
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
@@ -401,7 +401,7 @@
                                                     </el-table-column>
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="400" :key="index" v-if="type==9"
+                                                                     min-width="400" :key="index" v-if="type==14"
                                                                      :column-key="index + 1">
                                                         <template slot="header" slot-scope="scope"
                                                                   :column-key="index + 1">
@@ -593,7 +593,7 @@
 
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="400" :key="index" v-if="type==10"
+                                                                     min-width="400" :key="index" v-if="type==14"
                                                                      :column-key="index + 1">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"
@@ -784,7 +784,7 @@
                                                     <!--其他-->
                                                     <el-table-column :label="item.title"
                                                                      v-for="(item,index ) in companyname_toubiao"
-                                                                     min-width="400" :key="index" v-if=" type==11"
+                                                                     min-width="400" :key="index" v-if=" type==14"
                                                                      :column-key="index + 1">
                                                         <template slot="header" slot-scope="scope">
                                                             <a v-if="companyname_toubiao[scope.$index].pdf.length<2"

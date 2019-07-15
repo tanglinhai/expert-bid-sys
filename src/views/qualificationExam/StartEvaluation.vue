@@ -34,7 +34,7 @@
                         size="mini"
                         @click="enterFullMode"
                     >进入全屏模式</el-button> -->
-                <NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>
+                <!--<NavBar :msg="options" :type="type_btn" :methodType="methodType"></NavBar>-->
                 <div class="content">
                     <div class="div_pdf">
                         <div class="div_pdf_wrap cf">
@@ -293,16 +293,6 @@
                                         </div>
                                         <!--分页-->
                                         <div class="pageBox">
-                                            <!--<el-pagination-->
-                                                    <!--:hide-on-single-page="value_page"-->
-                                                    <!--@size-change="handleSizeChange"-->
-                                                    <!--@current-change="handleCurrentChange"-->
-                                                    <!--:current-page="currentPage"-->
-                                                    <!--:page-sizes="[1, 2, 3, 4]"-->
-                                                    <!--:page-size="100"-->
-                                                    <!--layout="total, sizes, prev, pager, next, jumper"-->
-                                                    <!--:total="400">-->
-                                            <!--</el-pagination>-->
                                             <el-pagination
                                                     @size-change="handleSizeChange"
                                                     @current-change="handleCurrentChange"
@@ -311,9 +301,9 @@
                                                     layout="total, prev, pager, next"
                                                     :total="1000">
                                             </el-pagination>
-                                            <!--page-size	每页显示条目个数，支持 .sync 修饰符-->
-                                            <!--page-sizes	每页显示个数选择器的选项设置	number[]	—	[10, 20, 30, 40, 50, 100]-->
                                         </div>
+                                        <!--page-size	每页显示条目个数，支持 .sync 修饰符-->
+                                        <!--page-sizes	每页显示个数选择器的选项设置	number[]	—	[10, 20, 30, 40, 50, 100]-->
                                     </div>
                                 </div>
                             </div>
@@ -353,8 +343,9 @@
                     :visible.sync="$store.state.failureEnery.submitPrompt"
                     width="700px"
             >
-                <SubmitPrompt :name="to_submit_prompt_name" :pro_num="completePercent"
-                              :baohao="to_submit_prompt_baohao"></SubmitPrompt>
+                <SubmitPrompt :name="to_submit_prompt_name" :pro_num="completePercent" :methodType="methodType"
+                              :baohao="to_submit_prompt_baohao"  :type_btn="type_btn" :allSubmitBtnLoading="allSubmitBtnLoading"></SubmitPrompt>
+                <!--:urlPage="urlPageToSubmitprompt"-->
             </el-dialog>
             <!--废标弹框-->
             <!-- <el-dialog
@@ -463,7 +454,7 @@
 <script>
     import TitleCommon from '../../components/publicVue/TitleCommon';  //标题组件
     import SubmitPrompt from '../../components/publicVue/SubmitPrompt';//审查提示
-    import NavBar from '../../components/publicVue/NavBar';// 导航
+    // import NavBar from '../../components/publicVue/NavBar';// 导航
     // import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     // import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     // import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
@@ -474,7 +465,7 @@
         components: {
             TitleCommon, //标题组件
             SubmitPrompt,
-            NavBar,
+            // NavBar,
             // AbandonedTender,//废标
             // ChangePrice,//调整评标基准价
             // StandardChallengeInformation,
@@ -494,7 +485,7 @@
                 name: "",//标包名称
                 biaoNum: '',
                 baohao: '',
-                options: [],//头部按钮
+                // options: [],//头部按钮
                 /* -------头部包信息end-----*/
                 /*-------------------左侧背景部分数据------------------*/
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
@@ -539,13 +530,6 @@
                     ]
                 },
                 failureEntryDialog: false,//不合格录入弹框
-                // determineOperatingDialog: false,//点击全部选中提示弹框\
-// <<<<<<< HEAD
-//                 num_pro: 0,
-//                 allNumPro: 0,
-//                 ChangedialogVisible: false,  //调整评标价弹框
-//                 TkOneloading: true,
-//                 ChangePriceTk: [],  //投标人最新报价列表弹框里面表格得数据
                 options_select: [{//通过下拉菜单的投标人个数展示投标人
                     value: '1',
                     label: '1'
@@ -643,34 +627,38 @@
                  },
                 ],
                 value1: [],//通过下拉菜单的多选展示投标人多选数组
-                arrayFind: [],
-
-// =======
+                arrayFind: [],//多选数组
                 num_pro:0,
                 allNumPro:0,
-                // ChangedialogVisible:false,  //调整评标价弹框
-                // TkOneloading:true,
-                // ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
-// >>>>>>> 43d4e2775fdaa345e068aa74799638332c0c405a
+                // urlPageToSubmitprompt:""
             }
         },
         created() {
             // this.methodType = this.$route.query.methodType;
             // console.log(this.type_btn);
             // this.methodType = this.$route.query.methodType;
-            console.log(this.$route.query);
+            console.log(this.$route.query,'0000');
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
                 this.methodType = this.$route.query.methodType;
             }
-            if (this.$route.query.type == undefined) {
-                this.type_btn = 1;
+            if ( this.$route.query.currentpage== undefined) {
+                this.type_btn = 4;
             } else {
-                this.type_btn = this.$route.query.type;
+                this.type_btn = this.$route.query.currentpage;
             }
+            console.log(this.type_btn,this.$route.query.currentpage,9999999999);
+        },
+        watch: {
+            // '$route.path': function (newVal, oldVal) {
+            //   if(newVal === '/elect/StartEvaluation'){
+            //      this.urlPageToSubmitprompt='StartEvaluation'
+            //   }
+            // }
         },
         mounted() {
+            console.log(this.type_btn,'当前的值');
             $(".positionDiv").hide();
             this.init();
             this.$commonJs.pdfOperations.pdf_init.call(this);
@@ -679,6 +667,9 @@
 
             // let num = parseInt(a.substring(1).substring(1));
             // $(".el-pagination__total").text("共"+num+"页")
+            if(this.$route.query.is_submit_type==1){
+                $("#hide_btn").hide();
+            }
         },
         computed: {
             filter_standard() {
@@ -741,8 +732,10 @@
                 return JSON.parse(obj);
             },
             init() {
+                // console.log(this.type_btn,this.$route.query.is_submit_type,'初始化');
                 this.page_loading = true;
-                this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                // this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                     if (res.status === 200) {
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
@@ -755,106 +748,39 @@
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
-                        if (res.data.bidMsg.type === 0) {
-                            this.$store.state.failureEnery.flag = true;//未提交
-                        } else {
-                            this.$store.state.failureEnery.flag = false;//已提交
-                            $("#hide_btn").hide();
+                        // console.log(this.$route.query.is_submit_type, '9999');//this.$route.query.is_submit_type:0是有radio的页面，his.$route.query.is_submit_type:1；是提交完成的页面
+                        if(this.$route.query.is_submit_type!=undefined||this.$route.query.is_submit_type!=null){//为提交(如果没有is_submit_type没有传值就随机，反之则为传的值)
+                            if (this.$route.query.is_submit_type== 0) {
+                                this.$store.state.failureEnery.flag = true;//未提交
+                            } else {
+                                this.$store.state.failureEnery.flag = false;//已提交
+                                $("#hide_btn").hide();
+                            }
+                        }else{
+                            if(res.data.bidMsg.type===0){
+                                this.$store.state.failureEnery.flag = true;//未提交
+                            }else {
+                                this.$store.state.failureEnery.flag = false;//已提交
+                                $("#hide_btn").hide();
+                            }
                         }
+
+                        // if (res.data.bidMsg.type === 0) {
+                        //     this.$store.state.failureEnery.flag = true;//未提交
+                        // } else {
+                        //     this.$store.state.failureEnery.flag = false;//已提交
+                        //     $("#hide_btn").hide();
+                        // }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
-                        console.log(this.companyname_toubiao.length,'333');
+                        // console.log(this.companyname_toubiao.length,'333');
                     }
                     this.page_loading = false;
                 })
             },
-// <<<<<<< HEAD
-//             handleCommand(val) {//弹框群
-//                 if (val === 'a') {//人员信息
-//                     this.dialogAbandonedTender = true;
-//                 } else if (val === 'b') {//交通费标准
-//                     this.dialogStandardChallengeInformation = true;
-//                     this.bzzxLoading = true;
-//                     this.$axios.post('/api/StandardChallengeList', {}).then(res => {
-//                         if (res.status == 200) {
-//                             this.cities = res.data.cityOptions;
-//                             this.tableDataTwo = res.data.standList;
-//                             this.bzzxLoading = false;
-//                         }
-//                     })
-//                 } else if (val === 'c') {//报销汇总表
-//                     window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-//                 } else if (val === 'd') {//报销汇总表-财政
-//                     window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-//                 } else if (val === 'e') {//报销情况查询-财政
-//                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-//                 } else if (val === 'f') {//点击修改密码
-//                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-//                 } else if (val === 'g') {//调整评标基准价
-//                     //调整评标价点击事件
-//                     this.ChangedialogVisible = true;
-//                     this.TkOneloading = true;
-//                     //console.log(row.id)
-//                     //调整评标价点击弹框传值到子页面
-//                     this.$axios.post('/api/NewChangePrice', {
-//                         //id:row.id,   //点击得id
-//                     }).then(res => {
-//                         if (res.status == 200) {
-//                             //console.log(res.data,99999)
-//                             this.ChangePriceTk = res.data.msgBox;
-//                             this.TkOneloading = false;
-//                         }
-//                     })
-//                 }
-//             },
             sonToFather(val) {  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
             },
-// =======
-            // handleCommand(val) {//弹框群
-            //     if (val === 'a') {//人员信息
-            //         this.dialogAbandonedTender = true;
-            //     } else if (val === 'b') {//交通费标准
-            //         this.dialogStandardChallengeInformation = true;
-            //         this.bzzxLoading = true;
-            //         this.$axios.post('/api/StandardChallengeList', {}).then(res => {
-            //             if (res.status == 200) {
-            //                 this.cities = res.data.cityOptions;
-            //                 this.tableDataTwo = res.data.standList;
-            //                 this.bzzxLoading = false;
-            //             }
-            //         })
-            //     } else if (val === 'c') {//报销汇总表
-            //         window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-            //     } else if (val === 'd') {//报销汇总表-财政
-            //         window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
-            //     } else if (val === 'e') {//报销情况查询-财政
-            //         window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-            //     } else if (val === 'f') {//点击修改密码
-            //         window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
-            //     } else if (val === 'g') {//调整评标基准价
-            //         //调整评标价点击事件
-            //         this.ChangedialogVisible = true;
-            //         this.TkOneloading=true;
-            //         //console.log(row.id)
-            //         //调整评标价点击弹框传值到子页面
-            //         this.$axios.post('/api/NewChangePrice',{
-            //             //id:row.id,   //点击得id
-            //         }).then(res=>{
-            //             if(res.status == 200){
-            //                 //console.log(res.data,99999)
-            //             this.ChangePriceTk=res.data.msgBox;
-            //             this.TkOneloading=false;
-            //             }
-            //         })
-            //     }
-            // },
-            // sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
-            //     this.ChangedialogVisible = val;
-            //     console.log("1111111111111")
-            // },
-// >>>>>>> 43d4e2775fdaa345e068aa74799638332c0c405a
-
 
             /*----------------- pdf start ----------------------*/
 
@@ -947,33 +873,42 @@
                 });
             },
             allSubmit() {//父级提交
-                this.allSubmitBtnLoading = true;
+                // this.allSubmitBtnLoading = true;
                 this.$store.state.failureEnery.submitPrompt = true;
-                let url;
-                if (this.type_btn == 3) {
-                    url = '/api/alltijiao_fhx';
-                } else if (this.type_btn == 1) {
-                    url = '/api/alltijiao';
-                }
-                else if (this.type_btn == 5) {
-                    url = '/api/alltijiao_xxjs';
-                }
-                let _this = this;
+                // let url;
+                // if (this.type_btn == 3) {
+                //     url = '/api/alltijiao_fhx';
+                // } else if (this.type_btn == 1) {
+                //     url = '/api/alltijiao';
+                // }
+                // else if (this.type_btn == 5) {
+                //     url = '/api/alltijiao_xxjs';
+                // }
 
-                setTimeout(function () {
-                    _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1,}).then(res => {
-                        console.log(parseInt(_this.type_btn) + 1);
-                        if (res.status == 200) {
-                            // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
-                            _this.allSubmitBtnLoading = false;
-                            _this.options = res.data.vue_type;
-                            console.log(_this.options);
-                        } else {
-                            _this.allSubmitBtnLoading = false;
-                        }
-                    })
-                }, 2000)
-
+                // if (this.type_btn == 6) {
+                //     url = '/api/alltijiao_fhx';
+                // } else if (this.type_btn == 4) {
+                //     url = '/api/alltijiao';
+                // }
+                // else if (this.type_btn == 8) {
+                //     url = '/api/alltijiao_xxjs';
+                // }
+                // let _this = this;
+                //
+                // setTimeout(function () {
+                //     _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1,}).then(res => {
+                //         console.log(parseInt(_this.type_btn) + 1,'0000');
+                //         if (res.status == 200) {
+                //             window.location.href="/elect/StartEvaluation?methodType="+_this.methodType+"&currentpage="+ _this.type_btn +'&is_submit_type=1';
+                //             // this.$router.push('/elect/StartEvaluation?is_submit_type=1');
+                //             _this.allSubmitBtnLoading = false;
+                //             // _this.options = res.data.vue_type;
+                //             // console.log(_this.options);
+                //         } else {
+                //             _this.allSubmitBtnLoading = true;
+                //         }
+                //     })
+                // }, 2000)
             },
             // rebackAllChecked() {//取消全选
             //     this.determineOperatingDialog = false;
@@ -1030,7 +965,7 @@
                             }
                         })
                     } else {
-                        console.log('error submit!!');
+                        // console.log('error submit!!');
                         return false;
                     }
                 });
@@ -1046,7 +981,7 @@
             changeValue() {//切换页面选择投标人数量
                 if(this.value!=''||this.value!=undefined||this.value!=null){
                     this.page_loading = true;
-                    this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                    this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                         if (res.status === 200) {
                             this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
                             this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList.slice(0, Number(this.value));
@@ -1056,19 +991,17 @@
                 }else{
                     this.init();
                 }
-
             },
             clearSelect(){//当下拉框的投标人为空时，显示全部数据（多选的时候也是一样）
                 this.init();
             },
             changeValueChoose(callback, vc) {//只有回调参数为false时才触发 ctx.getAreaListDataSearch(vc,1)这个函数;
-                console.log(this.value1);
-
+                // console.log(this.value1);
                 if (!callback) {
                     if(this.value1.length!=0){
                         this.arrayFind = this.value1;
                         this.page_loading = true;
-                        this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                        this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                             if (res.status === 200) {
                                 let arr = [];
                                 this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
@@ -1086,12 +1019,12 @@
                 }
             },
             removeTag() {//多选下拉的删除操作
-                console.log(this.value1);
+                // console.log(this.value1);
                 if(this.value1.length==0){
                   this.init();
                 }else{
                     this.page_loading = true;
-                    this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
+                    this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                         if (res.status === 200) {
                             let arr = [];
                             this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
@@ -1112,7 +1045,7 @@
                 this.pageLoading = true;
                 this.init();
             },
-                /*-------------资格审查end-------------------------*/
+          /*-------------资格审查end-------------------------*/
         }
     }
 </script>
@@ -1125,11 +1058,9 @@
             margin-left: 7px;
         }
     }
-
     /*.hide_div {*/
     /*display: none;*/
     /*}*/
-
     /*.nohide_div {*/
     /*display: block;*/
     /*}*/

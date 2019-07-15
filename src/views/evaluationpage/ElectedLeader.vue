@@ -47,7 +47,7 @@
                             <el-button size="small" type="primary" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template> -->
                         <template v-if="projectTableData.status==2">
-                            <el-button  size="small" type="primary" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
+                            <el-button  size="small" type="primary" @click="goto('/elect/StartEvaluation?is_submit_type=0&currentpage=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button  size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
@@ -273,7 +273,8 @@
                         this.BtnLoading=false;
                         this.$router.push({
                             // path: '/elect/StartEvaluation?types=4',
-                            path: '/elect/StartEvaluation?types=4&methodType='+this.val,
+                            // path: '/elect/StartEvaluation?types=4&methodType='+this.val,
+                            path: '/elect/StartEvaluation?is_submit_type=0&currentpage=4&methodType='+this.val,
                         })
                     }
                 })

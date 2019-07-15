@@ -25,7 +25,7 @@
                 </el-col>
             </el-row>
             <div class="mainContentWarp lineAll" v-loading="page_loading">
-                <NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>
+                <!--<NavBar :msg="options" :type="type" :methodType="methodType"></NavBar>-->
                 <el-row class="center_part">
                     <el-col :span="24">
                         <template>
@@ -57,7 +57,7 @@
                                     <el-col :span="12" class="mb10">
                                         <div class="grid-content bg-purple btnBox" style="text-align:right;">
                                         <span class="hide_div">
-                                            <el-button size="small" type="primary"
+                                            <el-button size="small" type="primary" class="submit_btn"
                                                                           @click="submit" :loading="submit_huizong"><i class=" icon iconfont icon-tijiao2 mr3"></i>提交</el-button>
                                             <el-button size="small" type="primary" plain
                                                        @click="individualTrial"> <i class="icon iconfont icon-zigeshenchazhuti mr3"></i>查看个人资格审查项表</el-button>
@@ -66,7 +66,7 @@
                                                 <i class=" icon iconfont icon-chakanjilu mr3"></i>
                                                 查看资格审查项解锁记录
                                             </el-button>
-                                            <span class="show_div" style="display: none;margin-left: 10px">
+                                            <span class="show_div" style="margin-left: 10px">
                                                 <el-button size="small" type="primary" plain  @click="quaUnlockApplication">
                                                     <i class=" icon iconfont icon-jiesuo1 mr3"></i>资格审查项解锁
                                                 </el-button>
@@ -254,7 +254,7 @@
                 name: "",//标包名称
                 biaoNum: '',
                 baohao: '',
-                options: [],//头部按钮
+                // options: [],//头部按钮
                 /* -------头部包信息end-----*/
                 msgBox: [],//专家进度页面数据
                 completePercent: 0,
@@ -285,36 +285,52 @@
             }
         },
         created() {
-            console.log(this.$route.query);
-
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
                 this.methodType=this.$route.query.methodType;
             }
            // this.type = this.$route.query.type;
-            if (this.$route.query.type == undefined) {
-                this.type = 2;
+            if (this.$route.query.currentpage == undefined) {
+                this.type = 5;
             } else {
-                this.type = this.$route.query.type;
+                // this.type = this.$route.query.type;
+                this.type = this.$route.query.currentpage;
             }
         },
         mounted() {
-            if(this.type==2){
+            // if(this.type==2){
+            //     this.huizongSubmitTips='资格审查汇总';
+            // }else if(this.type==4){
+            //     this.huizongSubmitTips='符合项审查汇总';
+            // }else if(this.type==6){
+            //     this.huizongSubmitTips='详细评审（技术）汇总';
+            // }
+            $(".show_div").hide();
+           if(this.$route.query.is_submit_type==1){
+               $(".hide_div").hide();
+               $(".show_div").show();
+               $('.qita_expalin').show();
+               $(".qita_expalin").text('11');
+               $('.qita_expalin_input').hide()
+           }
+
+        if(this.type==5){
                 this.huizongSubmitTips='资格审查汇总';
-            }else if(this.type==4){
+            }else if(this.type==7){
                 this.huizongSubmitTips='符合项审查汇总';
-            }else if(this.type==6){
+            }else if(this.type==14){
                 this.huizongSubmitTips='详细评审（技术）汇总';
             }
            this.init();
-            $(".show_div").hide();
+
         },
         computed: {},
         methods: {
             init() {   //初始化 table的数据
                 this.page_loading = true;
-                this.$axios.post('/api/table_data', {type: this.type}, {//通过包id
+                // this.$axios.post('/api/table_data', {type: this.type}, {//通过包id
+                this.$axios.post('/api/table_data', {currentPage: this.type,is_submit_type:this.$route.query.is_submit_type}, {//通过包id
                     // id:id
                     // type:2
                 }).then(res => {
@@ -334,12 +350,14 @@
                         this.individualTrialData = res.data.bidMsg.eviewrItemsMsg.msgBox;//个人初审活动表
                         this.grcs_titile_data = res.data.bidMsg.eviewrItemsMsg.grcs_titile_data;
                         this.companyName = res.data.bidMsg.eviewrItemsMsg.companyNameData;
+                        // console.log(this.$route.query.is_submit_type, '9999');
                         this.$store.state.failureEnery.isshow = false;
-                        if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//1：解锁的那个页面显示，反之进度条的那个显示
+                        if (res.data.bidMsg.eviewrItemsMsg.isShow === 0) {//1：解锁的那个页面显示，反之0:进度条的那个显示
                             this.$store.state.failureEnery.isshow = true;
                         } else {
                             this.$store.state.failureEnery.isshow = false;
                         }
+                        //console.log(res.data.bidMsg.eviewrItemsMsg.isShow,'显示那个页面');
                     }
                     this.page_loading = false;
                 })
@@ -400,22 +418,35 @@
                 }).then(() => {
                     this.submit_huizong=true;
                  //   this.$store.state.failureEnery.huizongSubmit = false;
+                    //console.log(this.type,'000');
                     let url;
-                    if (this.type == 4) {
+                    // if (this.type == 4) {
+                    //     url = '/api/tijiao_fhx';
+                    // } else if (this.type == 2) {
+                    //     url = '/api/tijiao';
+                    // }
+                    // else if (this.type == 6) {
+                    //     url = '/api/tijiao_xxjs';
+                    // }
+                    if (this.type == 7) {
                         url = '/api/tijiao_fhx';
-                    } else if (this.type == 2) {
+                    } else if (this.type == 5) {
                         url = '/api/tijiao';
                     }
-                    else if (this.type == 6) {
+                    else if (this.type == 9) {
                         url = '/api/tijiao_xxjs';
                     }
+                    //console.log(this.type,'11111');
+                 setTimeout(() => {
                     this.$axios.post(url, {
                         data: this.form.desc,
                         type: parseInt(this.type) + 1
                     }).then(res => {
                         if (res.status == 200) {
+                            //console.log(this.type,'00000');
+                            window.location.href="/elect/UnFinishQualificationsResult?methodType="+this.methodType+"&currentpage="+ this.type +'&is_submit_type=1';
                             this.submit_huizong=false;
-                            this.options = res.data.vue_type;
+                            // this.options = res.data.vue_type;
                             // this.$store.state.failureEnery.tijiaoHuizong=true;
                             this.$message({
                                 type: 'success',
@@ -426,8 +457,11 @@
                             $('.qita_expalin').show();
                             $(".qita_expalin").text(this.form.desc);
                             $('.qita_expalin_input').hide()
+                        }else{
+                            this.submit_huizong=true;
                         }
                     })
+                 },1000)
                 }).catch(() => {
                     this.$message({
                         type: 'info',
