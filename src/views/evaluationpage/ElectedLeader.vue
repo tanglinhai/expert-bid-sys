@@ -20,47 +20,19 @@
             <div class="evaluationcommon lineAll cf">
                <MessageCommon :tableData3="tableData3" :dianji="1"></MessageCommon>
                 <el-row class="LayoutRightSide">
-                    <!-- <div class="grid-content bg-purple-dark fl pro_msg_div textAlignL">
-                        <h5 class="commonTitle col348fe2 oneanonter">操作信息</h5>
-                    </div> -->
-                    <!-- <div class="fr mr20">
-                        当前状态
-                        <template v-if="projectTableData.status==3">
-                            <el-tag>已废标</el-tag>
-                        </template>
-                        <template v-if="projectTableData.status==0||projectTableData.status==1||projectTableData.status==4||projectTableData.status==5">
-                            <el-tag>进行中</el-tag>
-                        </template>
-                        <template v-if="projectTableData.status==2||projectTableData.status==6">
-                            <el-tag>已完成</el-tag>
-                        </template>
-                    </div> -->
+                   
                     <div class="grid-content bg-purple fl">
                         <template v-if="projectTableData.status==0" >
                             <el-button size="small" type="primary" @click="AgreeXieYi"><i class="icon iconfont icon-zhuanjiazhuye"></i>推举组长</el-button>
                         </template>
-                        <!-- <template v-if="projectTableData.status==3">
-                            <el-button   size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-message"></i>查看</el-button>
-                        </template> -->
-                        <!-- <template v-if="projectTableData.status==1">
-                            <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
-                            <el-button size="small" type="primary" @click="evaluationBidBtn"  :loading="BtnLoading" ><i class="el-icon-edit-outline"></i>评标</el-button>
-                        </template> -->
+                      
                         <template v-if="projectTableData.status==2">
                             <el-button  size="small" type="primary" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button  size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
                         </template>
-                        <!-- <template v-if="projectTableData.status==5">
-                            <el-button size="small" @click="adjustedValuation(projectTableData.id)"><i class="el-icon-edit-outline"></i>调整评标价 </el-button>
-                            <el-button size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第二信封评标</el-button>
-                            <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
-                        </template>
-                        <template v-if="projectTableData.status==6">
-                            <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第一信封查看</el-button>
-                            <el-button size="small" @click="goto('/elect/StartEvaluation?types=4&methodType='+val)"><i class="el-icon-edit-outline"></i>第二信封查看</el-button>
-                        </template> -->
+                      
                     </div>
                 </el-row>
             </div>
@@ -322,10 +294,17 @@
             // },
 
             AgreeXieYi(){  //推举组长
-            console.log("1")
-                this.$router.push({
-                    path: '/index/WheelPushing?is_submit_type=0&currentpage=3&methodType='+this.val,
-                })
+                this.$axios.get('/api/ElectedLeaderBtn',{
+
+                }).then(res=>{
+                    if(res.data.resultCode==200){
+                        //console.log(res.data.resultCode,99999999)
+                        this.$router.push({
+                            path: '/index/WheelPushing?is_submit_type=0&currentpage=3&methodType='+this.val,
+                        })
+                    }
+                });
+                
                 
             },
 

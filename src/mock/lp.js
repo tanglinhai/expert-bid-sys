@@ -535,6 +535,12 @@ Mock.mock('/api/getProjectInformation','get',{
 });
 //头部项目信息接口
 
+//推举组长按钮接口
+Mock.mock('/api/ElectedLeaderBtn','get',{
+    "resultCode":200,
+})
+//推举组长按钮接口
+
 //公共导航接口
 Mock.mock('/api/navcommons','post',(options) =>{
     let CommonsData;
