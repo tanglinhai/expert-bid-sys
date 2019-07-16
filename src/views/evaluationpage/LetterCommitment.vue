@@ -62,8 +62,7 @@
             } else {
                 this.val=this.$route.query.methodType;
             }
-            console.log(this.val);
-            if (this.$route.query.types == undefined) {
+             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
                 this.$store.state.navCommon.types=this.$route.query.types;

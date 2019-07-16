@@ -214,6 +214,12 @@ export default {
       if (newVal === '/index/ElectedLeader') {
         //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
+      }if(newVal === '/elect/StartEvaluation'){
+            console.log(this.$route.query.types,'审查项');
+            this.navcommonsListFun(); //导航接口
+      }if(newVal === '/elect/UnFinishQualificationsResult'){
+            this.navcommonsListFun(); //导航接口
+            console.log(this.$route.query.types,'审查汇总');
       }
     }
   },
@@ -268,7 +274,6 @@ export default {
          }).then(res=>{
              if(res.status == 200){
                  //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
- 
                  this.navcommonsList=res.data.navsAll; 
                  this.pageloadding=false;
                  this.CommonLeftNavsLoading=false;
@@ -285,9 +290,11 @@ export default {
        }
     },
   },
+
   updated(){
     //console.log(this.$route.query.currentpage,this.$route.query.is_submit_type,666666666)
     this.currentpage=parseFloat(this.$route.query.currentpage);
+      // console.log(this.currentpage,'当前进行到那步HOME');
   }
 }
 </script>
