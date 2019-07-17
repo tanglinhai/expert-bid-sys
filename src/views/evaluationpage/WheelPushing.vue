@@ -147,7 +147,6 @@
             //this.navcommonsListFun(); //导航接口
 
             $(".NavCommon").show();
-
             var _this=this;
             var setTime;
             setTime=setInterval(function(){
@@ -220,20 +219,20 @@
                 this.tuijuData();
             },
 
-            navcommonsListFun(){
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       //console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                            //$("#3").addClass("backblue");
-                        })
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            //console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                 //$("#3").addClass("backblue");
+            //             })
+            //         }
+            //     })
+            // },
 
         }
     }

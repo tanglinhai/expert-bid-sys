@@ -216,7 +216,7 @@ let ReasonScrap=Mock.mock('/api/FeiBiao','post',{
 //标中质询信息列表(standardChallengeinformation.vue)
 let StandardChallengeList=Mock.mock('/api/StandardChallengeList','post',{
     'standList|1-5':[{
-        inquiryConten:['111','222','444','333'],
+        "inquiryConten|1":['111','222','444','333'],
         questionTime:()=>Random.date()+Random.time(),
         requestReplyTime:()=>Random.date(),
         bidder:()=>Random.csentence(3,15),
@@ -297,7 +297,7 @@ let chooseSys = Mock.mock('/stamp/chooseSys','post',{  //选择北京或者河�
 });
 
 
-//包信息接口
+//头部包信息接口
 let baoInformations=Mock.mock('/api/baoInformations','post',{
     result:{
         'name': '2019年水利运输服务招标项目',
@@ -307,7 +307,7 @@ let baoInformations=Mock.mock('/api/baoInformations','post',{
         'TheCurrentStatus|1':['已完成','进行中','已废标']
     }
 });
-//包信息接口
+//头部包信息接口
 
 
 //SignaturePage签字数据接口
@@ -7219,28 +7219,28 @@ function get_data(currentPage,is_submit_type,types) {//type
     // console.log(a);
     return [
         {   //综合评标导航    商务，技术，服务，其他，评审汇总：（详细评审(技术)汇总提交完成之后可点）
-            value: '1',//
+           // value: '1',//
             label: '签到',  //步数字段
             types: 1,  //types 代表第几步对应相对应得步数
             typestaus:a[0],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
             children:[{
-                value: '1-1',//
+               // value: '1-1',//
                 label: '承诺书',  //步数字段
                 types: "1-1",  //types 代表第几步对应相对应得步数
                 typestaus:a[1],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
             },{
-                value: '1-2',//
+               // value: '1-2',//
                 label: '参加评标',  //步数字段
                 types: "1-2",  //types 代表第几步对应相对应得步数
                 typestaus:a[2],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
             }]
         },{
-            value: '2',//
+            //value: '2',//
             label: '推举组长',
             types: 2,
             typestaus:a[3],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
         },{
-            value: '3',//
+           // value: '3',//
             label: '评标',
             types: 3,
             typestaus:a[4],    //1; 通过,2:正在进行:3：未完成可点4：未完成不可点
@@ -7388,6 +7388,22 @@ Mock.mock('/api/ElectedLeaderBtn','get',{
     "resultCode":200,
 })
 //推举组长按钮接口
+//评标按钮接口
+Mock.mock('/api/BidEvaluationButton','get',{
+    "resultCode":200,
+})
+//评标按钮接口
+//查看招标文件
+Mock.mock('/api/BiddingDocuments','get',{
+    "resultCode":200,
+})
+//查看招标文件
+//查看开标一览表接口
+Mock.mock('/api/ListOfbidOpen','get',{
+    "resultCode":200,
+})
+//查看开标一览表接口
+
 
 //公共导航接口
 Mock.mock('/api/navcommons','post',(options) =>{

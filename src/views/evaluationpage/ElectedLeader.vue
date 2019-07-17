@@ -27,7 +27,7 @@
                         </template>
                       
                         <template v-if="projectTableData.status==2">
-                            <el-button  size="small" type="primary" @click="goto('/elect/StartEvaluation?is_submit_type=0&currentpage=4&methodType='+val)"><i class="el-icon-edit-outline"></i>评标</el-button>
+                            <el-button  size="small" type="primary" @click="BidEvaluationButton"><i class="el-icon-edit-outline"></i>评标</el-button>
                         </template>
                         <template v-if="projectTableData.status==4">
                             <el-button  size="small" type="primary" @click="evaluationBidBtn"><i class="el-icon-edit-outline"></i>第一信封评标</el-button>
@@ -236,6 +236,21 @@
                 })
             },
 
+            //评标按钮
+            BidEvaluationButton(){
+                this.$axios.get('/api/BidEvaluationButton',{
+
+                }).then(res=>{
+                    if(res.data.resultCode==200){
+                        //console.log(res.data.resultCode,99999999)
+                       this.$router.push({
+                            path: '/elect/StartEvaluation?is_submit_type=0&currentpage=4&methodType='+this.val,
+                        })
+                    }
+                });
+            },
+            //评标按钮
+            //第一信封评标按钮
             evaluationBidBtn(){
                 this.BtnLoading=true;
                 this.$axios.post('/api/evaluationBidBtn','post',{
@@ -251,6 +266,8 @@
                     }
                 })
             },
+            //第一信封评标按钮
+
             goto(url){//开始评标
                this.$router.push({
                     path: url

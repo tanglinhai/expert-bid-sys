@@ -118,9 +118,17 @@
                     })
                 } else if (val === 'c') {//报销汇总表
                     console.log("3")
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                    this.$axios.get('/api/BiddingDocuments', {}).then(res => {
+                        if (res.data.resultCode == 200) {
+                            window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                        }
+                    })
                 } else if (val === 'd') {//报销汇总表-财政
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                    this.$axios.get('/api/ListOfbidOpen', {}).then(res => {
+                        if (res.data.resultCode == 200) {
+                             window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                        }
+                    })
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
