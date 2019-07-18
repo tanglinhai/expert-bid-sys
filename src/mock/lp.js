@@ -296,6 +296,11 @@ let chooseSys = Mock.mock('/stamp/chooseSys','post',{  //选择北京或者河�
 
 });
 
+let SignatureReceipt= Mock.mock('/stamp/SignatureReceipt','post',{  //签名回执
+    "resultCode": 200,
+    url:'http://localhost:7000/img/download.svc',
+});
+
 
 //头部包信息接口
 let baoInformations=Mock.mock('/api/baoInformations','post',{

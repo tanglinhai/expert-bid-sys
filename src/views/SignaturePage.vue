@@ -75,7 +75,7 @@
     <div class="indexFix">
         <span class="tishimsgs" style="font-size:12px; position:absolute;left:50%; color:#c01717; margin-left:-150px; top:3px;">请稍侯，系统正在处理签名，完成后系统会自动刷新</span>
         <a id="more" @click="more" style="display:block;" href="javascript:;" class="btns"><i v-if="moreLoading" class="el-icon-loading"></i>&nbsp;&nbsp;批量签字</a>
-        <a id="more2" href="http://localhost:7000/img/download.svc" download="" class="btn2">签名回执</a>
+        <a id="more2" :href="SignatureReceiptHref" download="" class="btn2">签名回执</a>
     </div>
 
     <!-- 模态框（Modal） -->
@@ -251,6 +251,8 @@ export default {
       BjLoading:false,  //选择北京ca的loading
       HbLoading:false,  //选择河北ca的loading
       HbTjLoaing:false, //选择河北ca输入信息提交loading
+
+      SignatureReceiptHref:'',  //签名回执下载链接
       
     };
   },
@@ -314,9 +316,9 @@ export default {
         url: '/js/plugins/bootstrap/js/Tdrag.js',
         download_files_key: '/js/plugins/bootstrap/js/Tdrag.js',
         callback: this.init
-    });
-
+    }); 
   },
+  
   methods: {
     
     autodivheight(){
@@ -351,6 +353,8 @@ export default {
         })
     },
 
+
+
     statuss(){   //判断是否签名状态接口
         this.$axios.post('/api/status', 'post', {
             // id: id,
@@ -377,6 +381,19 @@ export default {
 
     ToLeaderPage(){  //签字页面得查看所有文档跳转点击
         window.open(window.location.protocol+'//'+window.location.host+'/LeaderSignaturePage','_blank');
+    },
+
+
+    SignatureReceipt(){   //签名回执
+        console.log("1111")
+        this.$axios.post('/stamp/SignatureReceipt', 'post', {
+           
+        }).then(res => {
+            if(res.data.resultCode == 200){
+                console.log(res.data.url,99999999999)
+                this.SignatureReceiptHref=res.data.url;
+            }
+        })
     },
     
      //$("#more").click(function(){    //签名按钮
@@ -510,6 +527,7 @@ export default {
     // timer = setInterval(function(){
     //     _this.statuss();
     // },3000)
+    this.SignatureReceipt(), //签名回执
 
     this.qianziContent(),  //签字列表和项目信息展示 
     this.statuss(), //判断是否签名状态接口
