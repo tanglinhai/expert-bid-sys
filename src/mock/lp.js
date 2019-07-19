@@ -121,19 +121,23 @@ let AllInformation=Mock.mock('/api/CheckReferrals','post',{  //专家个人信�
     },
     toubiaorenInformation:[{
         toubiaorenName:'重庆网控科技发展有限公司',
-        toubiaorenFenbao:'pad文件1',
+        toubiaorenFenbao:'1909qwerN1197',
+        toubiaoWenJian:'pad文件11',
         baoname:1,
     },{
         toubiaorenName:'普瑞太阳能有限公司',
-        toubiaorenFenbao:'pad文件2',
+        toubiaorenFenbao:'1909qwerN1197',
+        toubiaoWenJian:'pad文件22',
         baoname:1,
     },{
         toubiaorenName:'夏丰热工研究院有限公司',
-        toubiaorenFenbao:'pad文件4',
+        toubiaorenFenbao:'1909qwerN1197',
+        toubiaoWenJian:'pad文件33',
         baoname:1,
     },{
         'toubiaorenName|1':['北京有限公司','夏丰热工研究院有限公司'],
-        toubiaorenFenbao:'pad文件3',
+        toubiaorenFenbao:'1909qwerN1197',
+        toubiaoWenJian:'pad文件44',
         baoname:1,
     }]
 });
