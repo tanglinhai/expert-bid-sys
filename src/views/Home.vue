@@ -245,7 +245,7 @@ export default {
       this.$axios.get('/api/getProjectInformation',{
         projectId:1,
       }).then(res=>{
-        console.log(res,888888888)
+        // console.log(res,888888888)
         this.ProjectInformationsAll=res.data.ProjectInformationsAll;
       })
     },

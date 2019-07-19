@@ -485,7 +485,6 @@
                 </div>
             </el-dialog>
 
-
             <el-dialog
                     title="查看专家个人打分表"
                     :visible.sync=" $store.state.failureEnery.checkProScoreDialogVisible"
@@ -908,7 +907,7 @@
                     is_submit_type: this.$route.query.is_submit_type
                 }).then(res => {
                     if (res.status === 200) {
-                        // console.log(res.data)
+                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
@@ -1010,7 +1009,7 @@
             submit_btn_zdj(formName){
                 this.myloading = true;
                 this.$axios.post('/api/pshz_tijiao_zdj', 'post', {
-                    type: this.$route.query.type,
+                    currentPage: this.$route.query.type,
                     data: this.ruleForm.desc
                 }).then(res => {
                     if (res.status == 200) {
@@ -1047,7 +1046,7 @@
                 //     if (valid) {
                 this.myloading = true;
                 this.$axios.post('/api/pshz_tijiao', 'post', {
-                    type: this.$route.query.type,
+                    currentPage: this.$route.query.type,
                     data: this.ruleForm.desc
                 }).then(res => {
                     if (res.status == 200) {
@@ -1155,31 +1154,31 @@
             // rebackForm() {
             //     this.hldj_dialog_biddingAdvice = false;
             // },
-            submitForm(formName) {
-                console.log(this.ruleForm.desc);
-                this.hldj_bc_loading = true;
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.$axios.post('/api/hldjSaveBiddingAdvice', 'post', {
-                            data: this.$data.ruleForm
-                        }).then(res => {
-                            if (res.data.code == 200) {
-                                this.$message({
-                                    message: '保存完成！',
-                                    type: 'success'
-                                });
-                                this.hldj_bc_loading = false;
-                                // this.hldj_dialog_biddingAdvice = false;
-                                // this.ruleForm.desc='';
-                                this.is_disabled = true;
-                            }
-                        });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
+            // submitForm(formName) {
+            //     // console.log(this.ruleForm.desc);
+            //     this.hldj_bc_loading = true;
+            //     this.$refs[formName].validate((valid) => {
+            //         if (valid) {
+            //             this.$axios.post('/api/hldjSaveBiddingAdvice', 'post', {
+            //                 data: this.$data.ruleForm
+            //             }).then(res => {
+            //                 if (res.data.code == 200) {
+            //                     this.$message({
+            //                         message: '保存完成！',
+            //                         type: 'success'
+            //                     });
+            //                     this.hldj_bc_loading = false;
+            //                     // this.hldj_dialog_biddingAdvice = false;
+            //                     // this.ruleForm.desc='';
+            //                     this.is_disabled = true;
+            //                 }
+            //             });
+            //         } else {
+            //             console.log('error submit!!');
+            //             return false;
+            //         }
+            //     });
+            // },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
@@ -1272,7 +1271,7 @@
                 this.dialogFormVisible = true;
             },
             /*---------------------------------标价计算得分---------------*/
-            scoreQuotation() {//标价计算得分按钮
+            scoreQuotation() {//评标计算得分按钮
                 this.dialogScoring = true;
             },
             sumbitScoring() {//标价计算得分提交
@@ -1303,7 +1302,7 @@
             modifyFinalScore(){//修改最终得分
                 this.modifyFinalScoreDialog=true;
             },
-            modifyFinalScoreInit(){
+            modifyFinalScoreInit(){//修改最终得分接口
                 this.$axios.post('/api/modifyFinalScoreData').then(res => {
                     if (res.status == 200) {
                         this.modifyFinalScoreData=res.data.bidMsg.bidEvaluation;

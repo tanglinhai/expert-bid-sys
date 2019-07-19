@@ -1216,19 +1216,19 @@
             </el-dialog>
             <!--标中质询弹框-->
             <!--全部选中提示弹框-->
-            <el-dialog
-                    title="全部选中提示"
-                    :visible.sync="$store.state.failureEnery.determineOperating"
-                    width="30%"
-            >
-                <el-row class="textAlignC fs14" style="line-height: 30px">
-                    您确定要执行此操作！
-                </el-row>
-                <el-row class="textAlignC pt20">
-                    <el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>
-                    <el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>
-                </el-row>
-            </el-dialog>
+            <!--<el-dialog-->
+                    <!--title="全部选中提示"-->
+                    <!--:visible.sync="$store.state.failureEnery.determineOperating"-->
+                    <!--width="30%"-->
+            <!--&gt;-->
+                <!--<el-row class="textAlignC fs14" style="line-height: 30px">-->
+                    <!--您确定要执行此操作！-->
+                <!--</el-row>-->
+                <!--<el-row class="textAlignC pt20">-->
+                    <!--<el-button size="small" type="primary" @click="comfrimAllChecked">确认</el-button>-->
+                    <!--<el-button size="small" type="primary" @click="rebackAllChecked">取消</el-button>-->
+                <!--</el-row>-->
+            <!--</el-dialog>-->
             <!--调整评标价弹框-->
             <el-dialog
                     title="投标人最新报价列表"
@@ -1268,7 +1268,7 @@
                 companyname_toubiao: [],//定档评议table的投标人数组
                 dingdang_tableData: [],//定档评议table
                 evaluationExpert: "",// 专家
-                leibie: '',//定档table类别
+                // leibie: '',//定档table类别
                 viewUnfinishedData: [],//查看未完成项弹框数据
                 checkedArr: [],//选中的复选框数量
                 allRaioNum: '',// 定档table中所有的复选框数量
@@ -1597,7 +1597,7 @@
                     // type:2
                 }).then(res => {
                     if (res.status == 200) {
-                        // console.log(res.data);
+                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
@@ -1726,8 +1726,9 @@
                 }
                 let arr = [];//存放除了小计和总计的数据
                 let amt = 0;//商务小计
-                this.$axios.post('/api/isFailure', 'post', {
-                    // type: val
+                this.$axios.post('/api/isFailure_zhpb', 'post', {
+                //     val: val，
+                // id:id
                 }).then(res => {
                     if (res.status == 200) {
                         arr = this.dingdang_tableData.slice(0, -2);
@@ -1945,7 +1946,8 @@
                             type: 'warning'
                         });
                     } else {
-                        this.$axios.post('/api/business_tijiao', {type: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
+                        // type：评审方法
+                        this.$axios.post('/api/business_tijiao', {currentPage: parseInt(this.type) + 1}).then(res => { //商务接口(提交的时候把table的数据反给后台，接受后台的返回的table数据)
                             if (res.status == '200') {
                                 // console.log(this.type);
                                 window.location.href = "/elect/BusinessOther?methodType=" + this.methodType + "&currentpage=" + this.type + '&is_submit_type=1';
@@ -2046,23 +2048,23 @@
                 this.$store.state.failureEnery.flag = false;
                 $(".hide_btn").hide();
             },
-            comfrimAllChecked() {
-                this.allCheckedBtnLoading = true;
-                this.$store.state.failureEnery.determineOperating = false;
-                this.$axios.post('/api/allChecked_fhx', {
-                    // id:id
-                }).then(res => {
-                    if (res.status === 200) {
-                        for (let i = 0; i < this.radioArr.length; i++) {
-                            this.radioArr[i].radio = '合格';
-                        }
-                        this.allCheckedBtnLoading = false;
-                    }
-                });
-            },
-            rebackAllChecked() {
-                this.$store.state.failureEnery.determineOperating = false;
-            },
+            // comfrimAllChecked() {
+            //     this.allCheckedBtnLoading = true;
+            //     this.$store.state.failureEnery.determineOperating = false;
+            //     this.$axios.post('/api/allChecked_fhx', {
+            //         // id:id
+            //     }).then(res => {
+            //         if (res.status === 200) {
+            //             for (let i = 0; i < this.radioArr.length; i++) {
+            //                 this.radioArr[i].radio = '合格';
+            //             }
+            //             this.allCheckedBtnLoading = false;
+            //         }
+            //     });
+            // },
+            // rebackAllChecked() {
+            //     this.$store.state.failureEnery.determineOperating = false;
+            // },
             changeValue() {//切换页面选择投标人数量
                 // console.log(this.value);
                 if(this.value!=''||this.value!=undefined||this.value!=null){

@@ -391,7 +391,7 @@
                 <el-row class="personalAuditFormTable">
                     <div class="FormTableTitle cf fs14 mb10">
                         <div class="fl">
-                            <span>分包号：{{grzgTitleData.bagName}}</span>
+                            <span class="mr15">分包号：{{grzgTitleData.bagName}}</span>
                             <span>评标委员会：{{grzgTitleData.groupName}}</span>
                         </div>
                         <div class="fr">{{grzgTitleData.professorName}}</div>
@@ -634,10 +634,6 @@
             }
         },
         created() {
-            // this.methodType = this.$route.query.methodType;
-            // console.log(this.type_btn);
-            // this.methodType = this.$route.query.methodType;
-            console.log(this.$route.query,'0000');
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
@@ -648,23 +644,17 @@
             } else {
                 this.type_btn = this.$route.query.currentpage;
             }
-            console.log(this.type_btn,this.$route.query.currentpage,9999999999);
+            // console.log(this.type_btn,this.$route.query.currentpage,9999999999);
         },
         watch: {
-            // '$route.path': function (newVal, oldVal) {
-            //   if(newVal === '/elect/StartEvaluation'){
-            //      this.urlPageToSubmitprompt='StartEvaluation'
-            //   }
-            // }
         },
         mounted() {
-            console.log(this.type_btn,'当前的值');
+            // console.log(this.type_btn,'当前的值');
             $(".positionDiv").hide();
             this.init();
             this.$commonJs.pdfOperations.pdf_init.call(this);
             // let a = $(".el-pagination__total").text();
             // console.log(a);
-
             // let num = parseInt(a.substring(1).substring(1));
             // $(".el-pagination__total").text("共"+num+"页")
             if(this.$route.query.is_submit_type==1){
@@ -737,6 +727,7 @@
                 // this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                 this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                     if (res.status === 200) {
+                        console.log(res.data,'start');
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
@@ -748,7 +739,7 @@
                         this.personalAuditFormBtn = res.data.bidMsg.eviewrItemsMsg.viewnBtnName;
                         this.to_submit_prompt_name = res.data.bidMsg.eviewrItemsMsg.shenchaName;
                         this.options = res.data.bidMsg.eviewrItemsMsg.viewType;//头部导航数据
-                        // console.log(this.$route.query.is_submit_type, '9999');//this.$route.query.is_submit_type:0是有radio的页面，his.$route.query.is_submit_type:1；是提交完成的页面
+                        // //this.$route.query.is_submit_type:0是有radio的页面，his.$route.query.is_submit_type:1；是提交完成的页面
                         if(this.$route.query.is_submit_type!=undefined||this.$route.query.is_submit_type!=null){//为提交(如果没有is_submit_type没有传值就随机，反之则为传的值)
                             if (this.$route.query.is_submit_type== 0) {
                                 this.$store.state.failureEnery.flag = true;//未提交
@@ -764,7 +755,6 @@
                                 $("#hide_btn").hide();
                             }
                         }
-
                         // if (res.data.bidMsg.type === 0) {
                         //     this.$store.state.failureEnery.flag = true;//未提交
                         // } else {
@@ -773,7 +763,6 @@
                         // }
                         this.companyname_toubiao = res.data.bidMsg.eviewrItemsMsg.companyNameList;
                         this.dingdang_tableData = res.data.bidMsg.eviewrItemsMsg.dingdang_tableData;
-                        // console.log(this.companyname_toubiao.length,'333');
                     }
                     this.page_loading = false;
                 })
@@ -781,9 +770,7 @@
             sonToFather(val) {  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
             },
-
             /*----------------- pdf start ----------------------*/
-
             pdf_category_open_close($event) {
                 this.$commonJs.pdfOperations.pdf_category_open_close.call(this, $event);
             },
@@ -848,7 +835,7 @@
                     type: 'warning'
                 }).then(() => {
                     // this.$message({
-                    //     type: 'success',
+                    //    type: 'success',
                     //     message: '删除成功!'
                     // });
                     _this.allCheckedBtnLoading = true;

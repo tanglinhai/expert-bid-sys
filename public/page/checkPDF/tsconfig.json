@@ -1,0 +1,105 @@
+{
+  bidMsg: {
+   name:标包名称
+   baohao: 包号,
+   id:包id,
+   biaoNum: 标号,
+   type:显示那个页面(0：提交前那个页面显示，1:提交的页面)，
+   eviewrItemsMsg: {
+     is_tijiao：是否提交，0：未提交；1：已经提交完成，
+     companyNameList:[{//详细评审表格投标人数据
+       factors_standards:[{
+         factor:评审因素
+         relativePoints: [{关注点
+           id: pdf的id
+           name: pdf的文件名
+           page: 关注点页面号码
+           txt: 关注点文字的内容
+         }]
+         standard: 评审标准
+       }]
+       pdf: [{
+         id: pdf的id
+         pdf_name: pdf的文件名
+         url1:pdf的文件路径
+       }]
+       title: 投标人
+     }],
+     dingdang_tableData:[{详细评审表格数据
+       bool1:  投标人1对商务设置的变量
+       bool2: 投标人2对商务设置的变量
+       bool3: 投标人3对商务设置的变量（有多少个投标人就有多少个 bool）
+       ...
+       bool15: 投标人15对商务设置的变量
+       gradeExplain1:  投标人1对商务的评分说明
+       gradeExplain2: 投标人2对商务的评分说明（有多少个投标人就有多少个 gradeExplain）
+       ...
+       gradeExplain115: 投标人15对商务的评分说明
+       max: 专家打分的最大分
+       min: 专家打分的最小分
+       projectName: 项目
+       radioList:[复选法的radioList
+         {typeTitle: 显示选项数据, num: 选项序号},
+         {...}
+       ] ,
+       rowIndex: 记录点击的是那行
+       tit: 两步法的是否官方配置说明
+       type: 那种方法（例如：单选：radio；复选checkbox；人工录入法:inputLabour；布局法：inputSelect；两步法：input）
+       value1: 投标人1对商务1的打分
+       value2: 投标人2对商务1的打分（有多少个投标人就有多少个 value）
+       ...
+       value15: 投标人15对商务1的打分
+     }],
+     evaluationExpert:评审专家,
+     gongzuo_name:提交时提示的具体什么工作名称,
+     viewScheduleTitileData:{查看定档评议表弹框表表头数据
+       bagName: 分包号
+       groupName:  评标委员会
+     },
+     viewUnfinishedData:[{未完成弹框table数据
+       dafenxiangweizhi: 打分项位置
+       gongyingshang: 供应商名称
+       pageNumber：当前页码，
+       pageSize：每页的记录数
+       pageIndex：当前索引
+       totalPage：总页数
+     }],
+   }
+  }
+}
+
+
+
+{
+  'projectBagMsg':[{
+    'functionary': 项目负责人,
+    'id': 项目id,
+    'projectName': 项目名称,
+    'status': 项目状态(number)0：公开，1：谈判，2：邀请
+  }],
+  'allBagMsg': [{
+    bagName: 第几包,
+    ids:包id,
+    biaobaomingcheng: 标包名称,
+    starTime: 评标开始时间
+    stopTime:评标截至时间
+    methodType: 评标方法（number）1：合理低价, 2:     综合评标，3:最低价                                                                                                                                             pageNumber：当前页码，
+    pageSize：每页的记录数
+    pageIndex：当前索引
+    totalPage：总页数
+  }]，
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
