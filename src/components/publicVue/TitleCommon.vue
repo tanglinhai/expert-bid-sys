@@ -1,7 +1,7 @@
 <template>
     <el-row class="fs14 bid_msg mb15">
         <el-col :span="6">
-            <div class="grid-content bg-purple"><span>包号：</span><span>{{baohao}}</span></div>
+            <div class="grid-content bg-purple"><span>标包名称：</span><span>{{name}}</span></div>
         </el-col>
         <el-col :span="4">
             <div class="grid-content bg-purple-light"><span>标包号：</span><span>{{biaoNum}}</span></div>
@@ -22,7 +22,7 @@
                         <el-dropdown-item command="c">查看招标文件</el-dropdown-item>
                         <el-dropdown-item command="d">查看开标一览表</el-dropdown-item>
                         <el-dropdown-item command="e">评审结果签字</el-dropdown-item>
-                        <el-dropdown-item command="f">资质审查签字</el-dropdown-item>
+                        <el-dropdown-item command="f">资格审查签字</el-dropdown-item>
                         <el-dropdown-item command="g">调整评标基准价</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -74,6 +74,12 @@
                ChangedialogVisible:false,  //调整评标价弹框
                TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
+
+                name:'',  //标包名称
+                biaoNum:'', //标包号
+                projectWenjian:'',//招标文件
+
+
             }
         },
         // 父组件传过来的值
@@ -87,7 +93,7 @@
              ChangePrice,//调整评标基准价
         },
         mounted(){
-           
+           this.ProjectInformationData();   //头部包信息
         },
         methods: {
             goto(url){ //路由
@@ -112,9 +118,17 @@
                     })
                 } else if (val === 'c') {//报销汇总表
                     console.log("3")
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                    this.$axios.get('/api/BiddingDocuments', {}).then(res => {
+                        if (res.data.resultCode == 200) {
+                            window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                        }
+                    })
                 } else if (val === 'd') {//报销汇总表-财政
-                    window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                    this.$axios.get('/api/ListOfbidOpen', {}).then(res => {
+                        if (res.data.resultCode == 200) {
+                             window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
+                        }
+                    })
                 } else if (val === 'e') {//报销情况查询-财政
                     window.open(window.location.protocol + '//' + window.location.host + '/SignaturePage', '_blank',);
                 } else if (val === 'f') {//点击修改密码
@@ -140,6 +154,23 @@
                 this.ChangedialogVisible = val;
                 console.log("1111111111111")
             },
+            //包号，标包号，招标文件接口渲染
+            ProjectInformationData(){
+                this.$axios.post('/api/baoInformations','post',{
+                    //id:row.id,   //点击得id
+                }).then(res=>{
+                   // console.log(res,88888)
+                    if(res.status == 200){
+                        console.log(res.data,3333333333)
+                        this.name=res.data.result.name;
+                        this.biaoNum=res.data.result.biaoNum;
+                        this.baohao=res.data.result.baohao;
+                        this.projectWenjian=res.data.result.projectWenjian;
+                        this.TheCurrentStatus=res.data.result.TheCurrentStatus;
+                    }
+                })
+                
+            }
         },
         updated(){
             

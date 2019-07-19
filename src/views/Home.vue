@@ -205,7 +205,7 @@ export default {
       if (newVal === '/index/LetterCommitment') {
         //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
-        console.log("9999")
+        // console.log("9999")
       }
       if (newVal === '/index/AllInformation') {
         //console.log(this.$route.query.types,666);
@@ -214,6 +214,12 @@ export default {
       if (newVal === '/index/ElectedLeader') {
         //console.log(this.$route.query.types,666);
         this.navcommonsListFun(); //导航接口
+      }if(newVal === '/elect/StartEvaluation'){
+            console.log(this.$route.query.types,'审查项');
+            this.navcommonsListFun(); //导航接口
+      }if(newVal === '/elect/UnFinishQualificationsResult'){
+            this.navcommonsListFun(); //导航接口
+            console.log(this.$route.query.types,'审查汇总');
       }
     }
   },
@@ -231,8 +237,18 @@ export default {
     //     _this.navcommonsListFun(); //定时器导航接口
     //     console.log("哈哈哈哈")
     // },5000)
+    this.getProjectInformation();
   },
   methods:{
+    //头部项目信息接口
+    getProjectInformation(){
+      this.$axios.get('/api/getProjectInformation',{
+        projectId:1,
+      }).then(res=>{
+        console.log(res,888888888)
+        this.ProjectInformationsAll=res.data.ProjectInformationsAll;
+      })
+    },
     navcommonsListFun(){
         var leaderOrExpert = eval('(' + window.sessionStorage.getItem('user') + ')');
         // console.log(leaderOrExpert);
@@ -258,9 +274,7 @@ export default {
          }).then(res=>{
              if(res.status == 200){
                  //console.log(res.data,this.$route.query.currentpage,this.$route.query.is_submit_type,777)
- 
                  this.navcommonsList=res.data.navsAll; 
-                 this.ProjectInformationsAll=res.data.ProjectInformationsAll;
                  this.pageloadding=false;
                  this.CommonLeftNavsLoading=false;
              }
@@ -276,9 +290,11 @@ export default {
        }
     },
   },
+
   updated(){
     //console.log(this.$route.query.currentpage,this.$route.query.is_submit_type,666666666)
     this.currentpage=parseFloat(this.$route.query.currentpage);
+      // console.log(this.currentpage,'当前进行到那步HOME');
   }
 }
 </script>

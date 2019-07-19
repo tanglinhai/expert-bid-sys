@@ -116,7 +116,6 @@ import { setTimeout } from 'timers';
                 });
             },
            ToChangePage(types){   //导航点击值//types(添加选中class)
-                //console.log(this.currentpage,types,666666)
                 $(".Secondnav li").removeClass("LiActives");
                 $(".NavsUls>li").removeClass("LiActives");
                 $("#"+types).addClass("LiActives");
@@ -126,7 +125,33 @@ import { setTimeout } from 'timers';
                     this.$router.push("/index/AllInformation?types="+types+"&currentpage="+this.currentpage);
                 }else if(types==2){   //推举组长
                     this.$router.push("/index/ElectedLeader?types="+types+"&currentpage="+this.currentpage);
-                } 
+                }else if(types=="3-1"){   //评标
+                    // this.$router.push("/elect/StartEvaluation?types="+types+"&currentpage="+this.currentpage);
+                    this.$router.push("/elect/StartEvaluation?types="+types+"&currentpage=4");
+                }else if(types=="3-2"){
+                    this.$router.push("/elect/UnFinishQualificationsResult?types="+types+"&currentpage=5");
+                }else if(types=="3-3"){
+                    this.$router.push("/elect/StartEvaluation?types="+types+"&currentpage=6");
+                }else if(types=="3-4"){
+                    // this.$router.push("/elect/UnFinishQualificationsResult?types="+types+"&currentpage="+this.methodType+"&currentpage=7");
+                    this.$router.push("/elect/UnFinishQualificationsResult?types="+types+"&currentpage=7");
+                }else if(types=="3-5"){
+                    this.$router.push("/elect/StartEvaluation?types="+types+"&currentpage=8");
+                }else if(types=="3-6"){
+                    this.$router.push("/elect/UnFinishQualificationsResult?types="+types+"&currentpage=9");
+                }
+                else if(types=="3-7"){
+                    this.$router.push("/elect/BusinessOther?types="+types+"&currentpage=10");//商务
+                }
+                else if(types=="3-8"){
+                    this.$router.push("/elect/BusinessOther?types="+types+"&currentpage=11");//技术
+                }else if(types=="3-9"){
+                    this.$router.push("/elect/BusinessOther?types="+types+"&currentpage=12");//服务
+                }else if(types=="3-10"){
+                    this.$router.push("/elect/BusinessOther?types="+types+"&currentpage=13");//其他
+                }else if(types=="3-11"){
+                    this.$router.push("/elect/ReviewSummary?types="+types+"&currentpage=14");//其他
+                }
            }
         },
         updated(){

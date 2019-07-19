@@ -56,14 +56,13 @@
         created() {
             //console.log(this.$route.query.types);
             //console.log(this.$store.state.failureEnery.methodNum,this.$route.query.methodType,'1');
-
-            if (this.$route.query.type == undefined) {
+            console.log(this.$route.query);
+            if (this.$route.query.methodType == undefined) {
                 this.val= 1;
             } else {
                 this.val=this.$route.query.methodType;
             }
-            console.log(this.val);
-            if (this.$route.query.types == undefined) {
+             if (this.$route.query.types == undefined) {
                 this.$store.state.navCommon.types=1;
             } else {
                 this.$store.state.navCommon.types=this.$route.query.types;
@@ -87,27 +86,27 @@
                  });
             },
 
-            navcommonsListFun(){
-                this.pageloadding=true;
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                            //$("#1").addClass("backblue");
-                        })
-                        this.pageloadding=false;
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.pageloadding=true;
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                 //$("#1").addClass("backblue");
+            //             })
+            //             this.pageloadding=false;
+            //         }
+            //     })
+            // },
 
             AgreeXieYi(){  //同意按钮
                 this.BtnLoading=true,
                 this.$axios.post('/api/agreeBtn','post',{
-
+                    //projectId:id,
                 }).then(res=>{
                     if(res.status == 200){
                         this.BtnLoading=false,
