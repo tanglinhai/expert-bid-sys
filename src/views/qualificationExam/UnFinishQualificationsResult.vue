@@ -29,6 +29,7 @@
                 <el-row class="center_part">
                     <el-col :span="24">
                         <template>
+                            <!--汇总显示专家打分进度表格数据-->
                             <el-table
                                     :data="msgBox"
                                     border
@@ -47,6 +48,8 @@
                                     </template>
                                 </el-table-column>
                             </el-table>
+
+
                             <div class="unlock_table-warp fs14" v-else>
                                 <el-row style="line-height:40px;">
                                     <el-col :span="12">
@@ -335,6 +338,7 @@
                     // type:2
                 }).then(res => {
                     if (res.status === 200) {
+                        console.log(res.data,'汇总页');
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
@@ -440,7 +444,7 @@
                  setTimeout(() => {
                     this.$axios.post(url, {
                         data: this.form.desc,
-                        type: parseInt(this.type) + 1
+                        currentpage: parseInt(this.type) + 1
                     }).then(res => {
                         if (res.status == 200) {
                             //console.log(this.type,'00000');

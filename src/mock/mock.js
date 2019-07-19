@@ -19,7 +19,7 @@ let tableMs = Mock.mock('/api/tableMsg', 'post', {
 let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
     'projectBagMsg|0-2': [{
         id: () => Random.id(),
-        'status|1': [0, 1, 2],
+        'status|1': [0, 1, 2],//0：公开，1：谈判，2：邀请
         'functionary': '@cname',
         'projectName': '辅助-招标投标法-最低评标价【二次公告】',
     }],
@@ -31,104 +31,104 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
         'starTime': () => Random.datetime(),
         'stopTime': () => Random.datetime(),
         'methodType': Random.integer(1,2,3,),//新加的（合理低价的还是综合评标）1:合理低价的;2:综合评标；3:最低价
-        'proBusinessNum': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
-        + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'q' + 'w' + 'e' + 'r' + 'N'
-        + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9),
-        'sellStartTime': () => Random.datetime(),
-        'sellEndTime': () => Random.datetime(),
-        'bidOpeningTime': () => Random.datetime(),
-        'getBidType': '在线下载',
-        'bidOpeningPlace': '北京海淀区',
-        'evaluationBidPlace': '北京市朝阳区',
-        'evaluationBidTime': () => Random.datetime(),
-        'paymentType': [0, 1, 2],
-        'uploadWay|1': [0, 1, 2],
-        'tenderFree': Random.float(10, 1000, 2, 2),
-        'postage': Random.float(10, 100, 2, 2),
-        'drawingDeposit': Random.float(10, 100, 2, 2),
-        'bidAgencyServiceFee': Random.float(1, 100, 2, 2) + '(浮动费率 （发改价格[2011]534号)',
-        'tenderBond': Random.float(10, 100, 2, 2) + '万元',
-        'previewFile': '',
-        'tenderDocuments': "",
-        "attachement": "",
-        'pdf_url': "/documents/younojsxia.pdf"
+        // 'proBusinessNum': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
+        // + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'q' + 'w' + 'e' + 'r' + 'N'
+        // + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9) + Random.natural(0, 9),
+        // 'sellStartTime': () => Random.datetime(),
+        // 'sellEndTime': () => Random.datetime(),
+        // 'bidOpeningTime': () => Random.datetime(),
+        // 'getBidType': '在线下载',
+        // 'bidOpeningPlace': '北京海淀区',
+        // 'evaluationBidPlace': '北京市朝阳区',
+        // 'evaluationBidTime': () => Random.datetime(),
+        // 'paymentType': [0, 1, 2],
+        // 'uploadWay|1': [0, 1, 2],
+        // 'tenderFree': Random.float(10, 1000, 2, 2),
+        // 'postage': Random.float(10, 100, 2, 2),
+        // 'drawingDeposit': Random.float(10, 100, 2, 2),
+        // 'bidAgencyServiceFee': Random.float(1, 100, 2, 2) + '(浮动费率 （发改价格[2011]534号)',
+        // 'tenderBond': Random.float(10, 100, 2, 2) + '万元',
+        // 'previewFile': '',
+        // 'tenderDocuments': "",
+        // "attachement": "",
+        // 'pdf_url': "/documents/younojsxia.pdf"
     }],
 });
 // 修改密码页面登陆名以及密码
-let login = Mock.mock('/api/login', 'post', {
-    code: 200,
-    message: '成功!',
-    'msg': {
-        "name": 'dyzs2001@vip.sina.com',
-        "pass": '0',
-    }
-});
+// let login = Mock.mock('/api/login', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     'msg': {
+//         "name": 'dyzs2001@vip.sina.com',
+//         "pass": '0',
+//     }
+// });
 //一进页面判断是否已经绑定邮箱以及手机号码，
-let isbindingEmailPhone = Mock.mock('/api/isbindingEmailPhone', 'post', {
-    'data': {
-        name: "123",
-        pass: "0"
-    },
-    'massageList': {
-        "emaile": '1315619013@qq.com',
-        "phoneNum": "13325689861",
-        'IDNumber':'352226199505120036'//新加证件号码
-    },
-    'type|1': [
-        {
-            value: '1',
-            label: '有头像'
-        },
-        {
-            value: '2',
-            label: '没有头像'
-        }],
-    'img|1': {
-        "txph": "../../assets/image/txph.png"
-    }
-});
-//基本信息保存成功
-let save = Mock.mock('/api/save', 'post', {
-    code: 200,
-    message: '保存成功!',
-    data: []
-});
-//基本信息发送手机验证码
-let sendPhoneCode = Mock.mock('/api/sendPhoneCode', 'post', {
-    code: 200,
-    message: '成功!',
-    data: [1234]
-});
-//基本信息确定裁剪
-let comfirm_crop = Mock.mock('/api/comfirm_crop', 'post', {
-    code: 200,
-    message: '成功!',
-    data: []
-});
-//基本信息手机号绑定
-let phoneBinding = Mock.mock('/api/phoneBinding', 'post', {
-    code: 200,
-    message: '成功!',
-    data: [1234]
-});
-//基本信息发送邮箱验证码
-let sendEmailCode = Mock.mock('/api/sendEmailCode', 'post', {
-    code: 200,
-    message: '成功!',
-    data: [1234]
-});
-//基本信息邮箱绑定
-let Emailpd = Mock.mock('/api/Emailpd', 'post', {
-    code: 200,
-    message: '成功!',
-    data: [1234]
-});
+// let isbindingEmailPhone = Mock.mock('/api/isbindingEmailPhone', 'post', {
+//     'data': {
+//         name: "123",
+//         pass: "0"
+//     },
+//     'massageList': {
+//         "emaile": '1315619013@qq.com',
+//         "phoneNum": "13325689861",
+//         'IDNumber':'352226199505120036'//新加证件号码
+//     },
+//     'type|1': [
+//         {
+//             value: '1',
+//             label: '有头像'
+//         },
+//         {
+//             value: '2',
+//             label: '没有头像'
+//         }],
+//     'img|1': {
+//         "txph": "../../assets/image/txph.png"
+//     }
+// });
+// //基本信息保存成功
+// let save = Mock.mock('/api/save', 'post', {
+//     code: 200,
+//     message: '保存成功!',
+//     data: []
+// });
+// //基本信息发送手机验证码
+// let sendPhoneCode = Mock.mock('/api/sendPhoneCode', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     data: [1234]
+// });
+// //基本信息确定裁剪
+// let comfirm_crop = Mock.mock('/api/comfirm_crop', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     data: []
+// });
+// //基本信息手机号绑定
+// let phoneBinding = Mock.mock('/api/phoneBinding', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     data: [1234]
+// });
+// //基本信息发送邮箱验证码
+// let sendEmailCode = Mock.mock('/api/sendEmailCode', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     data: [1234]
+// });
+// //基本信息邮箱绑定
+// let Emailpd = Mock.mock('/api/Emailpd', 'post', {
+//     code: 200,
+//     message: '成功!',
+//     data: [1234]
+// });
 //密码修改页面的保存接口
-let save_pass = Mock.mock('/api/save_pass', 'post', {
-    code: 200,
-    message: '保存成功!',
-    data: []
-});
+// let save_pass = Mock.mock('/api/save_pass', 'post', {
+//     code: 200,
+//     message: '保存成功!',
+//     data: []
+// });
 let esta = Mock.mock('/api/esta', 'post', {
     msg: {
         'status|1': [0, 1]
@@ -265,7 +265,6 @@ function factors_standards(type){
                 txt: '夏丰热工研究院有限公司。资格审查评审项：内'
             }]
         }]
-
     ];
 
     /*
@@ -3088,6 +3087,13 @@ let isFailure_fhx = Mock.mock('/api/isFailure_fhx', 'post', {
 });
 //详细技术项合格不合格接口
 let isFailure_xxjs = Mock.mock('/api/isFailure_xxjs', 'post', {
+    code: 200,
+    message: '成功!',
+    data: '',
+    type: ''
+});
+// 综合评标( 商务服务技术其他radio)合格不合格radio接口
+let isFailure_zhpb = Mock.mock('/api/isFailure_zhpb', 'post', {
     code: 200,
     message: '成功!',
     data: '',

@@ -152,23 +152,24 @@
                             }
                             let _this = this;
                             setTimeout(function () {
-                                // _this.$axios.post(url, {type: parseInt(_this.type_btn) + 1,}).then(res => {
-                                console.log(parseInt(_this.type_btn) + 1, '0000');
-                                if (res.status == 200) {
-                                    window.location.href = "/elect/StartEvaluation?methodType=" + _this.methodType + "&currentpage=" + _this.type_btn + '&is_submit_type=1';
-                                    _this.$message({
-                                        message: _this.name + '评审成功！',
-                                        type: 'success'
-                                    });
-                                    _this.$store.state.failureEnery.submitPrompt=false;
-                                    _this.$store.state.failureEnery.flag = false;//false：已经提交，true:未提交
-                                    $("#hide_btn").hide();
-                                    // _this.allSubmitBtnLoading = true;
-                                } else {
-                                    // _this.allSubmitBtnLoading = true;
-                                }
-                            }, 2000)
-                        }
+                                _this.$axios.post(url, {currentPage: parseInt(_this.type_btn) + 1,}).then(res => {
+                                    // console.log(parseInt(_this.type_btn) + 1, '0000');
+                                    if (res.status == 200) {
+                                        window.location.href = "/elect/StartEvaluation?methodType=" + _this.methodType + "&currentpage=" + _this.type_btn + '&is_submit_type=1';
+                                        _this.$message({
+                                            message: _this.name + '评审成功！',
+                                            type: 'success'
+                                        });
+                                        _this.$store.state.failureEnery.submitPrompt = false;
+                                        _this.$store.state.failureEnery.flag = false;//false：已经提交，true:未提交
+                                        $("#hide_btn").hide();
+                                        // _this.allSubmitBtnLoading = true;
+                                    } else {
+                                        // _this.allSubmitBtnLoading = true;
+                                    }
+                                  })
+                                }, 2000)
+                            }
                     }
                 })
                 // this.$store.state.failureEnery.tijiaoNot100 = true;

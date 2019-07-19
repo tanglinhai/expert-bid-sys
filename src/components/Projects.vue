@@ -137,7 +137,6 @@
                 this.childMsg();
             },
             beginPingbiao(val){
-                // console.log(val);
                 this.$router.push(`/index/LetterCommitment?methodType=${val}`);
             },
             childMsg() {

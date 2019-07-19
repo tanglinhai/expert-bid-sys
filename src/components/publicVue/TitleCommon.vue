@@ -74,7 +74,6 @@
                ChangedialogVisible:false,  //调整评标价弹框
                TkOneloading:true,
                 ChangePriceTk:[],  //投标人最新报价列表弹框里面表格得数据
-
                 name:'',  //标包名称
                 biaoNum:'', //标包号
                 projectWenjian:'',//招标文件
@@ -103,10 +102,10 @@
             },
            handleCommand(val) {//弹框群
                 if (val === 'a') {//人员信息
-                    console.log("1")
+                    // console.log("1")
                     this.dialogAbandonedTender = true;
                 } else if (val === 'b') {//交通费标准
-                    console.log("2")
+                    // console.log("2")
                     this.dialogStandardChallengeInformation = true;
                     this.bzzxLoading = true;
                     this.$axios.post('/api/StandardChallengeList', {}).then(res => {
@@ -117,7 +116,6 @@
                         }
                     })
                 } else if (val === 'c') {//报销汇总表
-                    console.log("3")
                     this.$axios.get('/api/BiddingDocuments', {}).then(res => {
                         if (res.data.resultCode == 200) {
                             window.open(window.location.protocol + '//' + window.location.host + '/img/receipt.pdf', '_blank',);
@@ -152,16 +150,14 @@
             },
             sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
                 this.ChangedialogVisible = val;
-                console.log("1111111111111")
             },
             //包号，标包号，招标文件接口渲染
             ProjectInformationData(){
                 this.$axios.post('/api/baoInformations','post',{
                     //id:row.id,   //点击得id
                 }).then(res=>{
-                   // console.log(res,88888)
                     if(res.status == 200){
-                        console.log(res.data,3333333333)
+                        // console.log(res.data,3333333333)
                         this.name=res.data.result.name;
                         this.biaoNum=res.data.result.biaoNum;
                         this.baohao=res.data.result.baohao;

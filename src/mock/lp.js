@@ -784,31 +784,26 @@ let alltijiao_xxjs = Mock.mock('/api/alltijiao_xxjs', 'post', {
 });
 /*--------------------资格审查项接口start--------------------*/
 Mock.mock('/api/table_msg', 'post', (options) => {
-    // console.log(options);
     let return_val;
-    var submit_type;
+    let submit_type;
     let aaa=JSON.parse(options.body).is_submit_type;
-    // console.log(aaa);
     if(aaa){
         submit_type=aaa;
     }else{
         submit_type= Random.integer(0, 1);
     }
     let get_type_num=JSON.parse(options.body).currentPage;
-    // console.log(get_type_num,);
-    // var bidderIds = [Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id(),Random.id()];
-
     if (get_type_num == 4) {
     // if (get_type_num == 1) {
-        let ms = [];
-        for (var i = 0; i < Random.integer(1, 5); i++) {
-            ms.push({
-                date: '0',
-                isFinish: '未完成',
-                id: Random.id(),
-                name: Random.cname(),
-            })
-        }
+    //     let ms = [];
+    //     for (var i = 0; i < Random.integer(1, 5); i++) {
+    //         ms.push({
+    //             date: '0',
+    //             isFinish: '未完成',
+    //             id: Random.id(),
+    //             name: Random.cname(),
+    //         })
+    //     }
         return_val= {
             'bidMsg': {
                 id: Random.id(),
@@ -821,8 +816,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"资格审查-电脑硬件配置工作",
                     'companyNameList': [//(投标人)公司名
-                        // { "title":"（1）重庆网控科技发展有限公司",
-                        { "title":"公司",
+                        { "title":"（1）重庆网控科技发展有限公司",
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
@@ -831,7 +825,6 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         { "title": "（2）普瑞太阳能有限公司",
                             pdf: [{id: 'pdf2_1', pdf_name: 'pdf文件22', 'url1': "/documents/投标人2.pdf"}],
                             factors_standards:factors_standards(10)[1]
-
                         },
                         {
                             "title":"（3）夏丰热工研究院有限公司",
@@ -1045,12 +1038,13 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                             gradeExplain13:'',
                             gradeExplain14:'',
                             gradeExplain15:'',
+
                         },
                     ],
-                    'mylist': ms,
-                    vue_type: get_data(1),       //头部审查类型按钮
+                    // 'mylist': ms,
+                    // vue_type: get_data(1),       //头部审查类型按钮
                 },
-                msg: [  //个人形式审计表数据接口(改动)
+                msg: [  //个人资格审查项表数据接口(改动)
                     {
                         'number': '1',
                         'evaluationFactors': '资格审查1',
@@ -1206,8 +1200,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                     'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     'shenchaName':"形式审计-#707478",
                     'companyNameList': [//(投标人)公司名
-                        // { "title":"重庆网控科技发展有限公司（1）",
-                        { "title":"（1）",
+                        { "title":"重庆网控科技发展有限公司（1）",
                             pdf: [{id: 'pdf1_1', pdf_name: 'pdf文件11', 'url1': "/documents/投标人1.pdf"},
                                 {id: 'pdf1_2', pdf_name: 'pdf文件12', 'url1': "/documents/投标人11.pdf"},
                                 {id: 'pdf1_3', pdf_name: 'pdf文件13', 'url1': "/documents/投标人111.pdf"}],
@@ -1705,7 +1698,7 @@ Mock.mock('/api/table_msg', 'post', (options) => {
                         {
                             evaluationFactors: '详细评审1',
                             standardReview:'与营业执照、资质证书一致111',
-                            type: 'radio',//单选
+                            // type: 'radio',//单选
                             radioList: [
                                 {typeTitle: '合格', num: '合格'},
                                 {typeTitle: '不合格', num:'不合格'  },
@@ -1970,7 +1963,6 @@ Mock.mock('/api/table_data', 'post', (options) => {
     // console.log(options,'前端返回来的参数');
     let return_val;
     // let get_type_num=JSON.parse(options.body).type;
-
     var submit_type;
     let aaa=JSON.parse(options.body).is_submit_type;
     // console.log(aaa);
@@ -1979,7 +1971,6 @@ Mock.mock('/api/table_data', 'post', (options) => {
     }else{
         submit_type= Random.integer(0, 1);
     }
-
     let get_type_num=JSON.parse(options.body).currentPage;
     // console.log(get_type_num,'当前进行的是第一个');
     // if (get_type_num == 2) {//是区别那个页面
@@ -2013,7 +2004,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'baohao': '0635—1909qwerN1197/1',
                 //审查项
                 'eviewrItemsMsg': {
-                    'viewnBtnName': '个人资格审查项表',//左侧审查项类型
+                    // 'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     // 'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'isShow': submit_type,//1：解锁的那个页面显示，反之0：进度条的那个显示
                     'tables': [{//综合评标页面进度条数据
@@ -2424,7 +2415,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'baohao': '0635—1909qwerN1197/1',
                 //审查项
                 'eviewrItemsMsg': {
-                    'viewnBtnName': '个人资格审查项表',//左侧审查项类型
+                    // 'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
                     'tables': [{//综合评标页面进度条数据
@@ -2689,7 +2680,7 @@ Mock.mock('/api/table_data', 'post', (options) => {
                 'baohao': '0635—1909qwerN1197/1',
                 //审查项
                 'eviewrItemsMsg': {
-                    'viewnBtnName': '个人资格审查项表',//左侧审查项类型
+                    // 'viewnBtnName': '个人资格审查项表',//左侧审查项类型
                     //头部审查类型按钮
 
                     'isShow': Random.integer(0, 1),//1：解锁的那个页面显示，反之进度条的那个显示
@@ -2697,32 +2688,32 @@ Mock.mock('/api/table_data', 'post', (options) => {
                         'evaluationExpert': '评审专家七',
                         'businessReviewProgress': '5',
                         'isResultsBusinessReview': '未完成',
-                        ' technicalReviewProgress': '5',
-                        'isResultsTechnicalReview': '未完成',
-                        'serviceReviewProgress':'5',
-                        'isResultsServiceReview':"未完成",
-                        'otherReviewProgress':'5',
-                        'isResultsOtherReview':"未完成"
+                        // ' technicalReviewProgress': '5',
+                        // 'isResultsTechnicalReview': '未完成',
+                        // 'serviceReviewProgress':'5',
+                        // 'isResultsServiceReview':"未完成",
+                        // 'otherReviewProgress':'5',
+                        // 'isResultsOtherReview':"未完成"
                     }, {
                         'evaluationExpert': '评审专家五',
                         'businessReviewProgress':  '5',
                         'isResultsBusinessReview': '未完成',
-                        'technicalReviewProgress': '5',
-                        'isResultsTechnicalReview': '未完成',
-                        'serviceReviewProgress': '5',
-                        'isResultsServiceReview':"未完成",
-                        'otherReviewProgress':'5',
-                        'isResultsOtherReview':"未完成"
+                        // 'technicalReviewProgress': '5',
+                        // 'isResultsTechnicalReview': '未完成',
+                        // 'serviceReviewProgress': '5',
+                        // 'isResultsServiceReview':"未完成",
+                        // 'otherReviewProgress':'5',
+                        // 'isResultsOtherReview':"未完成"
                     }, {
                         'evaluationExpert': '评审专家一',
                         'businessReviewProgress':  '50',
                         'isResultsBusinessReview': '未完成',
-                        'technicalReviewProgress': '5',
-                        'isResultsTechnicalReview': '未完成',
-                        'serviceReviewProgress': '5',
-                        'isResultsServiceReview':"未完成",
-                        'otherReviewProgress':'5',
-                        'isResultsOtherReview':"未完成"
+                        // 'technicalReviewProgress': '5',
+                        // 'isResultsTechnicalReview': '未完成',
+                        // 'serviceReviewProgress': '5',
+                        // 'isResultsServiceReview':"未完成",
+                        // 'otherReviewProgress':'5',
+                        // 'isResultsOtherReview':"未完成"
                     }],
 
                     'tableData': [{
@@ -3428,14 +3419,14 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
     //     // } else if (get_type_num == 8) {
     // }
      if (get_type_num == 10) {
-        let msg = [];
-        msg.push(
-            {
-                'xuhao': '1',//序号
-                'dafenxiang': ' 0、商务1是否是官方配置？(50.00分) ',//打分项
-                'dingDang':'50.00',//定档
-            },
-        );
+        // let msg = [];
+        // msg.push(
+        //     {
+        //         'xuhao': '1',//序号
+        //         'dafenxiang': ' 0、商务1是否是官方配置？(50.00分) ',//打分项
+        //         'dingDang':'50.00',//定档
+        //     },
+        // );
         return_val= {
             'bidMsg': {
                 id: Random.id(),
@@ -3447,7 +3438,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
-                    'leibie':"商务",//大类别
+                    // 'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
                         { "title":"重庆网控科技发展有限公司（1）",
@@ -3879,231 +3870,231 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             rowIndex: 3
                         },
                     ],
-                    'msgBox': msg,//查看定档评议弹框表投标人数据
-                    'committeeGudges': [//查看定档评议表table数据
-                        {
-                            'companyName':'重庆网科技发展有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-
-                    ],
+                    // 'msgBox': msg,//查看定档评议弹框表投标人数据
+                    // 'committeeGudges': [//查看定档评议表table数据
+                    //     {
+                    //         'companyName':'重庆网科技发展有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //
+                    // ],
                     'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -4149,7 +4140,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
-                    'leibie':"商务",//大类别
+                    // 'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
                         { "title":"重庆网控科技发展有限公司（1）",
@@ -4428,231 +4419,231 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             rowIndex: 2
                         },
                     ],
-                    'msgBox': msg,//查看定档评议弹框表投标人数据
-                    'committeeGudges': [//查看定档评议表table数据
-                        {
-                            'companyName':'重庆网科技发展有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-
-                    ],
+                    // 'msgBox': msg,//查看定档评议弹框表投标人数据
+                    // 'committeeGudges': [//查看定档评议表table数据
+                    //     {
+                    //         'companyName':'重庆网科技发展有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //
+                    // ],
                     'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -4698,7 +4689,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
-                    'leibie':"商务",//大类别
+                    // 'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
                         { "title":"重庆网控科技发展有限公司（1）",
@@ -5002,230 +4993,230 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             rowIndex: 2
                         },
                     ],
-                    'msgBox': msg,//查看定档评议弹框表投标人数据
-                    'committeeGudges': [//查看定档评议表table数据
-                        {
-                            'companyName':'重庆网科技发展有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                    ],
+                    // 'msgBox': msg,//查看定档评议弹框表投标人数据
+                    // 'committeeGudges': [//查看定档评议表table数据
+                    //     {
+                    //         'companyName':'重庆网科技发展有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    // ],
                     'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -5271,7 +5262,7 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                 'eviewrItemsMsg': {
                     'is_tijiao': Random.integer(0, 1),//0：未提交；1：已经提交完成
                     'evaluationExpert': '评审专家五',//评审专家
-                    'leibie':"商务",//大类别
+                    // 'leibie':"商务",//大类别
                     'gongzuo_name':'评分',
                     'companyNameList': [//(投标人)公司名
                         { "title":"重庆网控科技发展有限公司（1）",
@@ -5544,231 +5535,231 @@ Mock.mock('/api/BusinessOther', 'post', (options) => {
                             rowIndex: 2//相当于id
                         },
                     ],
-                    'msgBox': msg,//查看定档评议弹框表投标人数据
-                    'committeeGudges': [//查看定档评议表table数据
-                        {
-                            'companyName':'重庆网科技发展有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-                        {
-                            'companyName':'夏丰热工研究院有限公司',
-                            'zhaunjiadata_gs':[
-                                {
-                                    'zhaunjiamingcheng': " 评标专家1",
-                                    'zhaunjia1':["50.00", "50.00", "50.00"]
-                                } ,
-                                {
-                                    'zhaunjiamingcheng': "评标专家5",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                },
-                                {
-                                    'zhaunjiamingcheng': "评标专家7",
-                                    'zhaunjia1':["50.00", "50.00","50.00"]
-                                }
-                            ]
-                        },
-
-                    ],
+                    // 'msgBox': msg,//查看定档评议弹框表投标人数据
+                    // 'committeeGudges': [//查看定档评议表table数据
+                    //     {
+                    //         'companyName':'重庆网科技发展有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         'companyName':'夏丰热工研究院有限公司',
+                    //         'zhaunjiadata_gs':[
+                    //             {
+                    //                 'zhaunjiamingcheng': " 评标专家1",
+                    //                 'zhaunjia1':["50.00", "50.00", "50.00"]
+                    //             } ,
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家5",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             },
+                    //             {
+                    //                 'zhaunjiamingcheng': "评标专家7",
+                    //                 'zhaunjia1':["50.00", "50.00","50.00"]
+                    //             }
+                    //         ]
+                    //     },
+                    //
+                    // ],
                     'viewScheduleTitileData':{//查看定档评议表弹框表表头数据
                         'groupName': '0' + '6' + Random.natural(0, 0) + Random.natural(0, 9) + '-'
                         + Random.natural(0, 6) + Random.natural(5, 9) + Random.natural(0, 6) + Random.natural(5, 9) + 'N'
@@ -5938,7 +5929,6 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     // console.log(options,'前端返回来的参数');
     let return_val;
 // let get_type_num=JSON.parse(options.body).type;
-
     var submit_type;
     let aaa=JSON.parse(options.body).is_submit_type;
     // console.log(aaa);
@@ -5947,7 +5937,6 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
     }else{
         submit_type= Random.integer(0, 1);
     }
-
     let get_type_num=JSON.parse(options.body).currentPage;
     // console.log(get_type_num,'当前进行的是第一个');
     // let get_type_num=JSON.parse(options.body).type;
@@ -6218,36 +6207,36 @@ Mock.mock('/api/pingshen_huizong', 'post', (options) => {
                             ]
                         },
                     ],
-                    tables: [{//综合评标页面进度条数据
+                    tables: [{//评标页面进度条数据
                         evaluationExpert: '评审专家七',
                         businessReviewProgress: '5',
                         isResultsBusinessReview: '未完成',
-                        technicalReviewProgress: '5',
-                        isResultsTechnicalReview: '未完成',
-                        serviceReviewProgress:'5',
-                        isResultsServiceReview:"未完成",
-                        otherReviewProgress:'5',
-                        isResultsOtherReview:"未完成"
+                        // technicalReviewProgress: '5',
+                        // isResultsTechnicalReview: '未完成',
+                        // serviceReviewProgress:'5',
+                        // isResultsServiceReview:"未完成",
+                        // otherReviewProgress:'5',
+                        // isResultsOtherReview:"未完成"
                     }, {
                         evaluationExpert: '评审专家五',
                         businessReviewProgress:  '5',
                         isResultsBusinessReview: '未完成',
-                        technicalReviewProgress: '5',
-                        isResultsTechnicalReview: '未完成',
-                        serviceReviewProgress: '5',
-                        isResultsServiceReview:"未完成",
-                        otherReviewProgress:'5',
-                        isResultsOtherReview:"未完成"
+                        // technicalReviewProgress: '5',
+                        // isResultsTechnicalReview: '未完成',
+                        // serviceReviewProgress: '5',
+                        // isResultsServiceReview:"未完成",
+                        // otherReviewProgress:'5',
+                        // isResultsOtherReview:"未完成"
                     }, {
                         evaluationExpert: '评审专家一',
                         businessReviewProgress:  '50',
                         isResultsBusinessReview: '未完成',
-                        technicalReviewProgress: '5',
-                        isResultsTechnicalReview: '未完成',
-                        serviceReviewProgress: '5',
-                        isResultsServiceReview:"未完成",
-                        otherReviewProgress:'5',
-                        isResultsOtherReview:"未完成"
+                        // technicalReviewProgress: '5',
+                        // isResultsTechnicalReview: '未完成',
+                        // serviceReviewProgress: '5',
+                        // isResultsServiceReview:"未完成",
+                        // otherReviewProgress:'5',
+                        // isResultsOtherReview:"未完成"
                     }],
                     'biddersScoreTitleData':[],
                     tableData: [{
@@ -7138,7 +7127,12 @@ let submitBtnZHPB = Mock.mock('/api/submitBtnZHPB', 'post', {
     data: [],
     vue_type: get_data(14)
 });
+let basePricefinalComfrimBtnData_hldj = Mock.mock('/api/basePricefinalComfrimBtnData_hldj', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: [],
 
+});
 
 //商务保存接口
 let fuwu_save = Mock.mock('/api/fuwu_save', 'post', {
