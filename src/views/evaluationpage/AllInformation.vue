@@ -247,20 +247,20 @@
                     }).catch(() => {
                 });
             },
-            navcommonsListFun(){
-                this.$axios.post('/api/navcommons',{
-                    //invitioninpval:this.invitioninpval,   //传值关键词
-                    //redshow:this.redshow,    //四个按钮选中的是id
-                }).then(res=>{
-                    if(res.status == 200){
-                       //console.log(res.data)
-                        this.navcommonsList=res.data.navsAll;
-                        this.$nextTick(function(){
-                            //$("#2").addClass("backblue");
-                        })
-                    }
-                })
-            },
+            // navcommonsListFun(){
+            //     this.$axios.post('/api/navcommons',{
+            //         //invitioninpval:this.invitioninpval,   //传值关键词
+            //         //redshow:this.redshow,    //四个按钮选中的是id
+            //     }).then(res=>{
+            //         if(res.status == 200){
+            //            //console.log(res.data)
+            //             this.navcommonsList=res.data.navsAll;
+            //             this.$nextTick(function(){
+            //                 //$("#2").addClass("backblue");
+            //             })
+            //         }
+            //     })
+            // },
 
             AgreeXieYi(){  //参加评标
                 this.BtnLoading=true,
