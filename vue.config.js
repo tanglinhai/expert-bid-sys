@@ -36,7 +36,7 @@ module.exports = {
   },
 
  configureWebpack: config => { // webpack配置，值位对象时会合并配置，为方法时会改写配置
-    config.devtool = 'source-map'
+    //config.devtool = 'source-map'
     if (debug) { // 开发环境配置
       
       
@@ -125,7 +125,7 @@ module.exports = {
 
   // 开启 CSS source maps?
 
-  sourceMap: true,
+  sourceMap: !debug,
 
   // css预设器配置项
 
