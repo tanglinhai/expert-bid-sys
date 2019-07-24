@@ -1,0 +1,15 @@
+﻿{
+  "ignore":[
+      "jquery.min.js",
+      "es5-shim.min.js",
+      "html5shiv.min.js",
+      "domTokenlist.js",
+      "polyfill.js",
+      "respond.min.js",
+      "dist/",
+      "docs/",
+      "public/",
+      "node_modules/"
+  ]
+
+}
