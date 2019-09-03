@@ -331,7 +331,7 @@
                             <el-button type="primary" @click="failureEntryConfirmBtn('ruleForm')" size="small">
                                 <i class="icon iconfont icon-baocun1 mr5"></i> 确定
                             </el-button>
-                            <el-button @click="$store.state.failureEnery.show=false" size="small" type="primary">
+                            <el-button @click="closeFailureDialog" size="small" type="primary">
                                 <i class="icon iconfont icon-fanhuishouye1 mr5"></i>返回
                             </el-button>
                         </el-form-item>
@@ -474,13 +474,13 @@
         data() {
             return {
                 page_loading: false,
-                tableData: [],//table1数据
+                // tableData: [],//table1数据
                 msgBox: [],//个人形式审计表table数据
                 grcsMsgBoxTitle: [],//个人形式审计表table的公司名以及内部数据数据
                 grzgTitleData: {},//个人形式审计表按钮切换table表头数据
                 grzgscFailureData: [],//个人形式审计表不合格数据
-                idradionoprss: '',//table不合格的id
-                operationType: [],
+                // idradionoprss: '',//table不合格的id
+                // operationType: [],
                 /* -------头部包信息-----*/
                 name: "",//标包名称
                 biaoNum: '',
@@ -491,7 +491,7 @@
                 personalAuditFormBtn: "",//个人资格审查项按钮数据
                 /*-------------------右侧主体部分数据-------------------*/
                 obj: {},//接受每次点击的数据
-                radioArr: [],//所有table的radio
+                // radioArr: [],//所有table的radio
                 type_btn: '',//导航传值类型
                 to_submit_prompt_name: "",//传给全部提交弹框的值
                 to_submit_prompt_baohao: "",//传给全部提交弹框的值
@@ -502,8 +502,8 @@
                 // cities: [],
                 // tableDataTwo: [],
                 bzzxLoading: true, //标中质询loading
-                son_all_checked: [],//子节点全选
-                son_all_che: [],//子节点全选
+                // son_all_checked: [],//子节点全选
+                // son_all_che: [],//子节点全选
                 /* ----------------------------pdf start------------------------------- */
                 filter_bidder: '',
                 filter_factor: '',
@@ -512,8 +512,8 @@
                 /* ----------------------------pdf end------------------------------- */
                 allCheckedBtnLoading: false,//父级全选按钮loadding
                 allSubmitBtnLoading: false,//父级提交按钮loadding
-                sonAllSubmitBtnLoading: false,//子级提交按钮loadding
-                sonAllCheckedBtnLoading: false,//父级提交按钮loadding
+                // sonAllSubmitBtnLoading: false,//子级提交按钮loadding
+                // sonAllCheckedBtnLoading: false,//父级提交按钮loadding
                 methodType: '',//区分那种方法
                 personalAuditFormDialog: false,//个人资格审查项按钮弹框
                 companyname_toubiao: [],//投标人数据
@@ -727,7 +727,6 @@
                 // this.$axios.post('/api/table_msg', {type: this.type_btn}).then(res => {
                 this.$axios.post('/api/table_msg', {currentPage: this.type_btn,is_submit_type:this.$route.query.is_submit_type}).then(res => {
                     if (res.status === 200) {
-                        console.log(res.data,'start');
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.to_submit_prompt_baohao = this.baohao.split('/')[1];//以/为分割线，将字符串截成数组，数组就只有两项，取第二项
@@ -827,7 +826,6 @@
 
             allChecked() {//全选（不用区分url）
                 // this.determineOperatingDialog = true;
-
                 let _this = this;
                 _this.$confirm('您确定要执行此操作?', '全部选中提示', {
                     confirmButtonText: '确定',
@@ -871,7 +869,6 @@
                 // else if (this.type_btn == 5) {
                 //     url = '/api/alltijiao_xxjs';
                 // }
-
                 // if (this.type_btn == 6) {
                 //     url = '/api/alltijiao_fhx';
                 // } else if (this.type_btn == 4) {
@@ -940,7 +937,7 @@
                         this.$axios.post('/api/save', 'post', {
                             data: this.$data.ruleForm.desc,
                         }).then(res => {
-                            if (res.data.code == 200) {
+                            if (res.status == 200) {
                                 this.dingdang_tableData[this.rowIndex]['gradeExplain' + this.colIndex] = this.$data.ruleForm.desc;
                                 this.$data.ruleForm.desc = '';
                                 this.$message({
@@ -956,6 +953,10 @@
                         return false;
                     }
                 });
+            },
+            closeFailureDialog(){
+                this.$data.ruleForm.desc = '';
+                this.failureEntryDialog=false;
             },
             handleRowClick: function (row, column, event) {//资格审查表点击行数据出现审查标准
                 this.standardReviewTips = row.standardReview;

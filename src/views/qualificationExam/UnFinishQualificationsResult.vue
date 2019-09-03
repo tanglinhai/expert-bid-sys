@@ -173,7 +173,6 @@
             >
                 <StandardChallengeInformation :cities="cities" :tableData="tableDataTwo"
                                               :bzzxLoading="bzzxLoading"></StandardChallengeInformation>
-
             </el-dialog>
             <!--标中质询弹框-->
             <!--<el-dialog-->
@@ -317,7 +316,6 @@
                $(".qita_expalin").text('11');
                $('.qita_expalin_input').hide()
            }
-
         if(this.type==5){
                 this.huizongSubmitTips='资格审查汇总';
             }else if(this.type==7){
@@ -326,7 +324,6 @@
                 this.huizongSubmitTips='详细评审（技术）汇总';
             }
            this.init();
-
         },
         computed: {},
         methods: {
@@ -338,11 +335,10 @@
                     // type:2
                 }).then(res => {
                     if (res.status === 200) {
-                        console.log(res.data,'汇总页');
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
-                        this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
+                        // this.options = res.data.bidMsg.eviewrItemsMsg.viewType;
                         this.msgBox = res.data.bidMsg.eviewrItemsMsg.tables;//进度条表格数据
                         this.tableHead=res.data.bidMsg.eviewrItemsMsg.tableData;//进度条表格表头数据
                         this.unlock_table = res.data.bidMsg.eviewrItemsMsg.unlock_table_data;
@@ -427,7 +423,7 @@
                     // if (this.type == 4) {
                     //     url = '/api/tijiao_fhx';
                     // } else if (this.type == 2) {
-                    //     url = '/api/tijiao';
+                    //     url = '/api/tijiao';9
                     // }
                     // else if (this.type == 6) {
                     //     url = '/api/tijiao_xxjs';

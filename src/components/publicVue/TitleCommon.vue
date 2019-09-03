@@ -77,15 +77,10 @@
                 name:'',  //标包名称
                 biaoNum:'', //标包号
                 projectWenjian:'',//招标文件
-
-
             }
         },
         // 父组件传过来的值
-        props:{
-           
-            
-        },
+        props:{ },
         components:{
             AbandonedTender,//废标
             StandardChallengeInformation,//标中质询

@@ -89,11 +89,8 @@
                 }]
             }
         },
-        created() {
-        },
-        mounted() {
-
-        },
+        created() {  },
+        mounted() {  },
         methods: {
             reback() {
                 this.$store.state.failureEnery.unlock_record = false;
@@ -103,7 +100,4 @@
 </script>
 
 <style lang="scss">
-    .ViewUnlockRecord {
-
-    }
 </style>

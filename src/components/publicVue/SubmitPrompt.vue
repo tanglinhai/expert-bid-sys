@@ -168,7 +168,7 @@
                                         // _this.allSubmitBtnLoading = true;
                                     }
                                   })
-                                }, 2000)
+                                },500)
                             }
                     }
                 })

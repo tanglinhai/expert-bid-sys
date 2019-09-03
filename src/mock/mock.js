@@ -88,11 +88,11 @@ let bagTitMs = Mock.mock('/api/bagMsg', 'post', {
 //     }
 // });
 // //基本信息保存成功
-// let save = Mock.mock('/api/save', 'post', {
-//     code: 200,
-//     message: '保存成功!',
-//     data: []
-// });
+let save = Mock.mock('/api/save', 'post', {
+    code: 200,
+    message: '保存成功!',
+    data: []
+});
 // //基本信息发送手机验证码
 // let sendPhoneCode = Mock.mock('/api/sendPhoneCode', 'post', {
 //     code: 200,

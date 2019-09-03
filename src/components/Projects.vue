@@ -29,8 +29,7 @@
                         <el-row v-if="projectBagMsg.length == 0" class="no_data">
                             <el-col :span="24">
                                 <div class="grid-content bg-purple zeroBox">
-                                    <img src="../assets/img/no_data_icon.png" alt="">
-                                    <el-button class="btnBg" @click="refreshBtn"   >  <i  class="icon iconfont icon-fresh  mr3 fs14" ></i>刷新</el-button>
+                                      <el-button class="btnBg" @click="refreshBtn"   >  <i  class="icon iconfont icon-fresh  mr3 fs14" ></i>刷新</el-button>
                                     <p class="countdown_prompt">&nbsp;{{count}}&nbsp;秒后自动刷新！</p>
                                 </div>
                             </el-col>
@@ -71,7 +70,7 @@
                                         </el-col>
                                         <el-col style="width:20%" class="btns_div">
                                             <el-col :span="11" class="begin_bidding" style="text-align: right">
-                                                <el-button size="small" class="btnBg"     @click="beginPingbiao(item.methodType)" >
+                                                <el-button size="small" class="btnBg"    @click="beginPingbiao(item.methodType)" >
                                                     <i  class="icon iconfont icon-kaishi mr3"></i>开始评标
                                                 </el-button>
                                             </el-col>
@@ -276,7 +275,6 @@
                             position: absolute;
                             top: 130px;
                             right: 15px;
-
                         }
                     }
                     .collBox {

@@ -42,7 +42,7 @@
                                 this.$message({
                                     type: 'success',
                                     message: '编辑成功',
-                                    center: true
+                                    center: true,
                                 });
                             }
                         })

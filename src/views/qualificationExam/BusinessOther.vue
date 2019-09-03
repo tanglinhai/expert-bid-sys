@@ -1133,8 +1133,6 @@
                 <!--<SubmitPrompt :name="to_submit_prompt_name" :pro_num="completePercent"-->
                 <!--:baohao="to_submit_prompt_baohao" :type1="type"-->
                 <!--:dingdang_tableData="dingdang_tableData" :companyname_toubiao="companyname_toubiao"></SubmitPrompt>-->
-
-
                 <div class="submitPrompt ">
                     <el-row class="textAlignC fs14" style="line-height: 30px">您的{{to_submit_prompt_name}}工作已进行
                         [&nbsp;<span
@@ -1264,7 +1262,7 @@
             return {
                 page_loading: false,
                 type: '',//路由传递的参数：区分是那个导航
-                options: [],//头部导航按钮数组
+                // options: [],//头部导航按钮数组
                 companyname_toubiao: [],//定档评议table的投标人数组
                 dingdang_tableData: [],//定档评议table
                 evaluationExpert: "",// 专家
@@ -1408,7 +1406,7 @@
             }
         },
         created() {
-            console.log(this.$route.query);
+            // console.log(this.$route.query);
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
@@ -1466,7 +1464,6 @@
                     let num = 0;
                     let allNum = (this.dingdang_tableData.length - 2) * this.companyname_toubiao.length;
                     let arr = this.dingdang_tableData.slice(0, -2);//去除最后两项
-                    console.log(arr);
                     arr.forEach(e => { //循环表数据
                         this.companyname_toubiao.forEach((k, i) => {
                             if (e[`value${i + 1}`] !== '' && e[`value${i + 1}`].length != 0) {
@@ -1597,7 +1594,6 @@
                     // type:2
                 }).then(res => {
                     if (res.status == 200) {
-                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
@@ -1686,7 +1682,6 @@
                 this.pageLoading = true;
                 this.init();
             },
-
             cellLeave(row, col, cell) {//离开单元格
                 let rowIndex = Number(row.rowIndex);
                 let colIndex = Number(col.columnKey);
@@ -1816,7 +1811,6 @@
                         }, 500)
                     }
                 }
-                // console.log(value, rowIndex, colIndex, rowList);
                 if (/[^\d]/.test(value)) {/*替换非数字字符  */
                     this.$message({
                         type: 'warning',
@@ -1826,7 +1820,6 @@
                     this.dingdang_tableData[rowIndex]['bool' + colIndex] = true;
                 } else {
                     this.dingdang_tableData[rowIndex]['bool' + colIndex] = false;
-                    // console.log(this.dingdang_tableData);
                     if (Number(value) >= rowList.min && Number(value) <= rowList.max) {
                         let arr = [];
                         let amt = 0;
@@ -1963,7 +1956,6 @@
                             }
                         })
                     }
-
                 } else if (this.type == 11) {
                     if (this.completePercent != 100.0) {
                         this.$message({

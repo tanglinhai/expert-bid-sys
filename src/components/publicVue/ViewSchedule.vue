@@ -63,7 +63,6 @@
         },
         mounted() {
             $(" tr:last-child .cell").css(' padding-right',0)
-
         },
         methods: {
             reback() {

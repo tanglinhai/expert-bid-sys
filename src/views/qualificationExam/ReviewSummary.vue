@@ -882,7 +882,7 @@
             }
         },
         created() {
-            console.log(this.$route.query.methodType,5,this.$route.query.type);
+            // console.log(this.$route.query.methodType,5,this.$route.query.type);
             if (this.$route.query.methodType == undefined) {
                 this.methodType = 1;
             } else {
@@ -907,7 +907,6 @@
                     is_submit_type: this.$route.query.is_submit_type
                 }).then(res => {
                     if (res.status === 200) {
-                        console.log(res.data);
                         this.name = res.data.bidMsg.name;
                         this.baohao = res.data.bidMsg.baohao;
                         this.biaoNum = res.data.bidMsg.biaoNum;
