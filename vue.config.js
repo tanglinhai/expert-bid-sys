@@ -7,7 +7,6 @@ const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
-
  // 基本路径
  publicPath: '/',
  // 输出文件目录
@@ -34,13 +33,10 @@ module.exports = {
     } else {
       // 生产开发配置
     }
-    config.watchOptions= {
-      ignored: /public\/upload/
-    }
   },
 
  configureWebpack: config => { // webpack配置，值位对象时会合并配置，为方法时会改写配置
-    config.devtool = 'source-map'
+    //config.devtool = 'source-map'
     if (debug) { // 开发环境配置
       
       
@@ -60,7 +56,7 @@ module.exports = {
     }
     config.watch = false;
     config.watchOptions= {
-      ignored: /public\/upload/
+      ignored: [/public/,/node_modules/,/dist/,/docs/,/src\/assets\/img/]
     }
 
     /*config.module= {
@@ -106,19 +102,7 @@ module.exports = {
     }
 */
 
-    config.optimization = !debug ? {
-      minimize: false,
-      minimizer: [new optimizeCss({
-          cssProcessorOptions: {
-            map: {
-              inline: false,
-              annotation: true,
-            }
-          }
-      }),new uglifyjsPlugin({
-          sourceMap: true
-      })],
-    } : {}
+    
   },
 
  // vue-loader 配置项
@@ -141,7 +125,7 @@ module.exports = {
 
   // 开启 CSS source maps?
 
-  sourceMap: true,
+  sourceMap: !debug,
 
   // css预设器配置项
 
@@ -201,7 +185,7 @@ module.exports = {
   hot: true,
   hotOnly: true,
   watchOptions: {
-    ignored: 'public/upload'
+    ignored: [/public/,/node_modules/,/dist/,/docs/,/src\/assets\/img/]
   }
 
  },
