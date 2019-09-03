@@ -54,6 +54,11 @@ module.exports = {
       //"mockjs": "Mock",
        'jquery': 'jQuery'
     }
+    config.watch = false;
+    config.watchOptions= {
+      ignored: [/node_modules/,/dist/,/docs/,/src\/assets\/img/]
+    }
+
     /*config.module= {
       rules:[
         {
@@ -179,6 +184,10 @@ module.exports = {
 
   hot: true,
   hotOnly: true,
+  watchOptions: {
+    ignored: [/node_modules/,/dist/,/docs/,/src\/assets\/img/]
+  }
+
  },
 
  // 第三方插件配置
