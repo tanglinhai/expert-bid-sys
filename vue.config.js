@@ -56,7 +56,7 @@ module.exports = {
     }
     config.watch = false;
     config.watchOptions= {
-      ignored: [/public/,/node_modules/,/dist/,/docs/,/src\/assets\/img/]
+      ignored: [/node_modules/,/dist/,/docs/,/src\/assets\/img/]
     }
 
     /*config.module= {
@@ -185,7 +185,7 @@ module.exports = {
   hot: true,
   hotOnly: true,
   watchOptions: {
-    ignored: [/public/,/node_modules/,/dist/,/docs/,/src\/assets\/img/]
+    ignored: [/node_modules/,/dist/,/docs/,/src\/assets\/img/]
   }
 
  },
