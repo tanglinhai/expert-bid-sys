@@ -17,6 +17,8 @@
                             class="el-icon-arrow-down el-icon--right"></i>
                     </el-button>
                     <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="h">围串标分析</el-dropdown-item>
+                        <el-dropdown-item command="i">否决供应商</el-dropdown-item>
                         <el-dropdown-item command="a">废标</el-dropdown-item>
                         <el-dropdown-item command="b">标中质询</el-dropdown-item>
                         <el-dropdown-item command="c">查看招标文件</el-dropdown-item>
@@ -28,7 +30,24 @@
                 </el-dropdown>
             </div>
         </el-col>
-
+        <!--否决供应商-->
+            <el-dialog
+                    title="否决供应商"
+                    :visible.sync="dialogSupplierRejection"
+                    width="1000px"
+            >
+                <SupplierRejection @sonToFather="dialogSupplierRejection=false"></SupplierRejection>
+            </el-dialog>
+        <!--否决供应商-->
+        <!--围串标分析-->
+            <el-dialog
+                    title="围串标分析"
+                    :visible.sync="dialogClusterAnalysis"
+                    width="1000px"
+            >
+                <ClusterAnalysis @sonToFather="dialogClusterAnalysis=false"></ClusterAnalysis>
+            </el-dialog>
+        <!--围串标分析-->
          <!--废标弹框-->
             <el-dialog
                     title="废标"
@@ -60,6 +79,8 @@
 </template>
 
 <script>
+    import ClusterAnalysis from '../../components/dialog/ClusterAnalysis';  //围串标分析
+    import SupplierRejection from '../../components/dialog/SupplierRejection';  //否决供应商
     import AbandonedTender from '../../components/dialog/AbandonedTender';  //废标
     import StandardChallengeInformation from '../../components/dialog/StandardChallengeInformation';//标中质询
     import ChangePrice from '../../components/publicVue/ChangePrice.vue';  //调整评标基准价
@@ -67,6 +88,8 @@
         name: "",
         data(){
             return {
+               dialogClusterAnalysis:false,  //围串标分析
+               dialogSupplierRejection:false,  //否决供应商
                dialogAbandonedTender: false, //废标
                dialogStandardChallengeInformation: false,//标中质询信息表
                tableDataTwo: [],
@@ -82,6 +105,8 @@
         // 父组件传过来的值
         props:{ },
         components:{
+            ClusterAnalysis, //围串标分析
+            SupplierRejection,//否决供应商
             AbandonedTender,//废标
             StandardChallengeInformation,//标中质询
              ChangePrice,//调整评标基准价
@@ -141,6 +166,11 @@
                         this.TkOneloading=false;
                         }
                     })
+                }else if(val === 'h'){  //围串标分析
+                    this.dialogClusterAnalysis=true;
+                }else if(val === 'i'){  //围串标分析
+                    console.log(val);
+                    this.dialogSupplierRejection=true;
                 }
             },
             sonToFather(val){  //调整评标基准价子集得返回点击关闭事件传值
