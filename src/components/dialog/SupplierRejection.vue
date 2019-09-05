@@ -41,7 +41,6 @@
                     </div>
                 </template>
             </el-table-column>
-            
           </el-table>
           <div class="block" style="margin:10px auto; text-align:center">
             <el-pagination
@@ -126,9 +125,11 @@
          tableData: [{   //硬件特征码分析数据
             SupplieName: '北京蓝天环境保护有限公司（测试）',
             SupplieStatus: '未否决',
+            RejectReason:'',
           }, {
             SupplieName: '夏丰热工研究院有限公司（测试）',
             SupplieStatus: '未否决',
+            RejectReason:'',
           }],
           
           currentPage4: 4,
@@ -136,7 +137,8 @@
           multipleSelection: [],
           search: '',//未否决供应商搜索输入值
           centerDialogVisible: false,  //否决点击弹框
-          selectTableUndData:[],
+          //selectTableUndData:[],   //弹框数据推进
+          
         }
       },
       mounted(){
@@ -144,12 +146,14 @@
       },
       methods: {
         handleSelectionChange(val) {
-          //this.multipleSelection = val;
-          console.log(val,99999)
+          this.multipleSelection = val;
+          console.log(this.multipleSelection,val,99999)
         },
         foujueBtn(){   //未否决供应商否决按钮
           this.centerDialogVisible=true;
-
+          // if(){
+            
+          // }
         },
         cancel() {    
            this.centerDialogVisible=false;
