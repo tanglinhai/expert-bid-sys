@@ -150,7 +150,10 @@
           console.log(this.multipleSelection,val,99999)
         },
         foujueBtn(){   //未否决供应商否决按钮
-          this.centerDialogVisible=true;
+            console.log(this.multipleSelection,1111)
+            this.centerDialogVisible=true;
+            console.log(this.multipleSelection,2222)
+            this.handleSelectionChange();
           // if(){
             
           // }
