@@ -19,10 +19,14 @@
           <el-table
             :data="tableData.filter(data => !search || data.SupplieName.toLowerCase().includes(search.toLowerCase()))"
             ref="multipleTable"
-            @selection-change="handleSelectionChange"
+            stripe
+            @selection-change="Change"
+            row-key="ID"
             style="width: 100%">
             <el-table-column
               type="selection"
+              prop="ID" 
+              :reserve-selection="true" 
               width="150">
             </el-table-column>
             <el-table-column
@@ -79,22 +83,50 @@
                     <el-button type="primary" @click="confirm">确 定</el-button>
                     <el-button @click="cancel">取 消</el-button>
             </span>
-            </el-dialog>
+          </el-dialog>
         </el-tab-pane>
         <el-tab-pane label="已否决供应商">
+          <el-row class="borderLine">
+              <el-col :span="22"><div class="grid-content bg-purple-dark">
+                  <el-input placeholder="快速查找" size="medium"  v-model="searchDeny"></el-input>
+              </div></el-col>
+              <el-col :span="2"><div class="grid-content bg-purple-dark fr">
+                  <div class="block">
+                      <el-button type="primary" size="medium" @click="centerDialogVisibleDeny=true">恢复</el-button>
+                      <!-- <el-button  size="medium" @click="close">关闭</el-button> -->
+                  </div>
+              </div></el-col>
+          </el-row>
+          <div class="fiexd">
+              全选/全不选
+          </div>
           <el-table
+            ref="TableDeny"
             empty-text="暂无数据"
-            :data="SametableData"
+            :data="SametableData.filter(data => !searchDeny || data.SupplieName.toLowerCase().includes(searchDeny.toLowerCase()))"
+            @selection-change="changeDeny"
+            row-key="ID"
             style="width: 100%">
+            <el-table-column width="150" type="selection" prop="ID" :reserve-selection="true"></el-table-column>
             <el-table-column
-              type="index"
-              label="序号"
-              width="450">
+              prop="SupplieName"
+              label="供应商名称"
+              >
             </el-table-column>
             <el-table-column
-              prop="SameSupplieName"
-              label="供应商名称"
-              width="450">
+              prop="SupplieStatus"
+              label="状态"
+              >
+            </el-table-column>
+            <el-table-column 
+              prop="RejectPhase" 
+              label="否决阶段"
+              >
+            </el-table-column>
+            <el-table-column 
+              prop="RejectReason" 
+              label="否决原因"
+              >
             </el-table-column>
           </el-table>
           <div class="block" style="margin:10px auto; text-align:center">
@@ -108,6 +140,32 @@
               :total="10">
             </el-pagination>
           </div>
+          <el-dialog
+            title="选中后的数据"
+            :visible.sync="centerDialogVisibleDeny"
+            width="25%"
+            center
+            append-to-body
+            >
+              <div>
+                  <el-table v-loading="loading"
+                            element-loading-text="拼命加载中"
+                            element-loading-spinner="el-icon-loading"
+                            element-loading-background="rgba(0, 0, 0, 0.8)"
+                            stripe
+                            style="width: 100%"
+                            :data="selectTableDataDeny"
+                            ref='unTab'
+                  >
+                      <el-table-column prop="SupplieName" label="供应商名称"></el-table-column>
+                      <el-table-column prop="SupplieStatus" label="状态"></el-table-column>
+                  </el-table> 
+              </div>
+              <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="confirm">确 定</el-button>
+                      <el-button @click="cancelDeny">取 消</el-button>
+              </span>
+          </el-dialog>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -122,44 +180,85 @@
         },
       data() {
         return {
-         tableData: [{   //硬件特征码分析数据
+         tableData: [{   //未否决供应商
             SupplieName: '北京蓝天环境保护有限公司（测试）',
             SupplieStatus: '未否决',
             RejectReason:'',
+            ID:'11111',
           }, {
             SupplieName: '夏丰热工研究院有限公司（测试）',
             SupplieStatus: '未否决',
             RejectReason:'',
+            ID:'222222',
           }],
-          
+          SametableData:[{//已否决供应商
+            SupplieName: '北京蓝天环境保护有限公司（测试）',
+            SupplieStatus: '未否决',
+            RejectReason:'SDFSSSDF',
+            RejectPhase:'符合性评审',
+            ID:'11111',
+          },{
+            SupplieName: '大连跃胜贸易有限公司',
+            SupplieStatus: '未否决',
+            RejectReason:'SDFSSSDF',
+            RejectPhase:'符合性评审',
+            ID:'44444444',
+          }],
+          //multipleSelection:[],
           currentPage4: 4,
           currentPage5: 1,
-          multipleSelection: [],
           search: '',//未否决供应商搜索输入值
+          searchDeny:'',//已否决供应商搜索输入值
           centerDialogVisible: false,  //否决点击弹框
-          //selectTableUndData:[],   //弹框数据推进
-          
+          selectTableUndData:[],   //弹框数据推进
+
+          centerDialogVisibleDeny:false,
+          selectTableDataDeny:[],
         }
       },
       mounted(){
         
       },
       methods: {
-        handleSelectionChange(val) {
-          this.multipleSelection = val;
-          console.log(this.multipleSelection,val,99999)
+        Change(val) {
+          this.selectTableUndData = val;
+          //console.log(this.multipleSelection,val,this.selectTableUndData,99999)
+        },
+        changeDeny(val){
+          this.selectTableDataDeny = val;
         },
         foujueBtn(){   //未否决供应商否决按钮
-            console.log(this.multipleSelection,1111)
+          var count = this.selectTableUndData.length;
+          var count1 = 0;
+          if(this.selectTableUndData.length==0){
             this.centerDialogVisible=true;
-            console.log(this.multipleSelection,2222)
-            this.handleSelectionChange();
-          // if(){
-            
-          // }
+          }else{
+            this.selectTableUndData.forEach(function (item) {
+                console.log(item);
+                if (item.RejectReason == ''||item.RejectReason==undefined) {
+                    count1--;
+                }else{
+                    count1++;
+                }
+            });
+            if(count1==count){
+                this.centerDialogVisible=true;
+            }else{
+                this.$message.error('否决原因不能为空！');
+            }
+           }
         },
         cancel() {    
            this.centerDialogVisible=false;
+           this.selectTableUndData.forEach(function (item) {
+               console.log(item,44444);
+               item.RejectReason = ''
+            });
+           this.$refs.multipleTable.clearSelection();
+        },
+        cancelDeny() {
+            this.centerDialogVisibleDeny = false;
+            this.$refs.TableDeny.clearSelection();
         },
         
       }
