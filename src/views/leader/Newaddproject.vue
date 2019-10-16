@@ -3,10 +3,13 @@
         <div v-if="state === 'newAdd'">
             <div v-if="append === 'newPro'">
                 <el-row class="bottomLine">
-                    <el-col :span="24">
+                    <el-col :span="22">
                         <div class="grid-content bg-purple-dark">
                             <h5 class="commonTitle col348fe2"><i class="icon iconfont icon-zhuanjiazhuye mr3"></i>项目信息</h5>
                         </div>
+                    </el-col>
+                    <el-col :span="2" style="text-align:center;">
+                        <el-button type="primary" size="small">返回</el-button>
                     </el-col>
                 </el-row>
                 <el-row style="padding:15px 0;">
@@ -53,18 +56,21 @@
                 </el-row>         
             </div>
             <el-row class="bottomLine">
-                <el-col :span="4">
+                <el-col :span="(append === 'newPro' ? 4 : 22)">
                     <div class="grid-content bg-purple-dark">
                         <h5 class="commonTitle col348fe2">
                             <i class="icon iconfont icon-zhuanjiazhuye mr3"></i>分包信息
                         </h5>
                     </div>
                 </el-col>
-                <el-col :span="20" v-if="append === 'newPro'">
+                <el-col :span="18"  v-if="append === 'newPro'">
                     <div class="grid-content bg-purple-dark" style="text-align:right;">
                         <el-button size="small">导 入</el-button>
                         <el-button size="small" class="btnBg" @click="$refs.addbag.dialogVisible=true">添加分包信息</el-button>
                     </div>
+                </el-col>
+                <el-col :span="2" style="text-align:center;" v-if="append !== 'newPro'">
+                    <el-button type="primary" size="small">返回</el-button>
                 </el-col>
             </el-row>
             <el-row style="padding-top:10px;">
@@ -239,7 +245,8 @@
         <el-row class="bottomLine">
             <el-col :span="24">
                 <div class="grid-content bg-purple-dark" style="text-align:center;">
-                    <el-button size="big" class="btnBg">保存</el-button>
+                    <el-button size="medium" class="btnBg">保存</el-button>
+                    <el-button type="primary" size="medium">返回</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -385,6 +392,9 @@ export default {
     background: #fff;
     padding-right: 20px;
     padding-bottom: 20px;
+    .backBtn{
+        text-align: center;
+    }
     .titBox{
         line-height: 50px;
         .rightText{
@@ -393,8 +403,7 @@ export default {
     }
     .bottomLine{
         border-bottom:1px dashed #d9e0e7;
-        padding-bottom: 20px;
-        padding-top: 20px;
+        line-height: 50px;
     }
     @include common-el-table;
 }

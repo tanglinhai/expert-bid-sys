@@ -240,16 +240,13 @@ export default {
     padding:15px 20px 15px 20px;
     .headerBox{
         background: #fff;
-        padding:15px;
+        padding:0 15px;
         border-bottom: 1px solid #f3f3f3;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-        line-height: 31px;
+        line-height: 50px;
         .textSty{
             text-align: right;
-        }
-        .commonTitle::before{
-            margin-top: 6px;
         }
     }
     .bodyBox{
